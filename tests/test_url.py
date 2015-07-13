@@ -172,14 +172,16 @@ class TestUrl (unittest.TestCase):
         nurl = "http://example.com:81/"
         self.urlnormtest(url, nurl)
 
-    def test_norm_fragment (self):
+    def test_norm_fragment_empty (self):
         # Test url norm fragment preserving.
         # Empty fragment identifiers must be preserved:
         url = "http://www.w3.org/2000/01/rdf-schema#"
         nurl = url
         self.urlnormtest(url, nurl)
+
+    def test_norm_fragment (self):
         url = "http://example.org/foo/ #a=1,2,3"
-        nurl = "http://example.org/foo/%20#a%3D1%2C2%2C3"
+        nurl = "http://example.org/foo/%20#a=1,2,3"
         self.urlnormtest(url, nurl)
 
     def test_norm_empty_path (self):

@@ -67,7 +67,7 @@ valid
 
 url http://example.org/foo/ #a=1,2,3
 cache key http://example.org/foo/%%20
-real url http://example.org/foo/%%20#a%%3D1%%2C2%%2C3
+real url http://example.org/foo/%%20#a=1,2,3
 error
 
 url http://.example.org/
