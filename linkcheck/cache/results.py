@@ -59,6 +59,10 @@ class ResultCache(object):
         """Non-thread-safe function for fast containment checks."""
         return key in self.cache
 
+    def has_non_empty_result(self, key):
+        """Non-thread-safe function for fast containment checks."""
+        return self.cache.get(key)
+
     def __len__(self):
         """Get number of cached elements. This is not thread-safe and is
         likely to change before the returned value is used."""
