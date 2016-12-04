@@ -22,12 +22,12 @@ try: # Python 3
     from http.cookiejar import split_header_words
 except ImportError: # Python 2
     from cookielib import split_header_words
-try: # Python 3
-    from http.client import HTTPMessage
-except ImportError: # Python 2
-    from httplib import HTTPMessage
 import requests
-from io import BytesIO
+try: # Python 2
+    from StringIO import StringIO
+except: # Python 3
+    from io import StringIO
+from email import message_from_file
 
 
 def from_file (filename):
@@ -58,15 +58,14 @@ def from_headers (strheader):
     @raises: ValueError for incomplete or invalid data
     """
     res = []
-    fp = BytesIO(strheader)
-    headers = HTTPMessage(fp, seekable=True)
-    if "Host" not in headers:
+    fp = StringIO(strheader)
+    headers = message_from_file(fp)
+    if "Host" not in dict(headers.items()):
         raise ValueError("Required header 'Host:' missing")
     host = headers["Host"]
     path= headers.get("Path", "/")
-    for header in headers.getallmatchingheaders("Set-Cookie"):
-        headervalue = header.split(':', 1)[1]
-        for pairs in split_header_words([headervalue]):
+    for header in headers.get_all("Set-Cookie"):
+        for pairs in split_header_words([header]):
             for name, value in pairs:
                 cookie = requests.cookies.create_cookie(name, value,
                     domain=host, path=path)
