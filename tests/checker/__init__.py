@@ -27,6 +27,7 @@ import linkcheck.configuration
 import linkcheck.director
 import linkcheck.logger
 from .. import get_file
+from builtins import str as text
 
 # helper alias
 get_url_from = linkcheck.checker.get_url_from
@@ -94,7 +95,7 @@ class TestLogger (linkcheck.logger._Logger):
         Stores differences between expected and result in self.diff.
         """
         for line in difflib.unified_diff(self.expected, self.result):
-            if not isinstance(line, unicode):
+            if not isinstance(line, text):
                 # The ---, +++ and @@ lines from diff format are ascii encoded.
                 # Make them unicode.
                 line = unicode(line, "ascii", "replace")
@@ -207,7 +208,7 @@ class LinkCheckTest (unittest.TestCase):
     def direct (self, url, resultlines, parts=None, recursionlevel=0,
                 confargs=None):
         """Check url with expected result."""
-        assert isinstance(url, unicode), repr(url)
+        assert isinstance(url, text), repr(url)
         if confargs is None:
             confargs = {'recursionlevel': recursionlevel}
         else:
