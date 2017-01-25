@@ -21,6 +21,7 @@ Find link tags in HTML text.
 import re
 from .. import strformat, log, LOG_CHECK, url as urlutil
 from . import linkname
+from builtins import str as str_text
 
 MAX_NAMELEN = 256
 MAX_TITLELEN = 256
@@ -86,13 +87,13 @@ refresh_re = re.compile(r"(?i)^\d+;\s*url=(?P<url>.+)$")
 _quoted_pat = r"('[^']+'|\"[^\"]+\"|[^\)\s]+)"
 css_url_re = re.compile(r"url\(\s*(?P<url>%s)\s*\)" % _quoted_pat)
 swf_url_re = re.compile("(?i)%s" % urlutil.safe_url_pattern)
-c_comment_re = re.compile(r"/\*.*?\*/", re.DOTALL)
+c_comment_re = re.compile(b"/\*.*?\*/", re.DOTALL)
 
 
 def strip_c_comments (text):
     """Remove C/CSS-style comments from text. Note that this method also
     deliberately removes comments inside of strings."""
-    return c_comment_re.sub('', text)
+    return c_comment_re.sub(b'', text)
 
 
 class StopParse(Exception):
@@ -250,11 +251,11 @@ class LinkFinder (TagFinder):
 
     def parse_tag (self, tag, attr, value, name, base):
         """Add given url data to url list."""
-        assert isinstance(tag, unicode), repr(tag)
-        assert isinstance(attr, unicode), repr(attr)
-        assert isinstance(name, unicode), repr(name)
-        assert isinstance(base, unicode), repr(base)
-        assert isinstance(value, unicode) or value is None, repr(value)
+        assert isinstance(tag, str_text), repr(tag)
+        assert isinstance(attr, str_text), repr(attr)
+        assert isinstance(name, str_text), repr(name)
+        assert isinstance(base, str_text), repr(base)
+        assert isinstance(value, str_text) or value is None, repr(value)
         # look for meta refresh
         if tag == u'meta' and value:
             mo = refresh_re.match(value)
@@ -278,6 +279,6 @@ class LinkFinder (TagFinder):
 
     def found_url(self, url, name, base):
         """Add newly found URL to queue."""
-        assert isinstance(url, unicode) or url is None, repr(url)
+        assert isinstance(url, str_text) or url is None, repr(url)
         self.callback(url, line=self.parser.last_lineno(),
                       column=self.parser.last_column(), name=name, base=base)
