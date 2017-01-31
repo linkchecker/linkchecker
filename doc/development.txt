@@ -47,3 +47,19 @@ Setup for Windows
 Execute ``windows\build.bat`` to build a local version.
 Execute ``windows\test.bat`` to run the unittest suite.
 Execute ``windows\dist.bat`` to build a binary installer.
+
+
+Release process
+---------------
+
+1. make sure tests pass
+
+2. bump AppVersion in setup.py and commit changes
+
+3. build wheel file (setup.py bdist_wheel) and upload to PyPI
+
+4. tag release (vX.Y.Z)
+
+5. push
+
+6. write release notes on github
