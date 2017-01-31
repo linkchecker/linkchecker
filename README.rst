@@ -3,8 +3,8 @@ LinkChecker
 
 |Build Status|_ |Latest Version|_ |License|_
 
-.. |Build Status| image:: https://travis-ci.org/wummel/linkchecker.svg?branch=master
-.. _Build Status: https://travis-ci.org/wummel/linkchecker
+.. |Build Status| image:: https://travis-ci.org/linkcheck/linkchecker.svg?branch=master
+.. _Build Status: https://travis-ci.org/linkcheck/linkchecker
 .. |Latest Version| image:: http://img.shields.io/pypi/v/LinkChecker.svg
 .. _Latest Version: https://pypi.python.org/pypi/LinkChecker
 .. |License| image:: http://img.shields.io/badge/license-GPL2-d49a6a.svg
