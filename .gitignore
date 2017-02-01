@@ -36,3 +36,5 @@ Changelog.linkchecker*
 /alexa*.log
 /testresults.txt
 /linkchecker.prof
+.cache
+.tox
