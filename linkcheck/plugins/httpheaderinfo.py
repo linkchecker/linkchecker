@@ -36,8 +36,8 @@ class HttpHeaderInfo(_ConnectionPlugin):
         """Check content for invalid anchors."""
         headers = []
         for name, value in url_data.headers.items():
-            if name.startswith(self.prefixes):
-                headers.append(name)
+            if name.lower().startswith(self.prefixes):
+                headers.append(name.lower())
         if headers:
             items = [u"%s=%s" % (name.capitalize(), url_data.headers[name]) for name in headers]
             info = u"HTTP headers %s" % u", ".join(items)
