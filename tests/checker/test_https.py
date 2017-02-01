@@ -17,6 +17,8 @@
 """
 Test news checking.
 """
+import pytest
+
 from tests import need_network
 from . import LinkCheckTest
 
@@ -26,6 +28,7 @@ class TestHttps (LinkCheckTest):
     Test https: link checking.
     """
 
+    @pytest.mark.xfail
     @need_network
     def test_https (self):
         url = u"https://www.amazon.com/"
