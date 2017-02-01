@@ -208,7 +208,7 @@ class LinkFinder (TagFinder):
             self.base_ref = attrs.get_true("href", u'')
         tagattrs = self.tags.get(tag, self.universal_attrs)
         # parse URLs in tag (possibly multiple URLs in CSS styles)
-        for attr in tagattrs.intersection(attrs):
+        for attr in sorted(tagattrs.intersection(attrs)):
             if tag == "meta" and not is_meta_url(attr, attrs):
                 continue
             if tag == "form" and not is_form_get(attr, attrs):
