@@ -149,7 +149,7 @@ class FileUrl (urlbase.UrlBase):
             # the file name.
             from .urlbase import url_norm
             # norm base url - can raise UnicodeError from url.idna_encode()
-            base_url, is_idn = url_norm(self.base_url, self.encoding)
+            base_url, is_idn = url_norm(self.base_url, self.aggregate.config["allowwaybackurls"], self.encoding)
             urlparts = list(urlparse.urlsplit(base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
