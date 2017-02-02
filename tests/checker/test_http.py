@@ -17,6 +17,9 @@
 """
 Test http checking.
 """
+
+import pytest
+
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
 class TestHttp (HttpServerTest):
