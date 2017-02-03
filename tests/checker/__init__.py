@@ -150,7 +150,7 @@ class LinkCheckTest (unittest.TestCase):
 
     def norm (self, url, encoding=None):
         """Helper function to norm a url."""
-        return linkcheck.url.url_norm(url, encoding=encoding)[0]
+        return linkcheck.url.url_norm(url, allow_wayback_urls=False, encoding=encoding)[0]
 
     def get_attrs (self, **kwargs):
         """Return current and data directory as dictionary.

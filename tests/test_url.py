@@ -37,8 +37,8 @@ import linkcheck.url
 #         (Latin capital letter C + Combining cedilla U+0327)
 
 
-def url_norm (url, encoding=None):
-    return linkcheck.url.url_norm(url, encoding=encoding)[0]
+def url_norm (url, allow_wayback_urls, encoding=None):
+    return linkcheck.url.url_norm(url, allow_wayback_urls, encoding=encoding)[0]
 
 
 class TestUrl (unittest.TestCase):
@@ -47,17 +47,21 @@ class TestUrl (unittest.TestCase):
     def urlnormtest (self, url, nurl, encoding=None):
         self.assertFalse(linkcheck.url.url_needs_quoting(nurl),
             "Result URL %r must not need quoting" % nurl)
-        nurl1 = url_norm(url, encoding=encoding)
+        nurl1 = url_norm(url, False, encoding=encoding)
         self.assertFalse(linkcheck.url.url_needs_quoting(nurl1),
             "Normed URL %r needs quoting" % nurl)
         self.assertEqual(nurl1, nurl)
+
+    def test_wayback(self):
+        self.assertTrue("http%3A/x" in url_norm("https://a.b.c/*/http://x.y.z", False))
+        self.assertTrue("http://x" in url_norm("https://a.b.c/*/http://x.y.z", True))        
 
     def test_pathattack (self):
         # Windows winamp path attack prevention.
         url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.."\
               "%5ccskin.zip"
         nurl = "http://server/cskin.zip"
-        self.assertEqual(linkcheck.url.url_quote(url_norm(url)), nurl)
+        self.assertEqual(linkcheck.url.url_quote(url_norm(url, False)), nurl)
 
     def test_safe_patterns (self):
         is_safe_host = linkcheck.url.is_safe_host
@@ -471,7 +475,7 @@ class TestUrl (unittest.TestCase):
             self.assertTrue(not linkcheck.url.url_needs_quoting(url))
         url = "http://hulla/a/b/!?c=d"
         nurl = url
-        self.assertEqual(url_norm(url), nurl)
+        self.assertEqual(url_norm(url, False), nurl)
 
     def test_idn_encoding (self):
         # Test idna encoding.

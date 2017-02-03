@@ -56,6 +56,7 @@ class TestConfig (unittest.TestCase):
         self.assertEqual(config["maxrunseconds"], 1)
         self.assertEqual(config["maxfilesizeparse"], 100)
         self.assertEqual(config["maxfilesizedownload"], 100)
+        self.assertEqual(config["allowwaybackurls"], 1)
         # filtering section
         patterns = [x["pattern"].pattern for x in config["externlinks"]]
         for prefix in ("ignore_", "nofollow_"):

@@ -67,11 +67,11 @@ def urljoin (parent, url):
     return urlparse.urljoin(parent, url)
 
 
-def url_norm (url, encoding=None):
+def url_norm (url, allow_wayback_urls, encoding=None):
     """Wrapper for url.url_norm() to convert UnicodeError in
     LinkCheckerError."""
     try:
-        return urlutil.url_norm(url, encoding=encoding)
+        return urlutil.url_norm(url, allow_wayback_urls, encoding=encoding)
     except UnicodeError:
         msg = _("URL has unparsable domain name: %(name)s") % \
             {"name": sys.exc_info()[1]}
@@ -357,7 +357,7 @@ class UrlBase (object):
         url information self.base_url, self.parent_url and self.base_ref.
         """
         # norm base url - can raise UnicodeError from url.idna_encode()
-        base_url, is_idn = url_norm(self.base_url, self.encoding)
+        base_url, is_idn = url_norm(self.base_url, self.aggregate.config["allowwaybackurls"], self.encoding)
         # make url absolute
         if self.base_ref:
             # use base reference as parent url
@@ -377,6 +377,9 @@ class UrlBase (object):
         urlparts = list(urlparse.urlsplit(self.url))
         if urlparts[2]:
             urlparts[2] = urlutil.collapse_segments(urlparts[2])
+            if self.aggregate.config["allowwaybackurls"]:
+                from linkcheck.url import url_fix_wayback_query
+                urlparts[2] = url_fix_wayback_query(urlparts[2]) # restore second / in http[s]:// in wayback path
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
         self.urlparts = strformat.url_unicode_split(self.url)
@@ -657,7 +660,7 @@ class UrlBase (object):
     def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
         """Add new URL to queue."""
         if base:
-            base_ref = urlutil.url_norm(base)[0]
+            base_ref = urlutil.url_norm(base, self.aggregate.config["allowwaybackurls"])[0]
         else:
             base_ref = None
         url_data = get_url_from(url, self.recursion_level+1, self.aggregate,
