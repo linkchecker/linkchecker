@@ -156,6 +156,7 @@ class LCConfigParser (ConfigParser.RawConfigParser, object):
         except ValueError:
             self.read_string_option(section, "sslverify")
         self.read_int_option(section, "maxrunseconds", min=0)
+        self.read_boolean_option(section, "allowwaybackurls")
 
     def read_authentication_config (self):
         """Read configuration options in section "authentication"."""
