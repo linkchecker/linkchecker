@@ -1,0 +1,6 @@
+# for testing:
+pytest
+pytest-xdist
+pyftpdlib
+# for building on osx:
+py2app
