@@ -64,9 +64,6 @@ Release process
 
 6. write release notes on github
 
-Contributor's guide
-===================
-
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
@@ -124,15 +121,30 @@ further defined and clarified by project maintainers.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [INSERT EMAIL ADDRESS]. All
+reported by contacting one of the persons listed below. All
 complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
+is deemed necessary and appropriate to the circumstances. The project maintainers is
 obligated to maintain confidentiality with regard to the reporter of an incident.
 Further details of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good
 faith may face temporary or permanent repercussions as determined by other
 members of the project's leadership.
+
+Project maintainers are encouraged to follow the spirit of the
+[Django Code of Conduct Enforcement Manual][enforcement] when
+receiving reports.
+
+ [enforcement]: https://www.djangoproject.com/conduct/enforcement-manual/
+
+## Contacts
+
+The following people have volunteered to be available to respond to
+Code of Conduct reports. They have reviewed existing literature and
+agree to follow the aforementioned process in good faith. They also
+accept OpenPGP-encrypted email:
+
+ * Antoine Beaupré <anarcat@debian.org>
 
 ## Attribution
 
@@ -141,3 +153,16 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
+
+Changes
+-------
+
+The Code of Conduct was modified to refer to *project maintainers*
+instead of *project team* and small paragraph was added to refer to
+the Django enforcement manual.
+
+> Note: We have so far determined that writing an explicit enforcement
+> policy is not necessary, considering the available literature
+> already available online and the relatively small size of the
+> community. This may change in the future if the community grows
+> larger.
