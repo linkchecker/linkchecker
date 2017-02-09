@@ -246,6 +246,13 @@ def url_fix_mailto_urlsplit (urlparts):
     if "?" in urlparts[2]:
         urlparts[2], urlparts[3] = urlparts[2].split('?', 1)
 
+# wayback urls include in the path http[s]://. By default the
+# tidying mechanism in linkchecker encodes the : and deletes the second slash
+# This function reverses these corrections. This function expects only the
+# path section of the URL as input.
+wayback_regex = re.compile(r'(https?)(\%3A/|:/)')
+def url_fix_wayback_query(path):
+    return wayback_regex.sub(r'\1://', path)
 
 def url_parse_query (query, encoding=None):
     """Parse and re-join the given CGI query."""
@@ -329,6 +336,8 @@ def url_norm (url, encoding=None):
     urlparts[0] = url_quote_part(urlparts[0], encoding=encoding) # scheme
     urlparts[1] = url_quote_part(urlparts[1], safechars='@:', encoding=encoding) # host
     urlparts[2] = url_quote_part(urlparts[2], safechars=_nopathquote_chars, encoding=encoding) # path
+    if not urlparts[0].startswith("feed"):
+        urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
     urlparts[4] = url_quote_part(urlparts[4], encoding=encoding) # anchor
     res = urlunsplit(urlparts)
     if url.endswith('#') and not urlparts[4]:

@@ -49,6 +49,7 @@ from .const import (WARN_URL_EFFECTIVE_URL,
     WARN_URL_CONTENT_SIZE_ZERO, WARN_URL_CONTENT_SIZE_TOO_LARGE,
     WARN_URL_WHITESPACE, URL_MAX_LENGTH, WARN_URL_TOO_LONG,
     ExcList, ExcSyntaxList, ExcNoCacheList)
+from ..url import url_fix_wayback_query
 
 # helper alias
 unicode_safe = strformat.unicode_safe
@@ -377,6 +378,8 @@ class UrlBase (object):
         urlparts = list(urlparse.urlsplit(self.url))
         if urlparts[2]:
             urlparts[2] = urlutil.collapse_segments(urlparts[2])
+            if not urlparts[0].startswith("feed"):
+                urlparts[2] = url_fix_wayback_query(urlparts[2]) # restore second / in http[s]:// in wayback path
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
         self.urlparts = strformat.url_unicode_split(self.url)
