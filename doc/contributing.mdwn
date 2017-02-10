@@ -119,7 +119,7 @@ Some guidelines for patches:
 * A patch must compile cleanly and pass project self-tests on all
   target platforms.
 * A patch commit message must consist of a single short (less than 50
-  characters) line stating the a summary of the change, followed by a
+  characters) line stating a summary of the change, followed by a
   blank line and then a description of the problem being solved and
   its solution, or a reason for the change. Write more information,
   not less, in the commit log.
