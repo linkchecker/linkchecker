@@ -124,8 +124,6 @@ Some guidelines for patches:
   its solution, or a reason for the change. Write more information,
   not less, in the commit log.
 
-Patches should be reviewed by at least one other maintainer.
-
 Maintainers should not merge their own patches if they haven't been
 approved by other maintainers, unless there is no response within a
 reasonable timeframe (roughly one week).
