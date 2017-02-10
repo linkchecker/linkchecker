@@ -126,9 +126,9 @@ Some guidelines for patches:
 
 Patches should be reviewed by at least one other maintainer.
 
-Maintainers should not merge their own patches unless there is no
-response from other maintainers within a reasonable time frame (1-2
-days).
+Maintainers should not merge their own patches if they haven't been
+approved by other maintainers, unless there is no response within a
+reasonable timeframe (roughly one week).
 
 > Note: Those guidelines were inspired by the
 > [Collective Code Construct Contract][C4]. The document was found to
