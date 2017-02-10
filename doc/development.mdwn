@@ -1,8 +1,12 @@
 Developing LinkChecker
 ======================
+
 The following steps describe how to compile LinkChecker from source
 on various platforms.
 
+This is a technical document, if you are looking for ways to
+participate in the community, you should rather look into
+[contributing](contributing).
 
 Requirements
 ------------
@@ -56,7 +60,7 @@ Release process
 
 2. bump AppVersion in setup.py and commit changes
 
-3. build wheel file (setup.py bdist_wheel) and upload to PyPI
+3. build Python distributions files (`setup.py sdist bdist_wheel`) and upload to PyPI
 
 4. tag release (vX.Y.Z)
 
