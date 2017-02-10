@@ -107,10 +107,10 @@ the Django enforcement manual.
 # Patches
 
 Patches can be submitted through [pull requests][] on the
-[Github project][].
+[GitHub project][].
 
 [pull requests]: https://github.com/linkcheck/linkchecker/pulls
-[Github project]: https://github.com/linkcheck/linkchecker
+[GitHub project]: https://github.com/linkcheck/linkchecker
 
 Some guidelines for patches:
 
@@ -152,12 +152,12 @@ We want you to report issuess you find in the software. It is a
 recognized and important part of contributing to this project. All
 issues will be read and replied to politely and
 professionnally. Issues and bug reports should be filed on the
-[Github issue tracker][issues].
+[GitHub issue tracker][issues].
 
 ## Issue triage
 
 Issue triage is a useful contribution as well. You can review the
-[issues][] in the Github project and, for each issue:
+[issues][] in the GitHub project and, for each issue:
 
 -  try to reproduce the issue, if it is not reproducible, label it with
    `help-wanted` and explain the steps taken to reproduce
@@ -176,8 +176,8 @@ members, see below for the different statuses.
 
 # Membership
 
-There are three levels of membership in Github organizations, Owner,
-Member, or regular users (everyone with or without a Github
+There are three levels of membership in GitHub organizations, Owner,
+Member, or regular users (everyone with or without a GitHub
 account). Anyone is welcome to contribute to the project within the
 guidelines outlined in this document, regardless of their status, and
 that includes regular users.
