@@ -175,9 +175,10 @@ Issue triage is a useful contribution as well. You can review the
 # Membership
 
 There are three levels of membership in Github organizations, Owner,
-Member, or regular user. Anyone is welcome to contribute to the
-project within the guidelines outlined in this document, regardless of
-their status, and that includes regular users.
+Member, or regular users (everyone with or without a Github
+account). Anyone is welcome to contribute to the project within the
+guidelines outlined in this document, regardless of their status, and
+that includes regular users.
 
 Members can:
 
