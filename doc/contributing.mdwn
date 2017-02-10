@@ -123,6 +123,7 @@ Some guidelines for patches:
   blank line and then a description of the problem being solved and
   its solution, or a reason for the change. Write more information,
   not less, in the commit log.
+* Patches should be reviewed by at least one member before being merged.
 
 Maintainers should merge their own patches only when they have been
 approved by other maintainers, unless there is no response within a
