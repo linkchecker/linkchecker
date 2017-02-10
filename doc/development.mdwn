@@ -60,7 +60,7 @@ Release process
 
 2. bump AppVersion in setup.py and commit changes
 
-3. build wheel file (setup.py bdist_wheel) and upload to PyPI
+3. build Python distributions files (`setup.py sdist bdist_wheel`) and upload to PyPI
 
 4. tag release (vX.Y.Z)
 
