@@ -180,11 +180,11 @@ maintainers, see below for the different statuses.
 # Membership
 
 There are three levels of membership in the project, Administrator
-(also known as "Owner" in GitHub), Maintainer (also known as "Member")
-, or regular users (everyone with or without a GitHub account). Anyone
-is welcome to contribute to the project within the guidelines outlined
-in this document, regardless of their status, and that includes
-regular users.
+(also known as "Owner" in GitHub), Maintainer (also known as
+"Member"), or regular users (everyone with or without a GitHub
+account). Anyone is welcome to contribute to the project within the
+guidelines outlined in this document, regardless of their status, and
+that includes regular users.
 
 Maintainers can:
 
