@@ -130,6 +130,9 @@ approved by other maintainers, unless there is no response within a
 reasonable timeframe (roughly one week) or there is an urgent change
 to be done (e.g. security or data loss issue).
 
+As an exception to this rule, this specific document cannot be changed
+without the consensus of all owners of the project.
+
 > Note: Those guidelines were inspired by the
 > [Collective Code Construct Contract][C4]. The document was found to
 > be a little too complex and hard to read and wasn't adopted in its
