@@ -116,8 +116,8 @@ Some guidelines for patches:
 
 * A patch should be a minimal and accurate answer to exactly one
   identified and agreed problem.
-* A patch must compile cleanly and pass project self-tests on at least
-  the principle target platform.
+* A patch must compile cleanly and pass project self-tests on all
+  target platforms.
 * A patch commit message must consist of a single short (less than 50
   characters) line stating the a summary of the change, followed by a
   blank line and then a description of the problem being solved and
