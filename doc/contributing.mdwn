@@ -107,7 +107,7 @@ the Django enforcement manual.
 # Patches
 
 Patches can be submitted through [pull requests][] on the
-[Github project][]. Some guidelines for patches:
+[Github project][].
 
 [pull requests]: https://github.com/linkcheck/linkchecker/pulls
 [Github project]: https://github.com/linkcheck/linkchecker
