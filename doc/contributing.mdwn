@@ -126,7 +126,8 @@ Some guidelines for patches:
 
 Maintainers should merge their own patches only when they have been
 approved by other maintainers, unless there is no response within a
-reasonable timeframe (roughly one week).
+reasonable timeframe (roughly one week) or there is an urgent change
+to be done (e.g. security or data loss issue).
 
 > Note: Those guidelines were inspired by the
 > [Collective Code Construct Contract][C4]. The document was found to
