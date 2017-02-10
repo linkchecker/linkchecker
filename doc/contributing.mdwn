@@ -169,8 +169,10 @@ Issue triage is a useful contribution as well. You can review the
 -  mark feature requests with the `enhancement` label, bugs with
    `bug`, duplicates with `duplicate` and so on...
 
-
 [issues]: https://github.com/linkcheck/linkchecker/issues
+
+Note that some of those operations are available only to project
+members, see below for the different statuses.
 
 # Membership
 
