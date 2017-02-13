@@ -17,7 +17,6 @@
 """
 Test news checking.
 """
-import os
 
 import pytest
 
@@ -30,10 +29,8 @@ class TestHttps (LinkCheckTest):
     Test https: link checking.
     """
 
-    @pytest.mark.skipif(
-        os.environ["TEST_SKIP"] == "travis",
-        reason="this test doesn't work in Travis yet",
-    )
+
+    @pytest.mark.xfail
     @need_network
     def test_https (self):
         url = u"https://www.amazon.com/"

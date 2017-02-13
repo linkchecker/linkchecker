@@ -1,8 +1,12 @@
 Developing LinkChecker
 ======================
+
 The following steps describe how to compile LinkChecker from source
 on various platforms.
 
+This is a technical document, if you are looking for ways to
+participate in the community, you should rather look into
+[contributing](contributing).
 
 Requirements
 ------------
@@ -47,3 +51,19 @@ Setup for Windows
 Execute ``windows\build.bat`` to build a local version.
 Execute ``windows\test.bat`` to run the unittest suite.
 Execute ``windows\dist.bat`` to build a binary installer.
+
+
+Release process
+---------------
+
+1. make sure tests pass
+
+2. bump AppVersion in setup.py and commit changes
+
+3. build Python distributions files (`setup.py sdist bdist_wheel`) and upload to PyPI
+
+4. tag release (vX.Y.Z)
+
+5. push
+
+6. write release notes on github

@@ -375,8 +375,7 @@ myemail = "bastian.kleineidam@web.de"
 
 data_files = [
     ('share/linkchecker',
-        ['config/linkcheckerrc',
-        'doc/html/lccollection.qhc', 'doc/html/lcdoc.qch']),
+        ['config/linkcheckerrc']),
     ('share/linkchecker/examples',
         ['cgi-bin/lconline/leer.html.en',
          'cgi-bin/lconline/leer.html.de',
@@ -480,6 +479,9 @@ args = dict(
     options = {
     },
     # Requirements, usable with setuptools or the new Python packaging module.
+    install_requires = [
+        'requests >= 2.2.0',
+    ],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
     #extra_requires = {

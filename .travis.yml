@@ -10,10 +10,10 @@ addons:
     - python-dev
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
-  - pip install pyftpdlib pytest-xdist
+  - pip install tox-travis
 # command to run tests
-script: make test PYTESTOPTS="--tb=short" TESTS="tests/test_*.py tests/*/test_*.py"
+script:
+  - tox
 # do not send emails of broken builds
 notifications:
   email: false

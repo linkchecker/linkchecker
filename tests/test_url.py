@@ -52,6 +52,10 @@ class TestUrl (unittest.TestCase):
             "Normed URL %r needs quoting" % nurl)
         self.assertEqual(nurl1, nurl)
 
+    def test_wayback(self):
+        self.assertFalse("http%3A/x" in url_norm("https://a.b.c/*/http://x.y.z"))
+        self.assertTrue("http://x" in url_norm("https://a.b.c/*/http://x.y.z"))
+
     def test_pathattack (self):
         # Windows winamp path attack prevention.
         url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.."\
