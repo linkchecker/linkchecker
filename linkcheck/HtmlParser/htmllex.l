@@ -47,7 +47,7 @@
 
 /* resize buffer b, returning T_ERROR on error */
 #define RESIZE_BUF(b, n) \
-    CHECK_NULL((b) = PyMem_Resize((b), char, (n))); \
+    CHECK_NULL(PyMem_Resize((b), char, (n))); \
     (b)[(n)-1] = '\0'
 
 /* make python unicode string from tmp_buf and assign it to a */

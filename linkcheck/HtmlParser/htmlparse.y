@@ -77,13 +77,13 @@ static PyObject* u_meta;
 
 /* clear buffer b, returning NULL on error */
 #define CLEAR_BUF(b) \
-    b = PyMem_Resize(b, char, 1); \
+    PyMem_Resize(b, char, 1); \
     if (b == NULL) return NULL; \
     (b)[0] = '\0'
 
 /* clear buffer b, returning NULL and decref self on error */
 #define CLEAR_BUF_DECREF(self, b) \
-    b = PyMem_Resize(b, char, 1); \
+    PyMem_Resize(b, char, 1); \
     if (b == NULL) { Py_DECREF(self); return NULL; } \
     (b)[0] = '\0'
 
