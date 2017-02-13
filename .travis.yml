@@ -7,10 +7,12 @@ branches:
     - master
 # command to install dependencies
 install:
-  - pip install tox-travis
+  - pip install tox-travis coveralls
 # command to run tests
 script:
   - tox
 # do not send emails of broken builds
 notifications:
   email: false
+after_script:
+  - coveralls
