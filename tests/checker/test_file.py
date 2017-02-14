@@ -169,10 +169,5 @@ class TestFile (LinkCheckTest):
             u"real url %s" % nurl3,
             u"name t.txt",
             u"valid",
-            u"url t.txt",
-            u"cache key %s" % nurl3,
-            u"real url %s" % nurl3,
-            u"name External link",
-            u"valid",
         ]
         self.direct(url, resultlines, recursionlevel=2)

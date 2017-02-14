@@ -4,19 +4,9 @@ real url file://%(curdir)s/%(datadir)s/misc.html
 name %(datadir)s/misc.html
 valid
 
-url 
-cache key file://%(curdir)s/%(datadir)s/misc.html
-real url file://%(curdir)s/%(datadir)s/misc.html
-valid
-
 url http://www.example.com/
 cache key http://www.example.com/
 real url http://www.example.com/
-valid
-
-url favicon.ico
-cache key file://%(curdir)s/%(datadir)s/favicon.ico
-real url file://%(curdir)s/%(datadir)s/favicon.ico
 valid
 
 url favicon.ico
