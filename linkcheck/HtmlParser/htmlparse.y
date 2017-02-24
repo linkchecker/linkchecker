@@ -37,7 +37,7 @@ extern int yyget_lineno(void*);
 #define YYERROR_VERBOSE 1
 
 /* standard error reporting, indicating an internal error */
-static void yyerror (YYSTYPE *locp, char const *msg) {
+static void yyerror (void *locp, char const *msg) {
     fprintf(stderr, "htmlsax: internal parse error: %s\n", msg);
 }
 
