@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.2"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -142,13 +142,13 @@ static PyObject* u_meta;
 
 /* clear buffer b, returning NULL on error */
 #define CLEAR_BUF(b) \
-    b = PyMem_Resize(b, char, 1); \
+    PyMem_Resize(b, char, 1); \
     if (b == NULL) return NULL; \
     (b)[0] = '\0'
 
 /* clear buffer b, returning NULL and decref self on error */
 #define CLEAR_BUF_DECREF(self, b) \
-    b = PyMem_Resize(b, char, 1); \
+    PyMem_Resize(b, char, 1); \
     if (b == NULL) { Py_DECREF(self); return NULL; } \
     (b)[0] = '\0'
 
