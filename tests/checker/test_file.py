@@ -19,6 +19,7 @@ Test file parsing.
 """
 import os
 import sys
+import pytest
 import zipfile
 
 import pytest
@@ -147,6 +148,10 @@ class TestFile (LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
+    @pytest.mark.skipif(
+        os.environ["TEST_SKIP"] == "travis",
+        reason="this test doesn't work in Travis yet",
+    )
     def test_good_dir_space (self):
         url = u"file://%(curdir)s/%(datadir)s/a b/" % self.get_attrs()
         nurl = self.norm(url)
