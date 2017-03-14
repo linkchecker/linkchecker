@@ -9,11 +9,6 @@ real url clsid:12345-67890
 info Clsid URL ignored.
 valid
 
-url 
-cache key http://localhost:%(port)d/%(datadir)s/http.html
-real url http://localhost:%(port)d/%(datadir)s/http.html
-valid
-
 url dns://www.example.org
 cache key dns://www.example.org
 real url dns://www.example.org

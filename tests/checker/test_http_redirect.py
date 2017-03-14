@@ -57,13 +57,6 @@ class TestHttpRedirect (HttpServerTest):
             u"real url %s" % rurl,
             u"info Redirected to `%s'." % rurl,
             u"valid",
-            u"url newurl.html",
-            u"cache key %s" % nurl,
-            u"real url %s" % rurl,
-            u"name Recursive Redirect",
-            # XXX the info is copied from the cached result
-            u"info Redirected to `%s'." % rurl,
-            u"valid",
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
