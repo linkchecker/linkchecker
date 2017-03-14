@@ -32,6 +32,16 @@ Installation
 See doc/install.txt in the source code archive.
 Python 2.7.2 or later is needed.
 
+
+Install using Docker
+---------------------
+You can try linkchecker in an isolated enviroment without changing any local files or have to install all the dependencies via a Docker Container:
+
+``docker pull ellerbrock/linkchecker``
+
+https://hub.docker.com/r/ellerbrock/link-checker/
+
+
 Usage
 ------
 Execute ``linkchecker http://www.example.com``.
