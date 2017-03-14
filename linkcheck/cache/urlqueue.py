@@ -121,7 +121,7 @@ class UrlQueue (object):
         key = url_data.cache_url
         cache = url_data.aggregate.result_cache
         if cache.has_result(key):
-                return
+            return
         if url_data.has_result:
             self.queue.appendleft(url_data)
         else:
