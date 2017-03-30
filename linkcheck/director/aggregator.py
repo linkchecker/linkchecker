@@ -21,6 +21,7 @@ import threading
 import thread
 import requests
 import time
+import cookielib
 try:
     import urlparse
 except ImportError:
@@ -28,6 +29,7 @@ except ImportError:
     from urllib import parse as urlparse
 import random
 from .. import log, LOG_CHECK, strformat, LinkCheckerError
+from .. import cookies as ckies
 from ..decorators import synchronized
 from ..cache import urlqueue
 from ..htmlutil import formsearch
@@ -48,8 +50,12 @@ def new_request_session(config, cookies):
         "User-Agent": config["useragent"],
     })
     if config["cookiefile"]:
-        for cookie in cookies.from_file(config["cookiefile"]):
-            session.cookies = requests.cookies.merge_cookies(session.cookies, cookie)
+        entries = ckies.from_file(config["cookiefile"])
+        if len(entries) > 0:
+            cj = cookielib.CookieJar()
+            for cookie in entries:
+                cj.set_cookie(cookie)
+            session.cookies = requests.cookies.merge_cookies(session.cookies, cj)
     return session
 
 
