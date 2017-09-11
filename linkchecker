@@ -425,6 +425,8 @@ if options.debug and not __debug__:
 # apply commandline options and arguments to configuration
 constructauth = False
 do_profile = False
+if options.version:
+    print_version()
 if not options.warnings:
     config["warnings"] = options.warnings
 if options.externstrict:
@@ -523,8 +525,6 @@ if options.timeout is not None:
     else:
         print_usage(_("Illegal argument %(arg)r for option %(option)s") % \
                     {"arg": options.timeout, "option": "'--timeout'"})
-if options.version:
-    print_version()
 if options.listplugins:
     print_plugins(config["pluginfolders"])
 if options.verbose:
