@@ -194,6 +194,10 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Get raw SSL socket."""
         assert self.scheme == u"https", self
         raw_connection = self.url_connection.raw._connection
+        if not raw_connection:
+            # this happens with newer requests versions:
+            # https://github.com/linkcheck/linkchecker/issues/76
+            return None
         if raw_connection.sock is None:
             # sometimes the socket is not yet connected
             # see https://github.com/kennethreitz/requests/issues/1966
@@ -204,7 +208,10 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Add SSL cipher info."""
         if self.scheme == u'https':
             sock = self._get_ssl_sock()
-            if hasattr(sock, 'cipher'):
+            if not sock:
+                log.debug(LOG_CHECK, "cannot extract SSL certificate from connection")
+                self.ssl_cert = None
+            elif hasattr(sock, 'cipher'):
                 self.ssl_cert = sock.getpeercert()
             else:
                 # using pyopenssl
