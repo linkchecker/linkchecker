@@ -20,6 +20,7 @@ A blacklist logger.
 
 import os
 import codecs
+from xdg.BaseDirectory import xdg_data_home
 from . import _Logger
 
 
@@ -33,7 +34,7 @@ class BlacklistLogger (_Logger):
     LoggerName = "blacklist"
 
     LoggerArgs = {
-        "filename": "~/.linkchecker/blacklist",
+        "filename": os.path.join(xdg_data_home, "linkchecker", "blacklist"),
     }
 
     def __init__ (self, **kwargs):
