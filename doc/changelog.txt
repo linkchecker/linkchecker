@@ -5,6 +5,7 @@ Features:
   Closes: GH bug #532
 - checking: Support XDG Base Directory Specification for configuration
   and data.
+  Closes: GH bug #44
 
 Changes:
 - installation: Remove dependency on msgfmt.py by pre-generating the
