@@ -365,13 +365,22 @@ class Configuration (dict):
                         pass
 
 
+def get_user_data():
+    """Get the user data folder.
+    Returns "~/.linkchecker/" if this folder exists, \
+    "$XDG_DATA_HOME/linkchecker" if it does not.
+    @rtype string
+    """
+    homedotdir = normpath("~/.linkchecker/")
+    userdata = homedotdir if os.path.isdir(homedotdir) \
+        else os.path.join(xdg_data_home, "linkchecker")
+    return userdata
+
 def get_plugin_folders():
     """Get linkchecker plugin folders. Default is
     $XDG_DATA_HOME/linkchecker/plugins/."""
     folders = []
-    homedotfilefolder = normpath("~/.linkchecker/plugins")
-    defaultfolder = homedotfilefolder if os.path.isdir(homedotfilefolder) \
-        else os.path.join(xdg_data_home, "linkchecker", "plugins")
+    defaultfolder = os.path.join(get_user_data(), "plugins")
     if not os.path.exists(defaultfolder) and not Portable:
         try:
             make_userdir(defaultfolder)
