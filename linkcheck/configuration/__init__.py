@@ -378,7 +378,9 @@ def get_user_data():
 
 def get_plugin_folders():
     """Get linkchecker plugin folders. Default is
-    $XDG_DATA_HOME/linkchecker/plugins/."""
+    "$XDG_DATA_HOME/linkchecker/plugins/". "~/.linkchecker/plugins/" is also
+    supported for backwards compatibility, and is used if both directories
+    exist."""
     folders = []
     defaultfolder = os.path.join(get_user_data(), "plugins")
     if not os.path.exists(defaultfolder) and not Portable:
