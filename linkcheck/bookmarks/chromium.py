@@ -18,6 +18,7 @@
 import os
 import sys
 import json
+from xdg import xdg_config_home
 
 
 # Windows filename encoding
@@ -42,7 +43,7 @@ def get_profile_dir ():
         if sys.platform == 'darwin':
             dirpath = os.path.join(basedir, u"Library", u"Application Support")
         else:
-            dirpath = os.path.join(basedir, u".config")
+            dirpath = xdg_config_home
         dirpath = os.path.join(dirpath, u"chromium")
     return dirpath
 

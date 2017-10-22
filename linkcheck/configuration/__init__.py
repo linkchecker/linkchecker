@@ -32,6 +32,7 @@ import _LinkChecker_configdata as configdata
 from .. import (log, LOG_CHECK, get_install_data, fileutil)
 from . import confparse
 from ..decorators import memoized
+from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 Version = configdata.version
 ReleaseDate = configdata.release_date
@@ -364,10 +365,24 @@ class Configuration (dict):
                         pass
 
 
+def get_user_data():
+    """Get the user data folder.
+    Returns "~/.linkchecker/" if this folder exists, \
+    "$XDG_DATA_HOME/linkchecker" if it does not.
+    @rtype string
+    """
+    homedotdir = normpath("~/.linkchecker/")
+    userdata = homedotdir if os.path.isdir(homedotdir) \
+        else os.path.join(xdg_data_home, "linkchecker")
+    return userdata
+
 def get_plugin_folders():
-    """Get linkchecker plugin folders. Default is ~/.linkchecker/plugins/."""
+    """Get linkchecker plugin folders. Default is
+    "$XDG_DATA_HOME/linkchecker/plugins/". "~/.linkchecker/plugins/" is also
+    supported for backwards compatibility, and is used if both directories
+    exist."""
     folders = []
-    defaultfolder = normpath("~/.linkchecker/plugins")
+    defaultfolder = os.path.join(get_user_data(), "plugins")
     if not os.path.exists(defaultfolder) and not Portable:
         try:
             make_userdir(defaultfolder)
@@ -403,7 +418,9 @@ def get_user_config():
     # initial config (with all options explained)
     initialconf = normpath(os.path.join(get_share_dir(), "linkcheckerrc"))
     # per user config settings
-    userconf = normpath("~/.linkchecker/linkcheckerrc")
+    homedotfile = normpath("~/.linkchecker/linkcheckerrc")
+    userconf = homedotfile if os.path.isfile(homedotfile) \
+        else os.path.join(xdg_config_home, "linkchecker", "linkcheckerrc")
     if os.path.isfile(initialconf) and not os.path.exists(userconf) and \
        not Portable:
         # copy the initial configuration to the user configuration
