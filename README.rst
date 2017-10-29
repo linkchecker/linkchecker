@@ -30,7 +30,7 @@ Features
 Installation
 -------------
 See doc/install.txt in the source code archive.
-Python 2.7.2 or later is needed.
+Python 2.7.2 or later is needed. It doesn't work with Python 3 yet, see `#40 <https://github.com/linkcheck/linkchecker/pull/40>`_ for details.
 
 Usage
 ------
