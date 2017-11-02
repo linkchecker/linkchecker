@@ -173,8 +173,36 @@ class MyInstallData (install_data, object):
 
     def run (self):
         """Adjust permissions on POSIX systems."""
+        self.install_translations()
         super(MyInstallData, self).run()
         self.fix_permissions()
+
+    def install_translations (self):
+        """Install compiled gettext catalogs."""
+        # A hack to fix https://github.com/linkcheck/linkchecker/issues/102
+        i18n_files = []
+        data_files = []
+        for dir, files in self.data_files:
+            if 'LC_MESSAGES' in dir:
+                i18n_files.append((dir, files))
+            else:
+                data_files.append((dir, files))
+        self.data_files = data_files
+        # We do almost the same thing that install_data.run() does, except
+        # we can assume everything in self.data_files is a (dir, files) tuple,
+        # and all files lists are non-empty.  And for i18n files, instead of
+        # specifying the directory we instead specify the destination filename.
+        for dest, files in i18n_files:
+            dest = util.convert_path(dest)
+            if not os.path.isabs(dest):
+                dest = os.path.join(self.install_dir, dest)
+            elif self.root:
+                dest = util.change_root(self.root, dest)
+            self.mkpath(os.path.dirname(dest))
+            for data in files:
+                data = util.convert_path(data)
+                (out, _) = self.copy_file(data, dest)
+                self.outfiles.append(out)
 
     def fix_permissions (self):
         """Set correct read permissions on POSIX systems. Might also
