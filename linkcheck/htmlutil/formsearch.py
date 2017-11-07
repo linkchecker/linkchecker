@@ -71,10 +71,10 @@ class FormFinder(object):
                     value = attrs.get('value')
                     self.form.add_value(key, value)
                 else:
-                    log.warning(LOG_CHECK, "nameless form input %s" % attrs)
+                    log.warn(LOG_CHECK, "nameless form input %s" % attrs)
                     pass
             else:
-                log.warning(LOG_CHECK, "formless input´%s" % attrs)
+                log.warn(LOG_CHECK, "formless input´%s" % attrs)
                 pass
 
     def start_end_element(self, tag, attrs):
