@@ -1,12 +1,10 @@
 LinkChecker
 ============
 
-|Build Status|_ |Latest Version|_ |License|_
+|Build Status|_ |License|_
 
 .. |Build Status| image:: https://travis-ci.org/linkcheck/linkchecker.svg?branch=master
 .. _Build Status: https://travis-ci.org/linkcheck/linkchecker
-.. |Latest Version| image:: http://img.shields.io/pypi/v/LinkChecker.svg
-.. _Latest Version: https://pypi.python.org/pypi/LinkChecker
 .. |License| image:: http://img.shields.io/badge/license-GPL2-d49a6a.svg
 .. _License: http://opensource.org/licenses/GPL-2.0
 
@@ -31,6 +29,8 @@ Installation
 -------------
 See doc/install.txt in the source code archive.
 Python 2.7.2 or later is needed. It doesn't work with Python 3 yet, see `#40 <https://github.com/linkcheck/linkchecker/pull/40>`_ for details.
+
+``pip install linkchecker`` should NOT be used for now, as it will install the old version of linkchecker. See `#4 <https://github.com/linkcheck/linkchecker/pull/4>`_.
 
 Usage
 ------
