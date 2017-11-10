@@ -338,7 +338,7 @@ def url_norm (url, encoding=None):
     urlparts[2] = url_quote_part(urlparts[2], safechars=_nopathquote_chars, encoding=encoding) # path
     if not urlparts[0].startswith("feed"):
         urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
-    urlparts[4] = url_quote_part(urlparts[4], encoding=encoding) # anchor
+    urlparts[4] = url_quote_part(urlparts[4], safechars="!$&'()*+,-./;=?@_~", encoding=encoding) # anchor
     res = urlunsplit(urlparts)
     if url.endswith('#') and not urlparts[4]:
         # re-append trailing empty fragment
