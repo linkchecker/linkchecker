@@ -125,7 +125,7 @@ class CSVLogger (_Logger):
     def encode_row_s(self, row_s):
         try:
             return row_s.encode("utf-8", self.codec_errors)
-        except TypeError:
+        except(TypeError, AttributeError):
             return row_s
 
     def writerow (self, row):
