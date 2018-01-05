@@ -19,6 +19,8 @@ Default HTML parser handler classes.
 """
 
 import sys
+from builtins import bytes, str as str_text
+from builtins import chr
 
 
 class HtmlPrinter (object):
@@ -43,7 +45,8 @@ class HtmlPrinter (object):
         @type attrs: tuple
         @return: None
         """
-        print >> self.fd, self.mem, attrs
+        self.fd.write(self.mem)
+        self.fd.write(str_text(attrs))
 
     def __getattr__ (self, name):
         """
@@ -123,7 +126,6 @@ class HtmlPrettyPrinter (object):
         @type end: string
         @return: None
         """
-        tag = tag.encode(self.encoding, "ignore")
         self.fd.write("<%s" % tag.replace("/", ""))
         for key, val in attrs.items():
             key = key.encode(self.encoding, "ignore")
@@ -186,7 +188,9 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
+        if type(data) != str_text:
+            data = data.encode(self.encoding, "ignore")  # Python 2
+
         self.fd.write(data)
 
 
@@ -201,14 +205,18 @@ def quote_attrval (s):
     """
     res = []
     for c in s:
-        if ord(c) <= 127:
+        try:  # Python 2
+            ord_c = ord(c)
+        except TypeError:
+            ord_c = c
+        if ord_c <= 127:
             # ASCII
             if c == u'&':
                 res.append(u"&amp;")
             elif c == u'"':
                 res.append(u"&quot;")
             else:
-                res.append(c)
+                res.append(chr(ord_c))
         else:
-            res.append(u"&#%d;" % ord(c))
+            res.append(u"&#%d;" % ord_c)
     return u"".join(res)
