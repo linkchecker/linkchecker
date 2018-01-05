@@ -30,7 +30,7 @@ try:
     from cStringIO import StringIO
 except ImportError:
     # Python 3
-    from io import StringIO
+    from io import BytesIO as StringIO
 
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
