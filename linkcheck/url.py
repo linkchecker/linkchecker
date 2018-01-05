@@ -100,7 +100,10 @@ def decode_for_unquote(part):
         unicode
         return part
     except NameError:
-        return part.decode("utf-8")
+        if type(part) == bytes:
+            return part.decode("utf-8")
+        else:
+            return part
 
 # snatched form urlparse.py
 def splitparams (path):
@@ -354,11 +357,14 @@ def url_norm (url, encoding=None):
         urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
     urlparts[4] = url_quote_part(urlparts[4], safechars="!$&'()*+,-./;=?@_~", encoding=encoding) # anchor
     res = urlunsplit(urlparts)
-    if url.endswith('#') and not urlparts[4]:
+    if url.endswith(b'#') and not urlparts[4]:
         # re-append trailing empty fragment
         res += '#'
     if encode_unicode:
-        res = unicode(res)
+        try:
+            res = unicode(res)
+        except NameError:
+            pass
     return (res, is_idn)
 
 
