@@ -30,7 +30,9 @@ except ImportError: # Python 2
     import urlparse
 import time
 import requests
+
 from . import log, LOG_CHECK, configuration
+from .url import decode_for_unquote
 
 __all__ = ["RobotFileParser"]
 
@@ -155,13 +157,13 @@ class RobotFileParser (object):
                     entry = Entry()
                     state = 0
             # remove optional comment and strip line
-            i = line.find('#')
+            i = decode_for_unquote(line).find('#')
             if i >= 0:
                 line = line[:i]
             line = line.strip()
             if not line:
                 continue
-            line = line.split(':', 1)
+            line = decode_for_unquote(line).split(':', 1)
             if len(line) == 2:
                 line[0] = line[0].strip().lower()
                 line[1] = urllib_parse.unquote(line[1].strip())

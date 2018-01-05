@@ -98,7 +98,7 @@ class TestLogger (linkcheck.logger._Logger):
             if not isinstance(line, text):
                 # The ---, +++ and @@ lines from diff format are ascii encoded.
                 # Make them unicode.
-                line = unicode(line, "ascii", "replace")
+                line = text(line, "ascii", "replace")
             self.diff.append(line)
 
 
@@ -196,7 +196,7 @@ class LinkCheckTest (unittest.TestCase):
         linkcheck.director.check_urls(aggregate)
         diff = aggregate.config['logger'].diff
         if diff:
-            msg = unicode(os.linesep).join([url] + diff)
+            msg = text(os.linesep).join([url] + diff)
             self.fail_unicode(msg)
 
     def fail_unicode (self, msg):
@@ -226,7 +226,7 @@ class LinkCheckTest (unittest.TestCase):
         if diff:
             l = [u"Differences found testing %s" % url]
             l.extend(x.rstrip() for x in diff[2:])
-            self.fail_unicode(unicode(os.linesep).join(l))
+            self.fail_unicode(text(os.linesep).join(l))
 
 
 class MailTest (LinkCheckTest):
