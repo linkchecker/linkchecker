@@ -52,7 +52,8 @@ def image_name (txt):
 def href_name (txt):
     """Return the name part of the first <a href="">name</a> link in txt."""
     name = u""
-    endtag = a_end_search(urlutil.decode_for_unquote(txt))
+    txt = urlutil.decode_for_unquote(txt)
+    endtag = a_end_search(txt)
     if not endtag:
         return name
     name = txt[:endtag.start()]

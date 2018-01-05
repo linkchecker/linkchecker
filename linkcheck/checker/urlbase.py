@@ -42,7 +42,7 @@ try:
     from cStringIO import StringIO
 except ImportError:
     # Python 3
-    from io import StringIO
+    from io import BytesIO as StringIO
 from builtins import str as str_text
 from future.utils import python_2_unicode_compatible
 

@@ -95,6 +95,8 @@ def guess_mimetype_read(read):
         pass
     else:
         for cmime, ro in PARSE_CONTENTS.items():
+            if isinstance(data, bytes):
+                data = data.decode()
             if ro.search(data):
                 mime = cmime
                 break
