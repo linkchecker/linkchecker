@@ -42,4 +42,5 @@ class TestDecorators (unittest.TestCase):
             time.sleep(1)
             return 42
         self.assertEqual(f(), 42)
-        self.assertTrue(log.getvalue())
+        log_value = log.getvalue()
+        self.assertEquals(log_value, b'f took 1.00 seconds\n()\n{}\n')
