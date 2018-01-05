@@ -23,7 +23,9 @@ import sys
 import socket
 import pytest
 from contextlib import contextmanager
+from functools import wraps
 from linkcheck import LinkCheckerInterrupt
+from builtins import str as str_text
 
 
 basedir = os.path.dirname(__file__)
@@ -86,11 +88,11 @@ def run_silent (cmd):
 def _need_func (testfunc, name):
     """Decorator skipping test if given testfunc fails."""
     def check_func (func):
+        @wraps(func)
         def newfunc (*args, **kwargs):
             if not testfunc():
                 pytest.skip("%s is not available" % name)
             return func(*args, **kwargs)
-        newfunc.func_name = func.func_name
         return newfunc
     return check_func
 
@@ -103,7 +105,7 @@ def has_network ():
         s.connect(("www.python.org", 80))
         s.close()
         return True
-    except StandardError:
+    except Exception:
         pass
     return False
 
@@ -153,7 +155,7 @@ def has_clamav ():
             s.connect(sock)
             s.close()
             return True
-    except StandardError:
+    except Exception:
         pass
     return False
 
@@ -168,7 +170,7 @@ def has_proxy ():
         s.connect(("localhost", 8081))
         s.close()
         return True
-    except StandardError:
+    except Exception:
         return False
 
 need_proxy = _need_func(has_proxy, "proxy")
@@ -285,8 +287,8 @@ def get_file (filename=None):
     """
     directory = os.path.join("tests", "checker", "data")
     if filename:
-        return unicode(os.path.join(directory, filename))
-    return unicode(directory)
+        return str_text(os.path.join(directory, filename))
+    return str_text(directory)
 
 
 if __name__ == '__main__':
