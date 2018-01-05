@@ -403,7 +403,7 @@ def make_userdir(child):
             # Windows forbids filenames with leading dot unless
             # a trailing dot is added.
             userdir += "."
-        os.makedirs(userdir, 0700)
+        os.makedirs(userdir, 0o700)
 
 
 def get_user_config():
