@@ -56,11 +56,8 @@ class TestGTranslator (unittest.TestCase):
     def test_gtranslator (self):
         """Test all pofiles for GTranslator brokenness."""
         for f in get_pofiles():
-            fd = file(f)
-            try:
+            with open(f, 'rb') as fd:
                 self.check_file(fd, f)
-            finally:
-                fd.close()
 
     def check_file (self, fd, f):
         """Test for GTranslator broken syntax."""
