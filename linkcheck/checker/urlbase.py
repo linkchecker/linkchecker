@@ -25,6 +25,10 @@ except ImportError:
     # Python 3
     from urllib import parse as urlparse
 try:
+    from urllib import splituser
+except ImportError: # Python 3
+    from urllib.parse import splituser
+try:
     from urllib2 import urlopen
 except ImportError:
     # Python 3
@@ -395,7 +399,7 @@ class UrlBase (object):
         Also checks for obfuscated IP addresses.
         """
         # check userinfo@host:port syntax
-        self.userinfo, host = urllib.splituser(self.urlparts[1])
+        self.userinfo, host = splituser(self.urlparts[1])
         port = urlutil.default_ports.get(self.scheme, 0)
         host, port = urlutil.splitport(host, port=port)
         if port is None:
