@@ -259,8 +259,8 @@ def url_fix_common_typos (url):
 
 def url_fix_mailto_urlsplit (urlparts):
     """Split query part of mailto url if found."""
-    if "?" in urlparts[2]:
-        urlparts[2], urlparts[3] = urlparts[2].split('?', 1)
+    if "?" in decode_for_unquote(urlparts[2]):
+        urlparts[2], urlparts[3] = decode_for_unquote(urlparts[2]).split('?', 1)
 
 # wayback urls include in the path http[s]://. By default the
 # tidying mechanism in linkchecker encodes the : and deletes the second slash
