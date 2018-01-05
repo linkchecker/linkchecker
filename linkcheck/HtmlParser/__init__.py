@@ -165,6 +165,7 @@ try:
     from htmlentitydefs import name2codepoint
 except ImportError:
     from html.entities import name2codepoint
+from builtins import chr
 
 
 def _resolve_entity (mo):
@@ -193,7 +194,7 @@ def _resolve_entity (mo):
         # unknown entity -> ignore
         return u''
     try:
-        return unichr(num)
+        return chr(num)
     except ValueError:
         return u''
 
