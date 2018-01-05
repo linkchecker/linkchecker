@@ -288,9 +288,9 @@ def get_file (filename=None):
 
 
 if __name__ == '__main__':
-    print "has clamav", has_clamav()
-    print "has network", has_network()
-    print "has msgfmt", has_msgfmt()
-    print "has POSIX", has_posix()
-    print "has proxy", has_proxy()
-    print "has X11", has_x11()
+    print("has clamav", has_clamav())
+    print("has network", has_network())
+    print("has msgfmt", has_msgfmt())
+    print("has POSIX", has_posix())
+    print("has proxy", has_proxy())
+    print("has X11", has_x11())
