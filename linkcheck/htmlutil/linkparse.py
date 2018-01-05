@@ -237,7 +237,10 @@ class LinkFinder (TagFinder):
         if tag == 'a' and attr == 'href':
             # Look for name only up to MAX_NAMELEN characters
             data = self.parser.peek(MAX_NAMELEN)
-            data = data.decode(self.parser.encoding, "ignore")
+            try:
+                data = data.decode(self.parser.encoding, "ignore")
+            except TypeError:  # data is already decoded
+                pass
             name = linkname.href_name(data)
             if not name:
                 name = attrs.get_true('title', u'')
