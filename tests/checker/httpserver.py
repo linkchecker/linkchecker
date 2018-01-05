@@ -18,9 +18,8 @@
 Define http test support classes for LinkChecker tests.
 """
 
-import SimpleHTTPServer
-import BaseHTTPServer
-import httplib
+from http.server import SimpleHTTPRequestHandler, HTTPServer
+from http.client import HTTPConnection
 import time
 import threading
 import cgi
@@ -32,7 +31,7 @@ from io import StringIO
 from . import LinkCheckTest
 
 
-class StoppableHttpRequestHandler (SimpleHTTPServer.SimpleHTTPRequestHandler, object):
+class StoppableHttpRequestHandler (SimpleHTTPRequestHandler, object):
     """
     HTTP request handler with QUIT stopping the server.
     """
@@ -57,7 +56,7 @@ StoppableHttpRequestHandler.extensions_map.update({
 })
 
 
-class StoppableHttpServer (BaseHTTPServer.HTTPServer, object):
+class StoppableHttpServer (HTTPServer, object):
     """
     HTTP server that reacts to self.stop flag.
     """
@@ -185,7 +184,7 @@ def start_server (handler):
     # wait for server to start up
     while True:
         try:
-            conn = httplib.HTTPConnection("localhost:%d" % port)
+            conn = HTTPConnection("localhost:%d" % port)
             conn.request("GET", "/")
             conn.getresponse()
             break
@@ -196,7 +195,7 @@ def start_server (handler):
 
 def stop_server (port):
     """Stop an HTTP server thread."""
-    conn = httplib.HTTPConnection("localhost:%d" % port)
+    conn = HTTPConnection("localhost:%d" % port)
     conn.request("QUIT", "/")
     conn.getresponse()
 
