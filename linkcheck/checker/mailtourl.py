@@ -159,7 +159,7 @@ class MailtoUrl (urlbase.UrlBase):
             {"addr": mail}, valid=False, overwrite=False)
             return
         # note: be sure to use rsplit since "@" can occur in local part
-        local, domain = mail.rsplit("@", 1)
+        local, domain = urlutil.decode_for_unquote(mail).rsplit("@", 1)
         if not local:
             self.set_result(_("Missing local part of mail address `%(addr)s'.") % \
             {"addr": mail}, valid=False, overwrite=False)
@@ -248,7 +248,7 @@ class MailtoUrl (urlbase.UrlBase):
         from dns.exception import DNSException
         log.debug(LOG_CHECK, "checking mail address %r", mail)
         mail = strformat.ascii_safe(mail)
-        username, domain = mail.rsplit('@', 1)
+        username, domain = urlutil.decode_for_unquote(mail).rsplit('@', 1)
         log.debug(LOG_CHECK, "looking up MX mailhost %r", domain)
         try:
             answers = resolver.query(domain, 'MX')
