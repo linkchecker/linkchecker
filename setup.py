@@ -504,6 +504,7 @@ args = dict(
         'requests<2.15,>=2.2',
         'dnspython',
         'pyxdg',
+        'future',
     ],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
