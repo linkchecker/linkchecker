@@ -83,7 +83,7 @@ def get_os_filename (path):
     """Return filesystem path for given URL path."""
     if os.name == 'nt':
         path = prepare_urlpath_for_nt(path)
-    res = urlrequest.url2pathname(fileutil.pathencode(path))
+    res = urlrequest.url2pathname(urlutil.decode_for_unquote(fileutil.pathencode(path)))
     if os.name == 'nt' and res.endswith(':') and len(res) == 2:
         # Work around http://bugs.python.org/issue11474
         res += os.sep
