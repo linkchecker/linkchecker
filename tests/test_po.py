@@ -65,7 +65,7 @@ class TestGTranslator (unittest.TestCase):
     def check_file (self, fd, f):
         """Test for GTranslator broken syntax."""
         for line in fd:
-            if line.strip().startswith("#"):
+            if line.strip().startswith(b"#"):
                 continue
-            self.assertFalse("\xc2\xb7" in line,
+            self.assertFalse(b"\xc2\xb7" in line,
                  "Broken GTranslator copy/paste in %r:\n%r" % (f, line))
