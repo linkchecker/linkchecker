@@ -83,7 +83,10 @@ def get_plist_data_from_string (data):
         return biplist.readPlistFromString(data)
     # fall back to normal plistlist
     try:
-        return plistlib.readPlistFromString(data)
+        if hasattr(plistlib, 'readPlistFromBytes'):  # Python 3
+            return plistlib.readPlistFromBytes(data)
+        else:
+            return plistlib.readPlistFromString(data)
     except Exception:
         # not parseable (eg. not well-formed, or binary)
         return {}
