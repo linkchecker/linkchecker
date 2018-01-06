@@ -89,7 +89,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         parser = htmlsax.parser(handler)
         handler.parser = parser
         if self.charset:
-            parser.encoding = self.charset
+            parser.encoding = self.charset.encode('ascii')
         # parse
         try:
             parser.feed(self.get_content())

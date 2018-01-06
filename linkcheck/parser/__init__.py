@@ -121,7 +121,7 @@ def find_links (url_data, callback, tags):
     handler = linkparse.LinkFinder(callback, tags)
     parser = htmlsax.parser(handler)
     if url_data.charset:
-        parser.encoding = url_data.charset
+        parser.encoding = url_data.charset.encode('ascii')
     handler.parser = parser
     # parse
     try:
