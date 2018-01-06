@@ -101,7 +101,7 @@ def decode_for_unquote(part):
         return part
     except NameError:
         if type(part) == bytes:
-            return part.decode("utf-8")
+            return part.decode("utf-8", "replace")
         else:
             return part
 
