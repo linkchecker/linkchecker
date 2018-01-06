@@ -212,7 +212,7 @@ def resolve_entities (s):
     """
     return _entity_re.sub(_resolve_entity, s)
 
-SUPPORTED_CHARSETS = ["utf-8", "iso-8859-1", "iso-8859-15"]
+SUPPORTED_CHARSETS = [b"utf-8", b"iso-8859-1", b"iso-8859-15"]
 
 _encoding_ro = re.compile(r"charset=(?P<encoding>[-0-9a-zA-Z]+)")
 
@@ -233,8 +233,9 @@ def set_encoding (parsobj, attrs):
     elif attrs.get_true('http-equiv', u'').lower() == u"content-type":
         # <meta http-equiv="content-type" content="text/html;charset="utf-8">
         charset = attrs.get_true('content', u'')
-        charset = charset.encode('ascii', 'ignore').lower()
         charset = get_ctype_charset(charset)
+        if charset:
+            charset = charset.encode('ascii', 'ignore').lower()
     if charset and charset in SUPPORTED_CHARSETS:
         parsobj.encoding = charset
 
