@@ -289,24 +289,24 @@ class TestParser (unittest.TestCase):
             def start_element (self_handler, tag, attrs):
                 # use self reference of TestParser instance
                 self.assertRaises(TypeError, self.htmlparser.peek, -1)
-                self.assertEqual(self.htmlparser.peek(0), "")
-                self.assertEqual(self.htmlparser.peek(4), "name")
+                self.assertEqual(self.htmlparser.peek(0), b"")
+                self.assertEqual(self.htmlparser.peek(4), b"name")
 
         self.htmlparser.handler = NamePeeker()
         self.htmlparser.feed(data)
 
     def test_encoding_detection (self):
         html = '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
-        self.encoding_test(html, "utf-8")
+        self.encoding_test(html, b"utf-8")
         html = '<meta charset="UTF-8">'
-        self.encoding_test(html, "utf-8")
+        self.encoding_test(html, b"utf-8")
         html = '<meta charset="hulla">'
-        self.encoding_test(html, "iso8859-1")
+        self.encoding_test(html, b"iso8859-1")
         html = '<meta http-equiv="content-type" content="text/html; charset=blabla">'
-        self.encoding_test(html, "iso8859-1")
+        self.encoding_test(html, b"iso8859-1")
 
     def encoding_test (self, html, expected):
         parser = linkcheck.HtmlParser.htmlsax.parser()
-        self.assertEqual(parser.encoding, "iso8859-1")
+        self.assertEqual(parser.encoding, b"iso8859-1")
         parser.feed(html)
         self.assertEqual(parser.encoding, expected)
