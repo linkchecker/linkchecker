@@ -17,7 +17,7 @@
 """
 Test url routines.
 """
-from . import need_network, need_posix, need_windows
+from . import need_network, need_posix, need_python2, need_windows
 import unittest
 import os
 import re
@@ -131,12 +131,26 @@ class TestUrl (unittest.TestCase):
         url = "http://example.com/?u=http://example2.com?b="
         nurl = "http://example.com/?u=http://example2.com?b="
         self.urlnormtest(url, nurl)
-        url = "http://localhost:8001/?quoted=ü"
-        nurl = "http://localhost:8001/?quoted=%FC"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
         url = "http://host/?a=b/c+d="
         nurl = "http://host/?a=b/c%20d%3D"
         self.urlnormtest(url, nurl)
+
+    @need_python2
+    def test_norm_quote_iso (self):
+        """
+        Check quoting URL with iso characters
+        This does not work on Python 3,
+        because urllib.parse.quote works only with UTF8
+        """
+        url = "http://localhost:8001/?quoted=ü"
+        nurl = "http://localhost:8001/?quoted=%FC"
+        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+
+    def test_norm_quote_utf (self):
+        """ Check quoting the same URL with utf characters """
+        url = u"http://localhost:8001/?quoted=ü"
+        nurl = "http://localhost:8001/?quoted=%C3%BC"
+        self.urlnormtest(url, nurl, encoding="utf8")
 
     def test_norm_case_sensitivity (self):
         # Test url norm case sensitivity.
