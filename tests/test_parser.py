@@ -18,6 +18,8 @@
 Test html parsing.
 """
 
+import sys
+
 import linkcheck.HtmlParser.htmlsax
 import linkcheck.HtmlParser.htmllib
 try:
@@ -295,18 +297,23 @@ class TestParser (unittest.TestCase):
         self.htmlparser.handler = NamePeeker()
         self.htmlparser.feed(data)
 
+    if sys.version_info < (3, 0):
+        default_encoding = b"iso8859-1"
+    else:
+        default_encoding = b"utf-8"
+
     def test_encoding_detection (self):
         html = '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
         self.encoding_test(html, b"utf-8")
         html = '<meta charset="UTF-8">'
         self.encoding_test(html, b"utf-8")
         html = '<meta charset="hulla">'
-        self.encoding_test(html, b"iso8859-1")
+        self.encoding_test(html,  self.default_encoding)
         html = '<meta http-equiv="content-type" content="text/html; charset=blabla">'
-        self.encoding_test(html, b"iso8859-1")
+        self.encoding_test(html,  self.default_encoding)
 
     def encoding_test (self, html, expected):
         parser = linkcheck.HtmlParser.htmlsax.parser()
-        self.assertEqual(parser.encoding, b"iso8859-1")
+        self.assertEqual(parser.encoding, self.default_encoding)
         parser.feed(html)
         self.assertEqual(parser.encoding, expected)

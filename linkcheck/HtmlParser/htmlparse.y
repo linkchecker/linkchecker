@@ -51,12 +51,14 @@ static void yyerror (void *locp, char const *msg) {
             PyModuleDef_HEAD_INIT, name, doc, -1, methods, }; \
           ob = PyModule_Create(&moduledef)
   #define PyInt_FromLong PyLong_FromLong
+  #define DEFAULT_ENCODING "utf-8"
 #else
   #define MOD_ERROR_VAL
   #define MOD_SUCCESS_VAL(val)
   #define MOD_INIT(name) void init##name(void)
   #define MOD_DEF(ob, name, doc, methods) \
           ob = Py_InitModule3(name, methods, doc)
+  #define DEFAULT_ENCODING "iso8859-1"
 #endif
 
 
@@ -530,7 +532,7 @@ static PyObject* parser_new (PyTypeObject* type, PyObject* args, PyObject* kwds)
         Py_DECREF(self);
         return NULL;
     }
-    self->encoding = PyBytes_FromString("iso8859-1");
+    self->encoding = PyBytes_FromString(DEFAULT_ENCODING);
     if (self->encoding == NULL) {
         Py_DECREF(self->handler);
         Py_DECREF(self);
