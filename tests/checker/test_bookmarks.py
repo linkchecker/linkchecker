@@ -28,17 +28,17 @@ class TestBookmarks (LinkCheckTest):
     """
 
     @need_network
-    def _test_firefox_bookmarks (self):
+    def test_firefox_bookmarks (self):
         # firefox 3 bookmark file parsing
         self.file_test("places.sqlite")
 
     @need_network
-    def _test_opera_bookmarks (self):
+    def test_opera_bookmarks (self):
         # Opera bookmark file parsing
         self.file_test("opera6.adr")
 
     @need_network
-    def _test_chromium_bookmarks (self):
+    def test_chromium_bookmarks (self):
         # Chromium and Google Chrome bookmark file parsing
         self.file_test("Bookmarks")
 
