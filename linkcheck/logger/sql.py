@@ -114,7 +114,7 @@ class SQLLogger (_Logger):
                'url_parent': sqlify((url_data.parent_url)),
                'base_ref': sqlify((url_data.base_ref)),
                'valid': intify(url_data.valid),
-               'result': sqlify(url_data.result),
+               'result': sqlify(str(url_data.result)),
                'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),
                'info': sqlify(os.linesep.join(url_data.info)),
                'url': sqlify(urlutil.url_quote(url_data.url)),

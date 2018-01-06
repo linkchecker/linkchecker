@@ -219,7 +219,7 @@ class TextLogger (_Logger):
             color = self.colorinvalid
             self.write(_("Error"), color=color)
         if url_data.result:
-            self.write(u": " + url_data.result, color=color)
+            self.write(u": %s" % url_data.result, color=color)
         self.writeln()
 
     def write_outro (self, interrupt=False):
