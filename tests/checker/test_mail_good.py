@@ -146,7 +146,10 @@ class TestMailGood (MailTest):
     @need_network
     def test_unicode_mail (self):
         mailto = u"mailto:ölvin@users.sourceforge.net"
-        url = self.norm(mailto, encoding="iso-8859-1")
+        if type(mailto) == str:
+            url = self.norm(mailto, encoding="utf8")
+        else:
+            url = self.norm(mailto, encoding="iso-8859-1")
         resultlines = [
             u"url %s" % url,
             u"cache key %s" % mailto,
