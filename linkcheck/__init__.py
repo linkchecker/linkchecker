@@ -148,15 +148,6 @@ def drop_privileges ():
         os.seteuid(pwd.getpwnam('nobody')[3])
 
 
-def find_third_party_modules ():
-    """Find third party modules and add them to the python path."""
-    parent = os.path.dirname(os.path.dirname(__file__))
-    third_party = os.path.join(parent, "third_party")
-    if os.path.isdir(third_party):
-        sys.path.append(os.path.join(third_party, "dnspython"))
-
-find_third_party_modules()
-
 if hasattr(signal, "SIGUSR1"):
     # install SIGUSR1 handler
     from .decorators import signal_handler
