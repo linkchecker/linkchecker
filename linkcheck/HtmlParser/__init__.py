@@ -266,4 +266,4 @@ def set_doctype (parsobj, doctype):
     @return: None
     """
     if u"XHTML" in doctype:
-        parsobj.doctype = "XHTML"
+        parsobj.doctype = b"XHTML"
