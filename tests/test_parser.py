@@ -141,8 +141,6 @@ parsetests = [
     ("""<a  href="&hulla;ailto:" >""", """<a href="ailto:">"""),
     ("""<a  href="&#109;ailto:" >""", """<a href="mailto:">"""),
     ("""<a  href="&#x6D;ailto:" >""", """<a href="mailto:">"""),
-    # note that \u8156 is not valid encoding and therefore gets removed
-    ("""<a  href="&#8156;ailto:" >""", """<a href="ailto:">"""),
     # non-ascii characters
     ("""<Üzgür> fahr </langsamer> ¹²³¼½¬{""",
      """<Üzgür> fahr </langsamer> ¹²³¼½¬{"""),
@@ -216,6 +214,20 @@ class TestParser (unittest.TestCase):
             self.htmlparser.handler = handler
             self.htmlparser.feed(_in)
             self.check_results(self.htmlparser, _in, _out, out)
+
+    def test_parse_invalid_encoding (self):
+        # Parse all test patterns in one go.
+        # The \u8156 is not valid encoding and therefore gets removed in Python 2.
+        # Python 3 doesn't require  to decode strings from parser, so id doesn't get removed.
+        if sys.version_info < (3, 0):
+            _in, _out = """<a  href="&#8156;ailto:" >""", """<a href="ailto:">"""
+        else:
+            _in, _out = """<a  href="&#8156;ailto:" >""", """<a href="&#8156;ailto:">"""
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        self.htmlparser.handler = handler
+        self.htmlparser.feed(_in)
+        self.check_results(self.htmlparser, _in, _out, out)
 
     def check_results (self, htmlparser, _in, _out, out):
         """
