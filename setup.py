@@ -460,25 +460,12 @@ args = dict(
         'linkcheck.configuration',
         'linkcheck.director',
         'linkcheck.htmlutil',
-        'linkcheck.HtmlParser',
         'linkcheck.logger',
         'linkcheck.network',
         'linkcheck.parser',
         'linkcheck.plugins',
     ],
     ext_modules = [
-        Extension('linkcheck.HtmlParser.htmlsax',
-            sources = [
-                'linkcheck/HtmlParser/htmllex.c',
-                'linkcheck/HtmlParser/htmlparse.c',
-                'linkcheck/HtmlParser/s_util.c',
-            ],
-            extra_compile_args = extra_compile_args,
-            library_dirs = library_dirs,
-            libraries = libraries,
-            define_macros = define_macros + [('YY_NO_INPUT', None)],
-            include_dirs = include_dirs + [normpath("linkcheck/HtmlParser")],
-        ),
         Extension("linkcheck.network._network",
             sources = ["linkcheck/network/_network.c"],
             extra_compile_args = extra_compile_args,
@@ -503,6 +490,7 @@ args = dict(
     install_requires = [
         'requests<2.15,>=2.2',
         'dnspython',
+        'bs4',
         'pyxdg',
     ],
     # Commented out since they are untested and not officially supported.
