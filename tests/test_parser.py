@@ -23,6 +23,8 @@ import linkcheck.HtmlParser.htmllib
 from cStringIO import StringIO
 import unittest
 
+from parameterized import parameterized
+
 
 # list of tuples
 # (<test pattern>, <expected parse output>)
@@ -203,14 +205,14 @@ class TestParser (unittest.TestCase):
         self.htmlparser = linkcheck.HtmlParser.htmlsax.parser()
         self.htmlparser2 = linkcheck.HtmlParser.htmlsax.parser()
 
-    def test_parse (self):
+    @parameterized.expand(parsetests)
+    def test_parse (self, _in, _out):
         # Parse all test patterns in one go.
-        for _in, _out in parsetests:
-            out = StringIO()
-            handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
-            self.htmlparser.handler = handler
-            self.htmlparser.feed(_in)
-            self.check_results(self.htmlparser, _in, _out, out)
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        self.htmlparser.handler = handler
+        self.htmlparser.feed(_in)
+        self.check_results(self.htmlparser, _in, _out, out)
 
     def check_results (self, htmlparser, _in, _out, out):
         """
@@ -223,52 +225,52 @@ class TestParser (unittest.TestCase):
         self.assertEqual(res, _out, msg=msg)
         htmlparser.reset()
 
-    def test_feed (self):
+    @parameterized.expand(parsetests)
+    def test_feed (self, _in, _out):
         # Parse all test patterns sequentially.
-        for _in, _out in parsetests:
-            out = StringIO()
-            handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
-            self.htmlparser.handler = handler
-            for c in _in:
-                self.htmlparser.feed(c)
-            self.check_results(self.htmlparser, _in, _out, out)
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        self.htmlparser.handler = handler
+        for c in _in:
+            self.htmlparser.feed(c)
+        self.check_results(self.htmlparser, _in, _out, out)
 
-    def test_interwoven (self):
+    @parameterized.expand(parsetests)
+    def test_interwoven (self, _in, _out):
         # Parse all test patterns on two parsers interwoven.
-        for _in, _out in parsetests:
-            out = StringIO()
-            out2 = StringIO()
-            handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
-            self.htmlparser.handler = handler
-            handler2 = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out2)
-            self.htmlparser2.handler = handler2
-            for c in _in:
-                self.htmlparser.feed(c)
-                self.htmlparser2.feed(c)
-            self.check_results(self.htmlparser, _in, _out, out)
-            self.check_results(self.htmlparser2, _in, _out, out2)
+        out = StringIO()
+        out2 = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        self.htmlparser.handler = handler
+        handler2 = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out2)
+        self.htmlparser2.handler = handler2
+        for c in _in:
+            self.htmlparser.feed(c)
+            self.htmlparser2.feed(c)
+        self.check_results(self.htmlparser, _in, _out, out)
+        self.check_results(self.htmlparser2, _in, _out, out2)
 
-    def test_handler (self):
-        for _in, _out in parsetests:
-            out = StringIO()
-            out2 = StringIO()
-            handler = linkcheck.HtmlParser.htmllib.HtmlPrinter(out)
-            self.htmlparser.handler = handler
-            handler2 = linkcheck.HtmlParser.htmllib.HtmlPrinter(out2)
-            self.htmlparser2.handler = handler2
-            for c in _in:
-                self.htmlparser.feed(c)
-                self.htmlparser2.feed(c)
-            self.assertEqual(out.getvalue(), out2.getvalue())
+    @parameterized.expand(parsetests)
+    def test_handler (self, _in, _out):
+        out = StringIO()
+        out2 = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrinter(out)
+        self.htmlparser.handler = handler
+        handler2 = linkcheck.HtmlParser.htmllib.HtmlPrinter(out2)
+        self.htmlparser2.handler = handler2
+        for c in _in:
+            self.htmlparser.feed(c)
+            self.htmlparser2.feed(c)
+        self.assertEqual(out.getvalue(), out2.getvalue())
 
-    def test_flush (self):
+    @parameterized.expand(flushtests)
+    def test_flush (self, _in, _out):
         # Test parser flushing.
-        for _in, _out in flushtests:
-            out = StringIO()
-            handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
-            self.htmlparser.handler = handler
-            self.htmlparser.feed(_in)
-            self.check_results(self.htmlparser, _in, _out, out)
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        self.htmlparser.handler = handler
+        self.htmlparser.feed(_in)
+        self.check_results(self.htmlparser, _in, _out, out)
 
     def test_entities (self):
         # Test entity resolving.
