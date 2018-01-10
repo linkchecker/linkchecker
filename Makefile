@@ -32,8 +32,6 @@ TESTS ?= tests
 # set test options, eg. to "--verbose"
 TESTOPTS=
 PAGER ?= less
-# original dnspython repository module
-DNSPYTHON:=$(HOME)/src/dnspython-git
 # options to run the pep8 utility
 PEP8OPTS:=--repeat --ignore=E211,E501,E225,E301,E302,E241 \
    --exclude="gzip2.py,httplib2.py,robotparser2.py"
@@ -187,12 +185,6 @@ diff:
 	  diff -u linkcheck/$${f}2.py $(SRCDIR)/cpython.hg/Lib/$${f}.py | $(PAGER); \
 	done
 	@diff -u linkcheck/better_exchook.py $(SRCDIR)/py_better_exchook.git/better_exchook.py
-
-# Compare dnspython files with the ones from upstream repository
-dnsdiff:
-	@(for d in dns tests; do \
-	  diff -BurN --exclude=*.pyc third_party/dnspython/$$d $(DNSPYTHON)/$$d; \
-	done) | $(PAGER)
 
 changelog:
 	github-changelog $(DRYRUN) $(GITUSER) $(GITREPO) doc/changelog.txt

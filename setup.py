@@ -452,9 +452,6 @@ args = dict(
         'clean': MyClean,
         'sdist': MySdist,
     },
-    package_dir = {
-        'linkcheck_dns.dns': 'third_party/dnspython/dns',
-    },
     packages = [
         'linkcheck',
         'linkcheck.bookmarks',
@@ -468,10 +465,6 @@ args = dict(
         'linkcheck.network',
         'linkcheck.parser',
         'linkcheck.plugins',
-        'linkcheck_dns.dns',
-        'linkcheck_dns.dns.rdtypes',
-        'linkcheck_dns.dns.rdtypes.ANY',
-        'linkcheck_dns.dns.rdtypes.IN',
     ],
     ext_modules = [
         Extension('linkcheck.HtmlParser.htmlsax',
@@ -509,6 +502,7 @@ args = dict(
     # Requirements, usable with setuptools or the new Python packaging module.
     install_requires = [
         'requests<2.15,>=2.2',
+        'dnspython',
         'pyxdg',
     ],
     # Commented out since they are untested and not officially supported.
