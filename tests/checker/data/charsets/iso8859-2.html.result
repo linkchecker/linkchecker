@@ -1,0 +1,17 @@
+url file://%(curdir)s/%(datadir)s/charsets/iso8859-2.html
+cache key file://%(curdir)s/%(datadir)s/charsets/iso8859-2.html
+real url file://%(curdir)s/%(datadir)s/charsets/iso8859-2.html
+name %(datadir)s/charsets/iso8859-2.html
+valid
+
+url file.html
+cache key file://%(curdir)s/%(datadir)s/charsets/file.html
+real url file://%(curdir)s/%(datadir)s/charsets/file.html
+name Žluťoučký kúň úpěl ďábelské ódy ůůůů
+error
+
+url img.png
+cache key file://%(curdir)s/%(datadir)s/charsets/img.png
+real url file://%(curdir)s/%(datadir)s/charsets/img.png
+name Žluťoučký kúň úpěl ďábelské ódy ůůůů
+error
