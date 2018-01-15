@@ -1,0 +1,25 @@
+# AppVeyor.com is a Continuous Integration service to build and run tests under
+# Windows
+
+environment:
+    matrix:
+        - PYTHON_VERSION: "2.7"
+        - PYTHON_VERSION: "3.5"
+        - PYTHON_VERSION: "3.6"
+
+matrix:
+    allow_failures:
+        - PYTHON_VERSION: "3.5"
+        - PYTHON_VERSION: "3.6"
+
+install:
+    - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+    - "pip install tox coveralls"
+
+build: false
+
+test_script:
+    - "tox"
+
+after_test:
+  - "coveralls"
