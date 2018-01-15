@@ -297,18 +297,36 @@ class TestParser (unittest.TestCase):
         self.htmlparser.handler = NamePeeker()
         self.htmlparser.feed(data)
 
-    def test_encoding_detection (self):
+    def test_encoding_detection_utf_content (self):
         html = '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
         self.encoding_test(html, "utf-8")
+
+    def test_encoding_detection_utf_charset (self):
         html = '<meta charset="UTF-8">'
         self.encoding_test(html, "utf-8")
+
+    def test_encoding_detection_iso_content (self):
+        html = '<meta http-equiv="content-type" content="text/html; charset=ISO8859-1">'
+        self.encoding_test(html, "iso8859-1")
+
+    def test_encoding_detection_iso_charset (self):
+        html = '<meta charset="ISO8859-1">'
+        self.encoding_test(html, "iso8859-1")
+
+    def test_encoding_detection_iso_bad_charset (self):
         html = '<meta charset="hulla">'
-        self.encoding_test(html, "iso8859-1")
+        self.encoding_test(html, "utf-8")
+
+    def test_encoding_detection_iso_bad_content (self):
         html = '<meta http-equiv="content-type" content="text/html; charset=blabla">'
-        self.encoding_test(html, "iso8859-1")
+        self.encoding_test(html, "utf-8")
 
     def encoding_test (self, html, expected):
         parser = linkcheck.HtmlParser.htmlsax.parser()
-        self.assertEqual(parser.encoding, "iso8859-1")
+        self.assertEqual(parser.encoding, None)
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        parser.handler = handler
         parser.feed(html)
+        parser.flush()
         self.assertEqual(parser.encoding, expected)
