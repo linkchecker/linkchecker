@@ -18,10 +18,12 @@
 Test url build method from url data objects.
 """
 
+import os
 import unittest
+
+import linkcheck.checker.urlbase
 import linkcheck.configuration
 import linkcheck.director
-import linkcheck.checker.urlbase
 from linkcheck.checker import get_url_from
 
 
@@ -54,7 +56,7 @@ class TestUrlBuild (unittest.TestCase):
         res = linkcheck.checker.urlbase.urljoin(parent_url, base_url)
         self.assertEqual(res, 'http://localhost:8001/;param=value')
 
-    def test_urljoin_file (self):
+    def test_urljoin_file_posix (self):
         parent_url = "file:///a/b.html"
         base_url = "?c=d"
         recursion_level = 0
@@ -62,7 +64,12 @@ class TestUrlBuild (unittest.TestCase):
         o = get_url_from(base_url, recursion_level,
                aggregate, parent_url=parent_url)
         o.build_url()
-        self.assertEqual(o.url, parent_url)
+        if os.name == "nt":
+            # On Windows the UNC name should have 4 slashes
+            expected_url = "file:////a/b.html"
+        else:
+            expected_url = "file:///a/b.html"
+        self.assertEqual(o.url, expected_url)
 
     def test_http_build2 (self):
         parent_url = u'http://example.org/test?a=b&c=d'

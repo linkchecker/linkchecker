@@ -18,9 +18,10 @@
 Test http checking.
 """
 
-import pytest
+import os
 
-from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
+from .httpserver import CookieRedirectHttpRequestHandler, HttpServerTest
+
 
 class TestHttp (HttpServerTest):
     """Test http:// link checking."""
@@ -36,7 +37,10 @@ class TestHttp (HttpServerTest):
         self.file_test("http_quotes.html", confargs=confargs)
         self.file_test("http_slash.html", confargs=confargs)
         self.file_test("http.xhtml", confargs=confargs)
-        self.file_test("http_file.html", confargs=confargs)
+        if os.name == "nt":
+            self.file_test("http_file_windows.html", confargs=confargs)
+        else:
+            self.file_test("http_file.html", confargs=confargs)
 
     def test_status(self):
         for status in sorted(self.handler.responses.keys()):
