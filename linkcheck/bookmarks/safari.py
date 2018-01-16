@@ -16,8 +16,9 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import os
-import sys
 import plistlib
+import sys
+from xml.parsers.expat import ExpatError
 try:
     import biplist
     has_biplist = True
@@ -44,7 +45,7 @@ def find_bookmark_file ():
             fname = os.path.join(dirname, u"Bookmarks.plist")
             if os.path.isfile(fname):
                 return fname
-    except Exception:
+    except ExpatError:
         pass
     return u""
 
@@ -71,7 +72,7 @@ def get_plist_data_from_file (filename):
     # fall back to normal plistlist
     try:
         return plistlib.readPlist(filename)
-    except Exception:
+    except ExpatError:
         # not parseable (eg. not well-formed, or binary)
         return {}
 
@@ -84,7 +85,7 @@ def get_plist_data_from_string (data):
     # fall back to normal plistlist
     try:
         return plistlib.readPlistFromString(data)
-    except Exception:
+    except ExpatError:
         # not parseable (eg. not well-formed, or binary)
         return {}
 
