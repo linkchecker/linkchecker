@@ -17,12 +17,14 @@
 """
 Mixin class for URLs that can be fetched over a proxy.
 """
-import urllib
-try:
-    import urlparse
+try:  # Python 3
+    from urllib import parse
+    from urllib import request
+    from urllib.parse import splitport
 except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+    from urllib import splitport
+    import urllib as request
+    import urlparse as parse
 import os
 from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 
@@ -40,7 +42,7 @@ class ProxySupport (object):
         self.proxyauth = None
         if not self.proxy:
             return
-        proxyurl = urlparse.urlparse(self.proxy)
+        proxyurl = parse.urlparse(self.proxy)
         self.proxytype = proxyurl.scheme
         if self.proxytype not in ('http', 'https'):
             # Note that invalid proxies might raise TypeError in urllib2,
@@ -67,7 +69,7 @@ class ProxySupport (object):
 
     def ignore_proxy_host (self):
         """Check if self.host is in the $no_proxy ignore list."""
-        if urllib.proxy_bypass(self.host):
+        if request.proxy_bypass(self.host):
             return True
         no_proxy = os.environ.get("no_proxy")
         if no_proxy:
@@ -96,7 +98,7 @@ class ProxySupport (object):
 
 def parse_host_port (host_port):
     """Parse a host:port string into separate components."""
-    host, port = urllib.splitport(host_port.strip())
+    host, port = splitport(host_port.strip())
     if port is not None:
         if urlutil.is_numeric_port(port):
             port = int(port)

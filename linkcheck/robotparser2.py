@@ -20,19 +20,24 @@ Robots.txt parser.
 The robots.txt Exclusion Protocol is implemented as specified in
 http://www.robotstxt.org/wc/norobots-rfc.html
 """
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
-import urllib
+try:  # Python 3
+    from urllib import parse
+except ImportError:  # Python 2
+    import urllib as parse
+try:  # Python 3
+    from urllib.parse import urlparse
+except ImportError:  # Python 2
+    from urlparse import urlparse
 import time
+
 import requests
+
 from . import log, LOG_CHECK, configuration
 
 __all__ = ["RobotFileParser"]
 
 ACCEPT_ENCODING = 'x-gzip,gzip,deflate'
+
 
 class RobotFileParser (object):
     """This class provides a set of methods to read, parse and answer
@@ -79,7 +84,7 @@ class RobotFileParser (object):
     def set_url (self, url):
         """Set the URL referring to a robots.txt file."""
         self.url = url
-        self.host, self.path = urlparse.urlparse(url)[1:3]
+        self.host, self.path = urlparse(url)[1:3]
 
     def read (self):
         """Read the robots.txt URL and feeds it to the parser."""
@@ -162,7 +167,7 @@ class RobotFileParser (object):
             line = line.split(':', 1)
             if len(line) == 2:
                 line[0] = line[0].strip().lower()
-                line[1] = urllib.unquote(line[1].strip())
+                line[1] = parse.unquote(line[1].strip())
                 if line[0] == "user-agent":
                     if state == 2:
                         log.debug(LOG_CHECK, "%r line %d: missing blank line before user-agent directive", self.url, linenumber)
@@ -230,7 +235,7 @@ class RobotFileParser (object):
             return True
         # search for given user agent matches
         # the first match counts
-        url = urllib.quote(urlparse.urlparse(urllib.unquote(url))[2]) or "/"
+        url = parse.quote(urlparse(parse.unquote(url))[2]) or "/"
         for entry in self.entries:
             if entry.applies_to(useragent):
                 return entry.allowance(url)
@@ -276,7 +281,7 @@ class RuleLine (object):
             # an empty value means allow all
             allowance = True
             path = '/'
-        self.path = urllib.quote(path)
+        self.path = parse.quote(path)
         self.allowance = allowance
 
     def applies_to (self, path):
