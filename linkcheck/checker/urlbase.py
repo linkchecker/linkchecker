@@ -90,6 +90,8 @@ class UrlBase (object):
         # It does not harm other URL schemes like HTTP since HTTP servers
         # should not send this content type. They send text/html instead.
         "application/x-httpd-php": "html",
+        # Support Atom web feeds.
+        "application/atom+xml": "html",
         "text/css": "css",
         "application/x-shockwave-flash": "swf",
         "application/msword": "word",
