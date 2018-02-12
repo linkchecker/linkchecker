@@ -39,12 +39,24 @@ class TestLogger (linkcheck.logger._Logger):
 
     LoggerName = 'test'
 
+    logparts = [
+        'cachekey',
+        'realurl',
+        'name',
+        'base',
+        'info',
+        'warning',
+        'result',
+        'url',
+    ]
+
     def __init__ (self, **kwargs):
         """
         The kwargs must have "expected" keyword with the expected logger
         output lines.
         """
         args = self.get_args(kwargs)
+        args['parts'] = self.logparts
         super(TestLogger, self).__init__(**args)
         # list of expected output lines
         self.expected = args['expected']
@@ -86,6 +98,20 @@ class TestLogger (linkcheck.logger._Logger):
                 self.result.append(u"warning %s" % warning)
         if self.has_part('result'):
             self.result.append(u"valid" if url_data.valid else u"error")
+        if self.has_part('line'):
+            self.result.append(u"line %s" % url_data.line)
+        if self.has_part('col'):
+            self.result.append(u"col %s" % url_data.column)
+        if self.has_part('size'):
+            self.result.append(u"size %s" % url_data.size)
+        if self.has_part('parent_url'):
+            self.result.append(u"parent_url %s" % url_data.parent_url)
+        if self.has_part('page'):
+            self.result.append(u"page %s" % url_data.page)
+        if self.has_part('modified'):
+            self.result.append(u"modified %s" % url_data.modified)
+        if self.has_part('content_type'):
+            self.result.append(u"content_type %s" % url_data.content_type)
         # note: do not append url_data.result since this is
         # platform dependent
 
@@ -119,12 +145,12 @@ def add_fileoutput_config (config):
         config['fileoutput'].append(logger)
 
 
-def get_test_aggregate (confargs, logargs):
+def get_test_aggregate (confargs, logargs, logger=TestLogger):
     """Initialize a test configuration object."""
     config = linkcheck.configuration.Configuration()
-    config.logger_add(TestLogger)
+    config.logger_add(logger)
     config['recursionlevel'] = 1
-    config['logger'] = config.logger_new(TestLogger.LoggerName, **logargs)
+    config['logger'] = config.logger_new(logger.LoggerName, **logargs)
     add_fileoutput_config(config)
     # uncomment for debugging
     #config.init_logging(None, debug=["all"])
@@ -141,6 +167,7 @@ class LinkCheckTest (unittest.TestCase):
     """
     Functional test class with ability to test local files.
     """
+    logger = TestLogger
 
     def setUp (self):
         """Ensure the current locale setting is the default.
@@ -189,7 +216,7 @@ class LinkCheckTest (unittest.TestCase):
         if confargs is None:
             confargs = {}
         logargs = {'expected': self.get_resultlines(filename)}
-        aggregate = get_test_aggregate(confargs, logargs)
+        aggregate = get_test_aggregate(confargs, logargs, logger=self.logger)
         url_data = get_url_from(url, 0, aggregate, extern=(0, 0))
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
