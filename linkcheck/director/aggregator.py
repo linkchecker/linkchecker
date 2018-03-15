@@ -34,6 +34,7 @@ from .. import log, LOG_CHECK, strformat, LinkCheckerError
 from ..decorators import synchronized
 from ..cache import urlqueue
 from ..htmlutil import formsearch
+from ..cookies import from_file
 from . import logger, status, checker, interrupt
 
 
@@ -51,7 +52,7 @@ def new_request_session(config, cookies):
         "User-Agent": config["useragent"],
     })
     if config["cookiefile"]:
-        for cookie in cookies.from_file(config["cookiefile"]):
+        for cookie in from_file(config["cookiefile"]):
             session.cookies = requests.cookies.merge_cookies(session.cookies, cookie)
     return session
 
