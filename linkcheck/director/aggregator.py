@@ -53,7 +53,7 @@ def new_request_session(config, cookies):
     })
     if config["cookiefile"]:
         for cookie in from_file(config["cookiefile"]):
-            session.cookies = requests.cookies.merge_cookies(session.cookies, cookie)
+            session.cookies.set_cookie(cookie)
     return session
 
 

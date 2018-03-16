@@ -42,12 +42,12 @@ def from_file (filename):
             line = line.rstrip()
             if not line:
                 if lines:
-                    entries.append(from_headers("\r\n".join(lines)))
+                    entries.extend(from_headers("\r\n".join(lines)))
                 lines = []
             else:
                 lines.append(line)
         if lines:
-            entries.append(from_headers("\r\n".join(lines)))
+            entries.extend(from_headers("\r\n".join(lines)))
         return entries
 
 
@@ -63,7 +63,9 @@ def from_headers (strheader):
     if "Host" not in headers:
         raise ValueError("Required header 'Host:' missing")
     host = headers["Host"]
-    path= headers.get("Path", "/")
+    # XXX: our --help says we also pay attention to the Scheme: header,
+    # but we don't?!
+    path = headers.get("Path", "/")
     for header in headers.getallmatchingheaders("Set-Cookie"):
         headervalue = header.split(':', 1)[1]
         for pairs in split_header_words([headervalue]):
