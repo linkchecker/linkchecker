@@ -72,8 +72,12 @@ class TestCookies (unittest.TestCase):
         self.assertRaises(ValueError, from_headers, "\r\n".join(lines))
 
     def test_cookie_file (self):
+        # Regression test for https://github.com/linkcheck/linkchecker/issues/62
         config = linkcheck.configuration.Configuration()
         here = os.path.dirname(__file__)
         config['cookiefile'] = os.path.join(here, 'cookies.txt')
         aggregate = linkcheck.director.get_aggregate(config)
         aggregate.add_request_session()
+        session = aggregate.get_request_session()
+        self.assertEqual({c.name for c in session.cookies},
+                         {'om', 'multiple', 'are'})
