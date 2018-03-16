@@ -18,8 +18,12 @@
 Test cookie routines.
 """
 
+import os
 import unittest
+
 import linkcheck.cookies
+import linkcheck.configuration
+import linkcheck.director
 
 
 class TestCookies (unittest.TestCase):
@@ -66,3 +70,10 @@ class TestCookies (unittest.TestCase):
         ]
         from_headers = linkcheck.cookies.from_headers
         self.assertRaises(ValueError, from_headers, "\r\n".join(lines))
+
+    def test_cookie_file (self):
+        config = linkcheck.configuration.Configuration()
+        here = os.path.dirname(__file__)
+        config['cookiefile'] = os.path.join(here, 'cookies.txt')
+        aggregate = linkcheck.director.get_aggregate(config)
+        aggregate.add_request_session()
