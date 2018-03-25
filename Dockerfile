@@ -1,5 +1,8 @@
 FROM python:2
 
+# needed to allow linkchecker create plugin directory and initial configuration file in "home" dir
+ENV HOME /tmp
+
 RUN set -x \
     && apt-get update -qq \
     && apt-get install -y -qq --no-install-recommends git \
