@@ -7,6 +7,10 @@ Before you participate in the community, you should also agree to
 respect the code of conduct, shipped in `CODE_OF_CONDUCT.md` in the
 source code.
 
+[project]: https://github.com/linkcheck/linkchecker/
+[issues]: https://github.com/linkcheck/linkchecker/issues
+[pull requests]: https://github.com/linkcheck/linkchecker/pulls
+
 # Positive feedback
 
 Even if you have no changes, suggestions, documentation or bug reports
@@ -20,10 +24,7 @@ story. You can also send your "thanks" through <https://saythanks.io/>.
 # Patches
 
 Patches can be submitted through [pull requests][] on the
-[GitHub project][].
-
-[pull requests]: https://github.com/linkcheck/linkchecker/pulls
-[GitHub project]: https://github.com/linkcheck/linkchecker
+[project page][project].
 
 Some guidelines for patches:
 
@@ -68,12 +69,12 @@ We want you to report issuess you find in the software. It is a
 recognized and important part of contributing to this project. All
 issues will be read and replied to politely and
 professionnally. Issues and bug reports should be filed on the
-[GitHub issue tracker][issues].
+[issue tracker][issues].
 
 ## Issue triage
 
 Issue triage is a useful contribution as well. You can review the
-[issues][] in the GitHub project and, for each issue:
+[issues][] in the [project page][project] and, for each issue:
 
 -  try to reproduce the issue, if it is not reproducible, label it with
    `help-wanted` and explain the steps taken to reproduce
@@ -84,8 +85,6 @@ Issue triage is a useful contribution as well. You can review the
    close the issue
 -  mark feature requests with the `enhancement` label, bugs with
    `bug`, duplicates with `duplicate` and so on...
-
-[issues]: https://github.com/linkcheck/linkchecker/issues
 
 Note that some of those operations are available only to project
 maintainers, see below for the different statuses.
