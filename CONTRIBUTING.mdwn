@@ -21,48 +21,6 @@ your positive experiences with the project or just thank you
 notes. Contact maintainers directly or submit a closed issue with your
 story. You can also send your "thanks" through <https://saythanks.io/>.
 
-# Patches
-
-Patches can be submitted through [pull requests][] on the
-[project page][project].
-
-Some guidelines for patches:
-
-* A patch should be a minimal and accurate answer to exactly one
-  identified and agreed problem.
-* A patch must compile cleanly and pass project self-tests on all
-  target platforms.
-* A patch commit message must consist of a single short (less than 50
-  characters) line stating a summary of the change, followed by a
-  blank line and then a description of the problem being solved and
-  its solution, or a reason for the change. Write more information,
-  not less, in the commit log.
-* Patches should be reviewed by at least one maintainer before being merged.
-
-Project maintainers should merge their own patches only when they have been
-approved by other maintainers, unless there is no response within a
-reasonable timeframe (roughly one week) or there is an urgent change
-to be done (e.g. security or data loss issue).
-
-As an exception to this rule, this specific document cannot be changed
-without the consensus of all administrators of the project.
-
-> Note: Those guidelines were inspired by the
-> [Collective Code Construct Contract][C4]. The document was found to
-> be a little too complex and hard to read and wasn't adopted in its
-> entirety. See this [discussion][] for more information.
-
- [C4]: https://rfc.zeromq.org/spec:42/C4/
- [discussion]: https://github.com/zeromq/rfc/issues?utf8=%E2%9C%93&q=author%3Aanarcat%20
-
-## Patch triage
-
-You can also review existing pull requests, by cloning the
-contributor's repository and testing it. If the tests do not pass
-(either locally or in Travis), if the patch is incomplete or otherwise
-does not respect the above guidelines, submit a review with "changes
-requested" with reasoning.
-
 # Issues and bug reports
 
 We want you to report issuess you find in the software. It is a
@@ -106,6 +64,48 @@ desired. We otherwise agree with the [Disclosure Guidelines][] of the
 
  [Disclosure Guidelines]: https://www.hackerone.com/disclosure-guidelines
  [HackerOne project]: https://www.hackerone.com/
+
+# Patches
+
+Patches can be submitted through [pull requests][] on the
+[project page][project].
+
+Some guidelines for patches:
+
+* A patch should be a minimal and accurate answer to exactly one
+  identified and agreed problem.
+* A patch must compile cleanly and pass project self-tests on all
+  target platforms.
+* A patch commit message must consist of a single short (less than 50
+  characters) line stating a summary of the change, followed by a
+  blank line and then a description of the problem being solved and
+  its solution, or a reason for the change. Write more information,
+  not less, in the commit log.
+* Patches should be reviewed by at least one maintainer before being merged.
+
+Project maintainers should merge their own patches only when they have been
+approved by other maintainers, unless there is no response within a
+reasonable timeframe (roughly one week) or there is an urgent change
+to be done (e.g. security or data loss issue).
+
+As an exception to this rule, this specific document cannot be changed
+without the consensus of all administrators of the project.
+
+> Note: Those guidelines were inspired by the
+> [Collective Code Construct Contract][C4]. The document was found to
+> be a little too complex and hard to read and wasn't adopted in its
+> entirety. See this [discussion][] for more information.
+
+ [C4]: https://rfc.zeromq.org/spec:42/C4/
+ [discussion]: https://github.com/zeromq/rfc/issues?utf8=%E2%9C%93&q=author%3Aanarcat%20
+
+## Patch triage
+
+You can also review existing pull requests, by cloning the
+contributor's repository and testing it. If the tests do not pass
+(either locally or in Travis), if the patch is incomplete or otherwise
+does not respect the above guidelines, submit a review with "changes
+requested" with reasoning.
 
 # Membership
 
