@@ -47,7 +47,12 @@ class TestHttpMisc (HttpServerTest):
         if os.name != "posix" or sys.platform != 'linux2':
             return
         host = "www.heise.de"
-        ip = iputil.resolve_host(host)[0]
+        for tentative_ip in iputil.resolve_host(host):
+            if iputil.is_valid_ipv4(tentative_ip):
+                ip = tentative_ip
+                break
+        else:
+            raise NotImplementedError("no IPv4 address detected for test host")
         url = u"http://%s/" % iputil.obfuscate_ip(ip)
         rurl = u"http://%s/" % ip
         resultlines = [
