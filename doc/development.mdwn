@@ -56,9 +56,9 @@ Execute ``windows\dist.bat`` to build a binary installer.
 Release process
 ---------------
 
-1. make sure tests pass
+1. make sure tests pass (run `tox`)
 
-2. bump AppVersion in setup.py and commit changes
+2. bump AppVersion in `setup.py`, edit `changelog.txt` and commit changes
 
 3. build Python distributions files (`setup.py sdist bdist_wheel`) and upload to PyPI
 

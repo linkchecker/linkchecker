@@ -6,6 +6,11 @@ Features:
 - checking: Support XDG Base Directory Specification for configuration
   and data.
   Closes: GH bug #44
+- add Dockerfile
+- use xdg dirs for config & data
+- use tox for tests and fix travis build
+- add --no-robots commandline flag
+- Added plugin for parsing and checking links in Markdown files
 
 Changes:
 - installation: Remove dependency on msgfmt.py by pre-generating the
@@ -14,6 +19,12 @@ Changes:
 - checking: When checking SSL certificates under POSIX systems try
   to use the system certificate store.
 - logging: improved debugging by also enabling urllib3 output
+- remove third-party packages and use them as dependency
+- Allow wayback-format urls without affecting atom 'feed' urls
+- Move dev requirements into dev-requirements.txt
+- Crawl HTML attributes in deterministic order
+- Remove platform-specific installer stuff and ensure a build .whl wheel file can be built.
+- Move GUI files to separate project
 
 Fixes:
 - checking: Correct typos in the proxy handling code.
@@ -22,6 +33,10 @@ Fixes:
 - cmdline: Reactivate paging of help pages.
 - requirements: Fix requests module version check.
   Closes: GH bug #548
+- load cookies from the --cookiefile correctly
+- fix incorrect call to the logging module
+- Fix TypeError: hasattr(): attribute name must be string
+- fix HTTPS URL checks
 
 
 9.3 "Better Living Through Chemistry" (released 16.7.2014)
