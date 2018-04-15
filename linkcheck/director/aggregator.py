@@ -18,19 +18,23 @@
 Aggregate needed object instances for checker threads.
 """
 import threading
-import thread
+try:  # Python 3
+    import _thread
+except ImportError:
+    import thread as _thread
+
 import requests
 import time
-try:
-    import urlparse
+try:  # Python 3
+    from urllib import parse
 except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+    import urlparse as parse
 import random
 from .. import log, LOG_CHECK, strformat, LinkCheckerError
 from ..decorators import synchronized
 from ..cache import urlqueue
 from ..htmlutil import formsearch
+from ..cookies import from_file
 from . import logger, status, checker, interrupt
 
 
@@ -48,8 +52,8 @@ def new_request_session(config, cookies):
         "User-Agent": config["useragent"],
     })
     if config["cookiefile"]:
-        for cookie in cookies.from_file(config["cookiefile"]):
-            session.cookies = requests.cookies.merge_cookies(session.cookies, cookie)
+        for cookie in from_file(config["cookiefile"]):
+            session.cookies.set_cookie(cookie)
     return session
 
 
@@ -92,7 +96,7 @@ class Aggregate (object):
         form.data[cgipassword] = password
         for key, value in self.config["loginextrafields"].items():
             form.data[key] = value
-        formurl = urlparse.urljoin(url, form.url)
+        formurl = parse.urljoin(url, form.url)
         response = session.post(formurl, data=form.data)
         self.cookies = session.cookies
         if len(self.cookies) == 0:
@@ -116,19 +120,19 @@ class Aggregate (object):
                 self.threads.append(t)
                 t.start()
         else:
-            self.request_sessions[thread.get_ident()] = new_request_session(self.config, self.cookies)
+            self.request_sessions[_thread.get_ident()] = new_request_session(self.config, self.cookies)
             checker.check_urls(self.urlqueue, self.logger)
 
     @synchronized(_threads_lock)
     def add_request_session(self):
         """Add a request session for current thread."""
         session = new_request_session(self.config, self.cookies)
-        self.request_sessions[thread.get_ident()] = session
+        self.request_sessions[_thread.get_ident()] = session
 
     @synchronized(_threads_lock)
     def get_request_session(self):
         """Get the request session for current thread."""
-        return self.request_sessions[thread.get_ident()]
+        return self.request_sessions[_thread.get_ident()]
 
     @synchronized(_hosts_lock)
     def wait_for_host(self, host):

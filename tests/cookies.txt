@@ -1,0 +1,7 @@
+Host: example.org
+Path: /hello
+Set-cookie: om="nomnom"
+
+Host: example.com
+Set-cookie: multiple=cookies
+Set-cookie: are=allowed

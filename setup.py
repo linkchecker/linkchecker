@@ -60,7 +60,7 @@ from distutils.core import Distribution
 from distutils.command.build import build
 
 # the application version
-AppVersion = "9.4"
+AppVersion = "9.4.0"
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
@@ -488,7 +488,7 @@ args = dict(
     },
     # Requirements, usable with setuptools or the new Python packaging module.
     install_requires = [
-        'requests<2.15,>=2.2',
+        'requests<2.15,>=2.4',
         'dnspython',
         'bs4',
         'pyxdg',

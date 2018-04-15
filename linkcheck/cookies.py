@@ -18,8 +18,14 @@
 Parsing of cookies.
 """
 
-import cookielib
-import httplib
+try: # Python 3
+    from http.cookiejar import split_header_words
+except ImportError: # Python 2
+    from cookielib import split_header_words
+try: # Python 3
+    from http.client import HTTPMessage
+except ImportError: # Python 2
+    from httplib import HTTPMessage
 import requests
 from cStringIO import StringIO
 
@@ -36,12 +42,12 @@ def from_file (filename):
             line = line.rstrip()
             if not line:
                 if lines:
-                    entries.append(from_headers("\r\n".join(lines)))
+                    entries.extend(from_headers("\r\n".join(lines)))
                 lines = []
             else:
                 lines.append(line)
         if lines:
-            entries.append(from_headers("\r\n".join(lines)))
+            entries.extend(from_headers("\r\n".join(lines)))
         return entries
 
 
@@ -53,14 +59,16 @@ def from_headers (strheader):
     """
     res = []
     fp = StringIO(strheader)
-    headers = httplib.HTTPMessage(fp, seekable=True)
+    headers = HTTPMessage(fp, seekable=True)
     if "Host" not in headers:
         raise ValueError("Required header 'Host:' missing")
     host = headers["Host"]
-    path= headers.get("Path", "/")
+    # XXX: our --help says we also pay attention to the Scheme: header,
+    # but we don't?!
+    path = headers.get("Path", "/")
     for header in headers.getallmatchingheaders("Set-Cookie"):
         headervalue = header.split(':', 1)[1]
-        for pairs in cookielib.split_header_words([headervalue]):
+        for pairs in split_header_words([headervalue]):
             for name, value in pairs:
                 cookie = requests.cookies.create_cookie(name, value,
                     domain=host, path=path)

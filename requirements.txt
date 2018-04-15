@@ -1,6 +1,6 @@
 # required:
 bs4
-requests<2.15,>=2.2
+requests<2.15,>=2.4
 pyxdg
 dnspython
 # optional:
