@@ -191,7 +191,6 @@ def idna_encode (host):
 def url_fix_host (urlparts):
     """Unquote and fix hostname. Returns is_idn."""
     if not urlparts[1]:
-        urlparts[2] = parse.unquote(urlparts[2])
         return False
     userpass, netloc = parse.splituser(urlparts[1])
     if userpass:
@@ -207,7 +206,7 @@ def url_fix_host (urlparts):
         if not urlparts[2] or urlparts[2] == '/':
             urlparts[2] = comps
         else:
-            urlparts[2] = "%s%s" % (comps, parse.unquote(urlparts[2]))
+            urlparts[2] = "%s%s" % (comps, urlparts[2])
         netloc = netloc[:i]
     else:
         # a leading ? in path causes urlsplit() to add the query to the
@@ -216,7 +215,6 @@ def url_fix_host (urlparts):
         if i != -1:
             netloc, urlparts[3] = netloc.split('?', 1)
         # path
-        urlparts[2] = parse.unquote(urlparts[2])
     if userpass:
         # append AT for easy concatenation
         userpass += "@"
@@ -452,7 +450,7 @@ def match_host (host, domainlist):
     return False
 
 
-_nopathquote_chars = "-;/=,~*+()@!"
+_nopathquote_chars = "-;/=,~*+()@!%"
 if os.name == 'nt':
     _nopathquote_chars += "|"
 _safe_url_chars = re.escape(_nopathquote_chars + "_:.&#%?[]!")+"a-zA-Z0-9"
