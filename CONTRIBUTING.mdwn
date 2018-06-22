@@ -135,3 +135,8 @@ requests.
 Maintainers can be promoted to administrators when they have given significant
 contributions for a sustained timeframe, by consensus of the current
 administrators. This process should be open and decided as any other issue.
+
+Maintainers can be demoted by administrators and administrators can be
+demoted by the other administrators' consensus. Unresponsive maintainers
+or administrators can be removed after a month unless they specifically
+announced a leave.
