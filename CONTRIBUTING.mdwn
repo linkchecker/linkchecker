@@ -26,7 +26,7 @@ story. You can also send your "thanks" through <https://saythanks.io/>.
 We want you to report issuess you find in the software. It is a
 recognized and important part of contributing to this project. All
 issues will be read and replied to politely and
-professionnally. Issues and bug reports should be filed on the
+professionally. Issues and bug reports should be filed on the
 [issue tracker][issues].
 
 ## Issue triage
