@@ -7,9 +7,9 @@ Before you participate in the community, you should also agree to
 respect the code of conduct, shipped in `CODE_OF_CONDUCT.md` in the
 source code.
 
-[project]: https://github.com/linkcheck/linkchecker/
-[issues]: https://github.com/linkcheck/linkchecker/issues
-[pull requests]: https://github.com/linkcheck/linkchecker/pulls
+[project]: https://github.com/linkchecker/linkchecker/
+[issues]: https://github.com/linkchecker/linkchecker/issues
+[pull requests]: https://github.com/linkchecker/linkchecker/pulls
 
 # Positive feedback
 
@@ -23,7 +23,7 @@ story. You can also send your "thanks" through <https://saythanks.io/>.
 
 # Issues and bug reports
 
-We want you to report issuess you find in the software. It is a
+We want you to report issues you find in the software. It is a
 recognized and important part of contributing to this project. All
 issues will be read and replied to politely and
 professionally. Issues and bug reports should be filed on the
