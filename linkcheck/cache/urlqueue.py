@@ -114,7 +114,7 @@ class UrlQueue (object):
             self.not_empty.notify()
 
     def _put (self, url_data):
-        """Put URL in queue, increase number of unfished tasks."""
+        """Put URL in queue, increase number of unfinished tasks."""
         if self.shutdown or self.max_allowed_urls == 0:
             return
         log.debug(LOG_CACHE, "queueing %s", url_data.url)
