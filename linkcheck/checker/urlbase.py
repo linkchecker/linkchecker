@@ -316,6 +316,10 @@ class UrlBase (object):
         # remove anchor from cached target url since we assume
         # URLs with different anchors to have the same content
         self.cache_url = urlutil.urlunsplit(self.urlparts[:4]+[u''])
+        if self.anchor:
+            # and bring anchor (now to full url) back since otherwise those
+            # urls would not be considered e.g. by AnchorCheck plugins
+            self.cache_url += '#%s' % self.anchor
         if self.cache_url is not None:
             assert isinstance(self.cache_url, unicode), repr(self.cache_url)
 
