@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test file for testing broken anchors detection</title>
+</head>
+<body>
+<a href="#anchor1">good anchor used before actual element is defined</a>
+<div id="anchor1"></div>
+<a href="#bad1">first local bad one</a>
+<a href="#bad2">second local bad one</a>
+<a href="anchors.html#anchor1">point to good anchor</a>
+<a href="anchors.html#bad3">point to bad anchor</a>
+</body>
+</html>
