@@ -501,7 +501,7 @@ args = dict(
     },
     # Requirements, usable with setuptools or the new Python packaging module.
     install_requires = [
-        'requests >= 2.20.0',
+        'requests >= 2.4',
         'dnspython',
         'pyxdg',
     ],
