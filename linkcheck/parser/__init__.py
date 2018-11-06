@@ -133,7 +133,7 @@ def find_links (url_data, callback, tags):
         content = url_data.get_content()
         with parse_mutex:
             parser.feed(content)
-        parser.flush()
+            parser.flush()
     except linkparse.StopParse as msg:
         log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
         pass
