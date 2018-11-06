@@ -30,13 +30,51 @@ class TestAnchor (LinkCheckTest):
         url = u"file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
         nurl = self.norm(url)
         anchor = "broken"
-        urlanchor = url + "#" + anchor
+        urlanchor = url + "#" + anchor   # TEMP
         resultlines = [
             u"url %s" % urlanchor,
-            u"cache key %s" % nurl,
+            u"cache key %s" % nurl + '#broken',
             u"real url %s" % nurl,
             u"warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
             u"valid",
         ]
         self.direct(urlanchor, resultlines, confargs=confargs)
 
+    def test_anchors (self):
+        # A more elaborate test requiring recursion through the page and
+        # to replicate  TODO-github-issue-url
+        confargs = {
+            "enabledplugins": ["AnchorCheck"],
+            "verbose": False,  # so to not see negatives (without warning)
+        }
+        url = u"file://%(curdir)s/%(datadir)s/anchors.html" % self.get_attrs()
+        nurl = self.norm(url)
+        resultlines = []
+        for urlanchor, name, warn in [
+            # There should be no false positive for
+            # "good anchor used before actual element is defined"
+            ('#bad1', 'first local bad one', True),
+            ('#bad2', 'second local bad one', True),
+            ('anchors.html#bad3', 'a new bad anchor', True),
+            # TODO: ATM would miss (cache_url relies on normalized url
+            #   so I guess the actual "instance" of a URL usage (should probably
+            #   point to the position or store that URL object id??) is not
+            #   properly considered and thus they aren't reported
+            #  ('#bad1', "duplicate local bad one", True)
+            #  ('anchors.html#bad2', "the same but not explicitly referenced with a page", True)
+        ]:
+            urlfile, anchor = urlanchor.split('#', 1)
+            resultlines += [
+                u"url %s" % urlanchor,
+                u"cache key %s" % nurl + '#' + anchor,  # TEMP
+                u"real url %s" % nurl,
+                u"name %s" % name,
+                u"warning Anchor `%s' not found. Available anchors: `anchor1'." % anchor,
+                u"valid"
+            ]
+        # test explicitly serially and with threads - some of the issues
+        # are pertinent only to the threaded run
+        confargs['threads'] = 0
+        self.direct(nurl, resultlines, confargs=confargs, recursionlevel=2)
+        confargs['threads'] = 10
+        self.direct(nurl, resultlines, confargs=confargs, recursionlevel=2)

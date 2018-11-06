@@ -249,8 +249,26 @@ class LinkCheckTest (unittest.TestCase):
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
         diff = aggregate.config['logger'].diff
+
+        note = ''
+        if confargs.get('threads', 0):
+            # in threaded execution records output order is not guaranteed
+            # so we would need to post-process the diff output
+            note = " (records might switch order which is ok)"
+            diff_ = [
+                l for l in diff
+                if l[:2] not in ('--', '++')
+            ]
+            removed = set(l[1:] for l in diff_ if l.startswith('-'))
+            added = set(l[1:] for l in diff_ if l.startswith('+'))
+            if removed == added:
+                # so most likely lines were just moved - reset diff
+                diff = None
+            else:
+                pass
+
         if diff:
-            l = [u"Differences found testing %s" % url]
+            l = [u"Differences found testing %s%s" % (url, note)]
             l.extend(x.rstrip() for x in diff[2:])
             self.fail_unicode(unicode(os.linesep).join(l))
 
