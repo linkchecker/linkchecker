@@ -4,7 +4,7 @@ This document outlines how to contribute to this project. It details
 instructions on how to submit issues, bug reports and patches.
 
 Before you participate in the community, you should also agree to
-respect the code of conduct, shipped in `CODE_OF_CONDUCT.md` in the
+respect the code of conduct, shipped in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) in the
 source code.
 
 [project]: https://github.com/linkchecker/linkchecker/
