@@ -1,6 +1,8 @@
 # for testing:
+miniboa
+parameterized
+pyftpdlib
 pytest
 pytest-xdist
-pyftpdlib
 # for building on osx:
 py2app
