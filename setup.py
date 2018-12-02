@@ -179,7 +179,7 @@ class MyInstallData (install_data, object):
 
     def install_translations (self):
         """Install compiled gettext catalogs."""
-        # A hack to fix https://github.com/linkcheck/linkchecker/issues/102
+        # A hack to fix https://github.com/linkchecker/linkchecker/issues/102
         i18n_files = []
         data_files = []
         for dir, files in self.data_files:
