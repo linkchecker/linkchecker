@@ -72,7 +72,7 @@ class TestCookies (unittest.TestCase):
         self.assertRaises(ValueError, from_headers, "\r\n".join(lines))
 
     def test_cookie_file (self):
-        # Regression test for https://github.com/linkcheck/linkchecker/issues/62
+        # Regression test for https://github.com/linkchecker/linkchecker/issues/62
         config = linkcheck.configuration.Configuration()
         here = os.path.dirname(__file__)
         config['cookiefile'] = os.path.join(here, 'cookies.txt')
