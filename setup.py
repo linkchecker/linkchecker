@@ -440,7 +440,7 @@ args = dict(
     author_email = myemail,
     maintainer = myname,
     maintainer_email = myemail,
-    url = "http://wummel.github.io/linkchecker/",
+    url = "https://linkchecker.github.io/linkchecker/",
     license = "GPL",
     long_description = get_long_description(),
     distclass = MyDistribution,
@@ -494,7 +494,8 @@ args = dict(
         'Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking',
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Programming Language :: Python',
+        'Progr
+        'linkcheck.logger',amming Language :: Python',
         'Programming Language :: C',
     ],
     options = {
