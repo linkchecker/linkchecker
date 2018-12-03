@@ -494,8 +494,7 @@ args = dict(
         'Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking',
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Progr
-        'linkcheck.logger',amming Language :: Python',
+        'Programming Language :: Python',
         'Programming Language :: C',
     ],
     options = {
