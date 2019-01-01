@@ -18,6 +18,7 @@
 Test http stuff with httpbin.org.
 """
 import re
+from tests import need_network
 from . import LinkCheckTest
 
 
@@ -30,6 +31,7 @@ def get_httpbin_url(path):
 class TestHttpbin(LinkCheckTest):
     """Test http:// link redirection checking."""
 
+    @need_network
     def test_http_link(self):
         linkurl = u"http://www.example.com"
         nlinkurl = self.norm(linkurl)
@@ -48,6 +50,7 @@ class TestHttpbin(LinkCheckTest):
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
+    @need_network
     def test_basic_auth(self):
         user = u"testuser"
         password = u"testpassword"
@@ -67,6 +70,7 @@ class TestHttpbin(LinkCheckTest):
         ]
         self.direct(url, resultlines, confargs=confargs)
 
+    @need_network
     def test_http_refresh_header(self):
         linkurl = u"http://www.example.com"
         nlinkurl = self.norm(linkurl)
@@ -85,6 +89,7 @@ class TestHttpbin(LinkCheckTest):
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
+    @need_network
     def test_http_content_location_header(self):
         linkurl = u"http://www.example.com"
         nlinkurl = self.norm(linkurl)

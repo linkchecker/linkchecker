@@ -20,11 +20,13 @@ Test http checking.
 import os
 import sys
 from .httpserver import HttpServerTest
+from tests import need_network
 from linkcheck.network import iputil
 
 class TestHttpMisc (HttpServerTest):
     """Test http:// misc link checking."""
 
+    @need_network
     def test_html (self):
         self.swf_test()
         self.obfuscate_test()

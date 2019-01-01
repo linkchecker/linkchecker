@@ -17,6 +17,7 @@
 """
 Test whitespace handling.
 """
+from tests import need_network
 from . import LinkCheckTest
 
 
@@ -25,6 +26,7 @@ class TestWhitespace (LinkCheckTest):
     Test whitespace in URLs.
     """
 
+    @need_network
     def test_leading_whitespace (self):
         # Leading whitespace
         url = u" http://www.example.org/"
@@ -50,6 +52,7 @@ class TestWhitespace (LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
+    @need_network
     def test_trailing_whitespace (self):
         # Trailing whitespace
         url = u"http://www.example.org/ "

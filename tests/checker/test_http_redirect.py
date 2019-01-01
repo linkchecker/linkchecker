@@ -17,6 +17,7 @@
 """
 Test http checking.
 """
+from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
 class TestHttpRedirect (HttpServerTest):
@@ -26,6 +27,7 @@ class TestHttpRedirect (HttpServerTest):
         super(TestHttpRedirect, self).__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
+    @need_network
     def test_redirect (self):
         self.redirect1()
         self.redirect2()
