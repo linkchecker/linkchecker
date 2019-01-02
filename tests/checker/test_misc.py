@@ -17,6 +17,7 @@
 """
 Test miscellaneous html tag parsing and URL types
 """
+from tests import need_network
 from . import LinkCheckTest
 
 
@@ -25,15 +26,18 @@ class TestMisc (LinkCheckTest):
     Test misc link types.
     """
 
+    @need_network
     def test_misc (self):
         self.file_test("misc.html")
 
     def test_html5 (self):
         self.file_test("html5.html")
 
+    @need_network
     def test_archive (self):
         self.file_test("archive.html")
 
+    @need_network
     def test_itms_services(self):
         url = u"itms-services:?action=download-manifest&url=http://www.example.com/"
         resultlines = [

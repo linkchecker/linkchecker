@@ -20,6 +20,7 @@ Test http checking.
 
 import pytest
 
+from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
 class TestHttp (HttpServerTest):
@@ -29,6 +30,7 @@ class TestHttp (HttpServerTest):
         super(TestHttp, self).__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
+    @need_network
     def test_html (self):
         confargs = dict(recursionlevel=1)
         self.file_test("http.html", confargs=confargs)
