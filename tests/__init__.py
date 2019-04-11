@@ -216,7 +216,7 @@ def need_newsserver (server):
             if not has_newsserver(server):
                 pytest.skip("Newsserver `%s' is not available" % server)
             return func(*args, **kwargs)
-        newfunc.func_name = func.func_name
+        newfunc.__name__ = func.__name__
         return newfunc
     return check_func
 
@@ -274,7 +274,7 @@ def limit_time (seconds, skip=False):
                 if skip:
                     pytest.skip("time limit of %d seconds exceeded" % seconds)
                 assert False, msg
-        new_func.func_name = func.func_name
+        new_func.__name__ = func.__name__
         return new_func
     return run_limited
 
