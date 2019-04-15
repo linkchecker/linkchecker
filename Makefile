@@ -34,7 +34,7 @@ TESTOPTS=
 PAGER ?= less
 # options to run the pep8 utility
 PEP8OPTS:=--repeat --ignore=E211,E501,E225,E301,E302,E241 \
-   --exclude="gzip2.py,httplib2.py,robotparser2.py"
+   --exclude="robotparser2.py"
 PY2APPOPTS ?=
 ifeq ($(shell uname),Darwin)
   CHMODMINUSMINUS:=
