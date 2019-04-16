@@ -22,6 +22,7 @@ except ImportError: # Python 2
     from ConfigParser import RawConfigParser
 import os
 from .. import LinkCheckerError, get_link_pat, LOG_CHECK, log, fileutil, plugins, logconf
+from builtins import str
 
 
 def read_multiline (value):
@@ -62,7 +63,7 @@ class LCConfigParser (RawConfigParser, object):
             self.read_plugin_config()
         except Exception as msg:
             raise LinkCheckerError(
-              _("Error parsing configuration: %s") % unicode(msg))
+              _("Error parsing configuration: %s") % str(msg))
 
     def read_string_option (self, section, option, allowempty=False):
         """Read a string option."""
