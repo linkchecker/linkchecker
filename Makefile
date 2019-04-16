@@ -166,7 +166,7 @@ sign:
 	done
 
 test:	localbuild
-	env LANG=en_US.utf-8 $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
+	env LANG=en_US.utf-8 PYTHONMALLOC=malloc $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 pyflakes:
 	pyflakes $(PY_FILES_DIRS) 2>&1 | \
