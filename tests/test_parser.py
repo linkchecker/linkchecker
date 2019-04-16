@@ -24,9 +24,11 @@ try:
     from cStringIO import StringIO
 except ImportError:
     from io import StringIO
+import sys
 import unittest
 
 from parameterized import parameterized
+import pytest
 
 
 # list of tuples
@@ -209,6 +211,8 @@ class TestParser (unittest.TestCase):
         self.htmlparser2 = linkcheck.HtmlParser.htmlsax.parser()
 
     @parameterized.expand(parsetests)
+    @pytest.mark.skipif(sys.version_info.major != 2,
+                        reason="HtmlParser not Python 3 compatible")
     def test_parse (self, _in, _out):
         # Parse all test patterns in one go.
         out = StringIO()
@@ -229,6 +233,8 @@ class TestParser (unittest.TestCase):
         htmlparser.reset()
 
     @parameterized.expand(parsetests)
+    @pytest.mark.skipif(sys.version_info.major != 2,
+                        reason="HtmlParser not Python 3 compatible")
     def test_feed (self, _in, _out):
         # Parse all test patterns sequentially.
         out = StringIO()
@@ -239,6 +245,8 @@ class TestParser (unittest.TestCase):
         self.check_results(self.htmlparser, _in, _out, out)
 
     @parameterized.expand(parsetests)
+    @pytest.mark.skipif(sys.version_info.major != 2,
+                        reason="HtmlParser not Python 3 compatible")
     def test_interwoven (self, _in, _out):
         # Parse all test patterns on two parsers interwoven.
         out = StringIO()
