@@ -18,7 +18,11 @@
 Test dummy object.
 """
 
+import sys
 import unittest
+
+from builtins import bytes, str
+
 import linkcheck.dummy
 
 
@@ -60,4 +64,5 @@ class TestDummy (unittest.TestCase):
         del dummy[2:3]
         str(dummy)
         repr(dummy)
-        unicode(dummy)
+        if sys.version_info.major == 2:
+            unicode(dummy)
