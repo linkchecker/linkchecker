@@ -65,6 +65,11 @@ class TestLogger (linkcheck.logger._Logger):
         # diff between expected and real output
         self.diff = []
 
+    def normalize(self, result_log):
+        # XXX we assume that each log entry has a URL key, maybe we should add an assert into log_url() to that effect?
+        sep = '\nurl '
+        return sep.join(sorted('\n'.join(result_log).split(sep))).splitlines()
+
     def start_output (self):
         """
         Nothing to do here.
@@ -119,6 +124,8 @@ class TestLogger (linkcheck.logger._Logger):
         """
         Stores differences between expected and result in self.diff.
         """
+        self.expected = self.normalize(self.expected)
+        self.result = self.normalize(self.result)
         for line in difflib.unified_diff(self.expected, self.result):
             if not isinstance(line, unicode):
                 # The ---, +++ and @@ lines from diff format are ascii encoded.
