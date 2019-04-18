@@ -196,7 +196,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         raw_connection = self.url_connection.raw._connection
         if not raw_connection:
             # this happens with newer requests versions:
-            # https://github.com/linkcheck/linkchecker/issues/76
+            # https://github.com/linkchecker/linkchecker/issues/76
             return None
         if raw_connection.sock is None:
             # sometimes the socket is not yet connected

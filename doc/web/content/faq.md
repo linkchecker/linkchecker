@@ -22,7 +22,7 @@ the ``/robots.txt`` file which follows the
 For identification LinkChecker adds to each request a User-Agent header
 like this:
 
-    Mozilla/5.0 (compatible; LinkChecker/9.3; +http://linkcheck.github.io/linkchecker/)
+    Mozilla/5.0 (compatible; LinkChecker/9.4; +https://linkchecker.github.io/linkchecker/)
 
 If you yourself are the webmaster, consider allowing LinkChecker to
 check your web pages by adding the following to your robots.txt file:
