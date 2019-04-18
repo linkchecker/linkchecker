@@ -102,7 +102,7 @@ def warn (logname, msg, *args, **kwargs):
     """
     log = logging.getLogger(logname)
     if log.isEnabledFor(logging.WARN):
-        _log(log.warn, msg, args, **kwargs)
+        _log(log.warning, msg, args, **kwargs)
 
 
 def error (logname, msg, *args, **kwargs):
