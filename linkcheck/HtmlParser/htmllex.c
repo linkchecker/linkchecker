@@ -2658,7 +2658,7 @@ static yyconst flex_int32_t yy_rule_linenum[131] =
     PyObject* pencoding; \
     char* encoding; \
     CHECK_NULL(pencoding = PyObject_GetAttrString(yyextra->parser, "encoding")); \
-    encoding = PyString_AsString(pencoding); \
+    encoding = PyBytes_AsString(pencoding); \
     if (encoding==NULL) { Py_DECREF(pencoding); return T_ERROR; } \
     (a) = PyUnicode_Decode(yyextra->tmp_buf, \
                            (Py_ssize_t)strlen(yyextra->tmp_buf),  \
@@ -2704,9 +2704,9 @@ static yyconst flex_int32_t yy_rule_linenum[131] =
 #define SCRIPT_CHECK { \
     PyObject* tagname; \
     CHECK_NULL(tagname = PyUnicode_AsEncodedString(yyextra->tmp_tag, "ascii", "ignore")); \
-    if (strcmp("script", PyString_AsString(tagname))==0) \
+    if (strcmp("script", PyBytes_AsString(tagname))==0) \
 	BEGIN(S_SCRIPT); \
-    else if (strcmp("style", PyString_AsString(tagname))==0) \
+    else if (strcmp("style", PyBytes_AsString(tagname))==0) \
         BEGIN(S_STYLE); \
     else \
 	BEGIN(INITIAL); \
