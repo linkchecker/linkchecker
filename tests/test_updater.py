@@ -39,4 +39,4 @@ class TestUpdater (unittest.TestCase):
                 self.assertTrue(isinstance(version, str), repr(version))
                 self.assertTrue(url is None or isinstance(url, str), repr(url))
         else:
-            self.assertTrue(isinstance(value, unicode), repr(value))
+            self.assertTrue(isinstance(value, str), repr(value))

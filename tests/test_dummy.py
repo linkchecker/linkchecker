@@ -21,7 +21,7 @@ Test dummy object.
 import sys
 import unittest
 
-from builtins import bytes, str
+from builtins import str
 
 import linkcheck.dummy
 
