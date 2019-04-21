@@ -46,7 +46,6 @@ AppInfo = App+u"              "+Copyright
 HtmlAppInfo = App+u", "+HtmlCopyright
 Url = configdata.url
 SupportUrl = u"https://github.com/linkchecker/linkchecker/issues"
-DonateUrl = ""
 Email = configdata.author_email
 UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!

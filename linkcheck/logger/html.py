@@ -323,9 +323,6 @@ class HtmlLogger (_Logger):
         self.writeln(_("Write comments and bugs to %s") %
            (u'<a href="'+configuration.SupportUrl+u'">'+
             configuration.SupportUrl+u"</a>.<br/>"))
-        self.writeln(_("Support this project at %s") %
-           (u'<a href="'+configuration.DonateUrl+u'">'+
-            configuration.DonateUrl+u"</a>."))
         self.writeln(u"</small></body></html>")
 
     def end_output (self, **kwargs):
