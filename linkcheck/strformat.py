@@ -190,18 +190,18 @@ def strsize (b, grouping=True):
     if b < 0:
         raise ValueError("Invalid negative byte number")
     if b < 1024:
-        return u"%sB" % locale.format("%d", b, grouping)
+        return u"%sB" % locale.format_string("%d", b, grouping)
     if b < 1024 * 10:
-        return u"%sKB" % locale.format("%d", (b // 1024), grouping)
+        return u"%sKB" % locale.format_string("%d", (b // 1024), grouping)
     if b < 1024 * 1024:
-        return u"%sKB" % locale.format("%.2f", (float(b) / 1024), grouping)
+        return u"%sKB" % locale.format_string("%.2f", (float(b) / 1024), grouping)
     if b < 1024 * 1024 * 10:
-        return u"%sMB" % locale.format("%.2f", (float(b) / (1024*1024)), grouping)
+        return u"%sMB" % locale.format_string("%.2f", (float(b) / (1024*1024)), grouping)
     if b < 1024 * 1024 * 1024:
-        return u"%sMB" % locale.format("%.1f", (float(b) / (1024*1024)), grouping)
+        return u"%sMB" % locale.format_string("%.1f", (float(b) / (1024*1024)), grouping)
     if b < 1024 * 1024 * 1024 * 10:
-        return u"%sGB" % locale.format("%.2f", (float(b) / (1024*1024*1024)), grouping)
-    return u"%sGB" % locale.format("%.1f", (float(b) / (1024*1024*1024)), grouping)
+        return u"%sGB" % locale.format_string("%.2f", (float(b) / (1024*1024*1024)), grouping)
+    return u"%sGB" % locale.format_string("%.1f", (float(b) / (1024*1024*1024)), grouping)
 
 
 def strtime (t, func=time.localtime):
