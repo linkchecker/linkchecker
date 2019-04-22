@@ -25,6 +25,8 @@ except ImportError:
     # Python 3
     from io import StringIO
 
+from builtins import bytes
+
 from .. import log, LOG_CHECK, LinkCheckerError, mimeutil
 from . import proxysupport, httpurl, internpaturl, get_index_html
 from .const import WARN_FTP_MISSING_SLASH
@@ -116,7 +118,9 @@ class FtpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         Change to URL parent directory. Return filename of last path
         component.
         """
-        path = self.urlparts[2].encode(self.filename_encoding, 'replace')
+        path = self.urlparts[2]
+        if isinstance(path, bytes):
+            path = path.decode(self.filename_encoding, 'replace')
         dirname = path.strip('/')
         dirs = dirname.split('/')
         filename = dirs.pop()
