@@ -99,8 +99,6 @@ class TextLogger (_Logger):
                      {'url': configuration.Url})
         self.writeln(_("Write comments and bugs to %(url)s") %
                      {'url': configuration.SupportUrl})
-        self.writeln(_("Support this project at %(url)s") %
-                     {'url': configuration.DonateUrl})
         self.check_date()
         self.writeln()
         self.writeln(_("Start checking at %s") %
