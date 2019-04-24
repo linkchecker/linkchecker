@@ -1,11 +1,10 @@
 Project: LinkChecker
-Version: 9.3
-Website-URL: http://wummel.github.io/linkchecker/
-Changelog-URL: https://github.com/wummel/linkchecker/blob/master/doc/changelog.txt
+Version: 9.4
+Website-URL: https://linkchecker.github.io/linkchecker/
+Changelog-URL: https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt
 Source-Package-URL: https://pypi.python.org/packages/source/L/LinkChecker/LinkChecker-${version}.tar.gz
 Debian-Package-URL: http://packages.debian.org/linkchecker
-GIT-Tree-URL: https://github.com/wummel/linkchecker.git
-Windows-installer-URL: http://wummel.github.io/linkchecker/dist/LinkChecker-${version}.exe
+GIT-Tree-URL: https://github.com/linkchecker/linkchecker.git
 
 This file is now only used for update checks since freecode.com is
 not functional anymore.
