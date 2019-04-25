@@ -49,7 +49,7 @@ class TelnetServerTest (LinkCheckTest):
 
     def setUp (self):
         """Start a new Telnet server in a new thread."""
-        deadline = time.time() + 2 * TIMEOUT
+        deadline = time.time() + 10 * TIMEOUT
         self.port = start_server(self.host, 0, deadline=deadline)
         self.assertFalse(self.port is None)
 
