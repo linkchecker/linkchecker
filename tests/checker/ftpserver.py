@@ -50,31 +50,34 @@ class FtpServerTest (LinkCheckTest):
 
 
 def start_server (host, port):
-    def line_logger(msg):
+    def line_logger(self, msg):
         if "kill" in msg:
             raise KeyboardInterrupt()
 
     try:
-        from pyftpdlib import ftpserver
+        from pyftpdlib.authorizers import DummyAuthorizer
+        from pyftpdlib.handlers import FTPHandler
+        from pyftpdlib.servers import FTPServer
+        from pyftpdlib import __ver__ as pyftpdlib_version
     except ImportError:
         pytest.skip("pyftpdlib is not available")
         return
-    authorizer = ftpserver.DummyAuthorizer()
+    authorizer = DummyAuthorizer()
     datadir = os.path.join(os.path.dirname(__file__), 'data')
     authorizer.add_anonymous(datadir)
 
     # Instantiate FTP handler class
-    ftp_handler = ftpserver.FTPHandler
+    ftp_handler = FTPHandler
     ftp_handler.authorizer = authorizer
     ftp_handler.timeout = TIMEOUT
-    ftpserver.logline = line_logger
+    ftp_handler.logline = line_logger
 
     # Define a customized banner (string returned when client connects)
-    ftp_handler.banner = "pyftpdlib %s based ftpd ready." % ftpserver.__ver__
+    ftp_handler.banner = "pyftpdlib %s based ftpd ready." % pyftpdlib_version
 
     # Instantiate FTP server class and listen to host:port
     address = (host, port)
-    server = ftpserver.FTPServer(address, ftp_handler)
+    server = FTPServer(address, ftp_handler)
     port = server.address[1]
     t = threading.Thread(None, server.serve_forever)
     t.start()
