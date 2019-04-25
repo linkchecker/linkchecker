@@ -50,7 +50,8 @@ class TelnetServerTest (LinkCheckTest):
     def setUp (self):
         """Start a new Telnet server in a new thread."""
         deadline = time.time() + 10 * TIMEOUT
-        self.port = start_server(self.host, 0, deadline=deadline)
+        self.port = start_server(self.host, 0, deadline=deadline,
+                                 testcase=self.id())
         self.assertFalse(self.port is None)
 
     def tearDown(self):
@@ -61,7 +62,7 @@ class TelnetServerTest (LinkCheckTest):
             pass
 
 
-def start_server (host, port, deadline):
+def start_server (host, port, deadline, testcase):
     # Instantiate Telnet server class and listen to host:port
     clients = []
     def on_connect(client):
@@ -69,7 +70,7 @@ def start_server (host, port, deadline):
         client.send("Telnet test server\n")
     server = miniboa.TelnetServer(port=port, address=host, on_connect=on_connect)
     port = server.server_socket.getsockname()[1]
-    t = threading.Thread(None, serve_forever, args=(server, clients, deadline))
+    t = threading.Thread(None, serve_forever, args=(server, clients, deadline, testcase))
     t.start()
     # wait for server to start up
     tries = 0
@@ -92,12 +93,12 @@ def stop_server (host, port):
     client.write("stop\n")
 
 
-def serve_forever(server, clients, deadline):
+def serve_forever(server, clients, deadline, testcase):
     """Run poll loop for server."""
     while True:
         if time.time() > deadline:
             # It could be that the test is very slow, but that's unlikely.
-            raise AssertionError('deadlock detected, aborting')
+            raise AssertionError('deadlock detected in %s, aborting' % testcase)
         server.poll()
         for client in clients:
             if client.active and client.cmd_ready:
