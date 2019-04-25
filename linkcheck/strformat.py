@@ -42,6 +42,8 @@ import locale
 import pydoc
 from . import i18n
 
+from builtins import str as str_text
+
 
 def unicode_safe (s, encoding=i18n.default_encoding, errors='replace'):
     """Get unicode string without raising encoding errors. Unknown
@@ -150,7 +152,7 @@ def wrap (text, width, **kwargs):
 
 def indent (text, indent_string="  "):
     """Indent each line of text with the given indent string."""
-    lines = str(text).splitlines()
+    lines = str_text(text).splitlines()
     return os.linesep.join("%s%s" % (indent_string, x) for x in lines)
 
 
