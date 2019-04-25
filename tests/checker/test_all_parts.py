@@ -18,10 +18,9 @@
 Test http checking.
 """
 from . import LinkCheckTest
-import __init__ as init
+from . import TestLogger
 
-
-class AllPartsLogger(init.TestLogger):
+class AllPartsLogger(TestLogger):
     logparts = [
         'cachekey',
         'realurl',

@@ -36,6 +36,9 @@ class TestLogger (linkcheck.logger._Logger):
     """
     Output logger for automatic regression tests.
     """
+    
+    # don't attempt to collect this class because it has an __init__()
+    __test__ = False
 
     LoggerName = 'test'
 
