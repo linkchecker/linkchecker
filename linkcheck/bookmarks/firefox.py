@@ -25,7 +25,7 @@ except ImportError:
     has_sqlite = False
 
 
-extension = re.compile(r'/(?i)places.sqlite$')
+extension = re.compile(r'/places.sqlite$', re.IGNORECASE)
 
 
 # Windows filename encoding

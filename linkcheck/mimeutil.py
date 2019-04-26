@@ -52,12 +52,12 @@ def add_mimetype(mimedb, mimetype, extension):
 
 # if file extension lookup was unsuccessful, look at the content
 PARSE_CONTENTS = {
-    "text/html": re.compile(r'^(?i)<(!DOCTYPE html|html|head|title)'),
+    "text/html": re.compile(r'^<(!DOCTYPE html|html|head|title)', re.IGNORECASE),
     "text/plain+opera": re.compile(r'^Opera Hotlist'),
     "text/plain+chromium": re.compile(r'^{\s*"checksum":'),
-    "text/plain+linkchecker": re.compile(r'(?i)^# LinkChecker URL list'),
+    "text/plain+linkchecker": re.compile(r'^# LinkChecker URL list', re.IGNORECASE),
     "application/xml+sitemapindex": re.compile(r'(?i)<\?xml[^<]+<sitemapindex\s+'),
-    "application/xml+sitemap": re.compile(r'(?i)<\?xml[^<]+<urlset\s+'),
+    "application/xml+sitemap": re.compile(r'<\?xml[^<]+<urlset\s+', re.IGNORECASE),
 }
 
 def guess_mimetype (filename, read=None):
