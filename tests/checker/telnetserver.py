@@ -65,7 +65,7 @@ def start_server (host, port, stop_event):
     clients = []
     def on_connect(client):
         clients.append(client)
-        client.send("Telnet test server\n")
+        client.send("Telnet test server\nlogin: ")
     server = miniboa.TelnetServer(port=port, address=host, on_connect=on_connect)
     port = server.server_socket.getsockname()[1]
     t = threading.Thread(None, serve_forever, args=(server, clients, stop_event))
@@ -100,3 +100,5 @@ def handle_cmd(client):
     msg = client.get_command().lower()
     if msg == 'exit':
         client.active = False
+    else:
+        client.send("Password: ")
