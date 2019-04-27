@@ -17,8 +17,6 @@
 """
 Define http test support classes for LinkChecker tests.
 """
-import sys
-import os
 import time
 import threading
 import telnetlib
@@ -36,6 +34,8 @@ class TelnetServerTest (LinkCheckTest):
         super(TelnetServerTest, self).__init__(methodName=methodName)
         self.host = 'localhost'
         self.port = None
+        self.stop_event = threading.Event()
+        self.server_thread = None
 
     def get_url(self, user=None, password=None):
         if user is not None:
@@ -49,18 +49,18 @@ class TelnetServerTest (LinkCheckTest):
 
     def setUp (self):
         """Start a new Telnet server in a new thread."""
-        self.port = start_server(self.host, 0)
+        self.port, self.server_thread = start_server(self.host, 0, self.stop_event)
         self.assertFalse(self.port is None)
 
     def tearDown(self):
         """Send QUIT request to telnet server."""
-        try:
-            stop_server(self.host, self.port)
-        except Exception:
-            pass
+        self.stop_event.set()
+        if self.server_thread is not None:
+            self.server_thread.join(10)
+            assert not self.server_thread.is_alive()
 
 
-def start_server (host, port):
+def start_server (host, port, stop_event):
     # Instantiate Telnet server class and listen to host:port
     clients = []
     def on_connect(client):
@@ -68,7 +68,7 @@ def start_server (host, port):
         client.send("Telnet test server\n")
     server = miniboa.TelnetServer(port=port, address=host, on_connect=on_connect)
     port = server.server_socket.getsockname()[1]
-    t = threading.Thread(None, serve_forever, args=(server, clients))
+    t = threading.Thread(None, serve_forever, args=(server, clients, stop_event))
     t.start()
     # wait for server to start up
     tries = 0
@@ -81,30 +81,22 @@ def start_server (host, port):
             break
         except:
             time.sleep(0.5)
-    return port
+    return port, t
 
 
-def stop_server (host, port):
-    """Stop a running FTP server."""
-    client = telnetlib.Telnet(timeout=TIMEOUT)
-    client.open(host, port)
-    client.write("stop\n")
-
-
-def serve_forever(server, clients):
+def serve_forever(server, clients, stop_event):
     """Run poll loop for server."""
     while True:
+        if stop_event.is_set():
+            return
         server.poll()
         for client in clients:
             if client.active and client.cmd_ready:
-                if not handle_cmd(client):
-                    return
+                handle_cmd(client)
+
 
 def handle_cmd(client):
     """Handle telnet clients."""
     msg = client.get_command().lower()
     if msg == 'exit':
         client.active = False
-    elif msg == 'stop':
-        return False
-    return True
