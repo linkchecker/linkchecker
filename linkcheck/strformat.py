@@ -322,7 +322,11 @@ def limit (s, length=72):
 
 def strline (s):
     """Display string representation on one line."""
-    return strip_control_chars(u"`%s'" % unicode(s).replace(u"\n", u"\\n"))
+    try:
+        s = unicode(s)
+    except NameError:
+        pass
+    return strip_control_chars(u"`%s'" % s.replace(u"\n", u"\\n"))
 
 
 def format_feature_warning (**kwargs):
