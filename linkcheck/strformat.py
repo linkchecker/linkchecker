@@ -64,7 +64,8 @@ def unicode_safe (s, encoding=i18n.default_encoding, errors='replace'):
         return unicode(str(s), encoding, errors)
     except NameError:  # Python3
         if isinstance(s, bytes):
-            return s.decode("utf-8", errors)
+            return s.decode(encoding, errors)
+        return str(s)
 
 
 def ascii_safe (s):
