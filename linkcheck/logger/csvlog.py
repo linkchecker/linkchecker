@@ -128,6 +128,7 @@ class CSVLogger (_Logger):
         # ... and write to the target stream
         self.write(data)
         # empty queue
+        self.queue.seek(0)
         self.queue.truncate(0)
 
     def end_output (self, **kwargs):
