@@ -15,8 +15,8 @@ real url http://localhost:%(port)d/stalter%%26sohn
 name unquoted ampersand
 error
 
-url http://www.example.com/
-cache key http://www.example.com/
-real url http://www.example.com/
+url http://www.example.com/"
+cache key http://www.example.com/%%22
+real url http://www.example.com/%%22
 name no beginning quote example
-valid
+error
