@@ -115,10 +115,10 @@ class TagFinder (object):
         """Does nothing, override in a subclass."""
         pass
 
-    def start_end_element (self, tag, attrs):
+    def start_end_element (self, tag, attrs, element_text=None):
         """Delegate a combined start/end element (eg. <br/>) to
         the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs)
+        self.start_element(tag, attrs, element_text)
 
 
 class MetaRobotsFinder (TagFinder):
