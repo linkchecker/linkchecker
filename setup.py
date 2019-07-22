@@ -466,20 +466,6 @@ args = dict(
         'linkcheck.parser',
         'linkcheck.plugins',
     ],
-    ext_modules = [
-        Extension('linkcheck.HtmlParser.htmlsax',
-            sources = [
-                'linkcheck/HtmlParser/htmllex.c',
-                'linkcheck/HtmlParser/htmlparse.c',
-                'linkcheck/HtmlParser/s_util.c',
-            ],
-            extra_compile_args = extra_compile_args,
-            library_dirs = library_dirs,
-            libraries = libraries,
-            define_macros = define_macros + [('YY_NO_INPUT', None)],
-            include_dirs = include_dirs + [normpath("linkcheck/HtmlParser")],
-        ),
-    ],
     scripts = scripts,
     data_files = data_files,
     classifiers = [

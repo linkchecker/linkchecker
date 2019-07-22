@@ -16,6 +16,5 @@
 @echo off
 set PYDIR=C:\Python27
 %PYDIR%\python.exe setup.py clean --all
-del linkcheck\HtmlParser\htmlsax.pyd
 del doc\html\lccollection.qhc
 del doc\html\lcdoc.qch

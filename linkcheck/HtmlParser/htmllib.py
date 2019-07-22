@@ -87,7 +87,6 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
         self.fd.write("<!--%s-->" % data)
 
     def start_element (self, tag, attrs):
@@ -102,7 +101,7 @@ class HtmlPrettyPrinter (object):
         """
         self._start_element(tag, attrs, ">")
 
-    def start_end_element (self, tag, attrs):
+    def start_end_element (self, tag, attrs, element_text=None):
         """
         Print HTML start-end element.
 
@@ -126,14 +125,11 @@ class HtmlPrettyPrinter (object):
         @type end: string
         @return: None
         """
-        tag = tag.encode(self.encoding, "ignore")
         self.fd.write("<%s" % tag.replace("/", ""))
         for key, val in attrs.items():
-            key = key.encode(self.encoding, "ignore")
             if val is None:
                 self.fd.write(" %s" % key)
             else:
-                val = val.encode(self.encoding, "ignore")
                 self.fd.write(' %s="%s"' % (key, quote_attrval(val)))
         self.fd.write(end)
 
@@ -145,7 +141,6 @@ class HtmlPrettyPrinter (object):
         @type tag: string
         @return: None
         """
-        tag = tag.encode(self.encoding, "ignore")
         self.fd.write("</%s>" % tag)
 
     def doctype (self, data):
@@ -156,7 +151,6 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
         self.fd.write("<!DOCTYPE%s>" % data)
 
     def pi (self, data):
@@ -167,7 +161,6 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
         self.fd.write("<?%s?>" % data)
 
     def cdata (self, data):
@@ -178,7 +171,6 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
         self.fd.write("<![CDATA[%s]]>" % data)
 
     def characters (self, data):
@@ -189,7 +181,6 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        data = data.encode(self.encoding, "ignore")
         self.fd.write(data)
 
 

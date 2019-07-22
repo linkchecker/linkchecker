@@ -15,64 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-Fast HTML parser module written in C with the following features:
-
-- Reentrant
-  As soon as any HTML string data is available, we try to feed it
-  to the HTML parser. This means that the parser has to scan possible
-  incomplete data, recognizing as much as it can. Incomplete trailing
-  data is saved for subsequent calls, or it is just flushed into the
-  output buffer with the flush() function.
-  A reset() brings the parser back to its initial state, throwing away all
-  buffered data.
-
-- Coping with HTML syntax errors
-  The parser recognizes as much as it can and passes the rest
-  of the data as TEXT tokens.
-  The scanner only passes complete recognized HTML syntax elements to
-  the parser. Invalid syntax elements are passed as TEXT. This way we do
-  not need the bison error recovery.
-  Incomplete data is rescanned the next time the parser calls yylex() or
-  when it is being flush()ed.
-
-  The following syntax errors will be recognized correctly:
-
-    - Unquoted attribute values.
-    - Missing beginning quote of attribute values.
-    - Invalid "</...>" end tags in script modus.
-    - Missing ">" in tags.
-    - Invalid characters in tag or attribute names.
-
- The following syntax errors will not be recognized:
-
-    - Missing end quote of attribute values. On the TODO list.
-    - Unknown HTML tag or attribute names.
-    - Invalid nesting of tags.
-
-  Additionally the parser has the following features:
-
-    - NULL bytes are changed into spaces
-    - <!-- ... --> inside a <script> or <style> are not treated as
-       comments but as DATA
-    - Rewrites all tag and attribute names to lowercase for easier
-       matching.
-
-- Speed
-  The FLEX code is configured to generate a large but fast scanner.
-  The parser ignores forbidden or unnecessary HTML end tags.
-  The parser converts tag and attribute names to lower case for easier
-  matching.
-  The parser quotes all attribute values.
-  Python memory management interface is used.
-
-- Character encoding aware
-  The parser itself is not encoding aware, but output strings are
-  always Python Unicode strings.
-
-- Retain HTML attribute order
-  The parser keeps the order in which HTML tag attributes are parsed.
-  The attributes are stored in a custom dictionary class ListDict which
-  iterates over the dictionary keys in insertion order.
+HTML parser module.
 
 USAGE
 
