@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf8 -*-
 # Copyright (C) 2004-2012 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -54,9 +54,9 @@ parsetests = [
     ("""< a >""", """< a >"""),
     ("""<>""", """<>"""),
     ("""< >""", """< >"""),
-    ("""<aä>""", u"""<aä></aä>"""),
-    ("""<a aä="b">""", u"""<a aä="b"></a>"""),
-    ("""<a a="bä">""", u"""<a a="b&#228;"></a>"""),
+    ("""<aÃ¤>""", u"""<aÃ¤></aÃ¤>"""),
+    ("""<a aÃ¤="b">""", u"""<a aÃ¤="b"></a>"""),
+    ("""<a a="bÃ¤">""", u"""<a a="b&#228;"></a>"""),
     # multiple attribute names should be ignored...
     ("""<a b="c" b="c" >""", """<a b="c"></a>"""),
     # ... but which one wins - in our implementation the last one
@@ -97,7 +97,7 @@ parsetests = [
     ("""</a >""", """"""),
     ("""< / a>""", """< / a>"""),
     ("""< /a>""", """< /a>"""),
-    ("""</aä>""", """"""),
+    ("""</aÃ¤>""", """"""),
     # start and end tag (HTML doctype assumed)
     ("""<a/>""", """<a></a>"""),
     ("""<meta/>""", """<meta/>"""),
@@ -144,8 +144,8 @@ parsetests = [
     # note that \u8156 is not valid encoding and therefore gets removed
     ("""<a  href="&#8156;ailto:" >""", """<a href="&#8156;ailto:"></a>"""),
     # non-ascii characters
-    ("""<Üzgür> fahr </langsamer> ¿¿¿¿¿¿{""",
-     u"""<Üzgür> fahr  ¿¿¿¿¿¿{"""),
+    ("""<ÃœzgÃ¼r> fahr </langsamer> Å¼Å¼Å¼Å¼Å¼Å¼{""",
+     u"""<ÃœzgÃ¼r> fahr  Å¼Å¼Å¼Å¼Å¼Å¼{"""),
     # mailto link
     ("""<a  href=mailto:calvin@LocalHost?subject=Hallo&to=michi>1</a>""",
      """<a href="mailto:calvin@LocalHost?subject=Hallo&amp;to=michi">1</a>"""),
