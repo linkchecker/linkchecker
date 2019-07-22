@@ -89,7 +89,7 @@ class HtmlPrettyPrinter (object):
         """
         self.fd.write("<!--%s-->" % data)
 
-    def start_element (self, tag, attrs):
+    def start_element (self, tag, attrs, element_text=None):
         """
         Print HTML start element.
 
