@@ -285,18 +285,36 @@ class TestParser (unittest.TestCase):
             self.assertEqual(resolve("&#%d;" % ord(c)), c)
         self.assertEqual(resolve("&#1114112;"), u"")
 
-    def test_encoding_detection (self):
-        html = '<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
+    def test_encoding_detection_utf_content (self):
+        html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
         self.encoding_test(html, "utf-8")
-        html = '<meta charset="UTF-8">'
+
+    def test_encoding_detection_utf_charset (self):
+        html = b'<meta charset="UTF-8">'
         self.encoding_test(html, "utf-8")
-        html = '<meta charset="hulla">'
+
+    def test_encoding_detection_iso_content (self):
+        html = b'<meta http-equiv="content-type" content="text/html; charset=ISO8859-1">'
         self.encoding_test(html, "iso8859-1")
-        html = '<meta http-equiv="content-type" content="text/html; charset=blabla">'
+
+    def test_encoding_detection_iso_charset (self):
+        html = b'<meta charset="ISO8859-1">'
         self.encoding_test(html, "iso8859-1")
+
+    def test_encoding_detection_iso_bad_charset (self):
+        html = b'<meta charset="hulla">'
+        self.encoding_test(html, "ascii")
+
+    def test_encoding_detection_iso_bad_content (self):
+        html = b'<meta http-equiv="content-type" content="text/html; charset=blabla">'
+        self.encoding_test(html, "ascii")
 
     def encoding_test (self, html, expected):
         parser = linkcheck.HtmlParser.htmlsax.parser()
-        self.assertEqual(parser.encoding, "iso8859-1")
+        self.assertEqual(parser.encoding, None)
+        out = StringIO()
+        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        parser.handler = handler
         parser.feed(html)
+        parser.flush()
         self.assertEqual(parser.encoding, expected)
