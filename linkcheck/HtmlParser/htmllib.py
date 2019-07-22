@@ -99,7 +99,7 @@ class HtmlPrettyPrinter (object):
         @type attrs: dict
         @return: None
         """
-        self._start_element(tag, attrs, ">")
+        self._start_element(tag, attrs, u">")
 
     def start_end_element (self, tag, attrs, element_text=None):
         """
@@ -111,7 +111,7 @@ class HtmlPrettyPrinter (object):
         @type attrs: dict
         @return: None
         """
-        self._start_element(tag, attrs, "/>")
+        self._start_element(tag, attrs, u"/>")
 
     def _start_element (self, tag, attrs, end):
         """
@@ -125,12 +125,12 @@ class HtmlPrettyPrinter (object):
         @type end: string
         @return: None
         """
-        self.fd.write("<%s" % tag.replace("/", ""))
+        self.fd.write(u"<%s" % tag.replace("/", ""))
         for key, val in attrs.items():
             if val is None:
-                self.fd.write(" %s" % key)
+                self.fd.write(u" %s" % key)
             else:
-                self.fd.write(' %s="%s"' % (key, quote_attrval(val)))
+                self.fd.write(u' %s="%s"' % (key, quote_attrval(val)))
         self.fd.write(end)
 
     def end_element (self, tag):
