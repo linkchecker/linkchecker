@@ -60,8 +60,8 @@ class TestHttpMisc (HttpServerTest):
         resultlines = [
             u"url %s" % url,
             u"cache key %s" % rurl,
-            u"real url %s" % rurl,
-            u"info Access denied by robots.txt, checked only syntax.",
+            u"real url https://%s/" % host,
+            u"info Redirected to `https://%s/'." % host,
             u"warning URL %s has obfuscated IP address %s" % (url, ip),
             u"valid",
         ]
