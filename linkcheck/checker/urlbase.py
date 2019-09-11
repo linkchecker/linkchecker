@@ -472,7 +472,7 @@ class UrlBase (object):
                 value = _('Hostname not found')
             elif isinstance(exc, UnicodeError):
                 # idna.encode(host) failed
-                value = _('Bad hostname %(host)r: %(msg)s') % {'host': self.host, 'msg': str(value)}
+                value = _('Bad hostname %(host)r: %(msg)s') % {'host': self.host, 'msg': str_text(value)}
             self.set_result(unicode_safe(value), valid=False)
 
     def check_content(self):
@@ -489,7 +489,7 @@ class UrlBase (object):
             except tuple(ExcList):
                 value = self.handle_exception()
                 self.add_warning(_("could not get content: %(msg)s") %
-                     {"msg": str(value)}, tag=WARN_URL_ERROR_GETTING_CONTENT)
+                     {"msg": str_text(value)}, tag=WARN_URL_ERROR_GETTING_CONTENT)
         return False
 
     def close_connection (self):
