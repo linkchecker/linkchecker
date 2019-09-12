@@ -135,9 +135,9 @@ def checklink (form=None, env=os.environ):
         form = {}
     try:
         checkform(form, env)
-    except LCFormError as errmsg:
-        log(env, errmsg)
-        yield encode(format_error(errmsg))
+    except LCFormError as err:
+        log(env, err)
+        yield encode(format_error(str(err)))
         return
     out = ThreadsafeIO()
     config = get_configuration(form, out)
@@ -233,7 +233,7 @@ def checkform (form, env):
 def log (env, msg):
     """Log message to WSGI error output."""
     logfile = env['wsgi.errors']
-    logfile.write(msg + "\n")
+    logfile.write("%s\n" % msg)
 
 
 def dump (env, form):
