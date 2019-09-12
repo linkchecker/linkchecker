@@ -32,7 +32,7 @@ import time
 
 import requests
 
-from . import log, LOG_CHECK, configuration
+from . import log, LOG_CHECK, configuration, url as urlutil
 
 __all__ = ["RobotFileParser"]
 
@@ -104,7 +104,7 @@ class RobotFileParser (object):
             response.raise_for_status()
             content_type = response.headers.get('content-type')
             if content_type and content_type.lower().startswith('text/plain'):
-                self.parse(response.iter_lines())
+                self.parse(response.iter_lines(decode_unicode=True))
             else:
                 log.debug(LOG_CHECK, "%r allow all (no text content)", self.url)
                 self.allow_all = True
@@ -281,7 +281,7 @@ class RuleLine (object):
             # an empty value means allow all
             allowance = True
             path = '/'
-        self.path = parse.quote(path)
+        self.path = urlutil.url_quote_part(path)
         self.allowance = allowance
 
     def applies_to (self, path):
