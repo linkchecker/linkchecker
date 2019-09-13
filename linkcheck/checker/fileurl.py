@@ -20,6 +20,7 @@ Handle local file: links.
 
 import re
 import os
+import sys
 try:
     import urlparse
 except ImportError:
@@ -192,7 +193,10 @@ class FileUrl (urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.pathencode(self.url)
+            if sys.version_info.major < 3:
+                url = fileutil.pathencode(self.url)
+            else:
+                url = self.url
             self.url_connection = urlopen(url)
             self.check_case_sensitivity()
 
