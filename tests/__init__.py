@@ -121,6 +121,15 @@ need_msgfmt = _need_func(has_msgfmt, "msgfmt")
 
 
 @memoized
+def has_python2 ():
+    """Test if this is a Python 2."""
+    return sys.version_info.major < 3
+
+
+need_python2 = _need_func(has_python2, "Python 2")
+
+
+@memoized
 def has_posix ():
     """Test if this is a POSIX system."""
     return os.name == "posix"
