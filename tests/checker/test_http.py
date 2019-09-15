@@ -53,7 +53,7 @@ class TestHttp (HttpServerTest):
         ]
         if status in (204,):
             resultlines.append(u"warning No Content")
-        if (status != 101 and status < 200) or status >= 400:
+        if (status not in [101, 102] and status < 200) or status >= 400:
             result = u"error"
         else:
             result = u"valid"
