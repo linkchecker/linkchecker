@@ -24,10 +24,10 @@ try:
 except ImportError:
     # Python 3
     from urllib import parse as urlparse
-try:
-    from urllib import splituser
-except ImportError: # Python 3
-    from urllib.parse import splituser
+try:  # Python 3
+    from urllib import parse as urllib_parse
+except ImportError:
+    import urllib as urllib_parse
 try:
     from urllib2 import urlopen
 except ImportError:
@@ -399,7 +399,7 @@ class UrlBase (object):
         Also checks for obfuscated IP addresses.
         """
         # check userinfo@host:port syntax
-        self.userinfo, host = splituser(self.urlparts[1])
+        self.userinfo, host = urllib_parse.splituser(self.urlparts[1])
         port = urlutil.default_ports.get(self.scheme, 0)
         host, port = urlutil.splitport(host, port=port)
         if port is None:
@@ -661,7 +661,7 @@ class UrlBase (object):
         """
         if self.userinfo:
             # URL itself has authentication info
-            return urllib.splitpasswd(self.userinfo)
+            return urllib_parse.splitpasswd(self.userinfo)
         return self.aggregate.config.get_user_password(self.url)
 
     def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
