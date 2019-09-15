@@ -92,7 +92,7 @@ class CSVLogger (_Logger):
         if self.has_part("baseref"):
             row.append(url_data.base_ref)
         if self.has_part("result"):
-            row.append(url_data.result)
+            row.append(str(url_data.result))
         if self.has_part("warningstring"):
             row.append(self.linesep.join(x[1] for x in url_data.warnings))
         if self.has_part("infostring"):

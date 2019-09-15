@@ -264,7 +264,7 @@ class HtmlLogger (_Logger):
             self.write(u'</td><td class="error">')
             self.write(cgi.escape(_("Error")))
         if url_data.result:
-            self.write(u": "+cgi.escape(url_data.result))
+            self.write(u": "+cgi.escape(str(url_data.result)))
         self.writeln(u"</td></tr>")
 
     def write_stats (self):

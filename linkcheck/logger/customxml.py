@@ -91,7 +91,7 @@ class CustomXMLLogger (xmllog._XMLLogger):
         if self.has_part("result"):
             attrs = {}
             if url_data.result:
-                attrs["result"] = url_data.result
+                attrs["result"] = str(url_data.result)
             self.xml_tag(u"valid", u"%d" % (1 if url_data.valid else 0), attrs)
         self.xml_endtag(u'urldata')
         self.flush()
