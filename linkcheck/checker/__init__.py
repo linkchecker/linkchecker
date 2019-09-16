@@ -20,7 +20,10 @@ Main functions for link checking.
 
 import os
 import cgi
-import urllib
+try: # Python 3
+    from urllib import parse as urlparse
+except ImportError:
+    import urllib as urlparse
 from .. import strformat, url as urlutil, log, LOG_CHECK
 
 MAX_FILESIZE = 1024*1024*10 # 10MB
@@ -55,11 +58,11 @@ def absolute_url (base_url, base_ref, parent_url):
     @param parent_url: url of parent document
     @type parent_url: string or None
     """
-    if base_url and urlutil.url_is_absolute(base_url):
+    if base_url and urlutil.url_is_absolute(urlutil.decode_for_unquote(base_url)):
         return base_url
-    elif base_ref and urlutil.url_is_absolute(base_ref):
+    elif base_ref and urlutil.url_is_absolute(urlutil.decode_for_unquote(base_ref)):
         return base_ref
-    elif parent_url and urlutil.url_is_absolute(parent_url):
+    elif parent_url and urlutil.url_is_absolute(urlutil.decode_for_unquote(parent_url)):
         return parent_url
     return u""
 
@@ -165,7 +168,7 @@ def get_index_html (urls):
     for entry in urls:
         name = cgi.escape(entry)
         try:
-            url = cgi.escape(urllib.quote(entry))
+            url = cgi.escape(urlparse.quote(entry))
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name
