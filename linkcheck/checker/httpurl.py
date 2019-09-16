@@ -26,11 +26,7 @@ import requests
 import warnings
 warnings.simplefilter('ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    # Python 3
-    from io import StringIO
+from io import BytesIO
 
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
@@ -316,7 +312,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Return data and data size for this URL.
         Can be overridden in subclasses."""
         maxbytes = self.aggregate.config["maxfilesizedownload"]
-        buf = StringIO()
+        buf = BytesIO()
         for data in self.url_connection.iter_content(chunk_size=self.ReadChunkBytes):
             if buf.tell() + len(data) > maxbytes:
                 raise LinkCheckerError(_("File size too large"))
