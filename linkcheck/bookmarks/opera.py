@@ -63,9 +63,9 @@ def parse_bookmark_data (data):
     for line in data.splitlines():
         lineno += 1
         line = line.strip()
-        if line.startswith("NAME="):
+        if line.startswith(b"NAME="):
             name = line[5:]
-        elif line.startswith("URL="):
+        elif line.startswith(b"URL="):
             url = line[4:]
             if url and name is not None:
                 yield (url, name, lineno)
