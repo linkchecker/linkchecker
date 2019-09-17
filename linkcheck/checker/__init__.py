@@ -19,7 +19,7 @@ Main functions for link checking.
 """
 
 import os
-import cgi
+from html import escape as html_escape
 try: # Python 3
     from urllib import parse as urlparse
 except ImportError:
@@ -166,9 +166,9 @@ def get_index_html (urls):
     """
     lines = ["<html>", "<body>"]
     for entry in urls:
-        name = cgi.escape(entry)
+        name = html_escape(entry)
         try:
-            url = cgi.escape(urlparse.quote(entry))
+            url = html_escape(urlparse.quote(entry))
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name
