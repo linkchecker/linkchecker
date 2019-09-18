@@ -238,8 +238,9 @@ class LinkCheckTest (unittest.TestCase):
 
     def fail_unicode (self, msg):
         """Print encoded fail message."""
-        # XXX self.fail() only supports ascii
-        msg = msg.encode("ascii", "replace")
+        # XXX self.fail() only supports ascii on Python 2
+        if not isinstance(msg, str) and isinstance(msg, str_text):  # this can be true only on Python 2
+            msg = msg.encode("ascii", "backslashreplace")
         self.fail(msg)
 
     def direct (self, url, resultlines, parts=None, recursionlevel=0,
