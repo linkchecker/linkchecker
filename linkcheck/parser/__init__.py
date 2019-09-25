@@ -72,7 +72,7 @@ def parse_chromium (url_data):
 def parse_safari (url_data):
     """Parse a Safari bookmark file."""
     from ..bookmarks.safari import parse_bookmark_data
-    for url, name in parse_bookmark_data(url_data.get_content()):
+    for url, name in parse_bookmark_data(url_data.get_raw_content()):
         url_data.add_url(url, name=name)
 
 
