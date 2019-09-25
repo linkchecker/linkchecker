@@ -90,8 +90,7 @@ class Aggregate (object):
         response = session.get(url)
         cgiuser = self.config["loginuserfield"]
         cgipassword = self.config["loginpasswordfield"]
-        form = formsearch.search_form(response.content, cgiuser, cgipassword,
-              encoding=response.encoding)
+        form = formsearch.search_form(response.text, cgiuser, cgipassword)
         form.data[cgiuser] = user
         form.data[cgipassword] = password
         for key, value in self.config["loginextrafields"].items():

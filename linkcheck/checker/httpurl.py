@@ -26,11 +26,12 @@ import requests
 import warnings
 warnings.simplefilter('ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
-from io import BytesIO
+from io import StringIO
 
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
 from . import (internpaturl, proxysupport)
+from ..decorators import notimplemented
 from ..HtmlParser import htmlsax
 from ..htmlutil import linkparse
 # import warnings
@@ -177,6 +178,10 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         log.debug(LOG_CHECK, "Send request %s with %s", request, kwargs)
         log.debug(LOG_CHECK, "Request headers %s", request.headers)
         self.url_connection = self.session.send(request, **kwargs)
+        # Ensure encoding is set to support decode_unicode=True
+        # https://requests.readthedocs.io/en/master/user/advanced/#streaming-requests
+        if self.url_connection.encoding is None:
+            self.url_connection.encoding = HEADER_ENCODING
         self.headers = self.url_connection.headers
         self._add_ssl_info()
 
@@ -308,12 +313,21 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             else:
                 self.set_result(_("OK"))
 
+    @notimplemented
+    def get_raw_content(self):
+        pass
+
+    def get_content (self):
+        if self.text is None:
+            self.text = self.download_content()
+        return self.text
+
     def read_content(self):
         """Return data and data size for this URL.
         Can be overridden in subclasses."""
         maxbytes = self.aggregate.config["maxfilesizedownload"]
-        buf = BytesIO()
-        for data in self.url_connection.iter_content(chunk_size=self.ReadChunkBytes):
+        buf = StringIO()
+        for data in self.url_connection.iter_content(chunk_size=self.ReadChunkBytes, decode_unicode=True):
             if buf.tell() + len(data) > maxbytes:
                 raise LinkCheckerError(_("File size too large"))
             buf.write(data)
