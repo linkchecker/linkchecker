@@ -131,9 +131,9 @@ class TestUrl (unittest.TestCase):
         url = "http://example.com/?u=http://example2.com?b="
         nurl = "http://example.com/?u=http://example2.com?b="
         self.urlnormtest(url, nurl)
-        url = "http://localhost:8001/?quoted=ü"
-        nurl = "http://localhost:8001/?quoted=%FC"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        url = b"http://localhost:8001/?quoted=\xfc".decode("iso-8859-1")
+        nurl = "http://localhost:8001/?quoted=%C3%BC"
+        self.urlnormtest(url, nurl)
         url = "http://host/?a=b/c+d="
         nurl = "http://host/?a=b/c%20d%3D"
         self.urlnormtest(url, nurl)
