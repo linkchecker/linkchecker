@@ -83,7 +83,7 @@ def parse_text (url_data):
     for line in url_data.get_content().splitlines():
         lineno += 1
         line = line.strip()
-        if not line or line.startswith(b'#'):
+        if not line or line.startswith('#'):
             continue
         url_data.add_url(line, line=lineno)
 
