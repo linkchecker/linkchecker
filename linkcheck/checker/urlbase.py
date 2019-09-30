@@ -38,13 +38,16 @@ import time
 import errno
 import socket
 import select
-try:
-    from cStringIO import StringIO
-except ImportError:
-    # Python 3
-    from io import StringIO
+from io import BytesIO
 from builtins import str as str_text
 from future.utils import python_2_unicode_compatible
+from warnings import filterwarnings
+
+filterwarnings("ignore",
+    message="The soupsieve package is not installed. CSS selectors cannot be used.",
+    category=UserWarning, module="bs4")
+
+from bs4 import BeautifulSoup
 
 from . import absolute_url, get_url_from
 from .. import (log, LOG_CHECK,
@@ -216,6 +219,8 @@ class UrlBase (object):
         self.url_connection = None
         # data of url content,  (data == None) means no data is available
         self.data = None
+        # url content as a Unicode string
+        self.text = None
         # cache url is set by build_url() calling set_cache_url()
         self.cache_url = None
         # extern flags (is_extern, is_strict)
@@ -625,24 +630,35 @@ class UrlBase (object):
         """Indicate wether url get_content() can be called."""
         return self.size <= self.aggregate.config["maxfilesizedownload"]
 
-    def get_content (self):
-        """Precondition: url_connection is an opened URL."""
-        if self.data is None:
-            log.debug(LOG_CHECK, "Get content of %r", self.url)
-            t = time.time()
-            self.data = self.read_content()
-            self.size = len(self.data)
-            self.dltime = time.time() - t
-            if self.size == 0:
-                self.add_warning(_("Content size is zero."),
+    def download_content(self):
+        log.debug(LOG_CHECK, "Get content of %r", self.url)
+        t = time.time()
+        content = self.read_content()
+        self.size = len(content)
+        self.dltime = time.time() - t
+        if self.size == 0:
+            self.add_warning(_("Content size is zero."),
                              tag=WARN_URL_CONTENT_SIZE_ZERO)
-            else:
-                self.aggregate.add_downloaded_bytes(self.size)
+        else:
+            self.aggregate.add_downloaded_bytes(self.size)
+        return content
+
+    def get_raw_content(self):
+        if self.data is None:
+            self.data = self.download_content()
         return self.data
+
+    def get_content (self):
+        if self.text is None:
+            self.get_raw_content()
+            soup = BeautifulSoup(self.data, "html.parser")
+            self.text = self.data.decode(soup.original_encoding)
+            self.encoding = soup.original_encoding
+        return self.text
 
     def read_content(self):
         """Return data for this URL. Can be overridden in subclasses."""
-        buf = StringIO()
+        buf = BytesIO()
         data = self.read_content_chunk()
         while data:
             if buf.tell() + len(data) > self.aggregate.config["maxfilesizedownload"]:
@@ -652,7 +668,9 @@ class UrlBase (object):
         return buf.getvalue()
 
     def read_content_chunk(self):
-        """Read one chunk of content from this URL."""
+        """Read one chunk of content from this URL.
+        Precondition: url_connection is an opened URL.
+        """
         return self.url_connection.read(self.ReadChunkBytes)
 
     def get_user_password (self):
