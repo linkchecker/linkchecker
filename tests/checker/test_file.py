@@ -51,6 +51,9 @@ class TestFile (LinkCheckTest):
     def test_html (self):
         self.file_test("file.html")
 
+    def test_html_url_quote (self):
+        self.file_test("file_url_quote.html")
+
     def test_wml (self):
         self.file_test("file.wml")
 
