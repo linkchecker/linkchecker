@@ -19,7 +19,7 @@ Parse names of title tags and link types.
 """
 
 import re
-from .. import HtmlParser, strformat, url as urlutil
+from .. import HtmlParser, strformat
 
 
 imgtag_re = re.compile(r"(?i)\s+alt\s*=\s*"+\
@@ -52,7 +52,6 @@ def image_name (txt):
 def href_name (txt):
     """Return the name part of the first <a href="">name</a> link in txt."""
     name = u""
-    txt = urlutil.decode_for_unquote(txt)
     endtag = a_end_search(txt)
     if not endtag:
         return name

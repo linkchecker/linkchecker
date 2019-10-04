@@ -58,11 +58,11 @@ def absolute_url (base_url, base_ref, parent_url):
     @param parent_url: url of parent document
     @type parent_url: string or None
     """
-    if base_url and urlutil.url_is_absolute(urlutil.decode_for_unquote(base_url)):
+    if base_url and urlutil.url_is_absolute(base_url):
         return base_url
-    elif base_ref and urlutil.url_is_absolute(urlutil.decode_for_unquote(base_ref)):
+    elif base_ref and urlutil.url_is_absolute(base_ref):
         return base_ref
-    elif parent_url and urlutil.url_is_absolute(urlutil.decode_for_unquote(parent_url)):
+    elif parent_url and urlutil.url_is_absolute(parent_url):
         return parent_url
     return u""
 
