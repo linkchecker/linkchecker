@@ -133,8 +133,8 @@ class TestUrl (unittest.TestCase):
         nurl = "http://example.com/?u=http://example2.com?b="
         self.urlnormtest(url, nurl)
         url = "http://localhost:8001/?quoted=ü"
-        nurl = "http://localhost:8001/?quoted=%FC"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = "http://localhost:8001/?quoted=%C3%BC"
+        self.urlnormtest(url, nurl)
         url = "http://host/?a=b/c+d="
         nurl = "http://host/?a=b/c%20d%3D"
         self.urlnormtest(url, nurl)
@@ -407,16 +407,16 @@ class TestUrl (unittest.TestCase):
         nurl = url
         self.urlnormtest(url, nurl)
         url = u"file:///a/ה.txt"
-        nurl = u"file:///a/%E4.txt"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = u"file:///a/%C3%A4.txt"
+        self.urlnormtest(url, nurl)
         #url = u"file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
         #nurl = u"file:///a.bin" # XXX
         #self.urlnormtest(url, nurl)
 
     def test_norm_invalid (self):
         url = u"הצü?:"
-        nurl = u"%E4%F6%FC?:"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = u"%C3%A4%C3%B6%C3%BC?:"
+        self.urlnormtest(url, nurl)
 
     def test_fixing (self):
         # Test url fix method.

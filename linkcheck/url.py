@@ -267,9 +267,9 @@ def url_parse_query (query, encoding):
         append = '?'+url_parse_query(rest, encoding=encoding)+append
     l = []
     for k, v, sep in parse_qsl(query, keep_blank_values=True, encoding=encoding):
-        k = url_quote_part(k, '/-:,;')
+        k = parse.quote(k, safe='/-:,;')
         if v:
-            v = url_quote_part(v, '/-:,;')
+            v = parse.quote(v, safe='/-:,;')
             l.append("%s=%s%s" % (k, v, sep))
         elif v is None:
             l.append("%s%s" % (k, sep))
@@ -323,12 +323,12 @@ def url_norm (url, encoding):
     # anchor
     urlparts[4] = parse.unquote(urlparts[4], encoding=encoding)
     # quote parts again
-    urlparts[0] = url_quote_part(urlparts[0], encoding=encoding) # scheme
-    urlparts[1] = url_quote_part(urlparts[1], safechars='@:', encoding=encoding) # host
-    urlparts[2] = url_quote_part(urlparts[2], safechars=_nopathquote_chars, encoding=encoding) # path
+    urlparts[0] = parse.quote(urlparts[0]) # scheme
+    urlparts[1] = parse.quote(urlparts[1], safe='@:') # host
+    urlparts[2] = parse.quote(urlparts[2], safe=_nopathquote_chars) # path
     if not urlparts[0].startswith("feed"):
         urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
-    urlparts[4] = url_quote_part(urlparts[4], safechars="!$&'()*+,-./;=?@_~", encoding=encoding) # anchor
+    urlparts[4] = parse.quote(urlparts[4], safe="!$&'()*+,-./;=?@_~") # anchor
     res = urlunsplit(urlparts)
     if url.endswith('#') and not urlparts[4]:
         # re-append trailing empty fragment
@@ -382,36 +382,27 @@ def url_quote (url, encoding):
     if not url_is_absolute(url):
         return document_quote(url)
     urlparts = list(urlparse.urlsplit(url))
-    urlparts[0] = url_quote_part(urlparts[0]) # scheme
-    urlparts[1] = url_quote_part(urlparts[1], ':') # host
-    urlparts[2] = url_quote_part(urlparts[2], '/=,') # path
-    urlparts[3] = url_quote_part(urlparts[3], '&=,') # query
+    urlparts[0] = parse.quote(urlparts[0]) # scheme
+    urlparts[1] = parse.quote(urlparts[1], safe=':') # host
+    urlparts[2] = parse.quote(urlparts[2], safe='/=,') # path
+    urlparts[3] = parse.quote(urlparts[3], safe='&=,') # query
     l = []
     for k, v, sep in parse_qsl(urlparts[3], encoding=encoding, keep_blank_values=True): # query
-        k = url_quote_part(k, '/-:,;')
+        k = parse.quote(k, safe='/-:,;')
         if v:
-            v = url_quote_part(v, '/-:,;')
+            v = parse.quote(v, safe='/-:,;')
             l.append("%s=%s%s" % (k, v, sep))
         else:
             l.append("%s%s" % (k, sep))
     urlparts[3] = ''.join(l)
-    urlparts[4] = url_quote_part(urlparts[4]) # anchor
+    urlparts[4] = parse.quote(urlparts[4]) # anchor
     return urlunsplit(urlparts)
 
-
-def url_quote_part (s, safechars='/', encoding=None):
-    """Wrap urllib.quote() to support unicode strings. A unicode string
-    is first converted to UTF-8. After that urllib.quote() is called."""
-    if isinstance(s, str_text):
-        if encoding is None:
-            encoding = url_encoding
-        s = s.encode(encoding, 'ignore')
-    return parse.quote(s, safechars)
 
 def document_quote (document):
     """Quote given document."""
     doc, query = parse.splitquery(document)
-    doc = url_quote_part(doc, '/=,')
+    doc = parse.quote(doc, safe='/=,')
     if query:
         return "%s?%s" % (doc, query)
     return doc
