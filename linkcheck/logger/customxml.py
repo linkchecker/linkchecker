@@ -54,8 +54,8 @@ class CustomXMLLogger (xmllog._XMLLogger):
             self.xml_tag(u"name", str_text(url_data.name))
         if url_data.parent_url and self.has_part('parenturl'):
             attrs = {
-                u'line': u"%d" % url_data.line,
-                u'column': u"%d" % url_data.column,
+                u'line': u"%s" % url_data.line,
+                u'column': u"%s" % url_data.column,
             }
             self.xml_tag(u"parent", str_text(url_data.parent_url),
                          attrs=attrs)

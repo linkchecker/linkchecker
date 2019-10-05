@@ -191,9 +191,9 @@ class HtmlLogger (_Logger):
                    u'</td><td><a target="top" href="'+
                    url_data.parent_url+u'">'+
                    html_escape(url_data.parent_url)+u"</a>")
-        if url_data.line > 0:
+        if url_data.line is not None:
             self.write(_(", line %d") % url_data.line)
-        if url_data.column > 0:
+        if url_data.column is not None:
             self.write(_(", col %d") % url_data.column)
         if url_data.page > 0:
             self.write(_(", page %d") % url_data.page)

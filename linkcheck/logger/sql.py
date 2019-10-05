@@ -99,8 +99,8 @@ class SQLLogger (_Logger):
               "%(warning)s,"
               "%(info)s,"
               "%(url)s,"
-              "%(line)d,"
-              "%(column)d,"
+              "%(line)s,"
+              "%(column)s,"
               "%(name)s,"
               "%(checktime)d,"
               "%(dltime)d,"
@@ -118,8 +118,8 @@ class SQLLogger (_Logger):
                'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),
                'info': sqlify(os.linesep.join(url_data.info)),
                'url': sqlify(urlutil.url_quote(url_data.url)),
-               'line': url_data.line,
-               'column': url_data.column,
+               'line': 'NULL' if url_data.line is None else url_data.line,
+               'column': 'NULL' if url_data.column is None else url_data.column,
                'name': sqlify(url_data.name),
                'checktime': url_data.checktime,
                'dltime': url_data.dltime,

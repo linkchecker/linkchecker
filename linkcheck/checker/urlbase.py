@@ -704,8 +704,8 @@ class UrlBase (object):
             u"base_ref=%r" % self.base_ref,
             u"recursion_level=%d" % self.recursion_level,
             u"url_connection=%s" % self.url_connection,
-            u"line=%d" % self.line,
-            u"column=%d" % self.column,
+            u"line=%s" % self.line,
+            u"column=%s" % self.column,
             u"page=%d" % self.page,
             u"name=%r" % self.name,
             u"anchor=%r" % self.anchor,
@@ -791,9 +791,9 @@ class UrlBase (object):
         - url_data.info: list of unicode
           Additional information about this URL.
         - url_data.line: int
-          Line number of this URL at parent document, or -1
+          Line number of this URL at parent document, or None
         - url_data.column: int
-          Column number of this URL at parent document, or -1
+          Column number of this URL at parent document, or None
         - url_data.page: int
           Page number of this URL at parent document, or -1
         - url_data.cache_url: unicode

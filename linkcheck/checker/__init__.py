@@ -68,8 +68,8 @@ def absolute_url (base_url, base_ref, parent_url):
 
 
 def get_url_from (base_url, recursion_level, aggregate,
-                  parent_url=None, base_ref=None, line=0, column=0, page=0,
-                  name=u"", parent_content_type=None, extern=None):
+                  parent_url=None, base_ref=None, line=None, column=None,
+                  page=0, name=u"", parent_content_type=None, extern=None):
     """
     Get url data from given base data.
 

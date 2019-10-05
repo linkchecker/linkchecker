@@ -155,9 +155,9 @@ class TextLogger (_Logger):
         """Write url_data.parent_url."""
         self.write(self.part('parenturl') + self.spaces("parenturl"))
         txt = url_data.parent_url
-        if url_data.line > 0:
+        if url_data.line is not None:
             txt += _(", line %d") % url_data.line
-        if url_data.column > 0:
+        if url_data.column is not None:
             txt += _(", col %d") % url_data.column
         if url_data.page > 0:
             txt += _(", page %d") % url_data.page
