@@ -84,8 +84,6 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         handler = linkparse.MetaRobotsFinder()
         parser = htmlsax.parser(handler)
         handler.parser = parser
-        if self.charset:
-            parser.encoding = self.charset
         # parse
         try:
             parser.feed(self.get_raw_content())

@@ -125,8 +125,6 @@ def find_links (url_data, callback, tags):
     # construct parser object
     handler = linkparse.LinkFinder(callback, tags)
     parser = htmlsax.parser(handler)
-    if url_data.charset:
-        parser.encoding = url_data.charset
     handler.parser = parser
     # parse
     try:

@@ -89,14 +89,13 @@ class FormFinder(object):
             self.form = None
 
 
-def search_form(content, cgiuser, cgipassword, encoding='utf-8'):
+def search_form(content, cgiuser, cgipassword):
     """Search for a HTML form in the given HTML content that has the given
     CGI fields. If no form is found return None.
     """
     handler = FormFinder()
     parser = htmlsax.parser(handler)
     handler.parser = parser
-    parser.encoding = encoding
     # parse
     parser.feed(content)
     parser.flush()
