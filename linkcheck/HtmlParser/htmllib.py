@@ -87,7 +87,7 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        self.fd.write("<!--%s-->" % data)
+        self.fd.write("<!-- %s -->" % data)
 
     def start_element (self, tag, attrs, element_text=None):
         """
