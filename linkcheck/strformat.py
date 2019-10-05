@@ -78,7 +78,7 @@ def ascii_safe (s):
     @rtype: string
     """
     if isinstance(s, str_text):
-        s = s.encode('ascii', 'ignore')
+        s = s.encode('ascii', 'ignore').decode('ascii')
     return s
 
 
