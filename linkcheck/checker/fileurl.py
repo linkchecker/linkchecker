@@ -83,7 +83,7 @@ def get_os_filename (path):
     """Return filesystem path for given URL path."""
     if os.name == 'nt':
         path = prepare_urlpath_for_nt(path)
-    res = urlrequest.url2pathname(fileutil.pathencode(path))
+    res = urlrequest.url2pathname(fileutil.path_safe(path))
     if os.name == 'nt' and res.endswith(':') and len(res) == 2:
         # Work around http://bugs.python.org/issue11474
         res += os.sep
@@ -192,7 +192,7 @@ class FileUrl (urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.pathencode(self.url)
+            url = fileutil.path_safe(self.url)
             self.url_connection = urlopen(url)
             self.check_case_sensitivity()
 
