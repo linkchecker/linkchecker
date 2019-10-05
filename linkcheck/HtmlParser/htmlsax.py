@@ -46,7 +46,11 @@ class Parser(object):
                 self.html_doc = StringIO()
         self.html_doc.write(feed_text)
 
+    def feed_soup(self, soup):
+        self.soup = soup
+
     def reset(self):
+        self.soup = None
         self.html_doc = None
         self.tag_lineno = None
         self.tag_column = None
@@ -104,10 +108,11 @@ class Parser(object):
                     self.handler.characters(content)
 
     def flush(self):
-        soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser')
-        if hasattr(soup, 'contents'):
-            self.parse_contents(soup.contents)
-        self.encoding = soup.original_encoding
+        if self.soup is None:
+            self.soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser')
+        if hasattr(self.soup, 'contents'):
+            self.parse_contents(self.soup.contents)
+        self.encoding = self.soup.original_encoding
 
     def debug(self, text):
         raise NotImplementedError("debug is not implemented")

@@ -221,6 +221,8 @@ class UrlBase (object):
         self.data = None
         # url content as a Unicode string
         self.text = None
+        # url content as a Beautiful Soup object
+        self.soup = None
         # cache url is set by build_url() calling set_cache_url()
         self.cache_url = None
         # extern flags (is_extern, is_strict)
@@ -643,6 +645,11 @@ class UrlBase (object):
             self.aggregate.add_downloaded_bytes(self.size)
         return content
 
+    def get_soup(self):
+        if self.soup is None:
+            self.get_content()
+        return self.soup
+
     def get_raw_content(self):
         if self.data is None:
             self.data = self.download_content()
@@ -651,9 +658,9 @@ class UrlBase (object):
     def get_content (self):
         if self.text is None:
             self.get_raw_content()
-            soup = BeautifulSoup(self.data, "html.parser")
-            self.text = self.data.decode(soup.original_encoding)
-            self.encoding = soup.original_encoding
+            self.soup = BeautifulSoup(self.data, "html.parser")
+            self.text = self.data.decode(self.soup.original_encoding)
+            self.encoding = self.soup.original_encoding
         return self.text
 
     def read_content(self):
