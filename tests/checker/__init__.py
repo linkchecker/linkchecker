@@ -186,7 +186,7 @@ class LinkCheckTest (unittest.TestCase):
         super(LinkCheckTest, self).setUp()
         linkcheck.init_i18n(loc='C')
 
-    def norm (self, url, encoding=None):
+    def norm (self, url, encoding="utf-8"):
         """Helper function to norm a url."""
         return linkcheck.url.url_norm(url, encoding=encoding)[0]
 
@@ -248,7 +248,7 @@ class LinkCheckTest (unittest.TestCase):
         self.fail(msg)
 
     def direct (self, url, resultlines, parts=None, recursionlevel=0,
-                confargs=None):
+                confargs=None, url_encoding=None):
         """Check url with expected result."""
         assert isinstance(url, str_text), repr(url)
         if confargs is None:
@@ -261,7 +261,7 @@ class LinkCheckTest (unittest.TestCase):
         aggregate = get_test_aggregate(confargs, logargs)
         # initial URL has recursion level zero
         url_reclevel = 0
-        url_data = get_url_from(url, url_reclevel, aggregate)
+        url_data = get_url_from(url, url_reclevel, aggregate, url_encoding=url_encoding)
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
         diff = aggregate.config['logger'].diff
@@ -282,9 +282,9 @@ class MailTest (LinkCheckTest):
         """Test error mail address."""
         return self.mail_test(addr, u"error", **kwargs)
 
-    def mail_test (self, addr, result, cache_key=None, warning=None):
+    def mail_test (self, addr, result, encoding="utf-8", cache_key=None, warning=None):
         """Test mail address."""
-        url = self.norm(addr)
+        url = self.norm(addr, encoding=encoding)
         if cache_key is None:
             cache_key = url
         resultlines = [

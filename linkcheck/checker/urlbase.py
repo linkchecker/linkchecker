@@ -77,7 +77,7 @@ def urljoin (parent, url):
     return urlparse.urljoin(parent, url)
 
 
-def url_norm (url, encoding=None):
+def url_norm (url, encoding):
     """Wrapper for url.url_norm() to convert UnicodeError in
     LinkCheckerError."""
     try:
@@ -692,12 +692,12 @@ class UrlBase (object):
     def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
         """Add new URL to queue."""
         if base:
-            base_ref = urlutil.url_norm(base)[0]
+            base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
         else:
             base_ref = None
         url_data = get_url_from(url, self.recursion_level+1, self.aggregate,
             parent_url=self.url, base_ref=base_ref, line=line, column=column,
-            page=page, name=name, parent_content_type=self.content_type)
+            page=page, name=name, parent_content_type=self.content_type, url_encoding=self.encoding)
         self.aggregate.urlqueue.put(url_data)
 
     def serialized (self, sep=os.linesep):

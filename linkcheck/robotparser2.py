@@ -64,6 +64,7 @@ class RobotFileParser (object):
         self.last_checked = 0
         # list of tuples (sitemap url, line number)
         self.sitemap_urls = []
+        self.encoding = None
 
     def mtime (self):
         """Returns the time the robots.txt file was last fetched.
@@ -103,6 +104,7 @@ class RobotFileParser (object):
             response = self.session.get(self.url, **kwargs)
             response.raise_for_status()
             content_type = response.headers.get('content-type')
+            self.encoding = response.encoding
             if content_type and content_type.lower().startswith('text/plain'):
                 self.parse(response.iter_lines(decode_unicode=True))
             else:
@@ -167,7 +169,7 @@ class RobotFileParser (object):
             line = line.split(':', 1)
             if len(line) == 2:
                 line[0] = line[0].strip().lower()
-                line[1] = parse.unquote(line[1].strip())
+                line[1] = parse.unquote(line[1].strip(), self.encoding)
                 if line[0] == "user-agent":
                     if state == 2:
                         log.debug(LOG_CHECK, "%r line %d: missing blank line before user-agent directive", self.url, linenumber)
