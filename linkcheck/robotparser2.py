@@ -32,7 +32,7 @@ import time
 
 import requests
 
-from . import log, LOG_CHECK, configuration, url as urlutil
+from . import log, LOG_CHECK, configuration
 
 __all__ = ["RobotFileParser"]
 
@@ -283,7 +283,7 @@ class RuleLine (object):
             # an empty value means allow all
             allowance = True
             path = '/'
-        self.path = urlutil.url_quote_part(path)
+        self.path = parse.quote(path)
         self.allowance = allowance
 
     def applies_to (self, path):
