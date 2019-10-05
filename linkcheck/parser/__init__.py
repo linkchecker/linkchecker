@@ -128,9 +128,9 @@ def find_links (url_data, callback, tags):
     handler.parser = parser
     # parse
     try:
-        content = url_data.get_raw_content()
+        soup = url_data.get_soup()
         with parse_mutex:
-            parser.feed(content)
+            parser.feed_soup(soup)
             parser.flush()
     except linkparse.StopParse as msg:
         log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
