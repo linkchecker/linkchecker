@@ -40,6 +40,7 @@ class TestHttp (HttpServerTest):
         self.file_test("http.xhtml", confargs=confargs)
         self.file_test("http_file.html", confargs=confargs)
         self.file_test("http_utf8.html", confargs=confargs)
+        self.file_test("http_url_quote.html", confargs=confargs)
 
     def test_status(self):
         for status in sorted(self.handler.responses.keys()):
