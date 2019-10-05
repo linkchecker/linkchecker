@@ -150,7 +150,8 @@ def parse_firefox (url_data):
 def parse_itms_services(url_data):
     """Get "url" CGI parameter value as child URL."""
     query = url_data.urlparts[3]
-    for k, v, sep in urlutil.parse_qsl(query, keep_blank_values=True):
+    for k, v, sep in urlutil.parse_qsl(query, encoding=url_data.encoding,
+                                       keep_blank_values=True):
         if k == "url":
             url_data.add_url(v)
             break

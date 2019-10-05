@@ -95,7 +95,7 @@ class MailtoUrl (urlbase.UrlBase):
         Stores parsed addresses in the self.addresses set.
         """
         # cut off leading mailto: and unquote
-        url = urlparse.unquote(self.base_url[7:])
+        url = urlparse.unquote(self.base_url[7:], self.encoding)
         # search for cc, bcc, to and store in headers
         mode = 0 # 0=default, 1=quote, 2=esc
         quote = None
@@ -123,7 +123,7 @@ class MailtoUrl (urlbase.UrlBase):
                 for key, vals in headers.items():
                     if key.lower() in EMAIL_CGI_ADDRESS:
                         # Only the first header value is added
-                        self.addresses.update(getaddresses(urlparse.unquote(vals[0])))
+                        self.addresses.update(getaddresses(urlparse.unquote(vals[0], self.encoding)))
                     if key.lower() == EMAIL_CGI_SUBJECT:
                         self.subject = vals[0]
             except ValueError as err:
