@@ -18,6 +18,11 @@ HTML parser implemented using Beautiful Soup and html.parser.
 """
 
 from io import BytesIO, StringIO
+from warnings import filterwarnings
+
+filterwarnings("ignore",
+    message="The soupsieve package is not installed. CSS selectors cannot be used.",
+    category=UserWarning, module="bs4")
 
 from bs4 import (BeautifulSoup, CData, Comment, Doctype, ProcessingInstruction,
                  Tag)
