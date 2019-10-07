@@ -92,16 +92,6 @@ is_safe_query = re.compile("(?i)^%s$" % _safe_query_pattern).match
 is_safe_fragment = re.compile("(?i)^%s$" % _safe_fragment_pattern).match
 
 
-def decode_for_unquote(part):
-    """
-    Decode string for unquote function
-    To string in Python 3, leave it in Python 2
-    """
-    if not isinstance(part, (str, str_text)):
-        # Python 3: we probably got bytes
-        part = part.decode("utf-8", "replace")
-    return part
-
 # snatched form urlparse.py
 def splitparams (path):
     """Split off parameter part from path.
@@ -202,9 +192,9 @@ def idna_encode (host):
 def url_fix_host (urlparts):
     """Unquote and fix hostname. Returns is_idn."""
     if not urlparts[1]:
-        urlparts[2] = parse.unquote(decode_for_unquote(urlparts[2]))
+        urlparts[2] = parse.unquote(urlparts[2])
         return False
-    userpass, netloc = parse.splituser(decode_for_unquote(urlparts[1]))
+    userpass, netloc = parse.splituser(urlparts[1])
     if userpass:
         userpass = parse.unquote(userpass)
     netloc, is_idn = idna_encode(parse.unquote(netloc).lower())
@@ -218,7 +208,7 @@ def url_fix_host (urlparts):
         if not urlparts[2] or urlparts[2] == '/':
             urlparts[2] = comps
         else:
-            urlparts[2] = "%s%s" % (comps, parse.unquote(decode_for_unquote(urlparts[2])))
+            urlparts[2] = "%s%s" % (comps, parse.unquote(urlparts[2]))
         netloc = netloc[:i]
     else:
         # a leading ? in path causes urlsplit() to add the query to the
@@ -227,7 +217,7 @@ def url_fix_host (urlparts):
         if i != -1:
             netloc, urlparts[3] = netloc.split('?', 1)
         # path
-        urlparts[2] = parse.unquote(decode_for_unquote(urlparts[2]))
+        urlparts[2] = parse.unquote(urlparts[2])
     if userpass:
         # append AT for easy concatenation
         userpass += "@"
@@ -272,7 +262,6 @@ def url_parse_query (query, encoding=None):
     """Parse and re-join the given CGI query."""
     # if ? is in the query, split it off, seen at msdn.microsoft.com
     append = ""
-    query = decode_for_unquote(query)
     while '?' in query:
         query, rest = query.rsplit('?', 1)
         append = '?'+url_parse_query(rest)+append
@@ -322,7 +311,7 @@ def url_norm (url, encoding=None):
         encode_unicode = False
     urlparts = list(urlparse.urlsplit(url))
     # scheme
-    urlparts[0] = parse.unquote(decode_for_unquote(urlparts[0])).lower()
+    urlparts[0] = parse.unquote(urlparts[0]).lower()
     # mailto: urlsplit is broken
     if urlparts[0] == 'mailto':
         url_fix_mailto_urlsplit(urlparts)
@@ -342,7 +331,7 @@ def url_norm (url, encoding=None):
             # fix redundant path parts
             urlparts[2] = collapse_segments(urlparts[2])
     # anchor
-    urlparts[4] = parse.unquote(decode_for_unquote(urlparts[4]))
+    urlparts[4] = parse.unquote(urlparts[4])
     # quote parts again
     urlparts[0] = url_quote_part(urlparts[0], encoding=encoding) # scheme
     urlparts[1] = url_quote_part(urlparts[1], safechars='@:', encoding=encoding) # host
@@ -351,7 +340,7 @@ def url_norm (url, encoding=None):
         urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
     urlparts[4] = url_quote_part(urlparts[4], safechars="!$&'()*+,-./;=?@_~", encoding=encoding) # anchor
     res = urlunsplit(urlparts)
-    if decode_for_unquote(url).endswith('#') and not urlparts[4]:
+    if url.endswith('#') and not urlparts[4]:
         # re-append trailing empty fragment
         res += '#'
     if encode_unicode:

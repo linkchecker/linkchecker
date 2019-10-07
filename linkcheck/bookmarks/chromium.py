@@ -20,8 +20,6 @@ import sys
 import json
 from xdg.BaseDirectory import xdg_config_home
 
-from .. import url as urlutil
-
 
 # Windows filename encoding
 nt_filename_encoding="mbcs"
@@ -71,7 +69,7 @@ def parse_bookmark_data (data):
     Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     """
-    for url, name in parse_bookmark_json(json.loads(urlutil.decode_for_unquote(data))):
+    for url, name in parse_bookmark_json(json.loads(data)):
         yield url, name
 
 

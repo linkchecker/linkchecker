@@ -93,7 +93,6 @@ c_comment_re = re.compile(r"/\*.*?\*/", re.DOTALL)
 def strip_c_comments (text):
     """Remove C/CSS-style comments from text. Note that this method also
     deliberately removes comments inside of strings."""
-    text = urlutil.decode_for_unquote(text)
     return c_comment_re.sub('', text)
 
 
