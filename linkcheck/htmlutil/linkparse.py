@@ -24,7 +24,6 @@ from . import linkname
 from builtins import str as str_text
 
 MAX_NAMELEN = 256
-MAX_TITLELEN = 256
 
 unquote = strformat.unquote
 
@@ -99,26 +98,6 @@ def strip_c_comments (text):
 class StopParse(Exception):
     """Raised when parsing should stop."""
     pass
-
-
-class TitleFinder (object):
-    """Find title tags in HTML text."""
-
-    def __init__ (self):
-        """Initialize title."""
-        super(TitleFinder, self).__init__()
-        log.debug(LOG_CHECK, "HTML title parser")
-        self.title = None
-
-    def start_element (self, tag, attrs):
-        """Search for <title> tag."""
-        if tag == 'title':
-            data = self.parser.peek(MAX_TITLELEN)
-            data = data.decode(self.parser.encoding, "ignore")
-            self.title = linkname.title_name(data)
-            raise StopParse("found <title> tag")
-        elif tag == 'body':
-            raise StopParse("found <body> tag")
 
 
 class TagFinder (object):
