@@ -72,7 +72,7 @@ def parse_chromium (url_data):
 def parse_safari (url_data):
     """Parse a Safari bookmark file."""
     from ..bookmarks.safari import parse_bookmark_data
-    for url, name in parse_bookmark_data(url_data.get_content()):
+    for url, name in parse_bookmark_data(url_data.get_raw_content()):
         url_data.add_url(url, name=name)
 
 
@@ -83,7 +83,7 @@ def parse_text (url_data):
     for line in url_data.get_content().splitlines():
         lineno += 1
         line = line.strip()
-        if not line or line.startswith(b'#'):
+        if not line or line.startswith('#'):
             continue
         url_data.add_url(line, line=lineno)
 
