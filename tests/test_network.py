@@ -19,22 +19,12 @@ Test network functions.
 """
 
 import unittest
-from tests import need_posix, need_network, need_linux
-import linkcheck.network
+from tests import need_network, need_linux
 from linkcheck.network import iputil
 
 
 class TestNetwork (unittest.TestCase):
     """Test network functions."""
-
-    @need_posix
-    def test_ifreq_size (self):
-        self.assertTrue(linkcheck.network.ifreq_size() > 0)
-
-    @need_posix
-    def test_interfaces (self):
-        ifc = linkcheck.network.IfConfig()
-        ifc.getInterfaceList()
 
     @need_network
     @need_linux
@@ -43,9 +33,3 @@ class TestNetwork (unittest.TestCase):
         host = "dinsdale.python.org"
         ips = iputil.resolve_host(host)
         self.assertTrue(len(ips) > 0)
-        for ip in ips:
-            if iputil.is_valid_ipv4(ip):
-                obfuscated = iputil.obfuscate_ip(ip)
-                self.assertTrue(iputil.is_obfuscated_ip(obfuscated))
-                hosts = iputil.lookup_ips([obfuscated])
-                self.assertTrue(host in hosts)

@@ -54,7 +54,6 @@ clean:
 	-$(PYTHON) setup.py clean --all
 	rm -f $(LAPPNAME)-out.* *-stamp*
 	$(MAKE) -C linkcheck/HtmlParser clean
-	rm -f linkcheck/network/_network*.so
 	find . -name '*.py[co]' -exec rm -f {} \;
 	find . -name '*.bak' -exec rm -f {} \;
 	find . -depth -name '__pycache__' -exec rm -rf {} \;
@@ -79,7 +78,6 @@ localbuild: MANIFEST locale
 	$(MAKE) -C linkcheck/HtmlParser
 	$(PYTHON) setup.py build
 	cp -f build/lib.$(PLATFORM)-$(PYVER)*/linkcheck/HtmlParser/htmlsax*.so linkcheck/HtmlParser
-	cp -f build/lib.$(PLATFORM)-$(PYVER)*/linkcheck/network/_network*.so linkcheck/network
 
 release: distclean releasecheck filescheck
 	$(MAKE) dist sign register upload homepage tag changelog deb
