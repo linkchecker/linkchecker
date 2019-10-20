@@ -17,11 +17,8 @@
 """
 Test http checking.
 """
-import os
-import sys
 from .httpserver import HttpServerTest
 from tests import need_network
-from linkcheck.network import iputil
 
 class TestHttpMisc (HttpServerTest):
     """Test http:// misc link checking."""
@@ -29,7 +26,6 @@ class TestHttpMisc (HttpServerTest):
     @need_network
     def test_html (self):
         self.swf_test()
-        self.obfuscate_test()
 
     def swf_test (self):
         url = self.get_url(u"test.swf")
@@ -44,25 +40,3 @@ class TestHttpMisc (HttpServerTest):
             u"valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)
-
-    def obfuscate_test (self):
-        if os.name != "posix" or sys.platform != 'linux2':
-            return
-        host = "www.heise.de"
-        for tentative_ip in iputil.resolve_host(host):
-            if iputil.is_valid_ipv4(tentative_ip):
-                ip = tentative_ip
-                break
-        else:
-            raise NotImplementedError("no IPv4 address detected for test host")
-        url = u"http://%s/" % iputil.obfuscate_ip(ip)
-        rurl = u"http://%s/" % ip
-        resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % rurl,
-            u"real url https://%s/" % host,
-            u"info Redirected to `https://%s/'." % host,
-            u"warning URL %s has obfuscated IP address %s" % (url, ip),
-            u"valid",
-        ]
-        self.direct(url, resultlines, recursionlevel=0)
