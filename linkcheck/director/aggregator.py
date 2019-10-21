@@ -199,6 +199,8 @@ class Aggregate (object):
             self.cancel()
         for t in self.threads:
             t.stop()
+        for t in self.threads:
+            t.join(timeout=1.0)
 
     @synchronized(_threads_lock)
     def is_finished (self):
