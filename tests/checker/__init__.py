@@ -231,10 +231,14 @@ class LinkCheckTest (unittest.TestCase):
         url_data = get_url_from(url, 0, aggregate, extern=(0, 0))
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
-        diff = aggregate.config['logger'].diff
+        logger = aggregate.config['logger']
+        diff = logger.diff
         if diff:
             msg = str_text(os.linesep).join([url] + diff)
             self.fail_unicode(msg)
+        if logger.stats.internal_errors:
+            self.fail_unicode("%d internal errors occurred!"
+                              % logger.stats.internal_errors)
 
     def fail_unicode (self, msg):
         """Print encoded fail message."""

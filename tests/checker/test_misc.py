@@ -33,6 +33,9 @@ class TestMisc (LinkCheckTest):
     def test_html5 (self):
         self.file_test("html5.html")
 
+    def test_utf8 (self):
+        self.file_test("utf8.html")
+
     @need_network
     def test_archive (self):
         self.file_test("archive.html")
