@@ -130,7 +130,7 @@ def find_links (url_data, callback, tags):
     handler.parser = parser
     # parse
     try:
-        content = url_data.get_content()
+        content = url_data.get_raw_content()
         with parse_mutex:
             parser.feed(content)
             parser.flush()

@@ -1,0 +1,5 @@
+url file://%(curdir)s/%(datadir)s/utf8.html
+cache key file://%(curdir)s/%(datadir)s/utf8.html
+real url file://%(curdir)s/%(datadir)s/utf8.html
+name %(datadir)s/utf8.html
+valid
