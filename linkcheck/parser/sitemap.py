@@ -39,7 +39,7 @@ class XmlTagUrlParser(object):
         self.url_data = url_data
         self.loc = False
         self.url = u""
-        data = url_data.get_content()
+        data = url_data.get_raw_content()
         isfinal = True
         try:
             self.parser.Parse(data, isfinal)
