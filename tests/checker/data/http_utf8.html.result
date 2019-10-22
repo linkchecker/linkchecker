@@ -1,0 +1,4 @@
+url http://localhost:%(port)d/%(datadir)s/http_utf8.html
+cache key http://localhost:%(port)d/%(datadir)s/http_utf8.html
+real url http://localhost:%(port)d/%(datadir)s/http_utf8.html
+valid
