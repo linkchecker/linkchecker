@@ -11,6 +11,9 @@ addons:
       - clamav-daemon
 install:
   - pip install tox-travis coveralls
+before_script:
+  - service clamav-daemon status
+  - while ! test -S /var/run/clamav/clamd.ctl; do printf "."; sleep 1; done
 # command to run tests
 script:
   - tox
