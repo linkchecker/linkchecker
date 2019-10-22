@@ -117,7 +117,7 @@ class WordParser(_ParserPlugin):
 
     def check(self, url_data):
         """Parse Word data."""
-        content = url_data.get_content()
+        content = url_data.get_raw_content()
         filename = get_temp_filename(content)
         # open word file and parse hyperlinks
         try:
