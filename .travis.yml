@@ -13,10 +13,10 @@ install:
   - pip install tox-travis coveralls
 before_script:
   # we need to download the clamav signature database before the daemon will run
-  - service clamav-freshclam stop
-  - freshclam
-  - service clamav-daemon restart
-  - service clamav-daemon status
+  - sudo service clamav-freshclam stop
+  - sudo freshclam
+  - sudo service clamav-daemon restart
+  - sudo service clamav-daemon status
   - while ! test -S /var/run/clamav/clamd.ctl; do printf "."; sleep 1; done
 # command to run tests
 script:
