@@ -5,6 +5,10 @@ python:
   - "3.6"
   - "3.7"
 # command to install dependencies
+addons:
+  apt:
+    packages:
+      - clamav-daemon
 install:
   - pip install tox-travis coveralls
 # command to run tests
@@ -16,7 +20,7 @@ notifications:
 after_script:
   - coveralls
 matrix:
-   allow_failures:
-      - python: "3.5"
-      - python: "3.6"
-      - python: "3.7"
+  allow_failures:
+    - python: "3.5"
+    - python: "3.6"
+    - python: "3.7"

@@ -51,6 +51,10 @@ class TestClamav (unittest.TestCase):
            'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAW0NMQU1BVl' \
            '0AEAAAABAAAAACAAABAAAAAAAAAAAAAAAAAAAAAAAAwA==">t</a>'
         infected, errors = clamav.scan(data, self.clamav_conf)
-        msg = 'stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n'
-        self.assertTrue(msg in infected)
+        # different versions of clamav report different responses, apparently
+        acceptable_responses = (
+            ['stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n'],
+            ['stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n'],
+        )
+        self.assertIn(infected, acceptable_responses)
         self.assertFalse(errors)
