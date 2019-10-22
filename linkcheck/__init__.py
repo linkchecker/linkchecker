@@ -37,11 +37,6 @@ if int(requests_version[0]) < 2 or \
     raise SystemExit("This program requires Python requests 2.4.0 or later instead of %s." % requests.__version__)
 
 import os
-# add the custom linkcheck_dns directory to sys.path
-_dnspath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'linkcheck_dns'))
-if _dnspath not in sys.path:
-    sys.path.insert(0, _dnspath)
-del _dnspath
 import re
 import signal
 import traceback
