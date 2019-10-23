@@ -78,7 +78,7 @@ class PdfParser(_ParserPlugin):
         """Parse PDF data."""
         # XXX user authentication from url_data
         password = ''
-        data = url_data.get_content()
+        data = url_data.get_raw_content()
         # PDFParser needs a seekable file object
         fp = StringIO(data)
         try:

@@ -1,6 +1,7 @@
 # for testing:
 miniboa
 parameterized
+pdfminer
 pyftpdlib
 pytest
 pytest-xdist
