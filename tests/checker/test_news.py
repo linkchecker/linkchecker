@@ -31,7 +31,7 @@ NNTP_INFO = u"200 news.uni-stuttgart.de InterNetNews NNRP server " \
 NNTP_TIMEOUT_SECS = 30
 
 # disabled for now until some stable news server comes up
-@pytest.mark.skipif("True")
+@pytest.mark.skip(reason="disabled for now until some stable news server comes up")
 class TestNews (LinkCheckTest):
     """Test nntp: and news: link checking."""
 
