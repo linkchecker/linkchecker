@@ -17,10 +17,9 @@
 """
 Parse links in PDF files with pdfminer.
 """
-try: # Python 2
-    from cStringIO import StringIO
-except: # Python 3
-    from io import StringIO
+from io import BytesIO
+from builtins import str as str_text
+
 from . import _ParserPlugin
 try:
     from pdfminer.pdfparser import PDFParser
@@ -46,11 +45,14 @@ def search_url(obj, url_data, pageno, seen_objs):
         obj = obj.resolve()
     if isinstance(obj, dict):
         for key, value in obj.items():
-            if key == 'URI' and isinstance(value, basestring):
-                # URIs should be 7bit ASCII encoded, but be safe and encode
-                # to unicode
-                # XXX this does not use an optional specified base URL
-                url = strformat.unicode_safe(value)
+            if key == 'URI':
+                if isinstance(value, str_text):
+                    url = value
+                else:
+                    # URIs should be 7bit ASCII encoded, but be safe and encode
+                    # to unicode
+                    # XXX this does not use an optional specified base URL
+                    url = strformat.unicode_safe(value)
                 url_data.add_url(url, page=pageno)
             else:
                 search_url(value, url_data, pageno, seen_objs)
@@ -80,7 +82,7 @@ class PdfParser(_ParserPlugin):
         password = ''
         data = url_data.get_raw_content()
         # PDFParser needs a seekable file object
-        fp = StringIO(data)
+        fp = BytesIO(data)
         try:
             parser = PDFParser(fp)
             doc = PDFDocument(parser, password=password)
