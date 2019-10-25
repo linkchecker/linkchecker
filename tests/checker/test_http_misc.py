@@ -26,6 +26,7 @@ class TestHttpMisc (HttpServerTest):
     @need_network
     def test_html (self):
         self.swf_test()
+        self.file_test("sitemap.xml")
 
     def swf_test (self):
         url = self.get_url(u"test.swf")
