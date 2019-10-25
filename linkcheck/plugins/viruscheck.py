@@ -87,11 +87,11 @@ class ClamdScanner (object):
         """Return a connected socket for sending scan data to it."""
         port = None
         try:
-            self.sock.sendall("STREAM")
+            self.sock.sendall(b"STREAM")
             port = None
             for dummy in range(60):
                 data = self.sock.recv(self.sock_rcvbuf)
-                i = data.find("PORT")
+                i = data.find(b"PORT")
                 if i != -1:
                     port = int(data[i+5:])
                     break
@@ -118,10 +118,10 @@ class ClamdScanner (object):
         self.wsock.close()
         data = self.sock.recv(self.sock_rcvbuf)
         while data:
-            if "FOUND\n" in data:
-                self.infected.append(data)
-            if "ERROR\n" in data:
-                self.errors.append(data)
+            if b"FOUND\n" in data:
+                self.infected.append(data.decode('UTF-8', 'replace'))
+            if b"ERROR\n" in data:
+                self.errors.append(data.decode('UTF-8', 'replace'))
             data = self.sock.recv(self.sock_rcvbuf)
         self.sock.close()
 
