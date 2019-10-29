@@ -71,8 +71,16 @@ class TestLogger (linkcheck.logger._Logger):
 
     def normalize(self, result_log):
         # XXX we assume that each log entry has a URL key, maybe we should add an assert into log_url() to that effect?
-        sep = '\nurl '
-        return sep.join(sorted('\n'.join(result_log).split(sep))).splitlines()
+        # Ensure that log entries are sorted by URL key:
+        # - join the result_log items together
+        # - split into entries (starting with a URL key)
+        # - sort the entries and join together
+        # - split the entries back into a list
+        return '\n'.join(
+            sorted(['url %s' % x.strip() for x in
+                    re.split(r'^url .*?', '\n'.join(result_log),
+                             flags=re.DOTALL | re.MULTILINE)
+                    if x])).splitlines()
 
     def start_output (self):
         """
@@ -130,7 +138,9 @@ class TestLogger (linkcheck.logger._Logger):
         """
         self.expected = self.normalize(self.expected)
         self.result = self.normalize(self.result)
-        for line in difflib.unified_diff(self.expected, self.result):
+        for line in difflib.unified_diff(self.expected, self.result,
+                                         fromfile="expected", tofile="result",
+                                         lineterm=""):
             if not isinstance(line, str_text):
                 # The ---, +++ and @@ lines from diff format are ascii encoded.
                 # Make them unicode.
