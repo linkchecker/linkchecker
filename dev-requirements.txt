@@ -3,6 +3,7 @@ miniboa
 parameterized
 pdfminer
 pyftpdlib
+pyopenssl
 pytest
 pytest-xdist
 # for building on osx:

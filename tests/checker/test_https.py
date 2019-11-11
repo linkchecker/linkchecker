@@ -15,34 +15,51 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-Test news checking.
+Test https.
 """
-import pytest
+from OpenSSL import crypto
 
 from tests import need_network
-from . import LinkCheckTest
+from .httpserver import HttpsServerTest, CookieRedirectHttpRequestHandler
+from .. import get_file
 
 
-class TestHttps (LinkCheckTest):
+class TestHttps(HttpsServerTest):
     """
     Test https: link checking.
     """
 
-    @pytest.mark.xfail
+    def __init__(self, methodName='runTest'):
+        super(TestHttps, self).__init__(methodName=methodName)
+        self.handler = CookieRedirectHttpRequestHandler
+
+    @classmethod
+    def setUpClass(cls):
+        key = crypto.PKey()
+        key.generate_key(crypto.TYPE_RSA, 2048)
+        cert = crypto.X509()
+        cert.get_subject().CN = "localhost"
+        cert.set_serial_number(1000)
+        cert.gmtime_adj_notBefore(0)
+        cert.set_notAfter(b"21190102030405Z")
+        cert.set_issuer(cert.get_subject())
+        cert.set_pubkey(key)
+        cert.sign(key, 'sha1')
+        with open(get_file("https_key.pem"), "wb") as f:
+            f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, key))
+        with open(get_file("https_cert.pem"), "wb") as f:
+            f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
+
     @need_network
     def test_https (self):
-        url = u"https://www.amazon.com/"
-        rurl = u"https://www.amazon.com/"
+        url = self.get_url("")
         resultlines = [
             u"url %s" % url,
             u"cache key %s" % url,
-            u"real url %s" % rurl,
-            #u"info SSL cipher RC4-SHA, TLSv1/SSLv3.",
-            u"info Access denied by robots.txt, checked only syntax.",
+            u"real url %s" % url,
             u"valid",
         ]
         confargs = dict(
-            #enabledplugins=['SslCertificateCheck'],
-            #SslCertificateCheck=dict(sslcertwarndays=10),
+            sslverify=False
         )
         self.direct(url, resultlines, recursionlevel=0, confargs=confargs)
