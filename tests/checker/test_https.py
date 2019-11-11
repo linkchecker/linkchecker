@@ -23,6 +23,8 @@ from tests import need_network
 from .httpserver import HttpsServerTest, CookieRedirectHttpRequestHandler
 from .. import get_file
 
+from linkcheck import httputil
+
 
 class TestHttps(HttpsServerTest):
     """
@@ -63,3 +65,9 @@ class TestHttps(HttpsServerTest):
             sslverify=False
         )
         self.direct(url, resultlines, recursionlevel=0, confargs=confargs)
+
+    def test_x509_to_dict(self):
+        with open(get_file("https_cert.pem"), "rb") as f:
+            cert = crypto.load_certificate(crypto.FILETYPE_PEM, f.read())
+        self.assertEqual(httputil.x509_to_dict(cert)["notAfter"],
+                         "Jan 02 03:04:05 2119 GMT")
