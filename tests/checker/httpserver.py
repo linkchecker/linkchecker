@@ -20,7 +20,8 @@ Define http test support classes for LinkChecker tests.
 
 from html import escape as html_escape
 from http.server import SimpleHTTPRequestHandler, HTTPServer
-from http.client import HTTPConnection
+from http.client import HTTPConnection, HTTPSConnection
+import ssl
 import time
 import threading
 try:
@@ -29,6 +30,7 @@ except ImportError:
     import urllib as urllib_parse
 from io import BytesIO
 from . import LinkCheckTest
+from .. import get_file
 
 
 class StoppableHttpRequestHandler (SimpleHTTPRequestHandler, object):
@@ -175,19 +177,45 @@ class HttpServerTest (LinkCheckTest):
         return u"http://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
+class HttpsServerTest(HttpServerTest):
+    """
+    Start/stop an HTTPS server that can be used for testing.
+    """
 
-def start_server (handler):
+    def setUp(self):
+        """Start a new HTTPS server in a new thread."""
+        self.port = start_server(self.handler, https=True)
+        assert self.port is not None
+
+    def tearDown(self):
+        """Send QUIT request to http server."""
+        stop_server(self.port, https=True)
+
+    def get_url(self, filename):
+        """Get HTTP URL for filename."""
+        return u"https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
+
+
+def start_server (handler, https=False):
     """Start an HTTP server thread and return its port number."""
     server_address = ('localhost', 0)
     handler.protocol_version = "HTTP/1.0"
     httpd = StoppableHttpServer(server_address, handler)
+    if https:
+        httpd.socket = ssl.wrap_socket(httpd.socket,
+            keyfile=get_file("https_key.pem"),
+            certfile=get_file("https_cert.pem"), server_side=True)
     port = httpd.server_port
     t = threading.Thread(None, httpd.serve_forever)
     t.start()
     # wait for server to start up
     while True:
         try:
-            conn = HTTPConnection("localhost:%d" % port)
+            if https:
+                conn = HTTPSConnection("localhost:%d" % port,
+                        context=ssl._create_unverified_context())
+            else:
+                conn = HTTPConnection("localhost:%d" % port)
             conn.request("GET", "/")
             conn.getresponse()
             break
@@ -196,9 +224,13 @@ def start_server (handler):
     return port
 
 
-def stop_server (port):
+def stop_server (port, https=False):
     """Stop an HTTP server thread."""
-    conn = HTTPConnection("localhost:%d" % port)
+    if https:
+        conn = HTTPSConnection("localhost:%d" % port,
+                               context=ssl._create_unverified_context())
+    else:
+        conn = HTTPConnection("localhost:%d" % port)
     conn.request("QUIT", "/")
     conn.getresponse()
 
