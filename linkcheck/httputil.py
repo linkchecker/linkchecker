@@ -44,6 +44,7 @@ def x509_to_dict(x509):
     }
     notAfter = x509.get_notAfter()
     if notAfter is not None:
+        notAfter = notAfter.decode()
         parsedtime = asn1_generaltime_to_seconds(notAfter)
         if parsedtime is not None:
             res['notAfter'] = parsedtime.strftime('%b %d %H:%M:%S %Y')
