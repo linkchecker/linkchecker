@@ -495,7 +495,7 @@ args = dict(
     install_requires = [
         'requests >= 2.4',
         'dnspython',
-        'bs4',
+        'beautifulsoup4',
         'pyxdg',
         'future',
     ],
