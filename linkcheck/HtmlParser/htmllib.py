@@ -151,7 +151,7 @@ class HtmlPrettyPrinter (object):
         @type data: string
         @return: None
         """
-        self.fd.write("<!DOCTYPE%s>" % data)
+        self.fd.write("<!DOCTYPE %s>" % data)
 
     def pi (self, data):
         """

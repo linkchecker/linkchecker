@@ -93,7 +93,7 @@ class Parser(object):
                             self.handler.comment(comment)
             elif isinstance(content, Doctype):
                 if hasattr(self.handler, 'doctype'):
-                    self.handler.doctype(content[7:])
+                    self.handler.doctype(content)
             elif isinstance(content, Comment):
                 if hasattr(self.handler, 'comment'):
                     self.handler.comment(content.strip())
