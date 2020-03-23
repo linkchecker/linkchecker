@@ -4,6 +4,13 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
+jobs:
+  include:
+    - python: "3.5"
+      env: TOXENV=py35-oldbs4
+  allow_failures:
+    - python: "3.5"
+      env: TOXENV=py35-oldbs4
 # command to install dependencies
 addons:
   apt:
