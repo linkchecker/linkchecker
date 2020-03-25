@@ -34,7 +34,7 @@ from . import (internpaturl, proxysupport)
 from ..HtmlParser import htmlsax
 from ..htmlutil import linkparse
 # import warnings
-from .const import WARN_HTTP_EMPTY_CONTENT
+from .const import (WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED)
 from requests.sessions import REDIRECT_STATI
 
 # assumed HTTP header encoding
@@ -295,7 +295,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def check_response (self):
         """Check final result and log it."""
-        if self.url_connection.status_code >= 400:
+        if self.url_connection.status_code >= 400 and self.url_connection.status_code != 429:
             self.set_result(u"%d %s" % (self.url_connection.status_code, self.url_connection.reason),
                             valid=False)
         else:
@@ -303,6 +303,11 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 # no content
                 self.add_warning(self.url_connection.reason,
                                  tag=WARN_HTTP_EMPTY_CONTENT)
+
+            if self.url_connection.status_code == 429:
+                self.add_warning(u"Rate limited (Retry-After: %s)" % self.getheader(_("Retry-After")),
+                                 tag=WARN_URL_RATE_LIMITED)
+
             if self.url_connection.status_code >= 200:
                 self.set_result(u"%r %s" % (self.url_connection.status_code, self.url_connection.reason))
             else:
