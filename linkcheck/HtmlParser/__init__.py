@@ -101,22 +101,3 @@ EXAMPLE
  parser.flush()
 
 """
-
-import codecs
-
-
-def get_ctype_charset (text):
-    """
-    Extract charset information from mime content type string, eg.
-    "text/html; charset=iso8859-1".
-    """
-    for param in text.lower().split(';'):
-        param = param.strip()
-        if param.startswith('charset='):
-            charset = param[8:].strip()
-            try:
-                codecs.lookup(charset)
-                return charset
-            except (LookupError, ValueError):
-                pass
-    return None
