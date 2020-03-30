@@ -17,8 +17,13 @@
 """
 Test http checking.
 """
+from bs4 import BeautifulSoup
+import pytest
+
 from . import LinkCheckTest
 from . import TestLogger
+
+bs_has_linenos = BeautifulSoup("<a>", "html.parser").a.sourceline is not None
 
 class AllPartsLogger(TestLogger):
     logparts = [
@@ -45,5 +50,12 @@ class TestAllParts(LinkCheckTest):
     """
     logger = AllPartsLogger
 
+    @pytest.mark.skipif(bs_has_linenos,
+                        reason="Beautiful Soup supports line numbers")
     def test_all_parts(self):
         self.file_test("all_parts.html")
+
+    @pytest.mark.skipif(not bs_has_linenos,
+                        reason="Beautiful Soup does not support line numbers")
+    def test_all_parts_linenos(self):
+        self.file_test("all_parts_linenos.html")

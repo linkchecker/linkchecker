@@ -88,15 +88,15 @@ class TestMailGood (MailTest):
     def test_warn_mail (self):
         # some mailto addrs with warnings
         # contains non-quoted characters
-        url = u"mailto:calvin@users.sourceforge.net?subject=äöü"
-        qurl = self.norm(url)
+        url = u"mailto:calvin@users.sourceforge.net?subject=\xe4\xf6\xfc"
+        qurl = self.norm(url, encoding="iso-8859-1")
         resultlines = [
             u"url %s" % url,
             u"cache key mailto:calvin@users.sourceforge.net",
             u"real url %s" % qurl,
             u"valid",
         ]
-        self.direct(url, resultlines)
+        self.direct(url, resultlines, url_encoding="iso-8859-1")
         url = u"mailto:calvin@users.sourceforge.net?subject=Halli hallo"
         qurl = self.norm(url)
         resultlines = [
@@ -145,15 +145,15 @@ class TestMailGood (MailTest):
 
     @need_network
     def test_unicode_mail (self):
-        mailto = u"mailto:ölvin@users.sourceforge.net"
+        mailto = u"mailto:\xf6lvin@users.sourceforge.net"
         url = self.norm(mailto, encoding="iso-8859-1")
         resultlines = [
-            u"url %s" % url,
+            u"url %s" % mailto,
             u"cache key %s" % mailto,
             u"real url %s" % url,
             u"valid",
         ]
-        self.direct(url, resultlines)
+        self.direct(mailto, resultlines, url_encoding="iso-8859-1")
 
     @need_network
     def test_mail_subject(self):

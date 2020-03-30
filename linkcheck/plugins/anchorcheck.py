@@ -17,8 +17,10 @@
 """
 Check HTML anchors
 """
+from urllib import parse
+
 from . import _ContentPlugin
-from .. import log, LOG_PLUGIN, url as urlutil
+from .. import log, LOG_PLUGIN
 from ..htmlutil import linkparse
 from ..parser import find_links
 
@@ -47,8 +49,7 @@ class AnchorCheck(_ContentPlugin):
         A warning is logged and True is returned if the anchor is not found.
         """
         log.debug(LOG_PLUGIN, "checking anchor %r in %s", url_data.anchor, self.anchors)
-        enc = lambda anchor: urlutil.url_quote_part(anchor, encoding=url_data.encoding)
-        if any(x for x in self.anchors if enc(x[0]) == url_data.anchor):
+        if any(x for x in self.anchors if parse.quote(x[0]) == url_data.anchor):
             return
         if self.anchors:
             anchornames = sorted(set(u"`%s'" % x[0] for x in self.anchors))

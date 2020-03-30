@@ -77,7 +77,7 @@ def urljoin (parent, url):
     return urlparse.urljoin(parent, url)
 
 
-def url_norm (url, encoding=None):
+def url_norm (url, encoding):
     """Wrapper for url.url_norm() to convert UnicodeError in
     LinkCheckerError."""
     try:
@@ -221,6 +221,8 @@ class UrlBase (object):
         self.data = None
         # url content as a Unicode string
         self.text = None
+        # url content as a Beautiful Soup object
+        self.soup = None
         # cache url is set by build_url() calling set_cache_url()
         self.cache_url = None
         # extern flags (is_extern, is_strict)
@@ -643,6 +645,11 @@ class UrlBase (object):
             self.aggregate.add_downloaded_bytes(self.size)
         return content
 
+    def get_soup(self):
+        if self.soup is None:
+            self.get_content()
+        return self.soup
+
     def get_raw_content(self):
         if self.data is None:
             self.data = self.download_content()
@@ -651,9 +658,9 @@ class UrlBase (object):
     def get_content (self):
         if self.text is None:
             self.get_raw_content()
-            soup = BeautifulSoup(self.data, "html.parser")
-            self.text = self.data.decode(soup.original_encoding)
-            self.encoding = soup.original_encoding
+            self.soup = BeautifulSoup(self.data, "html.parser")
+            self.text = self.data.decode(self.soup.original_encoding)
+            self.encoding = self.soup.original_encoding
         return self.text
 
     def read_content(self):
@@ -685,12 +692,12 @@ class UrlBase (object):
     def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
         """Add new URL to queue."""
         if base:
-            base_ref = urlutil.url_norm(base)[0]
+            base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
         else:
             base_ref = None
         url_data = get_url_from(url, self.recursion_level+1, self.aggregate,
             parent_url=self.url, base_ref=base_ref, line=line, column=column,
-            page=page, name=name, parent_content_type=self.content_type)
+            page=page, name=name, parent_content_type=self.content_type, url_encoding=self.encoding)
         self.aggregate.urlqueue.put(url_data)
 
     def serialized (self, sep=os.linesep):
@@ -704,8 +711,8 @@ class UrlBase (object):
             u"base_ref=%r" % self.base_ref,
             u"recursion_level=%d" % self.recursion_level,
             u"url_connection=%s" % self.url_connection,
-            u"line=%d" % self.line,
-            u"column=%d" % self.column,
+            u"line=%s" % self.line,
+            u"column=%s" % self.column,
             u"page=%d" % self.page,
             u"name=%r" % self.name,
             u"anchor=%r" % self.anchor,
@@ -791,9 +798,9 @@ class UrlBase (object):
         - url_data.info: list of unicode
           Additional information about this URL.
         - url_data.line: int
-          Line number of this URL at parent document, or -1
+          Line number of this URL at parent document, or None
         - url_data.column: int
-          Column number of this URL at parent document, or -1
+          Column number of this URL at parent document, or None
         - url_data.page: int
           Page number of this URL at parent document, or -1
         - url_data.cache_url: unicode

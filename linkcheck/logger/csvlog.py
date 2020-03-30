@@ -101,9 +101,9 @@ class CSVLogger (_Logger):
             row.append(url_data.valid)
         if self.has_part("url"):
             row.append(url_data.url)
-        if self.has_part("line"):
+        if self.has_part("line") and url_data.line is not None:
             row.append(url_data.line)
-        if self.has_part("column"):
+        if self.has_part("column") and url_data.column is not None:
             row.append(url_data.column)
         if self.has_part("name"):
             row.append(url_data.name)

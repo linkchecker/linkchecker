@@ -1,0 +1,28 @@
+url http://localhost:%(port)d/%(datadir)s/http_url_quote.html
+cache key http://localhost:%(port)d/%(datadir)s/http_url_quote.html
+real url http://localhost:%(port)d/%(datadir)s/http_url_quote.html
+valid
+
+url http://localhost:8001/?quoted=ü
+cache key http://localhost:8001/?quoted=%%C3%%BC
+real url http://localhost:8001/?quoted=%%C3%%BC
+name l1
+error
+
+url http://localhost:8001/?quoted=%%FF
+cache key http://localhost:8001/?quoted=%%C3%%BF
+real url http://localhost:8001/?quoted=%%C3%%BF
+name l2
+error
+
+url mailto:ölvin@users.sourceforge.net
+cache key mailto:ölvin@users.sourceforge.net
+real url mailto:%%C3%%B6lvin@users.sourceforge.net
+name l3
+valid
+
+url mailto:%%E4lvin@users.sourceforge.net
+cache key mailto:älvin@users.sourceforge.net
+real url mailto:%%C3%%A4lvin@users.sourceforge.net
+name l4
+valid

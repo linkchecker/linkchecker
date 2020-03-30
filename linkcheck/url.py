@@ -124,7 +124,7 @@ def safe_host_pattern (host):
      (_safe_scheme_pattern, host, _safe_path_pattern, _safe_fragment_pattern)
 
 
-def parse_qsl (qs, keep_blank_values=0, strict_parsing=0):
+def parse_qsl (qs, encoding, keep_blank_values=0, strict_parsing=0):
     """Parse a query given as a string argument.
 
     @param qs: URL-encoded query string to be parsed
@@ -165,9 +165,9 @@ def parse_qsl (qs, keep_blank_values=0, strict_parsing=0):
             else:
                 continue
         if nv[1] or keep_blank_values:
-            name = parse.unquote(nv[0].replace('+', ' '))
+            name = parse.unquote(nv[0].replace('+', ' '), encoding=encoding)
             if nv[1]:
-                value = parse.unquote(nv[1].replace('+', ' '))
+                value = parse.unquote(nv[1].replace('+', ' '), encoding=encoding)
             else:
                 value = nv[1]
             r.append((name, value, sep))
@@ -189,15 +189,15 @@ def idna_encode (host):
     return host, False
 
 
-def url_fix_host (urlparts):
+def url_fix_host (urlparts, encoding):
     """Unquote and fix hostname. Returns is_idn."""
     if not urlparts[1]:
-        urlparts[2] = parse.unquote(urlparts[2])
+        urlparts[2] = parse.unquote(urlparts[2], encoding=encoding)
         return False
     userpass, netloc = parse.splituser(urlparts[1])
     if userpass:
-        userpass = parse.unquote(userpass)
-    netloc, is_idn = idna_encode(parse.unquote(netloc).lower())
+        userpass = parse.unquote(userpass, encoding=encoding)
+    netloc, is_idn = idna_encode(parse.unquote(netloc, encoding=encoding).lower())
     # a leading backslash in path causes urlsplit() to add the
     # path components up to the first slash to host
     # try to find this case...
@@ -208,7 +208,7 @@ def url_fix_host (urlparts):
         if not urlparts[2] or urlparts[2] == '/':
             urlparts[2] = comps
         else:
-            urlparts[2] = "%s%s" % (comps, parse.unquote(urlparts[2]))
+            urlparts[2] = "%s%s" % (comps, parse.unquote(urlparts[2], encoding=encoding))
         netloc = netloc[:i]
     else:
         # a leading ? in path causes urlsplit() to add the query to the
@@ -217,7 +217,7 @@ def url_fix_host (urlparts):
         if i != -1:
             netloc, urlparts[3] = netloc.split('?', 1)
         # path
-        urlparts[2] = parse.unquote(urlparts[2])
+        urlparts[2] = parse.unquote(urlparts[2], encoding=encoding)
     if userpass:
         # append AT for easy concatenation
         userpass += "@"
@@ -258,18 +258,18 @@ wayback_regex = re.compile(r'(https?)(\%3A/|:/)')
 def url_fix_wayback_query(path):
     return wayback_regex.sub(r'\1://', path)
 
-def url_parse_query (query, encoding=None):
+def url_parse_query (query, encoding):
     """Parse and re-join the given CGI query."""
     # if ? is in the query, split it off, seen at msdn.microsoft.com
     append = ""
     while '?' in query:
         query, rest = query.rsplit('?', 1)
-        append = '?'+url_parse_query(rest)+append
+        append = '?'+url_parse_query(rest, encoding=encoding)+append
     l = []
-    for k, v, sep in parse_qsl(query, keep_blank_values=True):
-        k = url_quote_part(k, '/-:,;')
+    for k, v, sep in parse_qsl(query, keep_blank_values=True, encoding=encoding):
+        k = parse.quote(k, safe='/-:,;')
         if v:
-            v = url_quote_part(v, '/-:,;')
+            v = parse.quote(v, safe='/-:,;')
             l.append("%s=%s%s" % (k, v, sep))
         elif v is None:
             l.append("%s%s" % (k, sep))
@@ -292,31 +292,21 @@ def urlunsplit (urlparts):
     return res
 
 
-def url_norm (url, encoding=None):
+def url_norm (url, encoding):
     """Normalize the given URL which must be quoted. Supports unicode
     hostnames (IDNA encoding) according to RFC 3490.
 
     @return: (normed url, idna flag)
     @rtype: tuple of length two
     """
-    if isinstance(url, str_text):
-        # try to decode the URL to ascii since urllib.unquote()
-        # handles non-unicode strings differently
-        try:
-            url = url.encode('ascii')
-        except UnicodeEncodeError:
-            pass
-        encode_unicode = True
-    else:
-        encode_unicode = False
     urlparts = list(urlparse.urlsplit(url))
     # scheme
-    urlparts[0] = parse.unquote(urlparts[0]).lower()
+    urlparts[0] = parse.unquote(urlparts[0], encoding=encoding).lower()
     # mailto: urlsplit is broken
     if urlparts[0] == 'mailto':
         url_fix_mailto_urlsplit(urlparts)
     # host (with path or query side effects)
-    is_idn = url_fix_host(urlparts)
+    is_idn = url_fix_host(urlparts, encoding)
     # query
     urlparts[3] = url_parse_query(urlparts[3], encoding=encoding)
     if urlparts[0] in urlparse.uses_relative:
@@ -331,23 +321,18 @@ def url_norm (url, encoding=None):
             # fix redundant path parts
             urlparts[2] = collapse_segments(urlparts[2])
     # anchor
-    urlparts[4] = parse.unquote(urlparts[4])
+    urlparts[4] = parse.unquote(urlparts[4], encoding=encoding)
     # quote parts again
-    urlparts[0] = url_quote_part(urlparts[0], encoding=encoding) # scheme
-    urlparts[1] = url_quote_part(urlparts[1], safechars='@:', encoding=encoding) # host
-    urlparts[2] = url_quote_part(urlparts[2], safechars=_nopathquote_chars, encoding=encoding) # path
+    urlparts[0] = parse.quote(urlparts[0]) # scheme
+    urlparts[1] = parse.quote(urlparts[1], safe='@:') # host
+    urlparts[2] = parse.quote(urlparts[2], safe=_nopathquote_chars) # path
     if not urlparts[0].startswith("feed"):
         urlparts[2] = url_fix_wayback_query(urlparts[2]) # unencode colon in http[s]:// in wayback path
-    urlparts[4] = url_quote_part(urlparts[4], safechars="!$&'()*+,-./;=?@_~", encoding=encoding) # anchor
+    urlparts[4] = parse.quote(urlparts[4], safe="!$&'()*+,-./;=?@_~") # anchor
     res = urlunsplit(urlparts)
     if url.endswith('#') and not urlparts[4]:
         # re-append trailing empty fragment
         res += '#'
-    if encode_unicode:
-        try:
-            res = unicode(res)
-        except NameError:
-            pass
     return (res, is_idn)
 
 
@@ -392,41 +377,32 @@ def collapse_segments (path):
 url_is_absolute = re.compile(r"^[-\.a-z]+:", re.I).match
 
 
-def url_quote (url):
+def url_quote (url, encoding):
     """Quote given URL."""
     if not url_is_absolute(url):
         return document_quote(url)
     urlparts = list(urlparse.urlsplit(url))
-    urlparts[0] = url_quote_part(urlparts[0]) # scheme
-    urlparts[1] = url_quote_part(urlparts[1], ':') # host
-    urlparts[2] = url_quote_part(urlparts[2], '/=,') # path
-    urlparts[3] = url_quote_part(urlparts[3], '&=,') # query
+    urlparts[0] = parse.quote(urlparts[0]) # scheme
+    urlparts[1] = parse.quote(urlparts[1], safe=':') # host
+    urlparts[2] = parse.quote(urlparts[2], safe='/=,') # path
+    urlparts[3] = parse.quote(urlparts[3], safe='&=,') # query
     l = []
-    for k, v, sep in parse_qsl(urlparts[3], True): # query
-        k = url_quote_part(k, '/-:,;')
+    for k, v, sep in parse_qsl(urlparts[3], encoding=encoding, keep_blank_values=True): # query
+        k = parse.quote(k, safe='/-:,;')
         if v:
-            v = url_quote_part(v, '/-:,;')
+            v = parse.quote(v, safe='/-:,;')
             l.append("%s=%s%s" % (k, v, sep))
         else:
             l.append("%s%s" % (k, sep))
     urlparts[3] = ''.join(l)
-    urlparts[4] = url_quote_part(urlparts[4]) # anchor
+    urlparts[4] = parse.quote(urlparts[4]) # anchor
     return urlunsplit(urlparts)
 
-
-def url_quote_part (s, safechars='/', encoding=None):
-    """Wrap urllib.quote() to support unicode strings. A unicode string
-    is first converted to UTF-8. After that urllib.quote() is called."""
-    if isinstance(s, str_text):
-        if encoding is None:
-            encoding = url_encoding
-        s = s.encode(encoding, 'ignore')
-    return parse.quote(s, safechars)
 
 def document_quote (document):
     """Quote given document."""
     doc, query = parse.splitquery(document)
-    doc = url_quote_part(doc, '/=,')
+    doc = parse.quote(doc, safe='/=,')
     if query:
         return "%s?%s" % (doc, query)
     return doc

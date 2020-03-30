@@ -165,10 +165,10 @@ elif "G_BROKEN_FILENAMES" in os.environ:
 else:
     FSCODING = "utf-8"
 
-def pathencode (path):
-    """Encode a path string with the platform file system encoding."""
+def path_safe (path):
+    """Ensure path string is compatible with the platform file system encoding."""
     if isinstance(path, str_text) and not os.path.supports_unicode_filenames:
-        path = path.encode(FSCODING, "replace")
+        path = path.encode(FSCODING, "replace").decode(FSCODING)
     return path
 
 

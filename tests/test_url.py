@@ -37,7 +37,7 @@ import linkcheck.url
 #         (Latin capital letter C + Combining cedilla U+0327)
 
 
-def url_norm (url, encoding=None):
+def url_norm (url, encoding="utf-8"):
     return linkcheck.url.url_norm(url, encoding=encoding)[0]
 
 
@@ -61,7 +61,7 @@ class TestUrl (unittest.TestCase):
         url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.."\
               "%5ccskin.zip"
         nurl = "http://server/cskin.zip"
-        self.assertEqual(linkcheck.url.url_quote(url_norm(url)), nurl)
+        self.assertEqual(linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl)
 
     def test_safe_patterns (self):
         is_safe_host = linkcheck.url.is_safe_host
@@ -74,7 +74,8 @@ class TestUrl (unittest.TestCase):
         self.assertTrue(ro.match("http://example.org:80/"))
 
     def test_url_quote (self):
-        url_quote = linkcheck.url.url_quote
+        def url_quote(url):
+            return linkcheck.url.url_quote(url, encoding="utf-8")
         url = "http://a:80/bcd"
         self.assertEqual(url_quote(url), url)
         url = "http://a:80/bcd?"
@@ -132,8 +133,8 @@ class TestUrl (unittest.TestCase):
         nurl = "http://example.com/?u=http://example2.com?b="
         self.urlnormtest(url, nurl)
         url = "http://localhost:8001/?quoted=ü"
-        nurl = "http://localhost:8001/?quoted=%FC"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = "http://localhost:8001/?quoted=%C3%BC"
+        self.urlnormtest(url, nurl)
         url = "http://host/?a=b/c+d="
         nurl = "http://host/?a=b/c%20d%3D"
         self.urlnormtest(url, nurl)
@@ -406,16 +407,16 @@ class TestUrl (unittest.TestCase):
         nurl = url
         self.urlnormtest(url, nurl)
         url = u"file:///a/ה.txt"
-        nurl = u"file:///a/%E4.txt"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = u"file:///a/%C3%A4.txt"
+        self.urlnormtest(url, nurl)
         #url = u"file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
         #nurl = u"file:///a.bin" # XXX
         #self.urlnormtest(url, nurl)
 
     def test_norm_invalid (self):
         url = u"הצü?:"
-        nurl = u"%E4%F6%FC?:"
-        self.urlnormtest(url, nurl, encoding="iso-8859-1")
+        nurl = u"%C3%A4%C3%B6%C3%BC?:"
+        self.urlnormtest(url, nurl)
 
     def test_fixing (self):
         # Test url fix method.
@@ -525,13 +526,13 @@ class TestUrl (unittest.TestCase):
     def test_cgi_split (self):
         # Test cgi parameter splitting.
         u = "scid=kb;en-us;Q248840"
-        self.assertEqual(linkcheck.url.url_parse_query(u), u)
+        self.assertEqual(linkcheck.url.url_parse_query(u, encoding="utf-8"), u)
         u = "scid=kb;en-us;Q248840&b=c;hulla=bulla"
-        self.assertEqual(linkcheck.url.url_parse_query(u), u)
+        self.assertEqual(linkcheck.url.url_parse_query(u, encoding="utf-8"), u)
 
     def test_long_cgi (self):
         u = "/test%s;" % ("?a="*1000)
-        self.assertEqual(linkcheck.url.url_parse_query(u), u)
+        self.assertEqual(linkcheck.url.url_parse_query(u, encoding="utf-8"), u)
 
     def test_port (self):
         is_numeric_port = linkcheck.url.is_numeric_port

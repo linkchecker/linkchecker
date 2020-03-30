@@ -38,3 +38,5 @@ Changelog.linkchecker*
 /linkchecker.prof
 .cache
 .tox
+tests/checker/data/https_cert.pem
+tests/checker/data/https_key.pem

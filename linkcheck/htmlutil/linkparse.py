@@ -23,8 +23,6 @@ from .. import strformat, log, LOG_CHECK, url as urlutil
 from . import linkname
 from builtins import str as str_text
 
-MAX_NAMELEN = 256
-
 unquote = strformat.unquote
 
 # HTML4/5 link tags
@@ -115,10 +113,10 @@ class TagFinder (object):
         """Does nothing, override in a subclass."""
         pass
 
-    def start_end_element (self, tag, attrs):
+    def start_end_element (self, tag, attrs, element_text=None):
         """Delegate a combined start/end element (eg. <br/>) to
         the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs)
+        self.start_element(tag, attrs, element_text)
 
 
 class MetaRobotsFinder (TagFinder):
@@ -130,7 +128,7 @@ class MetaRobotsFinder (TagFinder):
         log.debug(LOG_CHECK, "meta robots finder")
         self.follow = self.index = True
 
-    def start_element (self, tag, attrs):
+    def start_element (self, tag, attrs, element_text=None):
         """Search for meta robots.txt "nofollow" and "noindex" flags."""
         if tag == 'meta' and attrs.get('name') == 'robots':
             val = attrs.get_true('content', u'').lower().split(u',')
@@ -180,10 +178,10 @@ class LinkFinder (TagFinder):
             self.tags[tag].update(self.universal_attrs)
         self.base_ref = u''
 
-    def start_element (self, tag, attrs):
+    def start_element (self, tag, attrs, element_text=None):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
-        log.debug(LOG_CHECK, "line %d col %d old line %d old col %d", self.parser.lineno(), self.parser.column(), self.parser.last_lineno(), self.parser.last_column())
+        log.debug(LOG_CHECK, "line %d col %d old line %s old col %s", self.parser.lineno(), self.parser.column(), self.parser.last_lineno(), self.parser.last_column())
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get_true("href", u'')
         tagattrs = self.tags.get(tag, self.universal_attrs)
@@ -194,7 +192,7 @@ class LinkFinder (TagFinder):
             if tag == "form" and not is_form_get(attr, attrs):
                 continue
             # name of this link
-            name = self.get_link_name(tag, attrs, attr)
+            name = self.get_link_name(tag, attrs, attr, element_text)
             # possible codebase
             base = u''
             if tag  == 'applet':
@@ -211,13 +209,9 @@ class LinkFinder (TagFinder):
             self.parse_tag(tag, attr, value, name, base)
         log.debug(LOG_CHECK, "LinkFinder finished tag %s", tag)
 
-    def get_link_name (self, tag, attrs, attr):
+    def get_link_name (self, tag, attrs, attr, name=None):
         """Parse attrs for link name. Return name of link."""
         if tag == 'a' and attr == 'href':
-            # Look for name only up to MAX_NAMELEN characters
-            data = self.parser.peek(MAX_NAMELEN)
-            data = data.decode(self.parser.encoding, "ignore")
-            name = linkname.href_name(data)
             if not name:
                 name = attrs.get_true('title', u'')
         elif tag == 'img':
@@ -259,5 +253,5 @@ class LinkFinder (TagFinder):
     def found_url(self, url, name, base):
         """Add newly found URL to queue."""
         assert isinstance(url, str_text) or url is None, repr(url)
-        self.callback(url, line=self.parser.last_lineno(),
-                      column=self.parser.last_column(), name=name, base=base)
+        self.callback(url, line=self.parser.lineno(),
+                      column=self.parser.column(), name=name, base=base)
