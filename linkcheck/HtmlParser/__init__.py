@@ -102,84 +102,7 @@ EXAMPLE
 
 """
 
-import re
 import codecs
-try:
-    from htmlentitydefs import name2codepoint
-except ImportError:
-    from html.entities import name2codepoint
-from builtins import chr
-
-
-def _resolve_entity (mo):
-    """
-    Resolve a HTML entity.
-
-    @param mo: matched _entity_re object with a "entity" match group
-    @type mo: MatchObject instance
-    @return: resolved entity char, or empty string on error
-    @rtype: unicode string
-    """
-    ent = mo.group("entity")
-    s = mo.group()
-    if s.startswith('&#'):
-        if s[2] in 'xX':
-            radix = 16
-        else:
-            radix = 10
-        try:
-            num = int(ent, radix)
-        except (ValueError, OverflowError):
-            return u''
-    else:
-        num = name2codepoint.get(ent)
-    if num is None or num < 0:
-        # unknown entity -> ignore
-        return u''
-    try:
-        return chr(num)
-    except ValueError:
-        return u''
-
-
-_entity_re = re.compile(u'(?i)&(#x?)?(?P<entity>[0-9a-z]+);')
-
-def resolve_entities (s):
-    """
-    Resolve HTML entities in s.
-
-    @param s: string with entities
-    @type s: string
-    @return: string with resolved entities
-    @rtype: string
-    """
-    return _entity_re.sub(_resolve_entity, s)
-
-SUPPORTED_CHARSETS = ["utf-8", "iso-8859-1", "iso-8859-15"]
-
-_encoding_ro = re.compile(r"charset=(?P<encoding>[-0-9a-zA-Z]+)")
-
-def set_encoding (parsobj, attrs):
-    """
-    Set document encoding for the HTML parser according to the <meta>
-    tag attribute information.
-
-    @param attrs: attributes of a <meta> HTML tag
-    @type attrs: dict
-    @return: None
-    """
-    charset = attrs.get_true('charset', u'')
-    if charset:
-        # <meta charset="utf-8">
-        # eg. in http://cn.dolphin-browser.com/activity/Dolphinjump
-        charset = charset.encode('ascii', 'ignore').lower()
-    elif attrs.get_true('http-equiv', u'').lower() == u"content-type":
-        # <meta http-equiv="content-type" content="text/html;charset="utf-8">
-        charset = attrs.get_true('content', u'')
-        charset = charset.encode('ascii', 'ignore').lower()
-        charset = get_ctype_charset(charset)
-    if charset and charset in SUPPORTED_CHARSETS:
-        parsobj.encoding = charset
 
 
 def get_ctype_charset (text):
@@ -197,16 +120,3 @@ def get_ctype_charset (text):
             except (LookupError, ValueError):
                 pass
     return None
-
-
-def set_doctype (parsobj, doctype):
-    """
-    Set document type of the HTML parser according to the given
-    document type string.
-
-    @param doctype: document type
-    @type doctype: string
-    @return: None
-    """
-    if u"XHTML" in doctype:
-        parsobj.doctype = "XHTML"

@@ -278,13 +278,6 @@ class TestParser (unittest.TestCase):
         self.htmlparser.feed(_in)
         self.check_results(self.htmlparser, _in, _out, out)
 
-    def test_entities (self):
-        # Test entity resolving.
-        resolve = linkcheck.HtmlParser.resolve_entities
-        for c in "abcdefghijklmnopqrstuvwxyz":
-            self.assertEqual(resolve("&#%d;" % ord(c)), c)
-        self.assertEqual(resolve("&#1114112;"), u"")
-
     def test_encoding_detection_utf_content (self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
         self.encoding_test(html, "utf-8")
