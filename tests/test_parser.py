@@ -19,7 +19,7 @@ Test html parsing.
 """
 
 import linkcheck.HtmlParser.htmlsax
-import linkcheck.HtmlParser.htmllib
+
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -28,6 +28,7 @@ import unittest
 
 from parameterized import parameterized
 
+from .htmllib import HtmlPrinter, HtmlPrettyPrinter
 
 # list of tuples
 # (<test pattern>, <expected parse output>)
@@ -215,7 +216,7 @@ class TestParser (unittest.TestCase):
     def test_parse (self, _in, _out):
         # Parse all test patterns in one go.
         out = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        handler = HtmlPrettyPrinter(out)
         self.htmlparser.handler = handler
         self.htmlparser.feed(_in)
         self.check_results(self.htmlparser, _in, _out, out)
@@ -235,7 +236,7 @@ class TestParser (unittest.TestCase):
     def test_feed (self, _in, _out):
         # Parse all test patterns sequentially.
         out = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        handler = HtmlPrettyPrinter(out)
         self.htmlparser.handler = handler
         for c in _in:
             self.htmlparser.feed(c)
@@ -246,9 +247,9 @@ class TestParser (unittest.TestCase):
         # Parse all test patterns on two parsers interwoven.
         out = StringIO()
         out2 = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        handler = HtmlPrettyPrinter(out)
         self.htmlparser.handler = handler
-        handler2 = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out2)
+        handler2 = HtmlPrettyPrinter(out2)
         self.htmlparser2.handler = handler2
         for c in _in:
             self.htmlparser.feed(c)
@@ -260,9 +261,9 @@ class TestParser (unittest.TestCase):
     def test_handler (self, _in, _out):
         out = StringIO()
         out2 = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrinter(out)
+        handler = HtmlPrinter(out)
         self.htmlparser.handler = handler
-        handler2 = linkcheck.HtmlParser.htmllib.HtmlPrinter(out2)
+        handler2 = HtmlPrinter(out2)
         self.htmlparser2.handler = handler2
         for c in _in:
             self.htmlparser.feed(c)
@@ -273,7 +274,7 @@ class TestParser (unittest.TestCase):
     def test_flush (self, _in, _out):
         # Test parser flushing.
         out = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        handler = HtmlPrettyPrinter(out)
         self.htmlparser.handler = handler
         self.htmlparser.feed(_in)
         self.check_results(self.htmlparser, _in, _out, out)
@@ -306,7 +307,7 @@ class TestParser (unittest.TestCase):
         parser = linkcheck.HtmlParser.htmlsax.parser()
         self.assertEqual(parser.encoding, None)
         out = StringIO()
-        handler = linkcheck.HtmlParser.htmllib.HtmlPrettyPrinter(out)
+        handler = HtmlPrettyPrinter(out)
         parser.handler = handler
         parser.feed(html)
         parser.flush()

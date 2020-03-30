@@ -91,8 +91,6 @@ Additionally, there are error and warning callbacks:
 
 EXAMPLE
 
- # This handler prints out the parsed HTML.
- handler = HtmlParser.htmllib.HtmlPrettyPrinter()
  # Create a new HTML parser object with the handler as parameter.
  parser = HtmlParser.htmlsax.parser(handler)
  # Feed data.
