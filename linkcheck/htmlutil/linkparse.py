@@ -20,7 +20,6 @@ Find link tags in HTML text.
 
 import re
 from .. import strformat, log, LOG_CHECK, url as urlutil
-from . import linkname
 from builtins import str as str_text
 
 unquote = strformat.unquote

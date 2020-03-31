@@ -170,7 +170,6 @@ class UrlBase (object):
         self.name = name
         assert isinstance(self.name, str_text), repr(self.name)
         self.encoding = url_encoding
-        self.charset = None
         self.extern = extern
         if self.base_ref:
             assert not urlutil.url_needs_quoting(self.base_ref), \
