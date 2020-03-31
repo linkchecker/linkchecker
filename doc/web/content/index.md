@@ -59,7 +59,7 @@ If this software does not fit your requirements, you can check out
 Test suite status
 ------------------
 Linkchecker has extensive unit tests to ensure code quality.
-[Travis CI](https://travis-ci.org/) is used for continuous build
+[Travis CI](https://travis-ci.com/) is used for continuous build
 and test integration.
 
-[![Build Status](https://travis-ci.org/linkchecker/linkchecker.png)](https://travis-ci.org/linkchecker/linkchecker)
+[![Build Status](https://travis-ci.com/linkchecker/linkchecker.png)](https://travis-ci.com/linkchecker/linkchecker)
