@@ -18,6 +18,7 @@
 Store metadata and options.
 """
 
+from functools import lru_cache
 import os
 import re
 try:  # Python 3
@@ -31,7 +32,6 @@ import socket
 import _LinkChecker_configdata as configdata
 from .. import (log, LOG_CHECK, get_install_data, fileutil)
 from . import confparse
-from ..decorators import memoized
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 Version = configdata.version
@@ -576,7 +576,7 @@ def get_kde_home_dir ():
 
 loc_ro = re.compile(r"\[.*\]$")
 
-@memoized
+@lru_cache(1)
 def read_kioslaverc (kde_config_dir):
     """Read kioslaverc into data dictionary."""
     data = {}

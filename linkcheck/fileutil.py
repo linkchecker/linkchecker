@@ -25,9 +25,9 @@ import fnmatch
 import tempfile
 import importlib
 from distutils.spawn import find_executable
+from functools import lru_cache
 from builtins import str as str_text
 
-from .decorators import memoized
 
 def write_file (filename, content, backup=False, callback=None):
     """Overwrite a possibly existing file with new content. Do this
@@ -197,7 +197,7 @@ def is_tty (fp):
     return (hasattr(fp, "isatty") and fp.isatty())
 
 
-@memoized
+@lru_cache(128)
 def is_readable(filename):
     """Check if file is a regular file and is readable."""
     return os.path.isfile(filename) and os.access(filename, os.R_OK)
@@ -215,7 +215,7 @@ def is_writable_by_others(filename):
     return mode & stat.S_IWOTH
 
 
-@memoized
+@lru_cache(128)
 def is_writable(filename):
     """Check if
     - the file is a regular file and is writable, or
