@@ -181,7 +181,6 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def _add_response_info(self):
         """Set info from established HTTP(S) connection."""
-        self.charset = httputil.get_charset(self.headers)
         self.set_content_type()
         self.add_size_info()
 
