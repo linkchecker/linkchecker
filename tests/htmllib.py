@@ -19,11 +19,9 @@ Default HTML parser handler classes.
 """
 
 import sys
-from builtins import bytes, str as str_text
-from builtins import chr
 
 
-class HtmlPrinter (object):
+class HtmlPrinter:
     """
     Handles all functions by printing the function name and attributes.
     """
@@ -46,7 +44,7 @@ class HtmlPrinter (object):
         @return: None
         """
         self.fd.write(self.mem)
-        self.fd.write(str_text(attrs))
+        self.fd.write(str(attrs))
 
     def __getattr__ (self, name):
         """
@@ -61,7 +59,7 @@ class HtmlPrinter (object):
         return self._print
 
 
-class HtmlPrettyPrinter (object):
+class HtmlPrettyPrinter:
     """
     Print out all parsed HTML data in encoded form.
     Also stores error and warnings messages.
@@ -115,12 +113,12 @@ class HtmlPrettyPrinter (object):
         @type end: string
         @return: None
         """
-        self.fd.write(u"<%s" % tag.replace("/", ""))
+        self.fd.write("<%s" % tag.replace("/", ""))
         for key, val in attrs.items():
             if val is None:
-                self.fd.write(u" %s" % key)
+                self.fd.write(" %s" % key)
             else:
-                self.fd.write(u' %s="%s"' % (key, quote_attrval(val)))
+                self.fd.write(' %s="%s"' % (key, quote_attrval(val)))
         self.fd.write(end)
         if element_text:
             self.fd.write(element_text)
@@ -147,18 +145,14 @@ def quote_attrval (s):
     """
     res = []
     for c in s:
-        try:  # Python 2
-            ord_c = ord(c)
-        except TypeError:
-            ord_c = c
-        if ord_c <= 127:
+        if ord(c) <= 127:
             # ASCII
-            if c == u'&':
-                res.append(u"&amp;")
-            elif c == u'"':
-                res.append(u"&quot;")
+            if c == '&':
+                res.append("&amp;")
+            elif c == '"':
+                res.append("&quot;")
             else:
-                res.append(chr(ord_c))
+                res.append(c)
         else:
-            res.append(u"&#%d;" % ord_c)
-    return u"".join(res)
+            res.append("&#%d;" % ord(c))
+    return "".join(res)

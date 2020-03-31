@@ -20,10 +20,7 @@ Test html parsing.
 
 import linkcheck.HtmlParser.htmlsax
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import StringIO
+from io import StringIO
 import unittest
 
 from parameterized import parameterized
