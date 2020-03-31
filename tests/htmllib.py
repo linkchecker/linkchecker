@@ -79,16 +79,6 @@ class HtmlPrettyPrinter (object):
         self.fd = fd
         self.encoding = encoding
 
-    def comment (self, data):
-        """
-        Print HTML comment.
-
-        @param data: the comment
-        @type data: string
-        @return: None
-        """
-        self.fd.write("<!-- %s -->" % data)
-
     def start_element (self, tag, attrs, element_text=None):
         """
         Print HTML start element.
@@ -99,7 +89,7 @@ class HtmlPrettyPrinter (object):
         @type attrs: dict
         @return: None
         """
-        self._start_element(tag, attrs, u">")
+        self._start_element(tag, attrs, ">", element_text)
 
     def start_end_element (self, tag, attrs, element_text=None):
         """
@@ -111,9 +101,9 @@ class HtmlPrettyPrinter (object):
         @type attrs: dict
         @return: None
         """
-        self._start_element(tag, attrs, u"/>")
+        self._start_element(tag, attrs, "/>", element_text)
 
-    def _start_element (self, tag, attrs, end):
+    def _start_element (self, tag, attrs, end, element_text=None):
         """
         Print HTML element with end string.
 
@@ -132,6 +122,8 @@ class HtmlPrettyPrinter (object):
             else:
                 self.fd.write(u' %s="%s"' % (key, quote_attrval(val)))
         self.fd.write(end)
+        if element_text:
+            self.fd.write(element_text)
 
     def end_element (self, tag):
         """
@@ -142,46 +134,6 @@ class HtmlPrettyPrinter (object):
         @return: None
         """
         self.fd.write("</%s>" % tag)
-
-    def doctype (self, data):
-        """
-        Print HTML document type.
-
-        @param data: the document type
-        @type data: string
-        @return: None
-        """
-        self.fd.write("<!DOCTYPE %s>" % data)
-
-    def pi (self, data):
-        """
-        Print HTML pi.
-
-        @param data: the tag data
-        @type data: string
-        @return: None
-        """
-        self.fd.write("<?%s?>" % data)
-
-    def cdata (self, data):
-        """
-        Print HTML cdata.
-
-        @param data: the character data
-        @type data: string
-        @return: None
-        """
-        self.fd.write("<![CDATA[%s]]>" % data)
-
-    def characters (self, data):
-        """
-        Print characters.
-
-        @param data: the character data
-        @type data: string
-        @return: None
-        """
-        self.fd.write(data)
 
 
 def quote_attrval (s):

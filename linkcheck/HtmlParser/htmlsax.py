@@ -24,8 +24,7 @@ filterwarnings("ignore",
     message="The soupsieve package is not installed. CSS selectors cannot be used.",
     category=UserWarning, module="bs4")
 
-from bs4 import (BeautifulSoup, CData, Comment, Doctype, ProcessingInstruction,
-                 Tag)
+from bs4 import BeautifulSoup, Tag
 
 from ..containers import ListDict
 
@@ -87,28 +86,6 @@ class Parser(object):
                         self.parse_contents(content.contents)
                     if hasattr(self.handler, 'end_element'):
                         self.handler.end_element(content.name)
-                if content.comments:
-                    for comment in content.comments:
-                        if hasattr(self.handler, 'comment'):
-                            self.handler.comment(comment)
-            elif isinstance(content, Doctype):
-                if hasattr(self.handler, 'doctype'):
-                    self.handler.doctype(
-                        content[len('DOCTYPE '):]
-                        if content.upper().startswith('DOCTYPE ')
-                        else content)
-            elif isinstance(content, Comment):
-                if hasattr(self.handler, 'comment'):
-                    self.handler.comment(content.strip())
-            elif isinstance(content, CData):
-                if hasattr(self.handler, 'cdata'):
-                    self.handler.cdata(content)
-            elif isinstance(content, ProcessingInstruction):
-                if hasattr(self.handler, 'pi'):
-                    self.handler.pi(content.strip("? "))
-            else:
-                if hasattr(self.handler, 'characters'):
-                    self.handler.characters(content)
 
     def flush(self):
         if self.soup is None:
