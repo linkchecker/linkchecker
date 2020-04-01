@@ -32,14 +32,11 @@ if sys.version_info < (3, 5, 0, 'final', 0):
     raise SystemExit("This program requires Python 3.5 or later.")
 import os
 import re
-import codecs
 import stat
 import glob
-import shutil
 
 # import Distutils stuff
 from setuptools import setup
-from distutils.core import Extension
 from distutils.command.install_lib import install_lib
 from distutils.command.sdist import sdist
 from distutils.command.clean import clean
@@ -321,12 +318,6 @@ class MySdist (sdist):
         self.filelist.append("MANIFEST")
 
 
-# global include dirs
-include_dirs = []
-# library directories
-library_dirs = []
-# libraries
-libraries = []
 # scripts
 scripts = ['linkchecker']
 
