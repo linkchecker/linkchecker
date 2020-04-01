@@ -33,16 +33,8 @@ class Form(object):
         self.data[key] = value
 
     def __repr__(self):
-        """Return unicode representation displaying URL and form data."""
-        return unicode(self)
-
-    def __unicode__(self):
-        """Return unicode string displaying URL and form data."""
-        return u"<url=%s data=%s>" % (self.url, self.data)
-
-    def __str__(self):
         """Return string displaying URL and form data."""
-        return unicode(self).encode('utf-8')
+        return "<url=%s data=%s>" % (self.url, self.data)
 
 
 class FormFinder(object):

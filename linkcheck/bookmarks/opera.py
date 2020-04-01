@@ -30,10 +30,9 @@ def get_profile_dir ():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
-        dirpath = os.path.join(basedir, u"Opera", u"Opera")
+        dirpath = os.path.join(basedir, "Opera", "Opera")
     elif os.name == 'posix':
-        basedir = unicode(os.environ["HOME"])
-        dirpath = os.path.join(basedir, u".opera")
+        dirpath = os.path.join(os.environ["HOME"], ".opera")
     return dirpath
 
 

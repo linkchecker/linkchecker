@@ -36,15 +36,16 @@ def get_profile_dir ():
             try:
                 basedir = get_shell_folder("Local AppData")
             except EnvironmentError:
-                basedir = os.path.join(os.environ["USERPROFILE"], "Local Settings", "Application Data")
-        dirpath = os.path.join(basedir, u"Chromium", u"User Data")
+                basedir = os.path.join(os.environ["USERPROFILE"],
+                                       "Local Settings", "Application Data")
+        dirpath = os.path.join(basedir, "Chromium", "User Data")
     elif os.name == 'posix':
-        basedir = unicode(os.environ["HOME"])
         if sys.platform == 'darwin':
-            dirpath = os.path.join(basedir, u"Library", u"Application Support")
+            dirpath = os.path.join(os.environ["HOME"], "Library",
+                                   "Application Support")
         else:
             dirpath = xdg_config_home
-        dirpath = os.path.join(dirpath, u"chromium")
+        dirpath = os.path.join(dirpath, "chromium")
     return dirpath
 
 
