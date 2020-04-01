@@ -23,38 +23,13 @@ import sys
 import socket
 import pytest
 from contextlib import contextmanager
-from functools import wraps
+from functools import lru_cache, wraps
 from linkcheck import LinkCheckerInterrupt
 from builtins import str as str_text
 
 
 basedir = os.path.dirname(__file__)
 linkchecker_cmd = os.path.join(os.path.dirname(basedir), "linkchecker")
-
-
-class memoized (object):
-    """Decorator that caches a function's return value each time it is called.
-    If called later with the same arguments, the cached value is returned, and
-    not re-evaluated."""
-
-    def __init__(self, func):
-        self.func = func
-        self.cache = {}
-
-    def __call__(self, *args):
-        try:
-            return self.cache[args]
-        except KeyError:
-            self.cache[args] = value = self.func(*args)
-            return value
-        except TypeError:
-            # uncachable -- for instance, passing a list as an argument.
-            # Better to not cache than to blow up entirely.
-            return self.func(*args)
-
-    def __repr__(self):
-        """Return the function's docstring."""
-        return self.func.__doc__
 
 
 def run (cmd, verbosity=0, **kwargs):
@@ -97,7 +72,7 @@ def _need_func (testfunc, name):
     return check_func
 
 
-@memoized
+@lru_cache(1)
 def has_network ():
     """Test if network is up."""
     try:
@@ -112,7 +87,7 @@ def has_network ():
 need_network = _need_func(has_network, "network")
 
 
-@memoized
+@lru_cache(1)
 def has_msgfmt ():
     """Test if msgfmt is available."""
     return run_silent(["msgfmt", "-V"]) == 0
@@ -120,7 +95,7 @@ def has_msgfmt ():
 need_msgfmt = _need_func(has_msgfmt, "msgfmt")
 
 
-@memoized
+@lru_cache(1)
 def has_posix ():
     """Test if this is a POSIX system."""
     return os.name == "posix"
@@ -128,7 +103,7 @@ def has_posix ():
 need_posix = _need_func(has_posix, "POSIX system")
 
 
-@memoized
+@lru_cache(1)
 def has_windows ():
     """Test if this is a Windows system."""
     return os.name == "nt"
@@ -136,7 +111,7 @@ def has_windows ():
 need_windows = _need_func(has_windows, "Windows system")
 
 
-@memoized
+@lru_cache(1)
 def has_linux ():
     """Test if this is a Linux system."""
     return sys.platform.startswith("linux")
@@ -144,7 +119,7 @@ def has_linux ():
 need_linux = _need_func(has_linux, "Linux system")
 
 
-@memoized
+@lru_cache(1)
 def has_clamav ():
     """Test if ClamAV daemon is installed and running."""
     try:
@@ -162,7 +137,7 @@ def has_clamav ():
 need_clamav = _need_func(has_clamav, "ClamAV")
 
 
-@memoized
+@lru_cache(1)
 def has_proxy ():
     """Test if proxy is running on port 8081."""
     try:
@@ -176,7 +151,7 @@ def has_proxy ():
 need_proxy = _need_func(has_proxy, "proxy")
 
 
-@memoized
+@lru_cache(1)
 def has_pyftpdlib ():
     """Test if pyftpdlib is available."""
     try:
@@ -188,7 +163,7 @@ def has_pyftpdlib ():
 need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 
 
-@memoized
+@lru_cache(1)
 def has_biplist ():
     """Test if biplist is available."""
     try:
@@ -200,7 +175,7 @@ def has_biplist ():
 need_biplist = _need_func(has_biplist, "biplist")
 
 
-@memoized
+@lru_cache(1)
 def has_newsserver (server):
     import nntplib
     try:
@@ -224,7 +199,7 @@ def need_newsserver (server):
 
 
 
-@memoized
+@lru_cache(1)
 def has_x11 ():
     """Test if DISPLAY variable is set."""
     return os.getenv('DISPLAY') is not None
@@ -232,7 +207,7 @@ def has_x11 ():
 need_x11 = _need_func(has_x11, 'X11')
 
 
-@memoized
+@lru_cache(1)
 def has_word():
     """Test if Word is available."""
     from linkcheck.plugins import parseword
@@ -241,7 +216,7 @@ def has_word():
 need_word = _need_func(has_word, 'Word')
 
 
-@memoized
+@lru_cache(1)
 def has_pdflib():
     from linkcheck.plugins import parsepdf
     return parsepdf.has_pdflib

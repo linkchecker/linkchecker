@@ -25,37 +25,8 @@ import fnmatch
 import tempfile
 import importlib
 from distutils.spawn import find_executable
+from functools import lru_cache
 from builtins import str as str_text
-
-from .decorators import memoized
-
-def write_file (filename, content, backup=False, callback=None):
-    """Overwrite a possibly existing file with new content. Do this
-    in a manner that does not leave truncated or broken files behind.
-    @param filename: name of file to write
-    @type filename: string
-    @param content: file content to write
-    @type content: string
-    @param backup: if backup file should be left
-    @type backup: bool
-    @param callback: non-default storage function
-    @type callback: None or function taking two parameters (fileobj, content)
-    """
-    # first write in a temp file
-    f = file(filename+".tmp", 'wb')
-    if callback is None:
-        f.write(content)
-    else:
-        callback(f, content)
-    f.close()
-    # move orig file to backup
-    if os.path.exists(filename):
-        os.rename(filename, filename+".bak")
-    # move temp file to orig
-    os.rename(filename+".tmp", filename)
-    # remove backup
-    if not backup and os.path.exists(filename+".bak"):
-        os.remove(filename+".bak")
 
 
 def has_module (name, without_error=True):
@@ -197,7 +168,7 @@ def is_tty (fp):
     return (hasattr(fp, "isatty") and fp.isatty())
 
 
-@memoized
+@lru_cache(128)
 def is_readable(filename):
     """Check if file is a regular file and is readable."""
     return os.path.isfile(filename) and os.access(filename, os.R_OK)
@@ -215,7 +186,7 @@ def is_writable_by_others(filename):
     return mode & stat.S_IWOTH
 
 
-@memoized
+@lru_cache(128)
 def is_writable(filename):
     """Check if
     - the file is a regular file and is writable, or
