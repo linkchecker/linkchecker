@@ -431,7 +431,7 @@ if os.name == 'posix':
                'doc/examples/check_urls.sh']))
     data_files.append(('share/applications', ['doc/linkchecker.desktop']))
 
-args = dict(
+setup(
     name = AppName,
     version = AppVersion,
     description = Description,
@@ -473,11 +473,15 @@ args = dict(
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Programming Language :: Python',
-        'Programming Language :: C',
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     options = {
     },
     # Requirements, usable with setuptools or the new Python packaging module.
+    python_requires = '>= 3.5',
     install_requires = [
         'requests >= 2.4',
         'dnspython',
@@ -494,4 +498,3 @@ args = dict(
     #    "Memory debugging": ['meliae'], # https://launchpad.net/meliae
     #}
 )
-setup(**args)
