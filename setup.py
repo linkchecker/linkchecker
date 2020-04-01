@@ -28,10 +28,8 @@ It includes the following features:
 Because of all the features, this script is nasty and big.
 Change it very carefully.
 """
-from __future__ import print_function
 import sys
-if not (hasattr(sys, 'version_info') or
-        sys.version_info < (3, 5, 0, 'final', 0)):
+if sys.version_info < (3, 5, 0, 'final', 0):
     raise SystemExit("This program requires Python 3.5 or later.")
 import os
 import re
@@ -40,10 +38,6 @@ import subprocess
 import stat
 import glob
 import shutil
-try:
-    unicode
-except NameError:
-    unicode = lambda x: x
 
 # import Distutils stuff
 from setuptools import setup
@@ -108,7 +102,7 @@ def get_portable():
     return os.environ.get('LINKCHECKER_PORTABLE', '0')
 
 
-class MyInstallLib (install_lib, object):
+class MyInstallLib (install_lib):
     """Custom library installation."""
 
     def install (self):
@@ -168,7 +162,7 @@ class MyInstallLib (install_lib, object):
         return outs
 
 
-class MyInstallData (install_data, object):
+class MyInstallData (install_data):
     """Fix file permissions."""
 
     def run (self):
@@ -218,7 +212,7 @@ class MyInstallData (install_data, object):
                 os.chmod(path, mode)
 
 
-class MyDistribution (Distribution, object):
+class MyDistribution (Distribution):
     """Custom distribution class generating config file."""
 
     def __init__ (self, attrs):
@@ -257,8 +251,6 @@ class MyDistribution (Distribution, object):
         for name in metanames:
             method = "get_" + name
             val = getattr(self.metadata, method)()
-            if isinstance(val, str):
-                val = unicode(val)
             cmd = "%s = %r" % (name, val)
             data.append(cmd)
         data.append('release_date = "%s"' % get_release_date())
@@ -343,7 +335,7 @@ def check_manifest ():
         print('\nMissing: '.join(err))
 
 
-class MyBuild (build, object):
+class MyBuild (build):
     """Custom build command."""
 
     def run (self):
@@ -352,7 +344,7 @@ class MyBuild (build, object):
         build.run(self)
 
 
-class MyClean (clean, object):
+class MyClean (clean):
     """Custom clean command."""
 
     def run (self):
@@ -367,7 +359,7 @@ class MyClean (clean, object):
         clean.run(self)
 
 
-class MySdist (sdist, object):
+class MySdist (sdist):
     """Custom sdist command."""
 
     def get_file_list (self):
