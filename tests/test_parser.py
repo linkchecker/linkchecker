@@ -20,10 +20,7 @@ Test html parsing.
 
 import linkcheck.HtmlParser.htmlsax
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import StringIO
+from io import StringIO
 import unittest
 
 from parameterized import parameterized
@@ -38,7 +35,6 @@ parsetests = [
     ("""<a  b='c' >""", """<a b="c"></a>"""),
     ("""<a  b=c" >""", """<a b="c&quot;"></a>"""),
     ("""<a  b=c' >""", """<a b="c'"></a>"""),
-    ("""<a  b="c >""", """<a  b="c >"""),
     ("""<a  b="" >""", """<a b=""></a>"""),
     ("""<a  b='' >""", """<a b=""></a>"""),
     ("""<a  b=>""", """<a b=""></a>"""),
@@ -51,10 +47,8 @@ parsetests = [
     ("""<a  b ="c" >""", """<a b="c"></a>"""),
     ("""<a  b = "c" >""", """<a b="c"></a>"""),
     ("""<a >""", """<a></a>"""),
-    ("""< a>""", """< a>"""),
-    ("""< a >""", """< a >"""),
-    ("""<>""", """<>"""),
-    ("""< >""", """< >"""),
+    ("""<>""", """"""),
+    ("""< >""", """"""),
     ("""<aä>""", u"""<aä></aä>"""),
     ("""<a aä="b">""", u"""<a aä="b"></a>"""),
     ("""<a a="bä">""", u"""<a a="b&#228;"></a>"""),
@@ -64,7 +58,6 @@ parsetests = [
     ("""<a b="c" b="d" >""", """<a b="d"></a>"""),
     # reduce test
     ("""<a  b="c"><""", """<a b="c"><</a>"""),
-    ("""d>""", """d>"""),
     # numbers in tag
     ("""<h1>bla</h1>""", """<h1>bla</h1>"""),
     # more start tags
@@ -72,49 +65,10 @@ parsetests = [
     ("""<a  b=/c/></a><br>""", """<a b="/c/"></a><br/>"""),
     ("""<br/>""", """<br/>"""),
     ("""<a  b="50%"><br>""", """<a b="50%"><br/></a>"""),
-    # comments
-    ("""<!---->< 1>""", """<!--  -->< 1>"""),
-    ("""<!-- a - b -->< 2>""", """<!-- a - b -->< 2>"""),
-    ("""<!----->< 3>""", """<!-- - -->< 3>"""),
-    ("""<!------>< 4>""", """<!-- -- -->< 4>"""),
-    ("""<!------->< 5>""", """<!-- --- -->< 5>"""),
-    ("""<!-- -->< 7>""", """<!--  -->< 7>"""),
-    ("""<!---- />-->""", """<!-- -- /> -->"""),
-    ("""<!-- a-2 -->< 9>""", """<!-- a-2 -->< 9>"""),
-    ("""<!-- --- -->< 10>""", """<!-- --- -->< 10>"""),
-    ("""<!>""", """<!--  -->"""), # empty comment
-    # invalid comments
-    ("""<!-- -- >< 8>""", """<!--  -->< 8>"""),
-    ("""<!---- >< 6>""", """<!--  -->< 6>"""),
-    ("""<!- blubb ->""", """<!-- - blubb - -->"""),
-    ("""<! -- blubb -->""", """<!-- -- blubb -- -->"""),
-    ("""<!-- blubb -- >""", """<!-- blubb -->"""),
-    ("""<! blubb !>< a>""", """<!-- blubb ! -->< a>"""),
-    ("""<! blubb >< a>""", """<!-- blubb -->< a>"""),
-    # end tags
-    ("""</a>""", """"""),
-    ("""</ a>""", """"""),
-    ("""</ a >""", """"""),
-    ("""</a >""", """"""),
-    ("""< / a>""", """< / a>"""),
-    ("""< /a>""", """< /a>"""),
-    ("""</aä>""", """"""),
     # start and end tag (HTML doctype assumed)
     ("""<a/>""", """<a></a>"""),
     ("""<meta/>""", """<meta/>"""),
     ("""<MetA/>""", """<meta/>"""),
-    # declaration tags
-    ("""<!DOCtype adrbook SYSTEM "adrbook.dtd">""",
-     """<!DOCTYPE adrbook SYSTEM "adrbook.dtd">"""),
-    # misc
-    ("""<?xmL version="1.0" encoding="latin1"?>""",
-     """<?xmL version="1.0" encoding="latin1"?>"""),
-    # javascript
-    ("""<script >\n</script>""", """<script>\n</script>"""),
-    ("""<sCrIpt lang="a">bla </a> fasel</scripT>""",
-     """<script lang="a">bla </a> fasel</script>"""),
-    ("""<script ><!--bla//-->// </script >""",
-     """<script><!--bla//-->// </script>"""),
     # line continuation (Dr. Fun webpage)
     ("""<img bo\\\nrder=0 >""", """<img bo\\="" rder="0"/>"""),
     ("""<img align="mid\\\ndle">""", """<img align="mid\\\ndle"/>"""),
@@ -144,15 +98,9 @@ parsetests = [
     ("""<a  href="&#x6D;ailto:" >""", """<a href="mailto:"></a>"""),
     # note that \u8156 is not valid encoding and therefore gets removed
     ("""<a  href="&#8156;ailto:" >""", """<a href="&#8156;ailto:"></a>"""),
-    # non-ascii characters
-    ("""<Üzgür> fahr </langsamer> żżżżżż{""",
-     u"""<Üzgür> fahr  żżżżżż{"""),
     # mailto link
     ("""<a  href=mailto:calvin@LocalHost?subject=Hallo&to=michi>1</a>""",
      """<a href="mailto:calvin@LocalHost?subject=Hallo&amp;to=michi">1</a>"""),
-    # doctype XHTML
-    ("""<!DOCTYPe html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><MeTa a="b"/>""",
-     """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><meta a="b"/>"""),
     # meta tag with charset encoding
     ("""<meta http-equiv="content-type" content>""",
      """<meta content="" http-equiv="content-type"/>"""),
@@ -164,22 +112,13 @@ parsetests = [
      """<meta content="text/html; charset=iso8859-1" http-equiv="content-type"/>"""),
     ("""<meta http-equiv="content-type" content="text/html; charset=hulla">""",
      """<meta content="text/html; charset=hulla" http-equiv="content-type"/>"""),
-    # CDATA
-    ("""<![CDATA[<a>hallo</a>]]>""", """<![CDATA[<a>hallo</a>]]>"""),
     # missing > in end tag
     ("""</td <td  a="b" >""", """"""),
     ("""</td<td  a="b" >""", """"""),
     # missing beginning quote
     ("""<td a=b">""", """<td a="b&quot;"></td>"""),
     # stray < before start tag
-    ("""<0.<td  a="b" >""", """<0.<td a="b"></td>"""),
-    # stray < before end tag
-    ("""<0.</td >""", """<0."""),
-    # missing end quote (XXX TODO)
-    #("""<td a="b>\n""", """<td a="b">\n"""),
-    #("""<td a="b></td>\na""", """<td a="b"></td>\na"""),
-    #("""<a  b="c><a b="c>\n""", """<a b="c"><a b="c">\n"""),
-    #("""<td a="b c="d"></td>\n""", """<td a="b" c="d"></td>\n"""),
+    ("""<0.<td  a="b" >""", """<td a="b"></td>"""),
     # HTML5 tags
     ("""<audio  src=bla>""", """<audio src="bla"></audio>"""),
     ("""<button  formaction=bla>""", """<button formaction="bla"></button>"""),
@@ -190,13 +129,6 @@ parsetests = [
     # Test inserted tag s
     ("""<b><a></a></b>""", """<b><a></a></b>"""),
     ("""<a></a><b></b>""", """<a></a><b></b>"""),
-]
-
-flushtests = [
-    ("<", "<"),
-    ("<a", "<a"),
-    ("<!a", "<!a"),
-    ("<?a", "<?a"),
 ]
 
 
@@ -269,15 +201,6 @@ class TestParser (unittest.TestCase):
             self.htmlparser.feed(c)
             self.htmlparser2.feed(c)
         self.assertEqual(out.getvalue(), out2.getvalue())
-
-    @parameterized.expand(flushtests)
-    def test_flush (self, _in, _out):
-        # Test parser flushing.
-        out = StringIO()
-        handler = HtmlPrettyPrinter(out)
-        self.htmlparser.handler = handler
-        self.htmlparser.feed(_in)
-        self.check_results(self.htmlparser, _in, _out, out)
 
     def test_encoding_detection_utf_content (self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'

@@ -26,11 +26,6 @@ in the ListDict (ie. "<a href>" with lead to a {href: None} dict entry).
 
 Used callbacks of a handler are:
 
-- Comments: <!--data-->
-  def comment (data)
-  @param data:
-  @type data: Unicode string
-
 - Start tag: <tag {attr1:value1, attr2:value2, ..}>
   def start_element (tag, attrs)
   @param tag: tag name
@@ -49,28 +44,6 @@ Used callbacks of a handler are:
   def end_element (tag)
   @param tag: tag name
   @type tag: Unicode string
-
-- Document type: <!DOCTYPE data>
-  def doctype (data)
-  @param data: doctype string data
-  @type data: Unicode string
-
-- Processing instruction (PI): <?name data?>
-  def pi (name, data=None)
-  @param name: instruction name
-  @type name: Unicode string
-  @param data: instruction data
-  @type data: Unicode string
-
-- Character data: <![CDATA[data]]>
-  def cdata (data)
-  @param data: character data
-  @type data: Unicode string
-
-- Characters: data
-  def characters(data): data
-  @param data: data
-  @type data: Unicode string
 
 Additionally, there are error and warning callbacks:
 
