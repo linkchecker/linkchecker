@@ -20,7 +20,6 @@ Setup file for the distuils module.
 
 It includes the following features:
 - creation and installation of configuration files with installation data
-- automatic detection and usage of GNU99 standard for C compiler
 - automatic MANIFEST.in check
 - automatic generation of .mo locale files
 - automatic permission setting on POSIX systems for installed files
@@ -34,7 +33,6 @@ if sys.version_info < (3, 5, 0, 'final', 0):
 import os
 import re
 import codecs
-import subprocess
 import stat
 import glob
 import shutil
@@ -43,7 +41,6 @@ import shutil
 from setuptools import setup
 from distutils.core import Extension
 from distutils.command.install_lib import install_lib
-from distutils.command.build_ext import build_ext
 from distutils.command.sdist import sdist
 from distutils.command.clean import clean
 from distutils.command.install_data import install_data
@@ -260,50 +257,6 @@ class MyDistribution (Distribution):
                      "creating %s" % filename, self.verbose >= 1, self.dry_run)
 
 
-def cc_run (args):
-    """Run the C compiler with a simple main program.
-
-    @return: successful exit flag
-    @rtype: bool
-    """
-    prog = b"int main(){}\n"
-    pipe = subprocess.Popen(args,
-        stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
-    pipe.communicate(input=prog)
-    if os.WIFEXITED(pipe.returncode):
-        return os.WEXITSTATUS(pipe.returncode) == 0
-    return False
-
-
-def cc_supports_option (cc, option):
-    """Check if the given C compiler supports the given option.
-
-    @return: True if the compiler supports the option, else False
-    @rtype: bool
-    """
-    return cc_run([cc[0], "-E", option, "-"])
-
-
-class MyBuildExt (build_ext, object):
-    """Custom build extension command."""
-
-    def build_extensions (self):
-        """Add -std=gnu99 to build options if supported."""
-        # For gcc >= 3 we can add -std=gnu99 to get rid of warnings.
-        extra = []
-        if self.compiler.compiler_type == 'unix':
-            option = "-std=gnu99"
-            if cc_supports_option(self.compiler.compiler, option):
-                extra.append(option)
-        # First, sanity-check the 'extensions' list
-        self.check_extensions_list(self.extensions)
-        for ext in self.extensions:
-            for opt in extra:
-                if opt not in ext.extra_compile_args:
-                    ext.extra_compile_args.append(opt)
-            self.build_extension(ext)
-
-
 def list_message_files (package, suffix=".mo"):
     """Return list of all found message files and their installation paths."""
     for fname in glob.glob("po/*" + suffix):
@@ -370,25 +323,12 @@ class MySdist (sdist):
 
 # global include dirs
 include_dirs = []
-# global macros
-define_macros = []
-# compiler args
-extra_compile_args = []
 # library directories
 library_dirs = []
 # libraries
 libraries = []
 # scripts
 scripts = ['linkchecker']
-
-if os.name == 'nt':
-    # windows does not have unistd.h
-    define_macros.append(('YY_NO_UNISTD_H', None))
-else:
-    extra_compile_args.append("-pedantic")
-
-if sys.platform == 'darwin':
-    define_macros.extend([('HAVE_STRLCPY', None), ('HAVE_STRLCAT', None)])
 
 myname = "Bastian Kleineidam"
 myemail = "bastian.kleineidam@web.de"
@@ -439,7 +379,6 @@ setup(
     cmdclass = {
         'install_lib': MyInstallLib,
         'install_data': MyInstallData,
-        'build_ext': MyBuildExt,
         'build': MyBuild,
         'clean': MyClean,
         'sdist': MySdist,
