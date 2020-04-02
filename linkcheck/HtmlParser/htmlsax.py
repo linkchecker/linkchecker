@@ -53,8 +53,6 @@ class Parser(object):
         self.html_doc = None
         self.tag_lineno = None
         self.tag_column = None
-        self.last_tag_lineno = None
-        self.last_tag_column = None
 
     def parse_contents(self, contents):
         for content in contents:
@@ -69,8 +67,6 @@ class Parser(object):
                         if v == b'':
                             v = u''
                         attrs[k] = v
-                self.last_tag_lineno = self.tag_lineno
-                self.last_tag_column = self.tag_column
                 self.tag_lineno = content.sourceline
                 self.tag_column = None if content.sourcepos is None \
                     else content.sourcepos + 1
@@ -100,14 +96,8 @@ class Parser(object):
     def lineno(self):
         return self.tag_lineno
 
-    def last_lineno(self):
-        return self.last_tag_lineno
-
     def column(self):
         return self.tag_column
-
-    def last_column(self):
-        return self.last_tag_column
 
 
 def parser(handler=None):
