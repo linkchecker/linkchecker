@@ -54,7 +54,9 @@ class TestHttp (HttpServerTest):
         ]
         if status in (204,):
             resultlines.append(u"warning No Content")
-        if (status not in [101, 102] and status < 200) or status >= 400:
+        if status == 429:
+            resultlines.append(u"warning Rate limited (Retry-After: None)")
+        if (status not in [101, 102] and status < 200) or (status >= 400 and status != 429):
             result = u"error"
         else:
             result = u"valid"
