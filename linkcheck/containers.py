@@ -18,86 +18,6 @@
 Special container classes.
 """
 
-from collections import namedtuple
-from past.builtins import basestring
-
-class AttrDict (dict):
-    """Dictionary allowing attribute access to its elements if they
-    are valid attribute names and not already existing methods."""
-
-    def __getattr__ (self, name):
-        """Return attribute name from dict."""
-        return self[name]
-
-
-class CaselessDict (dict):
-    """A dictionary ignoring the case of keys (which must be strings)."""
-
-    def __getitem__ (self, key):
-        """Return lowercase key item."""
-        assert isinstance(key, basestring)
-        return dict.__getitem__(self, key.lower())
-
-    def __delitem__ (self, key):
-        """Remove lowercase key item."""
-        assert isinstance(key, basestring)
-        return dict.__delitem__(self, key.lower())
-
-    def __setitem__ (self, key, value):
-        """Set lowercase key item."""
-        assert isinstance(key, basestring)
-        dict.__setitem__(self, key.lower(), value)
-
-    def __contains__ (self, key):
-        """Check lowercase key item."""
-        assert isinstance(key, basestring)
-        return dict.__contains__(self, key.lower())
-
-    def get (self, key, def_val=None):
-        """Return lowercase key value."""
-        assert isinstance(key, basestring)
-        return dict.get(self, key.lower(), def_val)
-
-    def setdefault (self, key, *args):
-        """Set lowercase key value and return."""
-        assert isinstance(key, basestring)
-        return dict.setdefault(self, key.lower(), *args)
-
-    def update (self, other):
-        """Update this dict with lowercase key from other dict"""
-        for k, v in other.items():
-            dict.__setitem__(self, k.lower(), v)
-
-    def fromkeys (cls, iterable, value=None):
-        """Construct new caseless dict from given data."""
-        d = cls()
-        for k in iterable:
-            dict.__setitem__(d, k.lower(), value)
-        return d
-    fromkeys = classmethod(fromkeys)
-
-    def pop (self, key, *args):
-        """Remove lowercase key from dict and return value."""
-        assert isinstance(key, basestring)
-        return dict.pop(self, key.lower(), *args)
-
-
-class CaselessSortedDict (CaselessDict):
-    """Caseless dictionary with sorted keys."""
-
-    def keys (self):
-        """Return sorted key list."""
-        return sorted(super(CaselessSortedDict, self).keys())
-
-    def items (self):
-        """Return sorted item list."""
-        return [(x, self[x]) for x in self.keys()]
-
-    def iteritems (self):
-        """Return sorted item iterator."""
-        return ((x, self[x]) for x in self.keys())
-
-
 class LFUCache (dict):
     """Limited cache which purges least frequently used items."""
 
@@ -182,18 +102,3 @@ class LFUCache (dict):
         """Remove and return a value."""
         value = super(LFUCache, self).pop()
         return value[1]
-
-
-def enum (*names):
-    """Return an enum datatype instance from given list of keyword names.
-    The enum values are zero-based integers.
-
-    >>> Status = enum('open', 'pending', 'closed')
-    >>> Status.open
-    0
-    >>> Status.pending
-    1
-    >>> Status.closed
-    2
-    """
-    return namedtuple('Enum', ' '.join(names))(*range(len(names)))
