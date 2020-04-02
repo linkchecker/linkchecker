@@ -78,9 +78,6 @@ class Parser(object):
             self.parse_contents(self.soup.contents)
         self.encoding = self.soup.original_encoding
 
-    def debug(self, text):
-        raise NotImplementedError("debug is not implemented")
-
     def lineno(self):
         return self.tag_lineno
 
