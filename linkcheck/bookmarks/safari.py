@@ -27,8 +27,7 @@ except ImportError:
 
 def get_profile_dir ():
     """Return path where all profiles of current user are stored."""
-    basedir = unicode(os.environ["HOME"])
-    return os.path.join(basedir, u"Library", u"Safari")
+    return os.path.join(os.environ["HOME"], "Library", "Safari")
 
 
 def find_bookmark_file ():
@@ -37,16 +36,16 @@ def find_bookmark_file ():
     could be found.
     """
     if sys.platform != 'darwin':
-        return u""
+        return ""
     try:
         dirname = get_profile_dir()
         if os.path.isdir(dirname):
-            fname = os.path.join(dirname, u"Bookmarks.plist")
+            fname = os.path.join(dirname, "Bookmarks.plist")
             if os.path.isfile(fname):
                 return fname
     except Exception:
         pass
-    return u""
+    return ""
 
 
 def parse_bookmark_file (filename):

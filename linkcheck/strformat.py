@@ -56,16 +56,12 @@ def unicode_safe (s, encoding=i18n.default_encoding, errors='replace'):
     @rtype: unicode
     """
     assert s is not None, "argument to unicode_safe was None"
-    if isinstance(s, str_text):
+    if isinstance(s, str):
         # s is already unicode, nothing to do
         return s
-
-    try:
-        return unicode(str(s), encoding, errors)
-    except NameError:  # Python3
-        if isinstance(s, bytes):
-            return s.decode(encoding, errors)
-        return str(s)
+    elif isinstance(s, bytes):
+        return s.decode(encoding, errors)
+    return str(s)
 
 
 def ascii_safe (s):
@@ -158,8 +154,8 @@ def wrap (text, width, **kwargs):
 
 def indent (text, indent_string="  "):
     """Indent each line of text with the given indent string."""
-    lines = str_text(text).splitlines()
-    return os.linesep.join("%s%s" % (indent_string, x) for x in lines)
+    return os.linesep.join("%s%s" % (indent_string, x)
+                           for x in text.splitlines())
 
 
 def get_line_number (s, index):
@@ -322,11 +318,7 @@ def limit (s, length=72):
 
 def strline (s):
     """Display string representation on one line."""
-    try:
-        s = unicode(s)
-    except NameError:
-        pass
-    return strip_control_chars(u"`%s'" % s.replace(u"\n", u"\\n"))
+    return strip_control_chars("`%s'" % s.replace("\n", "\\n"))
 
 
 def format_feature_warning (**kwargs):

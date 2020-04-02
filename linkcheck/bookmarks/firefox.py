@@ -35,10 +35,9 @@ def get_profile_dir ():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
-        dirpath = os.path.join(basedir, u"Mozilla", u"Firefox", u"Profiles")
+        dirpath = os.path.join(basedir, "Mozilla", "Firefox", "Profiles")
     elif os.name == 'posix':
-        basedir = unicode(os.environ["HOME"])
-        dirpath = os.path.join(basedir, u".mozilla", u"firefox")
+        dirpath = os.path.join(os.environ["HOME"], ".mozilla", "firefox")
     return dirpath
 
 
@@ -49,14 +48,14 @@ def find_bookmark_file (profile="*.default"):
     could be found.
     """
     try:
-        for dirname in glob.glob(u"%s/%s" % (get_profile_dir(), profile)):
+        for dirname in glob.glob("%s/%s" % (get_profile_dir(), profile)):
             if os.path.isdir(dirname):
                 fname = os.path.join(dirname, "places.sqlite")
                 if os.path.isfile(fname):
                     return fname
     except Exception:
         pass
-    return u""
+    return ""
 
 
 def parse_bookmark_file (filename):
