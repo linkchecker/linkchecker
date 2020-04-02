@@ -81,14 +81,14 @@ parsetests = [
     ("""<a  href= >""", """<a href=""></a>"""),
     ("""<a  href="'" >""", """<a href="'"></a>"""),
     ("""<a  href='"' >""", """<a href="&quot;"></a>"""),
-    ("""<a  href="bla" %]" >""", """<a %]"="" href="bla"></a>"""),
+    ("""<a  href="bla" %]" >""", """<a href="bla" %]"=""></a>"""),
     ("""<a  href=bla" >""", """<a href="bla&quot;"></a>"""),
     ("""<a onmouseover=blubb('nav1','',"""\
      """'/images/nav.gif',1);move(this); b="c">""",
-     """<a b="c" onmouseover="blubb('nav1','',"""\
-     """'/images/nav.gif',1);move(this);"></a>"""),
+     """<a onmouseover="blubb('nav1','',"""\
+     """'/images/nav.gif',1);move(this);" b="c"></a>"""),
     ("""<a onClick=location.href('/index.htm') b="c">""",
-     """<a b="c" onclick="location.href('/index.htm')"></a>"""),
+     """<a onclick="location.href('/index.htm')" b="c"></a>"""),
     # entity resolving
     ("""<a  href="&#6D;ailto:" >""", """<a href="D;ailto:"></a>"""),
     ("""<a  href="&amp;ailto:" >""", """<a href="&amp;ailto:"></a>"""),
@@ -103,15 +103,15 @@ parsetests = [
      """<a href="mailto:calvin@LocalHost?subject=Hallo&amp;to=michi">1</a>"""),
     # meta tag with charset encoding
     ("""<meta http-equiv="content-type" content>""",
-     """<meta content="" http-equiv="content-type"/>"""),
+     """<meta http-equiv="content-type" content=""/>"""),
     ("""<meta http-equiv="content-type" content=>""",
-     """<meta content="" http-equiv="content-type"/>"""),
+     """<meta http-equiv="content-type" content=""/>"""),
     ("""<meta http-equiv="content-type" content="hulla">""",
-     """<meta content="hulla" http-equiv="content-type"/>"""),
+     """<meta http-equiv="content-type" content="hulla"/>"""),
     ("""<meta http-equiv="content-type" content="text/html; charset=iso8859-1">""",
-     """<meta content="text/html; charset=iso8859-1" http-equiv="content-type"/>"""),
+     """<meta http-equiv="content-type" content="text/html; charset=iso8859-1"/>"""),
     ("""<meta http-equiv="content-type" content="text/html; charset=hulla">""",
-     """<meta content="text/html; charset=hulla" http-equiv="content-type"/>"""),
+     """<meta http-equiv="content-type" content="text/html; charset=hulla"/>"""),
     # missing > in end tag
     ("""</td <td  a="b" >""", """"""),
     ("""</td<td  a="b" >""", """"""),
