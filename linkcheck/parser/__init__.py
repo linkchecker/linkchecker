@@ -120,7 +120,6 @@ def find_links (url_data, callback, tags):
     # construct parser object
     handler = linkparse.LinkFinder(callback, tags)
     parser = htmlsax.parser(handler)
-    handler.parser = parser
     # parse
     try:
         soup = url_data.get_soup()
@@ -129,9 +128,6 @@ def find_links (url_data, callback, tags):
     except linkparse.StopParse as msg:
         log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
         pass
-    # break cyclic dependencies
-    handler.parser = None
-    parser.handler = None
 
 
 def parse_firefox (url_data):

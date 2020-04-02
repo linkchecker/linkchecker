@@ -87,13 +87,9 @@ def search_form(content, cgiuser, cgipassword):
     """
     handler = FormFinder()
     parser = htmlsax.parser(handler)
-    handler.parser = parser
     # parse
     parser.feed(content)
     parser.flush()
-    # break cyclic dependencies
-    handler.parser = None
-    parser.handler = None
     log.debug(LOG_CHECK, "Found forms %s", handler.forms)
     cginames = (cgiuser.lower(), cgipassword.lower())
     for form in handler.forms:
