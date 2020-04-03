@@ -19,7 +19,7 @@ Test container routines.
 """
 
 import unittest
-import random
+
 import linkcheck.containers
 
 from builtins import range
@@ -37,70 +37,6 @@ class TestAttrDict (unittest.TestCase):
     def test_method (self):
         self.d["get"] = 1
         self.assertTrue(isinstance(self.d.get, type({}.get)))
-
-
-class TestListDict (unittest.TestCase):
-    """Test list dictionary routines."""
-
-    def setUp (self):
-        """Set up self.d as empty listdict."""
-        self.d = linkcheck.containers.ListDict()
-
-    def test_insertion_order (self):
-        self.assertTrue(not self.d)
-        self.d[2] = 1
-        self.d[1] = 2
-        self.assertTrue(2 in self.d)
-        self.assertTrue(1 in self.d)
-
-    def test_deletion_order (self):
-        self.assertTrue(not self.d)
-        self.d[2] = 1
-        self.d[1] = 2
-        del self.d[1]
-        self.assertTrue(2 in self.d)
-        self.assertTrue(1 not in self.d)
-
-    def test_update_order (self):
-        self.assertTrue(not self.d)
-        self.d[2] = 1
-        self.d[1] = 2
-        self.d[1] = 1
-        self.assertEqual(self.d[1], 1)
-
-    def test_sorting (self):
-        self.assertTrue(not self.d)
-        toinsert = random.sample(range(10000000), 60)
-        for x in toinsert:
-            self.d[x] = x
-        for i, k in enumerate(self.d.keys()):
-            self.assertEqual(self.d[k], toinsert[i])
-        for i, k in enumerate(self.d.iterkeys()):
-            self.assertEqual(self.d[k], toinsert[i])
-        for x in self.d.values():
-            self.assertTrue(x in toinsert)
-        for x in self.d.itervalues():
-            self.assertTrue(x in toinsert)
-        for x, y in self.d.items():
-            self.assertTrue(x in toinsert)
-            self.assertTrue(y in toinsert)
-        for x, y in self.d.iteritems():
-            self.assertTrue(x in toinsert)
-            self.assertTrue(y in toinsert)
-
-    def test_clear (self):
-        self.assertTrue(not self.d)
-        self.d[2] = 1
-        self.d[1] = 3
-        self.d.clear()
-        self.assertTrue(not self.d)
-
-    def test_get_true (self):
-        self.assertTrue(not self.d)
-        self.d["a"] = 0
-        self.d["b"] = 1
-        self.assertEqual(self.d.get_true("a", 2), 2)
-        self.assertEqual(self.d.get_true("b", 2), 1)
 
 
 class TestCaselessDict (unittest.TestCase):

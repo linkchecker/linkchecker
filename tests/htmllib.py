@@ -114,7 +114,7 @@ class HtmlPrettyPrinter:
         @return: None
         """
         self.fd.write("<%s" % tag.replace("/", ""))
-        for key, val in attrs.items():
+        for key, val in sorted(attrs.items()):
             if val is None:
                 self.fd.write(" %s" % key)
             else:
