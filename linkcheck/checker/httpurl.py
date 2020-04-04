@@ -310,6 +310,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         if self.text is None:
             self.get_raw_content()
             self.soup = BeautifulSoup(self.data, "html.parser",
+                                      multi_valued_attributes=None,
                                       from_encoding=self.encoding)
             self.text = self.data.decode(self.soup.original_encoding)
         return self.text

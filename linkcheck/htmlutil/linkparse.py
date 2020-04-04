@@ -130,7 +130,7 @@ class MetaRobotsFinder (TagFinder):
     def start_element (self, tag, attrs, element_text=None):
         """Search for meta robots.txt "nofollow" and "noindex" flags."""
         if tag == 'meta' and attrs.get('name') == 'robots':
-            val = attrs.get_true('content', u'').lower().split(u',')
+            val = attrs.get('content', u'').lower().split(u',')
             self.follow = u'nofollow' not in val
             self.index = u'noindex' not in val
             raise StopParse("found <meta name=robots> tag")
@@ -142,11 +142,11 @@ def is_meta_url (attr, attrs):
     """Check if the meta attributes contain a URL."""
     res = False
     if attr == "content":
-        equiv = attrs.get_true('http-equiv', u'').lower()
-        scheme = attrs.get_true('scheme', u'').lower()
+        equiv = attrs.get('http-equiv', u'').lower()
+        scheme = attrs.get('scheme', u'').lower()
         res = equiv in (u'refresh',) or scheme in (u'dcterms.uri',)
     if attr == "href":
-        rel = attrs.get_true('rel', u'').lower()
+        rel = attrs.get('rel', u'').lower()
         res = rel in (u'shortcut icon', u'icon')
     return res
 
@@ -155,7 +155,7 @@ def is_form_get(attr, attrs):
     """Check if this is a GET form action URL."""
     res = False
     if attr == "action":
-        method = attrs.get_true('method', u'').lower()
+        method = attrs.get('method', u'').lower()
         res = method != 'post'
     return res
 
@@ -180,9 +180,9 @@ class LinkFinder (TagFinder):
     def start_element (self, tag, attrs, element_text=None):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
-        log.debug(LOG_CHECK, "line %d col %d old line %s old col %s", self.parser.lineno(), self.parser.column(), self.parser.last_lineno(), self.parser.last_column())
+        log.debug(LOG_CHECK, "line %d col %d", self.parser.lineno(), self.parser.column())
         if tag == "base" and not self.base_ref:
-            self.base_ref = attrs.get_true("href", u'')
+            self.base_ref = attrs.get("href", u'')
         tagattrs = self.tags.get(tag, self.universal_attrs)
         # parse URLs in tag (possibly multiple URLs in CSS styles)
         for attr in sorted(tagattrs.intersection(attrs)):
@@ -195,7 +195,7 @@ class LinkFinder (TagFinder):
             # possible codebase
             base = u''
             if tag  == 'applet':
-                base = attrs.get_true('codebase', u'')
+                base = attrs.get('codebase', u'')
             if not base:
                 base = self.base_ref
             # note: value can be None
@@ -212,11 +212,11 @@ class LinkFinder (TagFinder):
         """Parse attrs for link name. Return name of link."""
         if tag == 'a' and attr == 'href':
             if not name:
-                name = attrs.get_true('title', u'')
+                name = attrs.get('title', u'')
         elif tag == 'img':
-            name = attrs.get_true('alt', u'')
+            name = attrs.get('alt', u'')
             if not name:
-                name = attrs.get_true('title', u'')
+                name = attrs.get('title', u'')
         else:
             name = u""
         return name

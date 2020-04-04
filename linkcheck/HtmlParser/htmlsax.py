@@ -26,8 +26,6 @@ filterwarnings("ignore",
 
 from bs4 import BeautifulSoup, Tag
 
-from ..containers import ListDict
-
 
 class Parser(object):
     handler = None
@@ -53,34 +51,20 @@ class Parser(object):
         self.html_doc = None
         self.tag_lineno = None
         self.tag_column = None
-        self.last_tag_lineno = None
-        self.last_tag_column = None
 
     def parse_contents(self, contents):
         for content in contents:
             if isinstance(content, Tag):
-                attrs = ListDict()
-                for k, v_list in sorted(content.attrs.items()):
-                    if not isinstance(v_list, list):
-                        v_list = [v_list]
-                    for v in v_list:
-                        # empty parameters returned by BS4
-                        # are sometimes in bytes:
-                        if v == b'':
-                            v = u''
-                        attrs[k] = v
-                self.last_tag_lineno = self.tag_lineno
-                self.last_tag_column = self.tag_column
                 self.tag_lineno = content.sourceline
                 self.tag_column = None if content.sourcepos is None \
                     else content.sourcepos + 1
                 if content.is_empty_element:
                     self.handler.start_end_element(
-                        content.name, attrs, content.text.strip(),
+                        content.name, content.attrs, content.text.strip(),
                     )
                 else:
                     self.handler.start_element(
-                        content.name, attrs, content.text.strip(),
+                        content.name, content.attrs, content.text.strip(),
                     )
                     if hasattr(content, 'contents'):  # recursion
                         self.parse_contents(content.contents)
@@ -89,25 +73,17 @@ class Parser(object):
 
     def flush(self):
         if self.soup is None:
-            self.soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser')
+            self.soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser',
+                                      multi_valued_attributes=None)
         if hasattr(self.soup, 'contents'):
             self.parse_contents(self.soup.contents)
         self.encoding = self.soup.original_encoding
 
-    def debug(self, text):
-        raise NotImplementedError("debug is not implemented")
-
     def lineno(self):
         return self.tag_lineno
 
-    def last_lineno(self):
-        return self.last_tag_lineno
-
     def column(self):
         return self.tag_column
-
-    def last_column(self):
-        return self.last_tag_column
 
 
 def parser(handler=None):

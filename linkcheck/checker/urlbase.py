@@ -657,7 +657,8 @@ class UrlBase (object):
     def get_content (self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = BeautifulSoup(self.data, "html.parser")
+            self.soup = BeautifulSoup(self.data, "html.parser",
+                                      multi_valued_attributes=None)
             self.text = self.data.decode(self.soup.original_encoding)
             self.encoding = self.soup.original_encoding
         return self.text
