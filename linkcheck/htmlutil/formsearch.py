@@ -50,7 +50,7 @@ class FormFinder(object):
         self.forms = []
         self.form = None
 
-    def start_element(self, tag, attrs):
+    def start_element(self, tag, attrs, element_text=None):
         """Does nothing, override in a subclass."""
         if tag == u'form':
             if u'action' in attrs:
@@ -66,13 +66,13 @@ class FormFinder(object):
                     log.warn(LOG_CHECK, "nameless form input %s" % attrs)
                     pass
             else:
-                log.warn(LOG_CHECK, "formless input´%s" % attrs)
+                log.warn(LOG_CHECK, "formless input %s" % attrs)
                 pass
 
-    def start_end_element(self, tag, attrs):
+    def start_end_element(self, tag, attrs, element_text=None):
         """Delegate a combined start/end element (eg. <input .../>) to
         the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs)
+        self.start_element(tag, attrs, element_text)
 
     def end_element(self, tag):
         """search for ending form values."""
