@@ -27,6 +27,10 @@ filterwarnings("ignore",
 from bs4 import BeautifulSoup, Tag
 
 
+def make_soup(markup, from_encoding=None):
+    return BeautifulSoup(markup, "html.parser", from_encoding=from_encoding,
+                         multi_valued_attributes=None)
+
 class Parser(object):
     handler = None
     encoding = None

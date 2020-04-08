@@ -17,7 +17,6 @@
 """
 Handle http links.
 """
-from bs4 import BeautifulSoup
 import requests
 # The validity of SSL certs is ignored to be able
 # the check the URL and recurse into it.
@@ -305,9 +304,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def get_content(self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = BeautifulSoup(self.data, "html.parser",
-                                      multi_valued_attributes=None,
-                                      from_encoding=self.encoding)
+            self.soup = htmlsax.make_soup(self.data, self.encoding)
             self.text = self.data.decode(self.soup.original_encoding)
         return self.text
 

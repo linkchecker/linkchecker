@@ -41,17 +41,11 @@ import select
 from io import BytesIO
 from builtins import str as str_text
 from future.utils import python_2_unicode_compatible
-from warnings import filterwarnings
-
-filterwarnings("ignore",
-    message="The soupsieve package is not installed. CSS selectors cannot be used.",
-    category=UserWarning, module="bs4")
-
-from bs4 import BeautifulSoup
 
 from . import absolute_url, get_url_from
 from .. import (log, LOG_CHECK,
   strformat, LinkCheckerError, url as urlutil, trace, get_link_pat)
+from ..HtmlParser import htmlsax
 from ..network import iputil
 from .const import (WARN_URL_EFFECTIVE_URL,
     WARN_URL_ERROR_GETTING_CONTENT, WARN_URL_OBFUSCATED_IP,
@@ -657,8 +651,7 @@ class UrlBase (object):
     def get_content (self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = BeautifulSoup(self.data, "html.parser",
-                                      multi_valued_attributes=None)
+            self.soup = htmlsax.make_soup(self.data)
             self.text = self.data.decode(self.soup.original_encoding)
             self.encoding = self.soup.original_encoding
         return self.text
