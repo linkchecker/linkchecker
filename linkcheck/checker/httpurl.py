@@ -85,7 +85,6 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         # parse
         try:
             parser.feed_soup(self.get_soup())
-            parser.flush()
         except linkparse.StopParse as msg:
             log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
             pass

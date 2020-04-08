@@ -146,16 +146,14 @@ class TestParser (unittest.TestCase):
         parser.feed_soup(htmlsax.make_soup(_in))
         self.check_results(_in, _out, out)
 
-    def check_results (self, htmlparser, _in, _out, out):
+    def check_results (self, _in, _out, out):
         """
         Check parse results.
         """
-        htmlparser.flush()
         res = out.getvalue()
         msg = "Test error; in: %r, out: %r, expect: %r" % \
            (_in, res, _out)
         self.assertEqual(res, _out, msg=msg)
-        htmlparser.reset()
 
     def test_encoding_detection_utf_content (self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
@@ -188,5 +186,4 @@ class TestParser (unittest.TestCase):
         handler = HtmlPrettyPrinter(out)
         parser = htmlsax.parser(handler)
         parser.feed_soup(htmlsax.make_soup(html))
-        parser.flush()
         self.assertEqual(parser.encoding, expected)

@@ -36,13 +36,10 @@ class Parser(object):
 
     def __init__(self, handler):
         self.handler = handler
-        self.reset()
 
     def feed_soup(self, soup):
-        self.soup = soup
-
-    def reset(self):
-        self.soup = None
+        self.parse_contents(soup.contents)
+        self.encoding = soup.original_encoding
 
     def parse_contents(self, contents):
         for content in contents:
@@ -63,11 +60,6 @@ class Parser(object):
                         self.parse_contents(content.contents)
                     if hasattr(self.handler, 'end_element'):
                         self.handler.end_element(content.name)
-
-    def flush(self):
-        if hasattr(self.soup, 'contents'):
-            self.parse_contents(self.soup.contents)
-        self.encoding = self.soup.original_encoding
 
 
 def parser(handler=None):

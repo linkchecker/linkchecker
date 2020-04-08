@@ -124,7 +124,6 @@ def find_links (url_data, callback, tags):
     try:
         soup = url_data.get_soup()
         parser.feed_soup(soup)
-        parser.flush()
     except linkparse.StopParse as msg:
         log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
         pass

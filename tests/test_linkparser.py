@@ -34,7 +34,6 @@ class TestLinkparser (unittest.TestCase):
         p = htmlsax.parser(h)
         try:
             p.feed_soup(htmlsax.make_soup(content))
-            p.flush()
         except linkparse.StopParse:
             pass
         self.assertEqual(self.count_url, 1)
@@ -53,7 +52,6 @@ class TestLinkparser (unittest.TestCase):
         p = htmlsax.parser(h)
         try:
             p.feed_soup(htmlsax.make_soup(content))
-            p.flush()
         except linkparse.StopParse:
             pass
 
