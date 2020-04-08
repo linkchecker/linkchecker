@@ -15,48 +15,10 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-Default HTML parser handler classes.
+HTML parser handler test class.
 """
 
 import sys
-
-
-class HtmlPrinter:
-    """
-    Handles all functions by printing the function name and attributes.
-    """
-
-    def __init__ (self, fd=sys.stdout):
-        """
-        Write to given file descriptor.
-
-        @param fd: file like object (default=sys.stdout)
-        @type fd: file
-        """
-        self.fd = fd
-
-    def _print (self, *attrs):
-        """
-        Print function attributes to stored file descriptor.
-
-        @param attrs: list of values to print
-        @type attrs: tuple
-        @return: None
-        """
-        self.fd.write(self.mem)
-        self.fd.write(str(attrs))
-
-    def __getattr__ (self, name):
-        """
-        Remember the called method name in self.mem.
-
-        @param name: attribute name
-        @type name: string
-        @return: method which just prints out its arguments
-        @rtype: a bound function object
-        """
-        self.mem = name
-        return self._print
 
 
 class HtmlPrettyPrinter:

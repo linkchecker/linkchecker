@@ -17,7 +17,6 @@
 HTML parser implemented using Beautiful Soup and html.parser.
 """
 
-from io import BytesIO, StringIO
 from warnings import filterwarnings
 
 filterwarnings("ignore",
@@ -39,20 +38,11 @@ class Parser(object):
         self.handler = handler
         self.reset()
 
-    def feed(self, feed_text):
-        if not self.html_doc:
-            if isinstance(feed_text, bytes):
-                self.html_doc = BytesIO()
-            else:
-                self.html_doc = StringIO()
-        self.html_doc.write(feed_text)
-
     def feed_soup(self, soup):
         self.soup = soup
 
     def reset(self):
         self.soup = None
-        self.html_doc = None
 
     def parse_contents(self, contents):
         for content in contents:
@@ -75,9 +65,6 @@ class Parser(object):
                         self.handler.end_element(content.name)
 
     def flush(self):
-        if self.soup is None:
-            self.soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser',
-                                      multi_valued_attributes=None)
         if hasattr(self.soup, 'contents'):
             self.parse_contents(self.soup.contents)
         self.encoding = self.soup.original_encoding
