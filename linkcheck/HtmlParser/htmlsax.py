@@ -32,14 +32,12 @@ def make_soup(markup, from_encoding=None):
 
 class Parser(object):
     handler = None
-    encoding = None
 
     def __init__(self, handler):
         self.handler = handler
 
     def feed_soup(self, soup):
         self.parse_contents(soup.contents)
-        self.encoding = soup.original_encoding
 
     def parse_contents(self, contents):
         for content in contents:

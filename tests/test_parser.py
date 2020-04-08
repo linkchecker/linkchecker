@@ -180,10 +180,9 @@ class TestParser (unittest.TestCase):
         self.encoding_test(html, "ascii")
 
     def encoding_test (self, html, expected):
-        parser = htmlsax.parser()
-        self.assertEqual(parser.encoding, None)
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
         parser = htmlsax.parser(handler)
-        parser.feed_soup(htmlsax.make_soup(html))
-        self.assertEqual(parser.encoding, expected)
+        soup = htmlsax.make_soup(html)
+        parser.feed_soup(soup)
+        self.assertEqual(soup.original_encoding, expected)
