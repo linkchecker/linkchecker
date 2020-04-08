@@ -77,7 +77,7 @@ class HtmlPrettyPrinter:
         self.fd = fd
         self.encoding = encoding
 
-    def start_element (self, tag, attrs, element_text=None):
+    def start_element (self, tag, attrs, element_text, lineno, column):
         """
         Print HTML start element.
 
@@ -89,7 +89,7 @@ class HtmlPrettyPrinter:
         """
         self._start_element(tag, attrs, ">", element_text)
 
-    def start_end_element (self, tag, attrs, element_text=None):
+    def start_end_element (self, tag, attrs, element_text, lineno, column):
         """
         Print HTML start-end element.
 
@@ -101,7 +101,7 @@ class HtmlPrettyPrinter:
         """
         self._start_element(tag, attrs, "/>", element_text)
 
-    def _start_element (self, tag, attrs, end, element_text=None):
+    def _start_element (self, tag, attrs, end, element_text):
         """
         Print HTML element with end string.
 

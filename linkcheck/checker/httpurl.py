@@ -83,7 +83,6 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         # construct parser object
         handler = linkparse.MetaRobotsFinder()
         parser = htmlsax.parser(handler)
-        handler.parser = parser
         # parse
         try:
             parser.feed_soup(self.get_soup())
@@ -91,9 +90,6 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         except linkparse.StopParse as msg:
             log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
             pass
-        # break cyclic dependencies
-        handler.parser = None
-        parser.handler = None
         return handler.follow
 
     def add_size_info (self):

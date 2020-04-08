@@ -44,13 +44,10 @@ class FormFinder(object):
     def __init__(self):
         """Initialize local variables."""
         super(FormFinder, self).__init__()
-        # parser object will be initialized when it is used as
-        # a handler object
-        self.parser = None
         self.forms = []
         self.form = None
 
-    def start_element(self, tag, attrs, element_text=None):
+    def start_element(self, tag, attrs, element_text, lineno, column):
         """Does nothing, override in a subclass."""
         if tag == u'form':
             if u'action' in attrs:
@@ -69,10 +66,10 @@ class FormFinder(object):
                 log.warn(LOG_CHECK, "formless input %s" % attrs)
                 pass
 
-    def start_end_element(self, tag, attrs, element_text=None):
+    def start_end_element(self, tag, attrs, element_text, lineno, column):
         """Delegate a combined start/end element (eg. <input .../>) to
         the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs, element_text)
+        self.start_element(tag, attrs, element_text, lineno, column)
 
     def end_element(self, tag):
         """search for ending form values."""
@@ -87,13 +84,9 @@ def search_form(content, cgiuser, cgipassword):
     """
     handler = FormFinder()
     parser = htmlsax.parser(handler)
-    handler.parser = parser
     # parse
     parser.feed(content)
     parser.flush()
-    # break cyclic dependencies
-    handler.parser = None
-    parser.handler = None
     log.debug(LOG_CHECK, "Found forms %s", handler.forms)
     cginames = (cgiuser.lower(), cgipassword.lower())
     for form in handler.forms:

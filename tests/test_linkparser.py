@@ -32,14 +32,11 @@ class TestLinkparser (unittest.TestCase):
         self.count_url = 0
         h = linkparse.LinkFinder(self._test_one_url(url), linkparse.LinkTags)
         p = linkcheck.HtmlParser.htmlsax.parser(h)
-        h.parser = p
         try:
             p.feed(content)
             p.flush()
         except linkparse.StopParse:
             pass
-        h.parser = None
-        p.handler = None
         self.assertEqual(self.count_url, 1)
 
     def _test_one_url (self, origurl):
@@ -54,14 +51,11 @@ class TestLinkparser (unittest.TestCase):
             self.assertTrue(False, 'URL %r found' % url)
         h = linkparse.LinkFinder(callback, linkparse.LinkTags)
         p = linkcheck.HtmlParser.htmlsax.parser(h)
-        h.parser = p
         try:
             p.feed(content)
             p.flush()
         except linkparse.StopParse:
             pass
-        h.parser = None
-        p.handler = None
 
     def test_href_parsing (self):
         # Test <a href> parsing.

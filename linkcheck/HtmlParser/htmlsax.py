@@ -49,22 +49,21 @@ class Parser(object):
     def reset(self):
         self.soup = None
         self.html_doc = None
-        self.tag_lineno = None
-        self.tag_column = None
 
     def parse_contents(self, contents):
         for content in contents:
             if isinstance(content, Tag):
-                self.tag_lineno = content.sourceline
-                self.tag_column = None if content.sourcepos is None \
+                tag_column = None if content.sourcepos is None \
                     else content.sourcepos + 1
                 if content.is_empty_element:
                     self.handler.start_end_element(
                         content.name, content.attrs, content.text.strip(),
+                        content.sourceline, tag_column
                     )
                 else:
                     self.handler.start_element(
                         content.name, content.attrs, content.text.strip(),
+                        content.sourceline, tag_column
                     )
                     if hasattr(content, 'contents'):  # recursion
                         self.parse_contents(content.contents)
@@ -78,12 +77,6 @@ class Parser(object):
         if hasattr(self.soup, 'contents'):
             self.parse_contents(self.soup.contents)
         self.encoding = self.soup.original_encoding
-
-    def lineno(self):
-        return self.tag_lineno
-
-    def column(self):
-        return self.tag_column
 
 
 def parser(handler=None):

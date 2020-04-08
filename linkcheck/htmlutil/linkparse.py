@@ -104,18 +104,15 @@ class TagFinder (object):
     def __init__ (self):
         """Initialize local variables."""
         super(TagFinder, self).__init__()
-        # parser object will be initialized when it is used as
-        # a handler object
-        self.parser = None
 
-    def start_element (self, tag, attrs):
+    def start_element (self, tag, attrs, element_text, lineno, column):
         """Does nothing, override in a subclass."""
         pass
 
-    def start_end_element (self, tag, attrs, element_text=None):
+    def start_end_element (self, tag, attrs, element_text, lineno, column):
         """Delegate a combined start/end element (eg. <br/>) to
         the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs, element_text)
+        self.start_element(tag, attrs, element_text, lineno, column)
 
 
 class MetaRobotsFinder (TagFinder):
@@ -127,7 +124,7 @@ class MetaRobotsFinder (TagFinder):
         log.debug(LOG_CHECK, "meta robots finder")
         self.follow = self.index = True
 
-    def start_element (self, tag, attrs, element_text=None):
+    def start_element (self, tag, attrs, element_text, lineno, column):
         """Search for meta robots.txt "nofollow" and "noindex" flags."""
         if tag == 'meta' and attrs.get('name') == 'robots':
             val = attrs.get('content', u'').lower().split(u',')
@@ -177,10 +174,10 @@ class LinkFinder (TagFinder):
             self.tags[tag].update(self.universal_attrs)
         self.base_ref = u''
 
-    def start_element (self, tag, attrs, element_text=None):
+    def start_element (self, tag, attrs, element_text, lineno, column):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
-        log.debug(LOG_CHECK, "line %d col %d", self.parser.lineno(), self.parser.column())
+        log.debug(LOG_CHECK, "line %d col %d", lineno, column)
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get("href", u'')
         tagattrs = self.tags.get(tag, self.universal_attrs)
@@ -205,7 +202,7 @@ class LinkFinder (TagFinder):
                     value = value.split(':', 1)[1]
                 value = 'dns:' + value.rstrip('/')
             # parse tag for URLs
-            self.parse_tag(tag, attr, value, name, base)
+            self.parse_tag(tag, attr, value, name, base, lineno, column)
         log.debug(LOG_CHECK, "LinkFinder finished tag %s", tag)
 
     def get_link_name (self, tag, attrs, attr, name=None):
@@ -221,7 +218,7 @@ class LinkFinder (TagFinder):
             name = u""
         return name
 
-    def parse_tag (self, tag, attr, value, name, base):
+    def parse_tag (self, tag, attr, value, name, base, lineno, column):
         """Add given url data to url list."""
         assert isinstance(tag, str_text), repr(tag)
         assert isinstance(attr, str_text), repr(attr)
@@ -232,25 +229,24 @@ class LinkFinder (TagFinder):
         if tag == u'meta' and value:
             mo = refresh_re.match(value)
             if mo:
-                self.found_url(mo.group("url"), name, base)
+                self.found_url(mo.group("url"), name, base, lineno, column)
             elif attr != 'content':
-                self.found_url(value, name, base)
+                self.found_url(value, name, base, lineno, column)
         elif attr == u'style' and value:
             for mo in css_url_re.finditer(value):
                 url = unquote(mo.group("url"), matching=True)
-                self.found_url(url, name, base)
+                self.found_url(url, name, base, lineno, column)
         elif attr == u'archive':
             for url in value.split(u','):
-                self.found_url(url, name, base)
+                self.found_url(url, name, base, lineno, column)
         elif attr == u'srcset':
             for img_candidate in value.split(u','):
                 url = img_candidate.split()[0]
-                self.found_url(url, name, base)
+                self.found_url(url, name, base, lineno, column)
         else:
-            self.found_url(value, name, base)
+            self.found_url(value, name, base, lineno, column)
 
-    def found_url(self, url, name, base):
+    def found_url(self, url, name, base, lineno, column):
         """Add newly found URL to queue."""
         assert isinstance(url, str_text) or url is None, repr(url)
-        self.callback(url, line=self.parser.lineno(),
-                      column=self.parser.column(), name=name, base=base)
+        self.callback(url, line=lineno, column=column, name=name, base=base)
