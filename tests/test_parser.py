@@ -18,14 +18,14 @@
 Test html parsing.
 """
 
-import linkcheck.HtmlParser.htmlsax
+from linkcheck.HtmlParser import htmlsax
 
 from io import StringIO
 import unittest
 
 from parameterized import parameterized
 
-from .htmllib import HtmlPrinter, HtmlPrettyPrinter
+from .htmllib import HtmlPrettyPrinter
 
 # list of tuples
 # (<test pattern>, <expected parse output>)
@@ -137,70 +137,23 @@ class TestParser (unittest.TestCase):
     Test html parser.
     """
 
-    def setUp (self):
-        """
-        Initialize two internal html parsers to be used for testing.
-        """
-        self.htmlparser = linkcheck.HtmlParser.htmlsax.parser()
-        self.htmlparser2 = linkcheck.HtmlParser.htmlsax.parser()
-
     @parameterized.expand(parsetests)
     def test_parse (self, _in, _out):
         # Parse all test patterns in one go.
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        self.htmlparser.handler = handler
-        self.htmlparser.feed(_in)
-        self.check_results(self.htmlparser, _in, _out, out)
+        parser = htmlsax.parser(handler)
+        parser.feed_soup(htmlsax.make_soup(_in))
+        self.check_results(_in, _out, out)
 
-    def check_results (self, htmlparser, _in, _out, out):
+    def check_results (self, _in, _out, out):
         """
         Check parse results.
         """
-        htmlparser.flush()
         res = out.getvalue()
         msg = "Test error; in: %r, out: %r, expect: %r" % \
            (_in, res, _out)
         self.assertEqual(res, _out, msg=msg)
-        htmlparser.reset()
-
-    @parameterized.expand(parsetests)
-    def test_feed (self, _in, _out):
-        # Parse all test patterns sequentially.
-        out = StringIO()
-        handler = HtmlPrettyPrinter(out)
-        self.htmlparser.handler = handler
-        for c in _in:
-            self.htmlparser.feed(c)
-        self.check_results(self.htmlparser, _in, _out, out)
-
-    @parameterized.expand(parsetests)
-    def test_interwoven (self, _in, _out):
-        # Parse all test patterns on two parsers interwoven.
-        out = StringIO()
-        out2 = StringIO()
-        handler = HtmlPrettyPrinter(out)
-        self.htmlparser.handler = handler
-        handler2 = HtmlPrettyPrinter(out2)
-        self.htmlparser2.handler = handler2
-        for c in _in:
-            self.htmlparser.feed(c)
-            self.htmlparser2.feed(c)
-        self.check_results(self.htmlparser, _in, _out, out)
-        self.check_results(self.htmlparser2, _in, _out, out2)
-
-    @parameterized.expand(parsetests)
-    def test_handler (self, _in, _out):
-        out = StringIO()
-        out2 = StringIO()
-        handler = HtmlPrinter(out)
-        self.htmlparser.handler = handler
-        handler2 = HtmlPrinter(out2)
-        self.htmlparser2.handler = handler2
-        for c in _in:
-            self.htmlparser.feed(c)
-            self.htmlparser2.feed(c)
-        self.assertEqual(out.getvalue(), out2.getvalue())
 
     def test_encoding_detection_utf_content (self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
@@ -227,11 +180,9 @@ class TestParser (unittest.TestCase):
         self.encoding_test(html, "ascii")
 
     def encoding_test (self, html, expected):
-        parser = linkcheck.HtmlParser.htmlsax.parser()
-        self.assertEqual(parser.encoding, None)
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        parser.handler = handler
-        parser.feed(html)
-        parser.flush()
-        self.assertEqual(parser.encoding, expected)
+        parser = htmlsax.parser(handler)
+        soup = htmlsax.make_soup(html)
+        parser.feed_soup(soup)
+        self.assertEqual(soup.original_encoding, expected)

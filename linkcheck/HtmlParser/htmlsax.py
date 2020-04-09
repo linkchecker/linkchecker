@@ -17,7 +17,6 @@
 HTML parser implemented using Beautiful Soup and html.parser.
 """
 
-from io import BytesIO, StringIO
 from warnings import filterwarnings
 
 filterwarnings("ignore",
@@ -27,63 +26,38 @@ filterwarnings("ignore",
 from bs4 import BeautifulSoup, Tag
 
 
+def make_soup(markup, from_encoding=None):
+    return BeautifulSoup(markup, "html.parser", from_encoding=from_encoding,
+                         multi_valued_attributes=None)
+
 class Parser(object):
     handler = None
-    encoding = None
 
     def __init__(self, handler):
         self.handler = handler
-        self.reset()
-
-    def feed(self, feed_text):
-        if not self.html_doc:
-            if isinstance(feed_text, bytes):
-                self.html_doc = BytesIO()
-            else:
-                self.html_doc = StringIO()
-        self.html_doc.write(feed_text)
 
     def feed_soup(self, soup):
-        self.soup = soup
-
-    def reset(self):
-        self.soup = None
-        self.html_doc = None
-        self.tag_lineno = None
-        self.tag_column = None
+        self.parse_contents(soup.contents)
 
     def parse_contents(self, contents):
         for content in contents:
             if isinstance(content, Tag):
-                self.tag_lineno = content.sourceline
-                self.tag_column = None if content.sourcepos is None \
+                tag_column = None if content.sourcepos is None \
                     else content.sourcepos + 1
                 if content.is_empty_element:
                     self.handler.start_end_element(
                         content.name, content.attrs, content.text.strip(),
+                        content.sourceline, tag_column
                     )
                 else:
                     self.handler.start_element(
                         content.name, content.attrs, content.text.strip(),
+                        content.sourceline, tag_column
                     )
                     if hasattr(content, 'contents'):  # recursion
                         self.parse_contents(content.contents)
                     if hasattr(self.handler, 'end_element'):
                         self.handler.end_element(content.name)
-
-    def flush(self):
-        if self.soup is None:
-            self.soup = BeautifulSoup(self.html_doc.getvalue(), 'html.parser',
-                                      multi_valued_attributes=None)
-        if hasattr(self.soup, 'contents'):
-            self.parse_contents(self.soup.contents)
-        self.encoding = self.soup.original_encoding
-
-    def lineno(self):
-        return self.tag_lineno
-
-    def column(self):
-        return self.tag_column
 
 
 def parser(handler=None):

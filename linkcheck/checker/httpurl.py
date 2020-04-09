@@ -17,7 +17,6 @@
 """
 Handle http links.
 """
-from bs4 import BeautifulSoup
 import requests
 # The validity of SSL certs is ignored to be able
 # the check the URL and recurse into it.
@@ -83,17 +82,12 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         # construct parser object
         handler = linkparse.MetaRobotsFinder()
         parser = htmlsax.parser(handler)
-        handler.parser = parser
         # parse
         try:
             parser.feed_soup(self.get_soup())
-            parser.flush()
         except linkparse.StopParse as msg:
             log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
             pass
-        # break cyclic dependencies
-        handler.parser = None
-        parser.handler = None
         return handler.follow
 
     def add_size_info (self):
@@ -309,9 +303,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def get_content(self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = BeautifulSoup(self.data, "html.parser",
-                                      multi_valued_attributes=None,
-                                      from_encoding=self.encoding)
+            self.soup = htmlsax.make_soup(self.data, self.encoding)
             self.text = self.data.decode(self.soup.original_encoding)
         return self.text
 

@@ -20,7 +20,7 @@ Test linkparser routines.
 
 import unittest
 from linkcheck.htmlutil import linkparse
-import linkcheck.HtmlParser.htmlsax
+from linkcheck.HtmlParser import htmlsax
 
 
 class TestLinkparser (unittest.TestCase):
@@ -31,15 +31,11 @@ class TestLinkparser (unittest.TestCase):
     def _test_one_link (self, content, url):
         self.count_url = 0
         h = linkparse.LinkFinder(self._test_one_url(url), linkparse.LinkTags)
-        p = linkcheck.HtmlParser.htmlsax.parser(h)
-        h.parser = p
+        p = htmlsax.parser(h)
         try:
-            p.feed(content)
-            p.flush()
+            p.feed_soup(htmlsax.make_soup(content))
         except linkparse.StopParse:
             pass
-        h.parser = None
-        p.handler = None
         self.assertEqual(self.count_url, 1)
 
     def _test_one_url (self, origurl):
@@ -53,15 +49,11 @@ class TestLinkparser (unittest.TestCase):
         def callback (url, line, column, name, base):
             self.assertTrue(False, 'URL %r found' % url)
         h = linkparse.LinkFinder(callback, linkparse.LinkTags)
-        p = linkcheck.HtmlParser.htmlsax.parser(h)
-        h.parser = p
+        p = htmlsax.parser(h)
         try:
-            p.feed(content)
-            p.flush()
+            p.feed_soup(htmlsax.make_soup(content))
         except linkparse.StopParse:
             pass
-        h.parser = None
-        p.handler = None
 
     def test_href_parsing (self):
         # Test <a href> parsing.
