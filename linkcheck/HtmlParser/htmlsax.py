@@ -42,20 +42,14 @@ class Parser(object):
     def parse_contents(self, contents):
         for content in contents:
             if isinstance(content, Tag):
-                tag_column = None if content.sourcepos is None \
+                self.handler.start_element(
+                    content.name, content.attrs, content.text.strip(),
+                    content.sourceline,
+                    None if content.sourcepos is None
                     else content.sourcepos + 1
-                if content.is_empty_element:
-                    self.handler.start_end_element(
-                        content.name, content.attrs, content.text.strip(),
-                        content.sourceline, tag_column
-                    )
-                else:
-                    self.handler.start_element(
-                        content.name, content.attrs, content.text.strip(),
-                        content.sourceline, tag_column
-                    )
-                    if hasattr(content, 'contents'):  # recursion
-                        self.parse_contents(content.contents)
+                )
+                if hasattr(content, 'contents'):  # recursion
+                    self.parse_contents(content.contents)
 
 
 def parser(handler=None):

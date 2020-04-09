@@ -33,13 +33,6 @@ Used callbacks of a handler are:
   @param attrs: tag attributes
   @type attrs: ListDict
 
-- Start-end tag: <tag {attr1:value1, attr2:value2, ..}/>
-  def start_end_element(tag, attrs):
-  @param tag: tag name
-  @type tag: Unicode string
-  @param attrs: tag attributes
-  @type attrs: ListDict
-
 Additionally, there are error and warning callbacks:
 
 - Parser warning.
