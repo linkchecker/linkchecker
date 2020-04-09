@@ -40,11 +40,6 @@ Used callbacks of a handler are:
   @param attrs: tag attributes
   @type attrs: ListDict
 
-- End tag: </tag>
-  def end_element (tag)
-  @param tag: tag name
-  @type tag: Unicode string
-
 Additionally, there are error and warning callbacks:
 
 - Parser warning.

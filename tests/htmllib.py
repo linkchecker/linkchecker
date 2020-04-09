@@ -50,6 +50,7 @@ class HtmlPrettyPrinter:
         @return: None
         """
         self._start_element(tag, attrs, ">", element_text)
+        self.fd.write("</%s>" % tag)
 
     def start_end_element (self, tag, attrs, element_text, lineno, column):
         """
@@ -84,16 +85,6 @@ class HtmlPrettyPrinter:
         self.fd.write(end)
         if element_text:
             self.fd.write(element_text)
-
-    def end_element (self, tag):
-        """
-        Print HTML end element.
-
-        @param tag: tag name
-        @type tag: string
-        @return: None
-        """
-        self.fd.write("</%s>" % tag)
 
 
 def quote_attrval (s):

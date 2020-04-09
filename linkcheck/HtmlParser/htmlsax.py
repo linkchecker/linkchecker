@@ -56,8 +56,6 @@ class Parser(object):
                     )
                     if hasattr(content, 'contents'):  # recursion
                         self.parse_contents(content.contents)
-                    if hasattr(self.handler, 'end_element'):
-                        self.handler.end_element(content.name)
 
 
 def parser(handler=None):
