@@ -30,8 +30,8 @@ login_form = """
 </form>
 <h1>Login</h1>
 <form action="/log_me_in">
-<input name="user_field">
-<input name="password_field">
+<input name="User_Field">
+<input name="Password_Field">
 <input name="extra_field">
 </form>
 </body>
@@ -43,11 +43,11 @@ class TestFormSearch(unittest.TestCase):
 
     def test_search_form(self):
         form = formsearch.search_form(login_form,
-                                      "user_field", "password_field")
+                                      "USER_FIELD", "password_field")
         self.assertIsNotNone(form)
         self.assertEqual(form.url, "/log_me_in")
-        self.assertIn("user_field", form.data)
-        self.assertIn("password_field", form.data)
+        self.assertIn("User_Field", form.data)
+        self.assertIn("Password_Field", form.data)
 
     def test_search_form_none(self):
         form = formsearch.search_form(login_form,

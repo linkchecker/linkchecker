@@ -37,60 +37,24 @@ class Form(object):
         return "<url=%s data=%s>" % (self.url, self.data)
 
 
-class FormFinder(object):
-    """Base class handling HTML start elements.
-    TagFinder instances are used as HtmlParser handlers."""
-
-    def __init__(self):
-        """Initialize local variables."""
-        super(FormFinder, self).__init__()
-        self.forms = []
-        self.form = None
-
-    def start_element(self, tag, attrs, element_text, lineno, column):
-        """Does nothing, override in a subclass."""
-        if tag == u'form':
-            if u'action' in attrs:
-                url = attrs['action']
-                self.form = Form(url)
-        elif tag == u'input':
-            if self.form:
-                if 'name' in attrs:
-                    key = attrs['name']
-                    value = attrs.get('value')
-                    self.form.add_value(key, value)
-                else:
-                    log.warn(LOG_CHECK, "nameless form input %s" % attrs)
-                    pass
-            else:
-                log.warn(LOG_CHECK, "formless input %s" % attrs)
-                pass
-
-    def start_end_element(self, tag, attrs, element_text, lineno, column):
-        """Delegate a combined start/end element (eg. <input .../>) to
-        the start_element method. Ignore the end element part."""
-        self.start_element(tag, attrs, element_text, lineno, column)
-
-    def end_element(self, tag):
-        """search for ending form values."""
-        if tag == u'form':
-            self.forms.append(self.form)
-            self.form = None
-
-
 def search_form(content, cgiuser, cgipassword):
     """Search for a HTML form in the given HTML content that has the given
     CGI fields. If no form is found return None.
     """
-    handler = FormFinder()
-    parser = htmlsax.parser(handler)
-    # parse
-    parser.feed_soup(htmlsax.make_soup(content))
-    log.debug(LOG_CHECK, "Found forms %s", handler.forms)
-    cginames = (cgiuser.lower(), cgipassword.lower())
-    for form in handler.forms:
-        for key, value in form.data.items():
-            if key.lower() in cginames:
-                return form
+    soup = htmlsax.make_soup(content)
+    # The value of the name attribute is case-insensitive
+    # https://www.w3.org/TR/html401/interact/forms.html#adef-name-INPUT
+    cginames = {cgiuser.lower(), cgipassword.lower()}
+    for form_element in soup.find_all("form", action=True):
+        form = Form(form_element["action"])
+        for input_element in form_element.find_all("input",
+                                                   attrs={"name": True}):
+            form.add_value(
+                input_element["name"], input_element.attrs.get("value"))
+        if cginames <= {x.lower() for x in form.data}:
+            log.debug(LOG_CHECK, "Found form %s", form)
+            return form
+
     # not found
+    log.debug(LOG_CHECK, "Form with fields %s not found", ",".join(cginames))
     return None
