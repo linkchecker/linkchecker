@@ -79,12 +79,11 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """
         if not self.is_html():
             return True
-        # construct parser object
+        # construct handler object
         handler = linkparse.MetaRobotsFinder()
-        parser = htmlsax.parser(handler)
         # parse
         try:
-            parser.feed_soup(self.get_soup())
+            htmlsax.process_soup(handler, self.get_soup())
         except linkparse.StopParse as msg:
             log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
             pass

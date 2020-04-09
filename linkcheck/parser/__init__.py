@@ -117,13 +117,11 @@ def find_links (url_data, callback, tags):
     """Parse into content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    # construct parser object
+    # construct handler object
     handler = linkparse.LinkFinder(callback, tags)
-    parser = htmlsax.parser(handler)
     # parse
     try:
-        soup = url_data.get_soup()
-        parser.feed_soup(soup)
+        htmlsax.process_soup(handler, url_data.get_soup())
     except linkparse.StopParse as msg:
         log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
         pass

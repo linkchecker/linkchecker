@@ -143,8 +143,7 @@ class TestParser (unittest.TestCase):
         # Parse all test patterns in one go.
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        parser = htmlsax.parser(handler)
-        parser.feed_soup(htmlsax.make_soup(_in))
+        htmlsax.process_soup(handler, htmlsax.make_soup(_in))
         self.check_results(_in, _out, out)
 
     def check_results (self, _in, _out, out):
@@ -183,7 +182,6 @@ class TestParser (unittest.TestCase):
     def encoding_test (self, html, expected):
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        parser = htmlsax.parser(handler)
         soup = htmlsax.make_soup(html)
-        parser.feed_soup(soup)
+        htmlsax.process_soup(handler, soup)
         self.assertEqual(soup.original_encoding, expected)

@@ -19,44 +19,31 @@ HTML parser module.
 
 USAGE
 
-First make a HTML SAX handler object. Missing callback functions are
-ignored. The object returned from callbacks is also ignored.
-Note that a missing attribute value is stored as the value None
-in the ListDict (ie. "<a href>" with lead to a {href: None} dict entry).
 
-Used callbacks of a handler are:
+Two functions are provided, one to make a BeautifulSoup object from markup and
+another to call a handler's callback for each element in a BeautifulSoup
+object it can process.
+
+The used callback of a handler is:
 
 - Start tag: <tag {attr1:value1, attr2:value2, ..}>
-  def start_element (tag, attrs)
+  def start_element (tag, attrs, text, line, column)
   @param tag: tag name
-  @type tag: Unicode string
+  @type tag: string
   @param attrs: tag attributes
-  @type attrs: ListDict
-
-Additionally, there are error and warning callbacks:
-
-- Parser warning.
-  def warning (msg)
-  @param msg: warning message
-  @type msg: Unicode string
-
-- Parser error.
-  def error (msg)
-  @param msg: error message
-  @type msg: Unicode string
-
-- Fatal parser error
-  def fatal_error (msg)
-  @param msg: error message
-  @type msg: Unicode string
+  @type attrs: dict
+  @param text: element text
+  @type tag: string
+  @param line: tag line number
+  @type tag: integer
+  @param column: tag column number
+  @type tag: integer
 
 EXAMPLE
 
- # Create a new HTML parser object with the handler as parameter.
- parser = HtmlParser.htmlsax.parser(handler)
- # Feed data.
- parser.feed("<html><body>Blubb</body></html>")
- # Flush for finishing things up.
- parser.flush()
+ # Create a new BeautifulSoup object.
+ soup = HtmlParser.htmlsax.make_soup("<html><body>Blubb</body></html>")
+ # Process the soup with the chosen handler as a parameter.
+ HtmlParser.htmlsax.proces_soup(handler, soup)
 
 """

@@ -31,9 +31,8 @@ class TestLinkparser (unittest.TestCase):
     def _test_one_link (self, content, url):
         self.count_url = 0
         h = linkparse.LinkFinder(self._test_one_url(url), linkparse.LinkTags)
-        p = htmlsax.parser(h)
         try:
-            p.feed_soup(htmlsax.make_soup(content))
+            htmlsax.process_soup(h, htmlsax.make_soup(content))
         except linkparse.StopParse:
             pass
         self.assertEqual(self.count_url, 1)
@@ -49,9 +48,8 @@ class TestLinkparser (unittest.TestCase):
         def callback (url, line, column, name, base):
             self.assertTrue(False, 'URL %r found' % url)
         h = linkparse.LinkFinder(callback, linkparse.LinkTags)
-        p = htmlsax.parser(h)
         try:
-            p.feed_soup(htmlsax.make_soup(content))
+            htmlsax.process_soup(h, htmlsax.make_soup(content))
         except linkparse.StopParse:
             pass
 
