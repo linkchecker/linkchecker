@@ -18,7 +18,7 @@
 Test html parsing.
 """
 
-from linkcheck.HtmlParser import htmlsax
+from linkcheck.htmlutil import htmlsoup
 
 from io import StringIO
 import unittest
@@ -143,7 +143,7 @@ class TestParser (unittest.TestCase):
         # Parse all test patterns in one go.
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        htmlsax.process_soup(handler, htmlsax.make_soup(_in))
+        htmlsoup.process_soup(handler, htmlsoup.make_soup(_in))
         self.check_results(_in, _out, out)
 
     def check_results (self, _in, _out, out):
@@ -182,6 +182,6 @@ class TestParser (unittest.TestCase):
     def encoding_test (self, html, expected):
         out = StringIO()
         handler = HtmlPrettyPrinter(out)
-        soup = htmlsax.make_soup(html)
-        htmlsax.process_soup(handler, soup)
+        soup = htmlsoup.make_soup(html)
+        htmlsoup.process_soup(handler, soup)
         self.assertEqual(soup.original_encoding, expected)

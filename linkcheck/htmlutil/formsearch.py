@@ -17,7 +17,7 @@
 """
 HTML form utils
 """
-from ..HtmlParser import htmlsax
+from ..htmlutil import htmlsoup
 from .. import log, LOG_CHECK
 
 class Form(object):
@@ -41,7 +41,7 @@ def search_form(content, cgiuser, cgipassword):
     """Search for a HTML form in the given HTML content that has the given
     CGI fields. If no form is found return None.
     """
-    soup = htmlsax.make_soup(content)
+    soup = htmlsoup.make_soup(content)
     # The value of the name attribute is case-insensitive
     # https://www.w3.org/TR/html401/interact/forms.html#adef-name-INPUT
     cginames = {cgiuser.lower(), cgipassword.lower()}

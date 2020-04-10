@@ -45,7 +45,7 @@ from future.utils import python_2_unicode_compatible
 from . import absolute_url, get_url_from
 from .. import (log, LOG_CHECK,
   strformat, LinkCheckerError, url as urlutil, trace, get_link_pat)
-from ..HtmlParser import htmlsax
+from ..htmlutil import htmlsoup
 from ..network import iputil
 from .const import (WARN_URL_EFFECTIVE_URL,
     WARN_URL_ERROR_GETTING_CONTENT, WARN_URL_OBFUSCATED_IP,
@@ -651,7 +651,7 @@ class UrlBase (object):
     def get_content (self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = htmlsax.make_soup(self.data)
+            self.soup = htmlsoup.make_soup(self.data)
             self.text = self.data.decode(self.soup.original_encoding)
             self.encoding = self.soup.original_encoding
         return self.text

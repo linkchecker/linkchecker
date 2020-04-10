@@ -19,8 +19,7 @@ Test linkparser routines.
 """
 
 import unittest
-from linkcheck.htmlutil import linkparse
-from linkcheck.HtmlParser import htmlsax
+from linkcheck.htmlutil import htmlsoup, linkparse
 
 
 class TestLinkparser (unittest.TestCase):
@@ -32,7 +31,7 @@ class TestLinkparser (unittest.TestCase):
         self.count_url = 0
         h = linkparse.LinkFinder(self._test_one_url(url), linkparse.LinkTags)
         try:
-            htmlsax.process_soup(h, htmlsax.make_soup(content))
+            htmlsoup.process_soup(h, htmlsoup.make_soup(content))
         except linkparse.StopParse:
             pass
         self.assertEqual(self.count_url, 1)
@@ -49,7 +48,7 @@ class TestLinkparser (unittest.TestCase):
             self.assertTrue(False, 'URL %r found' % url)
         h = linkparse.LinkFinder(callback, linkparse.LinkTags)
         try:
-            htmlsax.process_soup(h, htmlsax.make_soup(content))
+            htmlsoup.process_soup(h, htmlsoup.make_soup(content))
         except linkparse.StopParse:
             pass
 

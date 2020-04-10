@@ -30,8 +30,7 @@ from io import BytesIO
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
 from . import (internpaturl, proxysupport)
-from ..HtmlParser import htmlsax
-from ..htmlutil import linkparse
+from ..htmlutil import htmlsoup, linkparse
 # import warnings
 from .const import WARN_HTTP_EMPTY_CONTENT
 from requests.sessions import REDIRECT_STATI
@@ -83,7 +82,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         handler = linkparse.MetaRobotsFinder()
         # parse
         try:
-            htmlsax.process_soup(handler, self.get_soup())
+            htmlsoup.process_soup(handler, self.get_soup())
         except linkparse.StopParse as msg:
             log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
             pass
@@ -302,7 +301,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def get_content(self):
         if self.text is None:
             self.get_raw_content()
-            self.soup = htmlsax.make_soup(self.data, self.encoding)
+            self.soup = htmlsoup.make_soup(self.data, self.encoding)
             self.text = self.data.decode(self.soup.original_encoding)
         return self.text
 
