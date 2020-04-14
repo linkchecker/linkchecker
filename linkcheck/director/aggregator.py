@@ -33,7 +33,7 @@ import random
 from .. import log, LOG_CHECK, strformat, LinkCheckerError
 from ..decorators import synchronized
 from ..cache import urlqueue
-from ..htmlutil import formsearch
+from ..htmlutil import loginformsearch
 from ..cookies import from_file
 from . import logger, status, checker, interrupt
 
@@ -90,7 +90,7 @@ class Aggregate (object):
         response = session.get(url)
         cgiuser = self.config["loginuserfield"]
         cgipassword = self.config["loginpasswordfield"]
-        form = formsearch.search_form(response.text, cgiuser, cgipassword)
+        form = loginformsearch.search_form(response.text, cgiuser, cgipassword)
         form.data[cgiuser] = user
         form.data[cgipassword] = password
         for key, value in self.config["loginextrafields"].items():

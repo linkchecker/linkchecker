@@ -19,7 +19,7 @@ Test login form functions.
 
 import unittest
 
-from linkcheck.htmlutil import formsearch
+from linkcheck.htmlutil import loginformsearch
 
 login_form = """
 <html>
@@ -42,14 +42,14 @@ class TestFormSearch(unittest.TestCase):
     """Test processing of a login form."""
 
     def test_search_form(self):
-        form = formsearch.search_form(login_form,
-                                      "USER_FIELD", "password_field")
+        form = loginformsearch.search_form(login_form,
+                                           "USER_FIELD", "password_field")
         self.assertIsNotNone(form)
         self.assertEqual(form.url, "/log_me_in")
         self.assertIn("User_Field", form.data)
         self.assertIn("Password_Field", form.data)
 
     def test_search_form_none(self):
-        form = formsearch.search_form(login_form,
-                                      "nouser", "nopassword")
+        form = loginformsearch.search_form(login_form,
+                                           "nouser", "nopassword")
         self.assertIsNone(form)
