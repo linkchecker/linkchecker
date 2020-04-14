@@ -43,7 +43,7 @@ class TestFormSearch(unittest.TestCase):
 
     def test_search_form(self):
         form = loginformsearch.search_form(login_form,
-                                           "USER_FIELD", "password_field")
+                                           "User_Field", "Password_Field")
         self.assertIsNotNone(form)
         self.assertEqual(form.url, "/log_me_in")
         self.assertIn("User_Field", form.data)
@@ -51,5 +51,5 @@ class TestFormSearch(unittest.TestCase):
 
     def test_search_form_none(self):
         form = loginformsearch.search_form(login_form,
-                                           "nouser", "nopassword")
+                                           "user_field", "password_field")
         self.assertIsNone(form)
