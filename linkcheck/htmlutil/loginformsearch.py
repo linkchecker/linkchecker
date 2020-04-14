@@ -54,5 +54,5 @@ def search_form(content, cgiuser, cgipassword):
             return form
 
     # not found
-    log.debug(LOG_CHECK, "Form with fields %s not found", ",".join(cginames))
+    log.warn(LOG_CHECK, "Form with fields %s not found", ",".join(cginames))
     return None
