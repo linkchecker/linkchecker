@@ -17,7 +17,6 @@
 """
 Utility functions suitable for command line clients.
 """
-from __future__ import print_function
 import sys
 import argparse
 from . import checker, fileutil, strformat, plugins
