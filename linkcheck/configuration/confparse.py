@@ -22,7 +22,6 @@ except ImportError: # Python 2
     from ConfigParser import RawConfigParser
 import os
 from .. import LinkCheckerError, get_link_pat, LOG_CHECK, log, fileutil, plugins, logconf
-from builtins import str
 
 
 def read_multiline (value):

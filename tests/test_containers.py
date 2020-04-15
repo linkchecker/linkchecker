@@ -22,8 +22,6 @@ import unittest
 
 import linkcheck.containers
 
-from builtins import range
-
 
 class TestLFUCache (unittest.TestCase):
     """Test LFU cache implementation."""

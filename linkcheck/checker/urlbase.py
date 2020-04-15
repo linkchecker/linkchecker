@@ -40,7 +40,6 @@ import socket
 import select
 from io import BytesIO
 from builtins import str as str_text
-from future.utils import python_2_unicode_compatible
 
 from . import absolute_url, get_url_from
 from .. import (log, LOG_CHECK,
@@ -82,7 +81,6 @@ def url_norm (url, encoding):
         raise LinkCheckerError(msg)
 
 
-@python_2_unicode_compatible
 class UrlBase (object):
     """An URL with additional information like validity etc."""
 

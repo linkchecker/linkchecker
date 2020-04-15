@@ -20,8 +20,6 @@ Test dummy object.
 
 import unittest
 
-from builtins import str
-
 import linkcheck.dummy
 
 
