@@ -23,42 +23,16 @@ filterwarnings("ignore",
     message="The soupsieve package is not installed. CSS selectors cannot be used.",
     category=UserWarning, module="bs4")
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 
 
 def make_soup(markup, from_encoding=None):
     return BeautifulSoup(markup, "html.parser", from_encoding=from_encoding,
                          multi_valued_attributes=None)
 
-class Parser(object):
-    handler = None
-
-    def __init__(self, handler):
-        self.handler = handler
-
-    def feed_soup(self, soup):
-        self.parse_contents(soup.contents)
-
-    def parse_contents(self, contents):
-        for content in contents:
-            if isinstance(content, Tag):
-                tag_column = None if content.sourcepos is None \
-                    else content.sourcepos + 1
-                if content.is_empty_element:
-                    self.handler.start_end_element(
-                        content.name, content.attrs, content.text.strip(),
-                        content.sourceline, tag_column
-                    )
-                else:
-                    self.handler.start_element(
-                        content.name, content.attrs, content.text.strip(),
-                        content.sourceline, tag_column
-                    )
-                    if hasattr(content, 'contents'):  # recursion
-                        self.parse_contents(content.contents)
-                    if hasattr(self.handler, 'end_element'):
-                        self.handler.end_element(content.name)
-
-
-def parser(handler=None):
-    return Parser(handler)
+def process_soup(handler, soup):
+    for element in soup.find_all(True):
+        handler.start_element(
+            element.name, element.attrs, element.text.strip(),
+            element.sourceline,
+            None if element.sourcepos is None else element.sourcepos + 1)

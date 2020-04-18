@@ -49,51 +49,16 @@ class HtmlPrettyPrinter:
         @type attrs: dict
         @return: None
         """
-        self._start_element(tag, attrs, ">", element_text)
-
-    def start_end_element (self, tag, attrs, element_text, lineno, column):
-        """
-        Print HTML start-end element.
-
-        @param tag: tag name
-        @type tag: string
-        @param attrs: tag attributes
-        @type attrs: dict
-        @return: None
-        """
-        self._start_element(tag, attrs, "/>", element_text)
-
-    def _start_element (self, tag, attrs, end, element_text):
-        """
-        Print HTML element with end string.
-
-        @param tag: tag name
-        @type tag: string
-        @param attrs: tag attributes
-        @type attrs: dict
-        @param end: either > or />
-        @type end: string
-        @return: None
-        """
         self.fd.write("<%s" % tag.replace("/", ""))
         for key, val in sorted(attrs.items()):
             if val is None:
                 self.fd.write(" %s" % key)
             else:
                 self.fd.write(' %s="%s"' % (key, quote_attrval(val)))
-        self.fd.write(end)
         if element_text:
-            self.fd.write(element_text)
-
-    def end_element (self, tag):
-        """
-        Print HTML end element.
-
-        @param tag: tag name
-        @type tag: string
-        @return: None
-        """
-        self.fd.write("</%s>" % tag)
+            self.fd.write(">%s</%s>" % (element_text, tag))
+        else:
+            self.fd.write("/>")
 
 
 def quote_attrval (s):
