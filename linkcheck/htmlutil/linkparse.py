@@ -175,10 +175,10 @@ class LinkFinder (TagFinder):
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get("href", u'')
-        if tag =="a" and attrs.get_true('class', u''):
-           if ("broken_link" in attrs.get('class')):
-               log.debug(LOG_CHECK," Found a broken_link to %s, not considering further", attrs.get('href'))
-               return
+         if tag == "a" and attrs.get('class'):
+            if ("broken_link" in attrs.get('class').split()):
+                log.debug(LOG_CHECK,"Found link classed as broken_link to %s, not considering further", attrs.get('href'))
+                return
         tagattrs = self.tags.get(tag, self.universal_attrs)
         # parse URLs in tag (possibly multiple URLs in CSS styles)
         for attr in sorted(tagattrs.intersection(attrs)):
