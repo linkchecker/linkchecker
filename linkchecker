@@ -437,7 +437,7 @@ if options.externstrict:
             for arg in options.externstrict]
     config["externlinks"].extend(pats)
 if options.ignoreclasses:
-    config["ignoreclasses"] = arg.split(',')
+    config["ignoreclasses"] = options.ignoreclasses[0].split(',')
 if options.extern:
     pats = [linkcheck.get_link_pat(arg) for arg in options.extern]
     config["externlinks"].extend(pats)
