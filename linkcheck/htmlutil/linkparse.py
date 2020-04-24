@@ -160,6 +160,7 @@ class LinkFinder (TagFinder):
         """Store content in buffer and initialize URL list."""
         super(LinkFinder, self).__init__()
         self.callback = callback
+        self.ignore_classes = ignore_classes
         # set universal tag attributes using tagname None
         self.universal_attrs = set(tags.get(None, []))
         self.tags = dict()
@@ -175,8 +176,8 @@ class LinkFinder (TagFinder):
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get("href", u'')
-        if tag == "a" and attrs.get('class') and ignore_classes:
-            if any(item in ignore_classes for item in attrs.get('class').split()):
+        if tag == "a" and attrs.get('class') and self.ignore_classes:
+            if any(item in self.ignore_classes for item in attrs.get('class').split()):
                 log.debug(LOG_CHECK, 'Found link classed "%s" to %s, not considering further', attrs.get('class'), attrs.get('href'))
                 return
         tagattrs = self.tags.get(tag, self.universal_attrs)
