@@ -174,6 +174,8 @@ class LinkFinder (TagFinder):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
+        log.debug(LOG_CHECK, "self.ignore_classes %s", self.ignore_classes)
+        
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get("href", u'')
         if tag == "a" and attrs.get('class') and self.ignore_classes:
