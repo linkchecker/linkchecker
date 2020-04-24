@@ -1,12 +1,12 @@
-.TH LINKCHECKER 1 2010-07-01 "LinkChecker" "LinkChecker commandline usage"
+.TH LINKCHECKER 1 2020-04-24 "LinkChecker" "LinkChecker User Manual"
 .SH NAME
-linkchecker - command line client to check HTML documents and websites for broken links
-.
+linkchecker \- command line client to check HTML documents and websites for broken links
 .SH SYNOPSIS
-\fBlinkchecker\fP [\fIoptions\fP] [\fIfile-or-url\fP]...
-.
+.B linkchecker
+.RI [ options ]
+.RI [ file-or-url ]...
 .SH DESCRIPTION
-.LP
+.TP 2
 LinkChecker features
 .IP \(bu
 recursive and multithreaded checking,
@@ -33,30 +33,30 @@ Antivirus check
 .IP \(bu
 a command line and web interface
 .SH EXAMPLES
+.TP 2
 The most common use checks the given domain recursively:
-  \fBlinkchecker http://www.example.com/\fP
+.B linkchecker http://www.example.com/
 .br
 Beware that this checks the whole site which can have thousands of URLs.
 Use the \fB\-r\fP option to restrict the recursion depth.
-.br
+.TP
 Don't check URLs with \fB/secret\fP in its name. All other links are checked as usual:
-  \fBlinkchecker \-\-ignore\-url=/secret mysite.example.com\fP
-.br
+.B linkchecker \-\-ignore\-url=/secret mysite.example.com
+.TP
 Checking a local HTML file on Unix:
-  \fBlinkchecker ../bla.html\fP
-.br
+.B linkchecker ../bla.html
+.TP
 Checking a local HTML file on Windows:
-  \fBlinkchecker c:\\temp\\test.html\fP
-.br
+.B linkchecker c:\\temp\\test.html
+.TP
 You can skip the \fBhttp://\fP url part if the domain starts with \fBwww.\fP:
-  \fBlinkchecker www.example.com\fP
-.br
+.B linkchecker www.example.com
+.TP
 You can skip the \fBftp://\fP url part if the domain starts with \fBftp.\fP:
-  \fBlinkchecker \-r0 ftp.example.com\fP
-.br
+.B linkchecker \-r0 ftp.example.com
+.TP
 Generate a sitemap graph and convert it with the graphviz dot utility:
-  \fBlinkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps\fP
-.
+.B linkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps
 .SH OPTIONS
 .SS General options
 .TP
@@ -99,7 +99,8 @@ Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP,
 The \fIENCODING\fP specifies the output encoding, the default is
 that of your locale.
 Valid encodings are listed at
-\fBhttp://docs.python.org/library/\:codecs.html#standard-encodings\fP.
+.UR http://docs.python.org/library/codecs.html#standard-encodings
+.UE .
 .br
 The \fIFILENAME\fP and \fIENCODING\fP parts of the \fBnone\fP output type
 will be ignored, else if the file already exists, it will be overwritten.
@@ -126,7 +127,8 @@ below.
 .br
 The \fIENCODING\fP specifies the output encoding, the default is
 that of your locale. Valid encodings are listed at
-\fBhttp://docs.python.org/library/\:codecs.html#standard-encodings\fP.
+.UR http://docs.python.org/library/codecs.html#standard-encodings
+.UE .
 .TP
 \fB\-q\fP, \fB\-\-quiet\fP
 Quiet operation, an alias for \fB\-o none\fP.
@@ -203,7 +205,9 @@ version of LinkChecker.
 .SH "CONFIGURATION FILES"
 Configuration files can specify all options above. They can also
 specify some options that cannot be set on the command line.
-See \fBlinkcheckerrc\fP(5) for more info.
+See
+.BR linkcheckerrc (5)
+for more info.
 
 .SH OUTPUT TYPES
 Note that by default only errors and warnings are logged.
@@ -236,7 +240,8 @@ Log check result as machine-readable XML.
 .TP
 \fBsitemap\fP
 Log check result as an XML sitemap whose protocol is documented at
-\fBhttp://www.sitemaps.org/protocol.html\fP.
+.UR http://www.sitemaps.org/protocol.html
+.UE .
 .TP
 \fBsql\fP
 Log check result as SQL script with INSERT commands. An example
@@ -252,7 +257,10 @@ Logs nothing. Suitable for debugging or checking the exit code.
 .
 .SH REGULAR EXPRESSIONS
 LinkChecker accepts Python regular expressions.
-See \fBhttp://docs.python.org/\:howto/regex.html\fP for an introduction.
+See
+.UR http://docs.python.org/howto/regex.html
+.UE
+for an introduction.
 
 An addition is that a leading exclamation mark negates the regular
 expression.
@@ -276,15 +284,15 @@ Multiple entries are separated by a blank line.
 The example below will send two cookies to all URLs starting with
 \fBhttp://example.com/hello/\fP and one to all URLs starting
 with \fBhttps://example.org/\fP:
-
- Host: example.com
- Path: /hello
- Set-cookie: ID="smee"
- Set-cookie: spam="egg"
-
- Host: example.org
- Set-cookie: baggage="elitist"; comment="hologram"
-
+.EX
+  Host: example.com
+  Path: /hello
+  Set-cookie: ID="smee"
+  Set-cookie: spam="egg"
+.PP
+  Host: example.org
+  Set-cookie: baggage="elitist"; comment="hologram"
+.EE
 .SH PROXY SUPPORT
 To use a proxy on Unix or Windows set the $http_proxy, $https_proxy or $ftp_proxy
 environment variables to the proxy URL. The URL should be of the form
@@ -292,29 +300,27 @@ environment variables to the proxy URL. The URL should be of the form
 LinkChecker also detects manual proxy settings of Internet Explorer under
 Windows systems, and gconf or KDE on Linux systems.
 On a Mac use the Internet Config to select a proxy.
-.
+.PP
 You can also set a comma-separated domain list in the $no_proxy environment
 variables to ignore any proxy settings for these domains.
-.
+.TP
 Setting a HTTP proxy on Unix for example looks like this:
-
-  export http_proxy="http://proxy.example.com:8080"
-
+.B
+export http_proxy="http://proxy.example.com:8080"
+.TP
 Proxy authentication is also supported:
-
-  export http_proxy="http://user1:mypass@proxy.example.org:8081"
-
+.B
+export http_proxy="http://user1:mypass@proxy.example.org:8081"
+.TP
 Setting a proxy on the Windows command prompt:
-
-  set http_proxy=http://proxy.example.com:8080
-
+.B
+set http_proxy=http://proxy.example.com:8080
 .SH PERFORMED CHECKS
 All URLs have to pass a preliminary syntax test. Minor quoting
 mistakes will issue a warning, all other invalid syntax issues
 are errors.
 After the syntax check passes, the URL is queued for connection
 checking. All connection check types are described below.
-.
 .TP
 HTTP links (\fBhttp:\fP, \fBhttps:\fP)
 After connecting to the given HTTP server the given path
@@ -322,75 +328,74 @@ or query is requested. All redirections are followed, and
 if user/password is given it will be used as authorization
 when necessary.
 All final HTTP status codes other than 2xx are errors.
-.
+.IP
 HTML page contents are checked for recursion.
 .TP
 Local files (\fBfile:\fP)
 A regular, readable file that can be opened is valid. A readable
 directory is also valid. All other files, for example device files,
 unreadable or non-existing files are errors.
-.
+.IP
 HTML or other parseable file contents are checked for recursion.
 .TP
 Mail links (\fBmailto:\fP)
 A mailto: link eventually resolves to a list of email addresses.
 If one address fails, the whole list will fail.
 For each mail address we check the following things:
-.
-  1) Check the adress syntax, both of the part before and after
-     the @ sign.
-  2) Look up the MX DNS records. If we found no MX record,
-     print an error.
-  3) Check if one of the mail hosts accept an SMTP connection.
-     Check hosts with higher priority first.
-     If no host accepts SMTP, we print a warning.
-  4) Try to verify the address with the VRFY command. If we got
-     an answer, print the verified address as an info.
+.br
+1) Check the adress syntax, both of the part before and after the @ sign.
+.br
+2) Look up the MX DNS records. If we found no MX record, print an error.
+.br
+3) Check if one of the mail hosts accept an SMTP connection.
+Check hosts with higher priority first.
+If no host accepts SMTP, we print a warning.
+.br
+4) Try to verify the address with the VRFY command. If we got an answer,
+print the verified address as an info.
+
 .TP
 FTP links (\fBftp:\fP)
-  
-  For FTP links we do:
-  
-  1) connect to the specified host
-  2) try to login with the given user and password. The default
-     user is ``anonymous``, the default password is ``anonymous@``.
-  3) try to change to the given directory
-  4) list the file with the NLST command
+For FTP links we do:
+.br
+1) connect to the specified host
+.br
+2) try to login with the given user and password. The default
+user is ``anonymous``, the default password is ``anonymous@``.
+.br
+3) try to change to the given directory
+.br
+4) list the file with the NLST command
 
 .TP
 Telnet links (``telnet:``)
-  
-  We try to connect and if user/password are given, login to the
-  given telnet server.
+We try to connect and if user/password are given, login to the
+given telnet server.
 
 .TP
 NNTP links (``news:``, ``snews:``, ``nntp``)
-  
-  We try to connect to the given NNTP server. If a news group or
-  article is specified, try to request it from the server.
+We try to connect to the given NNTP server. If a news group or
+article is specified, try to request it from the server.
 
 .TP
 Unsupported links (``javascript:``, etc.)
-  
-  An unsupported link will only print a warning. No further checking
-  will be made.
-  
-  The complete list of recognized, but unsupported links can be found
-  in the \fBlinkcheck/checker/unknownurl.py\fP source file.
-  The most prominent of them should be JavaScript links.
-
+An unsupported link will only print a warning. No further checking
+will be made.
+.IP
+The complete list of recognized, but unsupported links can be found
+in the \fBlinkcheck/checker/unknownurl.py\fP source file.
+The most prominent of them should be JavaScript links.
 .SH PLUGINS
 There are two plugin types: connection and content plugins.
-.
 Connection plugins are run after a successful connection to the
 URL host.
-.
 Content plugins are run if the URL type has content
 (mailto: URLs have no content for example) and if the check is not
 forbidden (ie. by HTTP robots.txt).
-.
+.PP
 See \fBlinkchecker \-\-list\-plugins\fP for a list of plugins and
-their documentation. All plugins are enabled via the \fBlinkcheckerrc\fP(5)
+their documentation. All plugins are enabled via the
+.BR linkcheckerrc (5)
 configuration file.
 
 .SH RECURSION
@@ -455,11 +460,11 @@ same as the host of the user browsing your pages.
 .
 .SH RETURN VALUE
 The return value is 2 when
-.IP \(bu
+.IP \(bu 2
 a program error occurred.
 .PP
 The return value is 1 when
-.IP \(bu
+.IP \(bu 2
 invalid links were found or
 .IP \(bu
 link warnings were found and warnings are enabled
@@ -478,12 +483,16 @@ might slow down the program or even the whole system.
 .br
 \fBlinkchecker\-out.\fP\fITYPE\fP - default logger file output name
 .br
-\fBhttp://docs.python.org/library/codecs.html#standard-encodings\fP - valid output encodings
+.UR http://docs.python.org/library/codecs.html#standard-encodings
+.UE
+\- valid output encodings
 .br
-\fBhttp://docs.python.org/howto/regex.html\fP - regular expression documentation
+.UR http://docs.python.org/howto/regex.html
+.UE
+\- regular expression documentation
 
 .SH "SEE ALSO"
-\fBlinkcheckerrc\fP(5)
+.BR linkcheckerrc (5)
 .
 .SH AUTHOR
 Bastian Kleineidam <bastian.kleineidam@web.de>

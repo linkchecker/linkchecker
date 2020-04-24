@@ -14,14 +14,14 @@
     code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
     code.Cd { font-weight: bold; font-family: inherit; }
   </style>
-  <title>linkcheckerrc(5)</title>
+  <title>LINKCHECKERRC(5)</title>
 </head>
 <body>
 <table class="head">
   <tr>
-    <td class="head-ltitle">linkcheckerrc(5)</td>
-    <td class="head-vol">File Formats Manual</td>
-    <td class="head-rtitle">linkcheckerrc(5)</td>
+    <td class="head-ltitle">LINKCHECKERRC(5)</td>
+    <td class="head-vol">LinkChecker User Manual</td>
+    <td class="head-rtitle">LINKCHECKERRC(5)</td>
   </tr>
 </table>
 <div class="manual-text">
@@ -44,7 +44,7 @@ The default file location is <b>~/.linkchecker/linkcheckerrc</b> on Unix,
 <dl class="Bl-tag">
   <dt><b>cookiefile=</b><i>filename</i></dt>
   <dd>Read a file with initial cookie data. The cookie data format is explained
-      in linkchecker(1).
+      in <a href="../man1/linkchecker.1.html" class="Xr">linkchecker(1)</a>.
     <br/>
     Command line option: <b>--cookiefile</b></dd>
   <dt><b>localwebroot=</b><i>STRING</i></dt>
@@ -201,7 +201,7 @@ The default file location is <b>~/.linkchecker/linkcheckerrc</b> on Unix,
     <br/>
     The <i>ENCODING</i> specifies the output encoding, the default is that of
       your locale. Valid encodings are listed at
-      <b>http://docs.python.org/library/codecs.html#standard-encodings</b>.
+      <a class="Lk" href="http://docs.python.org/library/codecs.html#standard-encodings">http://docs.python.org/library/codecs.html#standard-encodings</a>.
     <br/>
     Command line option: <b>--output</b></dd>
   <dt><b>quiet=</b>[<b>0</b>|<b>1</b>]</dt>
@@ -239,7 +239,7 @@ The default file location is <b>~/.linkchecker/linkcheckerrc</b> on Unix,
     Command line option: none</dd>
   <dt><b>encoding=</b><i>STRING</i></dt>
   <dd>Valid encodings are listed in
-      <b>http://docs.python.org/library/codecs.html#standard-encodings</b>.
+      <a class="Lk" href="http://docs.python.org/library/codecs.html#standard-encodings">http://docs.python.org/library/codecs.html#standard-encodings</a>.
     <br/>
     Default encoding is <b>iso-8859-15</b>.</dd>
   <dt><i>color*</i></dt>
@@ -405,46 +405,97 @@ The default file location is <b>~/.linkchecker/linkcheckerrc</b> on Unix,
 <section class="Sh">
 <h1 class="Sh" id="LOGGER_PARTS"><a class="permalink" href="#LOGGER_PARTS">LOGGER
   PARTS</a></h1>
- <b>all</b> (for all parts)
- <b>id</b> (a unique ID for each logentry)
- <b>realurl</b> (the full url link)
- <b>result</b> (valid or invalid, with messages)
- <b>extern</b> (1 or 0, only in some logger types reported)
- <b>base</b> (base href=...)
- <b>name</b> (&lt;a href=...&gt;name&lt;/a&gt; and &lt;img
-  alt=&quot;name&quot;&gt;)
- <b>parenturl</b> (if any)
- <b>info</b> (some additional info, e.g. FTP welcome messages)
- <b>warning</b> (warnings)
- <b>dltime</b> (download time)
- <b>checktime</b> (check time)
- <b>url</b> (the original url name, can be relative)
- <b>intro</b> (the blurb at the beginning, &quot;starting at ...&quot;)
- <b>outro</b> (the blurb at the end, &quot;found x errors ...&quot;)
+<table class="tbl">
+  <tr>
+    <td><b>all</b></td>
+    <td>(for all parts)</td>
+  </tr>
+  <tr>
+    <td><b>id</b></td>
+    <td>(a unique ID for each logentry)</td>
+  </tr>
+  <tr>
+    <td><b>realurl</b></td>
+    <td>(the full url link)</td>
+  </tr>
+  <tr>
+    <td><b>result</b></td>
+    <td>(valid or invalid, with messages)</td>
+  </tr>
+  <tr>
+    <td><b>extern</b></td>
+    <td>(1 or 0, only in some logger types reported)</td>
+  </tr>
+  <tr>
+    <td><b>base</b></td>
+    <td>(base href=...)</td>
+  </tr>
+  <tr>
+    <td><b>name</b></td>
+    <td>(&lt;a href=...&gt;name&lt;/a&gt; and &lt;img
+      alt=&quot;name&quot;&gt;)</td>
+  </tr>
+  <tr>
+    <td><b>parenturl</b></td>
+    <td>(if any)</td>
+  </tr>
+  <tr>
+    <td><b>info</b></td>
+    <td>(some additional info, e.g. FTP welcome messages)</td>
+  </tr>
+  <tr>
+    <td><b>warning</b></td>
+    <td>(warnings)</td>
+  </tr>
+  <tr>
+    <td><b>dltime</b></td>
+    <td>(download time)</td>
+  </tr>
+  <tr>
+    <td><b>checktime</b></td>
+    <td>(check time)</td>
+  </tr>
+  <tr>
+    <td><b>url</b></td>
+    <td>(the original url name, can be relative)</td>
+  </tr>
+  <tr>
+    <td><b>intro</b></td>
+    <td>(the blurb at the beginning, &quot;starting at ...&quot;)</td>
+  </tr>
+  <tr>
+    <td><b>outro</b></td>
+    <td>(the blurb at the end, &quot;found x errors ...&quot;)</td>
+  </tr>
+</table>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="MULTILINE"><a class="permalink" href="#MULTILINE">MULTILINE</a></h1>
 Some option values can span multiple lines. Each line has to be indented for
   that to work. Lines starting with a hash (<b>#</b>) will be ignored, though
   they must still be indented.
-<p class="Pp">
-   ignore=
-   lconline
-   bookmark
-   # a comment
-   ^mailto:</p>
+<pre>
+ignore=
+  lconline
+  bookmark
+  # a comment
+  ^mailto:
+</pre>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLE"><a class="permalink" href="#EXAMPLE">EXAMPLE</a></h1>
- [output]
- log=html
-<p class="Pp">
-   [checking]
-   threads=5</p>
-<p class="Pp">
-   [filtering]
-   ignorewarnings=http-moved-permanent</p>
-<p class="Pp"></p>
+<pre>
+[output]
+log=html
+</pre>
+<pre>
+[checking]
+threads=5
+</pre>
+<pre>
+[filtering]
+ignorewarnings=http-moved-permanent
+</pre>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="PLUGINS"><a class="permalink" href="#PLUGINS">PLUGINS</a></h1>
@@ -493,7 +544,7 @@ Check SSL certificate expiration date. Only internal https: links will be
 <section class="Ss">
 <h2 class="Ss" id="_fB_HtmlSyntaxCheck__fP"><a class="permalink" href="#_fB_HtmlSyntaxCheck__fP"><b>[HtmlSyntaxCheck]</b></a></h2>
 Check the syntax of HTML pages with the online W3C HTML validator. See
-  http://validator.w3.org/docs/api.html.
+  <a class="Lk" href="http://validator.w3.org/docs/api.html">http://validator.w3.org/docs/api.html</a>.
 <p class="Pp"></p>
 </section>
 <section class="Ss">
@@ -510,7 +561,7 @@ Print HTTP headers in URL info.
 <section class="Ss">
 <h2 class="Ss" id="_fB_CssSyntaxCheck__fP"><a class="permalink" href="#_fB_CssSyntaxCheck__fP"><b>[CssSyntaxCheck]</b></a></h2>
 Check the syntax of HTML pages with the online W3C CSS validator. See
-  http://jigsaw.w3.org/css-validator/manual.html#expert.
+  <a class="Lk" href="http://jigsaw.w3.org/css-validator/manual.html#expert">http://jigsaw.w3.org/css-validator/manual.html#expert</a>.
 <p class="Pp"></p>
 </section>
 <section class="Ss">
@@ -575,7 +626,7 @@ The following warnings are recognized in the 'ignorewarnings' config file entry:
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
   ALSO</a></h1>
-linkchecker(1)
+<a href="../man1/linkchecker.1.html" class="Xr">linkchecker(1)</a>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="AUTHOR"><a class="permalink" href="#AUTHOR">AUTHOR</a></h1>
@@ -588,7 +639,7 @@ Copyright &#x00A9; 2000-2014 Bastian Kleineidam
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">2007-11-30</td>
+    <td class="foot-date">2020-04-24</td>
     <td class="foot-os">LinkChecker</td>
   </tr>
 </table>

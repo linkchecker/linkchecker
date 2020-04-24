@@ -20,7 +20,7 @@
 <table class="head">
   <tr>
     <td class="head-ltitle">LINKCHECKER(1)</td>
-    <td class="head-vol">LinkChecker commandline usage</td>
+    <td class="head-vol">LinkChecker User Manual</td>
     <td class="head-rtitle">LINKCHECKER(1)</td>
   </tr>
 </table>
@@ -36,7 +36,10 @@ linkchecker - command line client to check HTML documents and websites for
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
-LinkChecker features
+<dl class="Bl-tag">
+  <dt>LinkChecker features</dt>
+  <dd></dd>
+</dl>
 <ul class="Bl-bullet">
   <li>recursive and multithreaded checking,</li>
   <li>output in colored or normal text, HTML, SQL, CSV, XML or a sitemap graph
@@ -56,30 +59,30 @@ LinkChecker features
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-The most common use checks the given domain recursively:
- <b>linkchecker http://www.example.com/</b>
-<br/>
-Beware that this checks the whole site which can have thousands of URLs. Use the
-  <b>-r</b> option to restrict the recursion depth.
-<br/>
-Don't check URLs with <b>/secret</b> in its name. All other links are checked as
-  usual:
- <b>linkchecker --ignore-url=/secret mysite.example.com</b>
-<br/>
-Checking a local HTML file on Unix:
- <b>linkchecker ../bla.html</b>
-<br/>
-Checking a local HTML file on Windows:
- <b>linkchecker c:\temp\test.html</b>
-<br/>
-You can skip the <b>http://</b> url part if the domain starts with <b>www.</b>:
- <b>linkchecker www.example.com</b>
-<br/>
-You can skip the <b>ftp://</b> url part if the domain starts with <b>ftp.</b>:
- <b>linkchecker -r0 ftp.example.com</b>
-<br/>
-Generate a sitemap graph and convert it with the graphviz dot utility:
- <b>linkchecker -odot -v www.example.com | dot -Tps &gt; sitemap.ps</b>
+<dl class="Bl-tag">
+  <dt>The most common use checks the given domain recursively:</dt>
+  <dd><b>linkchecker http://www.example.com/</b>
+    <br/>
+    Beware that this checks the whole site which can have thousands of URLs. Use
+      the <b>-r</b> option to restrict the recursion depth.</dd>
+  <dt>Don't check URLs with <b>/secret</b> in its name. All other links are
+    checked as usual:</dt>
+  <dd><b>linkchecker --ignore-url=/secret mysite.example.com</b></dd>
+  <dt>Checking a local HTML file on Unix:</dt>
+  <dd><b>linkchecker ../bla.html</b></dd>
+  <dt>Checking a local HTML file on Windows:</dt>
+  <dd><b>linkchecker c:empest.html</b></dd>
+  <dt>You can skip the <b>http://</b> url part if the domain starts with
+    <b>www.</b>:</dt>
+  <dd><b>linkchecker www.example.com</b></dd>
+  <dt>You can skip the <b>ftp://</b> url part if the domain starts with
+    <b>ftp.</b>:</dt>
+  <dd><b>linkchecker -r0 ftp.example.com</b></dd>
+  <dt>Generate a sitemap graph and convert it with the graphviz dot
+    utility:</dt>
+  <dd><b>linkchecker -odot -v www.example.com | dot -Tps &gt;
+    sitemap.ps</b></dd>
+</dl>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="OPTIONS"><a class="permalink" href="#OPTIONS">OPTIONS</a></h1>
@@ -120,7 +123,8 @@ Generate a sitemap graph and convert it with the graphviz dot utility:
       <b>$HOME/.linkchecker/blacklist</b> for <b>blacklist</b> output, or
       <i>FILENAME</i> if specified. The <i>ENCODING</i> specifies the output
       encoding, the default is that of your locale. Valid encodings are listed
-      at <b>http://docs.python.org/library/codecs.html#standard-encodings</b>.
+      at
+      <a class="Lk" href="http://docs.python.org/library/codecs.html#standard-encodings">http://docs.python.org/library/codecs.html#standard-encodings</a>.
     <br/>
     The <i>FILENAME</i> and <i>ENCODING</i> parts of the <b>none</b> output type
       will be ignored, else if the file already exists, it will be overwritten.
@@ -142,7 +146,7 @@ Generate a sitemap graph and convert it with the graphviz dot utility:
     <br/>
     The <i>ENCODING</i> specifies the output encoding, the default is that of
       your locale. Valid encodings are listed at
-      <b>http://docs.python.org/library/codecs.html#standard-encodings</b>.</dd>
+      <a class="Lk" href="http://docs.python.org/library/codecs.html#standard-encodings">http://docs.python.org/library/codecs.html#standard-encodings</a>.</dd>
   <dt><b>-q</b>, <b>--quiet</b></dt>
   <dd>Quiet operation, an alias for <b>-o none</b>. This is only useful with
       <b>-F</b>.</dd>
@@ -247,7 +251,7 @@ Note that by default only errors and warnings are logged. You should use the
   <dd>Log check result as machine-readable XML.</dd>
   <dt><b>sitemap</b></dt>
   <dd>Log check result as an XML sitemap whose protocol is documented at
-      <b>http://www.sitemaps.org/protocol.html</b>.</dd>
+      <a class="Lk" href="http://www.sitemaps.org/protocol.html">http://www.sitemaps.org/protocol.html</a>.</dd>
   <dt><b>sql</b></dt>
   <dd>Log check result as SQL script with INSERT commands. An example script to
       create the initial SQL table is included as create.sql.</dd>
@@ -263,7 +267,8 @@ Note that by default only errors and warnings are logged. You should use the
 <h1 class="Sh" id="REGULAR_EXPRESSIONS"><a class="permalink" href="#REGULAR_EXPRESSIONS">REGULAR
   EXPRESSIONS</a></h1>
 LinkChecker accepts Python regular expressions. See
-  <b>http://docs.python.org/howto/regex.html</b> for an introduction.
+  <a class="Lk" href="http://docs.python.org/howto/regex.html">http://docs.python.org/howto/regex.html</a>
+  for an introduction.
 <p class="Pp">An addition is that a leading exclamation mark negates the regular
     expression.</p>
 </section>
@@ -284,15 +289,16 @@ A cookie file contains standard HTTP header (RFC 2616) data with the following
     will send two cookies to all URLs starting with
     <b>http://example.com/hello/</b> and one to all URLs starting with
     <b>https://example.org/</b>:</p>
-<p class="Pp">
-   Host: example.com
-   Path: /hello
-   Set-cookie: ID=&quot;smee&quot;
-   Set-cookie: spam=&quot;egg&quot;</p>
-<p class="Pp">
-   Host: example.org
-   Set-cookie: baggage=&quot;elitist&quot;; comment=&quot;hologram&quot;</p>
-<p class="Pp"></p>
+<pre>
+  Host: example.com
+  Path: /hello
+  Set-cookie: ID=&quot;smee&quot;
+  Set-cookie: spam=&quot;egg&quot;
+</pre>
+<pre>
+  Host: example.org
+  Set-cookie: baggage=&quot;elitist&quot;; comment=&quot;hologram&quot;
+</pre>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="PROXY_SUPPORT"><a class="permalink" href="#PROXY_SUPPORT">PROXY
@@ -303,18 +309,18 @@ To use a proxy on Unix or Windows set the $http_proxy, $https_proxy or
   <b>http://</b>[<i>user</i><b>:</b><i>pass</i><b>@</b>]<i>host</i>[<b>:</b><i>port</i>].
   LinkChecker also detects manual proxy settings of Internet Explorer under
   Windows systems, and gconf or KDE on Linux systems. On a Mac use the Internet
-  Config to select a proxy. You can also set a comma-separated domain list in
-  the $no_proxy environment variables to ignore any proxy settings for these
-  domains. Setting a HTTP proxy on Unix for example looks like this:
-<p class="Pp">
-   export http_proxy=&quot;http://proxy.example.com:8080&quot;</p>
-<p class="Pp">Proxy authentication is also supported:</p>
-<p class="Pp">
-   export http_proxy=&quot;http://user1:mypass@proxy.example.org:8081&quot;</p>
-<p class="Pp">Setting a proxy on the Windows command prompt:</p>
-<p class="Pp">
-   set http_proxy=http://proxy.example.com:8080</p>
-<p class="Pp"></p>
+  Config to select a proxy.
+<p class="Pp">You can also set a comma-separated domain list in the $no_proxy
+    environment variables to ignore any proxy settings for these domains.</p>
+<dl class="Bl-tag">
+  <dt>Setting a HTTP proxy on Unix for example looks like this:</dt>
+  <dd><b>export http_proxy=&quot;http://proxy.example.com:8080&quot;</b></dd>
+  <dt>Proxy authentication is also supported:</dt>
+  <dd><b>export
+      http_proxy=&quot;http://user1:mypass@proxy.example.org:8081&quot;</b></dd>
+  <dt>Setting a proxy on the Windows command prompt:</dt>
+  <dd><b>set http_proxy=http://proxy.example.com:8080</b></dd>
+</dl>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="PERFORMED_CHECKS"><a class="permalink" href="#PERFORMED_CHECKS">PERFORMED
@@ -328,63 +334,71 @@ All URLs have to pass a preliminary syntax test. Minor quoting mistakes will
   <dd>After connecting to the given HTTP server the given path or query is
       requested. All redirections are followed, and if user/password is given it
       will be used as authorization when necessary. All final HTTP status codes
-      other than 2xx are errors. HTML page contents are checked for
-    recursion.</dd>
+      other than 2xx are errors.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>HTML page contents are checked for recursion.</dd>
+</dl>
+<dl class="Bl-tag">
   <dt>Local files (<b>file:</b>)</dt>
   <dd>A regular, readable file that can be opened is valid. A readable directory
       is also valid. All other files, for example device files, unreadable or
-      non-existing files are errors. HTML or other parseable file contents are
-      checked for recursion.</dd>
+      non-existing files are errors.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>HTML or other parseable file contents are checked for recursion.</dd>
+</dl>
+<dl class="Bl-tag">
   <dt>Mail links (<b>mailto:</b>)</dt>
   <dd>A mailto: link eventually resolves to a list of email addresses. If one
       address fails, the whole list will fail. For each mail address we check
       the following things:
-     1) Check the adress syntax, both of the part before and after
-     the @ sign.
-     2) Look up the MX DNS records. If we found no MX record,
-     print an error.
-     3) Check if one of the mail hosts accept an SMTP connection.
-     Check hosts with higher priority first.
-     If no host accepts SMTP, we print a warning.
-     4) Try to verify the address with the VRFY command. If we got
-     an answer, print the verified address as an info.</dd>
+    <br/>
+    1) Check the adress syntax, both of the part before and after the @ sign.
+    <br/>
+    2) Look up the MX DNS records. If we found no MX record, print an error.
+    <br/>
+    3) Check if one of the mail hosts accept an SMTP connection. Check hosts
+      with higher priority first. If no host accepts SMTP, we print a warning.
+    <br/>
+    4) Try to verify the address with the VRFY command. If we got an answer,
+      print the verified address as an info.
+    <p class="Pp"></p>
+  </dd>
   <dt>FTP links (<b>ftp:</b>)</dt>
-  <dd>
-    <p class="Pp">
-       For FTP links we do:</p>
-    <p class="Pp">
-       1) connect to the specified host
-       2) try to login with the given user and password. The default
-       user is ``anonymous``, the default password is ``anonymous@``.
-       3) try to change to the given directory
-       4) list the file with the NLST command</p>
+  <dd>For FTP links we do:
+    <br/>
+    1) connect to the specified host
+    <br/>
+    2) try to login with the given user and password. The default user is
+      ``anonymous``, the default password is ``anonymous@``.
+    <br/>
+    3) try to change to the given directory
+    <br/>
+    4) list the file with the NLST command
     <p class="Pp"></p>
   </dd>
   <dt>Telnet links (``telnet:``)</dt>
-  <dd>
-    <p class="Pp">
-       We try to connect and if user/password are given, login to the
-       given telnet server.</p>
+  <dd>We try to connect and if user/password are given, login to the given
+      telnet server.
     <p class="Pp"></p>
   </dd>
   <dt>NNTP links (``news:``, ``snews:``, ``nntp``)</dt>
-  <dd>
-    <p class="Pp">
-       We try to connect to the given NNTP server. If a news group or
-       article is specified, try to request it from the server.</p>
+  <dd>We try to connect to the given NNTP server. If a news group or article is
+      specified, try to request it from the server.
     <p class="Pp"></p>
   </dd>
   <dt>Unsupported links (``javascript:``, etc.)</dt>
-  <dd>
-    <p class="Pp">
-       An unsupported link will only print a warning. No further checking
-       will be made.</p>
-    <p class="Pp">
-       The complete list of recognized, but unsupported links can be found
-       in the <b>linkcheck/checker/unknownurl.py</b> source file.
-       The most prominent of them should be JavaScript links.</p>
-    <p class="Pp"></p>
-  </dd>
+  <dd>An unsupported link will only print a warning. No further checking will be
+      made.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>The complete list of recognized, but unsupported links can be found in the
+      <b>linkcheck/checker/unknownurl.py</b> source file. The most prominent of
+      them should be JavaScript links.</dd>
 </dl>
 </section>
 <section class="Sh">
@@ -392,9 +406,10 @@ All URLs have to pass a preliminary syntax test. Minor quoting mistakes will
 There are two plugin types: connection and content plugins. Connection plugins
   are run after a successful connection to the URL host. Content plugins are run
   if the URL type has content (mailto: URLs have no content for example) and if
-  the check is not forbidden (ie. by HTTP robots.txt). See <b>linkchecker
-  --list-plugins</b> for a list of plugins and their documentation. All plugins
-  are enabled via the <a href="../man5/linkcheckerrc.5.html" class="Xr">linkcheckerrc(5)</a> configuration file.
+  the check is not forbidden (ie. by HTTP robots.txt).
+<p class="Pp">See <b>linkchecker --list-plugins</b> for a list of plugins and
+    their documentation. All plugins are enabled via the <a href="../man5/linkcheckerrc.5.html" class="Xr">linkcheckerrc(5)</a>
+    configuration file.</p>
 <p class="Pp"></p>
 </section>
 <section class="Sh">
@@ -480,11 +495,11 @@ LinkChecker consumes memory for each queued URL to check. With thousands of
 <br/>
 <b>linkchecker-out.</b><i>TYPE</i> - default logger file output name
 <br/>
-<b>http://docs.python.org/library/codecs.html#standard-encodings</b> - valid
-  output encodings
+<a class="Lk" href="http://docs.python.org/library/codecs.html#standard-encodings">http://docs.python.org/library/codecs.html#standard-encodings</a>
+  - valid output encodings
 <br/>
-<b>http://docs.python.org/howto/regex.html</b> - regular expression
-  documentation
+<a class="Lk" href="http://docs.python.org/howto/regex.html">http://docs.python.org/howto/regex.html</a>
+  - regular expression documentation
 <p class="Pp"></p>
 </section>
 <section class="Sh">
@@ -503,7 +518,7 @@ Copyright &#x00A9; 2000-2014 Bastian Kleineidam
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">2010-07-01</td>
+    <td class="foot-date">2020-04-24</td>
     <td class="foot-os">LinkChecker</td>
   </tr>
 </table>
