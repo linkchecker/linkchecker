@@ -330,6 +330,9 @@ group.add_argument("--ignore-url", action="append", metavar="REGEX",
                  dest="externstrict", help=_(
 """Only check syntax of URLs matching the given regular expression.
  This option can be given multiple times."""))
+group.add_argument("--ignore-classes", action="append",
+                 dest="ignoreclasses", help=_(
+"""Ignore any anchor links styled with one or more of these comma-separated class names"""))
 group.add_argument("--no-follow-url", action="append", metavar="REGEX",
                  dest="extern", help=_(
 """Check but do not recurse into URLs matching the given regular
@@ -433,6 +436,8 @@ if options.externstrict:
     pats = [linkcheck.get_link_pat(arg, strict=True) \
             for arg in options.externstrict]
     config["externlinks"].extend(pats)
+if options.ignoreclasses:
+    config["ignoreclasses"] = options.ignoreclasses[0].split(',')
 if options.extern:
     pats = [linkcheck.get_link_pat(arg) for arg in options.extern]
     config["externlinks"].extend(pats)
