@@ -13,13 +13,17 @@ po4a:
 
 man:	$(MANHTMLFILES)
 
-$(HTMLDIR)/man1/linkchecker.1.html: en/linkchecker.1 linkchecker.1.html.diff
-	man2html -r $< | tail -n +2 | sed 's/Time:.*//g' | sed 's@/:@/@g' > $@
-	patch --no-backup-if-mismatch --quiet $@ linkchecker.1.html.diff
+$(HTMLDIR)/man1/linkchecker.1.html: en/linkchecker.1
+	mandoc -Thtml $< > $@
+	@sed -i -e \
+	  's:<b>linkcheckerrc</b>(5):<a href="../man5/linkcheckerrc.5.html" class="Xr">linkcheckerrc(5)</a>:g' \
+	  $(HTMLDIR)/man1/linkchecker.1.html
 
-$(HTMLDIR)/man5/linkcheckerrc.5.html: en/linkcheckerrc.5 linkcheckerrc.5.html.diff
-	man2html -r $< | tail -n +2 | sed 's/Time:.*//g' | sed 's@/:@/@g' > $@
-	patch --no-backup-if-mismatch --quiet $@ linkcheckerrc.5.html.diff
+$(HTMLDIR)/man5/linkcheckerrc.5.html: en/linkcheckerrc.5
+	mandoc -Thtml $< > $@
+	@sed -i -e \
+	  's:<b>linkchecker</b>(1):<a href="../man1/linkchecker.1.html" class="Xr">linkchecker(1)</a>:g' \
+	  $(HTMLDIR)/man5/linkcheckerrc.5.html
 
 # check all makefiles for formatting warnings
 check:
@@ -32,4 +36,8 @@ check:
 	  done; \
 	done
 
-.PHONY: po4a man check
+clean:
+	rm $(MANHTMLFILES)
+
+.PHONY: po4a man check clean
+
