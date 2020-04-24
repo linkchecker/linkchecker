@@ -191,7 +191,7 @@ class Configuration (dict):
         self["ignorewarnings"] = []
         self["internlinks"] = []
         self["checkextern"] = False
-        self["ignoreclass"] = []
+        self["ignoreclasses"] = []
         ## plugins
         self["pluginfolders"] = get_plugin_folders()
         self["enabledplugins"] = []

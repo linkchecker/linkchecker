@@ -118,7 +118,8 @@ def find_links (url_data, callback, tags):
     Found URLs are added to the URL queue.
     """
     # construct handler object
-    handler = linkparse.LinkFinder(callback, tags)
+    config = url_data.aggregate.config
+    handler = linkparse.LinkFinder(callback, tags, ignore_classes=config['ignoreclasses'])
     # parse
     try:
         htmlsax.process_soup(handler, url_data.get_soup())

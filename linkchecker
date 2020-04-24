@@ -1,3 +1,4 @@
+ignoreclass
 #!/usr/bin/python -Ru
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
@@ -331,7 +332,7 @@ group.add_argument("--ignore-url", action="append", metavar="REGEX",
 """Only check syntax of URLs matching the given regular expression.
  This option can be given multiple times."""))
 group.add_argument("--ignore-class", action="append",
-                 dest="ignoreclass", help=_(
+                 dest="ignoreclasses", help=_(
 """Ignore any anchor links styled with this class name"""))
 group.add_argument("--no-follow-url", action="append", metavar="REGEX",
                  dest="extern", help=_(
@@ -436,9 +437,9 @@ if options.externstrict:
     pats = [linkcheck.get_link_pat(arg, strict=True) \
             for arg in options.externstrict]
     config["externlinks"].extend(pats)
-if options.ignoreclass:
-    for arg in options.ignoreclass:
-        config["ignoreclass"].extend(arg)
+if options.ignoreclasses:
+    for arg in options.ignoreclasses:
+        config["ignoreclasses"].extend(arg)
 if options.extern:
     pats = [linkcheck.get_link_pat(arg) for arg in options.extern]
     config["externlinks"].extend(pats)

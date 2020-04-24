@@ -156,7 +156,7 @@ class LinkFinder (TagFinder):
     """Find HTML links, and apply them to the callback function with the
     format (url, lineno, column, name, codebase)."""
 
-    def __init__ (self, callback, tags):
+    def __init__ (self, callback, tags, ignore_classes):
         """Store content in buffer and initialize URL list."""
         super(LinkFinder, self).__init__()
         self.callback = callback
@@ -175,10 +175,10 @@ class LinkFinder (TagFinder):
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
         if tag == "base" and not self.base_ref:
             self.base_ref = attrs.get("href", u'')
-        ignoreclasses = ['broken_link','borked_link']
-        if tag == "a" and attrs.get('class') and ignoreclasses:
-            if any(item in ignoreclasses for item in attrs.get('class').split()):
-                log.debug(LOG_CHECK,"Found link classed \"%s\" to %s, not considering further", attrs.get('class'), attrs.get('href'))
+        # ignore_classes = ['broken_link', 'borked_link']
+        if tag == "a" and attrs.get('class') and ignore_classes:
+            if any(item in ignore_classes for item in attrs.get('class').split()):
+                log.debug(LOG_CHECK,'Found link classed "%s" to %s, not considering further', attrs.get('class'), attrs.get('href'))
                 return
         tagattrs = self.tags.get(tag, self.universal_attrs)
         # parse URLs in tag (possibly multiple URLs in CSS styles)
