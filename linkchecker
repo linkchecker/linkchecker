@@ -330,9 +330,9 @@ group.add_argument("--ignore-url", action="append", metavar="REGEX",
                  dest="externstrict", help=_(
 """Only check syntax of URLs matching the given regular expression.
  This option can be given multiple times."""))
-group.add_argument("--ignore-class", action="append",
+group.add_argument("--ignore-classes", action="append",
                  dest="ignoreclasses", help=_(
-"""Ignore any anchor links styled with this class name"""))
+"""Ignore any anchor links styled with one or more of these comma-separated class names"""))
 group.add_argument("--no-follow-url", action="append", metavar="REGEX",
                  dest="extern", help=_(
 """Check but do not recurse into URLs matching the given regular

@@ -228,7 +228,7 @@ class LCConfigParser (RawConfigParser, object):
                 pat = get_link_pat(line, strict=0)
                 self.config["externlinks"].append(pat)
         if self.has_option(section, "ignoreclasses"):
-                self.config["ignoreclasses"] = [f.strip() for f in self.get(section, 'ignoreclasses').split(',')]
+            self.config["ignoreclasses"] = [f.strip() for f in self.get(section, 'ignoreclasses').split(',')]
         if self.has_option(section, "internlinks"):
             pat = get_link_pat(self.get(section, "internlinks"))
             self.config["internlinks"].append(pat)
