@@ -99,7 +99,7 @@ class StopParse(Exception):
 
 class TagFinder (object):
     """Base class handling HTML start elements.
-    TagFinder instances are used as HtmlParser handlers."""
+    TagFinder instances are used as HTML parser handlers."""
 
     def __init__ (self):
         """Initialize local variables."""

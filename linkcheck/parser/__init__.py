@@ -18,8 +18,7 @@
 Main functions for link parsing
 """
 from .. import log, LOG_CHECK, strformat, url as urlutil
-from ..htmlutil import linkparse
-from ..HtmlParser import htmlsax
+from ..htmlutil import htmlsoup, linkparse
 from ..bookmarks import firefox
 
 
@@ -117,14 +116,8 @@ def find_links (url_data, callback, tags):
     """Parse into content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    # construct handler object
     handler = linkparse.LinkFinder(callback, tags)
-    # parse
-    try:
-        htmlsax.process_soup(handler, url_data.get_soup())
-    except linkparse.StopParse as msg:
-        log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
-        pass
+    htmlsoup.process_soup(handler, url_data.get_soup())
 
 
 def parse_firefox (url_data):

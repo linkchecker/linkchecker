@@ -382,7 +382,6 @@ setup(
         'linkcheck.configuration',
         'linkcheck.director',
         'linkcheck.htmlutil',
-        'linkcheck.HtmlParser',
         'linkcheck.logger',
         'linkcheck.network',
         'linkcheck.parser',
