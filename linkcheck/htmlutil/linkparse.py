@@ -80,9 +80,15 @@ WmlTags = {
 
 # matcher for <meta http-equiv=refresh> tags
 refresh_re = re.compile(r"(?i)^\d+;\s*url=(?P<url>.+)$")
+
 _quoted_pat = r"('[^']+'|\"[^\"]+\"|[^\)\s]+)"
 css_url_re = re.compile(r"url\(\s*(?P<url>%s)\s*\)" % _quoted_pat)
-swf_url_re = re.compile("(?i)%s" % urlutil.safe_url_pattern)
+
+# Note that swf_url_re, unlike all other regular expressions here, is meant
+# to match byte strings.  Yes, we're scraping binary SWF data for anything
+# that looks like a URL.  What did you expect, a full SWF format decoder?
+swf_url_re = re.compile(b"(?i)%s" % urlutil.safe_url_pattern.encode('ascii'))
+
 c_comment_re = re.compile(r"/\*.*?\*/", re.DOTALL)
 
 

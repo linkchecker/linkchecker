@@ -100,8 +100,11 @@ def parse_css (url_data):
 def parse_swf (url_data):
     """Parse a SWF file for URLs."""
     linkfinder = linkparse.swf_url_re.finditer
-    for mo in linkfinder(url_data.get_content()):
-        url = mo.group()
+    for mo in linkfinder(url_data.get_raw_content()):
+        # We're scraping binary data for anything that looks like an URL using
+        # a regex that matches only ASCII characters.  Any non-ASCII characters
+        # in the URL are expected to be %-encoded.
+        url = mo.group().decode('ascii')
         url_data.add_url(url)
 
 
