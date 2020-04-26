@@ -25,8 +25,6 @@ except ImportError:
     # Python 3
     from io import StringIO
 
-from builtins import bytes
-
 from .. import log, LOG_CHECK, LinkCheckerError, mimeutil
 from . import proxysupport, httpurl, internpaturl, get_index_html
 from .const import WARN_FTP_MISSING_SLASH

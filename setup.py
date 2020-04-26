@@ -408,7 +408,6 @@ setup(
         'dnspython',
         'beautifulsoup4',
         'pyxdg',
-        'future',
     ],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.

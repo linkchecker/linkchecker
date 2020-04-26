@@ -18,8 +18,6 @@
 A HTML logger.
 """
 
-from __future__ import absolute_import
-
 from html import escape as html_escape
 import os
 import time

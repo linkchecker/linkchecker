@@ -19,9 +19,9 @@ Test update check functionality.
 """
 
 import unittest
+
 from tests import need_network
 import linkcheck.updater
-from builtins import str
 
 
 class TestUpdater (unittest.TestCase):

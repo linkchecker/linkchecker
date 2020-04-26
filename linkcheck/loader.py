@@ -7,7 +7,6 @@ Example usage:
     modules = loader.get_package_modules('plugins')
     plugins = loader.get_plugins(modules, PluginClass)
 """
-from __future__ import print_function
 import os
 import sys
 import zipfile

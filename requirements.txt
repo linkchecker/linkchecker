@@ -3,6 +3,5 @@ beautifulsoup4
 requests >= 2.4
 pyxdg
 dnspython
-future
 # optional:
 argcomplete
