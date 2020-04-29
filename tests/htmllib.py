@@ -18,8 +18,6 @@
 HTML parser handler test class.
 """
 
-import sys
-
 
 class HtmlPrettyPrinter:
     """
@@ -27,17 +25,14 @@ class HtmlPrettyPrinter:
     Also stores error and warnings messages.
     """
 
-    def __init__ (self, fd=sys.stdout, encoding="iso8859-1"):
+    def __init__ (self, fd):
         """
-        Write to given file descriptor in given encoding.
+        Write to given file descriptor.
 
-        @param fd: file like object (default=sys.stdout)
+        @param fd: file like object
         @type fd: file
-        @param encoding: encoding (default=iso8859-1)
-        @type encoding: string
         """
         self.fd = fd
-        self.encoding = encoding
 
     def start_element (self, tag, attrs, element_text, lineno, column):
         """
