@@ -30,17 +30,17 @@ LinkTags = {
     'a':        [u'href'],
     'applet':   [u'archive', u'src'],
     'area':     [u'href'],
-    'audio':    [u'src'], # HTML5
+    'audio':    [u'src'],  # HTML5
     'bgsound':  [u'src'],
     'blockquote': [u'cite'],
     'body':     [u'background'],
-    'button':   [u'formaction'], # HTML5
+    'button':   [u'formaction'],  # HTML5
     'del':      [u'cite'],
     'embed':    [u'pluginspage', u'src'],
     'form':     [u'action'],
     'frame':    [u'src', u'longdesc'],
     'head':     [u'profile'],
-    'html':     [u'manifest'], # HTML5
+    'html':     [u'manifest'],  # HTML5
     'iframe':   [u'src', u'longdesc'],
     'ilayer':   [u'background'],
     'img':      [u'src', u'lowsrc', u'longdesc', u'usemap', u'srcset'],
@@ -53,13 +53,13 @@ LinkTags = {
     'object':   [u'classid', u'data', u'archive', u'usemap', u'codebase'],
     'q':        [u'cite'],
     'script':   [u'src'],
-    'source':   [u'src'], # HTML5
+    'source':   [u'src'],  # HTML5
     'table':    [u'background'],
     'td':       [u'background'],
     'th':       [u'background'],
     'tr':       [u'background'],
-    'track':    [u'src'], # HTML5
-    'video':    [u'src'], # HTML5
+    'track':    [u'src'],  # HTML5
+    'video':    [u'src'],  # HTML5
     'xmp':      [u'href'],
     None:       [u'style', u'itemtype'],
 }
@@ -130,7 +130,7 @@ class LinkFinder:
         # set universal tag attributes using tagname None
         self.universal_attrs = set(tags.get(None, []))
         self.tags = dict()
-        for  tag, attrs in tags.items():
+        for tag, attrs in tags.items():
             self.tags[tag] = set(attrs)
             # add universal tag attributes
             self.tags[tag].update(self.universal_attrs)
@@ -153,7 +153,7 @@ class LinkFinder:
             name = self.get_link_name(tag, attrs, attr, element_text)
             # possible codebase
             base = u''
-            if tag  == 'applet':
+            if tag == 'applet':
                 base = attrs.get('codebase', u'')
             if not base:
                 base = self.base_ref
