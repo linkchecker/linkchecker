@@ -98,19 +98,6 @@ def strip_c_comments (text):
     return c_comment_re.sub('', text)
 
 
-class TagFinder (object):
-    """Base class handling HTML start elements.
-    TagFinder instances are used as HTML parser handlers."""
-
-    def __init__ (self):
-        """Initialize local variables."""
-        super(TagFinder, self).__init__()
-
-    def start_element (self, tag, attrs, element_text, lineno, column):
-        """Does nothing, override in a subclass."""
-        pass
-
-
 def is_meta_url (attr, attrs):
     """Check if the meta attributes contain a URL."""
     res = False
@@ -133,13 +120,12 @@ def is_form_get(attr, attrs):
     return res
 
 
-class LinkFinder (TagFinder):
+class LinkFinder:
     """Find HTML links, and apply them to the callback function with the
     format (url, lineno, column, name, codebase)."""
 
     def __init__ (self, callback, tags):
         """Store content in buffer and initialize URL list."""
-        super(LinkFinder, self).__init__()
         self.callback = callback
         # set universal tag attributes using tagname None
         self.universal_attrs = set(tags.get(None, []))
@@ -150,7 +136,7 @@ class LinkFinder (TagFinder):
             self.tags[tag].update(self.universal_attrs)
         self.base_ref = u''
 
-    def start_element (self, tag, attrs, element_text, lineno, column):
+    def html_element (self, tag, attrs, element_text, lineno, column):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
@@ -226,3 +212,15 @@ class LinkFinder (TagFinder):
         """Add newly found URL to queue."""
         assert isinstance(url, str_text) or url is None, repr(url)
         self.callback(url, line=lineno, column=column, name=name, base=base)
+
+
+def find_links(soup, callback, tags):
+    """Parse into content and search for URLs to check.
+    When a URL is found it is passed to the supplied callback.
+    """
+    lf = LinkFinder(callback, tags)
+    for element in soup.find_all(True):
+        lf.html_element(
+            element.name, element.attrs, element.text.strip(),
+            element.sourceline,
+            None if element.sourcepos is None else element.sourcepos + 1)

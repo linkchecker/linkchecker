@@ -18,7 +18,7 @@
 Main functions for link parsing
 """
 from .. import log, LOG_CHECK, strformat, url as urlutil
-from ..htmlutil import htmlsoup, linkparse
+from ..htmlutil import linkparse
 from ..bookmarks import firefox
 
 
@@ -46,7 +46,7 @@ def parse_html (url_data):
     """Parse into HTML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    find_links(url_data, url_data.add_url, linkparse.LinkTags)
+    linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.LinkTags)
 
 
 def parse_opera (url_data):
@@ -112,15 +112,7 @@ def parse_wml (url_data):
     """Parse into WML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    find_links(url_data, url_data.add_url, linkparse.WmlTags)
-
-
-def find_links (url_data, callback, tags):
-    """Parse into content and search for URLs to check.
-    Found URLs are added to the URL queue.
-    """
-    handler = linkparse.LinkFinder(callback, tags)
-    htmlsoup.process_soup(handler, url_data.get_soup())
+    linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.WmlTags)
 
 
 def parse_firefox (url_data):

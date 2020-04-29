@@ -22,7 +22,6 @@ from urllib import parse
 from . import _ContentPlugin
 from .. import log, LOG_PLUGIN
 from ..htmlutil import linkparse
-from ..parser import find_links
 
 
 class AnchorCheck(_ContentPlugin):
@@ -37,7 +36,8 @@ class AnchorCheck(_ContentPlugin):
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
         # list of parsed anchors
         self.anchors = []
-        find_links(url_data, self.add_anchor, linkparse.AnchorTags)
+        linkparse.find_links(url_data.get_soup(), self.add_anchor,
+                             linkparse.AnchorTags)
         self.check_anchor(url_data)
 
     def add_anchor (self, url, line, column, name, base):
