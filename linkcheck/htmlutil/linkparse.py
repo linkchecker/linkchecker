@@ -98,11 +98,6 @@ def strip_c_comments (text):
     return c_comment_re.sub('', text)
 
 
-class StopParse(Exception):
-    """Raised when parsing should stop."""
-    pass
-
-
 class TagFinder (object):
     """Base class handling HTML start elements.
     TagFinder instances are used as HTML parser handlers."""
@@ -114,26 +109,6 @@ class TagFinder (object):
     def start_element (self, tag, attrs, element_text, lineno, column):
         """Does nothing, override in a subclass."""
         pass
-
-
-class MetaRobotsFinder (TagFinder):
-    """Class for finding robots.txt meta values in HTML."""
-
-    def __init__ (self):
-        """Initialize follow and index flags."""
-        super(MetaRobotsFinder, self).__init__()
-        log.debug(LOG_CHECK, "meta robots finder")
-        self.follow = self.index = True
-
-    def start_element (self, tag, attrs, element_text, lineno, column):
-        """Search for meta robots.txt "nofollow" and "noindex" flags."""
-        if tag == 'meta' and attrs.get('name') == 'robots':
-            val = attrs.get('content', u'').lower().split(u',')
-            self.follow = u'nofollow' not in val
-            self.index = u'noindex' not in val
-            raise StopParse("found <meta name=robots> tag")
-        elif tag == 'body':
-            raise StopParse("found <body> tag")
 
 
 def is_meta_url (attr, attrs):
