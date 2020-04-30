@@ -542,7 +542,7 @@ for entry in config["authentication"]:
         attrs["strpattern"] = attrs["pattern"].pattern
         msg = _("Enter LinkChecker password for user %(user)s" \
                 " at %(strpattern)s:") % attrs
-        entry["password"] = getpass.getpass(console.encode(msg))
+        entry["password"] = getpass.getpass(msg)
 if options.useragent is not None:
     config["useragent"] = options.useragent
 if options.cookiefile is not None:

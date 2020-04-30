@@ -42,19 +42,17 @@ def search_form(content, cgiuser, cgipassword):
     CGI fields. If no form is found return None.
     """
     soup = htmlsoup.make_soup(content)
-    # The value of the name attribute is case-insensitive
-    # https://www.w3.org/TR/html401/interact/forms.html#adef-name-INPUT
-    cginames = {cgiuser.lower(), cgipassword.lower()}
+    cginames = {cgiuser, cgipassword}
     for form_element in soup.find_all("form", action=True):
         form = Form(form_element["action"])
         for input_element in form_element.find_all("input",
                                                    attrs={"name": True}):
             form.add_value(
                 input_element["name"], input_element.attrs.get("value"))
-        if cginames <= {x.lower() for x in form.data}:
+        if cginames <= set(form.data):
             log.debug(LOG_CHECK, "Found form %s", form)
             return form
 
     # not found
-    log.debug(LOG_CHECK, "Form with fields %s not found", ",".join(cginames))
+    log.warn(LOG_CHECK, "Form with fields %s not found", ",".join(cginames))
     return None
