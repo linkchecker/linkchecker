@@ -131,11 +131,11 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
         f.write(b"<html>\n<title>Dummy directory listing</title>\n")
         f.write(b"<body>\n<h2>Dummy test directory listing</h2>\n")
         f.write(b"<hr>\n<ul>\n")
-        list = [u"example1.txt", u"example2.html", u"example3"]
+        list = ["example1.txt", "example2.html", "example3"]
         for name in list:
             displayname = linkname = name
             list_item = (
-                u'<li><a href="%s">%s</a>\n'
+                '<li><a href="%s">%s</a>\n'
                 % (urllib_parse.quote(linkname), html_escape(displayname))
             )
             f.write(list_item.encode())
@@ -174,7 +174,7 @@ class HttpServerTest (LinkCheckTest):
 
     def get_url(self, filename):
         """Get HTTP URL for filename."""
-        return u"http://localhost:%d/tests/checker/data/%s" % (self.port, filename)
+        return "http://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
 class HttpsServerTest(HttpServerTest):
@@ -193,7 +193,7 @@ class HttpsServerTest(HttpServerTest):
 
     def get_url(self, filename):
         """Get HTTP URL for filename."""
-        return u"https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
+        return "https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
 def start_server (handler, https=False):

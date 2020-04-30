@@ -62,7 +62,7 @@ def find_bookmark_file (profile="Default"):
                 return fname
     except Exception:
         pass
-    return u""
+    return ""
 
 
 def parse_bookmark_data (data):

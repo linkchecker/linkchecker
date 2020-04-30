@@ -71,7 +71,7 @@ class SQLLogger (_Logger):
         """
         Write SQL comment.
         """
-        self.write(u"-- ")
+        self.write("-- ")
         self.writeln(s=s, **args)
 
     def start_output (self):
@@ -88,7 +88,7 @@ class SQLLogger (_Logger):
         """
         Store url check info into the database.
         """
-        self.writeln(u"insert into %(table)s(urlname,"
+        self.writeln("insert into %(table)s(urlname,"
               "parentname,baseref,valid,result,warning,info,url,line,col,"
               "name,checktime,dltime,size,cached,level,modified) values ("
               "%(base_url)s,"

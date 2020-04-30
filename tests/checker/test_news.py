@@ -25,8 +25,8 @@ from . import LinkCheckTest
 # to enable the has_newsserver() resource manually.
 NNTP_SERVER = "news.uni-stuttgart.de"
 # info string returned by news server
-NNTP_INFO = u"200 news.uni-stuttgart.de InterNetNews NNRP server " \
-            u"INN 2.5.2 ready (no posting)"
+NNTP_INFO = "200 news.uni-stuttgart.de InterNetNews NNRP server " \
+            "INN 2.5.2 ready (no posting)"
 # Most free NNTP servers are slow, so don't waist a lot of time running those.
 NNTP_TIMEOUT_SECS = 30
 
@@ -40,100 +40,100 @@ class TestNews (LinkCheckTest):
 
     def test_news_without_host (self):
         # news testing
-        url = u"news:comp.os.linux.misc"
+        url = "news:comp.os.linux.misc"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"warning No NNTP server was specified, skipping this URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "warning No NNTP server was specified, skipping this URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)
         # no group
-        url = u"news:"
+        url = "news:"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"warning No NNTP server was specified, skipping this URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "warning No NNTP server was specified, skipping this URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     def test_snews_with_group (self):
-        url = u"snews:de.comp.os.unix.linux.misc"
+        url = "snews:de.comp.os.unix.linux.misc"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"warning No NNTP server was specified, skipping this URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "warning No NNTP server was specified, skipping this URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     def test_illegal_syntax (self):
         # illegal syntax
-        url = u"news:§$%&/´`(§%"
+        url = "news:§$%&/´`(§%"
         qurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % qurl,
-            u"real url %s" % qurl,
-            u"warning No NNTP server was specified, skipping this URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % qurl,
+            "real url %s" % qurl,
+            "warning No NNTP server was specified, skipping this URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     @need_newsserver(NNTP_SERVER)
     @limit_time(NNTP_TIMEOUT_SECS, skip=True)
     def test_nntp_with_host (self):
-        url = u"nntp://%s/comp.lang.python" % NNTP_SERVER
+        url = "nntp://%s/comp.lang.python" % NNTP_SERVER
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"info %s" % NNTP_INFO,
-            u"info News group comp.lang.python found.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "info %s" % NNTP_INFO,
+            "info News group comp.lang.python found.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     @need_newsserver(NNTP_SERVER)
     @limit_time(NNTP_TIMEOUT_SECS, skip=True)
     def test_article_span (self):
-        url = u"nntp://%s/comp.lang.python/1-5" % NNTP_SERVER
+        url = "nntp://%s/comp.lang.python/1-5" % NNTP_SERVER
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"info %s" % NNTP_INFO,
-            u"info News group comp.lang.python found.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "info %s" % NNTP_INFO,
+            "info News group comp.lang.python found.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     def test_article_span_no_host (self):
-        url = u"news:comp.lang.python/1-5"
+        url = "news:comp.lang.python/1-5"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"warning No NNTP server was specified, skipping this URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "warning No NNTP server was specified, skipping this URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)
 
     @need_newsserver(NNTP_SERVER)
     @limit_time(NNTP_TIMEOUT_SECS, skip=True)
     def test_host_no_group (self):
-        url = u"nntp://%s/" % NNTP_SERVER
+        url = "nntp://%s/" % NNTP_SERVER
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"info %s" % NNTP_INFO,
-            u"warning No newsgroup specified in NNTP URL.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "info %s" % NNTP_INFO,
+            "warning No newsgroup specified in NNTP URL.",
+            "valid",
         ]
         self.newstest(url, resultlines)

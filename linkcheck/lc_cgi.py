@@ -114,7 +114,7 @@ class ThreadsafeIO (object):
     @synchronized(_lock)
     def get_data (self):
         """Get bufferd unicode data."""
-        data = u"".join(self.buf)
+        data = "".join(self.buf)
         self.buf = []
         return data
 

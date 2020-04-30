@@ -66,7 +66,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
             response = session.post('http://validator.w3.org/check', data=body)
             response.raise_for_status()
             if response.headers.get('x-w3c-validator-status', 'Invalid') == 'Valid':
-                url_data.add_info(u"W3C Validator: %s" % _("valid HTML syntax"))
+                url_data.add_info("W3C Validator: %s" % _("valid HTML syntax"))
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:
@@ -103,7 +103,7 @@ class CssSyntaxCheck(_ContentPlugin):
             response = session.get(url, params=params)
             response.raise_for_status()
             if response.headers.get('X-W3C-Validator-Status', 'Invalid') == 'Valid':
-                url_data.add_info(u"W3C Validator: %s" % _("valid CSS syntax"))
+                url_data.add_info("W3C Validator: %s" % _("valid CSS syntax"))
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:

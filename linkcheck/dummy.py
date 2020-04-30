@@ -50,8 +50,8 @@ class Dummy (object):
         return "<dummy>"
 
     def __unicode__ (self):
-        """Return u'dummy'"""
-        return u"dummy"
+        """Return 'dummy'"""
+        return "dummy"
 
     def __len__ (self):
         """Return zero"""

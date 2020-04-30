@@ -30,7 +30,7 @@ ChangeFreqs = (
     'never',
 )
 
-HTTP_SCHEMES = (u'http:', u'https:')
+HTTP_SCHEMES = ('http:', 'https:')
 HTML_TYPES = ('text/html', "application/xhtml+xml")
 
 class SitemapXmlLogger (xmllog._XMLLogger):
@@ -68,8 +68,8 @@ class SitemapXmlLogger (xmllog._XMLLogger):
         """Write start of checking info as xml comment."""
         super(SitemapXmlLogger, self).start_output()
         self.xml_start_output()
-        attrs = {u"xmlns": u"http://www.sitemaps.org/schemas/sitemap/0.9"}
-        self.xml_starttag(u'urlset', attrs)
+        attrs = {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        self.xml_starttag('urlset', attrs)
         self.flush()
 
     def log_filter_url(self, url_data, do_print):
@@ -104,17 +104,17 @@ class SitemapXmlLogger (xmllog._XMLLogger):
 
     def log_url (self, url_data, priority=None):
         """Log URL data in sitemap format."""
-        self.xml_starttag(u'url')
-        self.xml_tag(u'loc', url_data.url)
+        self.xml_starttag('url')
+        self.xml_tag('loc', url_data.url)
         if url_data.modified:
-            self.xml_tag(u'lastmod', self.format_modified(url_data.modified, sep="T"))
-        self.xml_tag(u'changefreq', self.frequency)
-        self.xml_tag(u'priority', "%.2f" % priority)
-        self.xml_endtag(u'url')
+            self.xml_tag('lastmod', self.format_modified(url_data.modified, sep="T"))
+        self.xml_tag('changefreq', self.frequency)
+        self.xml_tag('priority', "%.2f" % priority)
+        self.xml_endtag('url')
         self.flush()
 
     def end_output (self, **kwargs):
         """Write XML end tag."""
-        self.xml_endtag(u"urlset")
+        self.xml_endtag("urlset")
         self.xml_end_output()
         self.close_fileoutput()

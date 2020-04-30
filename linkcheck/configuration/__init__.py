@@ -37,18 +37,18 @@ from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 Version = configdata.version
 ReleaseDate = configdata.release_date
 AppName = configdata.name
-App = AppName+u" "+Version
+App = AppName+" "+Version
 Author = configdata.author
-HtmlAuthor = Author.replace(u' ', u'&nbsp;')
-Copyright = u"Copyright (C) 2000-2014 "+Author
-HtmlCopyright = u"Copyright &copy; 2000-2014 "+HtmlAuthor
-AppInfo = App+u"              "+Copyright
-HtmlAppInfo = App+u", "+HtmlCopyright
+HtmlAuthor = Author.replace(' ', '&nbsp;')
+Copyright = "Copyright (C) 2000-2014 "+Author
+HtmlCopyright = "Copyright &copy; 2000-2014 "+HtmlAuthor
+AppInfo = App+"              "+Copyright
+HtmlAppInfo = App+", "+HtmlCopyright
 Url = configdata.url
-SupportUrl = u"https://github.com/linkchecker/linkchecker/issues"
+SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
 Email = configdata.author_email
-UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
-Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!
+UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
+Freeware = AppName+""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
 under certain conditions. Look at the file `LICENSE' within this
 distribution."""
@@ -66,13 +66,13 @@ Modules = (
 # required modules
     ("requests", "Requests", "__version__"),
 # optional modules
-    ("argcomplete", u"Argcomplete", None),
-    ("GeoIP", u"GeoIP", 'lib_version'),   # on Unix systems
-    ("pygeoip", u"GeoIP", 'lib_version'), # on Windows systems
-    ("sqlite3", u"Pysqlite", 'version'),
-    ("sqlite3", u"Sqlite", 'sqlite_version'),
-    ("gconf", u"Gconf", '__version__'),
-    ("meliae", u"Meliae", '__version__'),
+    ("argcomplete", "Argcomplete", None),
+    ("GeoIP", "GeoIP", 'lib_version'),   # on Unix systems
+    ("pygeoip", "GeoIP", 'lib_version'), # on Windows systems
+    ("sqlite3", "Pysqlite", 'version'),
+    ("sqlite3", "Sqlite", 'sqlite_version'),
+    ("gconf", "Gconf", '__version__'),
+    ("meliae", "Meliae", '__version__'),
 )
 
 def get_modules_info():
@@ -89,7 +89,7 @@ def get_modules_info():
             # ignore attribute errors in case library developers
             # change the version information attribute
             module_infos.append(name)
-    return u"Modules: %s" % (u", ".join(module_infos))
+    return "Modules: %s" % (", ".join(module_infos))
 
 
 def get_share_dir ():

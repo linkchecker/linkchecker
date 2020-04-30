@@ -176,7 +176,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def _get_ssl_sock(self):
         """Get raw SSL socket."""
-        assert self.scheme == u"https", self
+        assert self.scheme == "https", self
         raw_connection = self.url_connection.raw._connection
         if not raw_connection:
             # this happens with newer requests versions:
@@ -190,7 +190,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def _add_ssl_info(self):
         """Add SSL cipher info."""
-        if self.scheme == u'https':
+        if self.scheme == 'https':
             sock = self._get_ssl_sock()
             if not sock:
                 log.debug(LOG_CHECK, "cannot extract SSL certificate from connection")
@@ -230,7 +230,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         kwargs = dict(stream=True, timeout=self.aggregate.config["timeout"])
         if self.proxy:
             kwargs["proxies"] = {self.proxytype: self.proxy}
-        if self.scheme == u"https" and self.aggregate.config["sslverify"]:
+        if self.scheme == "https" and self.aggregate.config["sslverify"]:
             kwargs['verify'] = self.aggregate.config["sslverify"]
         else:
             kwargs['verify'] = False
@@ -284,7 +284,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def check_response (self):
         """Check final result and log it."""
         if self.url_connection.status_code >= 400:
-            self.set_result(u"%d %s" % (self.url_connection.status_code, self.url_connection.reason),
+            self.set_result("%d %s" % (self.url_connection.status_code, self.url_connection.reason),
                             valid=False)
         else:
             if self.url_connection.status_code == 204:
@@ -292,7 +292,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 self.add_warning(self.url_connection.reason,
                                  tag=WARN_HTTP_EMPTY_CONTENT)
             if self.url_connection.status_code >= 200:
-                self.set_result(u"%r %s" % (self.url_connection.status_code, self.url_connection.reason))
+                self.set_result("%r %s" % (self.url_connection.status_code, self.url_connection.reason))
             else:
                 self.set_result(_("OK"))
 
@@ -318,7 +318,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Parse URLs in HTTP headers Link:."""
         for linktype, linkinfo in self.url_connection.links.items():
             url = linkinfo["url"]
-            name = u"Link: header %s" % linktype
+            name = "Link: header %s" % linktype
             self.add_url(url, name=name)
         if 'Refresh' in self.headers:
             from ..htmlutil.linkparse import refresh_re
@@ -326,11 +326,11 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             mo = refresh_re.match(value)
             if mo:
                 url = unicode_safe(mo.group("url"))
-                name = u"Refresh: header"
+                name = "Refresh: header"
                 self.add_url(url, name=name)
         if 'Content-Location' in self.headers:
             url = self.headers['Content-Location'].strip()
-            name = u"Content-Location: header"
+            name = "Content-Location: header"
             self.add_url(url, name=name)
 
     def is_parseable (self):

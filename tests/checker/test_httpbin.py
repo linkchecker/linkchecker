@@ -25,7 +25,7 @@ from . import LinkCheckTest
 def get_httpbin_url(path):
     """Get httpbin URL. Note that this also could be a local
     httpbin installation, but right now this uses the official site."""
-    return u"http://httpbin.org%s" % path
+    return "http://httpbin.org%s" % path
 
 
 class TestHttpbin(LinkCheckTest):
@@ -33,28 +33,28 @@ class TestHttpbin(LinkCheckTest):
 
     @need_network
     def test_http_link(self):
-        linkurl = u"http://www.example.com"
+        linkurl = "http://www.example.com"
         nlinkurl = self.norm(linkurl)
-        url = get_httpbin_url(u"/response-headers?Link=<%s>;rel=previous" % linkurl)
+        url = get_httpbin_url("/response-headers?Link=<%s>;rel=previous" % linkurl)
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
-            u"url %s" % linkurl,
-            u"cache key %s" % nlinkurl,
-            u"real url %s" % nlinkurl,
-            u"name Link: header previous",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
+            "url %s" % linkurl,
+            "cache key %s" % nlinkurl,
+            "real url %s" % nlinkurl,
+            "name Link: header previous",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
     @need_network
     def test_basic_auth(self):
-        user = u"testuser"
-        password = u"testpassword"
-        url = get_httpbin_url(u"/basic-auth/%s/%s" % (user, password))
+        user = "testuser"
+        password = "testpassword"
+        url = get_httpbin_url("/basic-auth/%s/%s" % (user, password))
         nurl = self.norm(url)
         entry = dict(
             user=user,
@@ -63,47 +63,47 @@ class TestHttpbin(LinkCheckTest):
         )
         confargs = dict(authentication=[entry])
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
         ]
         self.direct(url, resultlines, confargs=confargs)
 
     @need_network
     def test_http_refresh_header(self):
-        linkurl = u"http://www.example.com"
+        linkurl = "http://www.example.com"
         nlinkurl = self.norm(linkurl)
-        url = get_httpbin_url(u"/response-headers?Refresh=5;url=%s" % linkurl)
+        url = get_httpbin_url("/response-headers?Refresh=5;url=%s" % linkurl)
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
-            u"url %s" % linkurl,
-            u"cache key %s" % nlinkurl,
-            u"real url %s" % nlinkurl,
-            u"name Refresh: header",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
+            "url %s" % linkurl,
+            "cache key %s" % nlinkurl,
+            "real url %s" % nlinkurl,
+            "name Refresh: header",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
     @need_network
     def test_http_content_location_header(self):
-        linkurl = u"http://www.example.com"
+        linkurl = "http://www.example.com"
         nlinkurl = self.norm(linkurl)
-        url = get_httpbin_url(u"/response-headers?Content-Location=%s" % linkurl)
+        url = get_httpbin_url("/response-headers?Content-Location=%s" % linkurl)
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
-            u"url %s" % linkurl,
-            u"cache key %s" % nlinkurl,
-            u"real url %s" % nlinkurl,
-            u"name Content-Location: header",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
+            "url %s" % linkurl,
+            "cache key %s" % nlinkurl,
+            "real url %s" % nlinkurl,
+            "name Content-Location: header",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)

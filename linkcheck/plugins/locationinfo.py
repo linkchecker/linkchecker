@@ -100,11 +100,11 @@ def get_location (host):
         log.debug(LOG_PLUGIN, "Geoip error for %r", host, exception=True)
         # ignore lookup errors
         return None
-    value = u""
+    value = ""
     if record and record.get("city"):
         value += unicode_safe(record["city"])
     if record and record.get("country_name"):
         if value:
-            value += u", "
+            value += ", "
         value += unicode_safe(record["country_name"])
     return value

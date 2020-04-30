@@ -36,68 +36,68 @@ class TestHttpRedirect (HttpServerTest):
         self.redirect5()
 
     def redirect1 (self):
-        url = u"http://localhost:%d/redirect1" % self.port
+        url = "http://localhost:%d/redirect1" % self.port
         nurl = url
         rurl = url.replace("redirect", "newurl")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % rurl,
-            u"info Redirected to `%s'." % rurl,
-            u"error",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % rurl,
+            "info Redirected to `%s'." % rurl,
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=0)
 
     def redirect2 (self):
-        url = u"http://localhost:%d/tests/checker/data/redirect.html" % \
+        url = "http://localhost:%d/tests/checker/data/redirect.html" % \
               self.port
         nurl = url
         rurl = url.replace("redirect", "newurl")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % rurl,
-            u"info Redirected to `%s'." % rurl,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % rurl,
+            "info Redirected to `%s'." % rurl,
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
     def redirect3 (self):
-        url = u"http://localhost:%d/tests/checker/data/redir.html" % self.port
+        url = "http://localhost:%d/tests/checker/data/redir.html" % self.port
         resultlines = self.get_resultlines("redir.html")
         self.direct(url, resultlines, recursionlevel=1)
 
     def redirect4 (self):
-        url = u"http://localhost:%d/redirect_newscheme_ftp" % self.port
+        url = "http://localhost:%d/redirect_newscheme_ftp" % self.port
         nurl = url
-        #rurl = u"ftp://example.com/"
+        #rurl = "ftp://example.com/"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
             # don't allow ftp redirects
-            #u"info Redirected to `%s'." % rurl,
-            #u"valid",
-            #u"url %s" % rurl,
-            #u"cache key %s" % rurl,
-            #u"real url %s" % rurl,
-            u"error",
+            #"info Redirected to `%s'." % rurl,
+            #"valid",
+            #"url %s" % rurl,
+            #"cache key %s" % rurl,
+            #"real url %s" % rurl,
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
     def redirect5 (self):
-        url = u"http://localhost:%d/redirect_newscheme_file" % self.port
+        url = "http://localhost:%d/redirect_newscheme_file" % self.port
         nurl = url
-        #rurl = u"file:README"
-        #rnurl = u"file:///README"
+        #rurl = "file:README"
+        #rnurl = "file:///README"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
             # don't allow file redirects
-            #u"info Redirected to `%s'." % rurl,
-            #u"warning Redirection to url `%s' is not allowed." % rnurl,
-            u"error",
+            #"info Redirected to `%s'." % rurl,
+            #"warning Redirection to url `%s' is not allowed." % rnurl,
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=99)
 

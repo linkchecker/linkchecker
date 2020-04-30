@@ -56,10 +56,10 @@ class TestHttps(HttpsServerTest):
     def test_https (self):
         url = self.get_url("")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         confargs = dict(
             sslverify=False

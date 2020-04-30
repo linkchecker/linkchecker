@@ -99,7 +99,7 @@ class TestStrFormat (unittest.TestCase):
     def test_is_ascii (self):
         self.assertTrue(linkcheck.strformat.is_ascii("abcd./"))
         self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
-        self.assertTrue(not linkcheck.strformat.is_ascii(u"ä"))
+        self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
 
     def test_indent (self):
         s = "bla"
@@ -107,11 +107,11 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(linkcheck.strformat.indent(s, " "), " "+s)
 
     def test_stripurl (self):
-        self.assertEqual(linkcheck.strformat.stripurl(u"a\tb"), u"a\tb")
-        self.assertEqual(linkcheck.strformat.stripurl(u" a\t b"), u"a\t b")
-        self.assertEqual(linkcheck.strformat.stripurl(u" ab\t\ra\nb"), u"ab")
+        self.assertEqual(linkcheck.strformat.stripurl("a\tb"), "a\tb")
+        self.assertEqual(linkcheck.strformat.stripurl(" a\t b"), "a\t b")
+        self.assertEqual(linkcheck.strformat.stripurl(" ab\t\ra\nb"), "ab")
         self.assertEqual(linkcheck.strformat.stripurl(None), None)
-        self.assertEqual(linkcheck.strformat.stripurl(u""), u"")
+        self.assertEqual(linkcheck.strformat.stripurl(""), "")
 
     def test_limit (self):
         self.assertEqual(linkcheck.strformat.limit("", 0), "")
@@ -164,21 +164,21 @@ class TestStrFormat (unittest.TestCase):
 
     def test_unicode_safe (self):
         unicode_safe = linkcheck.strformat.unicode_safe
-        self.assertEqual(unicode_safe("a"), u"a")
-        self.assertEqual(unicode_safe(u"a"), u"a")
+        self.assertEqual(unicode_safe("a"), "a")
+        self.assertEqual(unicode_safe("a"), "a")
 
     def test_ascii_safe (self):
         ascii_safe = linkcheck.strformat.ascii_safe
-        self.assertEqual(ascii_safe(u"a"), u"a")
-        self.assertEqual(ascii_safe(u"ä"), u"")
+        self.assertEqual(ascii_safe("a"), "a")
+        self.assertEqual(ascii_safe("ä"), "")
 
     def test_strip_control_chars(self):
         strip = linkcheck.strformat.strip_control_chars
         self.assertEqual(strip(""), "")
-        self.assertEqual(strip(u""), u"")
+        self.assertEqual(strip(""), "")
         self.assertEqual(strip("a"), "a")
-        self.assertEqual(strip(u"a"), u"a")
+        self.assertEqual(strip("a"), "a")
         self.assertEqual(strip("ä"), "ä")
-        self.assertEqual(strip(u"ä"), u"ä")
+        self.assertEqual(strip("ä"), "ä")
         self.assertEqual(strip("\x01"), "")
-        self.assertEqual(strip(u"\x01"), u"")
+        self.assertEqual(strip("\x01"), "")

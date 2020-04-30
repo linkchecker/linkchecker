@@ -40,66 +40,66 @@ class CustomXMLLogger (xmllog._XMLLogger):
         super(CustomXMLLogger, self).start_output()
         self.xml_start_output()
         attrs = {"created": strformat.strtime(self.starttime)}
-        self.xml_starttag(u'linkchecker', attrs)
+        self.xml_starttag('linkchecker', attrs)
         self.flush()
 
     def log_url (self, url_data):
         """
         Log URL data in custom XML format.
         """
-        self.xml_starttag(u'urldata')
+        self.xml_starttag('urldata')
         if self.has_part('url'):
-            self.xml_tag(u"url", str_text(url_data.base_url))
+            self.xml_tag("url", str_text(url_data.base_url))
         if url_data.name and self.has_part('name'):
-            self.xml_tag(u"name", str_text(url_data.name))
+            self.xml_tag("name", str_text(url_data.name))
         if url_data.parent_url and self.has_part('parenturl'):
             attrs = {
-                u'line': u"%s" % url_data.line,
-                u'column': u"%s" % url_data.column,
+                'line': "%s" % url_data.line,
+                'column': "%s" % url_data.column,
             }
-            self.xml_tag(u"parent", str_text(url_data.parent_url),
+            self.xml_tag("parent", str_text(url_data.parent_url),
                          attrs=attrs)
         if url_data.base_ref and self.has_part('base'):
-            self.xml_tag(u"baseref", str_text(url_data.base_ref))
+            self.xml_tag("baseref", str_text(url_data.base_ref))
         if self.has_part("realurl"):
-            self.xml_tag(u"realurl", str_text(url_data.url))
+            self.xml_tag("realurl", str_text(url_data.url))
         if self.has_part("extern"):
-            self.xml_tag(u"extern", u"%d" % (1 if url_data.extern else 0))
+            self.xml_tag("extern", "%d" % (1 if url_data.extern else 0))
         if url_data.dltime >= 0 and self.has_part("dltime"):
-            self.xml_tag(u"dltime", u"%f" % url_data.dltime)
+            self.xml_tag("dltime", "%f" % url_data.dltime)
         if url_data.size >= 0 and self.has_part("dlsize"):
-            self.xml_tag(u"dlsize", u"%d" % url_data.size)
+            self.xml_tag("dlsize", "%d" % url_data.size)
         if url_data.checktime and self.has_part("checktime"):
-            self.xml_tag(u"checktime", u"%f" % url_data.checktime)
+            self.xml_tag("checktime", "%f" % url_data.checktime)
         if self.has_part("level"):
-            self.xml_tag(u"level", u"%d" % url_data.level)
+            self.xml_tag("level", "%d" % url_data.level)
         if url_data.info and self.has_part('info'):
-            self.xml_starttag(u"infos")
+            self.xml_starttag("infos")
             for info in url_data.info:
-                self.xml_tag(u"info", info)
-            self.xml_endtag(u"infos")
+                self.xml_tag("info", info)
+            self.xml_endtag("infos")
         if url_data.modified and self.has_part('modified'):
-            self.xml_tag(u"modified", self.format_modified(url_data.modified))
+            self.xml_tag("modified", self.format_modified(url_data.modified))
         if url_data.warnings and self.has_part('warning'):
-            self.xml_starttag(u"warnings")
+            self.xml_starttag("warnings")
             for tag, data in url_data.warnings:
                 attrs = {}
                 if tag:
                     attrs["tag"] = tag
-                self.xml_tag(u"warning", data, attrs)
-            self.xml_endtag(u"warnings")
+                self.xml_tag("warning", data, attrs)
+            self.xml_endtag("warnings")
         if self.has_part("result"):
             attrs = {}
             if url_data.result:
                 attrs["result"] = url_data.result
-            self.xml_tag(u"valid", u"%d" % (1 if url_data.valid else 0), attrs)
-        self.xml_endtag(u'urldata')
+            self.xml_tag("valid", "%d" % (1 if url_data.valid else 0), attrs)
+        self.xml_endtag('urldata')
         self.flush()
 
     def end_output (self, **kwargs):
         """
         Write XML end tag.
         """
-        self.xml_endtag(u"linkchecker")
+        self.xml_endtag("linkchecker")
         self.xml_end_output()
         self.close_fileoutput()

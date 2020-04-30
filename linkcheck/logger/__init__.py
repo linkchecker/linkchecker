@@ -108,7 +108,7 @@ class LogStatistics (object):
             key = url_data.content_type.split('/', 1)[0].lower()
             if key not in self.link_types:
                 key = "other"
-        elif url_data.url.startswith(u"mailto:"):
+        elif url_data.url.startswith("mailto:"):
             key = "mail"
         else:
             key = "other"
@@ -320,11 +320,11 @@ class _Logger (object):
                 self.fd = dummy.Dummy()
                 self.is_active = False
 
-    def writeln (self, s=u"", **args):
+    def writeln (self, s="", **args):
         """
         Write string to output descriptor plus a newline.
         """
-        self.write(u"%s%s" % (s, str_text(os.linesep)), **args)
+        self.write("%s%s" % (s, str_text(os.linesep)), **args)
 
     def has_part (self, name):
         """
@@ -339,7 +339,7 @@ class _Logger (object):
         """
         Return translated part name.
         """
-        return _(Fields.get(name, u""))
+        return _(Fields.get(name, ""))
 
     def spaces (self, name):
         """
@@ -361,7 +361,7 @@ class _Logger (object):
         self.max_indent = max(len(x) for x in values)+1
         for key in parts:
             numspaces = (self.max_indent - len(self.part(key)))
-            self.logspaces[key] = u" " * numspaces
+            self.logspaces[key] = " " * numspaces
         self.stats.reset()
         self.starttime = time.time()
 
@@ -445,7 +445,7 @@ class _Logger (object):
         """
         if modified is not None:
             return modified.strftime("%Y-%m-%d{0}%H:%M:%S.%fZ".format(sep))
-        return u""
+        return ""
 
 def _get_loggers():
     """Return list of Logger classes."""

@@ -191,10 +191,10 @@ Warnings = _(r"""IGNORE WARNINGS
 The following warnings are recognized in the 'ignorewarnings' config
 file entry:
 """) + \
-"\n".join([u" o %s - %s" % (tag, desc) \
+"\n".join([" o %s - %s" % (tag, desc) \
            for tag, desc in sorted(linkcheck.checker.const.Warnings.items())])
 
-Epilog = u"\n".join((Examples, LoggerTypes, RegularExpressions, CookieFormat, ProxySupport, Notes, Retval, Warnings))
+Epilog = "\n".join((Examples, LoggerTypes, RegularExpressions, CookieFormat, ProxySupport, Notes, Retval, Warnings))
 
 
 def has_encoding (encoding):
@@ -605,9 +605,9 @@ else:
 if config["debugmemory"]:
     import linkcheck.memoryutil
     if has_meliae:
-        log.info(LOG_CMDLINE, _(u"Dumping memory statistics..."))
+        log.info(LOG_CMDLINE, _("Dumping memory statistics..."))
         filename = linkcheck.memoryutil.write_memory_dump()
-        message = _(u"The memory dump has been written to `%(filename)s'.")
+        message = _("The memory dump has been written to `%(filename)s'.")
         log.info(LOG_CMDLINE, message % dict(filename=filename))
     else:
         log.warn(LOG_CMDLINE, linkcheck.memoryutil.MemoryDebugMsg)

@@ -92,7 +92,7 @@ class BlacklistLogger (_Logger):
         """
         oldmask = os.umask(0o077)
         for key, value in self.blacklist.items():
-            self.write(u"%d %s%s" % (value, repr(key), os.linesep))
+            self.write("%d %s%s" % (value, repr(key), os.linesep))
         self.close_fileoutput()
         # restore umask
         os.umask(oldmask)

@@ -23,9 +23,9 @@ from . import strformat, log, LOG_CHECK
 from .fileutil import get_temp_file
 
 # Message to display when meliae package is not installed
-MemoryDebugMsg = strformat.format_feature_warning(module=u'meliae',
-            feature=u'memory debugging',
-            url=u'https://launchpad.net/meliae')
+MemoryDebugMsg = strformat.format_feature_warning(module='meliae',
+            feature='memory debugging',
+            url='https://launchpad.net/meliae')
 
 
 def write_memory_dump():

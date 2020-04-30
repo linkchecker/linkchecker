@@ -29,15 +29,15 @@ class TestHttpMisc (HttpServerTest):
         self.file_test("sitemap.xml")
 
     def swf_test (self):
-        url = self.get_url(u"test.swf")
+        url = self.get_url("test.swf")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
-            u"url http://www.example.org/",
-            u"cache key http://www.example.org/",
-            u"real url http://www.example.org/",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url http://www.example.org/",
+            "cache key http://www.example.org/",
+            "real url http://www.example.org/",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)

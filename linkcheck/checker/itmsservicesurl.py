@@ -29,7 +29,7 @@ class ItmsServicesUrl(urlbase.UrlBase):
     def check_syntax(self):
         """Only logs that this URL is unknown."""
         super(ItmsServicesUrl, self).check_syntax()
-        if u"url=" not in self.urlparts[3]:
+        if "url=" not in self.urlparts[3]:
             self.set_result(_("Missing required url parameter"), valid=False)
 
     def local_check(self):

@@ -111,7 +111,7 @@ class FileUrl (urlbase.UrlBase):
         """Initialize the scheme."""
         super(FileUrl, self).init(base_ref, base_url, parent_url,
          recursion_level, aggregate, line, column, page, name, url_encoding, extern)
-        self.scheme = u'file'
+        self.scheme = 'file'
 
     def build_base_url(self):
         """The URL is normed according to the platform:
@@ -183,7 +183,7 @@ class FileUrl (urlbase.UrlBase):
         is checked.
         """
         if (self.parent_url is not None and
-           not self.parent_url.startswith(u"file:")):
+           not self.parent_url.startswith("file:")):
             msg = _("local files are only checked without parent URL or when the parent URL is also a file")
             raise LinkCheckerError(msg)
         if self.is_directory():
@@ -265,7 +265,7 @@ class FileUrl (urlbase.UrlBase):
         if self.url:
             self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
         else:
-            self.content_type = u""
+            self.content_type = ""
 
     def get_intern_pattern (self, url=None):
         """Get pattern for intern URL matching.
@@ -284,11 +284,11 @@ class FileUrl (urlbase.UrlBase):
                 url = url[:i+1]
         return re.escape(url)
 
-    def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
+    def add_url (self, url, line=0, column=0, page=0, name="", base=None):
         """If a local webroot directory is configured, replace absolute URLs
         with it. After that queue the URL data for checking."""
         webroot = self.aggregate.config["localwebroot"]
-        if webroot and url and url.startswith(u"/"):
+        if webroot and url and url.startswith("/"):
             url = webroot + url[1:]
             log.debug(LOG_CHECK, "Applied local webroot `%s' to `%s'.", webroot, url)
         super(FileUrl, self).add_url(url, line=line, column=column, page=page, name=name, base=base)

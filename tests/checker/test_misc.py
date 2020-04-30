@@ -42,15 +42,15 @@ class TestMisc (LinkCheckTest):
 
     @need_network
     def test_itms_services(self):
-        url = u"itms-services:?action=download-manifest&url=http://www.example.com/"
+        url = "itms-services:?action=download-manifest&url=http://www.example.com/"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
-            u"url http://www.example.com/",
-            u"cache key http://www.example.com/",
-            u"real url http://www.example.com/",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url http://www.example.com/",
+            "cache key http://www.example.com/",
+            "real url http://www.example.com/",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)
