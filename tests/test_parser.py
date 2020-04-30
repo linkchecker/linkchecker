@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 # Copyright (C) 2004-2012 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify

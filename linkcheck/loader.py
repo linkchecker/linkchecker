@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
 """
 Functions to load plugin modules.
