@@ -15,50 +15,34 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-HTML parser handler test class.
+HTML parser test function.
 """
 
-import sys
 
-
-class HtmlPrettyPrinter:
+def pretty_print_html(fd, soup):
     """
-    Print out all parsed HTML data in encoded form.
-    Also stores error and warnings messages.
+    Print out all parsed HTML data,
+    writing to the given file descriptor.
+
+    @param fd: file like object
+    @type fd: file
+    @param soup: BeautifulSoup object
+    @type soup: BeautifulSoup
     """
+    for element in soup.find_all(True):
+        tag = element.name
+        element_text = element.text.strip()
 
-    def __init__ (self, fd=sys.stdout, encoding="iso8859-1"):
-        """
-        Write to given file descriptor in given encoding.
-
-        @param fd: file like object (default=sys.stdout)
-        @type fd: file
-        @param encoding: encoding (default=iso8859-1)
-        @type encoding: string
-        """
-        self.fd = fd
-        self.encoding = encoding
-
-    def start_element (self, tag, attrs, element_text, lineno, column):
-        """
-        Print HTML start element.
-
-        @param tag: tag name
-        @type tag: string
-        @param attrs: tag attributes
-        @type attrs: dict
-        @return: None
-        """
-        self.fd.write("<%s" % tag.replace("/", ""))
-        for key, val in sorted(attrs.items()):
+        fd.write("<%s" % tag.replace("/", ""))
+        for key, val in sorted(element.attrs.items()):
             if val is None:
-                self.fd.write(" %s" % key)
+                fd.write(" %s" % key)
             else:
-                self.fd.write(' %s="%s"' % (key, quote_attrval(val)))
+                fd.write(' %s="%s"' % (key, quote_attrval(val)))
         if element_text:
-            self.fd.write(">%s</%s>" % (element_text, tag))
+            fd.write(">%s</%s>" % (element_text, tag))
         else:
-            self.fd.write("/>")
+            fd.write("/>")
 
 
 def quote_attrval (s):

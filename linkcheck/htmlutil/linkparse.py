@@ -30,17 +30,17 @@ LinkTags = {
     'a':        [u'href'],
     'applet':   [u'archive', u'src'],
     'area':     [u'href'],
-    'audio':    [u'src'], # HTML5
+    'audio':    [u'src'],  # HTML5
     'bgsound':  [u'src'],
     'blockquote': [u'cite'],
     'body':     [u'background'],
-    'button':   [u'formaction'], # HTML5
+    'button':   [u'formaction'],  # HTML5
     'del':      [u'cite'],
     'embed':    [u'pluginspage', u'src'],
     'form':     [u'action'],
     'frame':    [u'src', u'longdesc'],
     'head':     [u'profile'],
-    'html':     [u'manifest'], # HTML5
+    'html':     [u'manifest'],  # HTML5
     'iframe':   [u'src', u'longdesc'],
     'ilayer':   [u'background'],
     'img':      [u'src', u'lowsrc', u'longdesc', u'usemap', u'srcset'],
@@ -53,13 +53,13 @@ LinkTags = {
     'object':   [u'classid', u'data', u'archive', u'usemap', u'codebase'],
     'q':        [u'cite'],
     'script':   [u'src'],
-    'source':   [u'src'], # HTML5
+    'source':   [u'src'],  # HTML5
     'table':    [u'background'],
     'td':       [u'background'],
     'th':       [u'background'],
     'tr':       [u'background'],
-    'track':    [u'src'], # HTML5
-    'video':    [u'src'], # HTML5
+    'track':    [u'src'],  # HTML5
+    'video':    [u'src'],  # HTML5
     'xmp':      [u'href'],
     None:       [u'style', u'itemtype'],
 }
@@ -98,44 +98,6 @@ def strip_c_comments (text):
     return c_comment_re.sub('', text)
 
 
-class StopParse(Exception):
-    """Raised when parsing should stop."""
-    pass
-
-
-class TagFinder (object):
-    """Base class handling HTML start elements.
-    TagFinder instances are used as HTML parser handlers."""
-
-    def __init__ (self):
-        """Initialize local variables."""
-        super(TagFinder, self).__init__()
-
-    def start_element (self, tag, attrs, element_text, lineno, column):
-        """Does nothing, override in a subclass."""
-        pass
-
-
-class MetaRobotsFinder (TagFinder):
-    """Class for finding robots.txt meta values in HTML."""
-
-    def __init__ (self):
-        """Initialize follow and index flags."""
-        super(MetaRobotsFinder, self).__init__()
-        log.debug(LOG_CHECK, "meta robots finder")
-        self.follow = self.index = True
-
-    def start_element (self, tag, attrs, element_text, lineno, column):
-        """Search for meta robots.txt "nofollow" and "noindex" flags."""
-        if tag == 'meta' and attrs.get('name') == 'robots':
-            val = attrs.get('content', u'').lower().split(u',')
-            self.follow = u'nofollow' not in val
-            self.index = u'noindex' not in val
-            raise StopParse("found <meta name=robots> tag")
-        elif tag == 'body':
-            raise StopParse("found <body> tag")
-
-
 def is_meta_url (attr, attrs):
     """Check if the meta attributes contain a URL."""
     res = False
@@ -158,24 +120,23 @@ def is_form_get(attr, attrs):
     return res
 
 
-class LinkFinder (TagFinder):
+class LinkFinder:
     """Find HTML links, and apply them to the callback function with the
     format (url, lineno, column, name, codebase)."""
 
     def __init__ (self, callback, tags):
         """Store content in buffer and initialize URL list."""
-        super(LinkFinder, self).__init__()
         self.callback = callback
         # set universal tag attributes using tagname None
         self.universal_attrs = set(tags.get(None, []))
         self.tags = dict()
-        for  tag, attrs in tags.items():
+        for tag, attrs in tags.items():
             self.tags[tag] = set(attrs)
             # add universal tag attributes
             self.tags[tag].update(self.universal_attrs)
         self.base_ref = u''
 
-    def start_element (self, tag, attrs, element_text, lineno, column):
+    def html_element (self, tag, attrs, element_text, lineno, column):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
@@ -192,7 +153,7 @@ class LinkFinder (TagFinder):
             name = self.get_link_name(tag, attrs, attr, element_text)
             # possible codebase
             base = u''
-            if tag  == 'applet':
+            if tag == 'applet':
                 base = attrs.get('codebase', u'')
             if not base:
                 base = self.base_ref
@@ -251,3 +212,15 @@ class LinkFinder (TagFinder):
         """Add newly found URL to queue."""
         assert isinstance(url, str_text) or url is None, repr(url)
         self.callback(url, line=lineno, column=column, name=name, base=base)
+
+
+def find_links(soup, callback, tags):
+    """Parse into content and search for URLs to check.
+    When a URL is found it is passed to the supplied callback.
+    """
+    lf = LinkFinder(callback, tags)
+    for element in soup.find_all(True):
+        lf.html_element(
+            element.name, element.attrs, element.text.strip(),
+            element.sourceline,
+            None if element.sourcepos is None else element.sourcepos + 1)

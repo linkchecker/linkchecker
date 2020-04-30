@@ -25,7 +25,7 @@ import unittest
 
 from parameterized import parameterized
 
-from .htmllib import HtmlPrettyPrinter
+from .htmllib import pretty_print_html
 
 # list of tuples
 # (<test pattern>, <expected parse output>)
@@ -142,8 +142,7 @@ class TestParser (unittest.TestCase):
     def test_parse (self, _in, _out):
         # Parse all test patterns in one go.
         out = StringIO()
-        handler = HtmlPrettyPrinter(out)
-        htmlsoup.process_soup(handler, htmlsoup.make_soup(_in))
+        pretty_print_html(out, htmlsoup.make_soup(_in))
         self.check_results(_in, _out, out)
 
     def check_results (self, _in, _out, out):
@@ -180,8 +179,5 @@ class TestParser (unittest.TestCase):
         self.encoding_test(html, "ascii")
 
     def encoding_test (self, html, expected):
-        out = StringIO()
-        handler = HtmlPrettyPrinter(out)
         soup = htmlsoup.make_soup(html)
-        htmlsoup.process_soup(handler, soup)
         self.assertEqual(soup.original_encoding, expected)

@@ -26,11 +26,12 @@ import warnings
 warnings.simplefilter('ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 from io import BytesIO
+import re
 
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
 from . import (internpaturl, proxysupport)
-from ..htmlutil import htmlsoup, linkparse
+from ..htmlutil import htmlsoup
 # import warnings
 from .const import WARN_HTTP_EMPTY_CONTENT
 from requests.sessions import REDIRECT_STATI
@@ -41,6 +42,9 @@ HTTP_SCHEMAS = ('http://', 'https://')
 
 # helper alias
 unicode_safe = strformat.unicode_safe
+
+# match for robots meta element content attribute
+nofollow_re = re.compile(r"\bnofollow\b", re.IGNORECASE)
 
 class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     """
@@ -78,15 +82,9 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """
         if not self.is_html():
             return True
-        # construct handler object
-        handler = linkparse.MetaRobotsFinder()
-        # parse
-        try:
-            htmlsoup.process_soup(handler, self.get_soup())
-        except linkparse.StopParse as msg:
-            log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
-            pass
-        return handler.follow
+
+        soup = self.get_soup()
+        return not soup.find("meta", attrs={"name": "robots", "content": nofollow_re})
 
     def add_size_info (self):
         """Get size of URL content from HTTP header."""

@@ -29,8 +29,8 @@ class TestLinkparser (unittest.TestCase):
 
     def _test_one_link (self, content, url):
         self.count_url = 0
-        h = linkparse.LinkFinder(self._test_one_url(url), linkparse.LinkTags)
-        htmlsoup.process_soup(h, htmlsoup.make_soup(content))
+        linkparse.find_links(htmlsoup.make_soup(content),
+                             self._test_one_url(url), linkparse.LinkTags)
         self.assertEqual(self.count_url, 1)
 
     def _test_one_url (self, origurl):
@@ -43,8 +43,8 @@ class TestLinkparser (unittest.TestCase):
     def _test_no_link (self, content):
         def callback (url, line, column, name, base):
             self.assertTrue(False, 'URL %r found' % url)
-        h = linkparse.LinkFinder(callback, linkparse.LinkTags)
-        htmlsoup.process_soup(h, htmlsoup.make_soup(content))
+        linkparse.find_links(htmlsoup.make_soup(content), callback,
+                             linkparse.LinkTags)
 
     def test_href_parsing (self):
         # Test <a href> parsing.
