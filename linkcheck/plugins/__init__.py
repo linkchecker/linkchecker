@@ -20,7 +20,7 @@ from .. import loader, log, LOG_PLUGIN
 from ..decorators import notimplemented
 
 
-class _PluginBase(object):
+class _PluginBase:
     """Basic plugin class featuring plugin identification and
     helper functions."""
 
@@ -75,7 +75,7 @@ def get_plugin_classes(modules):
     return loader.get_plugins(modules, classes)
 
 
-class PluginManager(object):
+class PluginManager:
     """Manage all connection and content plugins."""
 
     def __init__(self, config):

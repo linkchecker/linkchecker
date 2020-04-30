@@ -23,7 +23,7 @@ from ..decorators import synchronized
 _lock = threading.Lock()
 
 
-class Logger (object):
+class Logger:
     """Thread safe multi-logger class used by aggregator instances."""
 
     def __init__ (self, config):

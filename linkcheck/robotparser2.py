@@ -38,7 +38,7 @@ __all__ = ["RobotFileParser"]
 ACCEPT_ENCODING = 'x-gzip,gzip,deflate'
 
 
-class RobotFileParser (object):
+class RobotFileParser:
     """This class provides a set of methods to read, parse and answer
     questions about a single robots.txt file."""
 
@@ -271,7 +271,7 @@ class RobotFileParser (object):
         return "\n\n".join(lines)
 
 
-class RuleLine (object):
+class RuleLine:
     """A rule line is a single "Allow:" (allowance==1) or "Disallow:"
     (allowance==0) followed by a path.
     """
@@ -302,7 +302,7 @@ class RuleLine (object):
         return ("Allow" if self.allowance else "Disallow")+": "+self.path
 
 
-class Entry (object):
+class Entry:
     """An entry has one or more user-agents and zero or more rulelines."""
 
     def __init__ (self):

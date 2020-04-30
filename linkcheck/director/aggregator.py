@@ -56,7 +56,7 @@ def new_request_session(config, cookies):
     return session
 
 
-class Aggregate (object):
+class Aggregate:
     """Store thread-safe data collections for checker threads."""
 
     def __init__ (self, config, urlqueue, robots_txt, plugin_manager,

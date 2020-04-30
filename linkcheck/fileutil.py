@@ -44,7 +44,7 @@ def has_module (name, without_error=True):
         return not without_error
 
 
-class GlobDirectoryWalker (object):
+class GlobDirectoryWalker:
     """A forward iterator that traverses a directory tree."""
 
     def __init__ (self, directory, pattern="*"):
@@ -78,7 +78,7 @@ class GlobDirectoryWalker (object):
 rglob = GlobDirectoryWalker
 
 
-class Buffer (object):
+class Buffer:
     """Holds buffered data"""
 
     def __init__ (self, empty=''):

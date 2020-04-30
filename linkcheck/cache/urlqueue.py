@@ -33,7 +33,7 @@ class Empty(Exception):
 
 NUM_PUTS_CLEANUP = 10000
 
-class UrlQueue (object):
+class UrlQueue:
     """A queue supporting several consumer tasks. The task_done() idea is
     from the Python 2.5 implementation of Queue.Queue()."""
 

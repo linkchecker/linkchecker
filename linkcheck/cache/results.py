@@ -24,7 +24,7 @@ from ..lock import get_lock
 cache_lock = get_lock("results_cache_lock")
 
 
-class ResultCache(object):
+class ResultCache:
     """
     Thread-safe cache of UrlData.to_wire() results.
     the cache is limited in size since we rather recheck the same URL

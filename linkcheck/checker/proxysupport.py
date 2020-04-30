@@ -28,7 +28,7 @@ import os
 from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 
 
-class ProxySupport (object):
+class ProxySupport:
     """Get support for proxying and for URLs with user:pass@host setting."""
 
     def set_proxy (self, proxy):

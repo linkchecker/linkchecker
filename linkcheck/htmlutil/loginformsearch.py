@@ -19,7 +19,7 @@ HTML form utils
 from ..htmlutil import htmlsoup
 from .. import log, LOG_CHECK
 
-class Form(object):
+class Form:
     """Store HTML form URL and form data."""
 
     def __init__(self, url):

@@ -17,7 +17,7 @@
 Dummy objects.
 """
 
-class Dummy (object):
+class Dummy:
     """A dummy object ignores all access to it. Useful for testing."""
 
     def __init__ (self, *args, **kwargs):

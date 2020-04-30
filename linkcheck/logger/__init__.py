@@ -57,7 +57,7 @@ ContentTypes = dict(
 )
 
 
-class LogStatistics (object):
+class LogStatistics:
     """Gather log statistics:
     - number of errors, warnings and valid links
     - type of contents (image, video, audio, text, ...)

@@ -80,7 +80,7 @@ def url_norm (url, encoding):
         raise LinkCheckerError(msg)
 
 
-class UrlBase (object):
+class UrlBase:
     """An URL with additional information like validity etc."""
 
     # file types that can be parsed recursively
@@ -857,7 +857,7 @@ urlDataAttr = [
     'level',
 ]
 
-class CompactUrlData (object):
+class CompactUrlData:
     """Store selected UrlData attributes in slots to minimize memory usage."""
     __slots__ = urlDataAttr
 

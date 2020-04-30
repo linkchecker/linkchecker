@@ -33,7 +33,7 @@ def get_lock (name, debug=False):
     return lock
 
 
-class DebugLock (object):
+class DebugLock:
     """Debugging lock class."""
 
     def __init__ (self, lock, name):

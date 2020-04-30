@@ -25,7 +25,7 @@ from ..decorators import synchronized
 _w3_time_lock = threading.Lock()
 
 
-class W3Timer(object):
+class W3Timer:
     """Ensure W3C apis are not hammered."""
 
     # every X seconds

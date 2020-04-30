@@ -93,7 +93,7 @@ def formvalue (form, key):
 
 
 _lock = threading.Lock()
-class ThreadsafeIO (object):
+class ThreadsafeIO:
     """Thread-safe unicode I/O class."""
 
     def __init__(self):

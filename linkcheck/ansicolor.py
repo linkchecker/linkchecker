@@ -249,12 +249,11 @@ else:
     write_color = _write_color_ansi
 
 
-class Colorizer (object):
+class Colorizer:
     """Prints colored messages to streams."""
 
     def __init__ (self, fp):
         """Initialize with given stream (file-like object)."""
-        super(Colorizer, self).__init__()
         self.fp = fp
         if has_colors(fp):
             self.write = self._write_color
@@ -277,7 +276,7 @@ class Colorizer (object):
         return getattr(self.fp, name)
 
 
-class ColoredStreamHandler (logging.StreamHandler, object):
+class ColoredStreamHandler (logging.StreamHandler):
     """Send colored log messages to streams (file-like objects)."""
 
     def __init__ (self, strm=None):

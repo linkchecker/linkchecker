@@ -27,7 +27,7 @@ cache_lock = get_lock("robots.txt_cache_lock")
 robot_lock = get_lock("robots.txt_robot_lock")
 
 
-class RobotsTxt (object):
+class RobotsTxt:
     """
     Thread-safe cache of downloaded robots.txt files.
     format: {cache key (string) -> robots.txt content (RobotFileParser)}

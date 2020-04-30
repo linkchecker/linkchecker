@@ -70,7 +70,7 @@ class ClamavError (Exception):
     pass
 
 
-class ClamdScanner (object):
+class ClamdScanner:
     """Virus scanner using a clamd daemon process."""
 
     def __init__ (self, clamav_conf):

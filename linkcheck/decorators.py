@@ -135,7 +135,7 @@ def timed (log=sys.stderr, limit=2.0):
     return lambda func: timeit(func, log, limit)
 
 
-class curried (object):
+class curried:
     """Decorator that returns a function that keeps returning functions
     until all arguments are supplied; then the original function is
     evaluated."""

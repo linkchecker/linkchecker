@@ -20,7 +20,7 @@ from xml.parsers.expat import ParserCreate
 from xml.parsers.expat import ExpatError
 from ..checker.const import (WARN_XML_PARSE_ERROR)
 
-class XmlTagUrlParser(object):
+class XmlTagUrlParser:
     """Parse XML files and find URLs in text content of a tag name."""
 
     def __init__(self, tag):
