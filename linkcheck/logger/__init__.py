@@ -130,7 +130,7 @@ class LogStatistics (object):
         self.internal_errors += 1
 
 
-class _Logger (object):
+class _Logger (abc.ABC):
     """
     Base class for logging of checked urls. It defines the public API
     (see below) and offers basic functionality for all loggers.
@@ -158,7 +158,6 @@ class _Logger (object):
     * log_url(url_data)
         Log a checked URL. Called by log_filter_url if do_print is True.
     """
-    __metaclass__ = abc.ABCMeta
 
     # A lowercase name for this logger, usable for option values
     LoggerName = None
