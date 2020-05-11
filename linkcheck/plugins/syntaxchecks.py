@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -26,7 +25,7 @@ from ..decorators import synchronized
 _w3_time_lock = threading.Lock()
 
 
-class W3Timer(object):
+class W3Timer:
     """Ensure W3C apis are not hammered."""
 
     # every X seconds

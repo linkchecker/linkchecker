@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -25,7 +24,7 @@ from ..lock import get_lock
 cache_lock = get_lock("results_cache_lock")
 
 
-class ResultCache(object):
+class ResultCache:
     """
     Thread-safe cache of UrlData.to_wire() results.
     the cache is limited in size since we rather recheck the same URL

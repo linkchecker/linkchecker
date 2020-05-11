@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -94,7 +93,7 @@ def formvalue (form, key):
 
 
 _lock = threading.Lock()
-class ThreadsafeIO (object):
+class ThreadsafeIO:
     """Thread-safe unicode I/O class."""
 
     def __init__(self):

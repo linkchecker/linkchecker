@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -34,7 +33,7 @@ class Empty(Exception):
 
 NUM_PUTS_CLEANUP = 10000
 
-class UrlQueue (object):
+class UrlQueue:
     """A queue supporting several consumer tasks. The task_done() idea is
     from the Python 2.5 implementation of Queue.Queue()."""
 

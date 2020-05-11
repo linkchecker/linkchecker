@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -71,7 +70,7 @@ class ClamavError (Exception):
     pass
 
 
-class ClamdScanner (object):
+class ClamdScanner:
     """Virus scanner using a clamd daemon process."""
 
     def __init__ (self, clamav_conf):

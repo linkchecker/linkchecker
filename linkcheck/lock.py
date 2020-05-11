@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -34,7 +33,7 @@ def get_lock (name, debug=False):
     return lock
 
 
-class DebugLock (object):
+class DebugLock:
     """Debugging lock class."""
 
     def __init__ (self, lock, name):

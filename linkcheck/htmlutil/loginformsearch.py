@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,7 +19,7 @@ HTML form utils
 from ..htmlutil import htmlsoup
 from .. import log, LOG_CHECK
 
-class Form(object):
+class Form:
     """Store HTML form URL and form data."""
 
     def __init__(self, url):

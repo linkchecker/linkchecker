@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Hook routines for the wok static site generator.
 # Note that mediacompress is a local module.
 import os

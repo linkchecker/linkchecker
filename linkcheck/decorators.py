@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -136,7 +135,7 @@ def timed (log=sys.stderr, limit=2.0):
     return lambda func: timeit(func, log, limit)
 
 
-class curried (object):
+class curried:
     """Decorator that returns a function that keeps returning functions
     until all arguments are supplied; then the original function is
     evaluated."""

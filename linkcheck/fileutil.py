@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -45,7 +44,7 @@ def has_module (name, without_error=True):
         return not without_error
 
 
-class GlobDirectoryWalker (object):
+class GlobDirectoryWalker:
     """A forward iterator that traverses a directory tree."""
 
     def __init__ (self, directory, pattern="*"):
@@ -79,7 +78,7 @@ class GlobDirectoryWalker (object):
 rglob = GlobDirectoryWalker
 
 
-class Buffer (object):
+class Buffer:
     """Holds buffered data"""
 
     def __init__ (self, empty=''):

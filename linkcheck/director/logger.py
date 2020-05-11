@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,7 +23,7 @@ from ..decorators import synchronized
 _lock = threading.Lock()
 
 
-class Logger (object):
+class Logger:
     """Thread safe multi-logger class used by aggregator instances."""
 
     def __init__ (self, config):

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,7 +17,7 @@
 Dummy objects.
 """
 
-class Dummy (object):
+class Dummy:
     """A dummy object ignores all access to it. Useful for testing."""
 
     def __init__ (self, *args, **kwargs):

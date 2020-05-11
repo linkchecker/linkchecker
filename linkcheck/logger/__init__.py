@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -58,7 +57,7 @@ ContentTypes = dict(
 )
 
 
-class LogStatistics (object):
+class LogStatistics:
     """Gather log statistics:
     - number of errors, warnings and valid links
     - type of contents (image, video, audio, text, ...)

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -81,7 +80,7 @@ def url_norm (url, encoding):
         raise LinkCheckerError(msg)
 
 
-class UrlBase (object):
+class UrlBase:
     """An URL with additional information like validity etc."""
 
     # file types that can be parsed recursively
@@ -858,7 +857,7 @@ urlDataAttr = [
     'level',
 ]
 
-class CompactUrlData (object):
+class CompactUrlData:
     """Store selected UrlData attributes in slots to minimize memory usage."""
     __slots__ = urlDataAttr
 

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -29,7 +28,7 @@ import os
 from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 
 
-class ProxySupport (object):
+class ProxySupport:
     """Get support for proxying and for URLs with user:pass@host setting."""
 
     def set_proxy (self, proxy):

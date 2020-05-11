@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -27,7 +26,7 @@ stderr = i18n.get_encoded_writer(out=sys.stderr)
 stdout = i18n.get_encoded_writer()
 
 
-class StatusLogger (object):
+class StatusLogger:
     """Standard status logger. Default output is stderr."""
 
     def __init__ (self, fd=stderr):

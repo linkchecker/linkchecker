@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright: Jean Brouwers
 # License:
 # Permission is hereby granted, free of charge, to any person obtaining a copy

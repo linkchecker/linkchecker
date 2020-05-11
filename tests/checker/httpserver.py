@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -33,7 +32,7 @@ from . import LinkCheckTest
 from .. import get_file
 
 
-class StoppableHttpRequestHandler (SimpleHTTPRequestHandler, object):
+class StoppableHttpRequestHandler (SimpleHTTPRequestHandler):
     """
     HTTP request handler with QUIT stopping the server.
     """
@@ -58,7 +57,7 @@ StoppableHttpRequestHandler.extensions_map.update({
 })
 
 
-class StoppableHttpServer (HTTPServer, object):
+class StoppableHttpServer (HTTPServer):
     """
     HTTP server that reacts to self.stop flag.
     """
