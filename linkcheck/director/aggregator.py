@@ -83,19 +83,24 @@ class Aggregate:
         if not url:
             return
         user, password = self.config.get_user_password(url)
+        if not user and not password:
+            raise LinkCheckerError(
+                "loginurl is configured but neither user nor password are set")
         session = requests.Session()
         # XXX user-agent header
         # XXX timeout
         log.debug(LOG_CHECK, "Getting login form %s", url)
         response = session.get(url)
         response.raise_for_status()
-        cgiuser = self.config["loginuserfield"]
-        cgipassword = self.config["loginpasswordfield"]
+        cgiuser = self.config["loginuserfield"] if user else None
+        cgipassword = self.config["loginpasswordfield"] if password else None
         form = loginformsearch.search_form(response.text, cgiuser, cgipassword)
         if not form:
             raise LinkCheckerError("Login form not found at %s" % url)
-        form.data[cgiuser] = user
-        form.data[cgipassword] = password
+        if user:
+            form.data[cgiuser] = user
+        if password:
+            form.data[cgipassword] = password
         for key, value in self.config["loginextrafields"].items():
             form.data[key] = value
         formurl = parse.urljoin(url, form.url)
