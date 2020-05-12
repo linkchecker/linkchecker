@@ -29,18 +29,36 @@ class TestLoginUrl(HttpServerTest):
         super().__init__(methodName=methodName)
         self.handler = CGIHandler
 
-    def test_loginurl(self):
+    def visit_loginurl(self, page, user=None, password=None, extrafields=False):
         confargs = {}
-        confargs["loginurl"] = self.get_url("loginform.html")
-        confargs["loginextrafields"] = {"extra_field": "default"}
+        confargs["loginurl"] = self.get_url(page)
+        if extrafields:
+            confargs["loginextrafields"] = {"extra_field": "default"}
         confargs["authentication"] = [{
-            "user": "test_user", "password": "test_password",
+            "user": user, "password": password,
             "pattern": re.compile("^http://localhost.*")
         }]
 
         aggregate = get_test_aggregate(confargs, {"expected": ""})
         aggregate.visit_loginurl()
 
-        self.assertEqual(aggregate.cookies["login"], "test_user")
-        self.assertEqual(aggregate.cookies["password"], "test_password")
-        self.assertEqual(aggregate.cookies["extra_field"], "default")
+        return aggregate.cookies
+
+    def test_loginurl(self):
+        cookies = self.visit_loginurl("loginform.html", "test_user",
+                                      "test_password", True)
+
+        self.assertEqual(cookies["login"], "test_user")
+        self.assertEqual(cookies["password"], "test_password")
+        self.assertEqual(cookies["extra_field"], "default")
+
+    def test_loginurl_user(self):
+        cookies = self.visit_loginurl("loginform_user.html", "test_user")
+
+        self.assertEqual(cookies["login"], "test_user")
+
+    def test_login_password(self):
+        cookies = self.visit_loginurl("loginform_password.html",
+                                      password="test_password")
+
+        self.assertEqual(cookies["password"], "test_password")
