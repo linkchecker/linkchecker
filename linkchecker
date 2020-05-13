@@ -578,13 +578,12 @@ else:
 if do_profile:
     if has_profile:
         if os.path.exists(_profile):
-            question = _("""Overwrite profiling file %(file)r?
-Press Ctrl-C to cancel, RETURN to continue.""") % {"file": _profile}
+            print(_("""Overwrite profiling file %(file)r?
+Press Ctrl-C to cancel, RETURN to continue.""") % {"file": _profile})
             try:
-                raw_input(question.encode(i18n.default_encoding, 'replace'))
+                input()
             except KeyboardInterrupt:
-                print >> sys.stderr
-                print >> sys.stderr, _("Canceled.")
+                print("", _("Canceled."), file=sys.stderr, sep="\n")
                 sys.exit(1)
     else:
         log.warn(LOG_CMDLINE,
