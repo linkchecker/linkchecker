@@ -41,7 +41,7 @@ def search_form(content, cgiuser, cgipassword):
     CGI fields. If no form is found return None.
     """
     soup = htmlsoup.make_soup(content)
-    cginames = {cgiuser, cgipassword}
+    cginames = {cgiuser, cgipassword} - {None}
     for form_element in soup.find_all("form", action=True):
         form = Form(form_element["action"])
         for input_element in form_element.find_all("input",
