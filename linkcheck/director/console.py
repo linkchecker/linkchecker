@@ -37,13 +37,13 @@ class StatusLogger:
         """Write status message to file descriptor."""
         msg = _n("%2d thread active", "%2d threads active", in_progress) % \
           in_progress
-        self.write(u"%s, " % msg)
+        self.write("%s, " % msg)
         msg = _n("%5d link queued", "%5d links queued", queue) % queue
-        self.write(u"%s, " % msg)
+        self.write("%s, " % msg)
         msg = _n("%4d link", "%4d links", checked) % checked
-        self.write(u"%s" % msg)
+        self.write("%s" % msg)
         msg = _n("%3d URL", "%3d URLs", num_urls) % num_urls
-        self.write(u" in %s checked, " % msg)
+        self.write(" in %s checked, " % msg)
         msg = _("runtime %s") % strformat.strduration_long(duration)
         self.writeln(msg)
         self.flush()
@@ -54,7 +54,7 @@ class StatusLogger:
 
     def writeln (self, msg):
         """Write status message and line break to file descriptor."""
-        self.fd.write(u"%s%s" % (msg, os.linesep))
+        self.fd.write("%s%s" % (msg, os.linesep))
 
     def flush (self):
         """Flush file descriptor."""

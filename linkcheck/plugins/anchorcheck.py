@@ -51,11 +51,11 @@ class AnchorCheck(_ContentPlugin):
         if any(x for x in self.anchors if parse.quote(x[0]) == url_data.anchor):
             return
         if self.anchors:
-            anchornames = sorted(set(u"`%s'" % x[0] for x in self.anchors))
-            anchors = u", ".join(anchornames)
+            anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
+            anchors = ", ".join(anchornames)
         else:
-            anchors = u"-"
+            anchors = "-"
         args = {"name": url_data.anchor, "anchors": anchors}
-        msg = u"%s %s" % (_("Anchor `%(name)s' not found.") % args,
+        msg = "%s %s" % (_("Anchor `%(name)s' not found.") % args,
                           _("Available anchors: %(anchors)s.") % args)
         url_data.add_warning(msg)

@@ -42,48 +42,48 @@ class GraphXMLLogger (_XMLLogger, _GraphLogger):
         """Write start of checking info as xml comment."""
         super(GraphXMLLogger, self).start_output()
         self.xml_start_output()
-        self.xml_starttag(u'GraphXML')
-        self.xml_starttag(u'graph', attrs={u"isDirected": u"true"})
+        self.xml_starttag('GraphXML')
+        self.xml_starttag('graph', attrs={"isDirected": "true"})
         self.flush()
 
     def log_url (self, url_data):
         """Write one node and all possible edges."""
         node = self.get_node(url_data)
         if node:
-            self.xml_starttag(u'node', attrs={u"name": u"%d" % node["id"]})
-            self.xml_tag(u"label", node["label"])
+            self.xml_starttag('node', attrs={"name": "%d" % node["id"]})
+            self.xml_tag("label", node["label"])
             if self.has_part("realurl"):
-                self.xml_tag(u"url", node["url"])
-            self.xml_starttag(u"data")
+                self.xml_tag("url", node["url"])
+            self.xml_starttag("data")
             if node["dltime"] >= 0 and self.has_part("dltime"):
-                self.xml_tag(u"dltime", u"%f" % node["dltime"])
+                self.xml_tag("dltime", "%f" % node["dltime"])
             if node["size"] >= 0 and self.has_part("dlsize"):
-                self.xml_tag(u"size", u"%d" % node["size"])
+                self.xml_tag("size", "%d" % node["size"])
             if node["checktime"] and self.has_part("checktime"):
-                self.xml_tag(u"checktime", u"%f" % node["checktime"])
+                self.xml_tag("checktime", "%f" % node["checktime"])
             if self.has_part("extern"):
-                self.xml_tag(u"extern", u"%d" % node["extern"])
-            self.xml_endtag(u"data")
-            self.xml_endtag(u"node")
+                self.xml_tag("extern", "%d" % node["extern"])
+            self.xml_endtag("data")
+            self.xml_endtag("node")
 
     def write_edge (self, node):
         """Write one edge."""
         attrs = {
-            u"source": u"%d" % self.nodes[node["parent_url"]]["id"],
-            u"target": u"%d" % node["id"],
+            "source": "%d" % self.nodes[node["parent_url"]]["id"],
+            "target": "%d" % node["id"],
         }
-        self.xml_starttag(u"edge", attrs=attrs)
-        self.xml_tag(u"label", node["label"])
-        self.xml_starttag(u"data")
+        self.xml_starttag("edge", attrs=attrs)
+        self.xml_tag("label", node["label"])
+        self.xml_starttag("data")
         if self.has_part("result"):
-            self.xml_tag(u"valid", u"%d" % node["valid"])
-        self.xml_endtag(u"data")
-        self.xml_endtag(u"edge")
+            self.xml_tag("valid", "%d" % node["valid"])
+        self.xml_endtag("data")
+        self.xml_endtag("edge")
 
     def end_output (self, **kwargs):
         """Finish graph output, and print end of checking info as xml
         comment."""
-        self.xml_endtag(u"graph")
-        self.xml_endtag(u"GraphXML")
+        self.xml_endtag("graph")
+        self.xml_endtag("GraphXML")
         self.xml_end_output()
         self.close_fileoutput()

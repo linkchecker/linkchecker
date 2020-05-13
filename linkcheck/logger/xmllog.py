@@ -51,22 +51,22 @@ class _XMLLogger (_Logger):
         args = self.get_args(kwargs)
         super(_XMLLogger, self).__init__(**args)
         self.init_fileoutput(args)
-        self.indent = u"  "
+        self.indent = "  "
         self.level = 0
 
     def comment (self, s, **args):
         """
         Write XML comment.
         """
-        self.write(u"<!-- ")
+        self.write("<!-- ")
         self.write(s, **args)
-        self.writeln(u" -->")
+        self.writeln(" -->")
 
     def xml_start_output (self):
         """
         Write start of checking info as xml comment.
         """
-        self.writeln(u'<?xml version="1.0" encoding="%s"?>' %
+        self.writeln('<?xml version="1.0" encoding="%s"?>' %
              xmlquoteattr(self.get_charset_encoding()))
         if self.has_part("intro"):
             self.write_intro()
@@ -84,12 +84,12 @@ class _XMLLogger (_Logger):
         Write XML start tag.
         """
         self.write(self.indent*self.level)
-        self.write(u"<%s" % xmlquote(name))
+        self.write("<%s" % xmlquote(name))
         if attrs:
             for name, value in attrs.items():
                 args = (xmlquote(name), xmlquoteattr(value))
-                self.write(u' %s="%s"' % args)
-        self.writeln(u">")
+                self.write(' %s="%s"' % args)
+        self.writeln(">")
         self.level += 1
 
     def xml_endtag (self, name):
@@ -99,16 +99,16 @@ class _XMLLogger (_Logger):
         self.level -= 1
         assert self.level >= 0
         self.write(self.indent*self.level)
-        self.writeln(u"</%s>" % xmlquote(name))
+        self.writeln("</%s>" % xmlquote(name))
 
     def xml_tag (self, name, content, attrs=None):
         """
         Write XML tag with content.
         """
         self.write(self.indent*self.level)
-        self.write(u"<%s" % xmlquote(name))
+        self.write("<%s" % xmlquote(name))
         if attrs:
             for aname, avalue in attrs.items():
                 args = (xmlquote(aname), xmlquoteattr(avalue))
-                self.write(u' %s="%s"' % args)
-        self.writeln(u">%s</%s>" % (xmlquote(content), xmlquote(name)))
+                self.write(' %s="%s"' % args)
+        self.writeln(">%s</%s>" % (xmlquote(content), xmlquote(name)))

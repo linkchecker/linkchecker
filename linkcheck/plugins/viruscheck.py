@@ -45,9 +45,9 @@ class VirusCheck(_ContentPlugin):
         infected, errors = scan(data, self.clamav_conf)
         if infected or errors:
             for msg in infected:
-                url_data.add_warning(u"Virus scan infection: %s" % msg)
+                url_data.add_warning("Virus scan infection: %s" % msg)
             for msg in errors:
-                url_data.add_warning(u"Virus scan error: %s" % msg)
+                url_data.add_warning("Virus scan error: %s" % msg)
         else:
             url_data.add_info("No viruses in data found.")
 

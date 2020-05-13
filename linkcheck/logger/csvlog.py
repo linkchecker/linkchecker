@@ -26,9 +26,9 @@ from . import _Logger
 from .. import strformat
 
 Columns = (
-    u"urlname", u"parentname", u"baseref", u"result", u"warningstring",
-    u"infostring", u"valid", u"url", u"line", u"column", u"name",
-    u"dltime", u"size", u"checktime", u"cached", u"level", u"modified",
+    "urlname", "parentname", "baseref", "result", "warningstring",
+    "infostring", "valid", "url", "line", "column", "name",
+    "dltime", "size", "checktime", "cached", "level", "modified",
 )
 
 
@@ -59,7 +59,7 @@ class CSVLogger (_Logger):
 
     def comment (self, s, **args):
         """Write CSV comment."""
-        self.writeln(s=u"# %s" % s, **args)
+        self.writeln(s="# %s" % s, **args)
 
     def start_output (self):
         """Write checking start info as csv comment."""
@@ -70,7 +70,7 @@ class CSVLogger (_Logger):
             self.flush()
         else:
             # write empty string to initialize file output
-            self.write(u"")
+            self.write("")
         self.queue = StringIO()
         self.writer = csv.writer(self.queue, dialect=self.dialect,
                delimiter=self.separator, lineterminator=self.linesep,

@@ -47,53 +47,53 @@ class TestLinkparser (unittest.TestCase):
 
     def test_href_parsing (self):
         # Test <a href> parsing.
-        content = u'<a href="%s">'
-        url = u"alink"
+        content = '<a href="%s">'
+        url = "alink"
         self._test_one_link(content % url, url)
-        url = u" alink"
+        url = " alink"
         self._test_one_link(content % url, url)
-        url = u"alink "
+        url = "alink "
         self._test_one_link(content % url, url)
-        url = u" alink "
+        url = " alink "
         self._test_one_link(content % url, url)
 
     def test_img_srcset_parsing(self):
-        content = u'<img srcset="%s 1x">'
-        url = u"imagesmall.jpg"
+        content = '<img srcset="%s 1x">'
+        url = "imagesmall.jpg"
         self._test_one_link(content % url, url)
 
     def test_itemtype_parsing(self):
-        content = u'<div itemtype="%s">'
-        url = u"http://example.org/Movie"
+        content = '<div itemtype="%s">'
+        url = "http://example.org/Movie"
         self._test_one_link(content % url, url)
 
     def test_form_parsing(self):
         # Test <form action> parsing
-        content = u'<form action="%s">'
-        url = u"alink"
+        content = '<form action="%s">'
+        url = "alink"
         self._test_one_link(content % url, url)
-        content = u'<form action="%s" method="POST">'
-        url = u"alink"
+        content = '<form action="%s" method="POST">'
+        url = "alink"
         self._test_no_link(content % url)
 
     def test_css_parsing (self):
         # Test css style attribute parsing.
-        content = u'<table style="background: url(%s) no-repeat" >'
-        url = u"alink"
+        content = '<table style="background: url(%s) no-repeat" >'
+        url = "alink"
         self._test_one_link(content % url, url)
-        content = u'<table style="background: url(%s) no-repeat" >'
+        content = '<table style="background: url(%s) no-repeat" >'
         self._test_one_link(content % url, url)
-        content = u'<table style="background: url(%s ) no-repeat" >'
+        content = '<table style="background: url(%s ) no-repeat" >'
         self._test_one_link(content % url, url)
-        content = u'<table style="background: url( %s ) no-repeat" >'
+        content = '<table style="background: url( %s ) no-repeat" >'
         self._test_one_link(content % url, url)
-        content = u'<table style="background: url(\'%s\') no-repeat" >'
+        content = '<table style="background: url(\'%s\') no-repeat" >'
         self._test_one_link(content % url, url)
-        content = u"<table style='background: url(\"%s\") no-repeat' >"
+        content = "<table style='background: url(\"%s\") no-repeat' >"
         self._test_one_link(content % url, url)
-        content = u'<table style="background: url(\'%s\' ) no-repeat" >'
+        content = '<table style="background: url(\'%s\' ) no-repeat" >'
         self._test_one_link(content % url, url)
-        content = u"<table style='background: url( \"%s\") no-repeat' >"
+        content = "<table style='background: url( \"%s\") no-repeat' >"
         self._test_one_link(content % url, url)
 
     def test_comment_stripping (self):
@@ -108,6 +108,6 @@ class TestLinkparser (unittest.TestCase):
         self.assertEqual(strip(content), "abc")
 
     def test_url_quoting(self):
-        url = u'http://example.com/bla/a=b'
-        content = u'<a href="%s&quot;">'
-        self._test_one_link(content % url, url + u'"')
+        url = 'http://example.com/bla/a=b'
+        content = '<a href="%s&quot;">'
+        self._test_one_link(content % url, url + '"')

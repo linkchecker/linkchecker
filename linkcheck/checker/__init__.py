@@ -63,12 +63,12 @@ def absolute_url (base_url, base_ref, parent_url):
         return base_ref
     elif parent_url and urlutil.url_is_absolute(parent_url):
         return parent_url
-    return u""
+    return ""
 
 
 def get_url_from (base_url, recursion_level, aggregate,
                   parent_url=None, base_ref=None, line=None, column=None,
-                  page=0, name=u"", parent_content_type=None, extern=None, url_encoding=None):
+                  page=0, name="", parent_content_type=None, extern=None, url_encoding=None):
     """
     Get url data from given base data.
 

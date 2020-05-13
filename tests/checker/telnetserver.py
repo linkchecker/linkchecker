@@ -39,12 +39,12 @@ class TelnetServerTest (LinkCheckTest):
     def get_url(self, user=None, password=None):
         if user is not None:
             if password is not None:
-                netloc = u"%s:%s@%s" % (user, password, self.host)
+                netloc = "%s:%s@%s" % (user, password, self.host)
             else:
-                netloc = u"%s@%s" % (user, self.host)
+                netloc = "%s@%s" % (user, self.host)
         else:
             netloc = self.host
-        return u"telnet://%s:%d" % (netloc, self.port)
+        return "telnet://%s:%d" % (netloc, self.port)
 
     def setUp (self):
         """Start a new Telnet server in a new thread."""

@@ -46,17 +46,17 @@ class TestHttp (HttpServerTest):
             self._test_status(status)
 
     def _test_status(self, status):
-        url = u"http://localhost:%d/status/%d" % (self.port, status)
+        url = "http://localhost:%d/status/%d" % (self.port, status)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
         ]
         if status in (204,):
-            resultlines.append(u"warning No Content")
+            resultlines.append("warning No Content")
         if (status not in [101, 102] and status < 200) or status >= 400:
-            result = u"error"
+            result = "error"
         else:
-            result = u"valid"
+            result = "valid"
         resultlines.append(result)
         self.direct(url, resultlines, recursionlevel=0)

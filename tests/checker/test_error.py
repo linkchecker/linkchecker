@@ -27,55 +27,55 @@ class TestError (LinkCheckTest):
 
     def test_unrecognized (self):
         # Unrecognized scheme
-        url = u"hutzli:"
+        url = "hutzli:"
         attrs = self.get_attrs(url=url)
         attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
-            u"url file://%(curdir)s/%(url)s" % attrs,
-            u"cache key %(nurl)s" % attrs,
-            u"real url %(nurl)s" % attrs,
-            u"error",
+            "url file://%(curdir)s/%(url)s" % attrs,
+            "cache key %(nurl)s" % attrs,
+            "real url %(nurl)s" % attrs,
+            "error",
         ]
         self.direct(url, resultlines)
 
     def test_invalid1 (self):
         # invalid scheme chars
-        url = u"äöü:"
+        url = "äöü:"
         attrs = self.get_attrs(url=url)
         attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
-            u"url file://%(curdir)s/%(url)s" % attrs,
-            u"cache key %(nurl)s" % attrs,
-            u"real url %(nurl)s" % attrs,
-            u"name %(url)s" % attrs,
-            u"error",
+            "url file://%(curdir)s/%(url)s" % attrs,
+            "cache key %(nurl)s" % attrs,
+            "real url %(nurl)s" % attrs,
+            "name %(url)s" % attrs,
+            "error",
         ]
         self.direct(url, resultlines)
 
     def test_invalid2 (self):
         # missing scheme alltogether
-        url = u"äöü"
+        url = "äöü"
         attrs = self.get_attrs(url=url)
         attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
-            u"url file://%(curdir)s/%(url)s" % attrs,
-            u"cache key %(nurl)s" % attrs,
-            u"real url %(nurl)s" % attrs,
-            u"name %(url)s" % attrs,
-            u"error",
+            "url file://%(curdir)s/%(url)s" % attrs,
+            "cache key %(nurl)s" % attrs,
+            "real url %(nurl)s" % attrs,
+            "name %(url)s" % attrs,
+            "error",
         ]
         self.direct(url, resultlines)
 
     def test_invalid3 (self):
         # really fucked up
-        url = u"@³²¼][½ ³@] ¬½"
+        url = "@³²¼][½ ³@] ¬½"
         attrs = self.get_attrs(url=url)
         attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
-            u"url file://%(curdir)s/%(url)s" % attrs,
-            u"cache key %(nurl)s" % attrs,
-            u"real url %(nurl)s" % attrs,
-            u"name %(url)s" % attrs,
-            u"error",
+            "url file://%(curdir)s/%(url)s" % attrs,
+            "cache key %(nurl)s" % attrs,
+            "real url %(nurl)s" % attrs,
+            "name %(url)s" % attrs,
+            "error",
         ]
         self.direct(url, resultlines)

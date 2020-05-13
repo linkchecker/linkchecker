@@ -40,7 +40,7 @@ class XmlTagUrlParser:
         """Parse XML URL data."""
         self.url_data = url_data
         self.in_tag = False
-        self.url = u""
+        self.url = ""
         data = url_data.get_raw_content()
         isfinal = True
         try:
@@ -51,7 +51,7 @@ class XmlTagUrlParser:
     def start_element(self, name, attrs):
         """Set tag status for start element."""
         self.in_tag = (name == self.tag)
-        self.url = u""
+        self.url = ""
 
     def end_element(self, name):
         """If end tag is our tag, call add_url()."""
@@ -64,7 +64,7 @@ class XmlTagUrlParser:
         if self.url:
             self.url_data.add_url(self.url, line=self.parser.CurrentLineNumber,
                 column=self.parser.CurrentColumnNumber)
-            self.url = u""
+            self.url = ""
 
     def char_data(self, data):
         """If inside the wanted tag, append data to URL."""
@@ -74,9 +74,9 @@ class XmlTagUrlParser:
 
 def parse_sitemap(url_data):
     """Parse XML sitemap data."""
-    XmlTagUrlParser(u"loc").parse(url_data)
+    XmlTagUrlParser("loc").parse(url_data)
 
 
 def parse_sitemapindex(url_data):
     """Parse XML sitemap index data."""
-    XmlTagUrlParser(u"loc").parse(url_data)
+    XmlTagUrlParser("loc").parse(url_data)

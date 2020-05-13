@@ -48,9 +48,9 @@ parsetests = [
     ("""<a >""", """<a/>"""),
     ("""<>""", """"""),
     ("""< >""", """"""),
-    ("""<aä>""", u"""<aä/>"""),
-    ("""<a aä="b">""", u"""<a aä="b"/>"""),
-    ("""<a a="bä">""", u"""<a a="b&#228;"/>"""),
+    ("""<aä>""", """<aä/>"""),
+    ("""<a aä="b">""", """<a aä="b"/>"""),
+    ("""<a a="bä">""", """<a a="b&#228;"/>"""),
     # multiple attribute names should be ignored...
     ("""<a b="c" b="c" >""", """<a b="c"/>"""),
     # ... but which one wins - in our implementation the last one

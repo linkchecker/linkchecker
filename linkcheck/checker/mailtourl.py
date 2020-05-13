@@ -47,19 +47,19 @@ def getaddresses (addr):
 
 def is_quoted (addr):
     """Return True iff mail address string is quoted."""
-    return addr.startswith(u'"') and addr.endswith(u'"')
+    return addr.startswith('"') and addr.endswith('"')
 
 
 def is_literal (domain):
     """Return True iff domain string is a literal."""
-    return domain.startswith(u'[') and domain.endswith(u']')
+    return domain.startswith('[') and domain.endswith(']')
 
 
 _remove_quoted = re.compile(r'\\.').sub
 _quotes = re.compile(r'["\\]')
 def is_missing_quote (addr):
     """Return True iff mail address is not correctly quoted."""
-    return _quotes.match(_remove_quoted(u"", addr[1:-1]))
+    return _quotes.match(_remove_quoted("", addr[1:-1]))
 
 
 # list of CGI keys to search for email addresses
@@ -184,20 +184,20 @@ class MailtoUrl (urlbase.UrlBase):
                 {"addr": mail}, valid=False, overwrite=False)
                 return
         else:
-            if local.startswith(u"."):
+            if local.startswith("."):
                 self.set_result(_("Local part of mail address `%(addr)s' may not start with a dot.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            if local.endswith(u"."):
+            if local.endswith("."):
                 self.set_result(_("Local part of mail address `%(addr)s' may not end with a dot.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            if u".." in local:
+            if ".." in local:
                 self.set_result(_("Local part of mail address `%(addr)s' may not contain two dots.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            for char in u'@ \\",[]':
-                if char in local.replace(u"\\%s"%char, u""):
+            for char in '@ \\",[]':
+                if char in local.replace("\\%s"%char, ""):
                     self.set_result(_("Local part of mail address `%(addr)s' contains unquoted character `%(char)s.") % \
                     {"addr": mail, "char": char}, valid=False, overwrite=False)
                     return
@@ -207,7 +207,7 @@ class MailtoUrl (urlbase.UrlBase):
         if is_literal(domain):
             # it's an IP address
             ip = domain[1:-1]
-            if ip.startswith(u"IPv6:"):
+            if ip.startswith("IPv6:"):
                 ip = ip[5:]
             if not iputil.is_valid_ip(ip):
                 self.set_result(_("Domain part of mail address `%(addr)s' has invalid IP.") % \
@@ -293,8 +293,8 @@ class MailtoUrl (urlbase.UrlBase):
         """
         The cache url is a comma separated list of emails.
         """
-        emails = u",".join(sorted(self.addresses))
-        self.cache_url = u"%s:%s" % (self.scheme, emails)
+        emails = ",".join(sorted(self.addresses))
+        self.cache_url = "%s:%s" % (self.scheme, emails)
 
     def can_get_content (self):
         """

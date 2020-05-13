@@ -45,7 +45,7 @@ class TestUrlBuild (unittest.TestCase):
         aggregate = get_test_aggregate()
         o = get_url_from(base_url, recursion_level, aggregate, parent_url=parent_url)
         o.build_url()
-        self.assertEqual(o.url, u'http://foo')
+        self.assertEqual(o.url, 'http://foo')
 
     def test_urljoin (self):
         parent_url = "http://localhost:8001/test"
@@ -64,8 +64,8 @@ class TestUrlBuild (unittest.TestCase):
         self.assertEqual(o.url, parent_url)
 
     def test_http_build2 (self):
-        parent_url = u'http://example.org/test?a=b&c=d'
-        base_url = u'#usemap'
+        parent_url = 'http://example.org/test?a=b&c=d'
+        base_url = '#usemap'
         recursion_level = 0
         aggregate = get_test_aggregate()
         o = get_url_from(base_url, recursion_level, aggregate, parent_url=parent_url)

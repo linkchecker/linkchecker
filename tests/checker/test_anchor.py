@@ -26,16 +26,16 @@ class TestAnchor (LinkCheckTest):
 
     def test_anchor (self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
-        url = u"file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
+        url = "file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
         nurl = self.norm(url)
         anchor = "broken"
         urlanchor = url + "#" + anchor
         resultlines = [
-            u"url %s" % urlanchor,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
-            u"valid",
+            "url %s" % urlanchor,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
+            "valid",
         ]
         self.direct(urlanchor, resultlines, confargs=confargs)
 

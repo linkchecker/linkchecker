@@ -26,20 +26,20 @@ class TestHttpsRedirect (HttpServerTest):
         self.handler = RedirectHttpsRequestHandler
 
     def test_redirect (self):
-        url = u"http://localhost:%d/redirect1" % self.port
+        url = "http://localhost:%d/redirect1" % self.port
         nurl = url
-        #rurl = u"https://localhost:%d/newurl1" % self.port
+        #rurl = "https://localhost:%d/newurl1" % self.port
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % url,
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % url,
             # XXX the redirect fails because this is not an SSL server
-            #u"info Redirected to `%s'." % rurl.replace('http:', 'https:'),
-            #u"valid",
-            #u"url %s" % rurl,
-            #u"cache key %s" % rurl,
-            #u"real url %s" % rurl,
-            u"error",
+            #"info Redirected to `%s'." % rurl.replace('http:', 'https:'),
+            #"valid",
+            #"url %s" % rurl,
+            #"cache key %s" % rurl,
+            #"real url %s" % rurl,
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=0)
 

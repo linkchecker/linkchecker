@@ -137,7 +137,7 @@ class TextLogger (_Logger):
         """Write unique ID of url_data."""
         self.writeln()
         self.write(self.part('id') + self.spaces('id'))
-        self.writeln(u"%d" % self.stats.number, color=self.colorinfo)
+        self.writeln("%d" % self.stats.number, color=self.colorinfo)
 
     def write_url (self, url_data):
         """Write url_data.base_url."""
@@ -203,7 +203,7 @@ class TextLogger (_Logger):
     def write_warning (self, url_data):
         """Write url_data.warning."""
         self.write(self.part("warning") + self.spaces("warning"))
-        warning_msgs = [u"[%s] %s" % x for x in url_data.warnings]
+        warning_msgs = ["[%s] %s" % x for x in url_data.warnings]
         self.writeln(self.wrap(warning_msgs, 65), color=self.colorwarning)
 
     def write_result (self, url_data):
@@ -216,7 +216,7 @@ class TextLogger (_Logger):
             color = self.colorinvalid
             self.write(_("Error"), color=color)
         if url_data.result:
-            self.write(u": " + url_data.result, color=color)
+            self.write(": " + url_data.result, color=color)
         self.writeln()
 
     def write_outro (self, interrupt=False):
@@ -227,11 +227,11 @@ class TextLogger (_Logger):
         self.write(_("That's it.") + " ")
         self.write(_n("%d link", "%d links",
                       self.stats.number) % self.stats.number)
-        self.write(u" ")
+        self.write(" ")
         if self.stats.num_urls is not None:
             self.write(_n("in %d URL", "in %d URLs",
                           self.stats.num_urls) % self.stats.num_urls)
-        self.write(u" checked. ")
+        self.write(" checked. ")
         warning_text = _n("%d warning found", "%d warnings found",
              self.stats.warnings_printed) % self.stats.warnings_printed
         if self.stats.warnings_printed:
@@ -242,7 +242,7 @@ class TextLogger (_Logger):
         if self.stats.warnings != self.stats.warnings_printed:
             self.write(_(" (%d ignored or duplicates not printed)") %
                 (self.stats.warnings - self.stats.warnings_printed))
-        self.write(u". ")
+        self.write(". ")
         error_text = _n("%d error found", "%d errors found",
              self.stats.errors_printed) % self.stats.errors_printed
         if self.stats.errors_printed:
@@ -253,7 +253,7 @@ class TextLogger (_Logger):
         if self.stats.errors != self.stats.errors_printed:
             self.write(_(" (%d duplicates not printed)") %
                 (self.stats.errors - self.stats.errors_printed))
-        self.writeln(u".")
+        self.writeln(".")
         num = self.stats.internal_errors
         if num:
             self.writeln(_n("There was %(num)d internal error.",

@@ -26,54 +26,54 @@ unquote = strformat.unquote
 # HTML4/5 link tags
 # ripped mainly from HTML::Tagset.pm with HTML5 added
 LinkTags = {
-    'a':        [u'href'],
-    'applet':   [u'archive', u'src'],
-    'area':     [u'href'],
-    'audio':    [u'src'],  # HTML5
-    'bgsound':  [u'src'],
-    'blockquote': [u'cite'],
-    'body':     [u'background'],
-    'button':   [u'formaction'],  # HTML5
-    'del':      [u'cite'],
-    'embed':    [u'pluginspage', u'src'],
-    'form':     [u'action'],
-    'frame':    [u'src', u'longdesc'],
-    'head':     [u'profile'],
-    'html':     [u'manifest'],  # HTML5
-    'iframe':   [u'src', u'longdesc'],
-    'ilayer':   [u'background'],
-    'img':      [u'src', u'lowsrc', u'longdesc', u'usemap', u'srcset'],
-    'input':    [u'src', u'usemap', u'formaction'],
-    'ins':      [u'cite'],
-    'isindex':  [u'action'],
-    'layer':    [u'background', u'src'],
-    'link':     [u'href'],
-    'meta':     [u'content', u'href'],
-    'object':   [u'classid', u'data', u'archive', u'usemap', u'codebase'],
-    'q':        [u'cite'],
-    'script':   [u'src'],
-    'source':   [u'src'],  # HTML5
-    'table':    [u'background'],
-    'td':       [u'background'],
-    'th':       [u'background'],
-    'tr':       [u'background'],
-    'track':    [u'src'],  # HTML5
-    'video':    [u'src'],  # HTML5
-    'xmp':      [u'href'],
-    None:       [u'style', u'itemtype'],
+    'a':        ['href'],
+    'applet':   ['archive', 'src'],
+    'area':     ['href'],
+    'audio':    ['src'],  # HTML5
+    'bgsound':  ['src'],
+    'blockquote': ['cite'],
+    'body':     ['background'],
+    'button':   ['formaction'],  # HTML5
+    'del':      ['cite'],
+    'embed':    ['pluginspage', 'src'],
+    'form':     ['action'],
+    'frame':    ['src', 'longdesc'],
+    'head':     ['profile'],
+    'html':     ['manifest'],  # HTML5
+    'iframe':   ['src', 'longdesc'],
+    'ilayer':   ['background'],
+    'img':      ['src', 'lowsrc', 'longdesc', 'usemap', 'srcset'],
+    'input':    ['src', 'usemap', 'formaction'],
+    'ins':      ['cite'],
+    'isindex':  ['action'],
+    'layer':    ['background', 'src'],
+    'link':     ['href'],
+    'meta':     ['content', 'href'],
+    'object':   ['classid', 'data', 'archive', 'usemap', 'codebase'],
+    'q':        ['cite'],
+    'script':   ['src'],
+    'source':   ['src'],  # HTML5
+    'table':    ['background'],
+    'td':       ['background'],
+    'th':       ['background'],
+    'tr':       ['background'],
+    'track':    ['src'],  # HTML5
+    'video':    ['src'],  # HTML5
+    'xmp':      ['href'],
+    None:       ['style', 'itemtype'],
 }
 
 # HTML anchor tags
 AnchorTags = {
-    'a': [u'name'],
-    None: [u'id'],
+    'a': ['name'],
+    None: ['id'],
 }
 
 # WML tags
 WmlTags = {
-    'a':   [u'href'],
-    'go':  [u'href'],
-    'img': [u'src'],
+    'a':   ['href'],
+    'go':  ['href'],
+    'img': ['src'],
 }
 
 
@@ -101,12 +101,12 @@ def is_meta_url (attr, attrs):
     """Check if the meta attributes contain a URL."""
     res = False
     if attr == "content":
-        equiv = attrs.get('http-equiv', u'').lower()
-        scheme = attrs.get('scheme', u'').lower()
-        res = equiv in (u'refresh',) or scheme in (u'dcterms.uri',)
+        equiv = attrs.get('http-equiv', '').lower()
+        scheme = attrs.get('scheme', '').lower()
+        res = equiv in ('refresh',) or scheme in ('dcterms.uri',)
     if attr == "href":
-        rel = attrs.get('rel', u'').lower()
-        res = rel in (u'shortcut icon', u'icon')
+        rel = attrs.get('rel', '').lower()
+        res = rel in ('shortcut icon', 'icon')
     return res
 
 
@@ -114,7 +114,7 @@ def is_form_get(attr, attrs):
     """Check if this is a GET form action URL."""
     res = False
     if attr == "action":
-        method = attrs.get('method', u'').lower()
+        method = attrs.get('method', '').lower()
         res = method != 'post'
     return res
 
@@ -133,14 +133,14 @@ class LinkFinder:
             self.tags[tag] = set(attrs)
             # add universal tag attributes
             self.tags[tag].update(self.universal_attrs)
-        self.base_ref = u''
+        self.base_ref = ''
 
     def html_element (self, tag, attrs, element_text, lineno, column):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
         if tag == "base" and not self.base_ref:
-            self.base_ref = attrs.get("href", u'')
+            self.base_ref = attrs.get("href", '')
         tagattrs = self.tags.get(tag, self.universal_attrs)
         # parse URLs in tag (possibly multiple URLs in CSS styles)
         for attr in sorted(tagattrs.intersection(attrs)):
@@ -151,9 +151,9 @@ class LinkFinder:
             # name of this link
             name = self.get_link_name(tag, attrs, attr, element_text)
             # possible codebase
-            base = u''
+            base = ''
             if tag == 'applet':
-                base = attrs.get('codebase', u'')
+                base = attrs.get('codebase', '')
             if not base:
                 base = self.base_ref
             # note: value can be None
@@ -170,13 +170,13 @@ class LinkFinder:
         """Parse attrs for link name. Return name of link."""
         if tag == 'a' and attr == 'href':
             if not name:
-                name = attrs.get('title', u'')
+                name = attrs.get('title', '')
         elif tag == 'img':
-            name = attrs.get('alt', u'')
+            name = attrs.get('alt', '')
             if not name:
-                name = attrs.get('title', u'')
+                name = attrs.get('title', '')
         else:
-            name = u""
+            name = ""
         return name
 
     def parse_tag (self, tag, attr, value, name, base, lineno, column):
@@ -187,21 +187,21 @@ class LinkFinder:
         assert isinstance(base, str_text), repr(base)
         assert isinstance(value, str_text) or value is None, repr(value)
         # look for meta refresh
-        if tag == u'meta' and value:
+        if tag == 'meta' and value:
             mo = refresh_re.match(value)
             if mo:
                 self.found_url(mo.group("url"), name, base, lineno, column)
             elif attr != 'content':
                 self.found_url(value, name, base, lineno, column)
-        elif attr == u'style' and value:
+        elif attr == 'style' and value:
             for mo in css_url_re.finditer(value):
                 url = unquote(mo.group("url"), matching=True)
                 self.found_url(url, name, base, lineno, column)
-        elif attr == u'archive':
-            for url in value.split(u','):
+        elif attr == 'archive':
+            for url in value.split(','):
                 self.found_url(url, name, base, lineno, column)
-        elif attr == u'srcset':
-            for img_candidate in value.split(u','):
+        elif attr == 'srcset':
+            for img_candidate in value.split(','):
                 url = img_candidate.split()[0]
                 self.found_url(url, name, base, lineno, column)
         else:

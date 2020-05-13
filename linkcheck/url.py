@@ -245,7 +245,7 @@ def url_fix_common_typos (url):
 
 def url_fix_mailto_urlsplit (urlparts):
     """Split query part of mailto url if found."""
-    sep = b"?" if isinstance(urlparts[2], bytes) else u"?"
+    sep = b"?" if isinstance(urlparts[2], bytes) else "?"
     if sep in urlparts[2]:
         urlparts[2], urlparts[3] = urlparts[2].split(sep, 1)
 

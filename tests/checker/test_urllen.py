@@ -26,14 +26,14 @@ class TestURLLength(LinkCheckTest):
     """
 
     def test_url_warn(self):
-        url = u"http://www.example.org/" + (u"a" * URL_MAX_LENGTH)
+        url = "http://www.example.org/" + ("a" * URL_MAX_LENGTH)
         attrs = self.get_attrs(url=url)
         attrs['nurl'] = self.norm(url)
         resultlines = [
-            u"url %(nurl)s" % attrs,
-            u"cache key %(nurl)s" % attrs,
-            u"real url %(nurl)s" % attrs,
-            u"warning URL length %d is longer than %d." % (len(url), URL_MAX_LENGTH),
-            u"error",
+            "url %(nurl)s" % attrs,
+            "cache key %(nurl)s" % attrs,
+            "real url %(nurl)s" % attrs,
+            "warning URL length %d is longer than %d." % (len(url), URL_MAX_LENGTH),
+            "error",
         ]
         self.direct(url, resultlines)

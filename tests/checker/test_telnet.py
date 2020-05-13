@@ -23,38 +23,38 @@ class TestTelnet (TelnetServerTest):
     """Test telnet: link checking."""
 
     def test_telnet_error (self):
-        url = u"telnet:"
+        url = "telnet:"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key None",
-            u"real url %s" % nurl,
-            u"error",
+            "url %s" % url,
+            "cache key None",
+            "real url %s" % nurl,
+            "error",
         ]
         self.direct(url, resultlines)
 
     def test_telnet_localhost (self):
         url = self.get_url()
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.get_url(user=u"test")
+        url = self.get_url(user="test")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.get_url(user=u"test", password=u"test")
+        url = self.get_url(user="test", password="test")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)

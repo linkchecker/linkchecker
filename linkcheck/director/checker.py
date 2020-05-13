@@ -68,8 +68,8 @@ def check_url(url_data, logger):
             # copy data from cache and adjust it
             result = copy.copy(result)
             result.parent_url = url_data.parent_url
-            result.base_ref = url_data.base_ref or u""
-            result.base_url = url_data.base_url or u""
+            result.base_ref = url_data.base_ref or ""
+            result.base_url = url_data.base_url or ""
             result.line = url_data.line
             result.column = url_data.column
             result.level = url_data.recursion_level

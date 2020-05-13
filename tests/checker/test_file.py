@@ -98,16 +98,16 @@ class TestFile (LinkCheckTest):
 
     def test_unicode_filename (self):
         # a unicode filename
-        self.file_test(u"Мошкова.bin")
+        self.file_test("Мошкова.bin")
 
     def test_good_file (self):
-        url = u"file://%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
+        url = "file://%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
         ]
         self.direct(url, resultlines)
 
@@ -117,59 +117,59 @@ class TestFile (LinkCheckTest):
             # Cause: url get quoted %7C which gets lowercased to
             # %7c and this fails.
             return
-        url = u"file:/%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
+        url = "file:/%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"error",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "error",
         ]
         self.direct(url, resultlines)
 
     def test_good_file_missing_dslash (self):
         # good file (missing double slash)
         attrs = self.get_attrs()
-        url = u"file:%(curdir)s/%(datadir)s/file.txt" % attrs
+        url = "file:%(curdir)s/%(datadir)s/file.txt" % attrs
         resultlines = [
-            u"url %s" % url,
-            u"cache key file://%(curdir)s/%(datadir)s/file.txt" % attrs,
-            u"real url file://%(curdir)s/%(datadir)s/file.txt" % attrs,
-            u"valid",
+            "url %s" % url,
+            "cache key file://%(curdir)s/%(datadir)s/file.txt" % attrs,
+            "real url file://%(curdir)s/%(datadir)s/file.txt" % attrs,
+            "valid",
         ]
         self.direct(url, resultlines)
 
     def test_good_dir (self):
-        url = u"file://%(curdir)s/%(datadir)s/" % self.get_attrs()
+        url = "file://%(curdir)s/%(datadir)s/" % self.get_attrs()
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
 
     def test_good_dir_space (self):
-        url = u"file://%(curdir)s/%(datadir)s/a b/" % self.get_attrs()
+        url = "file://%(curdir)s/%(datadir)s/a b/" % self.get_attrs()
         nurl = self.norm(url)
-        url2 = u"file://%(curdir)s/%(datadir)s/a b/el.html" % self.get_attrs()
+        url2 = "file://%(curdir)s/%(datadir)s/a b/el.html" % self.get_attrs()
         nurl2 = self.norm(url2)
-        url3 = u"file://%(curdir)s/%(datadir)s/a b/t.txt" % self.get_attrs()
+        url3 = "file://%(curdir)s/%(datadir)s/a b/t.txt" % self.get_attrs()
         nurl3 = self.norm(url3)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"valid",
-            u"url el.html",
-            u"cache key %s" % nurl2,
-            u"real url %s" % nurl2,
-            u"name el.html",
-            u"valid",
-            u"url t.txt",
-            u"cache key %s" % nurl3,
-            u"real url %s" % nurl3,
-            u"name t.txt",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "valid",
+            "url el.html",
+            "cache key %s" % nurl2,
+            "real url %s" % nurl2,
+            "name el.html",
+            "valid",
+            "url t.txt",
+            "cache key %s" % nurl3,
+            "real url %s" % nurl3,
+            "name t.txt",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=2)

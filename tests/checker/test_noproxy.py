@@ -34,13 +34,13 @@ class TestProxy (httpserver.HttpServerTest):
 
     def noproxy_test(self):
         # Test setting proxy and no_proxy env variable.
-        url = self.get_url(u"favicon.ico")
+        url = self.get_url("favicon.ico")
         nurl = url
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Ignoring proxy setting `http://example.org:8877'.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Ignoring proxy setting `http://example.org:8877'.",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=0)

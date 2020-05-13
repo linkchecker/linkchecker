@@ -110,7 +110,7 @@ class UrlBase:
 
     def __init__ (self, base_url, recursion_level, aggregate,
                   parent_url=None, base_ref=None, line=-1, column=-1, page=-1,
-                  name=u"", url_encoding=None, extern=None):
+                  name="", url_encoding=None, extern=None):
         """
         Initialize check data, and store given variables.
 
@@ -189,7 +189,7 @@ class UrlBase:
         # the scheme, host, port and anchor part of url
         self.scheme = self.host = self.port = self.anchor = None
         # the result message string and flag
-        self.result = u""
+        self.result = ""
         self.has_result = False
         # valid or not
         self.valid = True
@@ -224,7 +224,7 @@ class UrlBase:
         # flag if content should be checked or not
         self.do_check_content = True
         # MIME content type
-        self.content_type = u""
+        self.content_type = ""
         # URLs seen through redirections
         self.aliases = []
 
@@ -250,7 +250,7 @@ class UrlBase:
         """Return title of page the URL refers to.
         This is per default the filename or the URL."""
         if self.title is None:
-            url = u""
+            url = ""
             if self.base_url:
                 url = self.base_url
             elif self.url:
@@ -319,7 +319,7 @@ class UrlBase:
         """Set the URL to be used for caching."""
         # remove anchor from cached target url since we assume
         # URLs with different anchors to have the same content
-        self.cache_url = urlutil.urlunsplit(self.urlparts[:4]+[u''])
+        self.cache_url = urlutil.urlunsplit(self.urlparts[:4]+[''])
         if self.cache_url is not None:
             assert isinstance(self.cache_url, str_text), repr(self.cache_url)
 
@@ -332,7 +332,7 @@ class UrlBase:
         """
         log.debug(LOG_CHECK, "checking syntax")
         if self.base_url is None:
-            self.base_url = u""
+            self.base_url = ""
         if not (self.base_url or self.parent_url):
             self.set_result(_("URL is empty"), valid=False)
             return
@@ -352,7 +352,7 @@ class UrlBase:
                              {"url": effectiveurl},
                              tag=WARN_URL_EFFECTIVE_URL)
             self.url = effectiveurl
-        if len(self.url) > URL_MAX_LENGTH and self.scheme != u"data":
+        if len(self.url) > URL_MAX_LENGTH and self.scheme != "data":
             args = dict(len=len(self.url), max=URL_MAX_LENGTH)
             self.add_warning(_("URL length %(len)d is longer than %(max)d.") % args, tag=WARN_URL_TOO_LONG)
 
@@ -519,7 +519,7 @@ class UrlBase:
         errmsg = str_text(etype.__name__)
         uvalue = strformat.unicode_safe(evalue)
         if uvalue:
-            errmsg += u": %s" % uvalue
+            errmsg += ": %s" % uvalue
         # limit length to 240
         return strformat.limit(errmsg, length=240)
 
@@ -679,7 +679,7 @@ class UrlBase:
             return urllib_parse.splitpasswd(self.userinfo)
         return self.aggregate.config.get_user_password(self.url)
 
-    def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
+    def add_url (self, url, line=0, column=0, page=0, name="", base=None):
         """Add new URL to queue."""
         if base:
             base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
@@ -695,18 +695,18 @@ class UrlBase:
         Return serialized url check data as unicode string.
         """
         return unicode_safe(sep).join([
-            u"%s link" % self.scheme,
-            u"base_url=%r" % self.base_url,
-            u"parent_url=%r" % self.parent_url,
-            u"base_ref=%r" % self.base_ref,
-            u"recursion_level=%d" % self.recursion_level,
-            u"url_connection=%s" % self.url_connection,
-            u"line=%s" % self.line,
-            u"column=%s" % self.column,
-            u"page=%d" % self.page,
-            u"name=%r" % self.name,
-            u"anchor=%r" % self.anchor,
-            u"cache_url=%s" % self.cache_url,
+            "%s link" % self.scheme,
+            "base_url=%r" % self.base_url,
+            "parent_url=%r" % self.parent_url,
+            "base_ref=%r" % self.base_ref,
+            "recursion_level=%d" % self.recursion_level,
+            "url_connection=%s" % self.url_connection,
+            "line=%s" % self.line,
+            "column=%s" % self.column,
+            "page=%d" % self.page,
+            "name=%r" % self.name,
+            "anchor=%r" % self.anchor,
+            "cache_url=%s" % self.cache_url,
            ])
 
     def get_intern_pattern (self, url=None):
@@ -757,7 +757,7 @@ class UrlBase:
         @return: URL info
         @rtype: unicode
         """
-        return u"<%s>" % self.serialized(sep=u", ")
+        return "<%s>" % self.serialized(sep=", ")
 
     def to_wire_dict (self):
         """Return a simplified transport object for logging and caching.
@@ -806,13 +806,13 @@ class UrlBase:
           extern=self.extern[0],
           result=self.result,
           warnings=self.warnings[:],
-          name=self.name or u"",
+          name=self.name or "",
           title=self.get_title(),
-          parent_url=self.parent_url or u"",
-          base_ref=self.base_ref or u"",
-          base_url=self.base_url or u"",
-          url=self.url or u"",
-          domain=(self.urlparts[1] if self.urlparts else u""),
+          parent_url=self.parent_url or "",
+          base_ref=self.base_ref or "",
+          base_url=self.base_url or "",
+          url=self.url or "",
+          domain=(self.urlparts[1] if self.urlparts else ""),
           checktime=self.checktime,
           dltime=self.dltime,
           size=self.size,

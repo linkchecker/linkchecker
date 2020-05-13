@@ -167,12 +167,12 @@ def norm_locale (loc):
 
 
 lang_names = {
-    'en': u'English',
-    'de': u'Deutsch',
+    'en': 'English',
+    'de': 'Deutsch',
 }
 lang_transis = {
-    'de': {'en': u'German'},
-    'en': {'de': u'Englisch'},
+    'de': {'en': 'German'},
+    'en': {'de': 'Englisch'},
 }
 
 def lang_name (lang):

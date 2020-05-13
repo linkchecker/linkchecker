@@ -38,47 +38,47 @@ class DOTLogger (_GraphLogger):
         if self.has_part("intro"):
             self.write_intro()
             self.writeln()
-        self.writeln(u"digraph G {")
-        self.writeln(u"  graph [")
-        self.writeln(u"    charset=\"%s\"," % self.get_charset_encoding())
-        self.writeln(u"  ];")
+        self.writeln("digraph G {")
+        self.writeln("  graph [")
+        self.writeln("    charset=\"%s\"," % self.get_charset_encoding())
+        self.writeln("  ];")
         self.flush()
 
     def comment (self, s, **args):
         """Write DOT comment."""
-        self.write(u"// ")
+        self.write("// ")
         self.writeln(s=s, **args)
 
     def log_url (self, url_data):
         """Write one node."""
         node = self.get_node(url_data)
         if node is not None:
-            self.writeln(u'  "%s" [' % dotquote(node["label"]))
+            self.writeln('  "%s" [' % dotquote(node["label"]))
             if self.has_part("realurl"):
-                self.writeln(u'    href="%s",' % dotquote(node["url"]))
+                self.writeln('    href="%s",' % dotquote(node["url"]))
             if node["dltime"] >= 0 and self.has_part("dltime"):
-                self.writeln(u"    dltime=%d," % node["dltime"])
+                self.writeln("    dltime=%d," % node["dltime"])
             if node["size"] >= 0 and self.has_part("dlsize"):
-                self.writeln(u"    size=%d," % node["size"])
+                self.writeln("    size=%d," % node["size"])
             if node["checktime"] and self.has_part("checktime"):
-                self.writeln(u"    checktime=%d," % node["checktime"])
+                self.writeln("    checktime=%d," % node["checktime"])
             if self.has_part("extern"):
-                self.writeln(u"    extern=%d," % node["extern"])
-            self.writeln(u"  ];")
+                self.writeln("    extern=%d," % node["extern"])
+            self.writeln("  ];")
 
     def write_edge (self, node):
         """Write edge from parent to node."""
         source = dotquote(self.nodes[node["parent_url"]]["label"])
         target = dotquote(node["label"])
-        self.writeln(u'  "%s" -> "%s" [' % (source, target))
-        self.writeln(u'    label="%s",' % dotquote(node["edge"]))
+        self.writeln('  "%s" -> "%s" [' % (source, target))
+        self.writeln('    label="%s",' % dotquote(node["edge"]))
         if self.has_part("result"):
-            self.writeln(u"    valid=%d," % node["valid"])
-        self.writeln(u"  ];")
+            self.writeln("    valid=%d," % node["valid"])
+        self.writeln("  ];")
 
     def end_graph (self):
         """Write end of graph marker."""
-        self.writeln(u"}")
+        self.writeln("}")
 
 
 def dotquote (s):

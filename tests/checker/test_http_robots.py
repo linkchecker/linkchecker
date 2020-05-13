@@ -26,22 +26,22 @@ class TestHttpRobots (HttpServerTest):
         self.robots_txt2_test()
 
     def robots_txt_test (self):
-        url = u"http://localhost:%d/robots.txt" % self.port
+        url = "http://localhost:%d/robots.txt" % self.port
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=5)
 
     def robots_txt2_test (self):
-        url = u"http://localhost:%d/secret" % self.port
+        url = "http://localhost:%d/secret" % self.port
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"info Access denied by robots.txt, checked only syntax.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "info Access denied by robots.txt, checked only syntax.",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=5)

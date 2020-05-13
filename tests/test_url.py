@@ -403,19 +403,19 @@ class TestUrl (unittest.TestCase):
 
     @need_posix
     def test_norm_file_unicode (self):
-        url = u"file:///a/b.txt"
+        url = "file:///a/b.txt"
         nurl = url
         self.urlnormtest(url, nurl)
-        url = u"file:///a/ה.txt"
-        nurl = u"file:///a/%C3%A4.txt"
+        url = "file:///a/ה.txt"
+        nurl = "file:///a/%C3%A4.txt"
         self.urlnormtest(url, nurl)
-        #url = u"file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
-        #nurl = u"file:///a.bin" # XXX
+        #url = "file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
+        #nurl = "file:///a.bin" # XXX
         #self.urlnormtest(url, nurl)
 
     def test_norm_invalid (self):
-        url = u"הצü?:"
-        nurl = u"%C3%A4%C3%B6%C3%BC?:"
+        url = "הצü?:"
+        nurl = "%C3%A4%C3%B6%C3%BC?:"
         self.urlnormtest(url, nurl)
 
     def test_fixing (self):
@@ -423,11 +423,11 @@ class TestUrl (unittest.TestCase):
         url = "http//www.example.org"
         nurl = "http://www.example.org"
         self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = u"http//www.example.org"
-        nurl = u"http://www.example.org"
+        url = "http//www.example.org"
+        nurl = "http://www.example.org"
         self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = u"https//www.example.org"
-        nurl = u"https://www.example.org"
+        url = "https//www.example.org"
+        nurl = "https://www.example.org"
         self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
 
     def test_valid (self):
@@ -482,16 +482,16 @@ class TestUrl (unittest.TestCase):
 
     def test_idn_encoding (self):
         # Test idna encoding.
-        url = u'www.צko.de'
+        url = 'www.צko.de'
         idna_encode = linkcheck.url.idna_encode
         encurl, is_idn = idna_encode(url)
         self.assertTrue(is_idn)
         self.assertTrue(encurl)
-        url = u''
+        url = ''
         encurl, is_idn = idna_encode(url)
         self.assertFalse(is_idn)
         self.assertFalse(encurl)
-        url = u"ה.."
+        url = "ה.."
         self.assertRaises(UnicodeError, idna_encode, url)
 
     def test_match_host (self):
@@ -553,10 +553,10 @@ class TestUrl (unittest.TestCase):
 
     def test_safe_domain (self):
         is_safe_domain = linkcheck.url.is_safe_domain
-        self.assertFalse(is_safe_domain(u"a..example.com"))
-        self.assertFalse(is_safe_domain(u"a_b.example.com"))
-        self.assertTrue(is_safe_domain(u"a-b.example.com"))
-        self.assertTrue(is_safe_domain(u"x1.example.com"))
+        self.assertFalse(is_safe_domain("a..example.com"))
+        self.assertFalse(is_safe_domain("a_b.example.com"))
+        self.assertTrue(is_safe_domain("a-b.example.com"))
+        self.assertTrue(is_safe_domain("x1.example.com"))
 
     @need_network
     def test_get_content (self):
