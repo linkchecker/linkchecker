@@ -35,7 +35,7 @@ import stat
 import glob
 
 # import Distutils stuff
-from setuptools import setup
+from setuptools import find_packages, setup
 from distutils.command.install_lib import install_lib
 from distutils.command.sdist import sdist
 from distutils.command.clean import clean
@@ -373,19 +373,7 @@ setup(
         'clean': MyClean,
         'sdist': MySdist,
     },
-    packages = [
-        'linkcheck',
-        'linkcheck.bookmarks',
-        'linkcheck.cache',
-        'linkcheck.checker',
-        'linkcheck.configuration',
-        'linkcheck.director',
-        'linkcheck.htmlutil',
-        'linkcheck.logger',
-        'linkcheck.network',
-        'linkcheck.parser',
-        'linkcheck.plugins',
-    ],
+    packages = find_packages(include=["linkcheck", "linkcheck.*"]),
     scripts = scripts,
     data_files = data_files,
     classifiers = [
