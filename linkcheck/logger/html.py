@@ -17,7 +17,7 @@
 A HTML logger.
 """
 
-from html import escape as html_escape
+import html
 import os
 import time
 
@@ -174,12 +174,12 @@ class HtmlLogger (_Logger):
         self.writeln("<tr>")
         self.writeln('<td class="url">%s</td>' % self.part("url"))
         self.write('<td class="url">')
-        self.write("`%s'" % html_escape(url_data.base_url))
+        self.write("`%s'" % html.escape(url_data.base_url))
         self.writeln("</td></tr>")
 
     def write_name (self, url_data):
         """Write url_data.name."""
-        args = (self.part("name"), html_escape(url_data.name))
+        args = (self.part("name"), html.escape(url_data.name))
         self.writeln("<tr><td>%s</td><td>`%s'</td></tr>" % args)
 
     def write_parent (self, url_data):
@@ -187,7 +187,7 @@ class HtmlLogger (_Logger):
         self.write("<tr><td>"+self.part("parenturl")+
                    '</td><td><a target="top" href="'+
                    url_data.parent_url+'">'+
-                   html_escape(url_data.parent_url)+"</a>")
+                   html.escape(url_data.parent_url)+"</a>")
         if url_data.line is not None:
             self.write(_(", line %d") % url_data.line)
         if url_data.column is not None:
@@ -206,13 +206,13 @@ class HtmlLogger (_Logger):
     def write_base (self, url_data):
         """Write url_data.base_ref."""
         self.writeln("<tr><td>"+self.part("base")+"</td><td>"+
-                     html_escape(url_data.base_ref)+"</td></tr>")
+                     html.escape(url_data.base_ref)+"</td></tr>")
 
     def write_real (self, url_data):
         """Write url_data.url."""
         self.writeln("<tr><td>"+self.part("realurl")+"</td><td>"+
                      '<a target="top" href="'+url_data.url+
-                     '">'+html_escape(url_data.url)+"</a></td></tr>")
+                     '">'+html.escape(url_data.url)+"</a></td></tr>")
 
     def write_dltime (self, url_data):
         """Write url_data.dltime."""
@@ -234,20 +234,20 @@ class HtmlLogger (_Logger):
     def write_info (self, url_data):
         """Write url_data.info."""
         sep = "<br/>"+os.linesep
-        text = sep.join(html_escape(x) for x in url_data.info)
+        text = sep.join(html.escape(x) for x in url_data.info)
         self.writeln('<tr><td valign="top">' + self.part("info")+
                "</td><td>"+text+"</td></tr>")
 
     def write_modified(self, url_data):
         """Write url_data.modified."""
-        text = html_escape(self.format_modified(url_data.modified))
+        text = html.escape(self.format_modified(url_data.modified))
         self.writeln('<tr><td valign="top">' + self.part("modified") +
             "</td><td>"+text+"</td></tr>")
 
     def write_warning (self, url_data):
         """Write url_data.warnings."""
         sep = "<br/>"+os.linesep
-        text = sep.join(html_escape(x[1]) for x in url_data.warnings)
+        text = sep.join(html.escape(x[1]) for x in url_data.warnings)
         self.writeln('<tr><td class="warning" '+
                      'valign="top">' + self.part("warning") +
                      '</td><td class="warning">' + text + "</td></tr>")
@@ -258,14 +258,14 @@ class HtmlLogger (_Logger):
             self.write('<tr><td class="valid">')
             self.write(self.part("result"))
             self.write('</td><td class="valid">')
-            self.write(html_escape(_("Valid")))
+            self.write(html.escape(_("Valid")))
         else:
             self.write('<tr><td class="error">')
             self.write(self.part("result"))
             self.write('</td><td class="error">')
-            self.write(html_escape(_("Error")))
+            self.write(html.escape(_("Error")))
         if url_data.result:
-            self.write(": "+html_escape(url_data.result))
+            self.write(": "+html.escape(url_data.result))
         self.writeln("</td></tr>")
 
     def write_stats (self):

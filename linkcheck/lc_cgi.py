@@ -17,7 +17,7 @@
 Functions used by the WSGI script.
 """
 
-from html import escape as html_escape
+import html
 import os
 import threading
 import locale
@@ -261,4 +261,4 @@ contains only these characters: <code>A-Za-z0-9./_~-</code><br/><br/>
 Errors are logged.
 </blockquote>
 </body>
-</html>""") % html_escape(why)
+</html>""") % html.escape(why)
