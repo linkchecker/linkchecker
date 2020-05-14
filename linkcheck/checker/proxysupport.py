@@ -72,7 +72,7 @@ class ProxySupport:
             return True
         no_proxy = os.environ.get("no_proxy")
         if no_proxy:
-            entries = [parse_host_port(x) for x in no_proxy.split(",")]
+            entries = [urlutil.splitport(x.strip()) for x in no_proxy.split(",")]
             for host, port in entries:
                 if host.lower() == self.host and port == self.port:
                     return True
@@ -93,12 +93,3 @@ class ProxySupport:
             host = self.host
             port = self.port
         return (scheme, host, port)
-
-
-def parse_host_port (host_port):
-    """Parse a host:port string into separate components."""
-    host, port = splitport(host_port.strip())
-    if port is not None:
-        if urlutil.is_numeric_port(port):
-            port = int(port)
-    return host, port
