@@ -19,20 +19,8 @@ Handle local file: links.
 
 import re
 import os
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
-try:  # Python 3
-    from urllib import request as urlrequest
-except ImportError:
-    import urllib as urlrequest
-try:
-    from urllib2 import urlopen
-except ImportError:
-    # Python 3
-    from urllib.request import urlopen
+import urllib.parse
+import urllib.request
 from builtins import str as str_text
 from datetime import datetime
 
@@ -82,7 +70,7 @@ def get_os_filename (path):
     """Return filesystem path for given URL path."""
     if os.name == 'nt':
         path = prepare_urlpath_for_nt(path)
-    res = urlrequest.url2pathname(fileutil.path_safe(path))
+    res = urllib.request.url2pathname(fileutil.path_safe(path))
     if os.name == 'nt' and res.endswith(':') and len(res) == 2:
         # Work around http://bugs.python.org/issue11474
         res += os.sep
@@ -153,7 +141,7 @@ class FileUrl (urlbase.UrlBase):
             from .urlbase import url_norm
             # norm base url - can raise UnicodeError from url.idna_encode()
             base_url, is_idn = url_norm(self.base_url, self.encoding)
-            urlparts = list(urlparse.urlsplit(base_url))
+            urlparts = list(urllib.parse.urlsplit(base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
@@ -189,7 +177,7 @@ class FileUrl (urlbase.UrlBase):
             self.set_result(_("directory"))
         else:
             url = fileutil.path_safe(self.url)
-            self.url_connection = urlopen(url)
+            self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
     def check_case_sensitivity (self):

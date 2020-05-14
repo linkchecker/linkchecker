@@ -18,21 +18,8 @@ Base URL handler.
 """
 import sys
 import os
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
-try:  # Python 3
-    from urllib import parse as urllib_parse
-except ImportError:
-    import urllib as urllib_parse
-try:
-    from urllib2 import urlopen
-except ImportError:
-    # Python 3
-    from urllib.request import urlopen
-import urllib
+import urllib.parse
+from urllib.request import urlopen
 import time
 import errno
 import socket
@@ -66,7 +53,7 @@ def urljoin (parent, url):
     """
     if urlutil.url_is_absolute(url):
         return url
-    return urlparse.urljoin(parent, url)
+    return urllib.parse.urljoin(parent, url)
 
 
 def url_norm (url, encoding):
@@ -372,14 +359,14 @@ class UrlBase:
             self.url = urljoin(self.base_ref, base_url)
         elif self.parent_url:
             # strip the parent url query and anchor
-            urlparts = list(urlparse.urlsplit(self.parent_url))
+            urlparts = list(urllib.parse.urlsplit(self.parent_url))
             urlparts[4] = ""
             parent_url = urlutil.urlunsplit(urlparts)
             self.url = urljoin(parent_url, base_url)
         else:
             self.url = base_url
         # urljoin can unnorm the url path, so norm it again
-        urlparts = list(urlparse.urlsplit(self.url))
+        urlparts = list(urllib.parse.urlsplit(self.url))
         if urlparts[2]:
             urlparts[2] = urlutil.collapse_segments(urlparts[2])
             if not urlparts[0].startswith("feed"):
@@ -396,7 +383,7 @@ class UrlBase:
         Also checks for obfuscated IP addresses.
         """
         # check userinfo@host:port syntax
-        self.userinfo, host = urllib_parse.splituser(self.urlparts[1])
+        self.userinfo, host = urllib.parse.splituser(self.urlparts[1])
         port = urlutil.default_ports.get(self.scheme, 0)
         host, port = urlutil.splitport(host, port=port)
         if port is None:
@@ -676,7 +663,7 @@ class UrlBase:
         """
         if self.userinfo:
             # URL itself has authentication info
-            return urllib_parse.splitpasswd(self.userinfo)
+            return urllib.parse.splitpasswd(self.userinfo)
         return self.aggregate.config.get_user_password(self.url)
 
     def add_url (self, url, line=0, column=0, page=0, name="", base=None):

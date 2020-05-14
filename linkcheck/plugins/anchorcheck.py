@@ -16,7 +16,7 @@
 """
 Check HTML anchors
 """
-from urllib import parse
+import urllib.parse
 
 from . import _ContentPlugin
 from .. import log, LOG_PLUGIN
@@ -48,7 +48,7 @@ class AnchorCheck(_ContentPlugin):
         A warning is logged and True is returned if the anchor is not found.
         """
         log.debug(LOG_PLUGIN, "checking anchor %r in %s", url_data.anchor, self.anchors)
-        if any(x for x in self.anchors if parse.quote(x[0]) == url_data.anchor):
+        if any(x for x in self.anchors if urllib.parse.quote(x[0]) == url_data.anchor):
             return
         if self.anchors:
             anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))

@@ -19,10 +19,8 @@ Main functions for link checking.
 
 import os
 from html import escape as html_escape
-try: # Python 3
-    from urllib import parse as urlparse
-except ImportError:
-    import urllib as urlparse
+import urllib.parse
+
 from .. import strformat, url as urlutil, log, LOG_CHECK
 
 MAX_FILESIZE = 1024*1024*10 # 10MB
@@ -167,7 +165,7 @@ def get_index_html (urls):
     for entry in urls:
         name = html_escape(entry)
         try:
-            url = html_escape(urlparse.quote(entry))
+            url = html_escape(urllib.parse.quote(entry))
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name

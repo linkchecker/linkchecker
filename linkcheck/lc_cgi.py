@@ -23,11 +23,8 @@ import threading
 import locale
 import re
 import time
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+import urllib.parse
+
 from . import configuration, strformat, checker, director, get_link_pat, \
     init_i18n, url as urlutil
 from .decorators import synchronized
@@ -54,7 +51,7 @@ def application(environ, start_response):
         request_body = environ['wsgi.input'].read(request_body_size)
     else:
         request_body = environ['wsgi.input'].read()
-    form = urlparse.parse_qs(request_body.decode(HTML_ENCODING))
+    form = urllib.parse.parse_qs(request_body.decode(HTML_ENCODING))
 
     status = '200 OK'
     start_response(status, get_response_headers())
@@ -188,7 +185,7 @@ def get_configuration(form, out):
 
 def get_host_name (form):
     """Return host name of given URL."""
-    return urlparse.urlparse(formvalue(form, "url"))[1]
+    return urllib.parse.urlparse(formvalue(form, "url"))[1]
 
 
 def checkform (form, env):
