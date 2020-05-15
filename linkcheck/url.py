@@ -446,13 +446,11 @@ def url_split (url):
     hostname is always lowercased.
     Precondition: url is syntactically correct URI (eg has no whitespace)
     """
-    scheme, netloc = urllib.parse.splittype(url)
-    host, document = urllib.parse.splithost(netloc)
-    port = default_ports.get(scheme, 0)
-    if host:
-        host = host.lower()
-        host, port = splitport(host, port=port)
-    return scheme, host, port, document
+    o = urllib.parse.urlparse(url)
+    port = o.port
+    if port is None:
+        port = default_ports.get(o.scheme, 0)
+    return o.scheme, o.hostname, port, o.path
 
 
 def url_unsplit (parts):
