@@ -395,10 +395,10 @@ def url_quote (url, encoding):
 
 def document_quote (document):
     """Quote given document."""
-    doc, query = urllib.parse.splitquery(document)
-    doc = urllib.parse.quote(doc, safe='/=,')
-    if query:
-        return "%s?%s" % (doc, query)
+    o = urllib.parse.urlparse(document)
+    doc = urllib.parse.quote(o.path, safe='/=,')
+    if o.query:
+        return "%s?%s" % (doc, o.query)
     return doc
 
 
