@@ -32,11 +32,7 @@ import codecs
 import os
 import math
 import time
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+import urllib.parse
 import locale
 import pydoc
 from . import i18n
@@ -95,8 +91,8 @@ def is_encoding (text):
 
 
 def url_unicode_split (url):
-    """Like urlparse.urlsplit(), but always returning unicode parts."""
-    return [unicode_safe(s) for s in urlparse.urlsplit(url)]
+    """Like urllib.parse.urlsplit(), but always returning unicode parts."""
+    return [unicode_safe(s) for s in urllib.parse.urlsplit(url)]
 
 
 def unquote (s, matching=False):

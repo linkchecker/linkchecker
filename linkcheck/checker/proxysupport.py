@@ -16,14 +16,8 @@
 """
 Mixin class for URLs that can be fetched over a proxy.
 """
-try:  # Python 3
-    from urllib import parse
-    from urllib import request
-    from urllib.parse import splitport
-except ImportError:
-    from urllib import splitport
-    import urllib as request
-    import urlparse as parse
+import urllib.parse
+import urllib.request
 import os
 from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 
@@ -41,7 +35,7 @@ class ProxySupport:
         self.proxyauth = None
         if not self.proxy:
             return
-        proxyurl = parse.urlparse(self.proxy)
+        proxyurl = urllib.parse.urlparse(self.proxy)
         self.proxytype = proxyurl.scheme
         if self.proxytype not in ('http', 'https'):
             # Note that invalid proxies might raise TypeError in urllib2,
@@ -68,11 +62,11 @@ class ProxySupport:
 
     def ignore_proxy_host (self):
         """Check if self.host is in the $no_proxy ignore list."""
-        if request.proxy_bypass(self.host):
+        if urllib.request.proxy_bypass(self.host):
             return True
         no_proxy = os.environ.get("no_proxy")
         if no_proxy:
-            entries = [parse_host_port(x) for x in no_proxy.split(",")]
+            entries = [urlutil.splitport(x.strip()) for x in no_proxy.split(",")]
             for host, port in entries:
                 if host.lower() == self.host and port == self.port:
                     return True
@@ -93,12 +87,3 @@ class ProxySupport:
             host = self.host
             port = self.port
         return (scheme, host, port)
-
-
-def parse_host_port (host_port):
-    """Parse a host:port string into separate components."""
-    host, port = splitport(host_port.strip())
-    if port is not None:
-        if urlutil.is_numeric_port(port):
-            port = int(port)
-    return host, port

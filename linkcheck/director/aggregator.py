@@ -24,10 +24,7 @@ except ImportError:
 
 import requests
 import time
-try:  # Python 3
-    from urllib import parse
-except ImportError:
-    import urlparse as parse
+import urllib.parse
 import random
 from .. import log, LOG_CHECK, strformat, LinkCheckerError
 from ..decorators import synchronized
@@ -103,7 +100,7 @@ class Aggregate:
             form.data[cgipassword] = password
         for key, value in self.config["loginextrafields"].items():
             form.data[key] = value
-        formurl = parse.urljoin(url, form.url)
+        formurl = urllib.parse.urljoin(url, form.url)
         log.debug(LOG_CHECK, "Posting login data to %s", formurl)
         response = session.post(formurl, data=form.data)
         response.raise_for_status()

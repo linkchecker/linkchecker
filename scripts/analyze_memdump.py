@@ -20,7 +20,7 @@ Analyze a memory dump by the meliae module.
 import sys
 import os
 import codecs
-from html import escape as html_escape
+import html
 from linkcheck import strformat
 
 def main (filename):
@@ -107,7 +107,7 @@ def write_html_obj(fp, obj, objs):
     if obj.value is None:
         value = "None"
     else:
-        value = html_escape(str(obj.value))
+        value = html.escape(str(obj.value))
     attrs = dict(
         address=obj.address,
         size=strformat.strsize(obj.size),

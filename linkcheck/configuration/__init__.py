@@ -20,12 +20,8 @@ Store metadata and options.
 from functools import lru_cache
 import os
 import re
-try:  # Python 3
-    from urllib import parse
-    from urllib import request
-except ImportError:  # Python 2
-    import urlparse as parse
-    import urllib as request
+import urllib.parse
+import urllib.request
 import shutil
 import socket
 import _LinkChecker_configdata as configdata
@@ -172,7 +168,7 @@ class Configuration (dict):
         self["maxrequestspersecond"] = 10
         self["maxhttpredirects"] = 10
         self["nntpserver"] = os.environ.get("NNTP_SERVER", None)
-        self["proxy"] = request.getproxies()
+        self["proxy"] = urllib.request.getproxies()
         self["sslverify"] = True
         self["threads"] = 10
         self["timeout"] = 60
@@ -317,7 +313,7 @@ class Configuration (dict):
         if not url.lower().startswith(("http:", "https:")):
             log.warn(LOG_CHECK, _("login URL is not a HTTP URL."))
             disable = True
-        urlparts = parse.urlsplit(url)
+        urlparts = urllib.parse.urlsplit(url)
         if not urlparts[0] or not urlparts[1] or not urlparts[2]:
             log.warn(LOG_CHECK, _("login URL is incomplete."))
             disable = True

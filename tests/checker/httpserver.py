@@ -17,17 +17,14 @@
 Define http test support classes for LinkChecker tests.
 """
 
-from html import escape as html_escape
+import html
 from http.server import CGIHTTPRequestHandler, SimpleHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection, HTTPSConnection
 import os.path
 import ssl
 import time
 import threading
-try:
-    from urllib import parse as urllib_parse
-except ImportError:
-    import urllib as urllib_parse
+import urllib.parse
 from io import BytesIO
 from . import LinkCheckTest
 from .. import get_file
@@ -136,7 +133,7 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
             displayname = linkname = name
             list_item = (
                 '<li><a href="%s">%s</a>\n'
-                % (urllib_parse.quote(linkname), html_escape(displayname))
+                % (urllib.parse.quote(linkname), html.escape(displayname))
             )
             f.write(list_item.encode())
         f.write(b"</ul>\n<hr>\n</body>\n</html>\n")
