@@ -17,10 +17,7 @@
 Parsing of cookies.
 """
 
-try: # Python 3
-    from http.cookiejar import split_header_words
-except ImportError: # Python 2
-    from cookielib import split_header_words
+from http.cookiejar import split_header_words
 import email
 import requests
 
