@@ -15,11 +15,9 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Parse configuration files"""
 
-try: # Python 3
-    from configparser import RawConfigParser
-except ImportError: # Python 2
-    from ConfigParser import RawConfigParser
+from configparser import RawConfigParser
 import os
+
 from .. import LinkCheckerError, get_link_pat, LOG_CHECK, log, fileutil, plugins, logconf
 
 
