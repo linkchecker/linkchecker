@@ -15,10 +15,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Logger for aggregator instances"""
 import threading
-try: # Python 3
-    import _thread
-except ImportError: # Python 2
-    import thread as _thread
+import _thread
+
 from ..decorators import synchronized
 _lock = threading.Lock()
 
