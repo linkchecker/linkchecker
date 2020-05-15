@@ -17,15 +17,11 @@
 Logging and debug functions.
 """
 
+from io import StringIO
 import logging
 import os
 import inspect
 import traceback
-try:
-    from cStringIO import StringIO
-except ImportError:
-    # Python 3
-    from io import StringIO
 
 # memory leak debugging
 #import gc

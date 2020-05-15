@@ -17,14 +17,9 @@
 Test decorators.
 """
 
-import unittest
+from io import StringIO
 import time
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    # Python 3
-    from io import StringIO
+import unittest
 
 import linkcheck.decorators
 
