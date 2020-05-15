@@ -188,7 +188,9 @@ def url_fix_host (urlparts, encoding):
     if not urlparts[1]:
         urlparts[2] = urllib.parse.unquote(urlparts[2], encoding=encoding)
         return False
-    userpass, netloc = urllib.parse.splituser(urlparts[1])
+    o = urllib.parse.urlparse("//%s" % urlparts[1])
+    userpass = ":".join([x for x in (o.username, o.password) if x is not None])
+    netloc = ":".join([str(x) for x in (o.hostname, o.port) if x is not None])
     if userpass:
         userpass = urllib.parse.unquote(userpass, encoding=encoding)
     netloc, is_idn = idna_encode(urllib.parse.unquote(netloc, encoding=encoding).lower())

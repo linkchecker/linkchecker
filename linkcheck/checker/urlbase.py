@@ -383,15 +383,16 @@ class UrlBase:
         Also checks for obfuscated IP addresses.
         """
         # check userinfo@host:port syntax
-        self.userinfo, host = urllib.parse.splituser(self.urlparts[1])
-        port = urlutil.default_ports.get(self.scheme, 0)
-        host, port = urlutil.splitport(host, port=port)
+        o = urllib.parse.urlparse("//%s" % self.urlparts[1])
+        self.userinfo = ":".join([x for x in (o.username, o.password) if x is not None])
+        port = o.port
+        if not port:
+            port = urlutil.default_ports.get(self.scheme, 0)
         if port is None:
             raise LinkCheckerError(_("URL host %(host)r has invalid port") %
-                    {"host": host})
+                    {"host": o.hostname})
         self.port = port
-        # set host lowercase
-        self.host = host.lower()
+        self.host = o.hostname
         if self.scheme in scheme_requires_host:
             if not self.host:
                 raise LinkCheckerError(_("URL has empty hostname"))
