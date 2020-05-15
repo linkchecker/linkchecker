@@ -663,7 +663,8 @@ class UrlBase:
         """
         if self.userinfo:
             # URL itself has authentication info
-            return urllib.parse.splitpasswd(self.userinfo)
+            o = urllib.parse.urlparse(self.userinfo)
+            return (o.username, o.password)
         return self.aggregate.config.get_user_password(self.url)
 
     def add_url (self, url, line=0, column=0, page=0, name="", base=None):
