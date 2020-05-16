@@ -17,11 +17,9 @@
 A CSV logger.
 """
 import csv
+from io import StringIO
 import os
-try:
-    from cStringIO import StringIO
-except ImportError: # Python 3
-    from io import StringIO
+
 from . import _Logger
 from .. import strformat
 

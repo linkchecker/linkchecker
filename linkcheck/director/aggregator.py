@@ -17,10 +17,6 @@
 Aggregate needed object instances for checker threads.
 """
 import threading
-try:  # Python 3
-    import _thread
-except ImportError:
-    import thread as _thread
 
 import requests
 import time
@@ -126,19 +122,19 @@ class Aggregate:
                 self.threads.append(t)
                 t.start()
         else:
-            self.request_sessions[_thread.get_ident()] = new_request_session(self.config, self.cookies)
+            self.request_sessions[threading.get_ident()] = new_request_session(self.config, self.cookies)
             checker.check_urls(self.urlqueue, self.logger)
 
     @synchronized(_threads_lock)
     def add_request_session(self):
         """Add a request session for current thread."""
         session = new_request_session(self.config, self.cookies)
-        self.request_sessions[_thread.get_ident()] = session
+        self.request_sessions[threading.get_ident()] = session
 
     @synchronized(_threads_lock)
     def get_request_session(self):
         """Get the request session for current thread."""
-        return self.request_sessions[_thread.get_ident()]
+        return self.request_sessions[threading.get_ident()]
 
     @synchronized(_hosts_lock)
     def wait_for_host(self, host):

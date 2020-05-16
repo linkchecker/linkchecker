@@ -16,11 +16,9 @@
 """
 Test proxy handling.
 """
+from test.support import EnvironmentVarGuard
+
 from . import httpserver
-try:
-    from test.support import EnvironmentVarGuard
-except ImportError:  # Python 3
-    from test.test_support import EnvironmentVarGuard
 
 class TestProxy (httpserver.HttpServerTest):
     """Test no_proxy env var handling."""
