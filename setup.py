@@ -60,12 +60,12 @@ def get_long_description():
     except:
         return Description
 
-def normpath (path):
+def normpath(path):
     """Norm a path name to platform specific notation."""
     return os.path.normpath(path)
 
 
-def cnormpath (path):
+def cnormpath(path):
     """Norm a path name to platform specific notation and make it absolute."""
     path = normpath(path)
     if os.name == 'nt':
@@ -77,7 +77,7 @@ def cnormpath (path):
 
 
 release_ro = re.compile(r"\(released (.+)\)")
-def get_release_date ():
+def get_release_date():
     """Parse and return relase date as string from doc/changelog.txt."""
     fname = os.path.join("doc", "changelog.txt")
     release_date = "unknown"
@@ -253,7 +253,7 @@ class MyDistribution(Distribution):
                      "creating %s" % filename, self.verbose >= 1, self.dry_run)
 
 
-def list_message_files (package, suffix=".mo"):
+def list_message_files(package, suffix=".mo"):
     """Return list of all found message files and their installation paths."""
     for fname in glob.glob("po/*" + suffix):
         # basename (without extension) is a locale name
@@ -263,7 +263,7 @@ def list_message_files (package, suffix=".mo"):
             "share", "locale", localename, "LC_MESSAGES", domainname))
 
 
-def check_manifest ():
+def check_manifest():
     """Snatched from roundup.sf.net.
     Check that the files listed in the MANIFEST are present when the
     source is unpacked."""

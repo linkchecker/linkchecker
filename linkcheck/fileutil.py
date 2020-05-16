@@ -28,7 +28,7 @@ from functools import lru_cache
 from builtins import str as str_text
 
 
-def has_module (name, without_error=True):
+def has_module(name, without_error=True):
     """Test if given module can be imported.
     @param without_error: True if module must not throw any errors when importing
     @return: flag if import is successful
@@ -109,7 +109,7 @@ class Buffer:
         return data
 
 
-def get_mtime (filename):
+def get_mtime(filename):
     """Return modification time of filename or zero on errors."""
     try:
         return os.path.getmtime(filename)
@@ -117,7 +117,7 @@ def get_mtime (filename):
         return 0
 
 
-def get_size (filename):
+def get_size(filename):
     """Return file size in Bytes, or -1 on error."""
     try:
         return os.path.getsize(filename)
@@ -135,7 +135,7 @@ elif "G_BROKEN_FILENAMES" in os.environ:
 else:
     FSCODING = "utf-8"
 
-def path_safe (path):
+def path_safe(path):
     """Ensure path string is compatible with the platform file system encoding."""
     if isinstance(path, str_text) and not os.path.supports_unicode_filenames:
         path = path.encode(FSCODING, "replace").decode(FSCODING)
@@ -144,7 +144,7 @@ def path_safe (path):
 
 # cache for modified check {absolute filename -> mtime}
 _mtime_cache = {}
-def has_changed (filename):
+def has_changed(filename):
     """Check if filename has changed since the last check. If this
     is the first check, assume the file is changed."""
     key = os.path.abspath(filename)
@@ -155,14 +155,14 @@ def has_changed (filename):
     return mtime > _mtime_cache[key]
 
 
-def get_temp_file (mode='r', **kwargs):
+def get_temp_file(mode='r', **kwargs):
     """Return tuple (open file object, filename) pointing to a temporary
     file."""
     fd, filename = tempfile.mkstemp(**kwargs)
     return os.fdopen(fd, mode), filename
 
 
-def is_tty (fp):
+def is_tty(fp):
     """Check if is a file object pointing to a TTY."""
     return (hasattr(fp, "isatty") and fp.isatty())
 

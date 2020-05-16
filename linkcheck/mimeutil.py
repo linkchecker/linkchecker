@@ -59,7 +59,7 @@ PARSE_CONTENTS = {
     "application/xml+sitemap": re.compile(r'<\?xml[^<]+<urlset\s+', re.IGNORECASE),
 }
 
-def guess_mimetype (filename, read=None):
+def guess_mimetype(filename, read=None):
     """Return MIME type of file, or 'application/octet-stream' if it could
     not be determined."""
     mime, encoding = None, None

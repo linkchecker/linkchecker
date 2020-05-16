@@ -21,7 +21,7 @@ from . import urlbase, absolute_url
 from .. import strformat, url as urlutil
 
 
-def get_intern_pattern (url):
+def get_intern_pattern(url):
     """Return intern pattern for given URL. Redirections to the same
     domain with or without "www." prepended are allowed."""
     parts = strformat.url_unicode_split(url)

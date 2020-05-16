@@ -22,7 +22,7 @@ from . import _Logger
 from .. import url as urlutil
 
 
-def sqlify (s):
+def sqlify(s):
     """
     Escape special SQL chars and strings.
     """
@@ -31,7 +31,7 @@ def sqlify (s):
     return "'%s'" % s.replace("'", "''").replace(os.linesep, r"\n")
 
 
-def intify (s):
+def intify(s):
     """
     Coerce a truth value to 0/1.
 

@@ -23,7 +23,7 @@ import codecs
 import html
 from linkcheck import strformat
 
-def main (filename):
+def main(filename):
     om = print_memorydump(filename)
     dirname, basename = os.path.split(filename)
     basename = os.path.splitext(basename)[0]

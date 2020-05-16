@@ -147,11 +147,11 @@ class TestLogger(linkcheck.logger._Logger):
             self.diff.append(line)
 
 
-def get_file_url (filename):
+def get_file_url(filename):
     return re.sub("^([a-zA-Z]):", r"/\1|", filename.replace("\\", "/"))
 
 
-def add_fileoutput_config (config):
+def add_fileoutput_config(config):
     if os.name == 'posix':
         devnull = '/dev/null'
     elif os.name == 'nt':
@@ -165,7 +165,7 @@ def add_fileoutput_config (config):
         config['fileoutput'].append(logger)
 
 
-def get_test_aggregate (confargs, logargs, logger=TestLogger):
+def get_test_aggregate(confargs, logargs, logger=TestLogger):
     """Initialize a test configuration object."""
     config = linkcheck.configuration.Configuration()
     config.logger_add(logger)

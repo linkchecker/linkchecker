@@ -30,7 +30,7 @@ from ..bookmarks import firefox
 from .const import WARN_FILE_MISSING_SLASH, WARN_FILE_SYSTEM_PATH
 
 
-def get_files (dirname):
+def get_files(dirname):
     """Get iterator of entries in directory. Only allows regular files
     and directories, no symlinks."""
     for entry in os.listdir(dirname):
@@ -43,7 +43,7 @@ def get_files (dirname):
             yield entry+"/"
 
 
-def prepare_urlpath_for_nt (path):
+def prepare_urlpath_for_nt(path):
     """
     URLs like 'file://server/path/' result in a path named '/server/path'.
     However urllib.url2pathname expects '////server/path'.
@@ -53,7 +53,7 @@ def prepare_urlpath_for_nt (path):
     return path
 
 
-def get_nt_filename (path):
+def get_nt_filename(path):
     """Return case sensitive filename for NT path."""
     unc, rest = os.path.splitunc(path)
     head, tail = os.path.split(rest)
@@ -66,7 +66,7 @@ def get_nt_filename (path):
     return path
 
 
-def get_os_filename (path):
+def get_os_filename(path):
     """Return filesystem path for given URL path."""
     if os.name == 'nt':
         path = prepare_urlpath_for_nt(path)
@@ -77,7 +77,7 @@ def get_os_filename (path):
     return res
 
 
-def is_absolute_path (path):
+def is_absolute_path(path):
     """Check if given path is absolute. On Windows absolute paths start
     with a drive letter. On all other systems absolute paths start with
     a slash."""

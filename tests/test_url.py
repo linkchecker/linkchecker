@@ -37,7 +37,7 @@ import linkcheck.url
 #         (Latin capital letter C + Combining cedilla U+0327)
 
 
-def url_norm (url, encoding="utf-8"):
+def url_norm(url, encoding="utf-8"):
     return linkcheck.url.url_norm(url, encoding=encoding)[0]
 
 

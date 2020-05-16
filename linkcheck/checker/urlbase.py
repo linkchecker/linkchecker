@@ -45,7 +45,7 @@ unicode_safe = strformat.unicode_safe
 # schemes that are invalid with an empty hostname
 scheme_requires_host = ("ftp", "http", "telnet")
 
-def urljoin (parent, url):
+def urljoin(parent, url):
     """
     If url is relative, join parent and url. Else leave url as-is.
 
@@ -56,7 +56,7 @@ def urljoin (parent, url):
     return urllib.parse.urljoin(parent, url)
 
 
-def url_norm (url, encoding):
+def url_norm(url, encoding):
     """Wrapper for url.url_norm() to convert UnicodeError in
     LinkCheckerError."""
     try:

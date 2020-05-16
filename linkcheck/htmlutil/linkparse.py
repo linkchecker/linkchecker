@@ -91,13 +91,13 @@ swf_url_re = re.compile(b"(?i)%s" % urlutil.safe_url_pattern.encode('ascii'))
 c_comment_re = re.compile(r"/\*.*?\*/", re.DOTALL)
 
 
-def strip_c_comments (text):
+def strip_c_comments(text):
     """Remove C/CSS-style comments from text. Note that this method also
     deliberately removes comments inside of strings."""
     return c_comment_re.sub('', text)
 
 
-def is_meta_url (attr, attrs):
+def is_meta_url(attr, attrs):
     """Check if the meta attributes contain a URL."""
     res = False
     if attr == "content":

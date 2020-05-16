@@ -49,7 +49,7 @@ under certain conditions. Look at the file `LICENSE' within this
 distribution."""
 Portable = configdata.portable
 
-def normpath (path):
+def normpath(path):
     """Norm given system path with all available norm or expand functions
     in os.path."""
     expanded = os.path.expanduser(os.path.expandvars(path))
@@ -87,12 +87,12 @@ def get_modules_info():
     return "Modules: %s" % (", ".join(module_infos))
 
 
-def get_share_dir ():
+def get_share_dir():
     """Return absolute path of LinkChecker example configuration."""
     return os.path.join(get_install_data(), "share", "linkchecker")
 
 
-def get_share_file (filename, devel_dir=None):
+def get_share_file(filename, devel_dir=None):
     """Return a filename in the share directory.
     @param devel_dir: directory to search when developing
     @ptype devel_dir: string
@@ -428,7 +428,7 @@ def get_user_config():
     return userconf
 
 
-def get_gconf_http_proxy ():
+def get_gconf_http_proxy():
     """Return host:port for GConf HTTP proxy if found, else None."""
     try:
         import gconf
@@ -449,7 +449,7 @@ def get_gconf_http_proxy ():
     return None
 
 
-def get_gconf_ftp_proxy ():
+def get_gconf_ftp_proxy():
     """Return host:port for GConf FTP proxy if found, else None."""
     try:
         import gconf
@@ -469,7 +469,7 @@ def get_gconf_ftp_proxy ():
     return None
 
 
-def get_kde_http_proxy ():
+def get_kde_http_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
     config_dir = get_kde_config_dir()
     if not config_dir:
@@ -483,7 +483,7 @@ def get_kde_http_proxy ():
         pass
 
 
-def get_kde_ftp_proxy ():
+def get_kde_ftp_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
     config_dir = get_kde_config_dir()
     if not config_dir:
@@ -527,7 +527,7 @@ def get_kde_ftp_proxy ():
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-def get_kde_config_dir ():
+def get_kde_config_dir():
     """Return KDE configuration directory or None if not found."""
     kde_home = get_kde_home_dir()
     if not kde_home:
@@ -536,12 +536,12 @@ def get_kde_config_dir ():
     return kde_home_to_config(kde_home)
 
 
-def kde_home_to_config (kde_home):
+def kde_home_to_config(kde_home):
     """Add subdirectories for config path to KDE home directory."""
     return os.path.join(kde_home, "share", "config")
 
 
-def get_kde_home_dir ():
+def get_kde_home_dir():
     """Return KDE home directory or None if not found."""
     if os.environ.get("KDEHOME"):
         kde_home = os.path.abspath(os.environ["KDEHOME"])
@@ -572,7 +572,7 @@ def get_kde_home_dir ():
 loc_ro = re.compile(r"\[.*\]$")
 
 @lru_cache(1)
-def read_kioslaverc (kde_config_dir):
+def read_kioslaverc(kde_config_dir):
     """Read kioslaverc into data dictionary."""
     data = {}
     filename = os.path.join(kde_config_dir, "kioslaverc")
@@ -600,14 +600,14 @@ def read_kioslaverc (kde_config_dir):
     return data
 
 
-def add_kde_proxy (key, value, data):
+def add_kde_proxy(key, value, data):
     """Add a proxy value to data dictionary after sanity checks."""
     if not value or value[:3] == "//:":
         return
     data[key] = value
 
 
-def add_kde_setting (key, value, data):
+def add_kde_setting(key, value, data):
     """Add a KDE proxy setting value to data dictionary."""
     if key == "ProxyType":
         mode = None
@@ -641,12 +641,12 @@ def add_kde_setting (key, value, data):
         # XXX todo
 
 
-def split_hosts (value):
+def split_hosts(value):
     """Split comma-separated host list."""
     return [host for host in value.split(", ") if host]
 
 
-def resolve_indirect (data, key, splithosts=False):
+def resolve_indirect(data, key, splithosts=False):
     """Replace name of environment variable with its value."""
     value = data[key]
     env_value = os.environ.get(value)
@@ -659,7 +659,7 @@ def resolve_indirect (data, key, splithosts=False):
         del data[key]
 
 
-def resolve_kde_settings (data):
+def resolve_kde_settings(data):
     """Write final proxy configuration values in data dictionary."""
     if "mode" not in data:
         return

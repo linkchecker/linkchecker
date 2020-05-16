@@ -26,7 +26,7 @@ from .. import parser
 QUEUE_POLL_INTERVALL_SECS = 1.0
 
 
-def check_urls (urlqueue, logger):
+def check_urls(urlqueue, logger):
     """Check URLs without threading."""
     while not urlqueue.empty():
         url_data = urlqueue.get()

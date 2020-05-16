@@ -23,7 +23,7 @@ import linkcheck.configuration
 from builtins import str as str_text
 
 
-def get_file (filename=None):
+def get_file(filename=None):
     """Get file name located within 'data' directory."""
     directory = os.path.join("tests", "configuration", "data")
     if filename:

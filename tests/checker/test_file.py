@@ -26,7 +26,7 @@ from tests import need_word, need_pdflib
 from . import LinkCheckTest, get_file
 
 
-def unzip (filename, targetdir):
+def unzip(filename, targetdir):
     """Unzip given zipfile into targetdir."""
     if isinstance(targetdir, unicode):
         targetdir = str(targetdir)

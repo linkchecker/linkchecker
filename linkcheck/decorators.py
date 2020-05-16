@@ -19,17 +19,17 @@ Simple decorators (usable in Python >= 2.4).
 Example:
 
 @synchronized(thread.allocate_lock())
-def f ():
+def f():
     "Synchronized function"
     print("i am synchronized:", f, f.__doc__)
 
 @deprecated
-def g ():
+def g():
     "this function is deprecated"
     pass
 
 @notimplemented
-def h ():
+def h():
     "todo"
     pass
 
@@ -41,7 +41,7 @@ import sys
 import time
 
 
-def update_func_meta (fake_func, real_func):
+def update_func_meta(fake_func, real_func):
     """Set meta information (eg. __doc__) of fake function to that
     of the real function.
     @return fake_func
@@ -53,7 +53,7 @@ def update_func_meta (fake_func, real_func):
     return fake_func
 
 
-def deprecated (func):
+def deprecated(func):
     """A decorator which can be used to mark functions as deprecated.
     It emits a warning when the function is called."""
     def newfunc (*args, **kwargs):
@@ -64,7 +64,7 @@ def deprecated (func):
     return update_func_meta(newfunc, func)
 
 
-def signal_handler (signal_number):
+def signal_handler(signal_number):
     """From http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/410666
 
     A decorator to set the specified function as handler for a signal.
@@ -86,7 +86,7 @@ def signal_handler (signal_number):
     return newfunc
 
 
-def synchronize (lock, func, log_duration_secs=0):
+def synchronize(lock, func, log_duration_secs=0):
     """Return synchronized function acquiring the given lock."""
     def newfunc (*args, **kwargs):
         """Execute function synchronized."""
@@ -99,12 +99,12 @@ def synchronize (lock, func, log_duration_secs=0):
     return update_func_meta(newfunc, func)
 
 
-def synchronized (lock):
+def synchronized(lock):
     """A decorator calling a function with aqcuired lock."""
     return lambda func: synchronize(lock, func)
 
 
-def notimplemented (func):
+def notimplemented(func):
     """Raises a NotImplementedError if the function is called."""
     def newfunc (*args, **kwargs):
         """Raise NotImplementedError"""
@@ -114,7 +114,7 @@ def notimplemented (func):
     return update_func_meta(newfunc, func)
 
 
-def timeit (func, log, limit):
+def timeit(func, log, limit):
     """Print execution time of the function. For quick'n'dirty profiling."""
 
     def newfunc (*args, **kwargs):
@@ -130,7 +130,7 @@ def timeit (func, log, limit):
     return update_func_meta(newfunc, func)
 
 
-def timed (log=sys.stderr, limit=2.0):
+def timed(log=sys.stderr, limit=2.0):
     """Decorator to run a function with timing info."""
     return lambda func: timeit(func, log, limit)
 

@@ -19,7 +19,7 @@ Locking utility class.
 import threading
 from . import log, LOG_THREAD
 
-def get_lock (name, debug=False):
+def get_lock(name, debug=False):
     """Get a new lock.
     @param debug: if True, acquire() and release() will have debug messages
     @ptype debug: boolean, default is False

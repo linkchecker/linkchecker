@@ -28,7 +28,7 @@ from ..network import iputil
 from .const import WARN_MAIL_NO_MX_HOST
 
 
-def getaddresses (addr):
+def getaddresses(addr):
     """Return list of email addresses from given field value."""
     parsed = [mail for name, mail in AddressList(addr).addresslist if mail]
     if parsed:
@@ -41,19 +41,19 @@ def getaddresses (addr):
     return addresses
 
 
-def is_quoted (addr):
+def is_quoted(addr):
     """Return True iff mail address string is quoted."""
     return addr.startswith('"') and addr.endswith('"')
 
 
-def is_literal (domain):
+def is_literal(domain):
     """Return True iff domain string is a literal."""
     return domain.startswith('[') and domain.endswith(']')
 
 
 _remove_quoted = re.compile(r'\\.').sub
 _quotes = re.compile(r'["\\]')
-def is_missing_quote (addr):
+def is_missing_quote(addr):
     """Return True iff mail address is not correctly quoted."""
     return _quotes.match(_remove_quoted("", addr[1:-1]))
 

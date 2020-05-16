@@ -48,7 +48,7 @@ class FtpServerTest(LinkCheckTest):
             pass
 
 
-def start_server (host, port):
+def start_server(host, port):
     def line_logger(self, msg):
         if "kill" in msg:
             raise KeyboardInterrupt()
@@ -95,7 +95,7 @@ def start_server (host, port):
     return port
 
 
-def stop_server (host, port):
+def stop_server(host, port):
     """Stop a running FTP server."""
     ftp = FTP()
     ftp.connect(host, port, TIMEOUT)

@@ -73,6 +73,6 @@ class Dummy:
         return False
 
 
-def dummy (*args, **kwargs):
+def dummy(*args, **kwargs):
     """Ignore any positional or keyword arguments, return None."""
     pass

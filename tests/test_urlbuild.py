@@ -24,7 +24,7 @@ import linkcheck.checker.urlbase
 from linkcheck.checker import get_url_from
 
 
-def get_test_aggregate ():
+def get_test_aggregate():
     """
     Initialize a test configuration object.
     """

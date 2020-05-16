@@ -35,7 +35,7 @@ _proc_status = '/proc/%d/status' % os.getpid()
 _scale = {'kB': 1024.0, 'mB': 1024.0*1024.0,
           'KB': 1024.0, 'MB': 1024.0*1024.0}
 
-def _VmB (VmKey):
+def _VmB(VmKey):
     """Parse /proc/<pid>/status file for given key.
 
     @return: requested number value of status entry
@@ -62,7 +62,7 @@ def _VmB (VmKey):
     return float(v[1]) * _scale[v[2]]
 
 
-def memory (since=0.0):
+def memory(since=0.0):
     """Get memory usage.
 
     @return: memory usage in bytes
@@ -71,7 +71,7 @@ def memory (since=0.0):
     return _VmB('VmSize:') - since
 
 
-def resident (since=0.0):
+def resident(since=0.0):
     """Get resident memory usage.
 
     @return: resident memory usage in bytes
@@ -80,7 +80,7 @@ def resident (since=0.0):
     return _VmB('VmRSS:') - since
 
 
-def stacksize (since=0.0):
+def stacksize(since=0.0):
     """Get stack size.
 
     @return: stack size in bytes

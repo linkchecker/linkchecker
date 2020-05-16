@@ -48,12 +48,12 @@ from .logconf import (
 import _LinkChecker_configdata as configdata
 
 
-def module_path ():
+def module_path():
     """Return absolute directory of system executable."""
     return os.path.dirname(os.path.abspath(sys.executable))
 
 
-def get_install_data ():
+def get_install_data():
     """Return absolute path of LinkChecker data installation directory."""
     from .loader import is_frozen
     if is_frozen():
@@ -70,7 +70,7 @@ class LinkCheckerInterrupt(Exception):
     pass
 
 
-def get_link_pat (arg, strict=False):
+def get_link_pat(arg, strict=False):
     """Get a link pattern matcher for intern/extern links.
     Returns a compiled pattern and a negate and strict option.
 
@@ -101,7 +101,7 @@ def get_link_pat (arg, strict=False):
     }
 
 
-def init_i18n (loc=None):
+def init_i18n(loc=None):
     """Initialize i18n with the configured locale dir. The environment
     variable LOCPATH can also specify a locale dir.
 
@@ -127,7 +127,7 @@ def init_i18n (loc=None):
 init_i18n()
 
 
-def drop_privileges ():
+def drop_privileges():
     """Make sure to drop root privileges on POSIX systems."""
     if os.name != 'posix':
         return

@@ -111,7 +111,7 @@ class CssSyntaxCheck(_ContentPlugin):
             log.warn(LOG_PLUGIN, _("CSS syntax check plugin error: %(msg)s ") % {"msg": msg})
 
 
-def check_w3_errors (url_data, xml, w3type):
+def check_w3_errors(url_data, xml, w3type):
     """Add warnings for W3C HTML or CSS errors in xml format.
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
@@ -126,7 +126,7 @@ def check_w3_errors (url_data, xml, w3type):
         url_data.add_warning(warnmsg % attrs)
 
 
-def getXmlText (parent, tag):
+def getXmlText(parent, tag):
     """Return XML content of given tag in parent element."""
     elem = parent.getElementsByTagName(tag)[0]
     # Yes, the DOM standard is awful.

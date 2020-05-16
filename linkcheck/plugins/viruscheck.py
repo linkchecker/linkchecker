@@ -125,7 +125,7 @@ class ClamdScanner:
         self.sock.close()
 
 
-def canonical_clamav_conf ():
+def canonical_clamav_conf():
     """Default clamav configs for various platforms."""
     if os.name == 'posix':
         clamavconf = "/etc/clamav/clamd.conf"
@@ -143,7 +143,7 @@ def get_clamav_conf(filename):
     log.warn(LOG_PLUGIN, "No ClamAV config file found at %r.", filename)
 
 
-def get_sockinfo (host, port=None):
+def get_sockinfo(host, port=None):
     """Return socket.getaddrinfo for given host and port."""
     family, socktype = socket.AF_INET, socket.SOCK_STREAM
     return socket.getaddrinfo(host, port, family, socktype)
@@ -215,7 +215,7 @@ class ClamavConfig(dict):
         return sock
 
 
-def scan (data, clamconf):
+def scan(data, clamconf):
     """Scan data for viruses.
     @return (infection msgs, errors)
     @rtype ([], [])

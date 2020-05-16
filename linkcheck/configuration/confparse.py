@@ -21,7 +21,7 @@ import os
 from .. import LinkCheckerError, get_link_pat, LOG_CHECK, log, fileutil, plugins, logconf
 
 
-def read_multiline (value):
+def read_multiline(value):
     """Helper function reading multiline values."""
     for line in value.splitlines():
         line = line.strip()

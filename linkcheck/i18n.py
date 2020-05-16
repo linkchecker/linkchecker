@@ -30,7 +30,7 @@ default_language = default_encoding = None
 default_directory = None
 default_domain = None
 
-def install_builtin (translator, do_unicode):
+def install_builtin(translator, do_unicode):
     """Install _() and _n() gettext methods into default namespace."""
     import builtins
     builtins.__dict__['_'] = translator.gettext
@@ -55,7 +55,7 @@ class NullTranslator(gettext.NullTranslations):
         install_builtin(self, do_unicode)
 
 
-def init (domain, directory, loc=None):
+def init(domain, directory, loc=None):
     """Initialize this gettext i18n module. Searches for supported languages
     and installs the gettext translator class."""
     global default_language, default_encoding, default_domain, default_directory
@@ -90,7 +90,7 @@ def install_language(language):
     translator.install(do_unicode)
 
 
-def get_translator (domain, directory, languages=None,
+def get_translator(domain, directory, languages=None,
                     translatorklass=Translator, fallback=False,
                     fallbackklass=NullTranslator):
     """Search the appropriate GNUTranslations class."""
@@ -101,14 +101,14 @@ def get_translator (domain, directory, languages=None,
     return translator
 
 
-def get_lang (lang):
+def get_lang(lang):
     """Return lang if it is supported, or the default language."""
     if lang in supported_languages:
         return lang
     return default_language
 
 
-def get_headers_lang (headers):
+def get_headers_lang(headers):
     """Return preferred supported language in given HTTP headers."""
     if 'Accept-Language' not in headers:
         return default_language
@@ -132,7 +132,7 @@ def get_headers_lang (headers):
     return default_language
 
 
-def get_locale ():
+def get_locale():
     """Search the default platform locale and norm it.
     @returns (locale, encoding)
     @rtype (string, string)"""
@@ -150,7 +150,7 @@ def get_locale ():
     return (loc, encoding)
 
 
-def norm_locale (loc):
+def norm_locale(loc):
     """Normalize a locale."""
     loc = locale.normalize(loc)
     # split up the locale into its base components
@@ -175,17 +175,17 @@ lang_transis = {
     'en': {'de': 'Englisch'},
 }
 
-def lang_name (lang):
+def lang_name(lang):
     """Return full name of given language."""
     return lang_names[lang]
 
 
-def lang_trans (lang, curlang):
+def lang_trans(lang, curlang):
     """Return translated full name of given language."""
     return lang_transis[lang][curlang]
 
 
-def get_encoded_writer (out=sys.stdout, encoding=None, errors='replace'):
+def get_encoded_writer(out=sys.stdout, encoding=None, errors='replace'):
     """Get wrapped output writer with given encoding and error handling."""
     if encoding is None:
         encoding = default_encoding

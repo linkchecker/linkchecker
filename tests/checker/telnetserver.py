@@ -59,7 +59,7 @@ class TelnetServerTest(LinkCheckTest):
             assert not self.server_thread.is_alive()
 
 
-def start_server (host, port, stop_event):
+def start_server(host, port, stop_event):
     # Instantiate Telnet server class and listen to host:port
     clients = []
     def on_connect(client):

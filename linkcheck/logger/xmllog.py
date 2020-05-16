@@ -29,14 +29,14 @@ xmlattr_entities = {
 }
 
 
-def xmlquote (s):
+def xmlquote(s):
     """
     Quote characters for XML.
     """
     return xml.sax.saxutils.escape(s)
 
 
-def xmlquoteattr (s):
+def xmlquoteattr(s):
     """
     Quote XML attribute, ready for inclusion with double quotes.
     """

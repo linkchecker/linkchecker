@@ -14,7 +14,7 @@ import imp
 from .fileutil import is_writable_by_others
 
 
-def is_frozen ():
+def is_frozen():
     """Return True if running inside a py2exe- or py2app-generated
     executable."""
     return hasattr(sys, "frozen")

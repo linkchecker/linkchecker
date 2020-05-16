@@ -193,7 +193,7 @@ class HttpsServerTest(HttpServerTest):
         return "https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
-def start_server (handler, https=False):
+def start_server(handler, https=False):
     """Start an HTTP server thread and return its port number."""
     server_address = ('localhost', 0)
     handler.protocol_version = "HTTP/1.0"
@@ -221,7 +221,7 @@ def start_server (handler, https=False):
     return port
 
 
-def stop_server (port, https=False):
+def stop_server(port, https=False):
     """Stop an HTTP server thread."""
     if https:
         conn = HTTPSConnection("localhost:%d" % port,
@@ -232,7 +232,7 @@ def stop_server (port, https=False):
     conn.getresponse()
 
 
-def get_cookie (maxage=2000):
+def get_cookie(maxage=2000):
     data = (
         ("Comment", "justatest"),
         ("Max-Age", "%d" % maxage),

@@ -27,7 +27,7 @@ from tests import need_msgfmt, need_posix
 
 pofiles = None
 
-def get_pofiles ():
+def get_pofiles():
     """Find all .po files in this source."""
     global pofiles
     if pofiles is None:

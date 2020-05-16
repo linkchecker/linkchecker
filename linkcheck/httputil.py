@@ -17,7 +17,7 @@ import base64
 from datetime import datetime
 
 
-def encode_base64 (s):
+def encode_base64(s):
     """Encode given string in base64, excluding trailing newlines."""
     return base64.b64encode(s)
 
@@ -68,7 +68,7 @@ def asn1_generaltime_to_seconds(timestr):
             pass
     return res
 
-def has_header_value (headers, name, value):
+def has_header_value(headers, name, value):
     """
     Look in headers for a specific header name and value.
     Both name and value are case insensitive.
@@ -84,7 +84,7 @@ def has_header_value (headers, name, value):
     return False
 
 
-def get_content_type (headers):
+def get_content_type(headers):
     """
     Get the MIME type from the Content-Type header value, or
     'application/octet-stream' if not found.

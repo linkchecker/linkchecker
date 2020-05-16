@@ -163,7 +163,7 @@ if os.name == 'nt':
 Beep = "\007"
 
 
-def esc_ansicolor (color):
+def esc_ansicolor(color):
     """convert a named color definition to an escaped ANSI color"""
     control = ''
     if ";" in color:
@@ -191,7 +191,7 @@ def get_win_color(color):
     return foreground, background, style
 
 
-def has_colors (fp):
+def has_colors(fp):
     """Test if given file is an ANSI color enabled tty."""
     # The is_tty() function ensures that we do not colorize
     # redirected streams, as this is almost never what we want
@@ -210,7 +210,7 @@ def has_colors (fp):
     return False
 
 
-def get_columns (fp):
+def get_columns(fp):
     """Return number of columns for given file."""
     if not is_tty(fp):
         return 80
@@ -226,7 +226,7 @@ def get_columns (fp):
     return 80
 
 
-def _write_color_colorama (fp, text, color):
+def _write_color_colorama(fp, text, color):
     """Colorize text with given color."""
     foreground, background, style = get_win_color(color)
     colorama.set_console(foreground=foreground, background=background,
@@ -235,7 +235,7 @@ def _write_color_colorama (fp, text, color):
     colorama.reset_console()
 
 
-def _write_color_ansi (fp, text, color):
+def _write_color_ansi(fp, text, color):
     """Colorize text with given color."""
     fp.write(esc_ansicolor(color))
     fp.write(text)

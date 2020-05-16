@@ -32,7 +32,7 @@ else:
     URL_TAG = 'Source-Package-URL:'
 
 
-def check_update ():
+def check_update():
     """Return the following values:
        (False, errmsg) - online version could not be determined
        (True, None) - user has newest version
@@ -53,7 +53,7 @@ def check_update ():
     return True, (version, None)
 
 
-def get_online_version ():
+def get_online_version():
     """Download update info and parse it."""
     # prevent getting a cached answer
     headers = {'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
@@ -70,6 +70,6 @@ def get_online_version ():
     return version, url
 
 
-def is_newer_version (version):
+def is_newer_version(version):
     """Check if given version is newer than current version."""
     return StrictVersion(version) > StrictVersion(CurrentVersion)

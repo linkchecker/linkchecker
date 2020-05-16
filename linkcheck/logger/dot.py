@@ -81,6 +81,6 @@ class DOTLogger(_GraphLogger):
         self.writeln("}")
 
 
-def dotquote (s):
+def dotquote(s):
     """Quote string for usage in DOT output format."""
     return s.replace('"', '\\"')
