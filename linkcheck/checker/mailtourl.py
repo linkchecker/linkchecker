@@ -67,7 +67,7 @@ class MailtoUrl(urlbase.UrlBase):
     Url link with mailto scheme.
     """
 
-    def build_url (self):
+    def build_url(self):
         """Call super.build_url(), extract list of mail addresses from URL,
         and check their syntax.
         """
@@ -84,7 +84,7 @@ class MailtoUrl(urlbase.UrlBase):
             self.add_warning(_("No mail addresses or email subject found in `%(url)s'.") % \
                 {"url": self.url})
 
-    def parse_addresses (self):
+    def parse_addresses(self):
         """Parse all mail addresses out of the URL target. Also parses
         optional CGI headers like "?to=foo@example.org".
         Stores parsed addresses in the self.addresses set.
@@ -127,7 +127,7 @@ class MailtoUrl(urlbase.UrlBase):
             self.addresses.update(getaddresses(url))
         log.debug(LOG_CHECK, "addresses: %s", self.addresses)
 
-    def check_email_syntax (self, mail):
+    def check_email_syntax(self, mail):
         """Check email syntax. The relevant RFCs:
         - How to check names (memo):
           http://tools.ietf.org/html/rfc3696
@@ -220,7 +220,7 @@ class MailtoUrl(urlbase.UrlBase):
                 {"addr": mail}, valid=False, overwrite=False)
                 return
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Verify a list of email addresses. If one address fails,
         the whole list will fail.
@@ -235,7 +235,7 @@ class MailtoUrl(urlbase.UrlBase):
             if not self.valid:
                 break
 
-    def check_smtp_domain (self, mail):
+    def check_smtp_domain(self, mail):
         """
         Check a single mail address.
         """
@@ -292,7 +292,7 @@ class MailtoUrl(urlbase.UrlBase):
         emails = ",".join(sorted(self.addresses))
         self.cache_url = "%s:%s" % (self.scheme, emails)
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         mailto: URLs do not have any content
 

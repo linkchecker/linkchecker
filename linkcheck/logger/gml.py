@@ -29,7 +29,7 @@ class GMLLogger(_GraphLogger):
         "filename": "linkchecker-out.gml",
     }
 
-    def start_output (self):
+    def start_output(self):
         """Write start of checking info as gml comment."""
         super(GMLLogger, self).start_output()
         if self.has_part("intro"):
@@ -39,11 +39,11 @@ class GMLLogger(_GraphLogger):
         self.writeln("  directed 1")
         self.flush()
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """Write GML comment."""
         self.writeln(s='comment "%s"' % s, **args)
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write one node."""
         node = self.get_node(url_data)
         if node:
@@ -62,7 +62,7 @@ class GMLLogger(_GraphLogger):
                 self.writeln("    extern %d" % node["extern"])
             self.writeln("  ]")
 
-    def write_edge (self, node):
+    def write_edge(self, node):
         """Write one edge."""
         self.writeln("  edge [")
         self.writeln('    label  "%s"' % node["edge"])
@@ -72,6 +72,6 @@ class GMLLogger(_GraphLogger):
             self.writeln("    valid  %d" % node["valid"])
         self.writeln("  ]")
 
-    def end_graph (self):
+    def end_graph(self):
         """Write end of graph marker."""
         self.writeln("]")

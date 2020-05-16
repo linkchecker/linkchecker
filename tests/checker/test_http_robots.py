@@ -21,11 +21,11 @@ from .httpserver import HttpServerTest
 class TestHttpRobots(HttpServerTest):
     """Test robots.txt link checking behaviour."""
 
-    def test_html (self):
+    def test_html(self):
         self.robots_txt_test()
         self.robots_txt2_test()
 
-    def robots_txt_test (self):
+    def robots_txt_test(self):
         url = "http://localhost:%d/robots.txt" % self.port
         resultlines = [
             "url %s" % url,
@@ -35,7 +35,7 @@ class TestHttpRobots(HttpServerTest):
         ]
         self.direct(url, resultlines, recursionlevel=5)
 
-    def robots_txt2_test (self):
+    def robots_txt2_test(self):
         url = "http://localhost:%d/secret" % self.port
         resultlines = [
             "url %s" % url,

@@ -39,7 +39,7 @@ class AnchorCheck(_ContentPlugin):
                              linkparse.AnchorTags)
         self.check_anchor(url_data)
 
-    def add_anchor (self, url, line, column, name, base):
+    def add_anchor(self, url, line, column, name, base):
         """Add anchor URL."""
         self.anchors.append((url, line, column, name, base))
 

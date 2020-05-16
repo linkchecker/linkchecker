@@ -42,7 +42,7 @@ class TestPo(unittest.TestCase):
 
     @need_posix
     @need_msgfmt
-    def test_pos (self):
+    def test_pos(self):
         """Test .po files syntax."""
         for f in get_pofiles():
             ret = os.system("msgfmt -c -o - %s > /dev/null" % f)
@@ -53,13 +53,13 @@ class TestGTranslator(unittest.TestCase):
     """GTranslator displays a middot · for a space. Unfortunately, it
     gets copied with copy-and-paste, what a shame."""
 
-    def test_gtranslator (self):
+    def test_gtranslator(self):
         """Test all pofiles for GTranslator brokenness."""
         for f in get_pofiles():
             with open(f, 'rb') as fd:
                 self.check_file(fd, f)
 
-    def check_file (self, fd, f):
+    def check_file(self, fd, f):
         """Test for GTranslator broken syntax."""
         for line in fd:
             if line.strip().startswith(b"#"):

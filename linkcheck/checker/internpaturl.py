@@ -48,7 +48,7 @@ def get_intern_pattern(url):
 class InternPatternUrl(urlbase.UrlBase):
     """Class supporting an intern URL pattern."""
 
-    def get_intern_pattern (self, url=None):
+    def get_intern_pattern(self, url=None):
         """
         Get pattern for intern URL matching.
 

@@ -58,7 +58,7 @@ class SQLLogger(_Logger):
         'dbname': 'linksdb',
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize database access data."""
         args = self.get_args(kwargs)
         super(SQLLogger, self).__init__(**args)
@@ -66,14 +66,14 @@ class SQLLogger(_Logger):
         self.dbname = args['dbname']
         self.separator = args['separator']
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write SQL comment.
         """
         self.write("-- ")
         self.writeln(s=s, **args)
 
-    def start_output (self):
+    def start_output(self):
         """
         Write start of checking info as sql comment.
         """
@@ -83,7 +83,7 @@ class SQLLogger(_Logger):
             self.writeln()
             self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Store url check info into the database.
         """
@@ -130,7 +130,7 @@ class SQLLogger(_Logger):
               })
         self.flush()
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Write end of checking info as sql comment.
         """

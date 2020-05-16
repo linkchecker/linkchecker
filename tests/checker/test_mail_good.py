@@ -26,7 +26,7 @@ class TestMailGood(MailTest):
     """
 
     @need_network
-    def test_good_mail (self):
+    def test_good_mail(self):
         # some good mailto addrs
         url = self.norm("mailto:Dude <calvin@users.sourceforge.net> , "\
                 "Killer <calvin@users.sourceforge.net>?subject=bla")
@@ -84,7 +84,7 @@ class TestMailGood(MailTest):
         self.direct(url, resultlines)
 
     @need_network
-    def test_warn_mail (self):
+    def test_warn_mail(self):
         # some mailto addrs with warnings
         # contains non-quoted characters
         url = "mailto:calvin@users.sourceforge.net?subject=\xe4\xf6\xfc"
@@ -123,27 +123,27 @@ class TestMailGood(MailTest):
           cache_key=url)
 
     @need_network
-    def test_valid_mail1 (self):
+    def test_valid_mail1(self):
         for char in "!#$&'":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail2 (self):
+    def test_valid_mail2(self):
         for char in "*+-/=":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail3 (self):
+    def test_valid_mail3(self):
         for char in "^_`.":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail4 (self):
+    def test_valid_mail4(self):
         for char in "{|}~":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_unicode_mail (self):
+    def test_unicode_mail(self):
         mailto = "mailto:\xf6lvin@users.sourceforge.net"
         url = self.norm(mailto, encoding="iso-8859-1")
         resultlines = [

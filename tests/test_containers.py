@@ -25,12 +25,12 @@ import linkcheck.containers
 class TestLFUCache(unittest.TestCase):
     """Test LFU cache implementation."""
 
-    def setUp (self):
+    def setUp(self):
         """Set up self.d as empty LFU cache with default size of 1000."""
         self.size = 1000
         self.d = linkcheck.containers.LFUCache(self.size)
 
-    def test_num_uses (self):
+    def test_num_uses(self):
         self.assertTrue(not self.d)
         self.d["a"] = 1
         self.assertTrue("a" in self.d)
@@ -38,21 +38,21 @@ class TestLFUCache(unittest.TestCase):
         dummy = self.d["a"]
         self.assertEqual(self.d.uses("a"), 1)
 
-    def test_values (self):
+    def test_values(self):
         self.assertTrue(not self.d)
         self.d["a"] = 1
         self.d["b"] = 2
         self.assertEqual(set([1, 2]), set(self.d.values()))
         self.assertEqual(set([1, 2]), set(self.d.itervalues()))
 
-    def test_popitem (self):
+    def test_popitem(self):
         self.assertTrue(not self.d)
         self.d["a"] = 42
         self.assertEqual(self.d.popitem(), ("a", 42))
         self.assertTrue(not self.d)
         self.assertRaises(KeyError, self.d.popitem)
 
-    def test_shrink (self):
+    def test_shrink(self):
         self.assertTrue(not self.d)
         for i in range(self.size):
             self.d[i] = i

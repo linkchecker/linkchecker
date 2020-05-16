@@ -95,7 +95,7 @@ class UrlBase:
     # Read in 16kb chunks
     ReadChunkBytes = 1024*16
 
-    def __init__ (self, base_url, recursion_level, aggregate,
+    def __init__(self, base_url, recursion_level, aggregate,
                   parent_url=None, base_ref=None, line=-1, column=-1, page=-1,
                   name="", url_encoding=None, extern=None):
         """
@@ -126,7 +126,7 @@ class UrlBase:
             if not self.has_result:
                 self.set_result(_("filtered"))
 
-    def init (self, base_ref, base_url, parent_url, recursion_level,
+    def init(self, base_ref, base_url, parent_url, recursion_level,
               aggregate, line, column, page, name, url_encoding, extern):
         """
         Initialize internal data.
@@ -162,7 +162,7 @@ class UrlBase:
             self.add_warning(_("Leading or trailing whitespace in URL `%(url)s'.") %
                                {"url": base_url}, tag=WARN_URL_WHITESPACE)
 
-    def reset (self):
+    def reset(self):
         """
         Reset all variables to default values.
         """
@@ -215,7 +215,7 @@ class UrlBase:
         # URLs seen through redirections
         self.aliases = []
 
-    def set_result (self, msg, valid=True, overwrite=False):
+    def set_result(self, msg, valid=True, overwrite=False):
         """
         Set result string and validity.
         """
@@ -233,7 +233,7 @@ class UrlBase:
         # free content data
         self.data = None
 
-    def get_title (self):
+    def get_title(self):
         """Return title of page the URL refers to.
         This is per default the filename or the URL."""
         if self.title is None:
@@ -249,17 +249,17 @@ class UrlBase:
                     self.title = title
         return self.title
 
-    def is_parseable (self):
+    def is_parseable(self):
         """
         Return True iff content of this url is parseable.
         """
         return False
 
-    def is_html (self):
+    def is_html(self):
         """Return True iff content of this url is HTML formatted."""
         return self._is_ctype("html")
 
-    def is_css (self):
+    def is_css(self):
         """Return True iff content of this url is CSS stylesheet."""
         return self._is_ctype("css")
 
@@ -270,11 +270,11 @@ class UrlBase:
         mime = self.content_type
         return self.ContentMimetypes.get(mime) == ctype
 
-    def is_http (self):
+    def is_http(self):
         """Return True for http:// or https:// URLs."""
         return self.scheme in ("http", "https")
 
-    def is_file (self):
+    def is_file(self):
         """Return True for file:// URLs."""
         return self.scheme == "file"
 
@@ -286,7 +286,7 @@ class UrlBase:
         """Return True for local (ie. file://) URLs."""
         return self.is_file()
 
-    def add_warning (self, s, tag=None):
+    def add_warning(self, s, tag=None):
         """
         Add a warning string.
         """
@@ -295,14 +295,14 @@ class UrlBase:
            tag not in self.aggregate.config["ignorewarnings"]:
             self.warnings.append(item)
 
-    def add_info (self, s):
+    def add_info(self, s):
         """
         Add an info string.
         """
         if s not in self.info:
             self.info.append(s)
 
-    def set_cache_url (self):
+    def set_cache_url(self):
         """Set the URL to be used for caching."""
         # remove anchor from cached target url since we assume
         # URLs with different anchors to have the same content
@@ -310,7 +310,7 @@ class UrlBase:
         if self.cache_url is not None:
             assert isinstance(self.cache_url, str_text), repr(self.cache_url)
 
-    def check_syntax (self):
+    def check_syntax(self):
         """
         Called before self.check(), this function inspects the
         url syntax. Success enables further checking, failure
@@ -343,7 +343,7 @@ class UrlBase:
             args = dict(len=len(self.url), max=URL_MAX_LENGTH)
             self.add_warning(_("URL length %(len)d is longer than %(max)d.") % args, tag=WARN_URL_TOO_LONG)
 
-    def build_url (self):
+    def build_url(self):
         """
         Construct self.url and self.urlparts out of the given base
         url information self.base_url, self.parent_url and self.base_ref.
@@ -378,7 +378,7 @@ class UrlBase:
         # and unsplit again
         self.url = urlutil.urlunsplit(self.urlparts)
 
-    def build_url_parts (self):
+    def build_url_parts(self):
         """Set userinfo, host, port and anchor from self.urlparts.
         Also checks for obfuscated IP addresses.
         """
@@ -409,7 +409,7 @@ class UrlBase:
         if self.anchor is not None:
             assert isinstance(self.anchor, str_text), repr(self.anchor)
 
-    def check_obfuscated_ip (self):
+    def check_obfuscated_ip(self):
         """Warn if host of this URL is obfuscated IP address."""
         # check if self.host can be an IP address
         # check for obfuscated IP address
@@ -422,7 +422,7 @@ class UrlBase:
                    {"url": self.base_url, "ip": ips[0]},
                           tag=WARN_URL_OBFUSCATED_IP)
 
-    def check (self):
+    def check(self):
         """Main check function for checking this URL."""
         if self.aggregate.config["trace"]:
             trace.trace_on()
@@ -437,7 +437,7 @@ class UrlBase:
             else:
                 raise
 
-    def local_check (self):
+    def local_check(self):
         """Local check function can be overridden in subclasses."""
         log.debug(LOG_CHECK, "Checking %s", str_text(self))
         # strict extern URLs should not be checked
@@ -476,7 +476,7 @@ class UrlBase:
                      {"msg": str_text(value)}, tag=WARN_URL_ERROR_GETTING_CONTENT)
         return False
 
-    def close_connection (self):
+    def close_connection(self):
         """
         Close an opened url connection.
         """
@@ -490,7 +490,7 @@ class UrlBase:
             pass
         self.url_connection = None
 
-    def handle_exception (self):
+    def handle_exception(self):
         """
         An exception occurred. Log it and set the cache flag.
         """
@@ -510,14 +510,14 @@ class UrlBase:
         # limit length to 240
         return strformat.limit(errmsg, length=240)
 
-    def check_connection (self):
+    def check_connection(self):
         """
         The basic connection check uses urlopen to initialize
         a connection object.
         """
         self.url_connection = urlopen(self.url)
 
-    def add_size_info (self):
+    def add_size_info(self):
         """Set size of URL content (if any)..
         Should be overridden in subclasses."""
         maxbytes = self.aggregate.config["maxfilesizedownload"]
@@ -539,7 +539,7 @@ class UrlBase:
             return False
         return True
 
-    def allows_recursion (self):
+    def allows_recursion(self):
         """
         Return True iff we can recurse into the url's content.
         """
@@ -568,7 +568,7 @@ class UrlBase:
         """Returns True: only check robots.txt on HTTP links."""
         return True
 
-    def set_extern (self, url):
+    def set_extern(self, url):
         """
         Match URL against extern and intern link patterns. If no pattern
         matches the URL is extern. Sets self.extern to a tuple (bool,
@@ -600,12 +600,12 @@ class UrlBase:
         else:
             self.extern = (1, 1)
 
-    def set_content_type (self):
+    def set_content_type(self):
         """Set content MIME type.
         Should be overridden in subclasses."""
         pass
 
-    def can_get_content (self):
+    def can_get_content(self):
         """Indicate wether url get_content() can be called."""
         return self.size <= self.aggregate.config["maxfilesizedownload"]
 
@@ -632,7 +632,7 @@ class UrlBase:
             self.data = self.download_content()
         return self.data
 
-    def get_content (self):
+    def get_content(self):
         if self.text is None:
             self.get_raw_content()
             self.soup = htmlsoup.make_soup(self.data)
@@ -657,7 +657,7 @@ class UrlBase:
         """
         return self.url_connection.read(self.ReadChunkBytes)
 
-    def get_user_password (self):
+    def get_user_password(self):
         """Get tuple (user, password) from configured authentication.
         Both user and password can be None.
         """
@@ -666,7 +666,7 @@ class UrlBase:
             return urllib.parse.splitpasswd(self.userinfo)
         return self.aggregate.config.get_user_password(self.url)
 
-    def add_url (self, url, line=0, column=0, page=0, name="", base=None):
+    def add_url(self, url, line=0, column=0, page=0, name="", base=None):
         """Add new URL to queue."""
         if base:
             base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
@@ -677,7 +677,7 @@ class UrlBase:
             page=page, name=name, parent_content_type=self.content_type, url_encoding=self.encoding)
         self.aggregate.urlqueue.put(url_data)
 
-    def serialized (self, sep=os.linesep):
+    def serialized(self, sep=os.linesep):
         """
         Return serialized url check data as unicode string.
         """
@@ -696,7 +696,7 @@ class UrlBase:
             "cache_url=%s" % self.cache_url,
            ])
 
-    def get_intern_pattern (self, url=None):
+    def get_intern_pattern(self, url=None):
         """Get pattern for intern URL matching.
 
         @param url: the URL to set intern pattern for, else self.url
@@ -737,7 +737,7 @@ class UrlBase:
         s = str_text(self)
         return self.aggregate.config['logger'].encode(s)
 
-    def __repr__ (self):
+    def __repr__(self):
         """
         Get URL info.
 
@@ -746,7 +746,7 @@ class UrlBase:
         """
         return "<%s>" % self.serialized(sep=", ")
 
-    def to_wire_dict (self):
+    def to_wire_dict(self):
         """Return a simplified transport object for logging and caching.
 
         The transport object must contain these attributes:
@@ -813,7 +813,7 @@ class UrlBase:
           modified=self.modified,
         )
 
-    def to_wire (self):
+    def to_wire(self):
         """Return compact UrlData object with information from to_wire_dict().
         """
         return CompactUrlData(self.to_wire_dict())

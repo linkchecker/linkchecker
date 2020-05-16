@@ -29,16 +29,16 @@ class TestDecorators(unittest.TestCase):
     Test decorators.
     """
 
-    def test_timeit (self):
+    def test_timeit(self):
         @linkcheck.decorators.timed()
-        def f ():
+        def f():
             return 42
         self.assertEqual(f(), 42)
 
-    def test_timeit2 (self):
+    def test_timeit2(self):
         log = StringIO()
         @linkcheck.decorators.timed(log=log, limit=0)
-        def f ():
+        def f():
             time.sleep(1)
             return 42
         self.assertEqual(f(), 42)

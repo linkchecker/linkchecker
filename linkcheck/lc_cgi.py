@@ -99,7 +99,7 @@ class ThreadsafeIO:
         self.closed = False
 
     @synchronized(_lock)
-    def write (self, data):
+    def write(self, data):
         """Write given unicode data to buffer."""
         assert isinstance(data, str_text)
         if self.closed:
@@ -108,14 +108,14 @@ class ThreadsafeIO:
             self.buf.append(data)
 
     @synchronized(_lock)
-    def get_data (self):
+    def get_data(self):
         """Get bufferd unicode data."""
         data = "".join(self.buf)
         self.buf = []
         return data
 
     @synchronized(_lock)
-    def close (self):
+    def close(self):
         """Reset buffer and close this I/O object."""
         self.buf = []
         self.closed = True

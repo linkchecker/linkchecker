@@ -98,7 +98,7 @@ def get_portable():
 class MyInstallLib(install_lib):
     """Custom library installation."""
 
-    def install (self):
+    def install(self):
         """Install the generated config file."""
         outs = super(MyInstallLib, self).install()
         infile = self.create_conf_file()
@@ -107,7 +107,7 @@ class MyInstallLib(install_lib):
         outs.append(outfile)
         return outs
 
-    def create_conf_file (self):
+    def create_conf_file(self):
         """Create configuration file."""
         cmd_obj = self.distribution.get_command_obj("install")
         cmd_obj.ensure_finalized()
@@ -141,11 +141,11 @@ class MyInstallLib(install_lib):
         self.distribution.create_conf_file(data, directory=self.install_lib)
         return self.get_conf_output()
 
-    def get_conf_output (self):
+    def get_conf_output(self):
         """Get name of configuration file."""
         return self.distribution.get_conf_filename(self.install_lib)
 
-    def get_outputs (self):
+    def get_outputs(self):
         """Add the generated config file to the list of outputs."""
         outs = super(MyInstallLib, self).get_outputs()
         conf_output = self.get_conf_output()
@@ -158,13 +158,13 @@ class MyInstallLib(install_lib):
 class MyInstallData(install_data):
     """Fix file permissions."""
 
-    def run (self):
+    def run(self):
         """Adjust permissions on POSIX systems."""
         self.install_translations()
         super(MyInstallData, self).run()
         self.fix_permissions()
 
-    def install_translations (self):
+    def install_translations(self):
         """Install compiled gettext catalogs."""
         # A hack to fix https://github.com/linkchecker/linkchecker/issues/102
         i18n_files = []
@@ -191,7 +191,7 @@ class MyInstallData(install_data):
                 (out, _) = self.copy_file(data, dest)
                 self.outfiles.append(out)
 
-    def fix_permissions (self):
+    def fix_permissions(self):
         """Set correct read permissions on POSIX systems. Might also
         be possible by setting umask?"""
         if os.name == 'posix' and not self.dry_run:
@@ -208,12 +208,12 @@ class MyInstallData(install_data):
 class MyDistribution(Distribution):
     """Custom distribution class generating config file."""
 
-    def __init__ (self, attrs):
+    def __init__(self, attrs):
         """Set console and windows scripts."""
         super(MyDistribution, self).__init__(attrs)
         self.console = ['linkchecker']
 
-    def run_commands (self):
+    def run_commands(self):
         """Generate config file and run commands."""
         cwd = os.getcwd()
         data = []
@@ -223,11 +223,11 @@ class MyDistribution(Distribution):
         self.create_conf_file(data)
         super(MyDistribution, self).run_commands()
 
-    def get_conf_filename (self, directory):
+    def get_conf_filename(self, directory):
         """Get name for config file."""
         return os.path.join(directory, "_%s_configdata.py" % self.get_name())
 
-    def create_conf_file (self, data, directory=None):
+    def create_conf_file(self, data, directory=None):
         """Create local config file from given data (list of lines) in
         the directory (or current directory if not given)."""
         data.insert(0, "# this file is automatically created by setup.py")
@@ -287,7 +287,7 @@ def check_manifest():
 class MyBuild(build):
     """Custom build command."""
 
-    def run (self):
+    def run(self):
         """Check MANIFEST before building."""
         check_manifest()
         build.run(self)
@@ -296,7 +296,7 @@ class MyBuild(build):
 class MyClean(clean):
     """Custom clean command."""
 
-    def run (self):
+    def run(self):
         """Remove share directory on clean."""
         if self.all:
             # remove share directory
@@ -311,7 +311,7 @@ class MyClean(clean):
 class MySdist(sdist):
     """Custom sdist command."""
 
-    def get_file_list (self):
+    def get_file_list(self):
         """Add MANIFEST to the file list."""
         super(MySdist, self).get_file_list()
         self.filelist.append("MANIFEST")

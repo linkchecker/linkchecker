@@ -138,13 +138,13 @@ class TestParser(unittest.TestCase):
     """
 
     @parameterized.expand(parsetests)
-    def test_parse (self, _in, _out):
+    def test_parse(self, _in, _out):
         # Parse all test patterns in one go.
         out = StringIO()
         pretty_print_html(out, htmlsoup.make_soup(_in))
         self.check_results(_in, _out, out)
 
-    def check_results (self, _in, _out, out):
+    def check_results(self, _in, _out, out):
         """
         Check parse results.
         """
@@ -153,30 +153,30 @@ class TestParser(unittest.TestCase):
            (_in, res, _out)
         self.assertEqual(res, _out, msg=msg)
 
-    def test_encoding_detection_utf_content (self):
+    def test_encoding_detection_utf_content(self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=UTF-8">'
         self.encoding_test(html, "utf-8")
 
-    def test_encoding_detection_utf_charset (self):
+    def test_encoding_detection_utf_charset(self):
         html = b'<meta charset="UTF-8">'
         self.encoding_test(html, "utf-8")
 
-    def test_encoding_detection_iso_content (self):
+    def test_encoding_detection_iso_content(self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=ISO8859-1">'
         self.encoding_test(html, "iso8859-1")
 
-    def test_encoding_detection_iso_charset (self):
+    def test_encoding_detection_iso_charset(self):
         html = b'<meta charset="ISO8859-1">'
         self.encoding_test(html, "iso8859-1")
 
-    def test_encoding_detection_iso_bad_charset (self):
+    def test_encoding_detection_iso_bad_charset(self):
         html = b'<meta charset="hulla">'
         self.encoding_test(html, "ascii")
 
-    def test_encoding_detection_iso_bad_content (self):
+    def test_encoding_detection_iso_bad_content(self):
         html = b'<meta http-equiv="content-type" content="text/html; charset=blabla">'
         self.encoding_test(html, "ascii")
 
-    def encoding_test (self, html, expected):
+    def encoding_test(self, html, expected):
         soup = htmlsoup.make_soup(html)
         self.assertEqual(soup.original_encoding, expected)

@@ -52,7 +52,7 @@ class TestHttps(HttpsServerTest):
             f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
 
     @need_network
-    def test_https (self):
+    def test_https(self):
         url = self.get_url("")
         resultlines = [
             "url %s" % url,

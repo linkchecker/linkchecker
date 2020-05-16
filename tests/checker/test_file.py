@@ -47,29 +47,29 @@ class TestFile(LinkCheckTest):
     Test file:// link checking (and file content parsing).
     """
 
-    def test_html (self):
+    def test_html(self):
         self.file_test("file.html")
 
-    def test_html_url_quote (self):
+    def test_html_url_quote(self):
         self.file_test("file_url_quote.html")
 
-    def test_wml (self):
+    def test_wml(self):
         self.file_test("file.wml")
 
-    def test_text (self):
+    def test_text(self):
         self.file_test("file.txt")
 
-    def test_asc (self):
+    def test_asc(self):
         self.file_test("file.asc")
 
-    def test_css (self):
+    def test_css(self):
         self.file_test("file.css")
 
-    def test_php (self):
+    def test_php(self):
         self.file_test("file.php")
 
     @need_word
-    def test_word (self):
+    def test_word(self):
         confargs = dict(enabledplugins=["WordParser"])
         self.file_test("file.doc", confargs=confargs)
 
@@ -82,11 +82,11 @@ class TestFile(LinkCheckTest):
         confargs = dict(enabledplugins=["MarkdownCheck"])
         self.file_test("file.markdown", confargs=confargs)
 
-    def test_urllist (self):
+    def test_urllist(self):
         self.file_test("urllist.txt")
 
     @pytest.mark.xfail
-    def test_directory_listing (self):
+    def test_directory_listing(self):
         # unpack non-unicode filename which cannot be stored
         # in the SF subversion repository
         if os.name != 'posix' or sys.platform != 'linux2':
@@ -96,11 +96,11 @@ class TestFile(LinkCheckTest):
             unzip(dirname + ".zip", os.path.dirname(dirname))
         self.file_test("dir")
 
-    def test_unicode_filename (self):
+    def test_unicode_filename(self):
         # a unicode filename
         self.file_test("Мошкова.bin")
 
-    def test_good_file (self):
+    def test_good_file(self):
         url = "file://%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
         nurl = self.norm(url)
         resultlines = [
@@ -111,7 +111,7 @@ class TestFile(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_bad_file (self):
+    def test_bad_file(self):
         if os.name == 'nt':
             # Fails on NT platforms and I am too lazy to fix
             # Cause: url get quoted %7C which gets lowercased to
@@ -127,7 +127,7 @@ class TestFile(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_good_file_missing_dslash (self):
+    def test_good_file_missing_dslash(self):
         # good file (missing double slash)
         attrs = self.get_attrs()
         url = "file:%(curdir)s/%(datadir)s/file.txt" % attrs
@@ -139,7 +139,7 @@ class TestFile(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_good_dir (self):
+    def test_good_dir(self):
         url = "file://%(curdir)s/%(datadir)s/" % self.get_attrs()
         resultlines = [
             "url %s" % url,
@@ -149,7 +149,7 @@ class TestFile(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_good_dir_space (self):
+    def test_good_dir_space(self):
         url = "file://%(curdir)s/%(datadir)s/a b/" % self.get_attrs()
         nurl = self.norm(url)
         url2 = "file://%(curdir)s/%(datadir)s/a b/el.html" % self.get_attrs()

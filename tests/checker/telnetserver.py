@@ -28,7 +28,7 @@ TIMEOUT = 5
 class TelnetServerTest(LinkCheckTest):
     """Start/stop a Telnet server that can be used for testing."""
 
-    def __init__ (self, methodName='runTest'):
+    def __init__(self, methodName='runTest'):
         """Init test class and store default ftp server port."""
         super(TelnetServerTest, self).__init__(methodName=methodName)
         self.host = 'localhost'
@@ -46,7 +46,7 @@ class TelnetServerTest(LinkCheckTest):
             netloc = self.host
         return "telnet://%s:%d" % (netloc, self.port)
 
-    def setUp (self):
+    def setUp(self):
         """Start a new Telnet server in a new thread."""
         self.port, self.server_thread = start_server(self.host, 0, self.stop_event)
         self.assertFalse(self.port is None)

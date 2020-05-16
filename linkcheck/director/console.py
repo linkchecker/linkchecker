@@ -29,11 +29,11 @@ stdout = i18n.get_encoded_writer()
 class StatusLogger:
     """Standard status logger. Default output is stderr."""
 
-    def __init__ (self, fd=stderr):
+    def __init__(self, fd=stderr):
         """Save file descriptor for logging."""
         self.fd = fd
 
-    def log_status (self, checked, in_progress, queue, duration, num_urls):
+    def log_status(self, checked, in_progress, queue, duration, num_urls):
         """Write status message to file descriptor."""
         msg = _n("%2d thread active", "%2d threads active", in_progress) % \
           in_progress
@@ -48,15 +48,15 @@ class StatusLogger:
         self.writeln(msg)
         self.flush()
 
-    def write (self, msg):
+    def write(self, msg):
         """Write message to file descriptor."""
         self.fd.write(msg)
 
-    def writeln (self, msg):
+    def writeln(self, msg):
         """Write status message and line break to file descriptor."""
         self.fd.write("%s%s" % (msg, os.linesep))
 
-    def flush (self):
+    def flush(self):
         """Flush file descriptor."""
         self.fd.flush()
 

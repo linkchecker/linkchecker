@@ -56,7 +56,7 @@ def update_func_meta(fake_func, real_func):
 def deprecated(func):
     """A decorator which can be used to mark functions as deprecated.
     It emits a warning when the function is called."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Print deprecated warning and execute original function."""
         warnings.warn("Call to deprecated function %s." % func.__name__,
                       category=DeprecationWarning)
@@ -74,7 +74,7 @@ def signal_handler(signal_number):
     no handler is set.
     """
     # create the 'real' decorator which takes only a function as an argument
-    def newfunc (function):
+    def newfunc(function):
         """Register function as signal handler."""
         # note: actually the kill(2) function uses the signal number of 0
         # for a special case, but for signal(2) only positive integers
@@ -88,7 +88,7 @@ def signal_handler(signal_number):
 
 def synchronize(lock, func, log_duration_secs=0):
     """Return synchronized function acquiring the given lock."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Execute function synchronized."""
         t = time.time()
         with lock:
@@ -106,7 +106,7 @@ def synchronized(lock):
 
 def notimplemented(func):
     """Raises a NotImplementedError if the function is called."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Raise NotImplementedError"""
         co = func.func_code
         attrs = (co.co_name, co.co_filename, co.co_firstlineno)
@@ -117,7 +117,7 @@ def notimplemented(func):
 def timeit(func, log, limit):
     """Print execution time of the function. For quick'n'dirty profiling."""
 
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Execute function and print execution time."""
         t = time.time()
         res = func(*args, **kwargs)

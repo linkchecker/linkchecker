@@ -24,7 +24,7 @@ from .__init__ import LinkCheckTest, get_url_from
 class TestInternpat(LinkCheckTest):
     """Test internal pattern."""
 
-    def test_trailing_slash (self):
+    def test_trailing_slash(self):
         # Make sure a trailing slash is not lost
         config = linkcheck.configuration.Configuration()
         aggregate = linkcheck.director.get_aggregate(config)

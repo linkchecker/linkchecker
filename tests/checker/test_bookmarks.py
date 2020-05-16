@@ -27,27 +27,27 @@ class TestBookmarks(LinkCheckTest):
     """
 
     @need_network
-    def test_firefox_bookmarks (self):
+    def test_firefox_bookmarks(self):
         # firefox 3 bookmark file parsing
         self.file_test("places.sqlite")
 
     @need_network
-    def test_opera_bookmarks (self):
+    def test_opera_bookmarks(self):
         # Opera bookmark file parsing
         self.file_test("opera6.adr")
 
     @need_network
-    def test_chromium_bookmarks (self):
+    def test_chromium_bookmarks(self):
         # Chromium and Google Chrome bookmark file parsing
         self.file_test("Bookmarks")
 
     @need_network
-    def test_safari_bookmarks_xml (self):
+    def test_safari_bookmarks_xml(self):
         # Safari bookmark file parsing (for plaintext plist files)
         self.file_test(os.path.join("plist_xml", "Bookmarks.plist"))
 
     @need_network
     @need_biplist
-    def test_safari_bookmarks_binary (self):
+    def test_safari_bookmarks_binary(self):
         # Safari bookmark file parsing (for binary plist files)
         self.file_test(os.path.join("plist_binary", "Bookmarks.plist"))

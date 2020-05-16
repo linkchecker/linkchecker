@@ -30,7 +30,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     Url link with ftp scheme.
     """
 
-    def reset (self):
+    def reset(self):
         """
         Initialize FTP url data.
         """
@@ -41,7 +41,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.filename = None
         self.filename_encoding = 'iso-8859-1'
 
-    def check_connection (self):
+    def check_connection(self):
         """
         In case of proxy, delegate to HttpUrl. Else check in this
         order: login, changing directory, list the file.
@@ -67,7 +67,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.files = []
         return None
 
-    def login (self):
+    def login(self):
         """Log into ftp server and check the welcome message."""
         self.url_connection = ftplib.FTP(timeout=self.aggregate.config["timeout"])
         if log.is_debug(LOG_CHECK):
@@ -93,7 +93,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             raise LinkCheckerError(
                       _("Remote host has closed connection: %(msg)s") % str(msg))
 
-    def negotiate_encoding (self):
+    def negotiate_encoding(self):
         """Check if server can handle UTF-8 encoded filenames.
         See also RFC 2640."""
         try:
@@ -106,7 +106,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             if " UTF-8" in features.splitlines():
                 self.filename_encoding = "utf-8"
 
-    def cwd (self):
+    def cwd(self):
         """
         Change to URL parent directory. Return filename of last path
         component.
@@ -122,7 +122,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             self.url_connection.cwd(d)
         return filename
 
-    def listfile (self):
+    def listfile(self):
         """
         See if filename is in the current FTP directory.
         """
@@ -143,11 +143,11 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             return
         raise ftplib.error_perm("550 File not found")
 
-    def get_files (self):
+    def get_files(self):
         """Get list of filenames in directory. Subdirectories have an
         ending slash."""
         files = []
-        def add_entry (line):
+        def add_entry(line):
             """Parse list line and add the entry it points to to the file
             list."""
             log.debug(LOG_CHECK, "Directory entry %r", line)
@@ -162,7 +162,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.url_connection.dir(add_entry)
         return files
 
-    def is_parseable (self):
+    def is_parseable(self):
         """See if URL target is parseable for recursion."""
         if self.is_directory():
             return True
@@ -171,18 +171,18 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         log.debug(LOG_CHECK, "URL with content type %r is not parseable.", self.content_type)
         return False
 
-    def is_directory (self):
+    def is_directory(self):
         """See if URL target is a directory."""
         # either the path is empty, or ends with a slash
         path = self.urlparts[2]
         return (not path) or path.endswith('/')
 
-    def set_content_type (self):
+    def set_content_type(self):
         """Set URL content type, or an empty string if content
         type could not be found."""
         self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
 
-    def read_content (self):
+    def read_content(self):
         """Return URL target content, or in case of directories a dummy HTML
         file with links to the files."""
         if self.is_directory():
@@ -194,7 +194,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # download file in BINARY mode
             ftpcmd = "RETR %s" % self.filename
             buf = StringIO()
-            def stor_data (s):
+            def stor_data(s):
                 """Helper method storing given data"""
                 # limit the download size
                 if (buf.tell() + len(s)) > self.max_size:
@@ -205,7 +205,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             buf.close()
         return data
 
-    def close_connection (self):
+    def close_connection(self):
         """Release the open connection from the connection pool."""
         if self.url_connection is not None:
             try:

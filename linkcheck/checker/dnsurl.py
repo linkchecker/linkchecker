@@ -27,7 +27,7 @@ class DnsUrl(urlbase.UrlBase):
     Url link with dns scheme.
     """
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         dns: URLs do not have any content
 

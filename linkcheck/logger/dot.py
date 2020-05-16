@@ -32,7 +32,7 @@ class DOTLogger(_GraphLogger):
         "encoding": "ascii",
     }
 
-    def start_output (self):
+    def start_output(self):
         """Write start of checking info as DOT comment."""
         super(DOTLogger, self).start_output()
         if self.has_part("intro"):
@@ -44,12 +44,12 @@ class DOTLogger(_GraphLogger):
         self.writeln("  ];")
         self.flush()
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """Write DOT comment."""
         self.write("// ")
         self.writeln(s=s, **args)
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write one node."""
         node = self.get_node(url_data)
         if node is not None:
@@ -66,7 +66,7 @@ class DOTLogger(_GraphLogger):
                 self.writeln("    extern=%d," % node["extern"])
             self.writeln("  ];")
 
-    def write_edge (self, node):
+    def write_edge(self, node):
         """Write edge from parent to node."""
         source = dotquote(self.nodes[node["parent_url"]]["label"])
         target = dotquote(node["label"])
@@ -76,7 +76,7 @@ class DOTLogger(_GraphLogger):
             self.writeln("    valid=%d," % node["valid"])
         self.writeln("  ];")
 
-    def end_graph (self):
+    def end_graph(self):
         """Write end of graph marker."""
         self.writeln("}")
 

@@ -23,7 +23,7 @@ from . import httpserver
 class TestProxy(httpserver.HttpServerTest):
     """Test no_proxy env var handling."""
 
-    def test_noproxy (self):
+    def test_noproxy(self):
         # set env vars
         with EnvironmentVarGuard() as env:
             env.set("http_proxy", "http://example.org:8877")

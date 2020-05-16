@@ -27,13 +27,13 @@ class TestRobotsTxt(unittest.TestCase):
     Test string formatting routines.
     """
 
-    def setUp (self):
+    def setUp(self):
         """
         Initialize self.rp as a robots.txt parser.
         """
         self.rp = linkcheck.robotparser2.RobotFileParser()
 
-    def test_robotstxt (self):
+    def test_robotstxt(self):
         lines = [
             "User-agent: *",
         ]
@@ -41,7 +41,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.assertTrue(self.rp.mtime() > 0)
         self.assertEqual(str(self.rp), "\n".join(lines))
 
-    def test_robotstxt2 (self):
+    def test_robotstxt2(self):
         lines = [
             "User-agent: *",
             "Disallow: /search",
@@ -49,7 +49,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines))
 
-    def test_robotstxt3 (self):
+    def test_robotstxt3(self):
         lines = [
             "Disallow: /search",
             "",
@@ -64,7 +64,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "")
 
-    def test_robotstxt4 (self):
+    def test_robotstxt4(self):
         lines = [
             "User-agent: Bla",
             "Disallow: /cgi-bin",
@@ -75,7 +75,7 @@ class TestRobotsTxt(unittest.TestCase):
         lines.insert(2, "")
         self.assertEqual(str(self.rp), "\n".join(lines))
 
-    def test_robotstxt5 (self):
+    def test_robotstxt5(self):
         lines = [
             "#one line comment",
             "User-agent: Bla",
@@ -90,7 +90,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
 
-    def test_robotstxt6 (self):
+    def test_robotstxt6(self):
         lines = [
             "User-agent: Bla",
             "",
@@ -98,7 +98,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "")
 
-    def test_robotstxt7 (self):
+    def test_robotstxt7(self):
         lines = [
             "User-agent: Bla",
             "Allow: /",
@@ -110,7 +110,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.assertEqual(str(self.rp), "\n".join(lines))
         self.assertTrue(self.rp.can_fetch("Bla", "/"))
 
-    def test_crawldelay (self):
+    def test_crawldelay(self):
         lines = [
             "User-agent: Blubb",
             "Crawl-delay: 10",
@@ -127,7 +127,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.assertEqual(self.rp.get_crawldelay("Hulla"), 5)
         self.assertEqual(self.rp.get_crawldelay("Bulla"), 1)
 
-    def test_crawldelay2 (self):
+    def test_crawldelay2(self):
         lines = [
             "User-agent: Blubb",
             "Crawl-delay: X",
@@ -136,13 +136,13 @@ class TestRobotsTxt(unittest.TestCase):
         del lines[1]
         self.assertEqual(str(self.rp), "\n".join(lines))
 
-    def check_urls (self, good, bad, agent="test_robotparser"):
+    def check_urls(self, good, bad, agent="test_robotparser"):
         for url in good:
             self.check_url(agent, url, True)
         for url in bad:
             self.check_url(agent, url, False)
 
-    def check_url (self, agent, url, can_fetch):
+    def check_url(self, agent, url, can_fetch):
         if isinstance(url, tuple):
             agent, url = url
         res = self.rp.can_fetch(agent, url)
@@ -151,7 +151,7 @@ class TestRobotsTxt(unittest.TestCase):
         else:
             self.assertFalse(res, "%s allowed" % url)
 
-    def test_access1 (self):
+    def test_access1(self):
         lines = [
             "User-agent: *",
             "Disallow: /cyberworld/map/ # This is an infinite virtual URL space",
@@ -170,7 +170,7 @@ class TestRobotsTxt(unittest.TestCase):
         bad = ['/cyberworld/map/index.html', '/tmp/xxx', '/foo.html']
         self.check_urls(good, bad)
 
-    def test_access2 (self):
+    def test_access2(self):
         lines = [
             "# robots.txt for http://www.example.com/",
             "",
@@ -195,7 +195,7 @@ class TestRobotsTxt(unittest.TestCase):
         bad = ['/cyberworld/map/index.html']
         self.check_urls(good, bad)
 
-    def test_access3 (self):
+    def test_access3(self):
         lines = [
             "# go away",
             "User-agent: *",
@@ -211,7 +211,7 @@ class TestRobotsTxt(unittest.TestCase):
         bad = ['/cyberworld/map/index.html', '/', '/tmp/']
         self.check_urls(good, bad)
 
-    def test_access4 (self):
+    def test_access4(self):
         lines = [
             "User-agent: figtree",
             "Disallow: /tmp",
@@ -237,7 +237,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.check_urls(good, bad, 'figtree')
         self.check_urls(good, bad, 'FigTree/1.0 Robot libwww-perl/5.04')
 
-    def test_access5 (self):
+    def test_access5(self):
         lines = [
             "User-agent: *",
             "Disallow: /tmp/",
@@ -261,7 +261,7 @@ class TestRobotsTxt(unittest.TestCase):
                '/%7Ejoe/index.html']
         self.check_urls(good, bad)
 
-    def test_access6 (self):
+    def test_access6(self):
         lines = [
             "User-Agent: *",
             "Disallow: /.",
@@ -271,7 +271,7 @@ class TestRobotsTxt(unittest.TestCase):
         bad = [] # Bug report says "/" should be denied, but that is not in the RFC
         self.check_urls(good, bad)
 
-    def test_access7 (self):
+    def test_access7(self):
         lines = [
             "User-agent: Example",
             "Disallow: /example",

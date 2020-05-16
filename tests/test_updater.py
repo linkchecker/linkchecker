@@ -27,7 +27,7 @@ class TestUpdater(unittest.TestCase):
     """Test update check."""
 
     @need_network
-    def test_updater (self):
+    def test_updater(self):
         res, value = linkcheck.updater.check_update()
         self.assertTrue(type(res) == bool)
         if res:

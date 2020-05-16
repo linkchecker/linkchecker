@@ -32,7 +32,7 @@ class TelnetUrl(urlbase.UrlBase):
     Url link with telnet scheme.
     """
 
-    def build_url (self):
+    def build_url(self):
         """
         Call super.build_url(), set default telnet port and initialize
         the login credentials.
@@ -44,7 +44,7 @@ class TelnetUrl(urlbase.UrlBase):
         # set user/pass
         self.user, self.password = self.get_user_password()
 
-    def local_check (self):
+    def local_check(self):
         """
         Warn about empty host names. Else call super.local_check().
         """
@@ -53,7 +53,7 @@ class TelnetUrl(urlbase.UrlBase):
             return
         super(TelnetUrl, self).local_check()
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Open a telnet connection and try to login. Expected login
         label is "login: ", expected password label is "Password: ".
@@ -71,7 +71,7 @@ class TelnetUrl(urlbase.UrlBase):
                 # XXX how to tell if we are logged in??
         self.url_connection.write(b"exit\n")
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         Telnet URLs have no content.
 

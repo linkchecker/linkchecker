@@ -24,5 +24,5 @@ class TestFrames(LinkCheckTest):
     Test link checking of HTML framesets.
     """
 
-    def test_frames (self):
+    def test_frames(self):
         self.file_test("frames.html")

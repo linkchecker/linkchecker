@@ -150,7 +150,7 @@ class Configuration(dict):
     the command line as well as from configuration files.
     """
 
-    def __init__ (self):
+    def __init__(self):
         """
         Initialize the default options.
         """
@@ -210,18 +210,18 @@ class Configuration(dict):
         """Set the status logger."""
         self.status_logger = status_logger
 
-    def logger_new (self, loggername, **kwargs):
+    def logger_new(self, loggername, **kwargs):
         """Instantiate new logger and return it."""
         args = self[loggername]
         args.update(kwargs)
         return self.loggers[loggername](**args)
 
-    def logger_add (self, loggerclass):
+    def logger_add(self, loggerclass):
         """Add a new logger type to the known loggers."""
         self.loggers[loggerclass.LoggerName] = loggerclass
         self[loggerclass.LoggerName] = {}
 
-    def read (self, files=None):
+    def read(self, files=None):
         """
         Read settings from given config files.
 
@@ -247,7 +247,7 @@ class Configuration(dict):
         log.debug(LOG_CHECK, "reading configuration from %s", filtered_cfiles)
         confparse.LCConfigParser(self).read(filtered_cfiles)
 
-    def add_auth (self, user=None, password=None, pattern=None):
+    def add_auth(self, user=None, password=None, pattern=None):
         """Add given authentication data."""
         if not user or not pattern:
             log.warn(LOG_CHECK,
@@ -260,7 +260,7 @@ class Configuration(dict):
         )
         self["authentication"].append(entry)
 
-    def get_user_password (self, url):
+    def get_user_password(self, url):
         """Get tuple (user, password) from configured authentication
         that matches the given URL.
         Both user and password can be None if not specified, or no
@@ -275,7 +275,7 @@ class Configuration(dict):
         """Get dict with limit per connection type."""
         return {key: self['maxconnections%s' % key] for key in ('http', 'https', 'ftp')}
 
-    def sanitize (self):
+    def sanitize(self):
         "Make sure the configuration is consistent."
         if self['logger'] is None:
             self.sanitize_logger()
@@ -287,14 +287,14 @@ class Configuration(dict):
         # set default socket timeout
         socket.setdefaulttimeout(self['timeout'])
 
-    def sanitize_logger (self):
+    def sanitize_logger(self):
         """Make logger configuration consistent."""
         if not self['output']:
             log.warn(LOG_CHECK, _("activating text logger output."))
             self['output'] = 'text'
         self['logger'] = self.logger_new(self['output'])
 
-    def sanitize_loginurl (self):
+    def sanitize_loginurl(self):
         """Make login configuration consistent."""
         url = self["loginurl"]
         disable = False
@@ -322,7 +322,7 @@ class Configuration(dict):
               _("disabling login URL %(url)s.") % {"url": url})
             self["loginurl"] = None
 
-    def sanitize_proxies (self):
+    def sanitize_proxies(self):
         """Try to read additional proxy settings which urllib does not
         support."""
         if os.name != 'posix':

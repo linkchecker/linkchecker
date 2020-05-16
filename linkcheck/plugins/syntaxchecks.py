@@ -36,7 +36,7 @@ class W3Timer:
         self.last_w3_call = 0
 
     @synchronized(_w3_time_lock)
-    def check_w3_time (self):
+    def check_w3_time(self):
         """Make sure the W3C validators are at most called once a second."""
         if time.time() - self.last_w3_call < W3Timer.SleepSeconds:
             time.sleep(W3Timer.SleepSeconds)

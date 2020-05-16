@@ -25,7 +25,7 @@ class TestError(LinkCheckTest):
     Test unrecognized or syntactically wrong links.
     """
 
-    def test_unrecognized (self):
+    def test_unrecognized(self):
         # Unrecognized scheme
         url = "hutzli:"
         attrs = self.get_attrs(url=url)
@@ -38,7 +38,7 @@ class TestError(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_invalid1 (self):
+    def test_invalid1(self):
         # invalid scheme chars
         url = "äöü:"
         attrs = self.get_attrs(url=url)
@@ -52,7 +52,7 @@ class TestError(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_invalid2 (self):
+    def test_invalid2(self):
         # missing scheme alltogether
         url = "äöü"
         attrs = self.get_attrs(url=url)
@@ -66,7 +66,7 @@ class TestError(LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_invalid3 (self):
+    def test_invalid3(self):
         # really fucked up
         url = "@³²¼][½ ³@] ¬½"
         attrs = self.get_attrs(url=url)

@@ -29,18 +29,18 @@ TIMEOUT = 5
 class FtpServerTest(LinkCheckTest):
     """Start/stop an FTP server that can be used for testing."""
 
-    def __init__ (self, methodName='runTest'):
+    def __init__(self, methodName='runTest'):
         """Init test class and store default ftp server port."""
         super(FtpServerTest, self).__init__(methodName=methodName)
         self.host = 'localhost'
         self.port = None
 
-    def setUp (self):
+    def setUp(self):
         """Start a new FTP server in a new thread."""
         self.port = start_server(self.host, 0)
         self.assertFalse(self.port is None)
 
-    def tearDown (self):
+    def tearDown(self):
         """Send stop request to server."""
         try:
             stop_server(self.host, self.port)

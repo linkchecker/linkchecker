@@ -35,7 +35,7 @@ class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
     HTTP request handler with QUIT stopping the server.
     """
 
-    def do_QUIT (self):
+    def do_QUIT(self):
         """
         Send 200 OK response, and set server.stop to True.
         """
@@ -43,7 +43,7 @@ class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.server.stop = True
 
-    def log_message (self, format, *args):
+    def log_message(self, format, *args):
         """
         Logging is disabled.
         """
@@ -60,7 +60,7 @@ class StoppableHttpServer(HTTPServer):
     HTTP server that reacts to self.stop flag.
     """
 
-    def serve_forever (self):
+    def serve_forever(self):
         """
         Handle one request at a time until stopped.
         """
@@ -75,7 +75,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
     listings.
     """
 
-    def remove_path_query (self):
+    def remove_path_query(self):
         """
         Remove everything after a question mark.
         """
@@ -90,7 +90,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
              return status
         return 500
 
-    def do_GET (self):
+    def do_GET(self):
         """
         Removes query part of GET request.
         """
@@ -104,7 +104,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
         else:
             super(NoQueryHttpRequestHandler, self).do_GET()
 
-    def do_HEAD (self):
+    def do_HEAD(self):
         """
         Removes query part of HEAD request.
         """
@@ -152,7 +152,7 @@ class HttpServerTest(LinkCheckTest):
     Start/stop an HTTP server that can be used for testing.
     """
 
-    def __init__ (self, methodName='runTest'):
+    def __init__(self, methodName='runTest'):
         """
         Init test class and store default http server port.
         """
@@ -246,27 +246,27 @@ def get_cookie(maxage=2000):
 class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
     """Handler redirecting certain requests, and setting cookies."""
 
-    def end_headers (self):
+    def end_headers(self):
         """Send cookie before ending headers."""
         self.send_header("Set-Cookie", get_cookie())
         self.send_header("Set-Cookie", get_cookie(maxage=0))
         super(CookieRedirectHttpRequestHandler, self).end_headers()
 
-    def redirect (self):
+    def redirect(self):
         """Redirect request."""
         path = self.path.replace("redirect", "newurl")
         self.send_response(302)
         self.send_header("Location", path)
         self.end_headers()
 
-    def redirect_newhost (self):
+    def redirect_newhost(self):
         """Redirect request to a new host."""
         path = "http://www.example.com/"
         self.send_response(302)
         self.send_header("Location", path)
         self.end_headers()
 
-    def redirect_newscheme (self):
+    def redirect_newscheme(self):
         """Redirect request to a new scheme."""
         if "file" in self.path:
             path = "file:README.md"
@@ -276,7 +276,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         self.send_header("Location", path)
         self.end_headers()
 
-    def do_GET (self):
+    def do_GET(self):
         """Handle redirections for GET."""
         if "redirect_newscheme" in self.path:
             self.redirect_newscheme()
@@ -287,7 +287,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         else:
             super(CookieRedirectHttpRequestHandler, self).do_GET()
 
-    def do_HEAD (self):
+    def do_HEAD(self):
         """Handle redirections for HEAD."""
         if "redirect_newscheme" in self.path:
             self.redirect_newscheme()

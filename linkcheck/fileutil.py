@@ -47,14 +47,14 @@ def has_module(name, without_error=True):
 class GlobDirectoryWalker:
     """A forward iterator that traverses a directory tree."""
 
-    def __init__ (self, directory, pattern="*"):
+    def __init__(self, directory, pattern="*"):
         """Set start directory and pattern matcher."""
         self.stack = [directory]
         self.pattern = pattern
         self.files = []
         self.index = 0
 
-    def __getitem__ (self, index):
+    def __getitem__(self, index):
         """Search for next filename."""
         while True:
             try:
@@ -81,22 +81,22 @@ rglob = GlobDirectoryWalker
 class Buffer:
     """Holds buffered data"""
 
-    def __init__ (self, empty=''):
+    def __init__(self, empty=''):
         """Initialize buffer."""
         self.empty = self.buf = empty
         self.tmpbuf = []
         self.pos = 0
 
-    def __len__ (self):
+    def __len__(self):
         """Buffer length."""
         return self.pos
 
-    def write (self, data):
+    def write(self, data):
         """Write data to buffer."""
         self.tmpbuf.append(data)
         self.pos += len(data)
 
-    def flush (self, overlap=0):
+    def flush(self, overlap=0):
         """Flush buffered data and return it."""
         self.buf += self.empty.join(self.tmpbuf)
         self.tmpbuf = []

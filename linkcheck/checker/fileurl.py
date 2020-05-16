@@ -93,7 +93,7 @@ class FileUrl(urlbase.UrlBase):
     Url link with file scheme.
     """
 
-    def init (self, base_ref, base_url, parent_url, recursion_level,
+    def init(self, base_ref, base_url, parent_url, recursion_level,
               aggregate, line, column, page, name, url_encoding, extern):
         """Initialize the scheme."""
         super(FileUrl, self).init(base_ref, base_url, parent_url,
@@ -128,7 +128,7 @@ class FileUrl(urlbase.UrlBase):
             base_url = re.sub("^file://([^/])", r"file:///\1", base_url)
         self.base_url = base_url
 
-    def build_url (self):
+    def build_url(self):
         """
         Calls super.build_url() and adds a trailing slash to directories.
         """
@@ -154,7 +154,7 @@ class FileUrl(urlbase.UrlBase):
             self.urlparts[2] += '/'
         self.url = urlutil.urlunsplit(self.urlparts)
 
-    def add_size_info (self):
+    def add_size_info(self):
         """Get size of file content and modification time from filename path."""
         if self.is_directory():
             # Directory size always differs from the customer index.html
@@ -164,7 +164,7 @@ class FileUrl(urlbase.UrlBase):
         self.size = fileutil.get_size(filename)
         self.modified = datetime.utcfromtimestamp(fileutil.get_mtime(filename))
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Try to open the local file. Under NT systems the case sensitivity
         is checked.
@@ -180,7 +180,7 @@ class FileUrl(urlbase.UrlBase):
             self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
-    def check_case_sensitivity (self):
+    def check_case_sensitivity(self):
         """
         Check if url and windows path name match cases
         else there might be problems when copying such
@@ -197,7 +197,7 @@ class FileUrl(urlbase.UrlBase):
                             {"path": path, "realpath": realpath},
                                tag=WARN_FILE_SYSTEM_PATH)
 
-    def read_content (self):
+    def read_content(self):
         """Return file content, or in case of directories a dummy HTML file
         with links to the files."""
         if self.is_directory():
@@ -208,7 +208,7 @@ class FileUrl(urlbase.UrlBase):
             data = super(FileUrl, self).read_content()
         return data
 
-    def get_os_filename (self):
+    def get_os_filename(self):
         """
         Construct os specific file path out of the file:// URL.
 
@@ -217,11 +217,11 @@ class FileUrl(urlbase.UrlBase):
         """
         return get_os_filename(self.urlparts[2])
 
-    def get_temp_filename (self):
+    def get_temp_filename(self):
         """Get filename for content to parse."""
         return self.get_os_filename()
 
-    def is_directory (self):
+    def is_directory(self):
         """
         Check if file is a directory.
 
@@ -231,7 +231,7 @@ class FileUrl(urlbase.UrlBase):
         filename = self.get_os_filename()
         return os.path.isdir(filename) and not os.path.islink(filename)
 
-    def is_parseable (self):
+    def is_parseable(self):
         """Check if content is parseable for recursion.
 
         @return: True if content is parseable
@@ -246,7 +246,7 @@ class FileUrl(urlbase.UrlBase):
         log.debug(LOG_CHECK, "File with content type %r is not parseable.", self.content_type)
         return False
 
-    def set_content_type (self):
+    def set_content_type(self):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
@@ -254,7 +254,7 @@ class FileUrl(urlbase.UrlBase):
         else:
             self.content_type = ""
 
-    def get_intern_pattern (self, url=None):
+    def get_intern_pattern(self, url=None):
         """Get pattern for intern URL matching.
 
         @return non-empty regex pattern or None
@@ -271,7 +271,7 @@ class FileUrl(urlbase.UrlBase):
                 url = url[:i+1]
         return re.escape(url)
 
-    def add_url (self, url, line=0, column=0, page=0, name="", base=None):
+    def add_url(self, url, line=0, column=0, page=0, name="", base=None):
         """If a local webroot directory is configured, replace absolute URLs
         with it. After that queue the URL data for checking."""
         webroot = self.aggregate.config["localwebroot"]

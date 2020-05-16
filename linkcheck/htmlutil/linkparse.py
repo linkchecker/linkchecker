@@ -123,7 +123,7 @@ class LinkFinder:
     """Find HTML links, and apply them to the callback function with the
     format (url, lineno, column, name, codebase)."""
 
-    def __init__ (self, callback, tags):
+    def __init__(self, callback, tags):
         """Store content in buffer and initialize URL list."""
         self.callback = callback
         # set universal tag attributes using tagname None
@@ -135,7 +135,7 @@ class LinkFinder:
             self.tags[tag].update(self.universal_attrs)
         self.base_ref = ''
 
-    def html_element (self, tag, attrs, element_text, lineno, column):
+    def html_element(self, tag, attrs, element_text, lineno, column):
         """Search for links and store found URLs in a list."""
         log.debug(LOG_CHECK, "LinkFinder tag %s attrs %s", tag, attrs)
         log.debug(LOG_CHECK, "line %d col %d", lineno, column)
@@ -166,7 +166,7 @@ class LinkFinder:
             self.parse_tag(tag, attr, value, name, base, lineno, column)
         log.debug(LOG_CHECK, "LinkFinder finished tag %s", tag)
 
-    def get_link_name (self, tag, attrs, attr, name=None):
+    def get_link_name(self, tag, attrs, attr, name=None):
         """Parse attrs for link name. Return name of link."""
         if tag == 'a' and attr == 'href':
             if not name:
@@ -179,7 +179,7 @@ class LinkFinder:
             name = ""
         return name
 
-    def parse_tag (self, tag, attr, value, name, base, lineno, column):
+    def parse_tag(self, tag, attr, value, name, base, lineno, column):
         """Add given url data to url list."""
         assert isinstance(tag, str_text), repr(tag)
         assert isinstance(attr, str_text), repr(attr)

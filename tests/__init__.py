@@ -59,9 +59,9 @@ def run_silent(cmd):
 
 def _need_func(testfunc, name):
     """Decorator skipping test if given testfunc fails."""
-    def check_func (func):
+    def check_func(func):
         @wraps(func)
-        def newfunc (*args, **kwargs):
+        def newfunc(*args, **kwargs):
             if not testfunc():
                 pytest.skip("%s is not available" % name)
             return func(*args, **kwargs)
@@ -185,8 +185,8 @@ def has_newsserver(server):
 
 def need_newsserver(server):
     """Decorator skipping test if newsserver is not available."""
-    def check_func (func):
-        def newfunc (*args, **kwargs):
+    def check_func(func):
+        def newfunc(*args, **kwargs):
             if not has_newsserver(server):
                 pytest.skip("Newsserver `%s' is not available" % server)
             return func(*args, **kwargs)
@@ -239,8 +239,8 @@ def _limit_time(seconds):
 
 def limit_time(seconds, skip=False):
     """Limit test time to the given number of seconds, else fail or skip."""
-    def run_limited (func):
-        def new_func (*args, **kwargs):
+    def run_limited(func):
+        def new_func(*args, **kwargs):
             try:
                 with _limit_time(seconds):
                     return func(*args, **kwargs)

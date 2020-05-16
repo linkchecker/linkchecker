@@ -46,7 +46,7 @@ def xmlquoteattr(s):
 class _XMLLogger(_Logger):
     """Base class for XML output; easy to parse with any XML tool."""
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """ Initialize graph node list and internal id counter. """
         args = self.get_args(kwargs)
         super(_XMLLogger, self).__init__(**args)
@@ -54,7 +54,7 @@ class _XMLLogger(_Logger):
         self.indent = "  "
         self.level = 0
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write XML comment.
         """
@@ -62,7 +62,7 @@ class _XMLLogger(_Logger):
         self.write(s, **args)
         self.writeln(" -->")
 
-    def xml_start_output (self):
+    def xml_start_output(self):
         """
         Write start of checking info as xml comment.
         """
@@ -72,14 +72,14 @@ class _XMLLogger(_Logger):
             self.write_intro()
             self.writeln()
 
-    def xml_end_output (self):
+    def xml_end_output(self):
         """
         Write end of checking info as xml comment.
         """
         if self.has_part("outro"):
             self.write_outro()
 
-    def xml_starttag (self, name, attrs=None):
+    def xml_starttag(self, name, attrs=None):
         """
         Write XML start tag.
         """
@@ -92,7 +92,7 @@ class _XMLLogger(_Logger):
         self.writeln(">")
         self.level += 1
 
-    def xml_endtag (self, name):
+    def xml_endtag(self, name):
         """
         Write XML end tag.
         """
@@ -101,7 +101,7 @@ class _XMLLogger(_Logger):
         self.write(self.indent*self.level)
         self.writeln("</%s>" % xmlquote(name))
 
-    def xml_tag (self, name, content, attrs=None):
+    def xml_tag(self, name, content, attrs=None):
         """
         Write XML tag with content.
         """

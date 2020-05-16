@@ -26,23 +26,23 @@ class NoneLogger(_Logger):
 
     LoggerName = 'none'
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Do nothing.
         """
         pass
 
-    def start_output (self):
+    def start_output(self):
         """
         Do nothing.
         """
         pass
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Do nothing."""
         pass
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Do nothing.
         """

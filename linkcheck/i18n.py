@@ -41,7 +41,7 @@ class Translator(gettext.GNUTranslations):
     """A translation class always installing its gettext methods into the
     default namespace."""
 
-    def install (self, do_unicode):
+    def install(self, do_unicode):
         """Install gettext methods into the default namespace."""
         install_builtin(self, do_unicode)
 
@@ -50,7 +50,7 @@ class NullTranslator(gettext.NullTranslations):
     """A dummy translation class always installing its gettext methods into
     the default namespace."""
 
-    def install (self, do_unicode):
+    def install(self, do_unicode):
         """Install gettext methods into the default namespace."""
         install_builtin(self, do_unicode)
 

@@ -26,7 +26,7 @@ class Interrupt(task.CheckedTask):
     """
     WaitSeconds = 5
 
-    def __init__ (self, duration):
+    def __init__(self, duration):
         """Initialize the task.
         @param duration: raise KeyboardInterrupt after given number of seconds
         @ptype duration: int
@@ -34,7 +34,7 @@ class Interrupt(task.CheckedTask):
         super(Interrupt, self).__init__()
         self.duration = duration
 
-    def run_checked (self):
+    def run_checked(self):
         """Wait and raise KeyboardInterrupt after."""
         self.start_time = time.time()
         self.setName("Interrupt")

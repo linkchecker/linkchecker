@@ -24,7 +24,7 @@ from . import urlbase
 class UnknownUrl(urlbase.UrlBase):
     """Handle unknown or just plain broken URLs."""
 
-    def build_url (self):
+    def build_url(self):
         """Only logs that this URL is unknown."""
         super(UnknownUrl, self).build_url()
         if self.is_ignored():
@@ -35,11 +35,11 @@ class UnknownUrl(urlbase.UrlBase):
             self.set_result(_("URL is unrecognized or has invalid syntax"),
                         valid=False)
 
-    def is_ignored (self):
+    def is_ignored(self):
         """Return True if this URL scheme is ignored."""
         return is_unknown_scheme(self.scheme)
 
-    def can_get_content (self):
+    def can_get_content(self):
         """Unknown URLs have no content.
 
         @return: False

@@ -29,7 +29,7 @@ class TestFilenames(unittest.TestCase):
     """
 
     @need_windows
-    def test_nt_filename (self):
+    def test_nt_filename(self):
         path = os.getcwd()
         realpath = get_nt_filename(path)
         self.assertEqual(path, realpath)

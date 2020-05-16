@@ -30,7 +30,7 @@ class TestHttp(HttpServerTest):
         self.handler = CookieRedirectHttpRequestHandler
 
     @need_network
-    def test_html (self):
+    def test_html(self):
         confargs = dict(recursionlevel=1)
         self.file_test("http.html", confargs=confargs)
         self.file_test("http_lowercase.html", confargs=confargs)

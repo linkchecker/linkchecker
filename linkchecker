@@ -196,7 +196,7 @@ file entry:
 Epilog = "\n".join((Examples, LoggerTypes, RegularExpressions, CookieFormat, ProxySupport, Notes, Retval, Warnings))
 
 
-def has_encoding (encoding):
+def has_encoding(encoding):
     """Detect if Python can encode in a certain encoding."""
     try:
         codecs.lookup(encoding)
@@ -376,7 +376,7 @@ if has_argcomplete:
     argcomplete.autocomplete(argparser)
 
 
-def read_stdin_urls ():
+def read_stdin_urls():
     """Read list of URLs, separated by white-space, from stdin."""
     num = 0
     while True:
