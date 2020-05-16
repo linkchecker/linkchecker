@@ -322,7 +322,7 @@ class _Logger (abc.ABC):
         """
         Write string to output descriptor plus a newline.
         """
-        self.write("%s%s" % (s, str_text(os.linesep)), **args)
+        self.write("%s%s" % (s, os.linesep), **args)
 
     def has_part (self, name):
         """

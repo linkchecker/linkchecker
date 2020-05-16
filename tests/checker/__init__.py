@@ -243,18 +243,11 @@ class LinkCheckTest (unittest.TestCase):
         logger = aggregate.config['logger']
         diff = logger.diff
         if diff:
-            msg = str_text(os.linesep).join([url] + diff)
-            self.fail_unicode(msg)
+            msg = os.linesep.join([url] + diff)
+            self.fail(msg)
         if logger.stats.internal_errors:
-            self.fail_unicode("%d internal errors occurred!"
+            self.fail("%d internal errors occurred!"
                               % logger.stats.internal_errors)
-
-    def fail_unicode (self, msg):
-        """Print encoded fail message."""
-        # XXX self.fail() only supports ascii on Python 2
-        if not isinstance(msg, str) and isinstance(msg, str_text):  # this can be true only on Python 2
-            msg = msg.encode("ascii", "backslashreplace")
-        self.fail(msg)
 
     def direct (self, url, resultlines, parts=None, recursionlevel=0,
                 confargs=None, url_encoding=None):
@@ -277,7 +270,7 @@ class LinkCheckTest (unittest.TestCase):
         if diff:
             l = ["Differences found testing %s" % url]
             l.extend(x.rstrip() for x in diff[2:])
-            self.fail_unicode(str_text(os.linesep).join(l))
+            self.fail(os.linesep.join(l))
 
 
 class MailTest (LinkCheckTest):
