@@ -190,6 +190,4 @@ def get_encoded_writer (out=sys.stdout, encoding=None, errors='replace'):
     if encoding is None:
         encoding = default_encoding
     Writer = codecs.getwriter(encoding)
-    # Use sys.stdout.buffer on Python 3, but sys.stdout itself on Python 2
-    buffer = getattr(out, 'buffer', out)
-    return Writer(buffer, errors)
+    return Writer(out.buffer, errors)
