@@ -664,7 +664,7 @@ class UrlBase:
         """
         if self.userinfo:
             # URL itself has authentication info
-            o = urllib.parse.urlparse(self.userinfo)
+            o = urllib.parse.urlparse("//{}@".format(self.userinfo))
             return (o.username, o.password)
         return self.aggregate.config.get_user_password(self.url)
 
