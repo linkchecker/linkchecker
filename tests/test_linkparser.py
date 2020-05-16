@@ -21,7 +21,7 @@ import unittest
 from linkcheck.htmlutil import htmlsoup, linkparse
 
 
-class TestLinkparser (unittest.TestCase):
+class TestLinkparser(unittest.TestCase):
     """
     Test link parsing.
     """

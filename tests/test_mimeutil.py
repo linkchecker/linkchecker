@@ -22,7 +22,7 @@ import os
 from . import get_file
 import linkcheck.mimeutil
 
-class TestMiMeutil (unittest.TestCase):
+class TestMiMeutil(unittest.TestCase):
     """Test file utility functions."""
 
     def mime_test (self, filename, mime_expected):

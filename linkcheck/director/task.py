@@ -20,7 +20,7 @@ from .. import threader
 from . import console
 
 
-class CheckedTask (threader.StoppableThread):
+class CheckedTask(threader.StoppableThread):
     """Stoppable URL check task, handling error conditions while running."""
 
     def run (self):
@@ -43,7 +43,7 @@ class CheckedTask (threader.StoppableThread):
         pass
 
 
-class LoggedCheckedTask (CheckedTask):
+class LoggedCheckedTask(CheckedTask):
     """URL check task with a logger instance and internal error handling."""
 
     def __init__ (self, logger):

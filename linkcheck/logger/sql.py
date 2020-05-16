@@ -45,7 +45,7 @@ def intify (s):
     return 0
 
 
-class SQLLogger (_Logger):
+class SQLLogger(_Logger):
     """
     SQL output, should work with any SQL database (not tested).
     """

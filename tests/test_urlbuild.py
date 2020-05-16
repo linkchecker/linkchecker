@@ -33,7 +33,7 @@ def get_test_aggregate ():
     return linkcheck.director.get_aggregate(config)
 
 
-class TestUrlBuild (unittest.TestCase):
+class TestUrlBuild(unittest.TestCase):
     """
     Test url building.
     """

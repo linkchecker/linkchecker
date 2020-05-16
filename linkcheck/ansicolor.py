@@ -276,7 +276,7 @@ class Colorizer:
         return getattr(self.fp, name)
 
 
-class ColoredStreamHandler (logging.StreamHandler):
+class ColoredStreamHandler(logging.StreamHandler):
     """Send colored log messages to streams (file-like objects)."""
 
     def __init__ (self, strm=None):

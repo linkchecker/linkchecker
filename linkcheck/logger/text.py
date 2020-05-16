@@ -22,7 +22,7 @@ from .. import ansicolor, strformat, configuration, i18n
 from builtins import str as str_text
 
 
-class TextLogger (_Logger):
+class TextLogger(_Logger):
     """
     A text logger, colorizing the output if possible.
 

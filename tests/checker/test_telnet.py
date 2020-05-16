@@ -19,7 +19,7 @@ Test telnet checking.
 from .telnetserver import TelnetServerTest
 
 
-class TestTelnet (TelnetServerTest):
+class TestTelnet(TelnetServerTest):
     """Test telnet: link checking."""
 
     def test_telnet_error (self):

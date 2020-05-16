@@ -25,7 +25,7 @@ from . import LinkCheckTest
 
 TIMEOUT = 5
 
-class TelnetServerTest (LinkCheckTest):
+class TelnetServerTest(LinkCheckTest):
     """Start/stop a Telnet server that can be used for testing."""
 
     def __init__ (self, methodName='runTest'):

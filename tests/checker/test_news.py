@@ -32,7 +32,7 @@ NNTP_TIMEOUT_SECS = 30
 
 # disabled for now until some stable news server comes up
 @pytest.mark.skip(reason="disabled for now until some stable news server comes up")
-class TestNews (LinkCheckTest):
+class TestNews(LinkCheckTest):
     """Test nntp: and news: link checking."""
 
     def newstest (self, url, resultlines):

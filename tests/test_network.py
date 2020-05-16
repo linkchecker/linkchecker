@@ -22,7 +22,7 @@ from tests import need_network, need_linux
 from linkcheck.network import iputil
 
 
-class TestNetwork (unittest.TestCase):
+class TestNetwork(unittest.TestCase):
     """Test network functions."""
 
     @need_network

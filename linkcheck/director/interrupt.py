@@ -19,7 +19,7 @@ from . import task
 from .. import log, LOG_CHECK, strformat
 
 
-class Interrupt (task.CheckedTask):
+class Interrupt(task.CheckedTask):
     """Thread that raises KeyboardInterrupt after a specified duration.
     This gives us a portable SIGALRM implementation.
     The duration is checked every 5 seconds.

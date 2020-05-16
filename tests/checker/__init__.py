@@ -32,7 +32,7 @@ from builtins import str as str_text
 get_url_from = linkcheck.checker.get_url_from
 
 
-class TestLogger (linkcheck.logger._Logger):
+class TestLogger(linkcheck.logger._Logger):
     """
     Output logger for automatic regression tests.
     """
@@ -183,7 +183,7 @@ def get_test_aggregate (confargs, logargs, logger=TestLogger):
     return linkcheck.director.get_aggregate(config)
 
 
-class LinkCheckTest (unittest.TestCase):
+class LinkCheckTest(unittest.TestCase):
     """
     Functional test class with ability to test local files.
     """
@@ -273,7 +273,7 @@ class LinkCheckTest (unittest.TestCase):
             self.fail(os.linesep.join(l))
 
 
-class MailTest (LinkCheckTest):
+class MailTest(LinkCheckTest):
     """Test mailto: link checking."""
 
     def mail_valid (self, addr, **kwargs):

@@ -30,7 +30,7 @@ from . import LinkCheckTest
 from .. import get_file
 
 
-class StoppableHttpRequestHandler (SimpleHTTPRequestHandler):
+class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
     """
     HTTP request handler with QUIT stopping the server.
     """
@@ -55,7 +55,7 @@ StoppableHttpRequestHandler.extensions_map.update({
 })
 
 
-class StoppableHttpServer (HTTPServer):
+class StoppableHttpServer(HTTPServer):
     """
     HTTP server that reacts to self.stop flag.
     """
@@ -69,7 +69,7 @@ class StoppableHttpServer (HTTPServer):
             self.handle_request()
 
 
-class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
+class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
     """
     Handler ignoring the query part of requests and sending dummy directory
     listings.
@@ -147,7 +147,7 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
         return f
 
 
-class HttpServerTest (LinkCheckTest):
+class HttpServerTest(LinkCheckTest):
     """
     Start/stop an HTTP server that can be used for testing.
     """
@@ -243,7 +243,7 @@ def get_cookie (maxage=2000):
     return "; ".join('%s="%s"' % (key, value) for key, value in data)
 
 
-class CookieRedirectHttpRequestHandler (NoQueryHttpRequestHandler):
+class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
     """Handler redirecting certain requests, and setting cookies."""
 
     def end_headers (self):

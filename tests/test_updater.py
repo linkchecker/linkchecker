@@ -23,7 +23,7 @@ from tests import need_network
 import linkcheck.updater
 
 
-class TestUpdater (unittest.TestCase):
+class TestUpdater(unittest.TestCase):
     """Test update check."""
 
     @need_network

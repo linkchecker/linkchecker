@@ -19,7 +19,7 @@ Test html <base> tag parsing.
 from . import LinkCheckTest
 
 
-class TestBase (LinkCheckTest):
+class TestBase(LinkCheckTest):
     """
     Test links of base*.html files.
     """

@@ -26,7 +26,7 @@ from . import LinkCheckTest
 
 TIMEOUT = 5
 
-class FtpServerTest (LinkCheckTest):
+class FtpServerTest(LinkCheckTest):
     """Start/stop an FTP server that can be used for testing."""
 
     def __init__ (self, methodName='runTest'):

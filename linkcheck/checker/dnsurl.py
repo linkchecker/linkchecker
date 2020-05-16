@@ -22,7 +22,7 @@ import socket
 from . import urlbase
 
 
-class DnsUrl (urlbase.UrlBase):
+class DnsUrl(urlbase.UrlBase):
     """
     Url link with dns scheme.
     """

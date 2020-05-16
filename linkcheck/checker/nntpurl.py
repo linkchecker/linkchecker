@@ -28,7 +28,7 @@ from .const import WARN_NNTP_NO_SERVER, WARN_NNTP_NO_NEWSGROUP
 
 random.seed()
 
-class NntpUrl (urlbase.UrlBase):
+class NntpUrl(urlbase.UrlBase):
     """
     Url link with NNTP scheme.
     """

@@ -45,7 +45,8 @@ unicode_safe = strformat.unicode_safe
 # match for robots meta element content attribute
 nofollow_re = re.compile(r"\bnofollow\b", re.IGNORECASE)
 
-class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
+
+class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     """
     Url link with http scheme.
     """

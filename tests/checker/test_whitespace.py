@@ -20,7 +20,7 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestWhitespace (LinkCheckTest):
+class TestWhitespace(LinkCheckTest):
     """
     Test whitespace in URLs.
     """

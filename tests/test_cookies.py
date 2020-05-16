@@ -25,7 +25,7 @@ import linkcheck.configuration
 import linkcheck.director
 
 
-class TestCookies (unittest.TestCase):
+class TestCookies(unittest.TestCase):
     """Test cookie routines."""
 
     def test_cookie_parse_multiple_headers (self):

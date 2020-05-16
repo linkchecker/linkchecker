@@ -20,7 +20,7 @@ from tests import need_network
 from . import MailTest
 
 
-class TestMailGood (MailTest):
+class TestMailGood(MailTest):
     """
     Test mailto: link checking.
     """

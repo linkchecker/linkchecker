@@ -27,7 +27,7 @@ def encode(s, encoding="iso-8859-1", errors="ignore"):
     return s.encode(encoding, errors)
 
 
-class TelnetUrl (urlbase.UrlBase):
+class TelnetUrl(urlbase.UrlBase):
     """
     Url link with telnet scheme.
     """

@@ -17,7 +17,7 @@
 Special container classes.
 """
 
-class LFUCache (dict):
+class LFUCache(dict):
     """Limited cache which purges least frequently used items."""
 
     def __init__ (self, size=1000):

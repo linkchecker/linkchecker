@@ -25,7 +25,7 @@ from . import proxysupport, httpurl, internpaturl, get_index_html
 from .const import WARN_FTP_MISSING_SLASH
 
 
-class FtpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
+class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     """
     Url link with ftp scheme.
     """

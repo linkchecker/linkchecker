@@ -19,7 +19,7 @@ Test checking of unknown URLs.
 from . import LinkCheckTest
 
 
-class TestUnknown (LinkCheckTest):
+class TestUnknown(LinkCheckTest):
     """Test unknown URL scheme checking."""
 
     def test_skype (self):

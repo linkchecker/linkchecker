@@ -43,7 +43,7 @@ def xmlquoteattr (s):
     return xml.sax.saxutils.escape(s, xmlattr_entities)
 
 
-class _XMLLogger (_Logger):
+class _XMLLogger(_Logger):
     """Base class for XML output; easy to parse with any XML tool."""
 
     def __init__ (self, **kwargs):

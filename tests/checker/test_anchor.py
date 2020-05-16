@@ -19,7 +19,7 @@ Test html anchor parsing and checking.
 from . import LinkCheckTest
 
 
-class TestAnchor (LinkCheckTest):
+class TestAnchor(LinkCheckTest):
     """
     Test anchor checking of HTML pages.
     """

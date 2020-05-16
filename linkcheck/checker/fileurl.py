@@ -88,7 +88,7 @@ def is_absolute_path (path):
     return path.startswith("/")
 
 
-class FileUrl (urlbase.UrlBase):
+class FileUrl(urlbase.UrlBase):
     """
     Url link with file scheme.
     """

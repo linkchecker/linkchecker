@@ -18,7 +18,7 @@ import time
 from . import task
 
 
-class Status (task.LoggedCheckedTask):
+class Status(task.LoggedCheckedTask):
     """Thread that gathers and logs the status periodically."""
 
     def __init__ (self, aggregator, wait_seconds):

@@ -19,7 +19,7 @@ import os
 from linkcheck.logger.csvlog import CSVLogger
 
 
-class TestCsvLogger (unittest.TestCase):
+class TestCsvLogger(unittest.TestCase):
 
     def test_parts (self):
         args = dict(

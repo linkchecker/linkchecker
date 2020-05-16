@@ -45,7 +45,7 @@ def get_intern_pattern (url):
     return "^%s://%s%s" % tuple(args)
 
 
-class InternPatternUrl (urlbase.UrlBase):
+class InternPatternUrl(urlbase.UrlBase):
     """Class supporting an intern URL pattern."""
 
     def get_intern_pattern (self, url=None):

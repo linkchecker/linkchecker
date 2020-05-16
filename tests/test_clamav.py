@@ -21,7 +21,7 @@ from tests import need_clamav
 from linkcheck.plugins import viruscheck as clamav
 
 
-class TestClamav (unittest.TestCase):
+class TestClamav(unittest.TestCase):
 
     def setUp(self):
         self.clamav_conf = clamav.get_clamav_conf("/etc/clamav/clamd.conf")

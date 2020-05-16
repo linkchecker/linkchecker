@@ -19,7 +19,7 @@ A gml logger.
 from .graph import _GraphLogger
 
 
-class GMLLogger (_GraphLogger):
+class GMLLogger(_GraphLogger):
     """GML means Graph Modeling Language. Use a GML tool to see
     the sitemap graph."""
 

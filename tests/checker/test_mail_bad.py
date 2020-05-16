@@ -19,7 +19,7 @@ Test mail checking of bad mail addresses.
 from . import MailTest
 
 
-class TestMailBad (MailTest):
+class TestMailBad(MailTest):
     """Test mailto: link checking."""
 
     def test_error_mail (self):

@@ -20,7 +20,7 @@ http://www.graphviz.org/doc/info/lang.html
 from .graph import _GraphLogger
 
 
-class DOTLogger (_GraphLogger):
+class DOTLogger(_GraphLogger):
     """
     Generates .dot sitemap graphs. Use graphviz to see the sitemap graph.
     """

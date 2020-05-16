@@ -23,7 +23,7 @@ from wsgiref.util import setup_testing_defaults
 from linkcheck.lc_cgi import checkform, checklink, LCFormError, application
 from linkcheck.strformat import limit
 
-class TestWsgi (unittest.TestCase):
+class TestWsgi(unittest.TestCase):
     """Test wsgi application."""
 
     def test_form_valid_url (self):

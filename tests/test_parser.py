@@ -132,7 +132,7 @@ parsetests = [
 ]
 
 
-class TestParser (unittest.TestCase):
+class TestParser(unittest.TestCase):
     """
     Test html parser.
     """

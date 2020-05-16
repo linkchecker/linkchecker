@@ -59,7 +59,7 @@ HTML_HEADER = """<!DOCTYPE HTML>
 """
 
 
-class HtmlLogger (_Logger):
+class HtmlLogger(_Logger):
     """Logger with HTML output."""
 
     LoggerName = 'html'

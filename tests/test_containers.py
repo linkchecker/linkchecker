@@ -22,7 +22,7 @@ import unittest
 import linkcheck.containers
 
 
-class TestLFUCache (unittest.TestCase):
+class TestLFUCache(unittest.TestCase):
     """Test LFU cache implementation."""
 
     def setUp (self):

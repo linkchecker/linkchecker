@@ -37,7 +37,7 @@ def install_builtin (translator, do_unicode):
     # also install ngettext
     builtins.__dict__['_n'] = translator.ngettext
 
-class Translator (gettext.GNUTranslations):
+class Translator(gettext.GNUTranslations):
     """A translation class always installing its gettext methods into the
     default namespace."""
 
@@ -46,7 +46,7 @@ class Translator (gettext.GNUTranslations):
         install_builtin(self, do_unicode)
 
 
-class NullTranslator (gettext.NullTranslations):
+class NullTranslator(gettext.NullTranslations):
     """A dummy translation class always installing its gettext methods into
     the default namespace."""
 

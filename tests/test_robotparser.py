@@ -22,7 +22,7 @@ from tests import need_network
 from linkcheck import configuration, robotparser2
 
 
-class TestRobotParser (unittest.TestCase):
+class TestRobotParser(unittest.TestCase):
     """
     Test robots.txt parser (needs internet access).
     """

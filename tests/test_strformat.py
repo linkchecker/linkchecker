@@ -24,7 +24,7 @@ import time
 import linkcheck.strformat
 
 
-class TestStrFormat (unittest.TestCase):
+class TestStrFormat(unittest.TestCase):
     """
     Test string formatting routines.
     """

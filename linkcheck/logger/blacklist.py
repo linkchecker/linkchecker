@@ -23,7 +23,7 @@ from linkcheck.configuration import get_user_data
 from . import _Logger
 
 
-class BlacklistLogger (_Logger):
+class BlacklistLogger(_Logger):
     """
     Updates a blacklist of wrong links. If a link on the blacklist
     is working (again), it is removed from the list. So after n days

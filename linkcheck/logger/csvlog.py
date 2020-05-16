@@ -30,7 +30,7 @@ Columns = (
 )
 
 
-class CSVLogger (_Logger):
+class CSVLogger(_Logger):
     """
     CSV output, consisting of one line per entry. Entries are
     separated by a separator (a semicolon per default).

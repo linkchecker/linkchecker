@@ -22,7 +22,7 @@ import unittest
 import linkcheck.dummy
 
 
-class TestDummy (unittest.TestCase):
+class TestDummy(unittest.TestCase):
     """
     Test dummy object.
     """

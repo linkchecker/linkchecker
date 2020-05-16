@@ -20,7 +20,7 @@ from .. import need_pyftpdlib
 from .ftpserver import FtpServerTest
 
 
-class TestFtp (FtpServerTest):
+class TestFtp(FtpServerTest):
     """Test ftp: link checking."""
 
     @need_pyftpdlib

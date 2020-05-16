@@ -21,7 +21,7 @@ from ..decorators import notimplemented
 import re
 
 
-class _GraphLogger (_Logger):
+class _GraphLogger(_Logger):
     """Provide base method to get node data."""
 
     def __init__ (self, **kwargs):

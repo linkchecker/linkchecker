@@ -19,7 +19,7 @@ A dummy logger.
 from . import _Logger
 
 
-class NoneLogger (_Logger):
+class NoneLogger(_Logger):
     """
     Dummy logger printing nothing.
     """

@@ -42,7 +42,7 @@ def unzip (filename, targetdir):
                 outfile.close()
 
 
-class TestFile (LinkCheckTest):
+class TestFile(LinkCheckTest):
     """
     Test file:// link checking (and file content parsing).
     """

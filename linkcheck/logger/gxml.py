@@ -21,7 +21,7 @@ from .xmllog import _XMLLogger
 from .graph import _GraphLogger
 
 
-class GraphXMLLogger (_XMLLogger, _GraphLogger):
+class GraphXMLLogger(_XMLLogger, _GraphLogger):
     """XML output mirroring the GML structure. Easy to parse with any XML
     tool."""
 

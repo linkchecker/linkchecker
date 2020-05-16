@@ -24,7 +24,7 @@ import unittest
 import linkcheck.decorators
 
 
-class TestDecorators (unittest.TestCase):
+class TestDecorators(unittest.TestCase):
     """
     Test decorators.
     """

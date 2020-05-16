@@ -19,7 +19,7 @@ Test html <frame> tag parsing.
 from . import LinkCheckTest
 
 
-class TestFrames (LinkCheckTest):
+class TestFrames(LinkCheckTest):
     """
     Test link checking of HTML framesets.
     """

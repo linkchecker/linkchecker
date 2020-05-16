@@ -95,7 +95,7 @@ def get_portable():
     return os.environ.get('LINKCHECKER_PORTABLE', '0')
 
 
-class MyInstallLib (install_lib):
+class MyInstallLib(install_lib):
     """Custom library installation."""
 
     def install (self):
@@ -155,7 +155,7 @@ class MyInstallLib (install_lib):
         return outs
 
 
-class MyInstallData (install_data):
+class MyInstallData(install_data):
     """Fix file permissions."""
 
     def run (self):
@@ -205,7 +205,7 @@ class MyInstallData (install_data):
                 os.chmod(path, mode)
 
 
-class MyDistribution (Distribution):
+class MyDistribution(Distribution):
     """Custom distribution class generating config file."""
 
     def __init__ (self, attrs):
@@ -284,7 +284,7 @@ def check_manifest ():
         print('\nMissing: '.join(err))
 
 
-class MyBuild (build):
+class MyBuild(build):
     """Custom build command."""
 
     def run (self):
@@ -293,7 +293,7 @@ class MyBuild (build):
         build.run(self)
 
 
-class MyClean (clean):
+class MyClean(clean):
     """Custom clean command."""
 
     def run (self):
@@ -308,7 +308,7 @@ class MyClean (clean):
         clean.run(self)
 
 
-class MySdist (sdist):
+class MySdist(sdist):
     """Custom sdist command."""
 
     def get_file_list (self):

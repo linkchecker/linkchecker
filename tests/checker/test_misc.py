@@ -20,7 +20,7 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestMisc (LinkCheckTest):
+class TestMisc(LinkCheckTest):
     """
     Test misc link types.
     """

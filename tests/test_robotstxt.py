@@ -22,7 +22,7 @@ import unittest
 import linkcheck.robotparser2
 
 
-class TestRobotsTxt (unittest.TestCase):
+class TestRobotsTxt(unittest.TestCase):
     """
     Test string formatting routines.
     """

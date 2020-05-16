@@ -30,7 +30,7 @@ def read_multiline (value):
         yield line
 
 
-class LCConfigParser (RawConfigParser):
+class LCConfigParser(RawConfigParser):
     """
     Parse a LinkChecker configuration file.
     """

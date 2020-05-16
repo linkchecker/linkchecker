@@ -41,7 +41,7 @@ def url_norm (url, encoding="utf-8"):
     return linkcheck.url.url_norm(url, encoding=encoding)[0]
 
 
-class TestUrl (unittest.TestCase):
+class TestUrl(unittest.TestCase):
     """Test url norming and quoting."""
 
     def urlnormtest (self, url, nurl, encoding=None):

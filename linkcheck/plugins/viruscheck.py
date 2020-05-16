@@ -65,7 +65,7 @@ class VirusCheck(_ContentPlugin):
         return config
 
 
-class ClamavError (Exception):
+class ClamavError(Exception):
     """Raised on clamav errors."""
     pass
 
@@ -149,7 +149,7 @@ def get_sockinfo (host, port=None):
     return socket.getaddrinfo(host, port, family, socktype)
 
 
-class ClamavConfig (dict):
+class ClamavConfig(dict):
     """Clamav configuration wrapper, with clamd connection method."""
 
     def __init__ (self, filename):

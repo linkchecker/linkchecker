@@ -18,7 +18,7 @@ Test http checking.
 """
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttpsRedirect (HttpServerTest):
+class TestHttpsRedirect(HttpServerTest):
     """Test https:// link redirection checking."""
 
     def __init__(self, methodName='runTest'):
@@ -44,7 +44,7 @@ class TestHttpsRedirect (HttpServerTest):
         self.direct(url, resultlines, recursionlevel=0)
 
 
-class RedirectHttpsRequestHandler (CookieRedirectHttpRequestHandler):
+class RedirectHttpsRequestHandler(CookieRedirectHttpRequestHandler):
 
     def redirect (self):
         """Redirect request."""

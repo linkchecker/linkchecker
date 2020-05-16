@@ -37,7 +37,7 @@ def get_pofiles ():
     return pofiles
 
 
-class TestPo (unittest.TestCase):
+class TestPo(unittest.TestCase):
     """Test .po file syntax."""
 
     @need_posix
@@ -49,7 +49,7 @@ class TestPo (unittest.TestCase):
             self.assertEqual(ret, 0, msg="PO-file syntax error in %r" % f)
 
 
-class TestGTranslator (unittest.TestCase):
+class TestGTranslator(unittest.TestCase):
     """GTranslator displays a middot · for a space. Unfortunately, it
     gets copied with copy-and-paste, what a shame."""
 

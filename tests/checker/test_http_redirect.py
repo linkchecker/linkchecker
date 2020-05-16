@@ -19,7 +19,7 @@ Test http checking.
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttpRedirect (HttpServerTest):
+class TestHttpRedirect(HttpServerTest):
     """Test http:// link redirection checking."""
 
     def __init__(self, methodName='runTest'):

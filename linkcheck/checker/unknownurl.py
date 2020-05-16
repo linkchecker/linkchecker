@@ -21,7 +21,7 @@ import re
 from . import urlbase
 
 
-class UnknownUrl (urlbase.UrlBase):
+class UnknownUrl(urlbase.UrlBase):
     """Handle unknown or just plain broken URLs."""
 
     def build_url (self):

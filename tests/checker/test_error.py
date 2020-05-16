@@ -20,7 +20,7 @@ Test error checking.
 from . import LinkCheckTest
 
 
-class TestError (LinkCheckTest):
+class TestError(LinkCheckTest):
     """
     Test unrecognized or syntactically wrong links.
     """

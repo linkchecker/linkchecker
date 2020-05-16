@@ -21,7 +21,7 @@ from .. import need_network, need_biplist
 import os
 
 
-class TestBookmarks (LinkCheckTest):
+class TestBookmarks(LinkCheckTest):
     """
     Test bookmark link checking and content parsing.
     """

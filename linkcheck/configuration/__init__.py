@@ -144,7 +144,7 @@ def get_certifi_file():
 
 
 # dynamic options
-class Configuration (dict):
+class Configuration(dict):
     """
     Storage for configuration options. Options can both be given from
     the command line as well as from configuration files.

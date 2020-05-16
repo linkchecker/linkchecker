@@ -31,7 +31,7 @@ def get_file (filename=None):
     return str_text(directory)
 
 
-class TestConfig (unittest.TestCase):
+class TestConfig(unittest.TestCase):
     """Test configuration parsing."""
 
     def test_confparse (self):

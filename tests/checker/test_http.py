@@ -22,7 +22,7 @@ import pytest
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttp (HttpServerTest):
+class TestHttp(HttpServerTest):
     """Test http:// link checking."""
 
     def __init__(self, methodName='runTest'):

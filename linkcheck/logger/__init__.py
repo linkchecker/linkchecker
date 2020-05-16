@@ -129,7 +129,7 @@ class LogStatistics:
         self.internal_errors += 1
 
 
-class _Logger (abc.ABC):
+class _Logger(abc.ABC):
     """
     Base class for logging of checked urls. It defines the public API
     (see below) and offers basic functionality for all loggers.

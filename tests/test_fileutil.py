@@ -24,7 +24,7 @@ file_existing = __file__
 file_non_existing = "ZZZ.i_dont_exist"
 
 
-class TestFileutil (unittest.TestCase):
+class TestFileutil(unittest.TestCase):
     """Test file utility functions."""
 
     def test_size (self):

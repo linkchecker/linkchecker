@@ -23,7 +23,7 @@ from linkcheck.checker.fileurl import get_nt_filename
 from . import need_windows
 
 
-class TestFilenames (unittest.TestCase):
+class TestFilenames(unittest.TestCase):
     """
     Test filename routines.
     """

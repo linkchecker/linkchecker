@@ -62,7 +62,7 @@ def is_missing_quote (addr):
 EMAIL_CGI_ADDRESS = ("to", "cc", "bcc")
 EMAIL_CGI_SUBJECT = "subject"
 
-class MailtoUrl (urlbase.UrlBase):
+class MailtoUrl(urlbase.UrlBase):
     """
     Url link with mailto scheme.
     """

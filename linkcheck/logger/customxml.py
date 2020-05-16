@@ -21,7 +21,7 @@ from .. import strformat
 from builtins import str as str_text
 
 
-class CustomXMLLogger (xmllog._XMLLogger):
+class CustomXMLLogger(xmllog._XMLLogger):
     """
     XML custom output for easy post-processing.
     """
