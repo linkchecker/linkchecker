@@ -243,7 +243,7 @@ class LinkCheckTest (unittest.TestCase):
         logger = aggregate.config['logger']
         diff = logger.diff
         if diff:
-            msg = str_text(os.linesep).join([url] + diff)
+            msg = os.linesep.join([url] + diff)
             self.fail(msg)
         if logger.stats.internal_errors:
             self.fail("%d internal errors occurred!"
@@ -270,7 +270,7 @@ class LinkCheckTest (unittest.TestCase):
         if diff:
             l = ["Differences found testing %s" % url]
             l.extend(x.rstrip() for x in diff[2:])
-            self.fail(str_text(os.linesep).join(l))
+            self.fail(os.linesep.join(l))
 
 
 class MailTest (LinkCheckTest):
