@@ -28,10 +28,6 @@ class XmlTagUrlParser:
         self.tag = tag
         self.parser = ParserCreate()
         self.parser.buffer_text = True
-        try:
-            self.parser.returns_unicode = True
-        except AttributeError:
-            pass  # Python 3
         self.parser.StartElementHandler = self.start_element
         self.parser.EndElementHandler = self.end_element
         self.parser.CharacterDataHandler = self.char_data
