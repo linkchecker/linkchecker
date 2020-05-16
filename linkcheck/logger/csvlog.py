@@ -119,15 +119,9 @@ class CSVLogger (_Logger):
         self.writerow(map(strformat.unicode_safe, row))
         self.flush()
 
-    def encode_row_s(self, row_s):
-        if isinstance(row_s, str):
-            return row_s  # Python 3
-        else:
-            return row_s.encode("utf-8", self.codec_errors)  # Python 2
-
     def writerow (self, row):
         """Write one row in CSV format."""
-        self.writer.writerow([self.encode_row_s(s) for s in row])
+        self.writer.writerow(row)
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
         try:
