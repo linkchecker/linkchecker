@@ -45,12 +45,13 @@ unicode_safe = strformat.unicode_safe
 # match for robots meta element content attribute
 nofollow_re = re.compile(r"\bnofollow\b", re.IGNORECASE)
 
-class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
+
+class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     """
     Url link with http scheme.
     """
 
-    def reset (self):
+    def reset(self):
         """
         Initialize HTTP specific variables.
         """
@@ -62,7 +63,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.ssl_cipher = None
         self.ssl_cert = None
 
-    def allows_robots (self, url):
+    def allows_robots(self, url):
         """
         Fetch and parse the robots.txt of given url. Checks if LinkChecker
         can get the requested resource content.
@@ -74,7 +75,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """
         return not self.aggregate.config['robotstxt'] or self.aggregate.robots_txt.allows_url(self)
 
-    def content_allows_robots (self):
+    def content_allows_robots(self):
         """
         Return False if the content of this URL forbids robots to
         search for recursive links.
@@ -85,7 +86,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         soup = self.get_soup()
         return not soup.find("meta", attrs={"name": "robots", "content": nofollow_re})
 
-    def add_size_info (self):
+    def add_size_info(self):
         """Get size of URL content from HTTP header."""
         if self.headers and "Content-Length" in self.headers and \
            "Transfer-Encoding" not in self.headers:
@@ -98,7 +99,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         else:
             self.size = -1
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Check a URL with HTTP protocol.
         Here is an excerpt from RFC 1945 with common response codes:
@@ -204,7 +205,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         else:
             self.ssl_cert = None
 
-    def construct_auth (self):
+    def construct_auth(self):
         """Construct HTTP Basic authentication credentials if there
         is user/password information available. Does not overwrite if
         credentials have already been constructed."""
@@ -214,7 +215,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         if _user is not None and _password is not None:
             self.auth = (_user, _password)
 
-    def set_content_type (self):
+    def set_content_type(self):
         """Return content MIME type or empty string."""
         self.content_type = httputil.get_content_type(self.headers)
 
@@ -269,7 +270,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 # run connection plugins for old connection
                 self.aggregate.plugin_manager.run_connection_plugins(self)
 
-    def getheader (self, name, default=None):
+    def getheader(self, name, default=None):
         """Get decoded header value.
 
         @return: decoded header value or default of not found
@@ -280,7 +281,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             return default
         return unicode_safe(value, encoding=HEADER_ENCODING)
 
-    def check_response (self):
+    def check_response(self):
         """Check final result and log it."""
         if self.url_connection.status_code >= 400:
             self.set_result("%d %s" % (self.url_connection.status_code, self.url_connection.reason),
@@ -332,7 +333,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             name = "Content-Location: header"
             self.add_url(url, name=name)
 
-    def is_parseable (self):
+    def is_parseable(self):
         """
         Check if content is parseable for recursion.
 
@@ -352,7 +353,7 @@ class HttpUrl (internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             return False
         return True
 
-    def get_robots_txt_url (self):
+    def get_robots_txt_url(self):
         """
         Get the according robots.txt URL for this URL.
 

@@ -19,17 +19,17 @@ Simple decorators (usable in Python >= 2.4).
 Example:
 
 @synchronized(thread.allocate_lock())
-def f ():
+def f():
     "Synchronized function"
     print("i am synchronized:", f, f.__doc__)
 
 @deprecated
-def g ():
+def g():
     "this function is deprecated"
     pass
 
 @notimplemented
-def h ():
+def h():
     "todo"
     pass
 
@@ -41,7 +41,7 @@ import sys
 import time
 
 
-def update_func_meta (fake_func, real_func):
+def update_func_meta(fake_func, real_func):
     """Set meta information (eg. __doc__) of fake function to that
     of the real function.
     @return fake_func
@@ -53,10 +53,10 @@ def update_func_meta (fake_func, real_func):
     return fake_func
 
 
-def deprecated (func):
+def deprecated(func):
     """A decorator which can be used to mark functions as deprecated.
     It emits a warning when the function is called."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Print deprecated warning and execute original function."""
         warnings.warn("Call to deprecated function %s." % func.__name__,
                       category=DeprecationWarning)
@@ -64,7 +64,7 @@ def deprecated (func):
     return update_func_meta(newfunc, func)
 
 
-def signal_handler (signal_number):
+def signal_handler(signal_number):
     """From http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/410666
 
     A decorator to set the specified function as handler for a signal.
@@ -74,7 +74,7 @@ def signal_handler (signal_number):
     no handler is set.
     """
     # create the 'real' decorator which takes only a function as an argument
-    def newfunc (function):
+    def newfunc(function):
         """Register function as signal handler."""
         # note: actually the kill(2) function uses the signal number of 0
         # for a special case, but for signal(2) only positive integers
@@ -86,9 +86,9 @@ def signal_handler (signal_number):
     return newfunc
 
 
-def synchronize (lock, func, log_duration_secs=0):
+def synchronize(lock, func, log_duration_secs=0):
     """Return synchronized function acquiring the given lock."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Execute function synchronized."""
         t = time.time()
         with lock:
@@ -99,14 +99,14 @@ def synchronize (lock, func, log_duration_secs=0):
     return update_func_meta(newfunc, func)
 
 
-def synchronized (lock):
+def synchronized(lock):
     """A decorator calling a function with aqcuired lock."""
     return lambda func: synchronize(lock, func)
 
 
-def notimplemented (func):
+def notimplemented(func):
     """Raises a NotImplementedError if the function is called."""
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Raise NotImplementedError"""
         co = func.func_code
         attrs = (co.co_name, co.co_filename, co.co_firstlineno)
@@ -114,10 +114,10 @@ def notimplemented (func):
     return update_func_meta(newfunc, func)
 
 
-def timeit (func, log, limit):
+def timeit(func, log, limit):
     """Print execution time of the function. For quick'n'dirty profiling."""
 
-    def newfunc (*args, **kwargs):
+    def newfunc(*args, **kwargs):
         """Execute function and print execution time."""
         t = time.time()
         res = func(*args, **kwargs)
@@ -130,7 +130,7 @@ def timeit (func, log, limit):
     return update_func_meta(newfunc, func)
 
 
-def timed (log=sys.stderr, limit=2.0):
+def timed(log=sys.stderr, limit=2.0):
     """Decorator to run a function with timing info."""
     return lambda func: timeit(func, log, limit)
 

@@ -32,7 +32,7 @@ from builtins import str as str_text
 get_url_from = linkcheck.checker.get_url_from
 
 
-class TestLogger (linkcheck.logger._Logger):
+class TestLogger(linkcheck.logger._Logger):
     """
     Output logger for automatic regression tests.
     """
@@ -53,7 +53,7 @@ class TestLogger (linkcheck.logger._Logger):
         'url',
     ]
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """
         The kwargs must have "expected" keyword with the expected logger
         output lines.
@@ -81,13 +81,13 @@ class TestLogger (linkcheck.logger._Logger):
                              flags=re.DOTALL | re.MULTILINE)
                     if x])).splitlines()
 
-    def start_output (self):
+    def start_output(self):
         """
         Nothing to do here.
         """
         pass
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Append logger output to self.result.
         """
@@ -131,7 +131,7 @@ class TestLogger (linkcheck.logger._Logger):
         # note: do not append url_data.result since this is
         # platform dependent
 
-    def end_output (self, linknumber=-1, **kwargs):
+    def end_output(self, linknumber=-1, **kwargs):
         """
         Stores differences between expected and result in self.diff.
         """
@@ -147,11 +147,11 @@ class TestLogger (linkcheck.logger._Logger):
             self.diff.append(line)
 
 
-def get_file_url (filename):
+def get_file_url(filename):
     return re.sub("^([a-zA-Z]):", r"/\1|", filename.replace("\\", "/"))
 
 
-def add_fileoutput_config (config):
+def add_fileoutput_config(config):
     if os.name == 'posix':
         devnull = '/dev/null'
     elif os.name == 'nt':
@@ -165,7 +165,7 @@ def add_fileoutput_config (config):
         config['fileoutput'].append(logger)
 
 
-def get_test_aggregate (confargs, logargs, logger=TestLogger):
+def get_test_aggregate(confargs, logargs, logger=TestLogger):
     """Initialize a test configuration object."""
     config = linkcheck.configuration.Configuration()
     config.logger_add(logger)
@@ -183,23 +183,23 @@ def get_test_aggregate (confargs, logargs, logger=TestLogger):
     return linkcheck.director.get_aggregate(config)
 
 
-class LinkCheckTest (unittest.TestCase):
+class LinkCheckTest(unittest.TestCase):
     """
     Functional test class with ability to test local files.
     """
     logger = TestLogger
 
-    def setUp (self):
+    def setUp(self):
         """Ensure the current locale setting is the default.
         Otherwise, warnings will get translated and will break tests."""
         super(LinkCheckTest, self).setUp()
         linkcheck.init_i18n(loc='C')
 
-    def norm (self, url, encoding="utf-8"):
+    def norm(self, url, encoding="utf-8"):
         """Helper function to norm a url."""
         return linkcheck.url.url_norm(url, encoding=encoding)[0]
 
-    def get_attrs (self, **kwargs):
+    def get_attrs(self, **kwargs):
         """Return current and data directory as dictionary.
         You can augment the dict with keyword attributes."""
         d = {
@@ -209,7 +209,7 @@ class LinkCheckTest (unittest.TestCase):
         d.update(kwargs)
         return d
 
-    def get_resultlines (self, filename):
+    def get_resultlines(self, filename):
         """
         Return contents of file, as list of lines without line endings,
         ignoring empty lines and lines starting with a hash sign (#).
@@ -230,7 +230,7 @@ class LinkCheckTest (unittest.TestCase):
         """Get URL for given filename."""
         return get_file(filename)
 
-    def file_test (self, filename, confargs=None):
+    def file_test(self, filename, confargs=None):
         """Check <filename> with expected result in <filename>.result."""
         url = self.get_url(filename)
         if confargs is None:
@@ -249,7 +249,7 @@ class LinkCheckTest (unittest.TestCase):
             self.fail("%d internal errors occurred!"
                               % logger.stats.internal_errors)
 
-    def direct (self, url, resultlines, parts=None, recursionlevel=0,
+    def direct(self, url, resultlines, parts=None, recursionlevel=0,
                 confargs=None, url_encoding=None):
         """Check url with expected result."""
         assert isinstance(url, str_text), repr(url)
@@ -273,18 +273,18 @@ class LinkCheckTest (unittest.TestCase):
             self.fail(os.linesep.join(l))
 
 
-class MailTest (LinkCheckTest):
+class MailTest(LinkCheckTest):
     """Test mailto: link checking."""
 
-    def mail_valid (self, addr, **kwargs):
+    def mail_valid(self, addr, **kwargs):
         """Test valid mail address."""
         return self.mail_test(addr, "valid", **kwargs)
 
-    def mail_error (self, addr, **kwargs):
+    def mail_error(self, addr, **kwargs):
         """Test error mail address."""
         return self.mail_test(addr, "error", **kwargs)
 
-    def mail_test (self, addr, result, encoding="utf-8", cache_key=None, warning=None):
+    def mail_test(self, addr, result, encoding="utf-8", cache_key=None, warning=None):
         """Test mail address."""
         url = self.norm(addr, encoding=encoding)
         if cache_key is None:

@@ -17,17 +17,17 @@
 Special container classes.
 """
 
-class LFUCache (dict):
+class LFUCache(dict):
     """Limited cache which purges least frequently used items."""
 
-    def __init__ (self, size=1000):
+    def __init__(self, size=1000):
         """Initialize internal LFU cache."""
         super(LFUCache, self).__init__()
         if size < 1:
             raise ValueError("invalid cache size %d" % size)
         self.size = size
 
-    def __setitem__ (self, key, val):
+    def __setitem__(self, key, val):
         """Store given key/value."""
         if key in self:
             # store value, do not increase number of uses
@@ -38,7 +38,7 @@ class LFUCache (dict):
             if len(self) > self.size:
                 self.shrink()
 
-    def shrink (self):
+    def shrink(self):
         """Shrink ca. 5% of entries."""
         trim = int(0.05*len(self))
         if trim:
@@ -49,24 +49,24 @@ class LFUCache (dict):
             for item in values[0:trim]:
                 del self[item[0]]
 
-    def __getitem__ (self, key):
+    def __getitem__(self, key):
         """Update key usage and return value."""
         entry = super(LFUCache, self).__getitem__(key)
         entry[0] += 1
         return entry[1]
 
-    def uses (self, key):
+    def uses(self, key):
         """Get number of uses for given key (without increasing the number of
         uses)"""
         return super(LFUCache, self).__getitem__(key)[0]
 
-    def get (self, key, def_val=None):
+    def get(self, key, def_val=None):
         """Update key usage if found and return value, else return default."""
         if key in self:
             return self[key]
         return def_val
 
-    def setdefault (self, key, def_val=None):
+    def setdefault(self, key, def_val=None):
         """Update key usage if found and return value, else set and return
         default."""
         if key in self:
@@ -74,30 +74,30 @@ class LFUCache (dict):
         self[key] = def_val
         return def_val
 
-    def items (self):
+    def items(self):
         """Return list of items, not updating usage count."""
         return [(key, value[1]) for key, value in super(LFUCache, self).items()]
 
-    def iteritems (self):
+    def iteritems(self):
         """Return iterator of items, not updating usage count."""
         for key, value in super(LFUCache, self).items():
             yield (key, value[1])
 
-    def values (self):
+    def values(self):
         """Return list of values, not updating usage count."""
         return [value[1] for value in super(LFUCache, self).values()]
 
-    def itervalues (self):
+    def itervalues(self):
         """Return iterator of values, not updating usage count."""
         for value in super(LFUCache, self).values():
             yield value[1]
 
-    def popitem (self):
+    def popitem(self):
         """Remove and return an item."""
         key, value = super(LFUCache, self).popitem()
         return (key, value[1])
 
-    def pop (self):
+    def pop(self):
         """Remove and return a value."""
         value = super(LFUCache, self).pop()
         return value[1]

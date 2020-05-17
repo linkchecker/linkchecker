@@ -50,7 +50,7 @@ class LocationInfo(_ConnectionPlugin):
 # no risks should be taken here by using a lock.
 _lock = get_lock("geoip")
 
-def get_geoip_dat ():
+def get_geoip_dat():
     """Find a GeoIP database, preferring city over country lookup."""
     datafiles = ("GeoIPCity.dat", "GeoIP.dat")
     if os.name == 'nt':
@@ -85,7 +85,7 @@ if geoip_dat:
 
 
 @synchronized(_lock)
-def get_location (host):
+def get_location(host):
     """Get translated country and optional city name.
 
     @return: country with optional city or an boolean False if not found

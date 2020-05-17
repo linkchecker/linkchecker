@@ -22,7 +22,7 @@ from . import _Logger
 from .. import url as urlutil
 
 
-def sqlify (s):
+def sqlify(s):
     """
     Escape special SQL chars and strings.
     """
@@ -31,7 +31,7 @@ def sqlify (s):
     return "'%s'" % s.replace("'", "''").replace(os.linesep, r"\n")
 
 
-def intify (s):
+def intify(s):
     """
     Coerce a truth value to 0/1.
 
@@ -45,7 +45,7 @@ def intify (s):
     return 0
 
 
-class SQLLogger (_Logger):
+class SQLLogger(_Logger):
     """
     SQL output, should work with any SQL database (not tested).
     """
@@ -58,7 +58,7 @@ class SQLLogger (_Logger):
         'dbname': 'linksdb',
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize database access data."""
         args = self.get_args(kwargs)
         super(SQLLogger, self).__init__(**args)
@@ -66,14 +66,14 @@ class SQLLogger (_Logger):
         self.dbname = args['dbname']
         self.separator = args['separator']
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write SQL comment.
         """
         self.write("-- ")
         self.writeln(s=s, **args)
 
-    def start_output (self):
+    def start_output(self):
         """
         Write start of checking info as sql comment.
         """
@@ -83,7 +83,7 @@ class SQLLogger (_Logger):
             self.writeln()
             self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Store url check info into the database.
         """
@@ -130,7 +130,7 @@ class SQLLogger (_Logger):
               })
         self.flush()
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Write end of checking info as sql comment.
         """

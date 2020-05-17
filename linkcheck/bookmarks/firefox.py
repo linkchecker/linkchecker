@@ -30,7 +30,7 @@ extension = re.compile(r'/places.sqlite$', re.IGNORECASE)
 # Windows filename encoding
 nt_filename_encoding="mbcs"
 
-def get_profile_dir ():
+def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
@@ -40,7 +40,7 @@ def get_profile_dir ():
     return dirpath
 
 
-def find_bookmark_file (profile="*.default"):
+def find_bookmark_file(profile="*.default"):
     """Return the first found places.sqlite file of the profile directories
     ending with '.default' (or another given profile name).
     Returns absolute filename if found, or empty string if no bookmark file
@@ -57,7 +57,7 @@ def find_bookmark_file (profile="*.default"):
     return ""
 
 
-def parse_bookmark_file (filename):
+def parse_bookmark_file(filename):
     """Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     Returns None if sqlite3 module is not installed.

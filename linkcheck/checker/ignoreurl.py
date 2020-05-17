@@ -19,9 +19,9 @@ Handle ignored URLs.
 
 from . import unknownurl
 
-class IgnoreUrl (unknownurl.UnknownUrl):
+class IgnoreUrl(unknownurl.UnknownUrl):
     """Always ignored URL."""
 
-    def is_ignored (self):
+    def is_ignored(self):
         """Return True if this URL scheme is ignored."""
         return True

@@ -21,31 +21,31 @@ import unittest
 from linkcheck.htmlutil import htmlsoup, linkparse
 
 
-class TestLinkparser (unittest.TestCase):
+class TestLinkparser(unittest.TestCase):
     """
     Test link parsing.
     """
 
-    def _test_one_link (self, content, url):
+    def _test_one_link(self, content, url):
         self.count_url = 0
         linkparse.find_links(htmlsoup.make_soup(content),
                              self._test_one_url(url), linkparse.LinkTags)
         self.assertEqual(self.count_url, 1)
 
-    def _test_one_url (self, origurl):
+    def _test_one_url(self, origurl):
         """Return parser callback function."""
-        def callback (url, line, column, name, base):
+        def callback(url, line, column, name, base):
             self.count_url += 1
             self.assertEqual(origurl, url)
         return callback
 
-    def _test_no_link (self, content):
-        def callback (url, line, column, name, base):
+    def _test_no_link(self, content):
+        def callback(url, line, column, name, base):
             self.assertTrue(False, 'URL %r found' % url)
         linkparse.find_links(htmlsoup.make_soup(content), callback,
                              linkparse.LinkTags)
 
-    def test_href_parsing (self):
+    def test_href_parsing(self):
         # Test <a href> parsing.
         content = '<a href="%s">'
         url = "alink"
@@ -76,7 +76,7 @@ class TestLinkparser (unittest.TestCase):
         url = "alink"
         self._test_no_link(content % url)
 
-    def test_css_parsing (self):
+    def test_css_parsing(self):
         # Test css style attribute parsing.
         content = '<table style="background: url(%s) no-repeat" >'
         url = "alink"
@@ -96,7 +96,7 @@ class TestLinkparser (unittest.TestCase):
         content = "<table style='background: url( \"%s\") no-repeat' >"
         self._test_one_link(content % url, url)
 
-    def test_comment_stripping (self):
+    def test_comment_stripping(self):
         strip = linkparse.strip_c_comments
         content = "/* url('http://example.org')*/"
         self.assertEqual(strip(content), "")

@@ -32,7 +32,7 @@ ChangeFreqs = (
 HTTP_SCHEMES = ('http:', 'https:')
 HTML_TYPES = ('text/html', "application/xhtml+xml")
 
-class SitemapXmlLogger (xmllog._XMLLogger):
+class SitemapXmlLogger(xmllog._XMLLogger):
     """Sitemap XML output according to http://www.sitemaps.org/protocol.html
     """
 
@@ -43,7 +43,7 @@ class SitemapXmlLogger (xmllog._XMLLogger):
         "encoding": "utf-8",
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
         super(SitemapXmlLogger, self).__init__(**args)
@@ -63,7 +63,7 @@ class SitemapXmlLogger (xmllog._XMLLogger):
         if 'priority' in args:
             self.priority = float(args['priority'])
 
-    def start_output (self):
+    def start_output(self):
         """Write start of checking info as xml comment."""
         super(SitemapXmlLogger, self).start_output()
         self.xml_start_output()
@@ -101,7 +101,7 @@ class SitemapXmlLogger (xmllog._XMLLogger):
             and url_data.content_type in HTML_TYPES):
             self.log_url(url_data, priority=priority)
 
-    def log_url (self, url_data, priority=None):
+    def log_url(self, url_data, priority=None):
         """Log URL data in sitemap format."""
         self.xml_starttag('url')
         self.xml_tag('loc', url_data.url)
@@ -112,7 +112,7 @@ class SitemapXmlLogger (xmllog._XMLLogger):
         self.xml_endtag('url')
         self.flush()
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write XML end tag."""
         self.xml_endtag("urlset")
         self.xml_end_output()

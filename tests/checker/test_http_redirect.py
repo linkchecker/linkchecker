@@ -19,7 +19,7 @@ Test http checking.
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttpRedirect (HttpServerTest):
+class TestHttpRedirect(HttpServerTest):
     """Test http:// link redirection checking."""
 
     def __init__(self, methodName='runTest'):
@@ -27,14 +27,14 @@ class TestHttpRedirect (HttpServerTest):
         self.handler = CookieRedirectHttpRequestHandler
 
     @need_network
-    def test_redirect (self):
+    def test_redirect(self):
         self.redirect1()
         self.redirect2()
         self.redirect3()
         self.redirect4()
         self.redirect5()
 
-    def redirect1 (self):
+    def redirect1(self):
         url = "http://localhost:%d/redirect1" % self.port
         nurl = url
         rurl = url.replace("redirect", "newurl")
@@ -47,7 +47,7 @@ class TestHttpRedirect (HttpServerTest):
         ]
         self.direct(url, resultlines, recursionlevel=0)
 
-    def redirect2 (self):
+    def redirect2(self):
         url = "http://localhost:%d/tests/checker/data/redirect.html" % \
               self.port
         nurl = url
@@ -61,12 +61,12 @@ class TestHttpRedirect (HttpServerTest):
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
-    def redirect3 (self):
+    def redirect3(self):
         url = "http://localhost:%d/tests/checker/data/redir.html" % self.port
         resultlines = self.get_resultlines("redir.html")
         self.direct(url, resultlines, recursionlevel=1)
 
-    def redirect4 (self):
+    def redirect4(self):
         url = "http://localhost:%d/redirect_newscheme_ftp" % self.port
         nurl = url
         #rurl = "ftp://example.com/"
@@ -84,7 +84,7 @@ class TestHttpRedirect (HttpServerTest):
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
-    def redirect5 (self):
+    def redirect5(self):
         url = "http://localhost:%d/redirect_newscheme_file" % self.port
         nurl = url
         #rurl = "file:README"

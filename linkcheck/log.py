@@ -29,7 +29,7 @@ import traceback
 #gc.set_debug(gc.DEBUG_LEAK)
 
 PRINT_LOCALVARS = False
-def _stack_format (stack):
+def _stack_format(stack):
     """Format a stack trace to a message.
 
     @return: formatted stack message
@@ -54,7 +54,7 @@ def _stack_format (stack):
     return s.getvalue()
 
 
-def _log (fun, msg, args, **kwargs):
+def _log(fun, msg, args, **kwargs):
     """Log a message with given function. Optional the following keyword
     arguments are supported:
     traceback(bool) - if True print traceback of current function
@@ -70,7 +70,7 @@ def _log (fun, msg, args, **kwargs):
         fun(traceback.format_exc())
 
 
-def debug (logname, msg, *args, **kwargs):
+def debug(logname, msg, *args, **kwargs):
     """Log a debug message.
 
     return: None
@@ -80,7 +80,7 @@ def debug (logname, msg, *args, **kwargs):
         _log(log.debug, msg, args, **kwargs)
 
 
-def info (logname, msg, *args, **kwargs):
+def info(logname, msg, *args, **kwargs):
     """Log an informational message.
 
     return: None
@@ -90,7 +90,7 @@ def info (logname, msg, *args, **kwargs):
         _log(log.info, msg, args, **kwargs)
 
 
-def warn (logname, msg, *args, **kwargs):
+def warn(logname, msg, *args, **kwargs):
     """Log a warning.
 
     return: None
@@ -100,7 +100,7 @@ def warn (logname, msg, *args, **kwargs):
         _log(log.warning, msg, args, **kwargs)
 
 
-def error (logname, msg, *args, **kwargs):
+def error(logname, msg, *args, **kwargs):
     """Log an error.
 
     return: None
@@ -110,7 +110,7 @@ def error (logname, msg, *args, **kwargs):
         _log(log.error, msg, args, **kwargs)
 
 
-def critical (logname, msg, *args, **kwargs):
+def critical(logname, msg, *args, **kwargs):
     """Log a critical error.
 
     return: None
@@ -120,7 +120,7 @@ def critical (logname, msg, *args, **kwargs):
         _log(log.critical, msg, args, **kwargs)
 
 
-def exception (logname, msg, *args, **kwargs):
+def exception(logname, msg, *args, **kwargs):
     """Log an exception.
 
     return: None
@@ -130,11 +130,11 @@ def exception (logname, msg, *args, **kwargs):
         _log(log.exception, msg, args, **kwargs)
 
 
-def is_debug (logname):
+def is_debug(logname):
     """See if logger is on debug level."""
     return logging.getLogger(logname).isEnabledFor(logging.DEBUG)
 
 
-def shutdown ():
+def shutdown():
     """Flush and close all log handlers."""
     logging.shutdown()

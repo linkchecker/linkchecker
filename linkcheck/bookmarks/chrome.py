@@ -22,7 +22,7 @@ from xdg import xdg_config_home
 nt_filename_encoding="mbcs"
 
 
-def get_profile_dir ():
+def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         if "LOCALAPPDATA" in os.environ:
@@ -46,7 +46,7 @@ def get_profile_dir ():
     return dirpath
 
 
-def find_bookmark_file (profile="Default"):
+def find_bookmark_file(profile="Default"):
     """Return the bookmark file of the Default profile.
     Returns absolute filename if found, or empty string if no bookmark file
     could be found.

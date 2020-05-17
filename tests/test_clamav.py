@@ -21,20 +21,20 @@ from tests import need_clamav
 from linkcheck.plugins import viruscheck as clamav
 
 
-class TestClamav (unittest.TestCase):
+class TestClamav(unittest.TestCase):
 
     def setUp(self):
         self.clamav_conf = clamav.get_clamav_conf("/etc/clamav/clamd.conf")
 
     @need_clamav
-    def testClean (self):
+    def testClean(self):
         data = b""
         infected, errors = clamav.scan(data, self.clamav_conf)
         self.assertFalse(infected)
         self.assertFalse(errors)
 
     @need_clamav
-    def testInfected (self):
+    def testInfected(self):
         # from the clamav test direcotry: the clamav test file as html data
         data = (
            b'<a href="data:application/octet-stream;base64,'

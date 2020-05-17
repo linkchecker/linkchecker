@@ -24,12 +24,12 @@ except ImportError:
     has_biplist = False
 
 
-def get_profile_dir ():
+def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     return os.path.join(os.environ["HOME"], "Library", "Safari")
 
 
-def find_bookmark_file ():
+def find_bookmark_file():
     """Return the bookmark file of the Default profile.
     Returns absolute filename if found, or empty string if no bookmark file
     could be found.
@@ -47,21 +47,21 @@ def find_bookmark_file ():
     return ""
 
 
-def parse_bookmark_file (filename):
+def parse_bookmark_file(filename):
     """Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     """
     return parse_plist(get_plist_data_from_file(filename))
 
 
-def parse_bookmark_data (data):
+def parse_bookmark_data(data):
     """Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     """
     return parse_plist(get_plist_data_from_string(data))
 
 
-def get_plist_data_from_file (filename):
+def get_plist_data_from_file(filename):
     """Parse plist data for a file. Tries biplist, falling back to
     plistlib."""
     if has_biplist:
@@ -74,7 +74,7 @@ def get_plist_data_from_file (filename):
         return {}
 
 
-def get_plist_data_from_string (data):
+def get_plist_data_from_string(data):
     """Parse plist data for a string. Tries biplist, falling back to
     plistlib."""
     if has_biplist:
@@ -105,11 +105,11 @@ def parse_plist(entry):
                 yield item
 
 
-def is_leaf (entry):
+def is_leaf(entry):
     """Return true if plist entry is an URL entry."""
     return entry.get(KEY_WEBBOOKMARKTYPE) == 'WebBookmarkTypeLeaf'
 
 
-def has_children (entry):
+def has_children(entry):
     """Return true if plist entry has children."""
     return entry.get(KEY_WEBBOOKMARKTYPE) == 'WebBookmarkTypeList'

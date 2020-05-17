@@ -18,14 +18,14 @@ Test http checking.
 """
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttpsRedirect (HttpServerTest):
+class TestHttpsRedirect(HttpServerTest):
     """Test https:// link redirection checking."""
 
     def __init__(self, methodName='runTest'):
         super(TestHttpsRedirect, self).__init__(methodName=methodName)
         self.handler = RedirectHttpsRequestHandler
 
-    def test_redirect (self):
+    def test_redirect(self):
         url = "http://localhost:%d/redirect1" % self.port
         nurl = url
         #rurl = "https://localhost:%d/newurl1" % self.port
@@ -44,9 +44,9 @@ class TestHttpsRedirect (HttpServerTest):
         self.direct(url, resultlines, recursionlevel=0)
 
 
-class RedirectHttpsRequestHandler (CookieRedirectHttpRequestHandler):
+class RedirectHttpsRequestHandler(CookieRedirectHttpRequestHandler):
 
-    def redirect (self):
+    def redirect(self):
         """Redirect request."""
         path = self.path.replace("redirect", "newurl")
         port = self.server.server_address[1]

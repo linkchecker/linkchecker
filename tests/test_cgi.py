@@ -23,38 +23,38 @@ from wsgiref.util import setup_testing_defaults
 from linkcheck.lc_cgi import checkform, checklink, LCFormError, application
 from linkcheck.strformat import limit
 
-class TestWsgi (unittest.TestCase):
+class TestWsgi(unittest.TestCase):
     """Test wsgi application."""
 
-    def test_form_valid_url (self):
+    def test_form_valid_url(self):
         # Check url validity.
         env = dict()
         form = dict(url="http://www.example.com/", level="1")
         checkform(form, env)
 
-    def test_form_empty_url (self):
+    def test_form_empty_url(self):
         # Check with empty url.
         env = dict()
         form = dict(url="", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_form_default_url (self):
+    def test_form_default_url(self):
         # Check with default url.
         env = dict()
         form = dict(url="http://", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_form_invalid_url (self):
+    def test_form_invalid_url(self):
         # Check url (in)validity.
         env = dict()
         form = dict(url="http://www.foo bar/", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_checklink (self):
+    def test_checklink(self):
         form = dict(url="http://www.example.com/", level="0")
         checklink(form)
 
-    def test_application (self):
+    def test_application(self):
         form = dict(url="http://www.example.com/", level="0")
         formdata = urllib.parse.urlencode(form)
         formdata = formdata.encode('ascii')

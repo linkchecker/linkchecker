@@ -22,7 +22,7 @@ import pytest
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttp (HttpServerTest):
+class TestHttp(HttpServerTest):
     """Test http:// link checking."""
 
     def __init__(self, methodName='runTest'):
@@ -30,7 +30,7 @@ class TestHttp (HttpServerTest):
         self.handler = CookieRedirectHttpRequestHandler
 
     @need_network
-    def test_html (self):
+    def test_html(self):
         confargs = dict(recursionlevel=1)
         self.file_test("http.html", confargs=confargs)
         self.file_test("http_lowercase.html", confargs=confargs)

@@ -81,7 +81,7 @@ def get_response_headers():
            ]
 
 
-def formvalue (form, key):
+def formvalue(form, key):
     """Get value with given key from WSGI form."""
     field = form.get(key)
     if isinstance(field, list):
@@ -99,7 +99,7 @@ class ThreadsafeIO:
         self.closed = False
 
     @synchronized(_lock)
-    def write (self, data):
+    def write(self, data):
         """Write given unicode data to buffer."""
         assert isinstance(data, str_text)
         if self.closed:
@@ -108,14 +108,14 @@ class ThreadsafeIO:
             self.buf.append(data)
 
     @synchronized(_lock)
-    def get_data (self):
+    def get_data(self):
         """Get bufferd unicode data."""
         data = "".join(self.buf)
         self.buf = []
         return data
 
     @synchronized(_lock)
-    def close (self):
+    def close(self):
         """Reset buffer and close this I/O object."""
         self.buf = []
         self.closed = True
@@ -126,7 +126,7 @@ def encode(s):
     return s.encode(HTML_ENCODING, 'ignore')
 
 
-def checklink (form=None, env=os.environ):
+def checklink(form=None, env=os.environ):
     """Validates the CGI form and checks the given links."""
     if form is None:
         form = {}
@@ -147,7 +147,7 @@ def checklink (form=None, env=os.environ):
     out.close()
 
 
-def start_check (aggregate, out):
+def start_check(aggregate, out):
     """Start checking in background and write encoded output to out."""
     # check in background
     t = threading.Thread(target=director.check_urls, args=(aggregate,))
@@ -183,12 +183,12 @@ def get_configuration(form, out):
     return config
 
 
-def get_host_name (form):
+def get_host_name(form):
     """Return host name of given URL."""
     return urllib.parse.urlparse(formvalue(form, "url"))[1]
 
 
-def checkform (form, env):
+def checkform(form, env):
     """Check form data. throw exception on error
     Be sure to NOT print out any user-given data as HTML code, so use
     only plain strings as exception text."""
@@ -227,13 +227,13 @@ def checkform (form, env):
                 raise LCFormError(_("invalid %s option %r") % (option, value))
 
 
-def log (env, msg):
+def log(env, msg):
     """Log message to WSGI error output."""
     logfile = env['wsgi.errors']
     logfile.write("%s\n" % msg)
 
 
-def dump (env, form):
+def dump(env, form):
     """Log environment and form."""
     for var, value in env.items():
         log(env, var+"="+value)
@@ -241,7 +241,7 @@ def dump (env, form):
         log(env, str(formvalue(form, key)))
 
 
-def format_error (why):
+def format_error(why):
     """Format standard error page.
     @param why: error message
     @ptype why: unicode

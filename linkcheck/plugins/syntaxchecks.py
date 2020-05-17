@@ -36,7 +36,7 @@ class W3Timer:
         self.last_w3_call = 0
 
     @synchronized(_w3_time_lock)
-    def check_w3_time (self):
+    def check_w3_time(self):
         """Make sure the W3C validators are at most called once a second."""
         if time.time() - self.last_w3_call < W3Timer.SleepSeconds:
             time.sleep(W3Timer.SleepSeconds)
@@ -111,7 +111,7 @@ class CssSyntaxCheck(_ContentPlugin):
             log.warn(LOG_PLUGIN, _("CSS syntax check plugin error: %(msg)s ") % {"msg": msg})
 
 
-def check_w3_errors (url_data, xml, w3type):
+def check_w3_errors(url_data, xml, w3type):
     """Add warnings for W3C HTML or CSS errors in xml format.
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
@@ -126,7 +126,7 @@ def check_w3_errors (url_data, xml, w3type):
         url_data.add_warning(warnmsg % attrs)
 
 
-def getXmlText (parent, tag):
+def getXmlText(parent, tag):
     """Return XML content of given tag in parent element."""
     elem = parent.getElementsByTagName(tag)[0]
     # Yes, the DOM standard is awful.

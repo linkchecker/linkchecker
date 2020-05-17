@@ -19,10 +19,10 @@ Test telnet checking.
 from .telnetserver import TelnetServerTest
 
 
-class TestTelnet (TelnetServerTest):
+class TestTelnet(TelnetServerTest):
     """Test telnet: link checking."""
 
-    def test_telnet_error (self):
+    def test_telnet_error(self):
         url = "telnet:"
         nurl = self.norm(url)
         resultlines = [
@@ -33,7 +33,7 @@ class TestTelnet (TelnetServerTest):
         ]
         self.direct(url, resultlines)
 
-    def test_telnet_localhost (self):
+    def test_telnet_localhost(self):
         url = self.get_url()
         resultlines = [
             "url %s" % url,

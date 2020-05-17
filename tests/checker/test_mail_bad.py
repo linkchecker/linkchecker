@@ -19,10 +19,10 @@ Test mail checking of bad mail addresses.
 from . import MailTest
 
 
-class TestMailBad (MailTest):
+class TestMailBad(MailTest):
     """Test mailto: link checking."""
 
-    def test_error_mail (self):
+    def test_error_mail(self):
         # too long or too short
         self.mail_error("mailto:@")
         self.mail_error("mailto:@example.org")

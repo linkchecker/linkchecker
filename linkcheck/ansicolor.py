@@ -163,7 +163,7 @@ if os.name == 'nt':
 Beep = "\007"
 
 
-def esc_ansicolor (color):
+def esc_ansicolor(color):
     """convert a named color definition to an escaped ANSI color"""
     control = ''
     if ";" in color:
@@ -191,7 +191,7 @@ def get_win_color(color):
     return foreground, background, style
 
 
-def has_colors (fp):
+def has_colors(fp):
     """Test if given file is an ANSI color enabled tty."""
     # The is_tty() function ensures that we do not colorize
     # redirected streams, as this is almost never what we want
@@ -210,7 +210,7 @@ def has_colors (fp):
     return False
 
 
-def get_columns (fp):
+def get_columns(fp):
     """Return number of columns for given file."""
     if not is_tty(fp):
         return 80
@@ -226,7 +226,7 @@ def get_columns (fp):
     return 80
 
 
-def _write_color_colorama (fp, text, color):
+def _write_color_colorama(fp, text, color):
     """Colorize text with given color."""
     foreground, background, style = get_win_color(color)
     colorama.set_console(foreground=foreground, background=background,
@@ -235,7 +235,7 @@ def _write_color_colorama (fp, text, color):
     colorama.reset_console()
 
 
-def _write_color_ansi (fp, text, color):
+def _write_color_ansi(fp, text, color):
     """Colorize text with given color."""
     fp.write(esc_ansicolor(color))
     fp.write(text)
@@ -252,7 +252,7 @@ else:
 class Colorizer:
     """Prints colored messages to streams."""
 
-    def __init__ (self, fp):
+    def __init__(self, fp):
         """Initialize with given stream (file-like object)."""
         self.fp = fp
         if has_colors(fp):
@@ -260,26 +260,26 @@ class Colorizer:
         else:
             self.write = self._write
 
-    def _write (self, text, color=None):
+    def _write(self, text, color=None):
         """Print text as-is."""
         self.fp.write(text)
 
-    def _write_color (self, text, color=None):
+    def _write_color(self, text, color=None):
         """Print text with given color. If color is None, print text as-is."""
         if color is None:
             self.fp.write(text)
         else:
             write_color(self.fp, text, color)
 
-    def __getattr__ (self, name):
+    def __getattr__(self, name):
         """Delegate attribute access to the stored stream object."""
         return getattr(self.fp, name)
 
 
-class ColoredStreamHandler (logging.StreamHandler):
+class ColoredStreamHandler(logging.StreamHandler):
     """Send colored log messages to streams (file-like objects)."""
 
-    def __init__ (self, strm=None):
+    def __init__(self, strm=None):
         """Log to given stream (a file-like object) or to stderr if
         strm is None.
         """
@@ -293,12 +293,12 @@ class ColoredStreamHandler (logging.StreamHandler):
             logging.DEBUG: 'white',
         }
 
-    def get_color (self, record):
+    def get_color(self, record):
         """Get appropriate color according to log level.
         """
         return self.colors.get(record.levelno, 'default')
 
-    def emit (self, record):
+    def emit(self, record):
         """Emit a record.
 
         If a formatter is specified, it is used to format the record.

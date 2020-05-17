@@ -24,12 +24,12 @@ import time
 import linkcheck.strformat
 
 
-class TestStrFormat (unittest.TestCase):
+class TestStrFormat(unittest.TestCase):
     """
     Test string formatting routines.
     """
 
-    def test_unquote (self):
+    def test_unquote(self):
         # Test quote stripping.
         u = linkcheck.strformat.unquote
         self.assertEqual(u(""), "")
@@ -52,7 +52,7 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(u("'a\"", matching=True), "'a\"")
         self.assertEqual(u("\"a'", matching=True), "\"a'")
 
-    def test_wrap (self):
+    def test_wrap(self):
         # Test line wrapping.
         wrap = linkcheck.strformat.wrap
         s = "11%(sep)s22%(sep)s33%(sep)s44%(sep)s55" % {'sep': os.linesep}
@@ -73,14 +73,14 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(wrap(None, 10), None)
         self.assertFalse(linkcheck.strformat.get_paragraphs(None))
 
-    def test_remove_markup (self):
+    def test_remove_markup(self):
         # Test markup removing.
         self.assertEqual(linkcheck.strformat.remove_markup("<a>"), "")
         self.assertEqual(linkcheck.strformat.remove_markup("<>"), "")
         self.assertEqual(linkcheck.strformat.remove_markup("<<>"), "")
         self.assertEqual(linkcheck.strformat.remove_markup("a < b"), "a < b")
 
-    def test_strsize (self):
+    def test_strsize(self):
         # Test byte size strings.
         self.assertRaises(ValueError, linkcheck.strformat.strsize, -1)
         self.assertEqual(linkcheck.strformat.strsize(0), "0B")
@@ -96,35 +96,35 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(linkcheck.strformat.strsize(1024*1024*1024*14),
             "14.0GB")
 
-    def test_is_ascii (self):
+    def test_is_ascii(self):
         self.assertTrue(linkcheck.strformat.is_ascii("abcd./"))
         self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
         self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
 
-    def test_indent (self):
+    def test_indent(self):
         s = "bla"
         self.assertEqual(linkcheck.strformat.indent(s, ""), s)
         self.assertEqual(linkcheck.strformat.indent(s, " "), " "+s)
 
-    def test_stripurl (self):
+    def test_stripurl(self):
         self.assertEqual(linkcheck.strformat.stripurl("a\tb"), "a\tb")
         self.assertEqual(linkcheck.strformat.stripurl(" a\t b"), "a\t b")
         self.assertEqual(linkcheck.strformat.stripurl(" ab\t\ra\nb"), "ab")
         self.assertEqual(linkcheck.strformat.stripurl(None), None)
         self.assertEqual(linkcheck.strformat.stripurl(""), "")
 
-    def test_limit (self):
+    def test_limit(self):
         self.assertEqual(linkcheck.strformat.limit("", 0), "")
         self.assertEqual(linkcheck.strformat.limit("a", 0), "")
         self.assertEqual(linkcheck.strformat.limit("1", 1), "1")
         self.assertEqual(linkcheck.strformat.limit("11", 1), "1...")
 
-    def test_strtime (self):
+    def test_strtime(self):
         zone = linkcheck.strformat.strtimezone()
         t = linkcheck.strformat.strtime(0, func=time.gmtime)
         self.assertEqual(t, "1970-01-01 00:00:00"+zone)
 
-    def test_duration (self):
+    def test_duration(self):
         duration = linkcheck.strformat.strduration
         self.assertEqual(duration(-0.5), "-00:01")
         self.assertEqual(duration(0), "00:00")
@@ -136,7 +136,7 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(duration(60*60), "01:00:00")
         self.assertEqual(duration(60*60*24), "24:00:00")
 
-    def test_duration_long (self):
+    def test_duration_long(self):
         duration = lambda s: linkcheck.strformat.strduration_long(s, do_translate=False)
         self.assertEqual(duration(-0.5), "-0.50 seconds")
         self.assertEqual(duration(0), "0.00 seconds")
@@ -151,23 +151,23 @@ class TestStrFormat (unittest.TestCase):
         self.assertEqual(duration(60*60*24*365 + 60*60*24 + 2),
                          "1 year, 1 day")
 
-    def test_linenumber (self):
+    def test_linenumber(self):
         get_line_number = linkcheck.strformat.get_line_number
         self.assertEqual(get_line_number("a", -5), 0)
         self.assertEqual(get_line_number("a", 0), 1)
         self.assertEqual(get_line_number("a\nb", 2), 2)
 
-    def test_encoding (self):
+    def test_encoding(self):
         is_encoding = linkcheck.strformat.is_encoding
         self.assertTrue(is_encoding('ascii'))
         self.assertFalse(is_encoding('hulla'))
 
-    def test_unicode_safe (self):
+    def test_unicode_safe(self):
         unicode_safe = linkcheck.strformat.unicode_safe
         self.assertEqual(unicode_safe("a"), "a")
         self.assertEqual(unicode_safe("a"), "a")
 
-    def test_ascii_safe (self):
+    def test_ascii_safe(self):
         ascii_safe = linkcheck.strformat.ascii_safe
         self.assertEqual(ascii_safe("a"), "a")
         self.assertEqual(ascii_safe("ä"), "")

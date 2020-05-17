@@ -19,15 +19,15 @@ Test http checking.
 from .httpserver import HttpServerTest
 from tests import need_network
 
-class TestHttpMisc (HttpServerTest):
+class TestHttpMisc(HttpServerTest):
     """Test http:// misc link checking."""
 
     @need_network
-    def test_html (self):
+    def test_html(self):
         self.swf_test()
         self.file_test("sitemap.xml")
 
-    def swf_test (self):
+    def swf_test(self):
         url = self.get_url("test.swf")
         resultlines = [
             "url %s" % url,

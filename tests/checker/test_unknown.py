@@ -19,10 +19,10 @@ Test checking of unknown URLs.
 from . import LinkCheckTest
 
 
-class TestUnknown (LinkCheckTest):
+class TestUnknown(LinkCheckTest):
     """Test unknown URL scheme checking."""
 
-    def test_skype (self):
+    def test_skype(self):
         url = "skype:"
         nurl = self.norm(url)
         resultlines = [
@@ -34,7 +34,7 @@ class TestUnknown (LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_irc (self):
+    def test_irc(self):
         url = "irc://example.org"
         nurl = self.norm(url)
         resultlines = [
@@ -56,7 +56,7 @@ class TestUnknown (LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_steam (self):
+    def test_steam(self):
         url = "steam://connect/example.org"
         nurl = self.norm(url)
         resultlines = [
@@ -68,7 +68,7 @@ class TestUnknown (LinkCheckTest):
         ]
         self.direct(url, resultlines)
 
-    def test_feed (self):
+    def test_feed(self):
         url = "feed:https://example.com/entries.atom"
         nurl = "feed:https%3A/example.com/entries.atom"
         resultlines = [

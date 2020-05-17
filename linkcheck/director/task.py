@@ -20,10 +20,10 @@ from .. import threader
 from . import console
 
 
-class CheckedTask (threader.StoppableThread):
+class CheckedTask(threader.StoppableThread):
     """Stoppable URL check task, handling error conditions while running."""
 
-    def run (self):
+    def run(self):
         """Handle keyboard interrupt and other errors."""
         try:
             self.run_checked()
@@ -33,25 +33,25 @@ class CheckedTask (threader.StoppableThread):
             self.internal_error()
 
     @notimplemented
-    def run_checked (self):
+    def run_checked(self):
         """Overload in subclass."""
         pass
 
     @notimplemented
-    def internal_error (self):
+    def internal_error(self):
         """Overload in subclass."""
         pass
 
 
-class LoggedCheckedTask (CheckedTask):
+class LoggedCheckedTask(CheckedTask):
     """URL check task with a logger instance and internal error handling."""
 
-    def __init__ (self, logger):
+    def __init__(self, logger):
         """Initialize super instance and store given logger."""
         super(CheckedTask, self).__init__()
         self.logger = logger
 
-    def internal_error (self):
+    def internal_error(self):
         """Log an internal error on console and the logger."""
         console.internal_error()
         self.logger.log_internal_error()

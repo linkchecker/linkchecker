@@ -19,19 +19,19 @@ Support for managing threads.
 import threading
 
 
-class StoppableThread (threading.Thread):
+class StoppableThread(threading.Thread):
     """Thread class with a stop() method. The thread itself has to check
     regularly for the stopped() condition."""
 
-    def __init__ (self):
+    def __init__(self):
         """Store stop event."""
         super(StoppableThread, self).__init__()
         self._stopper = threading.Event()
 
-    def stop (self):
+    def stop(self):
         """Set stop event."""
         self._stopper.set()
 
-    def stopped (self, timeout=None):
+    def stopped(self, timeout=None):
         """Return True if stop event is set."""
         return self._stopper.wait(timeout)

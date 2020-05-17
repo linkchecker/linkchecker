@@ -21,12 +21,12 @@ See also http://cr.yp.to/ftpparse.html
 
 months = ("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep",
           "oct", "nov", "dec")
-def ismonth (txt):
+def ismonth(txt):
     """Check if given text is a month name."""
     return txt.lower() in months
 
 
-def ftpparse (line):
+def ftpparse(line):
     """Parse a FTP list line into a dictionary with attributes:
     name - name of file (string)
     trycwd - False if cwd is definitely pointless, True otherwise

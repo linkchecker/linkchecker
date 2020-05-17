@@ -20,11 +20,11 @@ from .. import need_pyftpdlib
 from .ftpserver import FtpServerTest
 
 
-class TestFtp (FtpServerTest):
+class TestFtp(FtpServerTest):
     """Test ftp: link checking."""
 
     @need_pyftpdlib
-    def test_ftp (self):
+    def test_ftp(self):
         # ftp two slashes
         url = "ftp://%s:%d/" % (self.host, self.port)
         resultlines = [

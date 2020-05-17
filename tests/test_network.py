@@ -22,12 +22,12 @@ from tests import need_network, need_linux
 from linkcheck.network import iputil
 
 
-class TestNetwork (unittest.TestCase):
+class TestNetwork(unittest.TestCase):
     """Test network functions."""
 
     @need_network
     @need_linux
-    def test_iputils (self):
+    def test_iputils(self):
         # note: need a hostname whose reverse lookup of the IP is the same host
         host = "dinsdale.python.org"
         ips = iputil.resolve_host(host)

@@ -26,7 +26,7 @@ from .. import parser
 QUEUE_POLL_INTERVALL_SECS = 1.0
 
 
-def check_urls (urlqueue, logger):
+def check_urls(urlqueue, logger):
     """Check URLs without threading."""
     while not urlqueue.empty():
         url_data = urlqueue.get()
@@ -80,21 +80,21 @@ def check_url(url_data, logger):
 class Checker(task.LoggedCheckedTask):
     """URL check thread."""
 
-    def __init__ (self, urlqueue, logger, add_request_session):
+    def __init__(self, urlqueue, logger, add_request_session):
         """Store URL queue and logger."""
         super(Checker, self).__init__(logger)
         self.urlqueue = urlqueue
         self.origname = self.getName()
         self.add_request_session = add_request_session
 
-    def run_checked (self):
+    def run_checked(self):
         """Check URLs in the queue."""
         # construct per-thread HTTP/S requests session
         self.add_request_session()
         while not self.stopped(0):
             self.check_url()
 
-    def check_url (self):
+    def check_url(self):
         """Try to get URL data from queue and check it."""
         try:
             url_data = self.urlqueue.get(timeout=QUEUE_POLL_INTERVALL_SECS)
@@ -109,7 +109,7 @@ class Checker(task.LoggedCheckedTask):
         except Exception:
             self.internal_error()
 
-    def check_url_data (self, url_data):
+    def check_url_data(self, url_data):
         """Check one URL data instance."""
         if url_data.url is None:
             url = ""

@@ -23,7 +23,7 @@ from linkcheck.configuration import get_user_data
 from . import _Logger
 
 
-class BlacklistLogger (_Logger):
+class BlacklistLogger(_Logger):
     """
     Updates a blacklist of wrong links. If a link on the blacklist
     is working (again), it is removed from the list. So after n days
@@ -36,7 +36,7 @@ class BlacklistLogger (_Logger):
         "filename": os.path.join(get_user_data(), "blacklist"),
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Intialize with old blacklist data (if found, else not)."""
         args = self.get_args(kwargs)
         super(BlacklistLogger, self).__init__(**args)
@@ -45,13 +45,13 @@ class BlacklistLogger (_Logger):
         if self.filename is not None and os.path.exists(self.filename):
             self.read_blacklist()
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write nothing.
         """
         pass
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Put invalid url in blacklist, delete valid url from blacklist.
         """
@@ -66,13 +66,13 @@ class BlacklistLogger (_Logger):
             if not url_data.valid:
                 self.blacklist[key] = 1
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Write blacklist file.
         """
         self.write_blacklist()
 
-    def read_blacklist (self):
+    def read_blacklist(self):
         """
         Read a previously stored blacklist from file fd.
         """
@@ -85,7 +85,7 @@ class BlacklistLogger (_Logger):
                 value, key = line.split(None, 1)
                 self.blacklist[key] = int(value)
 
-    def write_blacklist (self):
+    def write_blacklist(self):
         """
         Write the blacklist.
         """

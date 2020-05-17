@@ -41,35 +41,35 @@ def parse_url(url_data):
         url_data.aggregate.plugin_manager.run_parser_plugins(url_data, pagetype=key)
 
 
-def parse_html (url_data):
+def parse_html(url_data):
     """Parse into HTML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
     linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.LinkTags)
 
 
-def parse_opera (url_data):
+def parse_opera(url_data):
     """Parse an opera bookmark file."""
     from ..bookmarks.opera import parse_bookmark_data
     for url, name, lineno in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, line=lineno, name=name)
 
 
-def parse_chromium (url_data):
+def parse_chromium(url_data):
     """Parse a Chromium or Google Chrome bookmark file."""
     from ..bookmarks.chromium import parse_bookmark_data
     for url, name in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, name=name)
 
 
-def parse_safari (url_data):
+def parse_safari(url_data):
     """Parse a Safari bookmark file."""
     from ..bookmarks.safari import parse_bookmark_data
     for url, name in parse_bookmark_data(url_data.get_raw_content()):
         url_data.add_url(url, name=name)
 
 
-def parse_text (url_data):
+def parse_text(url_data):
     """Parse a text file with one url per line; comment and blank
     lines are ignored."""
     lineno = 0
@@ -81,7 +81,7 @@ def parse_text (url_data):
         url_data.add_url(line, line=lineno)
 
 
-def parse_css (url_data):
+def parse_css(url_data):
     """
     Parse a CSS file for url() patterns.
     """
@@ -96,7 +96,7 @@ def parse_css (url_data):
             url_data.add_url(url, line=lineno, column=column)
 
 
-def parse_swf (url_data):
+def parse_swf(url_data):
     """Parse a SWF file for URLs."""
     linkfinder = linkparse.swf_url_re.finditer
     for mo in linkfinder(url_data.get_raw_content()):
@@ -107,14 +107,14 @@ def parse_swf (url_data):
         url_data.add_url(url)
 
 
-def parse_wml (url_data):
+def parse_wml(url_data):
     """Parse into WML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
     linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.WmlTags)
 
 
-def parse_firefox (url_data):
+def parse_firefox(url_data):
     """Parse a Firefox3 bookmark file."""
     filename = url_data.get_os_filename()
     for url, name in firefox.parse_bookmark_file(filename):

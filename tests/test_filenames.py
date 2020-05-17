@@ -23,13 +23,13 @@ from linkcheck.checker.fileurl import get_nt_filename
 from . import need_windows
 
 
-class TestFilenames (unittest.TestCase):
+class TestFilenames(unittest.TestCase):
     """
     Test filename routines.
     """
 
     @need_windows
-    def test_nt_filename (self):
+    def test_nt_filename(self):
         path = os.getcwd()
         realpath = get_nt_filename(path)
         self.assertEqual(path, realpath)

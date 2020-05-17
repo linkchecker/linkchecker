@@ -30,7 +30,7 @@ Columns = (
 )
 
 
-class CSVLogger (_Logger):
+class CSVLogger(_Logger):
     """
     CSV output, consisting of one line per entry. Entries are
     separated by a separator (a semicolon per default).
@@ -45,7 +45,7 @@ class CSVLogger (_Logger):
         "dialect": "excel",
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Store default separator and (os dependent) line terminator."""
         args = self.get_args(kwargs)
         super(CSVLogger, self).__init__(**args)
@@ -55,11 +55,11 @@ class CSVLogger (_Logger):
         self.dialect = args['dialect']
         self.linesep = os.linesep
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """Write CSV comment."""
         self.writeln(s="# %s" % s, **args)
 
-    def start_output (self):
+    def start_output(self):
         """Write checking start info as csv comment."""
         super(CSVLogger, self).start_output()
         row = []
@@ -79,7 +79,7 @@ class CSVLogger (_Logger):
         if row:
             self.writerow(row)
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write csv formatted url check info."""
         row = []
         if self.has_part("urlname"):
@@ -119,7 +119,7 @@ class CSVLogger (_Logger):
         self.writerow(map(strformat.unicode_safe, row))
         self.flush()
 
-    def writerow (self, row):
+    def writerow(self, row):
         """Write one row in CSV format."""
         self.writer.writerow(row)
         # Fetch UTF-8 output from the queue ...
@@ -134,7 +134,7 @@ class CSVLogger (_Logger):
         self.queue.seek(0)
         self.queue.truncate(0)
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write end of checking info as csv comment."""
         if self.has_part("outro"):
             self.write_outro()

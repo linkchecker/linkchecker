@@ -22,7 +22,7 @@ def run_with_options(options, cmd=linkchecker_cmd):
     run_checked([sys.executable, cmd] + options)
 
 
-class TestLinkchecker (unittest.TestCase):
+class TestLinkchecker(unittest.TestCase):
     """Test the linkchecker commandline client."""
 
     def test_linkchecker(self):

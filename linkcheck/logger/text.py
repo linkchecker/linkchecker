@@ -22,7 +22,7 @@ from .. import ansicolor, strformat, configuration, i18n
 from builtins import str as str_text
 
 
-class TextLogger (_Logger):
+class TextLogger(_Logger):
     """
     A text logger, colorizing the output if possible.
 
@@ -52,7 +52,7 @@ class TextLogger (_Logger):
         'colorreset':   "default",
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize error counter and optional file output."""
         args = self.get_args(kwargs)
         super(TextLogger, self).__init__(**args)
@@ -71,27 +71,27 @@ class TextLogger (_Logger):
         self.colordlsize = args.get('colordlsize', 'default')
         self.colorreset = args.get('colorreset', 'default')
 
-    def init_fileoutput (self, args):
+    def init_fileoutput(self, args):
         """Colorize file output if possible."""
         super(TextLogger, self).init_fileoutput(args)
         if self.fd is not None:
             self.fd = ansicolor.Colorizer(self.fd)
 
-    def start_fileoutput (self):
+    def start_fileoutput(self):
         """Needed to make file descriptor color aware."""
         init_color = self.fd is None
         super(TextLogger, self).start_fileoutput()
         if init_color:
             self.fd = ansicolor.Colorizer(self.fd)
 
-    def start_output (self):
+    def start_output(self):
         """Write generic start checking info."""
         super(TextLogger, self).start_output()
         if self.has_part('intro'):
             self.write_intro()
         self.flush()
 
-    def write_intro (self):
+    def write_intro(self):
         """Log introduction text."""
         self.writeln(configuration.AppInfo)
         self.writeln(configuration.Freeware)
@@ -104,7 +104,7 @@ class TextLogger (_Logger):
         self.writeln(_("Start checking at %s") %
                      strformat.strtime(self.starttime))
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write url checking info."""
         self.writeln()
         if self.has_part('url'):
@@ -133,24 +133,24 @@ class TextLogger (_Logger):
             self.write_result(url_data)
         self.flush()
 
-    def write_id (self):
+    def write_id(self):
         """Write unique ID of url_data."""
         self.writeln()
         self.write(self.part('id') + self.spaces('id'))
         self.writeln("%d" % self.stats.number, color=self.colorinfo)
 
-    def write_url (self, url_data):
+    def write_url(self, url_data):
         """Write url_data.base_url."""
         self.write(self.part('url') + self.spaces('url'))
         txt = strformat.strline(url_data.base_url)
         self.writeln(txt, color=self.colorurl)
 
-    def write_name (self, url_data):
+    def write_name(self, url_data):
         """Write url_data.name."""
         self.write(self.part("name") + self.spaces("name"))
         self.writeln(strformat.strline(url_data.name), color=self.colorname)
 
-    def write_parent (self, url_data):
+    def write_parent(self, url_data):
         """Write url_data.parent_url."""
         self.write(self.part('parenturl') + self.spaces("parenturl"))
         txt = url_data.parent_url
@@ -162,35 +162,35 @@ class TextLogger (_Logger):
             txt += _(", page %d") % url_data.page
         self.writeln(txt, color=self.colorparent)
 
-    def write_base (self, url_data):
+    def write_base(self, url_data):
         """Write url_data.base_ref."""
         self.write(self.part("base") + self.spaces("base"))
         self.writeln(url_data.base_ref, color=self.colorbase)
 
-    def write_real (self, url_data):
+    def write_real(self, url_data):
         """Write url_data.url."""
         self.write(self.part("realurl") + self.spaces("realurl"))
         self.writeln(str_text(url_data.url), color=self.colorreal)
 
-    def write_dltime (self, url_data):
+    def write_dltime(self, url_data):
         """Write url_data.dltime."""
         self.write(self.part("dltime") + self.spaces("dltime"))
         self.writeln(_("%.3f seconds") % url_data.dltime,
                      color=self.colordltime)
 
-    def write_size (self, url_data):
+    def write_size(self, url_data):
         """Write url_data.size."""
         self.write(self.part("dlsize") + self.spaces("dlsize"))
         self.writeln(strformat.strsize(url_data.size),
                      color=self.colordlsize)
 
-    def write_checktime (self, url_data):
+    def write_checktime(self, url_data):
         """Write url_data.checktime."""
         self.write(self.part("checktime") + self.spaces("checktime"))
         self.writeln(_("%.3f seconds") % url_data.checktime,
                      color=self.colordltime)
 
-    def write_info (self, url_data):
+    def write_info(self, url_data):
         """Write url_data.info."""
         self.write(self.part("info") + self.spaces("info"))
         self.writeln(self.wrap(url_data.info, 65), color=self.colorinfo)
@@ -200,13 +200,13 @@ class TextLogger (_Logger):
         self.write(self.part("modified") + self.spaces("modified"))
         self.writeln(self.format_modified(url_data.modified))
 
-    def write_warning (self, url_data):
+    def write_warning(self, url_data):
         """Write url_data.warning."""
         self.write(self.part("warning") + self.spaces("warning"))
         warning_msgs = ["[%s] %s" % x for x in url_data.warnings]
         self.writeln(self.wrap(warning_msgs, 65), color=self.colorwarning)
 
-    def write_result (self, url_data):
+    def write_result(self, url_data):
         """Write url_data.result."""
         self.write(self.part("result") + self.spaces("result"))
         if url_data.valid:
@@ -219,7 +219,7 @@ class TextLogger (_Logger):
             self.write(": " + url_data.result, color=color)
         self.writeln()
 
-    def write_outro (self, interrupt=False):
+    def write_outro(self, interrupt=False):
         """Write end of checking message."""
         self.writeln()
         if interrupt:
@@ -264,7 +264,7 @@ class TextLogger (_Logger):
              {"time": strformat.strtime(self.stoptime),
               "duration": strformat.strduration_long(duration)})
 
-    def write_stats (self):
+    def write_stats(self):
         """Write check statistic info."""
         self.writeln()
         self.writeln(_("Statistics:"))
@@ -282,7 +282,7 @@ class TextLogger (_Logger):
         else:
             self.writeln(_("No statistics available since no URLs were checked."))
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write end of output info, and flush all output buffers."""
         self.stats.downloaded_bytes = kwargs.get("downloaded_bytes")
         self.stats.num_urls = kwargs.get("num_urls")

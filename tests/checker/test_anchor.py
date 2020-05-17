@@ -19,12 +19,12 @@ Test html anchor parsing and checking.
 from . import LinkCheckTest
 
 
-class TestAnchor (LinkCheckTest):
+class TestAnchor(LinkCheckTest):
     """
     Test anchor checking of HTML pages.
     """
 
-    def test_anchor (self):
+    def test_anchor(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
         url = "file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
         nurl = self.norm(url)

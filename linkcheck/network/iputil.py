@@ -22,7 +22,7 @@ import re
 import socket
 from .. import log, LOG_CHECK
 
-def is_valid_ip (ip):
+def is_valid_ip(ip):
     """
     Return True if given ip is a valid IPv4 or IPv6 address.
     """
@@ -33,7 +33,7 @@ def is_valid_ip (ip):
     return True
 
 
-def resolve_host (host):
+def resolve_host(host):
     """
     @host: hostname or IP address
     Return list of ip numbers for given host.

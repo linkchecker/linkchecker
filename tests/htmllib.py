@@ -44,7 +44,7 @@ def pretty_print_html(fd, soup):
             fd.write("/>")
 
 
-def quote_attrval (s):
+def quote_attrval(s):
     """
     Quote a HTML attribute to be able to wrap it in double quotes.
 

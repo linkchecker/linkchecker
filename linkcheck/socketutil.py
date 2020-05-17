@@ -34,7 +34,7 @@ if socket.has_ipv6:
             raise
 
 
-def create_socket (family, socktype, proto=0, timeout=60):
+def create_socket(family, socktype, proto=0, timeout=60):
     """
     Create a socket with given family and type. If SSL context
     is given an SSL socket is created.

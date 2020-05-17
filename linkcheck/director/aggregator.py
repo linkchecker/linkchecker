@@ -52,7 +52,7 @@ def new_request_session(config, cookies):
 class Aggregate:
     """Store thread-safe data collections for checker threads."""
 
-    def __init__ (self, config, urlqueue, robots_txt, plugin_manager,
+    def __init__(self, config, urlqueue, robots_txt, plugin_manager,
                   result_cache):
         """Store given link checking objects."""
         self.config = config
@@ -105,7 +105,7 @@ class Aggregate:
             raise LinkCheckerError("No cookies set by login URL %s" % url)
 
     @synchronized(_threads_lock)
-    def start_threads (self):
+    def start_threads(self):
         """Spawn threads for URL checking and status printing."""
         if self.config["status"]:
             t = status.Status(self, self.config["status_wait_seconds"])
@@ -150,7 +150,7 @@ class Aggregate:
         self.times[host] = t + wait_time
 
     @synchronized(_threads_lock)
-    def print_active_threads (self):
+    def print_active_threads(self):
         """Log all currently active threads."""
         debug = log.is_debug(LOG_CHECK)
         if debug:
@@ -174,11 +174,11 @@ class Aggregate:
             if name.startswith("CheckThread-"):
                 yield name
 
-    def cancel (self):
+    def cancel(self):
         """Empty the URL queue."""
         self.urlqueue.do_shutdown()
 
-    def abort (self):
+    def abort(self):
         """Print still-active URLs and empty the URL queue."""
         self.print_active_threads()
         self.cancel()
@@ -190,12 +190,12 @@ class Aggregate:
             raise KeyboardInterrupt()
 
     @synchronized(_threads_lock)
-    def remove_stopped_threads (self):
+    def remove_stopped_threads(self):
         """Remove the stopped threads from the internal thread list."""
         self.threads = [t for t in self.threads if t.is_alive()]
 
     @synchronized(_threads_lock)
-    def finish (self):
+    def finish(self):
         """Wait for checker threads to finish."""
         if not self.urlqueue.empty():
             # This happens when all checker threads died.
@@ -206,7 +206,7 @@ class Aggregate:
             t.join(timeout=1.0)
 
     @synchronized(_threads_lock)
-    def is_finished (self):
+    def is_finished(self):
         """Determine if checking is finished."""
         self.remove_stopped_threads()
         return self.urlqueue.empty() and not self.threads

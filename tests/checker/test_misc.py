@@ -20,23 +20,23 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestMisc (LinkCheckTest):
+class TestMisc(LinkCheckTest):
     """
     Test misc link types.
     """
 
     @need_network
-    def test_misc (self):
+    def test_misc(self):
         self.file_test("misc.html")
 
-    def test_html5 (self):
+    def test_html5(self):
         self.file_test("html5.html")
 
-    def test_utf8 (self):
+    def test_utf8(self):
         self.file_test("utf8.html")
 
     @need_network
-    def test_archive (self):
+    def test_archive(self):
         self.file_test("archive.html")
 
     @need_network

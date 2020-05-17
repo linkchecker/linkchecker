@@ -21,7 +21,7 @@ from .xmllog import _XMLLogger
 from .graph import _GraphLogger
 
 
-class GraphXMLLogger (_XMLLogger, _GraphLogger):
+class GraphXMLLogger(_XMLLogger, _GraphLogger):
     """XML output mirroring the GML structure. Easy to parse with any XML
     tool."""
 
@@ -31,14 +31,14 @@ class GraphXMLLogger (_XMLLogger, _GraphLogger):
         "filename": "linkchecker-out.gxml",
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
         super(GraphXMLLogger, self).__init__(**args)
         self.nodes = {}
         self.nodeid = 0
 
-    def start_output (self):
+    def start_output(self):
         """Write start of checking info as xml comment."""
         super(GraphXMLLogger, self).start_output()
         self.xml_start_output()
@@ -46,7 +46,7 @@ class GraphXMLLogger (_XMLLogger, _GraphLogger):
         self.xml_starttag('graph', attrs={"isDirected": "true"})
         self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write one node and all possible edges."""
         node = self.get_node(url_data)
         if node:
@@ -66,7 +66,7 @@ class GraphXMLLogger (_XMLLogger, _GraphLogger):
             self.xml_endtag("data")
             self.xml_endtag("node")
 
-    def write_edge (self, node):
+    def write_edge(self, node):
         """Write one edge."""
         attrs = {
             "source": "%d" % self.nodes[node["parent_url"]]["id"],
@@ -80,7 +80,7 @@ class GraphXMLLogger (_XMLLogger, _GraphLogger):
         self.xml_endtag("data")
         self.xml_endtag("edge")
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Finish graph output, and print end of checking info as xml
         comment."""
         self.xml_endtag("graph")

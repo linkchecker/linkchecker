@@ -43,7 +43,7 @@ def guess_url(url):
     return url
 
 
-def absolute_url (base_url, base_ref, parent_url):
+def absolute_url(base_url, base_ref, parent_url):
     """
     Search for the absolute url to detect the link type. This does not
     join any url fragments together!
@@ -64,7 +64,7 @@ def absolute_url (base_url, base_ref, parent_url):
     return ""
 
 
-def get_url_from (base_url, recursion_level, aggregate,
+def get_url_from(base_url, recursion_level, aggregate,
                   parent_url=None, base_ref=None, line=None, column=None,
                   page=0, name="", parent_content_type=None, extern=None, url_encoding=None):
     """
@@ -125,7 +125,7 @@ def get_url_from (base_url, recursion_level, aggregate,
                  line=line, column=column, page=page, name=name, extern=extern, url_encoding=url_encoding)
 
 
-def get_urlclass_from (scheme, assume_local_file=False):
+def get_urlclass_from(scheme, assume_local_file=False):
     """Return checker class for given URL scheme. If the scheme
     cannot be matched and assume_local_file is True, assume a local file.
     """
@@ -154,7 +154,7 @@ def get_urlclass_from (scheme, assume_local_file=False):
     return klass
 
 
-def get_index_html (urls):
+def get_index_html(urls):
     """
     Construct artificial index.html from given URLs.
 

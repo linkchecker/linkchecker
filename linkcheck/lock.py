@@ -19,7 +19,7 @@ Locking utility class.
 import threading
 from . import log, LOG_THREAD
 
-def get_lock (name, debug=False):
+def get_lock(name, debug=False):
     """Get a new lock.
     @param debug: if True, acquire() and release() will have debug messages
     @ptype debug: boolean, default is False
@@ -36,19 +36,19 @@ def get_lock (name, debug=False):
 class DebugLock:
     """Debugging lock class."""
 
-    def __init__ (self, lock, name):
+    def __init__(self, lock, name):
         """Store lock and name parameters."""
         self.lock = lock
         self.name = name
 
-    def acquire (self, blocking=1):
+    def acquire(self, blocking=1):
         """Acquire lock."""
         threadname = threading.currentThread().getName()
         log.debug(LOG_THREAD, "Acquire %s for %s", self.name, threadname)
         self.lock.acquire(blocking)
         log.debug(LOG_THREAD, "...acquired %s for %s", self.name, threadname)
 
-    def release (self):
+    def release(self):
         """Release lock."""
         threadname = threading.currentThread().getName()
         log.debug(LOG_THREAD, "Release %s for %s", self.name, threadname)

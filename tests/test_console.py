@@ -21,8 +21,8 @@ import unittest
 import linkcheck.director.console
 
 
-class TestConsole (unittest.TestCase):
+class TestConsole(unittest.TestCase):
     """Test console operations."""
 
-    def test_internal_error (self):
+    def test_internal_error(self):
         linkcheck.director.console.internal_error()

@@ -22,7 +22,7 @@ import email
 import requests
 
 
-def from_file (filename):
+def from_file(filename):
     """Parse cookie data from a text file in HTTP header format.
 
     @return: list of tuples (headers, scheme, host, path)
@@ -43,7 +43,7 @@ def from_file (filename):
         return entries
 
 
-def from_headers (strheader):
+def from_headers(strheader):
     """Parse cookie data from a string in HTTP header (RFC 2616) format.
 
     @return: list of cookies

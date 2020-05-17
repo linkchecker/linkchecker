@@ -33,7 +33,7 @@ class RobotsTxt:
     format: {cache key (string) -> robots.txt content (RobotFileParser)}
     """
 
-    def __init__ (self, useragent):
+    def __init__(self, useragent):
         """Initialize per-URL robots.txt cache."""
         # mapping {URL -> parsed robots.txt}
         self.cache = LFUCache(size=100)
@@ -41,13 +41,13 @@ class RobotsTxt:
         self.roboturl_locks = {}
         self.useragent = useragent
 
-    def allows_url (self, url_data):
+    def allows_url(self, url_data):
         """Ask robots.txt allowance."""
         roboturl = url_data.get_robots_txt_url()
         with self.get_lock(roboturl):
             return self._allows_url(url_data, roboturl)
 
-    def _allows_url (self, url_data, roboturl):
+    def _allows_url(self, url_data, roboturl):
         """Ask robots.txt allowance. Assumes only single thread per robots.txt
         URL calls this function."""
         with cache_lock:

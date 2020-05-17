@@ -29,7 +29,7 @@ from .. import fileutil, log, LOG_PLUGIN
 
 
 _initialized = False
-def init_win32com ():
+def init_win32com():
     """Initialize the win32com.client cache."""
     global _initialized
     if _initialized:
@@ -47,7 +47,7 @@ def init_win32com ():
     _initialized = True
 
 
-def has_word ():
+def has_word():
     """Determine if Word is available on the current system."""
     if not has_win32com:
         return False
@@ -64,13 +64,13 @@ def has_word ():
     return False
 
 
-def constants (name):
+def constants(name):
     """Helper to return constants. Avoids importing win32com.client in
     other modules."""
     return getattr(win32com.client.constants, name)
 
 
-def get_word_app ():
+def get_word_app():
     """Return open Word.Application handle, or None if Word is not available
     on this system."""
     if not has_word():
@@ -84,18 +84,18 @@ def get_word_app ():
     return app
 
 
-def close_word_app (app):
+def close_word_app(app):
     """Close Word application object."""
     app.Quit()
 
 
-def open_wordfile (app, filename):
+def open_wordfile(app, filename):
     """Open given Word file with application object."""
     return app.Documents.Open(filename, ReadOnly=True,
       AddToRecentFiles=False, Visible=False, NoEncodingDialog=True)
 
 
-def close_wordfile (doc):
+def close_wordfile(doc):
     """Close word file."""
     doc.Close()
 
@@ -155,7 +155,7 @@ def get_line_number(doc, wrange):
     return lineno
 
 
-def get_temp_filename (content):
+def get_temp_filename(content):
     """Get temporary filename for content to parse."""
     # store content in temporary file
     fd, filename = fileutil.get_temp_file(mode='wb', suffix='.doc',

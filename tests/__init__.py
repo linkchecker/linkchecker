@@ -29,7 +29,7 @@ basedir = os.path.dirname(__file__)
 linkchecker_cmd = os.path.join(os.path.dirname(basedir), "linkchecker")
 
 
-def run (cmd, verbosity=0, **kwargs):
+def run(cmd, verbosity=0, **kwargs):
     """Run command without error checking.
     @return: command return code"""
     if kwargs.get("shell"):
@@ -38,7 +38,7 @@ def run (cmd, verbosity=0, **kwargs):
     return subprocess.call(cmd, **kwargs)
 
 
-def run_checked (cmd, ret_ok=(0,), **kwargs):
+def run_checked(cmd, ret_ok=(0,), **kwargs):
     """Run command and raise OSError on error."""
     retcode = run(cmd, **kwargs)
     if retcode not in ret_ok:
@@ -48,7 +48,7 @@ def run_checked (cmd, ret_ok=(0,), **kwargs):
 
 
 
-def run_silent (cmd):
+def run_silent(cmd):
     """Run given command without output."""
     null = open(os.name == 'nt' and ':NUL' or "/dev/null", 'w')
     try:
@@ -57,11 +57,11 @@ def run_silent (cmd):
         null.close()
 
 
-def _need_func (testfunc, name):
+def _need_func(testfunc, name):
     """Decorator skipping test if given testfunc fails."""
-    def check_func (func):
+    def check_func(func):
         @wraps(func)
-        def newfunc (*args, **kwargs):
+        def newfunc(*args, **kwargs):
             if not testfunc():
                 pytest.skip("%s is not available" % name)
             return func(*args, **kwargs)
@@ -70,7 +70,7 @@ def _need_func (testfunc, name):
 
 
 @lru_cache(1)
-def has_network ():
+def has_network():
     """Test if network is up."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -85,7 +85,7 @@ need_network = _need_func(has_network, "network")
 
 
 @lru_cache(1)
-def has_msgfmt ():
+def has_msgfmt():
     """Test if msgfmt is available."""
     return run_silent(["msgfmt", "-V"]) == 0
 
@@ -93,7 +93,7 @@ need_msgfmt = _need_func(has_msgfmt, "msgfmt")
 
 
 @lru_cache(1)
-def has_posix ():
+def has_posix():
     """Test if this is a POSIX system."""
     return os.name == "posix"
 
@@ -101,7 +101,7 @@ need_posix = _need_func(has_posix, "POSIX system")
 
 
 @lru_cache(1)
-def has_windows ():
+def has_windows():
     """Test if this is a Windows system."""
     return os.name == "nt"
 
@@ -109,7 +109,7 @@ need_windows = _need_func(has_windows, "Windows system")
 
 
 @lru_cache(1)
-def has_linux ():
+def has_linux():
     """Test if this is a Linux system."""
     return sys.platform.startswith("linux")
 
@@ -117,7 +117,7 @@ need_linux = _need_func(has_linux, "Linux system")
 
 
 @lru_cache(1)
-def has_clamav ():
+def has_clamav():
     """Test if ClamAV daemon is installed and running."""
     try:
         cmd = ["grep", "LocalSocket", "/etc/clamav/clamd.conf"]
@@ -135,7 +135,7 @@ need_clamav = _need_func(has_clamav, "ClamAV")
 
 
 @lru_cache(1)
-def has_proxy ():
+def has_proxy():
     """Test if proxy is running on port 8081."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -149,7 +149,7 @@ need_proxy = _need_func(has_proxy, "proxy")
 
 
 @lru_cache(1)
-def has_pyftpdlib ():
+def has_pyftpdlib():
     """Test if pyftpdlib is available."""
     try:
         import pyftpdlib
@@ -161,7 +161,7 @@ need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 
 
 @lru_cache(1)
-def has_biplist ():
+def has_biplist():
     """Test if biplist is available."""
     try:
         import biplist
@@ -173,7 +173,7 @@ need_biplist = _need_func(has_biplist, "biplist")
 
 
 @lru_cache(1)
-def has_newsserver (server):
+def has_newsserver(server):
     import nntplib
     try:
         nntp = nntplib.NNTP(server, usenetrc=False)
@@ -183,10 +183,10 @@ def has_newsserver (server):
         return False
 
 
-def need_newsserver (server):
+def need_newsserver(server):
     """Decorator skipping test if newsserver is not available."""
-    def check_func (func):
-        def newfunc (*args, **kwargs):
+    def check_func(func):
+        def newfunc(*args, **kwargs):
             if not has_newsserver(server):
                 pytest.skip("Newsserver `%s' is not available" % server)
             return func(*args, **kwargs)
@@ -197,7 +197,7 @@ def need_newsserver (server):
 
 
 @lru_cache(1)
-def has_x11 ():
+def has_x11():
     """Test if DISPLAY variable is set."""
     return os.getenv('DISPLAY') is not None
 
@@ -222,7 +222,7 @@ need_pdflib = _need_func(has_pdflib, 'pdflib')
 
 
 @contextmanager
-def _limit_time (seconds):
+def _limit_time(seconds):
     """Raises LinkCheckerInterrupt if given number of seconds have passed."""
     if os.name == 'posix':
         def signal_handler(signum, frame):
@@ -237,10 +237,10 @@ def _limit_time (seconds):
             signal.signal(signal.SIGALRM, old_handler)
 
 
-def limit_time (seconds, skip=False):
+def limit_time(seconds, skip=False):
     """Limit test time to the given number of seconds, else fail or skip."""
-    def run_limited (func):
-        def new_func (*args, **kwargs):
+    def run_limited(func):
+        def new_func(*args, **kwargs):
             try:
                 with _limit_time(seconds):
                     return func(*args, **kwargs)
@@ -253,7 +253,7 @@ def limit_time (seconds, skip=False):
     return run_limited
 
 
-def get_file (filename=None):
+def get_file(filename=None):
     """
     Get file name located within 'data' directory.
     """

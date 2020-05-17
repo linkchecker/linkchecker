@@ -19,7 +19,7 @@ Test html <base> tag parsing.
 from . import LinkCheckTest
 
 
-class TestBase (LinkCheckTest):
+class TestBase(LinkCheckTest):
     """
     Test, if charset encoding is done right.
     The linkchecker should translate the encoding

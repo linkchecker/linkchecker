@@ -21,10 +21,10 @@ from ..decorators import notimplemented
 import re
 
 
-class _GraphLogger (_Logger):
+class _GraphLogger(_Logger):
     """Provide base method to get node data."""
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
         super(_GraphLogger, self).__init__(**args)
@@ -41,7 +41,7 @@ class _GraphLogger (_Logger):
         if url_data.valid:
             self.log_url(url_data)
 
-    def get_node (self, url_data):
+    def get_node(self, url_data):
         """Return new node data or None if node already exists."""
         if not url_data.url:
             return None
@@ -63,7 +63,7 @@ class _GraphLogger (_Logger):
         self.nodeid += 1
         return node
 
-    def write_edges (self):
+    def write_edges(self):
         """
         Write all edges we can find in the graph in a brute-force manner.
         """
@@ -73,16 +73,16 @@ class _GraphLogger (_Logger):
         self.flush()
 
     @notimplemented
-    def write_edge (self, node):
+    def write_edge(self, node):
         """Write edge data for one node and its parent."""
         pass
 
     @notimplemented
-    def end_graph (self):
+    def end_graph(self):
         """Write end-of-graph marker."""
         pass
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write edges and end of checking info as gml comment."""
         self.write_edges()
         self.end_graph()
@@ -93,7 +93,7 @@ class _GraphLogger (_Logger):
 
 _disallowed = re.compile(r"[^a-zA-Z0-9 '#(){}\-\[\]\.,;:\!\?]+")
 
-def quote (s):
+def quote(s):
     """Replace disallowed characters in node or edge labels.
     Also remove whitespace from beginning or end of label."""
     return _disallowed.sub(" ", s).strip()

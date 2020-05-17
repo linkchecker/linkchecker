@@ -21,7 +21,7 @@ from .. import strformat
 from builtins import str as str_text
 
 
-class CustomXMLLogger (xmllog._XMLLogger):
+class CustomXMLLogger(xmllog._XMLLogger):
     """
     XML custom output for easy post-processing.
     """
@@ -32,7 +32,7 @@ class CustomXMLLogger (xmllog._XMLLogger):
         "filename": "linkchecker-out.xml",
     }
 
-    def start_output (self):
+    def start_output(self):
         """
         Write start of checking info as xml comment.
         """
@@ -42,7 +42,7 @@ class CustomXMLLogger (xmllog._XMLLogger):
         self.xml_starttag('linkchecker', attrs)
         self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Log URL data in custom XML format.
         """
@@ -95,7 +95,7 @@ class CustomXMLLogger (xmllog._XMLLogger):
         self.xml_endtag('urldata')
         self.flush()
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Write XML end tag.
         """

@@ -59,7 +59,7 @@ HTML_HEADER = """<!DOCTYPE HTML>
 """
 
 
-class HtmlLogger (_Logger):
+class HtmlLogger(_Logger):
     """Logger with HTML output."""
 
     LoggerName = 'html'
@@ -75,7 +75,7 @@ class HtmlLogger (_Logger):
         'colorok':         '#3ba557',
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize default HTML color values."""
         args = self.get_args(kwargs)
         super(HtmlLogger, self).__init__(**args)
@@ -88,17 +88,17 @@ class HtmlLogger (_Logger):
         self.colorerror = args['colorerror']
         self.colorok = args['colorok']
 
-    def part (self, name):
+    def part(self, name):
         """Return non-space-breakable part name."""
         return super(HtmlLogger, self).part(name).replace(" ", "&nbsp;")
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """Write HTML comment."""
         self.write("<!-- ")
         self.write(s, **args)
         self.write(" -->")
 
-    def start_output (self):
+    def start_output(self):
         """Write start of checking info."""
         super(HtmlLogger, self).start_output()
         header = {
@@ -125,7 +125,7 @@ class HtmlLogger (_Logger):
             self.check_date()
         self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write url checking info as HTML."""
         self.write_table_start()
         if self.has_part("url"):
@@ -155,21 +155,21 @@ class HtmlLogger (_Logger):
         self.write_table_end()
         self.flush()
 
-    def write_table_start (self):
+    def write_table_start(self):
         """Start html table."""
         self.writeln('<br/><br/><table>')
 
-    def write_table_end (self):
+    def write_table_end(self):
         """End html table."""
         self.write('</table><br/>')
 
-    def write_id (self):
+    def write_id(self):
         """Write ID for current URL."""
         self.writeln("<tr>")
         self.writeln('<td>%s</td>' % self.part("id"))
         self.write("<td>%d</td></tr>" % self.stats.number)
 
-    def write_url (self, url_data):
+    def write_url(self, url_data):
         """Write url_data.base_url."""
         self.writeln("<tr>")
         self.writeln('<td class="url">%s</td>' % self.part("url"))
@@ -177,12 +177,12 @@ class HtmlLogger (_Logger):
         self.write("`%s'" % html.escape(url_data.base_url))
         self.writeln("</td></tr>")
 
-    def write_name (self, url_data):
+    def write_name(self, url_data):
         """Write url_data.name."""
         args = (self.part("name"), html.escape(url_data.name))
         self.writeln("<tr><td>%s</td><td>`%s'</td></tr>" % args)
 
-    def write_parent (self, url_data):
+    def write_parent(self, url_data):
         """Write url_data.parent_url."""
         self.write("<tr><td>"+self.part("parenturl")+
                    '</td><td><a target="top" href="'+
@@ -203,35 +203,35 @@ class HtmlLogger (_Logger):
             self.write('(<a href="'+vcss+'">CSS</a>)')
         self.writeln("</td></tr>")
 
-    def write_base (self, url_data):
+    def write_base(self, url_data):
         """Write url_data.base_ref."""
         self.writeln("<tr><td>"+self.part("base")+"</td><td>"+
                      html.escape(url_data.base_ref)+"</td></tr>")
 
-    def write_real (self, url_data):
+    def write_real(self, url_data):
         """Write url_data.url."""
         self.writeln("<tr><td>"+self.part("realurl")+"</td><td>"+
                      '<a target="top" href="'+url_data.url+
                      '">'+html.escape(url_data.url)+"</a></td></tr>")
 
-    def write_dltime (self, url_data):
+    def write_dltime(self, url_data):
         """Write url_data.dltime."""
         self.writeln("<tr><td>"+self.part("dltime")+"</td><td>"+
                      (_("%.3f seconds") % url_data.dltime)+
                      "</td></tr>")
 
-    def write_size (self, url_data):
+    def write_size(self, url_data):
         """Write url_data.size."""
         self.writeln("<tr><td>"+self.part("dlsize")+"</td><td>"+
                      strformat.strsize(url_data.size)+
                      "</td></tr>")
 
-    def write_checktime (self, url_data):
+    def write_checktime(self, url_data):
         """Write url_data.checktime."""
         self.writeln("<tr><td>"+self.part("checktime")+"</td><td>"+
                      (_("%.3f seconds") % url_data.checktime)+"</td></tr>")
 
-    def write_info (self, url_data):
+    def write_info(self, url_data):
         """Write url_data.info."""
         sep = "<br/>"+os.linesep
         text = sep.join(html.escape(x) for x in url_data.info)
@@ -244,7 +244,7 @@ class HtmlLogger (_Logger):
         self.writeln('<tr><td valign="top">' + self.part("modified") +
             "</td><td>"+text+"</td></tr>")
 
-    def write_warning (self, url_data):
+    def write_warning(self, url_data):
         """Write url_data.warnings."""
         sep = "<br/>"+os.linesep
         text = sep.join(html.escape(x[1]) for x in url_data.warnings)
@@ -252,7 +252,7 @@ class HtmlLogger (_Logger):
                      'valign="top">' + self.part("warning") +
                      '</td><td class="warning">' + text + "</td></tr>")
 
-    def write_result (self, url_data):
+    def write_result(self, url_data):
         """Write url_data.result."""
         if url_data.valid:
             self.write('<tr><td class="valid">')
@@ -268,7 +268,7 @@ class HtmlLogger (_Logger):
             self.write(": "+html.escape(url_data.result))
         self.writeln("</td></tr>")
 
-    def write_stats (self):
+    def write_stats(self):
         """Write check statistic infos."""
         self.writeln('<br/><i>%s</i><br/>' % _("Statistics"))
         if self.stats.number > 0:
@@ -285,7 +285,7 @@ class HtmlLogger (_Logger):
             self.writeln(_("No statistics available since no URLs were checked."))
         self.writeln("<br/>")
 
-    def write_outro (self):
+    def write_outro(self):
         """Write end of check message."""
         self.writeln("<br/>")
         self.write(_("That's it.")+" ")
@@ -326,7 +326,7 @@ class HtmlLogger (_Logger):
             configuration.SupportUrl+"</a>.<br/>"))
         self.writeln("</small></body></html>")
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write end of checking info as HTML."""
         if self.has_part("stats"):
             self.write_stats()

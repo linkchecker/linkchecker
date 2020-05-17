@@ -23,7 +23,7 @@ import linkcheck.configuration
 from builtins import str as str_text
 
 
-def get_file (filename=None):
+def get_file(filename=None):
     """Get file name located within 'data' directory."""
     directory = os.path.join("tests", "configuration", "data")
     if filename:
@@ -31,10 +31,10 @@ def get_file (filename=None):
     return str_text(directory)
 
 
-class TestConfig (unittest.TestCase):
+class TestConfig(unittest.TestCase):
     """Test configuration parsing."""
 
-    def test_confparse (self):
+    def test_confparse(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config0.ini")]
         config.read(files)
@@ -147,12 +147,12 @@ class TestConfig (unittest.TestCase):
         self.assertEqual(config["gxml"]["parts"], ["realurl"])
         self.assertEqual(config["gxml"]["encoding"], "utf-8")
 
-    def test_confparse_error1 (self):
+    def test_confparse_error1(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config1.ini")]
         self.assertRaises(linkcheck.LinkCheckerError, config.read, files)
 
-    def test_confparse_error2 (self):
+    def test_confparse_error2(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config2.ini")]
         self.assertRaises(linkcheck.LinkCheckerError, config.read, files)

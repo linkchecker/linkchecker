@@ -78,12 +78,12 @@ patterns = (
 )
 
 
-class TestFtpparse (unittest.TestCase):
+class TestFtpparse(unittest.TestCase):
     """
     Test FTP LIST line parsing.
     """
 
-    def test_ftpparse (self):
+    def test_ftpparse(self):
         for line, expected in patterns:
             res = ftpparse(line)
             self.assertEqual(expected, res,

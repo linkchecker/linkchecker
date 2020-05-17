@@ -25,7 +25,7 @@ from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 class ProxySupport:
     """Get support for proxying and for URLs with user:pass@host setting."""
 
-    def set_proxy (self, proxy):
+    def set_proxy(self, proxy):
         """Parse given proxy information and store parsed values.
         Note that only http:// proxies are supported, both for ftp://
         and http:// URLs.
@@ -60,7 +60,7 @@ class ProxySupport:
             auth = "%s:%s" % (username, password)
             self.proxyauth = "Basic "+httputil.encode_base64(auth)
 
-    def ignore_proxy_host (self):
+    def ignore_proxy_host(self):
         """Check if self.host is in the $no_proxy ignore list."""
         if urllib.request.proxy_bypass(self.host):
             return True
