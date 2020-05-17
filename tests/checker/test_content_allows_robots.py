@@ -33,7 +33,7 @@ class TestHttpMetaRobots(HttpServerTest):
     """Test <meta name="robots" content="nofollow"> using http."""
 
     def test_http_meta_robots(self):
-        url = "http://localhost:%d/tests/checker/data/norobots.html" % self.port
+        url = self.get_url("norobots.html")
         resultlines = [
             "url %s" % url,
             "cache key %s" % url,

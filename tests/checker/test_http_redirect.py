@@ -48,8 +48,7 @@ class TestHttpRedirect(HttpServerTest):
         self.direct(url, resultlines, recursionlevel=0)
 
     def redirect2(self):
-        url = "http://localhost:%d/tests/checker/data/redirect.html" % \
-              self.port
+        url = self.get_url("redirect.html")
         nurl = url
         rurl = url.replace("redirect", "newurl")
         resultlines = [
