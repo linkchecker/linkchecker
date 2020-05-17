@@ -47,7 +47,7 @@ from distutils.core import Distribution
 from distutils.command.build import build
 
 # the application version
-AppVersion = "9.4.0"
+AppVersion = "10.0.0.dev0"
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
