@@ -20,7 +20,7 @@ Function to check for updates.
 import os
 from .configuration import Version as CurrentVersion
 from .url import get_content
-from distutils.version import StrictVersion
+from distutils.version import LooseVersion
 
 # Use the Freecode submit file as source since that file gets updated
 # only when releasing a new version.
@@ -72,4 +72,4 @@ def get_online_version():
 
 def is_newer_version(version):
     """Check if given version is newer than current version."""
-    return StrictVersion(version) > StrictVersion(CurrentVersion)
+    return LooseVersion(version) > LooseVersion(CurrentVersion)
