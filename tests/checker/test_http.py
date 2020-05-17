@@ -17,8 +17,6 @@
 Test http checking.
 """
 
-import pytest
-
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
