@@ -99,7 +99,6 @@ class TestStrFormat(unittest.TestCase):
     def test_is_ascii(self):
         self.assertTrue(linkcheck.strformat.is_ascii("abcd./"))
         self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
-        self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
 
     def test_indent(self):
         s = "bla"
@@ -165,7 +164,6 @@ class TestStrFormat(unittest.TestCase):
     def test_unicode_safe(self):
         unicode_safe = linkcheck.strformat.unicode_safe
         self.assertEqual(unicode_safe("a"), "a")
-        self.assertEqual(unicode_safe("a"), "a")
 
     def test_ascii_safe(self):
         ascii_safe = linkcheck.strformat.ascii_safe
@@ -175,10 +173,6 @@ class TestStrFormat(unittest.TestCase):
     def test_strip_control_chars(self):
         strip = linkcheck.strformat.strip_control_chars
         self.assertEqual(strip(""), "")
-        self.assertEqual(strip(""), "")
-        self.assertEqual(strip("a"), "a")
         self.assertEqual(strip("a"), "a")
         self.assertEqual(strip("ä"), "ä")
-        self.assertEqual(strip("ä"), "ä")
-        self.assertEqual(strip("\x01"), "")
         self.assertEqual(strip("\x01"), "")

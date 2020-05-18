@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005 Joe Wreschnig
 # Copyright (C) 2005-2010 Bastian Kleineidam
 #
@@ -50,7 +49,7 @@ class TestPo(unittest.TestCase):
 
 
 class TestGTranslator(unittest.TestCase):
-    """GTranslator displays a middot · for a space. Unfortunately, it
+    """GTranslator displays a middot Â· for a space. Unfortunately, it
     gets copied with copy-and-paste, what a shame."""
 
     def test_gtranslator(self):
