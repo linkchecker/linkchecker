@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(1 < n);\n"
 
@@ -85,21 +85,21 @@ msgstr ""
 "Usted ha encontrado un error interno en LinkChecker. Por favor escriba\n"
 "un reporte de error en http://sourceforge.net/tracker/?"
 "func=add&group_id=1913&atid=101913\n"
-"o escriba un correo-e a %s e incluya la informaciÛn siguiente:\n"
-"- el URL o archivo que usted est· probando,\n"
-"- sus argumentos de la lÌnea de comandos y/o configuraciÛn,\n"
-"- la salida de una corrida de depuraciÛn del comando ejecutado con la\n"
-"  opciÛn \"-Dall\", y\n"
-"- la informaciÛn del sistema debajo.\n"
+"o escriba un correo-e a %s e incluya la informaci√≥n siguiente:\n"
+"- el URL o archivo que usted est√° probando,\n"
+"- sus argumentos de la l√≠nea de comandos y/o configuraci√≥n,\n"
+"- la salida de una corrida de depuraci√≥n del comando ejecutado con la\n"
+"  opci√≥n \"-Dall\", y\n"
+"- la informaci√≥n del sistema debajo.\n"
 "\n"
-"Est· bien no revelar alguna de la informaciÛn arriba debido a razones\n"
-"de privacidad. IntentarÈ ayudarle de todos modos, pero debe darme algo\n"
+"Est√° bien no revelar alguna de la informaci√≥n arriba debido a razones\n"
+"de privacidad. Intentar√© ayudarle de todos modos, pero debe darme algo\n"
 "con que pueda trabajar ;) .\n"
 
 #: ../linkcheck/director/console.py:103
 #, fuzzy
 msgid "******** LinkChecker internal error, over and out ********"
-msgstr "******** Error interno de LinkChecker, saliÈndose ********"
+msgstr "******** Error interno de LinkChecker, sali√©ndose ********"
 
 #: ../linkcheck/director/console.py:123
 msgid "Default locale:"
@@ -107,7 +107,7 @@ msgstr ""
 
 #: ../linkcheck/director/console.py:145
 msgid "System info:"
-msgstr "InformaciÛn del sistema:"
+msgstr "Informaci√≥n del sistema:"
 
 #: ../linkcheck/director/console.py:147
 msgid "Released on:"
@@ -116,7 +116,7 @@ msgstr ""
 #: ../linkcheck/director/console.py:148 ../linkchecker:402
 #, python-format
 msgid "Python %(version)s on %(platform)s"
-msgstr "PitÛn %(version)s en %(platform)s"
+msgstr "Pit√≥n %(version)s en %(platform)s"
 
 #: ../linkcheck/director/console.py:154
 #, fuzzy
@@ -150,7 +150,7 @@ msgstr ""
 #: ../linkcheck/director/__init__.py:89
 #, fuzzy
 msgid "interrupt; waiting for active threads to finish"
-msgstr "interrupciÛn por teclado, esperando a que termine %d hilo activo"
+msgstr "interrupci√≥n por teclado, esperando a que termine %d hilo activo"
 
 #: ../linkcheck/director/__init__.py:91
 msgid "another interrupt will exit immediately"
@@ -259,12 +259,12 @@ msgstr ""
 #: ../linkcheck/plugins/regexcheck.py:62
 #, fuzzy, python-format
 msgid "Found %(match)r at line %(line)d in link contents."
-msgstr "Se encontrÛ %(match)r en los contenidos del enlace."
+msgstr "Se encontr√≥ %(match)r en los contenidos del enlace."
 
 #: ../linkcheck/plugins/locationinfo.py:47
 #, fuzzy, python-format
 msgid "URL is located in %(location)s."
-msgstr "El URL est· localizado en %(country)s."
+msgstr "El URL est√° localizado en %(country)s."
 
 #: ../linkcheck/plugins/sslcertcheck.py:64
 msgid "certificate did not include \"notAfter\" information"
@@ -297,7 +297,7 @@ msgstr ""
 #: ../linkcheck/plugins/anchorcheck.py:59
 #, python-format
 msgid "Anchor `%(name)s' not found."
-msgstr "No se encontrÛ el ancla `%(name)s'."
+msgstr "No se encontr√≥ el ancla `%(name)s'."
 
 #: ../linkcheck/plugins/anchorcheck.py:60
 #, python-format
@@ -351,12 +351,12 @@ msgstr ""
 #: ../linkcheck/logger/html.py:121 ../linkcheck/logger/text.py:106
 #, python-format
 msgid "Start checking at %s"
-msgstr "Se comenzÛ el chequeo en %s"
+msgstr "Se comenz√≥ el chequeo en %s"
 
 #: ../linkcheck/logger/html.py:191 ../linkcheck/logger/text.py:160
 #, python-format
 msgid ", line %d"
-msgstr ", lÌnea %d"
+msgstr ", l√≠nea %d"
 
 #: ../linkcheck/logger/html.py:193 ../linkcheck/logger/text.py:162
 #, python-format
@@ -366,7 +366,7 @@ msgstr ", columna %d"
 #: ../linkcheck/logger/html.py:195 ../linkcheck/logger/text.py:164
 #, fuzzy, python-format
 msgid ", page %d"
-msgstr ", lÌnea %d"
+msgstr ", l√≠nea %d"
 
 #: ../linkcheck/logger/html.py:219 ../linkcheck/logger/html.py:231
 #: ../linkcheck/logger/text.py:180 ../linkcheck/logger/text.py:192
@@ -376,7 +376,7 @@ msgstr "%.3f segundos"
 
 #: ../linkcheck/logger/html.py:260 ../linkcheck/logger/text.py:216
 msgid "Valid"
-msgstr "V·lido"
+msgstr "V√°lido"
 
 #: ../linkcheck/logger/html.py:265 ../linkcheck/logger/text.py:219
 msgid "Error"
@@ -448,12 +448,12 @@ msgstr[1] ""
 #: ../linkcheck/logger/__init__.py:393
 #, python-format
 msgid "Stopped checking at %(time)s (%(duration)s)"
-msgstr "Se parÛ el chequeo en %(time)s (%(duration)s)"
+msgstr "Se par√≥ el chequeo en %(time)s (%(duration)s)"
 
 #: ../linkcheck/logger/html.py:320
 #, python-format
 msgid "Get the newest version at %s"
-msgstr "Obtenga la versiÛn m·s reciente en %s"
+msgstr "Obtenga la versi√≥n m√°s reciente en %s"
 
 #: ../linkcheck/logger/html.py:323
 #, python-format
@@ -468,7 +468,7 @@ msgstr ""
 #: ../linkcheck/logger/text.py:98 ../linkcheck/logger/__init__.py:381
 #, python-format
 msgid "Get the newest version at %(url)s"
-msgstr "Obtenga la versiÛn m·s reciente en %(url)s"
+msgstr "Obtenga la versi√≥n m√°s reciente en %(url)s"
 
 #: ../linkcheck/logger/text.py:100 ../linkcheck/logger/__init__.py:383
 #, python-format
@@ -537,7 +537,7 @@ msgstr "Externo"
 
 #: ../linkcheck/logger/__init__.py:38
 msgid "Info"
-msgstr "InformaciÛn"
+msgstr "Informaci√≥n"
 
 #: ../linkcheck/logger/__init__.py:39
 msgid "Warning"
@@ -551,7 +551,7 @@ msgstr "Tiempo de bajada"
 #: ../linkcheck/logger/__init__.py:41
 #, fuzzy
 msgid "Size"
-msgstr "TamaÒo de bajada"
+msgstr "Tama√±o de bajada"
 
 #: ../linkcheck/logger/__init__.py:42
 #, fuzzy
@@ -573,7 +573,7 @@ msgstr ""
 #: ../linkcheck/logger/__init__.py:279
 #, python-format
 msgid "Happy birthday for LinkChecker, I'm %d years old today!"
-msgstr "°CumpleaÒos feliz para LinkChecker, cumplo %d aÒos hoy!"
+msgstr "¬°Cumplea√±os feliz para LinkChecker, cumplo %d a√±os hoy!"
 
 #: ../linkcheck/logger/__init__.py:378
 #, python-format
@@ -582,7 +582,7 @@ msgstr "crado por %(app)s en %(time)s"
 
 #: ../linkcheck/checker/telneturl.py:53
 msgid "Host is empty"
-msgstr "El servidor est· vacÌo"
+msgstr "El servidor est√° vac√≠o"
 
 #: ../linkcheck/checker/unknownurl.py:32
 #, python-format
@@ -596,7 +596,7 @@ msgstr "URL %s ignorado."
 
 #: ../linkcheck/checker/unknownurl.py:36
 msgid "URL is unrecognized or has invalid syntax"
-msgstr "No se reconoce el URL o tiene sintaxis inv·lida"
+msgstr "No se reconoce el URL o tiene sintaxis inv√°lida"
 
 #: ../linkcheck/checker/const.py:103
 msgid "The effective URL is different from the original."
@@ -653,7 +653,7 @@ msgstr ""
 #: ../linkcheck/checker/const.py:119
 #, fuzzy
 msgid "No NNTP server was found."
-msgstr "No se especificÛ un servidor NNTP, pasando por alto este URL."
+msgstr "No se especific√≥ un servidor NNTP, pasando por alto este URL."
 
 #: ../linkcheck/checker/const.py:120
 msgid "The NNTP newsgroup could not be found."
@@ -756,12 +756,12 @@ msgstr ""
 #: ../linkcheck/checker/mailtourl.py:258
 #, python-format
 msgid "No MX mail host for %(domain)s found."
-msgstr "No se encontrÛ servidor MX para %(domain)s."
+msgstr "No se encontr√≥ servidor MX para %(domain)s."
 
 #: ../linkcheck/checker/mailtourl.py:266
 #, fuzzy, python-format
 msgid "No host for %(domain)s found."
-msgstr "No se encontrÛ servidor MX para %(domain)s."
+msgstr "No se encontr√≥ servidor MX para %(domain)s."
 
 #: ../linkcheck/checker/mailtourl.py:280
 #, python-format
@@ -771,7 +771,7 @@ msgstr ""
 #: ../linkcheck/checker/mailtourl.py:292
 #, fuzzy
 msgid "Valid mail address syntax"
-msgstr "Sintaxis de correo inv·lida"
+msgstr "Sintaxis de correo inv√°lida"
 
 #: ../linkcheck/checker/urlbase.py:76
 #, python-format
@@ -781,7 +781,7 @@ msgstr ""
 #: ../linkcheck/checker/urlbase.py:135
 #, fuzzy
 msgid "The URL is outside of the domain filter, checked only syntax."
-msgstr "Fuera del filtro de dominio, se chequeÛ sÛlo la sintaxis."
+msgstr "Fuera del filtro de dominio, se cheque√≥ s√≥lo la sintaxis."
 
 #: ../linkcheck/checker/urlbase.py:138
 msgid "filtered"
@@ -794,7 +794,7 @@ msgstr ""
 
 #: ../linkcheck/checker/urlbase.py:332
 msgid "URL is empty"
-msgstr "El URL est· vacÌo"
+msgstr "El URL est√° vac√≠o"
 
 #: ../linkcheck/checker/urlbase.py:346
 #, python-format
@@ -804,17 +804,17 @@ msgstr "URL efectivo %(url)r."
 #: ../linkcheck/checker/urlbase.py:352
 #, fuzzy, python-format
 msgid "URL length %(len)d is longer than %(max)d."
-msgstr "El tamaÒo del contenido %(dlsize)s es m·s grande que %(maxbytes)s."
+msgstr "El tama√±o del contenido %(dlsize)s es m√°s grande que %(maxbytes)s."
 
 #: ../linkcheck/checker/urlbase.py:396
 #, fuzzy, python-format
 msgid "URL host %(host)r has invalid port"
-msgstr "El URL tiene un puerto %(port)r inv·lido"
+msgstr "El URL tiene un puerto %(port)r inv√°lido"
 
 #: ../linkcheck/checker/urlbase.py:403
 #, fuzzy
 msgid "URL has empty hostname"
-msgstr "El URL est· vacÌo"
+msgstr "El URL est√° vac√≠o"
 
 #: ../linkcheck/checker/urlbase.py:427
 #, python-format
@@ -823,7 +823,7 @@ msgstr ""
 
 #: ../linkcheck/checker/urlbase.py:462
 msgid "Hostname not found"
-msgstr "No se encontrÛ el nombre del servidor"
+msgstr "No se encontr√≥ el nombre del servidor"
 
 #: ../linkcheck/checker/urlbase.py:465
 #, python-format
@@ -838,7 +838,7 @@ msgstr "no se pudo analizar el contenido: %(msg)r"
 #: ../linkcheck/checker/urlbase.py:532
 #, fuzzy, python-format
 msgid "Content size %(size)s is larger than %(maxbytes)s."
-msgstr "El tamaÒo del contenido %(dlsize)s es m·s grande que %(maxbytes)s."
+msgstr "El tama√±o del contenido %(dlsize)s es m√°s grande que %(maxbytes)s."
 
 #: ../linkcheck/checker/urlbase.py:627
 msgid "Content size is zero."
@@ -889,7 +889,7 @@ msgstr "No se obtuvo respuesta del servidor FTP"
 #: ../linkcheck/checker/ftpurl.py:99
 #, python-format
 msgid "Remote host has closed connection: %(msg)s"
-msgstr "El servidor remoto ha cerrado la conexiÛn: %(msg)s"
+msgstr "El servidor remoto ha cerrado la conexi√≥n: %(msg)s"
 
 #: ../linkcheck/checker/ftpurl.py:143
 msgid "Missing trailing directory slash in ftp url."
@@ -907,7 +907,7 @@ msgstr "no se pudo analizar el contenido: %(msg)r"
 #: ../linkcheck/checker/fileurl.py:161
 #, fuzzy
 msgid "Added trailing slash to directory."
-msgstr "Se adicionÛ \"slash\" final al directorio."
+msgstr "Se adicion√≥ \"slash\" final al directorio."
 
 #: ../linkcheck/checker/fileurl.py:183
 msgid ""
@@ -927,12 +927,12 @@ msgid ""
 msgstr ""
 "El camino %(path)r del URL no es el mismo que el camino %(realpath)r del "
 "sistema.\n"
-"DeberÌa usar siempre el camino del sistema en los URLs."
+"Deber√≠a usar siempre el camino del sistema en los URLs."
 
 #: ../linkcheck/checker/httpurl.py:141
 #, fuzzy
 msgid "Access denied by robots.txt, checked only syntax."
-msgstr "Denegado el acceso por robots.txt, chequeando sÛlo la sintaxis."
+msgstr "Denegado el acceso por robots.txt, chequeando s√≥lo la sintaxis."
 
 #: ../linkcheck/checker/httpurl.py:142
 msgid "syntax OK"
@@ -949,12 +949,12 @@ msgstr ""
 
 #: ../linkcheck/checker/nntpurl.py:45
 msgid "No NNTP server was specified, skipping this URL."
-msgstr "No se especificÛ un servidor NNTP, pasando por alto este URL."
+msgstr "No se especific√≥ un servidor NNTP, pasando por alto este URL."
 
 #: ../linkcheck/checker/nntpurl.py:55
 #, python-format
 msgid "Article number %(num)s found."
-msgstr "Se encontrÛ el artÌculo n˙mero %(num)s."
+msgstr "Se encontr√≥ el art√≠culo n√∫mero %(num)s."
 
 #: ../linkcheck/checker/nntpurl.py:62
 #, python-format
@@ -963,16 +963,16 @@ msgstr ""
 
 #: ../linkcheck/checker/nntpurl.py:65
 msgid "No newsgroup specified in NNTP URL."
-msgstr "No se especificÛ ning˙n grupo de noticias en el URL NTTP."
+msgstr "No se especific√≥ ning√∫n grupo de noticias en el URL NTTP."
 
 #: ../linkcheck/checker/nntpurl.py:89
 #, fuzzy, python-format
 msgid "NNTP server too busy; tried more than %d times."
-msgstr "El servidor NTTP est· demasiado ocupado; se intentÛ m·s de %d veces."
+msgstr "El servidor NTTP est√° demasiado ocupado; se intent√≥ m√°s de %d veces."
 
 #: ../linkcheck/__init__.py:120
 msgid "CRITICAL"
-msgstr "CRÕTICO"
+msgstr "CR√çTICO"
 
 #: ../linkcheck/__init__.py:121
 msgid "ERROR"
@@ -988,11 +988,11 @@ msgstr "ADVERTENCIA"
 
 #: ../linkcheck/__init__.py:124
 msgid "INFO"
-msgstr "INFORMACI”N"
+msgstr "INFORMACI√ìN"
 
 #: ../linkcheck/__init__.py:125
 msgid "DEBUG"
-msgstr "DEPURACI”N"
+msgstr "DEPURACI√ìN"
 
 #: ../linkcheck/__init__.py:126
 msgid "NOTSET"
@@ -1019,26 +1019,26 @@ msgstr "lenguaje sin soporte"
 
 #: ../linkcheck/lc_cgi.py:215
 msgid "empty url was given"
-msgstr "se diÛ un URL vacÌo"
+msgstr "se di√≥ un URL vac√≠o"
 
 #: ../linkcheck/lc_cgi.py:217
 #, fuzzy, python-format
 msgid "disallowed url %r was given"
-msgstr "se diÛ un URL no permitido"
+msgstr "se di√≥ un URL no permitido"
 
 #: ../linkcheck/lc_cgi.py:219
 msgid "no url was given"
-msgstr "no se diÛ un URL"
+msgstr "no se di√≥ un URL"
 
 #: ../linkcheck/lc_cgi.py:224
 #, fuzzy, python-format
 msgid "invalid recursion level %r"
-msgstr "nivel de recursiÛn inv·lido"
+msgstr "nivel de recursi√≥n inv√°lido"
 
 #: ../linkcheck/lc_cgi.py:230
 #, fuzzy, python-format
 msgid "invalid %s option %r"
-msgstr "opciÛn de registro %r inv·lida"
+msgstr "opci√≥n de registro %r inv√°lida"
 
 #: ../linkcheck/lc_cgi.py:254
 #, fuzzy, python-format
@@ -1061,15 +1061,15 @@ msgid ""
 "</html>"
 msgstr ""
 "<html><head>\n"
-"<title>Error de LinkChecker en lÌnea</title></head>\n"
+"<title>Error de LinkChecker en l√≠nea</title></head>\n"
 "<body text=#192c83 bgcolor=#fff7e5 link=#191c83 vlink=#191c83 "
 "alink=#191c83>\n"
 "<blockquote>\n"
 "<b>Error: %s</b><br>\n"
-"El guiÛn LinkChecker En lÌnea ha encontrado un error. Por favor aseg˙rese\n"
-"que en enlcade del URL proveÌdo comience con <code>http://</code> y "
+"El gui√≥n LinkChecker En l√≠nea ha encontrado un error. Por favor aseg√∫rese\n"
+"que en enlcade del URL prove√≠do comience con <code>http://</code> y "
 "contenga\n"
-"sÛlo estos caracteres: <code>A-Za-z0-9./_~-</code><br><br>\n"
+"s√≥lo estos caracteres: <code>A-Za-z0-9./_~-</code><br><br>\n"
 "Los errores son registrados.\n"
 "</blockquote>\n"
 "</body>\n"
@@ -1142,27 +1142,27 @@ msgid ""
 "   same as the host of the user browsing your pages.\n"
 msgstr ""
 "NOTAS\n"
-"o Un ! antes de una expresiÛn regular la niega. AsÌ '!^mailto:' coincide\n"
+"o Un ! antes de una expresi√≥n regular la niega. As√≠ '!^mailto:' coincide\n"
 "  con todo menos un enlace 'mailto'.\n"
-"o Los URLs de la lÌnea de comandos comenzando con \"ftp.\" son tratados\n"
+"o Los URLs de la l√≠nea de comandos comenzando con \"ftp.\" son tratados\n"
 "  como \"ftp://ftp.\", los URLs comenzando con \"www.\" son tratados como\n"
 "  \"http://www.\".\n"
-"  TambiÈn puede dar archivos locales como argumentos.\n"
-"o Si tiene su sistema configurado para establecer autom·ticamente una\n"
-"  conexiÛn a internet (ej.: con diald), se conectar· cuando se chequeen\n"
+"  Tambi√©n puede dar archivos locales como argumentos.\n"
+"o Si tiene su sistema configurado para establecer autom√°ticamente una\n"
+"  conexi√≥n a internet (ej.: con diald), se conectar√° cuando se chequeen\n"
 "  enlaces que no apunten a sus sistema local.\n"
-"  Vea la opciÛn --extern-strict-all para ver como prevernir esto.\n"
+"  Vea la opci√≥n --extern-strict-all para ver como prevernir esto.\n"
 "o Los enlaces de Javascript se ignoran en este momento.\n"
 "o Si su plataforma no soporta hilos, LinkChecker los deshabilita\n"
-"  autom·ticamente.\n"
-"o Puede suplir varios pares de usuario/contraseÒa en un archivo de\n"
-"  configuraciÛn\n"
+"  autom√°ticamente.\n"
+"o Puede suplir varios pares de usuario/contrase√±a en un archivo de\n"
+"  configuraci√≥n\n"
 "\n"
 "o Para usar proxies asigne un valor a las variables $http_proxy,\n"
 "  $https_proxy, $ftp_proxy, en Unix o Windows.\n"
-"  En Mac use la ConfiguraciÛn de Internet.\n"
-"o °Cuando se chequean los enlaces 'news:' el servidor NTTP no necesita ser\n"
-"  el mismo que el servidor del usuario navegando sus p·ginas!\n"
+"  En Mac use la Configuraci√≥n de Internet.\n"
+"o ¬°Cuando se chequean los enlaces 'news:' el servidor NTTP no necesita ser\n"
+"  el mismo que el servidor del usuario navegando sus p√°ginas!\n"
 
 #: ../linkchecker:72
 msgid ""
@@ -1244,10 +1244,10 @@ msgid ""
 msgstr ""
 "VALOR RETORNADO\n"
 "El valor retornado es diferente de cero cuando:\n"
-" o se encontraron enlaces inv·lidos, o\n"
-" o se encontraron advertencias de enlace link warnings y se diÛ la opciÛn\n"
+" o se encontraron enlaces inv√°lidos, o\n"
+" o se encontraron advertencias de enlace link warnings y se di√≥ la opci√≥n\n"
 "   --warnings\n"
-" o ocurriÛ un error del programa\n"
+" o ocurri√≥ un error del programa\n"
 
 #: ../linkchecker:141
 #, fuzzy
@@ -1276,15 +1276,15 @@ msgid ""
 "  linkchecker -r0 ftp.example.org\n"
 msgstr ""
 "EJEMPLOS\n"
-"El uso m·s com˙n chequea el dominio dado recursivamente, adem·s de\n"
+"El uso m√°s com√∫n chequea el dominio dado recursivamente, adem√°s de\n"
 "cualquier URL simple apuntando afuera del dominio:\n"
 "  linkchecker http://tesoro.liborio.int/\n"
 "Tenga en cuanta que esto chequea el sitio completo, el cual puede\n"
-"tener varios cientos de miles de URLs. Use la opciÛn -r para\n"
-"restringir la profundidad de la recursiÛn.\n"
+"tener varios cientos de miles de URLs. Use la opci√≥n -r para\n"
+"restringir la profundidad de la recursi√≥n.\n"
 "\n"
-"No conectarse a anfitriones mailto:, sÛlo chequear su sintaxis\n"
-"URL. Todos los dem·s enlaces son chequeados como usual:\n"
+"No conectarse a anfitriones mailto:, s√≥lo chequear su sintaxis\n"
+"URL. Todos los dem√°s enlaces son chequeados como usual:\n"
 "  linkchecker --intern='!^mailto:' --extern-strict-all www.misitio.org\n"
 "\n"
 "Chequeando un archivo HTML local en Unix:\n"
@@ -1329,32 +1329,32 @@ msgid ""
 "none    Logs nothing. Suitable for debugging or checking the exit code.\n"
 msgstr ""
 "TIPOS DE SALIDA\n"
-"Note que por omisiÛn sÛlo se registran los errores.\n"
+"Note que por omisi√≥n s√≥lo se registran los errores.\n"
 "\n"
-"text    Salido est·ndar de texto, registrando los URLs en la forma llave: "
+"text    Salido est√°ndar de texto, registrando los URLs en la forma llave: "
 "argumento.\n"
 "html    Registra los URLs en la forma llave: argumento, formateado como "
 "HTML.\n"
-"        Adicionalmente tiene enlaces a las p·ginas referenciadas. Los URLs "
-"inv·lidos\n"
+"        Adicionalmente tiene enlaces a las p√°ginas referenciadas. Los URLs "
+"inv√°lidos\n"
 "        adicionados enlaces de chequeo de HTML y CSS.\n"
 "csv     Registra el resultado del chequeo en formato CSV con un URL por "
-"lÌnea.\n"
+"l√≠nea.\n"
 "gml     Registra relaciones padre-hijo entre URLs enlazados como un grafo "
 "GML.\n"
-"        DeberÌa usar la opciÛn --verbose para obtener un grafo completo.\n"
+"        Deber√≠a usar la opci√≥n --verbose para obtener un grafo completo.\n"
 "dot     Registra relaciones padre-hijo entre URLs enlazados como un grafo "
 "DOT.\n"
-"        DeberÌa usar la opciÛn --verbose para obtener un grafo completo.\n"
-"xml     Registra el resultado del chequeo como un archivo XML leÌble por la "
-"m·quina.\n"
-"sql     Registra el resultado del chequeo como un guiÛn SQL con\n"
-"        comandos INSERT. Un guiÛn de ejemplo para crear la tabla SQL\n"
+"        Deber√≠a usar la opci√≥n --verbose para obtener un grafo completo.\n"
+"xml     Registra el resultado del chequeo como un archivo XML le√≠ble por la "
+"m√°quina.\n"
+"sql     Registra el resultado del chequeo como un gui√≥n SQL con\n"
+"        comandos INSERT. Un gui√≥n de ejemplo para crear la tabla SQL\n"
 "        inicial se incluye como create.sql.\n"
 "blacklist\n"
 "        Apropiado para los trabajos de cron. Registra el resultado del\n"
-"        chequeo en un archivo ~/.linkchecker/blacklist el cual sÛlo\n"
-"        contiene entradas con URLs inv·lidos y la cantidad de veces\n"
+"        chequeo en un archivo ~/.linkchecker/blacklist el cual s√≥lo\n"
+"        contiene entradas con URLs inv√°lidos y la cantidad de veces\n"
 "        que han fallado.\n"
 "\n"
 "none    No registra nada. Apropiado para guiones.\n"
@@ -1377,7 +1377,7 @@ msgid ""
 "~/.linkchecker/linkcheckerrc (under Windows\n"
 "%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
 msgstr ""
-"Use CONFIGFILE como archivo de configuraciÛn. Por omisiÛn LinkChecker\n"
+"Use CONFIGFILE como archivo de configuraci√≥n. Por omisi√≥n LinkChecker\n"
 "primero busca /etc/linkchecker/linkcheckerrc y entonces\n"
 "~/.linkchecker/linkcheckerrc (en Windows\n"
 "<path-to-program>\\linkcheckerrc)."
@@ -1387,16 +1387,16 @@ msgstr ""
 msgid ""
 "Generate no more than the given number of threads. Default number\n"
 "of threads is 10. To disable threading specify a non-positive number."
-msgstr "No generar mas de num de hilos. Por omisiÛn el n˙mero de hilos es 10."
+msgstr "No generar mas de num de hilos. Por omisi√≥n el n√∫mero de hilos es 10."
 
 #: ../linkchecker:232
 msgid "Print version and exit."
-msgstr "Imprimir versiÛn y salir."
+msgstr "Imprimir versi√≥n y salir."
 
 #: ../linkchecker:235
 #, fuzzy
 msgid "Print available check plugins and exit."
-msgstr "Imprimir versiÛn y salir."
+msgstr "Imprimir versi√≥n y salir."
 
 #: ../linkchecker:238
 msgid "Read list of white-space separated URLs to check from stdin."
@@ -1417,14 +1417,14 @@ msgid ""
 "\n"
 "For accurate results, threading will be disabled during debug runs."
 msgstr ""
-"Imprimir salida de depuraciÛn para el registrador dado.\n"
+"Imprimir salida de depuraci√≥n para el registrador dado.\n"
 "Los registradores disponibles son %(lognamelist)s.\n"
 "Especificando 'all' es un alias para especificar todos los registradores\n"
 "disponibles.\n"
-"La opciÛn puede darse varias veces para depurar con m·s de un registrador.\n"
+"La opci√≥n puede darse varias veces para depurar con m√°s de un registrador.\n"
 "\n"
-"Para resultados acertados, se desahabilitar· el uso de hilos durante\n"
-"las corridas de depuraciÛn."
+"Para resultados acertados, se desahabilitar√° el uso de hilos durante\n"
+"las corridas de depuraci√≥n."
 
 #: ../linkchecker:263
 #, fuzzy, python-format
@@ -1445,17 +1445,17 @@ msgstr ""
 "Salida hacia un archivo linkchecker-out.TYPE,\n"
 "$HOME/.linkchecker/blacklist para la salida 'blacklist', o\n"
 "NOMBREDEARCHIVO si se especifica.\n"
-"CODIFICACI”N especifica la codificaciÛn de la salida, si se omite es\n"
+"CODIFICACI√ìN especifica la codificaci√≥n de la salida, si se omite es\n"
 "\"iso-8859-1\".\n"
-"Las codificaciones v·lidas est·n listadas en\n"
+"Las codificaciones v√°lidas est√°n listadas en\n"
 "http://docs.python.org/lib/node127.html.\n"
-"Las partes NOMBREDEARCHIVO y CODIFICACI”N del tipo de salida 'none'\n"
-"ser·n ignoradas, si no, si el archivo ya existe, ser· sobreescrito.\n"
-"Puede especificar esta opciÛn m·s de una vez. TIPOs de archivos de\n"
-"salida v·lidos son %(loggertypes)s. Puede especificar esta opciÛn varias\n"
-"veces para sacar m·s de un archivo. Por omisiÛn es no sacar hacia\n"
+"Las partes NOMBREDEARCHIVO y CODIFICACI√ìN del tipo de salida 'none'\n"
+"ser√°n ignoradas, si no, si el archivo ya existe, ser√° sobreescrito.\n"
+"Puede especificar esta opci√≥n m√°s de una vez. TIPOs de archivos de\n"
+"salida v√°lidos son %(loggertypes)s. Puede especificar esta opci√≥n varias\n"
+"veces para sacar m√°s de un archivo. Por omisi√≥n es no sacar hacia\n"
 "archivo. Note que puede suprimir toda salida hacia la consola con la\n"
-"opciÛn '-o none'."
+"opci√≥n '-o none'."
 
 #: ../linkchecker:277
 msgid "Do not print check status messages."
@@ -1475,8 +1475,8 @@ msgid ""
 "html."
 msgstr ""
 "Especificar la salida como %(loggertypes)s. El tipo de salida por\n"
-"omisiÛn es texto. ENCODING especifica la codificaciÛn de la salida,\n"
-"por omisiÛn es \"iso-8859-1\". Las codificaciones v·lidas est·n listadas\n"
+"omisi√≥n es texto. ENCODING especifica la codificaci√≥n de la salida,\n"
+"por omisi√≥n es \"iso-8859-1\". Las codificaciones v√°lidas est√°n listadas\n"
 "en http://docs.python.org/lib/node127.html."
 
 #: ../linkchecker:292
@@ -1484,14 +1484,14 @@ msgstr ""
 msgid ""
 "Quiet operation, an alias for '-o none'.\n"
 "This is only useful with -F."
-msgstr "OperaciÛn callada. Esta es sÛlo ˙til con -F."
+msgstr "Operaci√≥n callada. Esta es s√≥lo √∫til con -F."
 
 #: ../linkchecker:301
 #, fuzzy
 msgid "Log all URLs. Default is to log only errors and warnings."
 msgstr ""
-"Registra todos los URLs chequeados (implica -w). Por omisiÛn se\n"
-"registran sÛlo los URLs inv·lidos."
+"Registra todos los URLs chequeados (implica -w). Por omisi√≥n se\n"
+"registran s√≥lo los URLs inv√°lidos."
 
 #: ../linkchecker:313
 msgid "Checking options"
@@ -1525,8 +1525,8 @@ msgid ""
 "environment variable NNTP_SERVER. If no host is given,\n"
 "only the syntax of the link is checked."
 msgstr ""
-"Especificar un servidor NNTP para enlaces 'news:...'. Por omisiÛn es\n"
-"la variable del entorno NNTP_SERVER. Si no se da un anfitriÛn, sÛlo se\n"
+"Especificar un servidor NNTP para enlaces 'news:...'. Por omisi√≥n es\n"
+"la variable del entorno NNTP_SERVER. Si no se da un anfitri√≥n, s√≥lo se\n"
 "chequea la sintaxis del enlace."
 
 #: ../linkchecker:342
@@ -1536,8 +1536,8 @@ msgid ""
 "For FTP the default password is 'anonymous@'. For HTTP there is\n"
 "no default password. See also -u."
 msgstr ""
-"Intentar la contraseÒa dada para la autorizaciÛn HTTP y FTP. Para FTP\n"
-"la contraseÒa por omisiÛn es 'anonymous@'. Vea tambiÈn -u."
+"Intentar la contrase√±a dada para la autorizaci√≥n HTTP y FTP. Para FTP\n"
+"la contrase√±a por omisi√≥n es 'anonymous@'. Vea tambi√©n -u."
 
 #: ../linkchecker:352
 #, fuzzy
@@ -1546,8 +1546,8 @@ msgid ""
 "will enable infinite recursion. Default depth is infinite."
 msgstr ""
 "Chequear recursivamente todos los enlaces hasta la profundidad\n"
-"dada. Una profundidad negativa habilitar· la recursiÛn infinita. Por\n"
-"omisiÛn la profundidad es infinita."
+"dada. Una profundidad negativa habilitar√° la recursi√≥n infinita. Por\n"
+"omisi√≥n la profundidad es infinita."
 
 #: ../linkchecker:357
 #, fuzzy, python-format
@@ -1555,8 +1555,8 @@ msgid ""
 "Set the timeout for connection attempts in seconds. The default\n"
 "timeout is %d seconds."
 msgstr ""
-"Pone el tiempo de espera para intentos de conexiÛn en segundos. El\n"
-"tiempo de espera por omisiÛn es de %d segundos."
+"Pone el tiempo de espera para intentos de conexi√≥n en segundos. El\n"
+"tiempo de espera por omisi√≥n es de %d segundos."
 
 #: ../linkchecker:361
 #, fuzzy
@@ -1565,9 +1565,9 @@ msgid ""
 "For FTP the default username is 'anonymous'. For HTTP there is\n"
 "no default username. See also -p."
 msgstr ""
-"Intentar el nombre de usuario dado para la autoriazaciÛn HTTP y\n"
-"FTP. Para FTP el nombre de usuario por omisiÛn es 'anonymous'. Vea\n"
-"tambiÈn -p."
+"Intentar el nombre de usuario dado para la autoriazaci√≥n HTTP y\n"
+"FTP. Para FTP el nombre de usuario por omisi√≥n es 'anonymous'. Vea\n"
+"tambi√©n -p."
 
 #: ../linkchecker:366
 msgid ""
@@ -1580,7 +1580,7 @@ msgstr ""
 #: ../linkchecker:400
 #, python-format
 msgid "Invalid debug level %(level)r"
-msgstr "Nivel de depuraciÛn inv·lido %(level)r"
+msgstr "Nivel de depuraci√≥n inv√°lido %(level)r"
 
 #: ../linkchecker:413
 #, python-format
@@ -1594,12 +1594,12 @@ msgstr ""
 #: ../linkchecker:447 ../linkchecker:479
 #, fuzzy, python-format
 msgid "Unknown logger type %(type)r in %(output)r for option %(option)s"
-msgstr "Tipo %r de registrador desconocido en %r para la opciÛn %s"
+msgstr "Tipo %r de registrador desconocido en %r para la opci√≥n %s"
 
 #: ../linkchecker:451 ../linkchecker:485
 #, fuzzy, python-format
 msgid "Unknown encoding %(encoding)r in %(output)r for option %(option)s"
-msgstr "CodificaciÛn %r desconocida en %r para la opciÛn %s"
+msgstr "Codificaci√≥n %r desconocida en %r para la opci√≥n %s"
 
 #: ../linkchecker:497
 #, python-format
@@ -1613,7 +1613,7 @@ msgstr ""
 #: ../linkchecker:519
 #, python-format
 msgid "Illegal argument %(arg)r for option %(option)s"
-msgstr "Argumento ilegal %(arg)r para la opciÛn %(option)s"
+msgstr "Argumento ilegal %(arg)r para la opci√≥n %(option)s"
 
 #: ../linkchecker:538
 #, python-format
@@ -1635,7 +1635,7 @@ msgid ""
 "Overwrite profiling file %(file)r?\n"
 "Press Ctrl-C to cancel, RETURN to continue."
 msgstr ""
-"øSobreescribir archivo %(file)r de perfilamiento?\n"
+"¬øSobreescribir archivo %(file)r de perfilamiento?\n"
 "Presione Ctrl-C para cancelar, RETORNO para continuar."
 
 #: ../linkchecker:583
@@ -1648,8 +1648,8 @@ msgid ""
 "The `yappi' Python module is not installed, therefore the --profile option "
 "is disabled."
 msgstr ""
-"El mÛdulo `profile' de Python no est· instalado, por tanto la opciÛn --"
-"profile est· deshabilitada."
+"El m√≥dulo `profile' de Python no est√° instalado, por tanto la opci√≥n --"
+"profile est√° deshabilitada."
 
 #: ../linkchecker:603
 msgid "Dumping memory statistics..."
@@ -1720,12 +1720,12 @@ msgstr ""
 #: /usr/lib/python2.7/argparse.py:1597
 #, fuzzy
 msgid "positional arguments"
-msgstr "la opciÛn %s requiere un argumento"
+msgstr "la opci√≥n %s requiere un argumento"
 
 #: /usr/lib/python2.7/argparse.py:1598
 #, fuzzy
 msgid "optional arguments"
-msgstr "la opciÛn %s requiere un argumento"
+msgstr "la opci√≥n %s requiere un argumento"
 
 #: /usr/lib/python2.7/argparse.py:1613
 msgid "show this help message and exit"
@@ -1733,7 +1733,7 @@ msgstr "mostrar este mensaje de ayuda y salir"
 
 #: /usr/lib/python2.7/argparse.py:1619
 msgid "show program's version number and exit"
-msgstr "mostrar n˙mero de versiÛn del programa"
+msgstr "mostrar n√∫mero de versi√≥n del programa"
 
 #: /usr/lib/python2.7/argparse.py:1651
 msgid "cannot have multiple subparser arguments"
@@ -1788,7 +1788,7 @@ msgstr ""
 #: /usr/lib/python2.7/argparse.py:2089
 #, fuzzy, python-format
 msgid "ambiguous option: %s could match %s"
-msgstr "opciÛn ambigua: %s (ø%s?)"
+msgstr "opci√≥n ambigua: %s (¬ø%s?)"
 
 #: /usr/lib/python2.7/argparse.py:2151
 #, fuzzy, python-format
@@ -1803,12 +1803,12 @@ msgstr ""
 #: /usr/lib/python2.7/argparse.py:2271
 #, fuzzy, python-format
 msgid "invalid %s value: %r"
-msgstr "opciÛn %s: inv·lido %s valor: %r"
+msgstr "opci√≥n %s: inv√°lido %s valor: %r"
 
 #: /usr/lib/python2.7/argparse.py:2281
 #, fuzzy, python-format
 msgid "invalid choice: %r (choose from %s)"
-msgstr "opciÛn %s: opciÛn inv·lida: %r (escoja de %s)"
+msgstr "opci√≥n %s: opci√≥n inv√°lida: %r (escoja de %s)"
 
 #: /usr/lib/python2.7/argparse.py:2374
 #, fuzzy, python-format
