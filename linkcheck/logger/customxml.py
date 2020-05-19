@@ -18,7 +18,6 @@ An XML logger.
 """
 from . import xmllog
 from .. import strformat
-from builtins import str as str_text
 
 
 class CustomXMLLogger(xmllog._XMLLogger):
@@ -48,20 +47,20 @@ class CustomXMLLogger(xmllog._XMLLogger):
         """
         self.xml_starttag('urldata')
         if self.has_part('url'):
-            self.xml_tag("url", str_text(url_data.base_url))
+            self.xml_tag("url", url_data.base_url)
         if url_data.name and self.has_part('name'):
-            self.xml_tag("name", str_text(url_data.name))
+            self.xml_tag("name", url_data.name)
         if url_data.parent_url and self.has_part('parenturl'):
             attrs = {
                 'line': "%s" % url_data.line,
                 'column': "%s" % url_data.column,
             }
-            self.xml_tag("parent", str_text(url_data.parent_url),
+            self.xml_tag("parent", url_data.parent_url,
                          attrs=attrs)
         if url_data.base_ref and self.has_part('base'):
-            self.xml_tag("baseref", str_text(url_data.base_ref))
+            self.xml_tag("baseref", url_data.base_ref)
         if self.has_part("realurl"):
-            self.xml_tag("realurl", str_text(url_data.url))
+            self.xml_tag("realurl", url_data.url)
         if self.has_part("extern"):
             self.xml_tag("extern", "%d" % (1 if url_data.extern else 0))
         if url_data.dltime >= 0 and self.has_part("dltime"):
