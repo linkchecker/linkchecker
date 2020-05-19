@@ -17,7 +17,6 @@
 Parse links in PDF files with pdfminer.
 """
 from io import BytesIO
-from builtins import str as str_text
 
 from . import _ParserPlugin
 try:
@@ -45,7 +44,7 @@ def search_url(obj, url_data, pageno, seen_objs):
     if isinstance(obj, dict):
         for key, value in obj.items():
             if key == 'URI':
-                if isinstance(value, str_text):
+                if isinstance(value, str):
                     url = value
                 else:
                     # URIs should be 7bit ASCII encoded, but be safe and encode
