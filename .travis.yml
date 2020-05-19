@@ -8,6 +8,13 @@ jobs:
   include:
     - python: "3.5"
       env: TOXENV=oldbs4
+    - name: flake8
+      env: TOXENV=flake8
+      before_script:
+      after_success:
+  allow_failures:
+    - name: flake8
+      env: TOXENV=flake8
 # command to install dependencies
 addons:
   apt:
