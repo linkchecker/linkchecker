@@ -23,8 +23,8 @@ import datetime
 import time
 import codecs
 import abc
+
 from .. import log, LOG_CHECK, strformat, dummy, configuration, i18n
-from builtins import str as str_text
 
 _ = lambda x: x
 Fields = dict(
@@ -206,7 +206,7 @@ class _Logger(abc.ABC):
 
     def encode(self, s):
         """Encode string with output encoding."""
-        assert isinstance(s, str_text)
+        assert isinstance(s, str)
         return s.encode(self.output_encoding, self.codec_errors)
 
     def init_fileoutput(self, args):

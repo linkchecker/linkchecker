@@ -252,7 +252,7 @@ class LinkCheckTest(unittest.TestCase):
     def direct(self, url, resultlines, parts=None, recursionlevel=0,
                 confargs=None, url_encoding=None):
         """Check url with expected result."""
-        assert isinstance(url, str_text), repr(url)
+        assert isinstance(url, str), repr(url)
         if confargs is None:
             confargs = {'recursionlevel': recursionlevel}
         else:

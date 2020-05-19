@@ -133,20 +133,20 @@ class UrlBase:
         """
         self.base_ref = base_ref
         if self.base_ref is not None:
-            assert isinstance(self.base_ref, str_text), repr(self.base_ref)
+            assert isinstance(self.base_ref, str), repr(self.base_ref)
         self.base_url = base_url.strip() if base_url else base_url
         if self.base_url is not None:
-            assert isinstance(self.base_url, str_text), repr(self.base_url)
+            assert isinstance(self.base_url, str), repr(self.base_url)
         self.parent_url = parent_url
         if self.parent_url is not None:
-            assert isinstance(self.parent_url, str_text), repr(self.parent_url)
+            assert isinstance(self.parent_url, str), repr(self.parent_url)
         self.recursion_level = recursion_level
         self.aggregate = aggregate
         self.line = line
         self.column = column
         self.page = page
         self.name = name
-        assert isinstance(self.name, str_text), repr(self.name)
+        assert isinstance(self.name, str), repr(self.name)
         self.encoding = url_encoding
         self.extern = extern
         if self.base_ref:
@@ -308,7 +308,7 @@ class UrlBase:
         # URLs with different anchors to have the same content
         self.cache_url = urlutil.urlunsplit(self.urlparts[:4]+[''])
         if self.cache_url is not None:
-            assert isinstance(self.cache_url, str_text), repr(self.cache_url)
+            assert isinstance(self.cache_url, str), repr(self.cache_url)
 
     def check_syntax(self):
         """
@@ -407,7 +407,7 @@ class UrlBase:
         # safe anchor for later checking
         self.anchor = self.urlparts[4]
         if self.anchor is not None:
-            assert isinstance(self.anchor, str_text), repr(self.anchor)
+            assert isinstance(self.anchor, str), repr(self.anchor)
 
     def check_obfuscated_ip(self):
         """Warn if host of this URL is obfuscated IP address."""
