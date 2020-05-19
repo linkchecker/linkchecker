@@ -20,8 +20,6 @@ Handle itms-services URLs.
 from . import urlbase
 from .. import log, LOG_CHECK
 
-from builtins import str as str_text
-
 class ItmsServicesUrl(urlbase.UrlBase):
     """Apple iOS application download URLs."""
 
@@ -33,7 +31,7 @@ class ItmsServicesUrl(urlbase.UrlBase):
 
     def local_check(self):
         """Disable content checks."""
-        log.debug(LOG_CHECK, "Checking %s", str_text(self))
+        log.debug(LOG_CHECK, "Checking %s", self)
         pass
 
     def check_content(self):
