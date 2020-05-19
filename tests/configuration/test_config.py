@@ -20,15 +20,14 @@ Test config parsing.
 import unittest
 import os
 import linkcheck.configuration
-from builtins import str as str_text
 
 
 def get_file(filename=None):
     """Get file name located within 'data' directory."""
     directory = os.path.join("tests", "configuration", "data")
     if filename:
-        return str_text(os.path.join(directory, filename))
-    return str_text(directory)
+        return os.path.join(directory, filename)
+    return directory
 
 
 class TestConfig(unittest.TestCase):
