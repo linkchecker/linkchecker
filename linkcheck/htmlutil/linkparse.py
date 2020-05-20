@@ -19,7 +19,6 @@ Find link tags in HTML text.
 
 import re
 from .. import strformat, log, LOG_CHECK, url as urlutil
-from builtins import str as str_text
 
 unquote = strformat.unquote
 
@@ -181,11 +180,11 @@ class LinkFinder:
 
     def parse_tag(self, tag, attr, value, name, base, lineno, column):
         """Add given url data to url list."""
-        assert isinstance(tag, str_text), repr(tag)
-        assert isinstance(attr, str_text), repr(attr)
-        assert isinstance(name, str_text), repr(name)
-        assert isinstance(base, str_text), repr(base)
-        assert isinstance(value, str_text) or value is None, repr(value)
+        assert isinstance(tag, str), repr(tag)
+        assert isinstance(attr, str), repr(attr)
+        assert isinstance(name, str), repr(name)
+        assert isinstance(base, str), repr(base)
+        assert isinstance(value, str) or value is None, repr(value)
         # look for meta refresh
         if tag == 'meta' and value:
             mo = refresh_re.match(value)
@@ -209,7 +208,7 @@ class LinkFinder:
 
     def found_url(self, url, name, base, lineno, column):
         """Add newly found URL to queue."""
-        assert isinstance(url, str_text) or url is None, repr(url)
+        assert isinstance(url, str) or url is None, repr(url)
         self.callback(url, line=lineno, column=column, name=name, base=base)
 
 

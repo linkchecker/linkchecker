@@ -37,8 +37,6 @@ import locale
 import pydoc
 from . import i18n
 
-from builtins import str as str_text
-
 
 def unicode_safe(s, encoding=i18n.default_encoding, errors='replace'):
     """Get unicode string without raising encoding errors. Unknown
@@ -68,7 +66,7 @@ def ascii_safe(s):
     @return: encoded ASCII version of s, or None if s was None
     @rtype: string
     """
-    if isinstance(s, str_text):
+    if isinstance(s, str):
         s = s.encode('ascii', 'ignore').decode('ascii')
     return s
 

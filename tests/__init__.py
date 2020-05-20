@@ -22,7 +22,6 @@ import pytest
 from contextlib import contextmanager
 from functools import lru_cache, wraps
 from linkcheck import LinkCheckerInterrupt
-from builtins import str as str_text
 
 
 basedir = os.path.dirname(__file__)
@@ -259,8 +258,8 @@ def get_file(filename=None):
     """
     directory = os.path.join("tests", "checker", "data")
     if filename:
-        return str_text(os.path.join(directory, filename))
-    return str_text(directory)
+        return os.path.join(directory, filename)
+    return directory
 
 
 if __name__ == '__main__':

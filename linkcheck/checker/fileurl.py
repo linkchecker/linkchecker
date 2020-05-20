@@ -21,7 +21,6 @@ import re
 import os
 import urllib.parse
 import urllib.request
-from builtins import str as str_text
 from datetime import datetime
 
 from . import urlbase, get_index_html
@@ -202,7 +201,7 @@ class FileUrl(urlbase.UrlBase):
         with links to the files."""
         if self.is_directory():
             data = get_index_html(get_files(self.get_os_filename()))
-            if isinstance(data, str_text):
+            if isinstance(data, str):
                 data = data.encode("iso8859-1", "ignore")
         else:
             data = super(FileUrl, self).read_content()
