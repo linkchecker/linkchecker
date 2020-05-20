@@ -26,7 +26,6 @@ import linkcheck.configuration
 import linkcheck.director
 import linkcheck.logger
 from .. import get_file
-from builtins import str as str_text
 
 # helper alias
 get_url_from = linkcheck.checker.get_url_from
@@ -137,14 +136,10 @@ class TestLogger(linkcheck.logger._Logger):
         """
         self.expected = self.normalize(self.expected)
         self.result = self.normalize(self.result)
-        for line in difflib.unified_diff(self.expected, self.result,
-                                         fromfile="expected", tofile="result",
-                                         lineterm=""):
-            if not isinstance(line, str_text):
-                # The ---, +++ and @@ lines from diff format are ascii encoded.
-                # Make them unicode.
-                line = str_text(line, "ascii", "replace")
-            self.diff.append(line)
+        self.diff = list(difflib.unified_diff(self.expected, self.result,
+                                              fromfile="expected",
+                                              tofile="result",
+                                              lineterm=""))
 
 
 def get_file_url(filename):
