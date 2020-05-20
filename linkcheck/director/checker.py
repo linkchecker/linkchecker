@@ -103,7 +103,7 @@ class Checker(task.LoggedCheckedTask):
                     self.check_url_data(url_data)
                 finally:
                     self.urlqueue.task_done(url_data)
-                self.setName(self.origname)
+                self.name = self.origname
         except urlqueue.Empty:
             pass
         except Exception:
@@ -111,5 +111,5 @@ class Checker(task.LoggedCheckedTask):
 
     def check_url_data(self, url_data):
         """Check one URL data instance."""
-        self.setName("CheckThread-%s" % (url_data.url or ""))
+        self.name = "CheckThread-%s" % (url_data.url or "")
         check_url(url_data, self.logger)
