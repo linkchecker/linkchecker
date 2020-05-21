@@ -68,6 +68,9 @@ class TestFile(LinkCheckTest):
     def test_php(self):
         self.file_test("file.php")
 
+    def test_empty(self):
+        self.file_test("empty.html")
+
     @need_word
     def test_word(self):
         confargs = dict(enabledplugins=["WordParser"])
