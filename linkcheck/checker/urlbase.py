@@ -633,7 +633,9 @@ class UrlBase:
             self.get_raw_content()
             self.soup = htmlsoup.make_soup(self.data)
             # Sometimes soup.original_encoding is None!  Better mangled text
-            # than an internal crash, eh?
+            # than an internal crash, eh?  ISO-8859-1 is a safe fallback in the
+            # sense that any binary blob can be decoded, it'll never cause a
+            # UnicodeDecodeError.
             self.encoding = self.soup.original_encoding or 'ISO-8859-1'
             self.text = self.data.decode(self.encoding)
         return self.text
