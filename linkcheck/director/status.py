@@ -39,7 +39,7 @@ class Status(task.LoggedCheckedTask):
     def run_checked(self):
         """Print periodic status messages."""
         self.start_time = time.time()
-        self.setName("Status")
+        self.name = "Status"
         # the first status should be after a second
         wait_seconds = 1
         first_wait = True

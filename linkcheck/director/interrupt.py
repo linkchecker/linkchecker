@@ -37,7 +37,7 @@ class Interrupt(task.CheckedTask):
     def run_checked(self):
         """Wait and raise KeyboardInterrupt after."""
         self.start_time = time.time()
-        self.setName("Interrupt")
+        self.name = "Interrupt"
         while not self.stopped(self.WaitSeconds):
             duration = time.time() - self.start_time
             if duration > self.duration:
