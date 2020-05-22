@@ -41,13 +41,13 @@ class RobotsTxt:
         self.roboturl_locks = {}
         self.useragent = useragent
 
-    def allows_url(self, url_data):
+    def allows_url(self, url_data, timeout=None):
         """Ask robots.txt allowance."""
         roboturl = url_data.get_robots_txt_url()
         with self.get_lock(roboturl):
-            return self._allows_url(url_data, roboturl)
+            return self._allows_url(url_data, roboturl, timeout)
 
-    def _allows_url(self, url_data, roboturl):
+    def _allows_url(self, url_data, roboturl, timeout=None):
         """Ask robots.txt allowance. Assumes only single thread per robots.txt
         URL calls this function."""
         with cache_lock:
@@ -56,7 +56,8 @@ class RobotsTxt:
                 rp = self.cache[roboturl]
                 return rp.can_fetch(self.useragent, url_data.url)
             self.misses += 1
-        kwargs = dict(auth=url_data.auth, session=url_data.session)
+        kwargs = dict(auth=url_data.auth, session=url_data.session,
+                      timeout=timeout)
         if hasattr(url_data, "proxy") and hasattr(url_data, "proxy_type"):
             kwargs["proxies"] = {url_data.proxytype: url_data.proxy}
         rp = robotparser2.RobotFileParser(**kwargs)
