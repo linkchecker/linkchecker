@@ -79,11 +79,12 @@ class Aggregate:
         if not user and not password:
             raise LinkCheckerError(
                 "loginurl is configured but neither user nor password are set")
-        session = requests.Session()
-        # XXX user-agent header
-        # XXX timeout
+        session = new_request_session(self.config, self.cookies)
         log.debug(LOG_CHECK, "Getting login form %s", url)
-        response = session.get(url)
+        kwargs = dict(timeout=self.config["timeout"])
+        # XXX: proxy?  sslverify?  can we reuse HttpUrl.get_request_kwargs()
+        # somehow?
+        response = session.get(url, **kwargs)
         response.raise_for_status()
         cgiuser = self.config["loginuserfield"] if user else None
         cgipassword = self.config["loginpasswordfield"] if password else None
@@ -98,7 +99,7 @@ class Aggregate:
             form.data[key] = value
         formurl = urllib.parse.urljoin(url, form.url)
         log.debug(LOG_CHECK, "Posting login data to %s", formurl)
-        response = session.post(formurl, data=form.data)
+        response = session.post(formurl, data=form.data, **kwargs)
         response.raise_for_status()
         self.cookies = session.cookies
         if len(self.cookies) == 0:
