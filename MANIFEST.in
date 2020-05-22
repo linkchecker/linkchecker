@@ -1,4 +1,5 @@
 include README.rst COPYING MANIFEST.in
+include *.md
 include config/linkchecker-completion config/create.sql
 include config/linkcheckerrc
 include config/linkchecker.apache2.conf install-rpm.sh
@@ -8,7 +9,7 @@ include Makefile
 include cgi-bin/lconline/*.html cgi-bin/lconline/*.de cgi-bin/lconline/*.en
 include cgi-bin/lconline/*.js cgi-bin/lconline/*.css cgi-bin/lconline/*.ico
 include po/*.po po/*.mo po/*.pot po/Makefile
-include doc/*.example doc/*.txt
+include doc/*.example doc/*.md doc/*.txt
 include doc/html/*.ico
 include doc/html/*.html
 include doc/html/*.txt
@@ -23,4 +24,7 @@ include doc/Makefile
 include doc/examples/*.sh doc/examples/*.bat doc/examples/*.py
 include doc/examples/linkcheckerrc_loginurl
 include scripts/*.sh scripts/*.py
-recursive-include tests *.py *.result *.html *.ico *.txt *.zip *.asc *.css *.xhtml *.sqlite *.adr *.swf
+# tests
+include robots.txt
+include tests/configuration/data/*.ini
+recursive-include tests *.py *.result *.html *.ico *.txt *.zip *.asc *.css *.xhtml *.sqlite *.adr *.swf *.bin *.markdown *.pdf *.php *.plist *.wml *.xml
