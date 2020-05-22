@@ -73,7 +73,9 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         @return: True if access is granted, otherwise False
         @rtype: bool
         """
-        return not self.aggregate.config['robotstxt'] or self.aggregate.robots_txt.allows_url(self)
+        return (not self.aggregate.config['robotstxt']
+                or self.aggregate.robots_txt.allows_url(
+                    self, timeout=self.aggregate.config["timeout"]))
 
     def content_allows_robots(self):
         """
