@@ -628,10 +628,10 @@ class UrlBase:
             self.data = self.download_content()
         return self.data
 
-    def get_content(self):
+    def get_content(self, encoding=None):
         if self.text is None:
             self.get_raw_content()
-            self.soup = htmlsoup.make_soup(self.data)
+            self.soup = htmlsoup.make_soup(self.data, encoding)
             # Sometimes soup.original_encoding is None!  Better mangled text
             # than an internal crash, eh?  ISO-8859-1 is a safe fallback in the
             # sense that any binary blob can be decoded, it'll never cause a
