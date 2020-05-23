@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -26,7 +25,7 @@ from ..decorators import synchronized
 _w3_time_lock = threading.Lock()
 
 
-class W3Timer(object):
+class W3Timer:
     """Ensure W3C apis are not hammered."""
 
     # every X seconds
@@ -37,7 +36,7 @@ class W3Timer(object):
         self.last_w3_call = 0
 
     @synchronized(_w3_time_lock)
-    def check_w3_time (self):
+    def check_w3_time(self):
         """Make sure the W3C validators are at most called once a second."""
         if time.time() - self.last_w3_call < W3Timer.SleepSeconds:
             time.sleep(W3Timer.SleepSeconds)
@@ -66,7 +65,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
             response = session.post('http://validator.w3.org/check', data=body)
             response.raise_for_status()
             if response.headers.get('x-w3c-validator-status', 'Invalid') == 'Valid':
-                url_data.add_info(u"W3C Validator: %s" % _("valid HTML syntax"))
+                url_data.add_info("W3C Validator: %s" % _("valid HTML syntax"))
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:
@@ -103,7 +102,7 @@ class CssSyntaxCheck(_ContentPlugin):
             response = session.get(url, params=params)
             response.raise_for_status()
             if response.headers.get('X-W3C-Validator-Status', 'Invalid') == 'Valid':
-                url_data.add_info(u"W3C Validator: %s" % _("valid CSS syntax"))
+                url_data.add_info("W3C Validator: %s" % _("valid CSS syntax"))
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:
@@ -112,7 +111,7 @@ class CssSyntaxCheck(_ContentPlugin):
             log.warn(LOG_PLUGIN, _("CSS syntax check plugin error: %(msg)s ") % {"msg": msg})
 
 
-def check_w3_errors (url_data, xml, w3type):
+def check_w3_errors(url_data, xml, w3type):
     """Add warnings for W3C HTML or CSS errors in xml format.
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
@@ -127,7 +126,7 @@ def check_w3_errors (url_data, xml, w3type):
         url_data.add_warning(warnmsg % attrs)
 
 
-def getXmlText (parent, tag):
+def getXmlText(parent, tag):
     """Return XML content of given tag in parent element."""
     elem = parent.getElementsByTagName(tag)[0]
     # Yes, the DOM standard is awful.

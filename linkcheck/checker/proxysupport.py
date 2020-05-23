@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,22 +16,16 @@
 """
 Mixin class for URLs that can be fetched over a proxy.
 """
-try:  # Python 3
-    from urllib import parse
-    from urllib import request
-    from urllib.parse import splitport
-except ImportError:
-    from urllib import splitport
-    import urllib as request
-    import urlparse as parse
+import urllib.parse
+import urllib.request
 import os
 from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
 
 
-class ProxySupport (object):
+class ProxySupport:
     """Get support for proxying and for URLs with user:pass@host setting."""
 
-    def set_proxy (self, proxy):
+    def set_proxy(self, proxy):
         """Parse given proxy information and store parsed values.
         Note that only http:// proxies are supported, both for ftp://
         and http:// URLs.
@@ -42,7 +35,7 @@ class ProxySupport (object):
         self.proxyauth = None
         if not self.proxy:
             return
-        proxyurl = parse.urlparse(self.proxy)
+        proxyurl = urllib.parse.urlparse(self.proxy)
         self.proxytype = proxyurl.scheme
         if self.proxytype not in ('http', 'https'):
             # Note that invalid proxies might raise TypeError in urllib2,
@@ -67,13 +60,13 @@ class ProxySupport (object):
             auth = "%s:%s" % (username, password)
             self.proxyauth = "Basic "+httputil.encode_base64(auth)
 
-    def ignore_proxy_host (self):
+    def ignore_proxy_host(self):
         """Check if self.host is in the $no_proxy ignore list."""
-        if request.proxy_bypass(self.host):
+        if urllib.request.proxy_bypass(self.host):
             return True
         no_proxy = os.environ.get("no_proxy")
         if no_proxy:
-            entries = [parse_host_port(x) for x in no_proxy.split(",")]
+            entries = [urlutil.splitport(x.strip()) for x in no_proxy.split(",")]
             for host, port in entries:
                 if host.lower() == self.host and port == self.port:
                     return True
@@ -94,12 +87,3 @@ class ProxySupport (object):
             host = self.host
             port = self.port
         return (scheme, host, port)
-
-
-def parse_host_port (host_port):
-    """Parse a host:port string into separate components."""
-    host, port = splitport(host_port.strip())
-    if port is not None:
-        if urlutil.is_numeric_port(port):
-            port = int(port)
-    return host, port

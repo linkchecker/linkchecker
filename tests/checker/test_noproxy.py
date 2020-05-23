@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2012 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,16 +16,14 @@
 """
 Test proxy handling.
 """
-from . import httpserver
-try:
-    from test.support import EnvironmentVarGuard
-except ImportError:  # Python 3
-    from test.test_support import EnvironmentVarGuard
+from test.support import EnvironmentVarGuard
 
-class TestProxy (httpserver.HttpServerTest):
+from . import httpserver
+
+class TestProxy(httpserver.HttpServerTest):
     """Test no_proxy env var handling."""
 
-    def test_noproxy (self):
+    def test_noproxy(self):
         # set env vars
         with EnvironmentVarGuard() as env:
             env.set("http_proxy", "http://example.org:8877")
@@ -35,13 +32,13 @@ class TestProxy (httpserver.HttpServerTest):
 
     def noproxy_test(self):
         # Test setting proxy and no_proxy env variable.
-        url = self.get_url(u"favicon.ico")
+        url = self.get_url("favicon.ico")
         nurl = url
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Ignoring proxy setting `http://example.org:8877'.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Ignoring proxy setting `http://example.org:8877'.",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=0)

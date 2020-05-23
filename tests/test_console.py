@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2011 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,8 +21,8 @@ import unittest
 import linkcheck.director.console
 
 
-class TestConsole (unittest.TestCase):
+class TestConsole(unittest.TestCase):
     """Test console operations."""
 
-    def test_internal_error (self):
+    def test_internal_error(self):
         linkcheck.director.console.internal_error()

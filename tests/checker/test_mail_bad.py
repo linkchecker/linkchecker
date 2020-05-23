@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,30 +19,30 @@ Test mail checking of bad mail addresses.
 from . import MailTest
 
 
-class TestMailBad (MailTest):
+class TestMailBad(MailTest):
     """Test mailto: link checking."""
 
-    def test_error_mail (self):
+    def test_error_mail(self):
         # too long or too short
-        self.mail_error(u"mailto:@")
-        self.mail_error(u"mailto:@example.org")
-        self.mail_error(u"mailto:a@")
-        self.mail_error(u"mailto:%s@example.org" % (u"a"*65))
-        self.mail_error(u'mailto:a@%s.com' % (u"a"*64))
+        self.mail_error("mailto:@")
+        self.mail_error("mailto:@example.org")
+        self.mail_error("mailto:a@")
+        self.mail_error("mailto:%s@example.org" % ("a"*65))
+        self.mail_error('mailto:a@%s.com' % ("a"*64))
         # local part quoted
-        self.mail_error(u'mailto:"a""@example.com', cache_key=u'mailto:a')
-        self.mail_error(u'mailto:""a"@example.com', cache_key=u'mailto:""a"@example.com')
-        self.mail_error(u'mailto:"a\\"@example.com', cache_key=u'mailto:a"@example.com')
+        self.mail_error('mailto:"a""@example.com', cache_key='mailto:a')
+        self.mail_error('mailto:""a"@example.com', cache_key='mailto:""a"@example.com')
+        self.mail_error('mailto:"a\\"@example.com', cache_key='mailto:a"@example.com')
         # local part unqouted
-        self.mail_error(u'mailto:.a@example.com')
-        self.mail_error(u'mailto:a.@example.com')
-        self.mail_error(u'mailto:a..b@example.com')
+        self.mail_error('mailto:.a@example.com')
+        self.mail_error('mailto:a.@example.com')
+        self.mail_error('mailto:a..b@example.com')
         # domain part
-        self.mail_error(u'mailto:a@a_b.com')
-        self.mail_error(u'mailto:a@example.com.')
-        self.mail_error(u'mailto:a@example.com.111')
-        self.mail_error(u'mailto:a@example..com')
+        self.mail_error('mailto:a@a_b.com')
+        self.mail_error('mailto:a@example.com.')
+        self.mail_error('mailto:a@example.com.111')
+        self.mail_error('mailto:a@example..com')
         # other
         # ? extension forbidden in <> construct
-        self.mail_error(u"mailto:Bastian Kleineidam <calvin@users.sourceforge.net?foo=bar>",
-            cache_key=u"mailto:calvin@users.sourceforge.net?foo=bar")
+        self.mail_error("mailto:Bastian Kleineidam <calvin@users.sourceforge.net?foo=bar>",
+            cache_key="mailto:calvin@users.sourceforge.net?foo=bar")

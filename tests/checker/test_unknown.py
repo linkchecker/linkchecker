@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2010-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,73 +19,73 @@ Test checking of unknown URLs.
 from . import LinkCheckTest
 
 
-class TestUnknown (LinkCheckTest):
+class TestUnknown(LinkCheckTest):
     """Test unknown URL scheme checking."""
 
-    def test_skype (self):
-        url = u"skype:"
+    def test_skype(self):
+        url = "skype:"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Skype URL ignored.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Skype URL ignored.",
+            "valid",
         ]
         self.direct(url, resultlines)
 
-    def test_irc (self):
-        url = u"irc://example.org"
+    def test_irc(self):
+        url = "irc://example.org"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Irc URL ignored.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Irc URL ignored.",
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = u"ircs://example.org"
+        url = "ircs://example.org"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Ircs URL ignored.",
-            u"valid",
-        ]
-        self.direct(url, resultlines)
-
-    def test_steam (self):
-        url = u"steam://connect/example.org"
-        nurl = self.norm(url)
-        resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Steam URL ignored.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Ircs URL ignored.",
+            "valid",
         ]
         self.direct(url, resultlines)
 
-    def test_feed (self):
-        url = u"feed:https://example.com/entries.atom"
-        nurl = u"feed:https%3A/example.com/entries.atom"
-        resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Feed URL ignored.",
-            u"valid",
-        ]
-        self.direct(url, resultlines)
-        url = u"feed://example.com/entries.atom"
+    def test_steam(self):
+        url = "steam://connect/example.org"
         nurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"info Feed URL ignored.",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Steam URL ignored.",
+            "valid",
+        ]
+        self.direct(url, resultlines)
+
+    def test_feed(self):
+        url = "feed:https://example.com/entries.atom"
+        nurl = "feed:https%3A/example.com/entries.atom"
+        resultlines = [
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Feed URL ignored.",
+            "valid",
+        ]
+        self.direct(url, resultlines)
+        url = "feed://example.com/entries.atom"
+        nurl = self.norm(url)
+        resultlines = [
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "info Feed URL ignored.",
+            "valid",
         ]
         self.direct(url, resultlines)

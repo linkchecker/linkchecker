@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,21 +17,17 @@
 Functions used by the WSGI script.
 """
 
-from html import escape as html_escape
+import html
 import os
 import threading
 import locale
 import re
 import time
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+import urllib.parse
+
 from . import configuration, strformat, checker, director, get_link_pat, \
     init_i18n, url as urlutil
 from .decorators import synchronized
-from builtins import str as str_text
 
 # 5 minutes timeout for requests
 MAX_REQUEST_SECONDS = 300
@@ -55,7 +50,7 @@ def application(environ, start_response):
         request_body = environ['wsgi.input'].read(request_body_size)
     else:
         request_body = environ['wsgi.input'].read()
-    form = urlparse.parse_qs(request_body.decode(HTML_ENCODING))
+    form = urllib.parse.parse_qs(request_body.decode(HTML_ENCODING))
 
     status = '200 OK'
     start_response(status, get_response_headers())
@@ -85,7 +80,7 @@ def get_response_headers():
            ]
 
 
-def formvalue (form, key):
+def formvalue(form, key):
     """Get value with given key from WSGI form."""
     field = form.get(key)
     if isinstance(field, list):
@@ -94,7 +89,7 @@ def formvalue (form, key):
 
 
 _lock = threading.Lock()
-class ThreadsafeIO (object):
+class ThreadsafeIO:
     """Thread-safe unicode I/O class."""
 
     def __init__(self):
@@ -103,23 +98,23 @@ class ThreadsafeIO (object):
         self.closed = False
 
     @synchronized(_lock)
-    def write (self, data):
+    def write(self, data):
         """Write given unicode data to buffer."""
-        assert isinstance(data, str_text)
+        assert isinstance(data, str)
         if self.closed:
             raise IOError("Write on closed I/O object")
         if data:
             self.buf.append(data)
 
     @synchronized(_lock)
-    def get_data (self):
+    def get_data(self):
         """Get bufferd unicode data."""
-        data = u"".join(self.buf)
+        data = "".join(self.buf)
         self.buf = []
         return data
 
     @synchronized(_lock)
-    def close (self):
+    def close(self):
         """Reset buffer and close this I/O object."""
         self.buf = []
         self.closed = True
@@ -130,7 +125,7 @@ def encode(s):
     return s.encode(HTML_ENCODING, 'ignore')
 
 
-def checklink (form=None, env=os.environ):
+def checklink(form=None, env=os.environ):
     """Validates the CGI form and checks the given links."""
     if form is None:
         form = {}
@@ -151,7 +146,7 @@ def checklink (form=None, env=os.environ):
     out.close()
 
 
-def start_check (aggregate, out):
+def start_check(aggregate, out):
     """Start checking in background and write encoded output to out."""
     # check in background
     t = threading.Thread(target=director.check_urls, args=(aggregate,))
@@ -187,12 +182,12 @@ def get_configuration(form, out):
     return config
 
 
-def get_host_name (form):
+def get_host_name(form):
     """Return host name of given URL."""
-    return urlparse.urlparse(formvalue(form, "url"))[1]
+    return urllib.parse.urlparse(formvalue(form, "url"))[1]
 
 
-def checkform (form, env):
+def checkform(form, env):
     """Check form data. throw exception on error
     Be sure to NOT print out any user-given data as HTML code, so use
     only plain strings as exception text."""
@@ -231,13 +226,13 @@ def checkform (form, env):
                 raise LCFormError(_("invalid %s option %r") % (option, value))
 
 
-def log (env, msg):
+def log(env, msg):
     """Log message to WSGI error output."""
     logfile = env['wsgi.errors']
     logfile.write("%s\n" % msg)
 
 
-def dump (env, form):
+def dump(env, form):
     """Log environment and form."""
     for var, value in env.items():
         log(env, var+"="+value)
@@ -245,7 +240,7 @@ def dump (env, form):
         log(env, str(formvalue(form, key)))
 
 
-def format_error (why):
+def format_error(why):
     """Format standard error page.
     @param why: error message
     @ptype why: unicode
@@ -265,4 +260,4 @@ contains only these characters: <code>A-Za-z0-9./_~-</code><br/><br/>
 Errors are logged.
 </blockquote>
 </body>
-</html>""") % html_escape(why)
+</html>""") % html.escape(why)

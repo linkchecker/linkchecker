@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,30 +19,30 @@ A dummy logger.
 from . import _Logger
 
 
-class NoneLogger (_Logger):
+class NoneLogger(_Logger):
     """
     Dummy logger printing nothing.
     """
 
     LoggerName = 'none'
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Do nothing.
         """
         pass
 
-    def start_output (self):
+    def start_output(self):
         """
         Do nothing.
         """
         pass
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Do nothing."""
         pass
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Do nothing.
         """

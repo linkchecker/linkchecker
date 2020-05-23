@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -28,13 +27,13 @@ cache_lock = get_lock("robots.txt_cache_lock")
 robot_lock = get_lock("robots.txt_robot_lock")
 
 
-class RobotsTxt (object):
+class RobotsTxt:
     """
     Thread-safe cache of downloaded robots.txt files.
     format: {cache key (string) -> robots.txt content (RobotFileParser)}
     """
 
-    def __init__ (self, useragent):
+    def __init__(self, useragent):
         """Initialize per-URL robots.txt cache."""
         # mapping {URL -> parsed robots.txt}
         self.cache = LFUCache(size=100)
@@ -42,13 +41,13 @@ class RobotsTxt (object):
         self.roboturl_locks = {}
         self.useragent = useragent
 
-    def allows_url (self, url_data):
+    def allows_url(self, url_data, timeout=None):
         """Ask robots.txt allowance."""
         roboturl = url_data.get_robots_txt_url()
         with self.get_lock(roboturl):
-            return self._allows_url(url_data, roboturl)
+            return self._allows_url(url_data, roboturl, timeout)
 
-    def _allows_url (self, url_data, roboturl):
+    def _allows_url(self, url_data, roboturl, timeout=None):
         """Ask robots.txt allowance. Assumes only single thread per robots.txt
         URL calls this function."""
         with cache_lock:
@@ -57,7 +56,8 @@ class RobotsTxt (object):
                 rp = self.cache[roboturl]
                 return rp.can_fetch(self.useragent, url_data.url)
             self.misses += 1
-        kwargs = dict(auth=url_data.auth, session=url_data.session)
+        kwargs = dict(auth=url_data.auth, session=url_data.session,
+                      timeout=timeout)
         if hasattr(url_data, "proxy") and hasattr(url_data, "proxy_type"):
             kwargs["proxies"] = {url_data.proxytype: url_data.proxy}
         rp = robotparser2.RobotFileParser(**kwargs)

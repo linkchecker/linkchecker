@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2009-2010 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,9 +19,9 @@ import os
 from linkcheck.logger.csvlog import CSVLogger
 
 
-class TestCsvLogger (unittest.TestCase):
+class TestCsvLogger(unittest.TestCase):
 
-    def test_parts (self):
+    def test_parts(self):
         args = dict(
             filename=os.path.join(os.path.dirname(__file__), "testlog.csv"),
             parts=["realurl"],

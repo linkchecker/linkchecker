@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,8 +23,8 @@ import datetime
 import time
 import codecs
 import abc
+
 from .. import log, LOG_CHECK, strformat, dummy, configuration, i18n
-from builtins import str as str_text
 
 _ = lambda x: x
 Fields = dict(
@@ -58,18 +57,18 @@ ContentTypes = dict(
 )
 
 
-class LogStatistics (object):
+class LogStatistics:
     """Gather log statistics:
     - number of errors, warnings and valid links
     - type of contents (image, video, audio, text, ...)
     - URL lengths
     """
 
-    def __init__ (self):
+    def __init__(self):
         """Initialize log statistics."""
         self.reset()
 
-    def reset (self):
+    def reset(self):
         """Reset all log statistics to default values."""
         # number of logged URLs
         self.number = 0
@@ -93,7 +92,7 @@ class LogStatistics (object):
         # overall downloaded bytes
         self.downloaded_bytes = None
 
-    def log_url (self, url_data, do_print):
+    def log_url(self, url_data, do_print):
         """Log URL statistics."""
         self.number += 1
         if not url_data.valid:
@@ -108,7 +107,7 @@ class LogStatistics (object):
             key = url_data.content_type.split('/', 1)[0].lower()
             if key not in self.link_types:
                 key = "other"
-        elif url_data.url.startswith(u"mailto:"):
+        elif url_data.url.startswith("mailto:"):
             key = "mail"
         else:
             key = "other"
@@ -125,12 +124,12 @@ class LogStatistics (object):
             # calculate running average
             self.avg_url_length += (l - self.avg_url_length) / self.avg_number
 
-    def log_internal_error (self):
+    def log_internal_error(self):
         """Increase internal error count."""
         self.internal_errors += 1
 
 
-class _Logger (object):
+class _Logger(abc.ABC):
     """
     Base class for logging of checked urls. It defines the public API
     (see below) and offers basic functionality for all loggers.
@@ -158,7 +157,6 @@ class _Logger (object):
     * log_url(url_data)
         Log a checked URL. Called by log_filter_url if do_print is True.
     """
-    __metaclass__ = abc.ABCMeta
 
     # A lowercase name for this logger, usable for option values
     LoggerName = None
@@ -166,7 +164,7 @@ class _Logger (object):
     # Default log configuration
     LoggerArgs = {}
 
-    def __init__ (self, **args):
+    def __init__(self, **args):
         """
         Initialize a logger, looking for part restrictions in kwargs.
         """
@@ -200,18 +198,18 @@ class _Logger (object):
         args.update(kwargs)
         return args
 
-    def get_charset_encoding (self):
+    def get_charset_encoding(self):
         """Translate the output encoding to a charset encoding name."""
         if self.output_encoding == "utf-8-sig":
             return "utf-8"
         return self.output_encoding
 
-    def encode (self, s):
+    def encode(self, s):
         """Encode string with output encoding."""
-        assert isinstance(s, str_text)
+        assert isinstance(s, str)
         return s.encode(self.output_encoding, self.codec_errors)
 
-    def init_fileoutput (self, args):
+    def init_fileoutput(self, args):
         """
         Initialize self.fd file descriptor from args. For file output
         (used when the fileoutput arg is given), the self.fd
@@ -228,7 +226,7 @@ class _Logger (object):
         else:
             self.fd = self.create_fd()
 
-    def start_fileoutput (self):
+    def start_fileoutput(self):
         """Start output to configured file."""
         path = os.path.dirname(self.filename)
         try:
@@ -245,7 +243,7 @@ class _Logger (object):
             self.is_active = False
         self.filename = None
 
-    def create_fd (self):
+    def create_fd(self):
         """Create open file descriptor."""
         if self.filename is None:
             return i18n.get_encoded_writer(encoding=self.output_encoding,
@@ -253,7 +251,7 @@ class _Logger (object):
         return codecs.open(self.filename, "wb", self.output_encoding,
                            self.codec_errors)
 
-    def close_fileoutput (self):
+    def close_fileoutput(self):
         """
         Flush and close the file output denoted by self.fd.
         """
@@ -271,7 +269,7 @@ class _Logger (object):
                     pass
             self.fd = None
 
-    def check_date (self):
+    def check_date(self):
         """
         Check for special dates.
         """
@@ -280,14 +278,14 @@ class _Logger (object):
             msg = _("Happy birthday for LinkChecker, I'm %d years old today!")
             self.comment(msg % (now.year - 2000))
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write a comment and a newline. This method just prints
         the given string.
         """
         self.writeln(s=s, **args)
 
-    def wrap (self, lines, width):
+    def wrap(self, lines, width):
         """
         Return wrapped version of given lines.
         """
@@ -299,7 +297,7 @@ class _Logger (object):
                       break_on_hyphens=False)
         return strformat.wrap(text, width, **kwargs).lstrip()
 
-    def write (self, s, **args):
+    def write(self, s, **args):
         """Write string to output descriptor. Strips control characters
         from string before writing.
         """
@@ -320,13 +318,13 @@ class _Logger (object):
                 self.fd = dummy.Dummy()
                 self.is_active = False
 
-    def writeln (self, s=u"", **args):
+    def writeln(self, s="", **args):
         """
         Write string to output descriptor plus a newline.
         """
-        self.write(u"%s%s" % (s, str_text(os.linesep)), **args)
+        self.write("%s%s" % (s, os.linesep), **args)
 
-    def has_part (self, name):
+    def has_part(self, name):
         """
         See if given part name will be logged.
         """
@@ -335,19 +333,19 @@ class _Logger (object):
             return True
         return name in self.logparts
 
-    def part (self, name):
+    def part(self, name):
         """
         Return translated part name.
         """
-        return _(Fields.get(name, u""))
+        return _(Fields.get(name, ""))
 
-    def spaces (self, name):
+    def spaces(self, name):
         """
         Return indent of spaces for given part name.
         """
         return self.logspaces[name]
 
-    def start_output (self):
+    def start_output(self):
         """
         Start log output.
         """
@@ -361,11 +359,11 @@ class _Logger (object):
         self.max_indent = max(len(x) for x in values)+1
         for key in parts:
             numspaces = (self.max_indent - len(self.part(key)))
-            self.logspaces[key] = u" " * numspaces
+            self.logspaces[key] = " " * numspaces
         self.stats.reset()
         self.starttime = time.time()
 
-    def log_filter_url (self, url_data, do_print):
+    def log_filter_url(self, url_data, do_print):
         """
         Log a new url with this logger if do_print is True. Else
         only update accounting data.
@@ -374,7 +372,7 @@ class _Logger (object):
         if do_print:
             self.log_url(url_data)
 
-    def write_intro (self):
+    def write_intro(self):
         """Write intro comments."""
         self.comment(_("created by %(app)s at %(time)s") %
                     {"app": configuration.AppName,
@@ -385,7 +383,7 @@ class _Logger (object):
                      {'url': configuration.SupportUrl})
         self.check_date()
 
-    def write_outro (self):
+    def write_outro(self):
         """Write outro comments."""
         self.stoptime = time.time()
         duration = self.stoptime - self.starttime
@@ -394,32 +392,32 @@ class _Logger (object):
               "duration": strformat.strduration_long(duration)})
 
     @abc.abstractmethod
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Log a new url with this logger.
         """
         pass
 
     @abc.abstractmethod
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         End of output, used for cleanup (eg output buffer flushing).
         """
         pass
 
-    def __str__ (self):
+    def __str__(self):
         """
         Return class name.
         """
         return self.__class__.__name__
 
-    def __repr__ (self):
+    def __repr__(self):
         """
         Return class name.
         """
         return repr(self.__class__.__name__)
 
-    def flush (self):
+    def flush(self):
         """
         If the logger has internal buffers, flush them.
         Ignore flush I/O errors since we are not responsible for proper
@@ -431,7 +429,7 @@ class _Logger (object):
             except (IOError, AttributeError):
                 pass
 
-    def log_internal_error (self):
+    def log_internal_error(self):
         """Indicate that an internal error occurred in the program."""
         log.warn(LOG_CHECK, "internal error occurred")
         self.stats.log_internal_error()
@@ -445,7 +443,7 @@ class _Logger (object):
         """
         if modified is not None:
             return modified.strftime("%Y-%m-%d{0}%H:%M:%S.%fZ".format(sep))
-        return u""
+        return ""
 
 def _get_loggers():
     """Return list of Logger classes."""

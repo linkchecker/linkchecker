@@ -1,0 +1,5 @@
+url file://%(curdir)s/%(datadir)s/empty.html
+cache key file://%(curdir)s/%(datadir)s/empty.html
+real url file://%(curdir)s/%(datadir)s/empty.html
+name %(datadir)s/empty.html
+valid

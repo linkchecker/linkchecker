@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -26,10 +25,10 @@ import linkcheck.configuration
 import linkcheck.director
 
 
-class TestCookies (unittest.TestCase):
+class TestCookies(unittest.TestCase):
     """Test cookie routines."""
 
-    def test_cookie_parse_multiple_headers (self):
+    def test_cookie_parse_multiple_headers(self):
         lines = [
             'Host: example.org',
             'Path: /hello',
@@ -47,7 +46,7 @@ class TestCookies (unittest.TestCase):
         self.assertEqual(cookies[1].name, 'spam')
         self.assertEqual(cookies[1].value, 'egg')
 
-    def test_cookie_parse_multiple_values (self):
+    def test_cookie_parse_multiple_values(self):
         lines = [
             'Host: example.org',
             'Set-cookie: baggage="elitist"; comment="hologram"',
@@ -63,7 +62,7 @@ class TestCookies (unittest.TestCase):
         self.assertEqual(cookies[1].name, 'comment')
         self.assertEqual(cookies[1].value, 'hologram')
 
-    def test_cookie_parse_error (self):
+    def test_cookie_parse_error(self):
         lines = [
             ' Host: imaweevil.org',
             'Set-cookie: baggage="elitist"; comment="hologram"',
@@ -71,7 +70,7 @@ class TestCookies (unittest.TestCase):
         from_headers = linkcheck.cookies.from_headers
         self.assertRaises(ValueError, from_headers, "\r\n".join(lines))
 
-    def test_cookie_file (self):
+    def test_cookie_file(self):
         # Regression test for https://github.com/linkchecker/linkchecker/issues/62
         config = linkcheck.configuration.Configuration()
         here = os.path.dirname(__file__)

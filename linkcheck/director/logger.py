@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -16,39 +15,37 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Logger for aggregator instances"""
 import threading
-try: # Python 3
-    import _thread
-except ImportError: # Python 2
-    import thread as _thread
+import _thread
+
 from ..decorators import synchronized
 _lock = threading.Lock()
 
 
-class Logger (object):
+class Logger:
     """Thread safe multi-logger class used by aggregator instances."""
 
-    def __init__ (self, config):
+    def __init__(self, config):
         """Initialize basic logging variables."""
         self.loggers = [config['logger']]
         self.loggers.extend(config['fileoutput'])
         self.verbose = config["verbose"]
         self.warnings = config["warnings"]
 
-    def start_log_output (self):
+    def start_log_output(self):
         """
         Start output of all configured loggers.
         """
         for logger in self.loggers:
             logger.start_output()
 
-    def end_log_output (self, **kwargs):
+    def end_log_output(self, **kwargs):
         """
         End output of all configured loggers.
         """
         for logger in self.loggers:
             logger.end_output(**kwargs)
 
-    def do_print (self, url_data):
+    def do_print(self, url_data):
         """Determine if URL entry should be logged or not."""
         if self.verbose:
             return True
@@ -57,7 +54,7 @@ class Logger (object):
         return not url_data.valid
 
     @synchronized(_lock)
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Send new url to all configured loggers."""
         self.check_active_loggers()
         do_print = self.do_print(url_data)
@@ -67,7 +64,7 @@ class Logger (object):
             log.log_filter_url(url_data, do_print)
 
     @synchronized(_lock)
-    def log_internal_error (self):
+    def log_internal_error(self):
         """Document that an internal error occurred."""
         for logger in self.loggers:
             logger.log_internal_error()

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2011-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -26,18 +25,17 @@ OperaBookmarkFiles = (
 )
 
 
-def get_profile_dir ():
+def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
-        dirpath = os.path.join(basedir, u"Opera", u"Opera")
+        dirpath = os.path.join(basedir, "Opera", "Opera")
     elif os.name == 'posix':
-        basedir = unicode(os.environ["HOME"])
-        dirpath = os.path.join(basedir, u".opera")
+        dirpath = os.path.join(os.environ["HOME"], ".opera")
     return dirpath
 
 
-def find_bookmark_file ():
+def find_bookmark_file():
     """Return the bookmark file of the Opera profile.
     Returns absolute filename if found, or empty string if no bookmark file
     could be found.
@@ -51,10 +49,10 @@ def find_bookmark_file ():
                     return fname
     except Exception:
         pass
-    return u""
+    return ""
 
 
-def parse_bookmark_data (data):
+def parse_bookmark_data(data):
     """Return iterator for bookmarks of the form (url, name, line number).
     Bookmarks are not sorted.
     """

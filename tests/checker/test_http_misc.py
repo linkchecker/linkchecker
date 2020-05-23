@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,24 +19,24 @@ Test http checking.
 from .httpserver import HttpServerTest
 from tests import need_network
 
-class TestHttpMisc (HttpServerTest):
+class TestHttpMisc(HttpServerTest):
     """Test http:// misc link checking."""
 
     @need_network
-    def test_html (self):
+    def test_html(self):
         self.swf_test()
         self.file_test("sitemap.xml")
 
-    def swf_test (self):
-        url = self.get_url(u"test.swf")
+    def swf_test(self):
+        url = self.get_url("test.swf")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
-            u"url http://www.example.org/",
-            u"cache key http://www.example.org/",
-            u"real url http://www.example.org/",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url http://www.example.org/",
+            "cache key http://www.example.org/",
+            "real url http://www.example.org/",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)

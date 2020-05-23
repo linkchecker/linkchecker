@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,27 +17,25 @@
 Define http test support classes for LinkChecker tests.
 """
 
-from html import escape as html_escape
-from http.server import SimpleHTTPRequestHandler, HTTPServer
+import html
+from http.server import CGIHTTPRequestHandler, SimpleHTTPRequestHandler, HTTPServer
 from http.client import HTTPConnection, HTTPSConnection
+import os.path
 import ssl
 import time
 import threading
-try:
-    from urllib import parse as urllib_parse
-except ImportError:
-    import urllib as urllib_parse
+import urllib.parse
 from io import BytesIO
 from . import LinkCheckTest
 from .. import get_file
 
 
-class StoppableHttpRequestHandler (SimpleHTTPRequestHandler, object):
+class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
     """
     HTTP request handler with QUIT stopping the server.
     """
 
-    def do_QUIT (self):
+    def do_QUIT(self):
         """
         Send 200 OK response, and set server.stop to True.
         """
@@ -46,7 +43,7 @@ class StoppableHttpRequestHandler (SimpleHTTPRequestHandler, object):
         self.end_headers()
         self.server.stop = True
 
-    def log_message (self, format, *args):
+    def log_message(self, format, *args):
         """
         Logging is disabled.
         """
@@ -58,12 +55,12 @@ StoppableHttpRequestHandler.extensions_map.update({
 })
 
 
-class StoppableHttpServer (HTTPServer, object):
+class StoppableHttpServer(HTTPServer):
     """
     HTTP server that reacts to self.stop flag.
     """
 
-    def serve_forever (self):
+    def serve_forever(self):
         """
         Handle one request at a time until stopped.
         """
@@ -72,13 +69,13 @@ class StoppableHttpServer (HTTPServer, object):
             self.handle_request()
 
 
-class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
+class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
     """
     Handler ignoring the query part of requests and sending dummy directory
     listings.
     """
 
-    def remove_path_query (self):
+    def remove_path_query(self):
         """
         Remove everything after a question mark.
         """
@@ -93,7 +90,7 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
              return status
         return 500
 
-    def do_GET (self):
+    def do_GET(self):
         """
         Removes query part of GET request.
         """
@@ -107,7 +104,7 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
         else:
             super(NoQueryHttpRequestHandler, self).do_GET()
 
-    def do_HEAD (self):
+    def do_HEAD(self):
         """
         Removes query part of HEAD request.
         """
@@ -131,12 +128,12 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
         f.write(b"<html>\n<title>Dummy directory listing</title>\n")
         f.write(b"<body>\n<h2>Dummy test directory listing</h2>\n")
         f.write(b"<hr>\n<ul>\n")
-        list = [u"example1.txt", u"example2.html", u"example3"]
+        list = ["example1.txt", "example2.html", "example3"]
         for name in list:
             displayname = linkname = name
             list_item = (
-                u'<li><a href="%s">%s</a>\n'
-                % (urllib_parse.quote(linkname), html_escape(displayname))
+                '<li><a href="%s">%s</a>\n'
+                % (urllib.parse.quote(linkname), html.escape(displayname))
             )
             f.write(list_item.encode())
         f.write(b"</ul>\n<hr>\n</body>\n</html>\n")
@@ -150,12 +147,12 @@ class NoQueryHttpRequestHandler (StoppableHttpRequestHandler):
         return f
 
 
-class HttpServerTest (LinkCheckTest):
+class HttpServerTest(LinkCheckTest):
     """
     Start/stop an HTTP server that can be used for testing.
     """
 
-    def __init__ (self, methodName='runTest'):
+    def __init__(self, methodName='runTest'):
         """
         Init test class and store default http server port.
         """
@@ -174,7 +171,7 @@ class HttpServerTest (LinkCheckTest):
 
     def get_url(self, filename):
         """Get HTTP URL for filename."""
-        return u"http://localhost:%d/tests/checker/data/%s" % (self.port, filename)
+        return "http://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
 class HttpsServerTest(HttpServerTest):
@@ -193,10 +190,10 @@ class HttpsServerTest(HttpServerTest):
 
     def get_url(self, filename):
         """Get HTTP URL for filename."""
-        return u"https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
+        return "https://localhost:%d/tests/checker/data/%s" % (self.port, filename)
 
 
-def start_server (handler, https=False):
+def start_server(handler, https=False):
     """Start an HTTP server thread and return its port number."""
     server_address = ('localhost', 0)
     handler.protocol_version = "HTTP/1.0"
@@ -224,7 +221,7 @@ def start_server (handler, https=False):
     return port
 
 
-def stop_server (port, https=False):
+def stop_server(port, https=False):
     """Stop an HTTP server thread."""
     if https:
         conn = HTTPSConnection("localhost:%d" % port,
@@ -235,7 +232,7 @@ def stop_server (port, https=False):
     conn.getresponse()
 
 
-def get_cookie (maxage=2000):
+def get_cookie(maxage=2000):
     data = (
         ("Comment", "justatest"),
         ("Max-Age", "%d" % maxage),
@@ -246,30 +243,30 @@ def get_cookie (maxage=2000):
     return "; ".join('%s="%s"' % (key, value) for key, value in data)
 
 
-class CookieRedirectHttpRequestHandler (NoQueryHttpRequestHandler):
+class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
     """Handler redirecting certain requests, and setting cookies."""
 
-    def end_headers (self):
+    def end_headers(self):
         """Send cookie before ending headers."""
         self.send_header("Set-Cookie", get_cookie())
         self.send_header("Set-Cookie", get_cookie(maxage=0))
         super(CookieRedirectHttpRequestHandler, self).end_headers()
 
-    def redirect (self):
+    def redirect(self):
         """Redirect request."""
         path = self.path.replace("redirect", "newurl")
         self.send_response(302)
         self.send_header("Location", path)
         self.end_headers()
 
-    def redirect_newhost (self):
+    def redirect_newhost(self):
         """Redirect request to a new host."""
         path = "http://www.example.com/"
         self.send_response(302)
         self.send_header("Location", path)
         self.end_headers()
 
-    def redirect_newscheme (self):
+    def redirect_newscheme(self):
         """Redirect request to a new scheme."""
         if "file" in self.path:
             path = "file:README.md"
@@ -279,7 +276,7 @@ class CookieRedirectHttpRequestHandler (NoQueryHttpRequestHandler):
         self.send_header("Location", path)
         self.end_headers()
 
-    def do_GET (self):
+    def do_GET(self):
         """Handle redirections for GET."""
         if "redirect_newscheme" in self.path:
             self.redirect_newscheme()
@@ -290,7 +287,7 @@ class CookieRedirectHttpRequestHandler (NoQueryHttpRequestHandler):
         else:
             super(CookieRedirectHttpRequestHandler, self).do_GET()
 
-    def do_HEAD (self):
+    def do_HEAD(self):
         """Handle redirections for HEAD."""
         if "redirect_newscheme" in self.path:
             self.redirect_newscheme()
@@ -300,3 +297,15 @@ class CookieRedirectHttpRequestHandler (NoQueryHttpRequestHandler):
             self.redirect()
         else:
             super(CookieRedirectHttpRequestHandler, self).do_HEAD()
+
+class CGIHandler(CGIHTTPRequestHandler, StoppableHttpRequestHandler):
+    cgi_path = "/tests/checker/cgi-bin/"
+
+    def is_cgi(self):
+        # CGIHTTPRequestHandler.is_cgi() can only handle a single-level path
+        # override so that we can store scripts under /tests/checker
+        if CGIHandler.cgi_path in self.path:
+            self.cgi_info = (CGIHandler.cgi_path,
+                             os.path.relpath(self.path, CGIHandler.cgi_path))
+            return True
+        return False

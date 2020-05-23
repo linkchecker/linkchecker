@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -23,7 +22,7 @@ from . import _Logger
 from .. import url as urlutil
 
 
-def sqlify (s):
+def sqlify(s):
     """
     Escape special SQL chars and strings.
     """
@@ -32,7 +31,7 @@ def sqlify (s):
     return "'%s'" % s.replace("'", "''").replace(os.linesep, r"\n")
 
 
-def intify (s):
+def intify(s):
     """
     Coerce a truth value to 0/1.
 
@@ -46,7 +45,7 @@ def intify (s):
     return 0
 
 
-class SQLLogger (_Logger):
+class SQLLogger(_Logger):
     """
     SQL output, should work with any SQL database (not tested).
     """
@@ -59,7 +58,7 @@ class SQLLogger (_Logger):
         'dbname': 'linksdb',
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize database access data."""
         args = self.get_args(kwargs)
         super(SQLLogger, self).__init__(**args)
@@ -67,14 +66,14 @@ class SQLLogger (_Logger):
         self.dbname = args['dbname']
         self.separator = args['separator']
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """
         Write SQL comment.
         """
-        self.write(u"-- ")
+        self.write("-- ")
         self.writeln(s=s, **args)
 
-    def start_output (self):
+    def start_output(self):
         """
         Write start of checking info as sql comment.
         """
@@ -84,11 +83,11 @@ class SQLLogger (_Logger):
             self.writeln()
             self.flush()
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """
         Store url check info into the database.
         """
-        self.writeln(u"insert into %(table)s(urlname,"
+        self.writeln("insert into %(table)s(urlname,"
               "parentname,baseref,valid,result,warning,info,url,line,col,"
               "name,checktime,dltime,size,cached,level,modified) values ("
               "%(base_url)s,"
@@ -99,8 +98,8 @@ class SQLLogger (_Logger):
               "%(warning)s,"
               "%(info)s,"
               "%(url)s,"
-              "%(line)d,"
-              "%(column)d,"
+              "%(line)s,"
+              "%(column)s,"
               "%(name)s,"
               "%(checktime)d,"
               "%(dltime)d,"
@@ -117,9 +116,9 @@ class SQLLogger (_Logger):
                'result': sqlify(url_data.result),
                'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),
                'info': sqlify(os.linesep.join(url_data.info)),
-               'url': sqlify(urlutil.url_quote(url_data.url)),
-               'line': url_data.line,
-               'column': url_data.column,
+               'url': sqlify(urlutil.url_quote(url_data.url, encoding="utf-8")),
+               'line': 'NULL' if url_data.line is None else url_data.line,
+               'column': 'NULL' if url_data.column is None else url_data.column,
                'name': sqlify(url_data.name),
                'checktime': url_data.checktime,
                'dltime': url_data.dltime,
@@ -131,7 +130,7 @@ class SQLLogger (_Logger):
               })
         self.flush()
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """
         Write end of checking info as sql comment.
         """

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,23 +19,23 @@ Test html anchor parsing and checking.
 from . import LinkCheckTest
 
 
-class TestAnchor (LinkCheckTest):
+class TestAnchor(LinkCheckTest):
     """
     Test anchor checking of HTML pages.
     """
 
-    def test_anchor (self):
+    def test_anchor(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
-        url = u"file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
+        url = "file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
         nurl = self.norm(url)
         anchor = "broken"
         urlanchor = url + "#" + anchor
         resultlines = [
-            u"url %s" % urlanchor,
-            u"cache key %s" % nurl,
-            u"real url %s" % nurl,
-            u"warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
-            u"valid",
+            "url %s" % urlanchor,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
+            "valid",
         ]
         self.direct(urlanchor, resultlines, confargs=confargs)
 

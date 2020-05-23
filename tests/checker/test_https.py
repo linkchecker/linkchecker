@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -53,13 +52,13 @@ class TestHttps(HttpsServerTest):
             f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
 
     @need_network
-    def test_https (self):
+    def test_https(self):
         url = self.get_url("")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         confargs = dict(
             sslverify=False

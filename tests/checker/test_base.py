@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,19 +19,19 @@ Test html <base> tag parsing.
 from . import LinkCheckTest
 
 
-class TestBase (LinkCheckTest):
+class TestBase(LinkCheckTest):
     """
     Test links of base*.html files.
     """
 
-    def test_base1 (self):
+    def test_base1(self):
         self.file_test("base1.html")
 
-    def test_base2 (self):
+    def test_base2(self):
         self.file_test("base2.html")
 
-    def test_base3 (self):
+    def test_base3(self):
         self.file_test("base3.html")
 
-    def test_base4 (self):
+    def test_base4(self):
         self.file_test("base4.html")

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2011-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -25,7 +24,7 @@ from xdg.BaseDirectory import xdg_config_home
 nt_filename_encoding="mbcs"
 
 
-def get_profile_dir ():
+def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         if "LOCALAPPDATA" in os.environ:
@@ -36,19 +35,20 @@ def get_profile_dir ():
             try:
                 basedir = get_shell_folder("Local AppData")
             except EnvironmentError:
-                basedir = os.path.join(os.environ["USERPROFILE"], "Local Settings", "Application Data")
-        dirpath = os.path.join(basedir, u"Chromium", u"User Data")
+                basedir = os.path.join(os.environ["USERPROFILE"],
+                                       "Local Settings", "Application Data")
+        dirpath = os.path.join(basedir, "Chromium", "User Data")
     elif os.name == 'posix':
-        basedir = unicode(os.environ["HOME"])
         if sys.platform == 'darwin':
-            dirpath = os.path.join(basedir, u"Library", u"Application Support")
+            dirpath = os.path.join(os.environ["HOME"], "Library",
+                                   "Application Support")
         else:
             dirpath = xdg_config_home
-        dirpath = os.path.join(dirpath, u"chromium")
+        dirpath = os.path.join(dirpath, "chromium")
     return dirpath
 
 
-def find_bookmark_file (profile="Default"):
+def find_bookmark_file(profile="Default"):
     """Return the bookmark file of the Default profile.
     Returns absolute filename if found, or empty string if no bookmark file
     could be found.
@@ -61,10 +61,10 @@ def find_bookmark_file (profile="Default"):
                 return fname
     except Exception:
         pass
-    return u""
+    return ""
 
 
-def parse_bookmark_data (data):
+def parse_bookmark_data(data):
     """Parse data string.
     Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
@@ -73,7 +73,7 @@ def parse_bookmark_data (data):
         yield url, name
 
 
-def parse_bookmark_file (file):
+def parse_bookmark_file(file):
     """Parse file object.
     Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
@@ -82,14 +82,14 @@ def parse_bookmark_file (file):
         yield url, name
 
 
-def parse_bookmark_json (data):
+def parse_bookmark_json(data):
     """Parse complete JSON data for Chromium Bookmarks."""
     for entry in data["roots"].values():
         for url, name in parse_bookmark_node(entry):
             yield url, name
 
 
-def parse_bookmark_node (node):
+def parse_bookmark_node(node):
     """Parse one JSON node of Chromium Bookmarks."""
     if node["type"] == "url":
         yield node["url"], node["name"]

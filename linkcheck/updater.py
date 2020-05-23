@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2011-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,7 +20,7 @@ Function to check for updates.
 import os
 from .configuration import Version as CurrentVersion
 from .url import get_content
-from distutils.version import StrictVersion
+from distutils.version import LooseVersion
 
 # Use the Freecode submit file as source since that file gets updated
 # only when releasing a new version.
@@ -33,7 +32,7 @@ else:
     URL_TAG = 'Source-Package-URL:'
 
 
-def check_update ():
+def check_update():
     """Return the following values:
        (False, errmsg) - online version could not be determined
        (True, None) - user has newest version
@@ -54,7 +53,7 @@ def check_update ():
     return True, (version, None)
 
 
-def get_online_version ():
+def get_online_version():
     """Download update info and parse it."""
     # prevent getting a cached answer
     headers = {'Pragma': 'no-cache', 'Cache-Control': 'no-cache'}
@@ -71,6 +70,6 @@ def get_online_version ():
     return version, url
 
 
-def is_newer_version (version):
+def is_newer_version(version):
     """Check if given version is newer than current version."""
-    return StrictVersion(version) > StrictVersion(CurrentVersion)
+    return LooseVersion(version) > LooseVersion(CurrentVersion)

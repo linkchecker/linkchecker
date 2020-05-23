@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -19,10 +18,10 @@ import time
 from . import task
 
 
-class Status (task.LoggedCheckedTask):
+class Status(task.LoggedCheckedTask):
     """Thread that gathers and logs the status periodically."""
 
-    def __init__ (self, aggregator, wait_seconds):
+    def __init__(self, aggregator, wait_seconds):
         """Initialize the status logger task.
         @param urlqueue: the URL queue
         @ptype urlqueue: Urlqueue
@@ -37,10 +36,10 @@ class Status (task.LoggedCheckedTask):
         self.wait_seconds = wait_seconds
         assert self.wait_seconds >= 1
 
-    def run_checked (self):
+    def run_checked(self):
         """Print periodic status messages."""
         self.start_time = time.time()
-        self.setName("Status")
+        self.name = "Status"
         # the first status should be after a second
         wait_seconds = 1
         first_wait = True
@@ -50,7 +49,7 @@ class Status (task.LoggedCheckedTask):
                 wait_seconds = self.wait_seconds
                 first_wait = False
 
-    def log_status (self):
+    def log_status(self):
         """Log a status message."""
         duration = time.time() - self.start_time
         checked, in_progress, queue = self.aggregator.urlqueue.status()

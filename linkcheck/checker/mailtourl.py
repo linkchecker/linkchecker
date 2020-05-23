@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -19,11 +18,7 @@ Handle for mailto: links.
 """
 
 import re
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
+import urllib.parse
 from email._parseaddr import AddressList
 
 from . import urlbase
@@ -33,7 +28,7 @@ from ..network import iputil
 from .const import WARN_MAIL_NO_MX_HOST
 
 
-def getaddresses (addr):
+def getaddresses(addr):
     """Return list of email addresses from given field value."""
     parsed = [mail for name, mail in AddressList(addr).addresslist if mail]
     if parsed:
@@ -46,33 +41,33 @@ def getaddresses (addr):
     return addresses
 
 
-def is_quoted (addr):
+def is_quoted(addr):
     """Return True iff mail address string is quoted."""
-    return addr.startswith(u'"') and addr.endswith(u'"')
+    return addr.startswith('"') and addr.endswith('"')
 
 
-def is_literal (domain):
+def is_literal(domain):
     """Return True iff domain string is a literal."""
-    return domain.startswith(u'[') and domain.endswith(u']')
+    return domain.startswith('[') and domain.endswith(']')
 
 
 _remove_quoted = re.compile(r'\\.').sub
 _quotes = re.compile(r'["\\]')
-def is_missing_quote (addr):
+def is_missing_quote(addr):
     """Return True iff mail address is not correctly quoted."""
-    return _quotes.match(_remove_quoted(u"", addr[1:-1]))
+    return _quotes.match(_remove_quoted("", addr[1:-1]))
 
 
 # list of CGI keys to search for email addresses
 EMAIL_CGI_ADDRESS = ("to", "cc", "bcc")
 EMAIL_CGI_SUBJECT = "subject"
 
-class MailtoUrl (urlbase.UrlBase):
+class MailtoUrl(urlbase.UrlBase):
     """
     Url link with mailto scheme.
     """
 
-    def build_url (self):
+    def build_url(self):
         """Call super.build_url(), extract list of mail addresses from URL,
         and check their syntax.
         """
@@ -89,13 +84,13 @@ class MailtoUrl (urlbase.UrlBase):
             self.add_warning(_("No mail addresses or email subject found in `%(url)s'.") % \
                 {"url": self.url})
 
-    def parse_addresses (self):
+    def parse_addresses(self):
         """Parse all mail addresses out of the URL target. Also parses
         optional CGI headers like "?to=foo@example.org".
         Stores parsed addresses in the self.addresses set.
         """
         # cut off leading mailto: and unquote
-        url = urlparse.unquote(self.base_url[7:])
+        url = urllib.parse.unquote(self.base_url[7:], self.encoding)
         # search for cc, bcc, to and store in headers
         mode = 0 # 0=default, 1=quote, 2=esc
         quote = None
@@ -119,11 +114,11 @@ class MailtoUrl (urlbase.UrlBase):
         if i < (len(url) - 1):
             self.addresses.update(getaddresses(url[:i]))
             try:
-                headers = urlparse.parse_qs(url[(i+1):], strict_parsing=True)
+                headers = urllib.parse.parse_qs(url[(i+1):], strict_parsing=True)
                 for key, vals in headers.items():
                     if key.lower() in EMAIL_CGI_ADDRESS:
                         # Only the first header value is added
-                        self.addresses.update(getaddresses(urlparse.unquote(vals[0])))
+                        self.addresses.update(getaddresses(urllib.parse.unquote(vals[0], self.encoding)))
                     if key.lower() == EMAIL_CGI_SUBJECT:
                         self.subject = vals[0]
             except ValueError as err:
@@ -132,7 +127,7 @@ class MailtoUrl (urlbase.UrlBase):
             self.addresses.update(getaddresses(url))
         log.debug(LOG_CHECK, "addresses: %s", self.addresses)
 
-    def check_email_syntax (self, mail):
+    def check_email_syntax(self, mail):
         """Check email syntax. The relevant RFCs:
         - How to check names (memo):
           http://tools.ietf.org/html/rfc3696
@@ -185,20 +180,20 @@ class MailtoUrl (urlbase.UrlBase):
                 {"addr": mail}, valid=False, overwrite=False)
                 return
         else:
-            if local.startswith(u"."):
+            if local.startswith("."):
                 self.set_result(_("Local part of mail address `%(addr)s' may not start with a dot.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            if local.endswith(u"."):
+            if local.endswith("."):
                 self.set_result(_("Local part of mail address `%(addr)s' may not end with a dot.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            if u".." in local:
+            if ".." in local:
                 self.set_result(_("Local part of mail address `%(addr)s' may not contain two dots.") % \
                 {"addr": mail}, valid=False, overwrite=False)
                 return
-            for char in u'@ \\",[]':
-                if char in local.replace(u"\\%s"%char, u""):
+            for char in '@ \\",[]':
+                if char in local.replace("\\%s"%char, ""):
                     self.set_result(_("Local part of mail address `%(addr)s' contains unquoted character `%(char)s.") % \
                     {"addr": mail, "char": char}, valid=False, overwrite=False)
                     return
@@ -208,7 +203,7 @@ class MailtoUrl (urlbase.UrlBase):
         if is_literal(domain):
             # it's an IP address
             ip = domain[1:-1]
-            if ip.startswith(u"IPv6:"):
+            if ip.startswith("IPv6:"):
                 ip = ip[5:]
             if not iputil.is_valid_ip(ip):
                 self.set_result(_("Domain part of mail address `%(addr)s' has invalid IP.") % \
@@ -225,7 +220,7 @@ class MailtoUrl (urlbase.UrlBase):
                 {"addr": mail}, valid=False, overwrite=False)
                 return
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Verify a list of email addresses. If one address fails,
         the whole list will fail.
@@ -240,7 +235,7 @@ class MailtoUrl (urlbase.UrlBase):
             if not self.valid:
                 break
 
-    def check_smtp_domain (self, mail):
+    def check_smtp_domain(self, mail):
         """
         Check a single mail address.
         """
@@ -294,10 +289,10 @@ class MailtoUrl (urlbase.UrlBase):
         """
         The cache url is a comma separated list of emails.
         """
-        emails = u",".join(sorted(self.addresses))
-        self.cache_url = u"%s:%s" % (self.scheme, emails)
+        emails = ",".join(sorted(self.addresses))
+        self.cache_url = "%s:%s" % (self.scheme, emails)
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         mailto: URLs do not have any content
 

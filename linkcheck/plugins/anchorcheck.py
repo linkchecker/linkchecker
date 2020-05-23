@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,10 +16,11 @@
 """
 Check HTML anchors
 """
+import urllib.parse
+
 from . import _ContentPlugin
-from .. import log, LOG_PLUGIN, url as urlutil
+from .. import log, LOG_PLUGIN
 from ..htmlutil import linkparse
-from ..parser import find_links
 
 
 class AnchorCheck(_ContentPlugin):
@@ -35,10 +35,11 @@ class AnchorCheck(_ContentPlugin):
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
         # list of parsed anchors
         self.anchors = []
-        find_links(url_data, self.add_anchor, linkparse.AnchorTags)
+        linkparse.find_links(url_data.get_soup(), self.add_anchor,
+                             linkparse.AnchorTags)
         self.check_anchor(url_data)
 
-    def add_anchor (self, url, line, column, name, base):
+    def add_anchor(self, url, line, column, name, base):
         """Add anchor URL."""
         self.anchors.append((url, line, column, name, base))
 
@@ -47,15 +48,14 @@ class AnchorCheck(_ContentPlugin):
         A warning is logged and True is returned if the anchor is not found.
         """
         log.debug(LOG_PLUGIN, "checking anchor %r in %s", url_data.anchor, self.anchors)
-        enc = lambda anchor: urlutil.url_quote_part(anchor, encoding=url_data.encoding)
-        if any(x for x in self.anchors if enc(x[0]) == url_data.anchor):
+        if any(x for x in self.anchors if urllib.parse.quote(x[0]) == url_data.anchor):
             return
         if self.anchors:
-            anchornames = sorted(set(u"`%s'" % x[0] for x in self.anchors))
-            anchors = u", ".join(anchornames)
+            anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
+            anchors = ", ".join(anchornames)
         else:
-            anchors = u"-"
+            anchors = "-"
         args = {"name": url_data.anchor, "anchors": anchors}
-        msg = u"%s %s" % (_("Anchor `%(name)s' not found.") % args,
+        msg = "%s %s" % (_("Anchor `%(name)s' not found.") % args,
                           _("Available anchors: %(anchors)s.") % args)
         url_data.add_warning(msg)

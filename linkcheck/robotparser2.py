@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,30 +19,24 @@ Robots.txt parser.
 The robots.txt Exclusion Protocol is implemented as specified in
 http://www.robotstxt.org/wc/norobots-rfc.html
 """
-try:  # Python 3
-    from urllib import parse
-except ImportError:  # Python 2
-    import urllib as parse
-try:  # Python 3
-    from urllib.parse import urlparse
-except ImportError:  # Python 2
-    from urlparse import urlparse
 import time
+import urllib.parse
 
 import requests
 
-from . import log, LOG_CHECK, configuration, url as urlutil
+from . import log, LOG_CHECK, configuration
 
 __all__ = ["RobotFileParser"]
 
 ACCEPT_ENCODING = 'x-gzip,gzip,deflate'
 
 
-class RobotFileParser (object):
+class RobotFileParser:
     """This class provides a set of methods to read, parse and answer
     questions about a single robots.txt file."""
 
-    def __init__ (self, url='', session=None, proxies=None, auth=None):
+    def __init__(self, url='', session=None, proxies=None, auth=None,
+                 timeout=None):
         """Initialize internal entry lists and store given url and
         credentials."""
         self.set_url(url)
@@ -53,9 +46,10 @@ class RobotFileParser (object):
             self.session = session
         self.proxies = proxies
         self.auth = auth
+        self.timeout = timeout
         self._reset()
 
-    def _reset (self):
+    def _reset(self):
         """Reset internal flags and entry lists."""
         self.entries = []
         self.default_entry = None
@@ -64,8 +58,9 @@ class RobotFileParser (object):
         self.last_checked = 0
         # list of tuples (sitemap url, line number)
         self.sitemap_urls = []
+        self.encoding = None
 
-    def mtime (self):
+    def mtime(self):
         """Returns the time the robots.txt file was last fetched.
 
         This is useful for long-running web spiders that need to
@@ -76,17 +71,17 @@ class RobotFileParser (object):
         """
         return self.last_checked
 
-    def modified (self):
+    def modified(self):
         """Set the time the robots.txt file was last fetched to the
         current time."""
         self.last_checked = time.time()
 
-    def set_url (self, url):
+    def set_url(self, url):
         """Set the URL referring to a robots.txt file."""
         self.url = url
-        self.host, self.path = urlparse(url)[1:3]
+        self.host, self.path = urllib.parse.urlparse(url)[1:3]
 
-    def read (self):
+    def read(self):
         """Read the robots.txt URL and feeds it to the parser."""
         self._reset()
         kwargs = dict(
@@ -99,10 +94,13 @@ class RobotFileParser (object):
             kwargs["auth"] = self.auth
         if self.proxies:
             kwargs["proxies"] = self.proxies
+        if self.timeout:
+            kwargs["timeout"] = self.timeout
         try:
             response = self.session.get(self.url, **kwargs)
             response.raise_for_status()
             content_type = response.headers.get('content-type')
+            self.encoding = response.encoding
             if content_type and content_type.lower().startswith('text/plain'):
                 self.parse(response.iter_lines(decode_unicode=True))
             else:
@@ -122,7 +120,7 @@ class RobotFileParser (object):
             self.allow_all = True
             log.debug(LOG_CHECK, "%r allow all (request error)", self.url)
 
-    def _add_entry (self, entry):
+    def _add_entry(self, entry):
         """Add a parsed entry to entry list.
 
         @return: None
@@ -133,7 +131,7 @@ class RobotFileParser (object):
         else:
             self.entries.append(entry)
 
-    def parse (self, lines):
+    def parse(self, lines):
         """Parse the input lines from a robot.txt file.
         We allow that a user-agent: line is not preceded by
         one or more blank lines.
@@ -167,7 +165,7 @@ class RobotFileParser (object):
             line = line.split(':', 1)
             if len(line) == 2:
                 line[0] = line[0].strip().lower()
-                line[1] = parse.unquote(line[1].strip())
+                line[1] = urllib.parse.unquote(line[1].strip(), self.encoding)
                 if line[0] == "user-agent":
                     if state == 2:
                         log.debug(LOG_CHECK, "%r line %d: missing blank line before user-agent directive", self.url, linenumber)
@@ -216,7 +214,7 @@ class RobotFileParser (object):
         self.modified()
         log.debug(LOG_CHECK, "Parsed rules:\n%s", str(self))
 
-    def can_fetch (self, useragent, url):
+    def can_fetch(self, useragent, url):
         """Using the parsed robots.txt decide if useragent can fetch url.
 
         @return: True if agent can fetch url, else False
@@ -235,7 +233,7 @@ class RobotFileParser (object):
             return True
         # search for given user agent matches
         # the first match counts
-        url = parse.quote(urlparse(parse.unquote(url))[2]) or "/"
+        url = urllib.parse.quote(urllib.parse.urlparse(urllib.parse.unquote(url))[2]) or "/"
         for entry in self.entries:
             if entry.applies_to(useragent):
                 return entry.allowance(url)
@@ -246,7 +244,7 @@ class RobotFileParser (object):
         log.debug(LOG_CHECK, " ... agent not found, allow.")
         return True
 
-    def get_crawldelay (self, useragent):
+    def get_crawldelay(self, useragent):
         """Look for a configured crawl delay.
 
         @return: crawl delay in seconds or zero
@@ -257,7 +255,7 @@ class RobotFileParser (object):
                 return entry.crawldelay
         return 0
 
-    def __str__ (self):
+    def __str__(self):
         """Constructs string representation, usable as contents of a
         robots.txt file.
 
@@ -270,21 +268,21 @@ class RobotFileParser (object):
         return "\n\n".join(lines)
 
 
-class RuleLine (object):
+class RuleLine:
     """A rule line is a single "Allow:" (allowance==1) or "Disallow:"
     (allowance==0) followed by a path.
     """
 
-    def __init__ (self, path, allowance):
+    def __init__(self, path, allowance):
         """Initialize with given path and allowance info."""
         if path == '' and not allowance:
             # an empty value means allow all
             allowance = True
             path = '/'
-        self.path = urlutil.url_quote_part(path)
+        self.path = urllib.parse.quote(path)
         self.allowance = allowance
 
-    def applies_to (self, path):
+    def applies_to(self, path):
         """Look if given path applies to this rule.
 
         @return: True if pathname applies to this rule, else False
@@ -292,7 +290,7 @@ class RuleLine (object):
         """
         return self.path == "*" or path.startswith(self.path)
 
-    def __str__ (self):
+    def __str__(self):
         """Construct string representation in robots.txt format.
 
         @return: robots.txt format
@@ -301,16 +299,16 @@ class RuleLine (object):
         return ("Allow" if self.allowance else "Disallow")+": "+self.path
 
 
-class Entry (object):
+class Entry:
     """An entry has one or more user-agents and zero or more rulelines."""
 
-    def __init__ (self):
+    def __init__(self):
         """Initialize user agent and rule list."""
         self.useragents = []
         self.rulelines = []
         self.crawldelay = 0
 
-    def __str__ (self):
+    def __str__(self):
         """string representation in robots.txt format.
 
         @return: robots.txt format
@@ -322,7 +320,7 @@ class Entry (object):
         lines.extend([str(line) for line in self.rulelines])
         return "\n".join(lines)
 
-    def applies_to (self, useragent):
+    def applies_to(self, useragent):
         """Check if this entry applies to the specified agent.
 
         @return: True if this entry applies to the agent, else False.
@@ -339,7 +337,7 @@ class Entry (object):
                 return True
         return False
 
-    def allowance (self, filename):
+    def allowance(self, filename):
         """Preconditions:
         - our agent applies to this entry
         - filename is URL decoded

@@ -38,7 +38,5 @@ if defined MSSdk (
 
 %PYDIR%\python.exe setup.py sdist --manifest-only
 %PYDIR%\python.exe setup.py build %COMPILER%
-:: copy .pyd files to start linkchecker in local directory
-copy build\lib.%PLATFORM%-%PYVER%\linkcheck\HtmlParser\htmlsax.pyd linkcheck\HtmlParser
 
 :finish

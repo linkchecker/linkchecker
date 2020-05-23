@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,15 +16,9 @@
 """
 Main functions for link parsing
 """
-import threading
-
 from .. import log, LOG_CHECK, strformat, url as urlutil
 from ..htmlutil import linkparse
-from ..HtmlParser import htmlsax
 from ..bookmarks import firefox
-
-# Is needed within find_links around non-threadsafe call
-parse_mutex = threading.Lock()
 
 
 def parse_url(url_data):
@@ -48,35 +41,35 @@ def parse_url(url_data):
         url_data.aggregate.plugin_manager.run_parser_plugins(url_data, pagetype=key)
 
 
-def parse_html (url_data):
+def parse_html(url_data):
     """Parse into HTML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    find_links(url_data, url_data.add_url, linkparse.LinkTags)
+    linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.LinkTags)
 
 
-def parse_opera (url_data):
+def parse_opera(url_data):
     """Parse an opera bookmark file."""
     from ..bookmarks.opera import parse_bookmark_data
     for url, name, lineno in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, line=lineno, name=name)
 
 
-def parse_chromium (url_data):
+def parse_chromium(url_data):
     """Parse a Chromium or Google Chrome bookmark file."""
     from ..bookmarks.chromium import parse_bookmark_data
     for url, name in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, name=name)
 
 
-def parse_safari (url_data):
+def parse_safari(url_data):
     """Parse a Safari bookmark file."""
     from ..bookmarks.safari import parse_bookmark_data
     for url, name in parse_bookmark_data(url_data.get_raw_content()):
         url_data.add_url(url, name=name)
 
 
-def parse_text (url_data):
+def parse_text(url_data):
     """Parse a text file with one url per line; comment and blank
     lines are ignored."""
     lineno = 0
@@ -88,7 +81,7 @@ def parse_text (url_data):
         url_data.add_url(line, line=lineno)
 
 
-def parse_css (url_data):
+def parse_css(url_data):
     """
     Parse a CSS file for url() patterns.
     """
@@ -103,46 +96,25 @@ def parse_css (url_data):
             url_data.add_url(url, line=lineno, column=column)
 
 
-def parse_swf (url_data):
+def parse_swf(url_data):
     """Parse a SWF file for URLs."""
     linkfinder = linkparse.swf_url_re.finditer
-    for mo in linkfinder(url_data.get_content()):
-        url = mo.group()
+    for mo in linkfinder(url_data.get_raw_content()):
+        # We're scraping binary data for anything that looks like an URL using
+        # a regex that matches only ASCII characters.  Any non-ASCII characters
+        # in the URL are expected to be %-encoded.
+        url = mo.group().decode('ascii')
         url_data.add_url(url)
 
 
-def parse_wml (url_data):
+def parse_wml(url_data):
     """Parse into WML content and search for URLs to check.
     Found URLs are added to the URL queue.
     """
-    find_links(url_data, url_data.add_url, linkparse.WmlTags)
+    linkparse.find_links(url_data.get_soup(), url_data.add_url, linkparse.WmlTags)
 
 
-def find_links (url_data, callback, tags):
-    """Parse into content and search for URLs to check.
-    Found URLs are added to the URL queue.
-    """
-    # construct parser object
-    handler = linkparse.LinkFinder(callback, tags)
-    parser = htmlsax.parser(handler)
-    if url_data.charset:
-        parser.encoding = url_data.charset
-    handler.parser = parser
-    # parse
-    try:
-        content = url_data.get_raw_content()
-        with parse_mutex:
-            parser.feed(content)
-            parser.flush()
-    except linkparse.StopParse as msg:
-        log.debug(LOG_CHECK, "Stopped parsing: %s", msg)
-        pass
-    # break cyclic dependencies
-    handler.parser = None
-    parser.handler = None
-
-
-def parse_firefox (url_data):
+def parse_firefox(url_data):
     """Parse a Firefox3 bookmark file."""
     filename = url_data.get_os_filename()
     for url, name in firefox.parse_bookmark_file(filename):
@@ -152,7 +124,8 @@ def parse_firefox (url_data):
 def parse_itms_services(url_data):
     """Get "url" CGI parameter value as child URL."""
     query = url_data.urlparts[3]
-    for k, v, sep in urlutil.parse_qsl(query, keep_blank_values=True):
+    for k, v, sep in urlutil.parse_qsl(query, encoding=url_data.encoding,
+                                       keep_blank_values=True):
         if k == "url":
             url_data.add_url(v)
             break

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2009 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,36 +20,36 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestMisc (LinkCheckTest):
+class TestMisc(LinkCheckTest):
     """
     Test misc link types.
     """
 
     @need_network
-    def test_misc (self):
+    def test_misc(self):
         self.file_test("misc.html")
 
-    def test_html5 (self):
+    def test_html5(self):
         self.file_test("html5.html")
 
-    def test_utf8 (self):
+    def test_utf8(self):
         self.file_test("utf8.html")
 
     @need_network
-    def test_archive (self):
+    def test_archive(self):
         self.file_test("archive.html")
 
     @need_network
     def test_itms_services(self):
-        url = u"itms-services:?action=download-manifest&url=http://www.example.com/"
+        url = "itms-services:?action=download-manifest&url=http://www.example.com/"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % url,
-            u"real url %s" % url,
-            u"valid",
-            u"url http://www.example.com/",
-            u"cache key http://www.example.com/",
-            u"real url http://www.example.com/",
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url http://www.example.com/",
+            "cache key http://www.example.com/",
+            "real url http://www.example.com/",
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)

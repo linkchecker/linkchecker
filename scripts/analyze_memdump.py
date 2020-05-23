@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,10 +20,10 @@ Analyze a memory dump by the meliae module.
 import sys
 import os
 import codecs
-from html import escape as html_escape
+import html
 from linkcheck import strformat
 
-def main (filename):
+def main(filename):
     om = print_memorydump(filename)
     dirname, basename = os.path.split(filename)
     basename = os.path.splitext(basename)[0]
@@ -63,7 +62,7 @@ def close_files(open_files):
         write_html_footer(fp)
         fp.close()
 
-HtmlHeader = u"""
+HtmlHeader = """
 <!doctype html>
 <head>
     <meta charset="%s">
@@ -73,20 +72,20 @@ HtmlHeader = u"""
 
 def write_html_header(fp, type_str, encoding):
     fp.write(HtmlHeader % encoding)
-    fp.write(u"<h1>Type %s</h1>\n" % type_str)
-    fp.write(u"<table><tr><th>Address</th><th>Name</th><th>Size</th><th>Parents</th><th>References</th></tr>\n")
+    fp.write("<h1>Type %s</h1>\n" % type_str)
+    fp.write("<table><tr><th>Address</th><th>Name</th><th>Size</th><th>Parents</th><th>References</th></tr>\n")
 
 def get_children(obj, objs):
     res = []
     for address in obj.children:
         if address in objs:
             child = objs[address]
-            url = u"#%d" % address
+            url = "#%d" % address
             if child.type_str != obj.type_str:
-                url = child.type_str + u".html" + url
-            entry = u'<a href="%s">%d</a>' % (url, address)
+                url = child.type_str + ".html" + url
+            entry = '<a href="%s">%d</a>' % (url, address)
         else:
-            entry = u"%d" % address
+            entry = "%d" % address
         res.append(entry)
     return res
 
@@ -95,31 +94,31 @@ def get_parents(obj, objs):
     for address in obj.parents:
         if address in objs:
             parent = objs[address]
-            url = u"#%d" % address
+            url = "#%d" % address
             if parent.type_str != obj.type_str:
-                url = parent.type_str + u".html" + url
-            entry = u'<a href="%s">%d</a>' % (url, address)
+                url = parent.type_str + ".html" + url
+            entry = '<a href="%s">%d</a>' % (url, address)
         else:
-            entry = u"%d" % address
+            entry = "%d" % address
         res.append(entry)
     return res
 
 def write_html_obj(fp, obj, objs):
     if obj.value is None:
-        value = u"None"
+        value = "None"
     else:
-        value = html_escape(str(obj.value))
+        value = html.escape(str(obj.value))
     attrs = dict(
         address=obj.address,
         size=strformat.strsize(obj.size),
-        children=u",".join(get_children(obj, objs)),
-        parents=u",".join(get_parents(obj, objs)),
+        children=",".join(get_children(obj, objs)),
+        parents=",".join(get_parents(obj, objs)),
         value=value,
     )
-    fp.write(u"<tr><td>%(address)d</td><td>%(value)s</td><td>%(size)s</td><td>%(children)s</td></tr>\n" % attrs)
+    fp.write("<tr><td>%(address)d</td><td>%(value)s</td><td>%(size)s</td><td>%(children)s</td></tr>\n" % attrs)
 
 def write_html_footer(fp):
-    fp.write(u"</table></body></html>")
+    fp.write("</table></body></html>")
 
 if __name__ == '__main__':
     filename = sys.argv[1]

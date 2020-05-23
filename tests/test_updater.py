@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2011-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -19,16 +18,16 @@ Test update check functionality.
 """
 
 import unittest
+
 from tests import need_network
 import linkcheck.updater
-from builtins import str
 
 
-class TestUpdater (unittest.TestCase):
+class TestUpdater(unittest.TestCase):
     """Test update check."""
 
     @need_network
-    def test_updater (self):
+    def test_updater(self):
         res, value = linkcheck.updater.check_update()
         self.assertTrue(type(res) == bool)
         if res:

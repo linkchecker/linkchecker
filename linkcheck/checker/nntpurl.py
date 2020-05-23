@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -29,12 +28,12 @@ from .const import WARN_NNTP_NO_SERVER, WARN_NNTP_NO_NEWSGROUP
 
 random.seed()
 
-class NntpUrl (urlbase.UrlBase):
+class NntpUrl(urlbase.UrlBase):
     """
     Url link with NNTP scheme.
     """
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Connect to NNTP server and try to request the URL article
         resource (if specified).
@@ -65,7 +64,7 @@ class NntpUrl (urlbase.UrlBase):
                 self.add_warning(_("No newsgroup specified in NNTP URL."),
                             tag=WARN_NNTP_NO_NEWSGROUP)
 
-    def _connect_nntp (self, nntpserver):
+    def _connect_nntp(self, nntpserver):
         """
         This is done only once per checking task. Also, the newly
         introduced error codes 504 and 505 (both inclining "Too busy, retry
@@ -92,11 +91,11 @@ class NntpUrl (urlbase.UrlBase):
         self.add_info(nntp.getwelcome())
         return nntp
 
-    def wait (self):
+    def wait(self):
         """Wait some time before trying to connect again."""
         time.sleep(random.randrange(10, 30))
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         NNTP urls have no content.
 

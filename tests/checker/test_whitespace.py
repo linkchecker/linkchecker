@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,55 +20,55 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestWhitespace (LinkCheckTest):
+class TestWhitespace(LinkCheckTest):
     """
     Test whitespace in URLs.
     """
 
     @need_network
-    def test_leading_whitespace (self):
+    def test_leading_whitespace(self):
         # Leading whitespace
-        url = u" http://www.example.org/"
+        url = " http://www.example.org/"
         attrs = self.get_attrs(url=url)
         attrs['surl'] = url.strip()
         resultlines = [
-            u"url %(surl)s" % attrs,
-            u"cache key %(surl)s" % attrs,
-            u"real url %(surl)s" % attrs,
-            u"warning Leading or trailing whitespace in URL `%(url)s'." % attrs,
-            u"valid",
+            "url %(surl)s" % attrs,
+            "cache key %(surl)s" % attrs,
+            "real url %(surl)s" % attrs,
+            "warning Leading or trailing whitespace in URL `%(url)s'." % attrs,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = u"\nhttp://www.example.org/"
+        url = "\nhttp://www.example.org/"
         attrs = self.get_attrs(url=url)
         attrs['surl'] = url.strip()
         resultlines = [
-            u"url %(surl)s" % attrs,
-            u"cache key %(surl)s" % attrs,
-            u"real url %(surl)s" % attrs,
-            u"warning Leading or trailing whitespace in URL `%(url)s'." % attrs,
-            u"valid",
+            "url %(surl)s" % attrs,
+            "cache key %(surl)s" % attrs,
+            "real url %(surl)s" % attrs,
+            "warning Leading or trailing whitespace in URL `%(url)s'." % attrs,
+            "valid",
         ]
         self.direct(url, resultlines)
 
     @need_network
-    def test_trailing_whitespace (self):
+    def test_trailing_whitespace(self):
         # Trailing whitespace
-        url = u"http://www.example.org/ "
+        url = "http://www.example.org/ "
         resultlines = [
-            u"url %s" % url.strip(),
-            u"cache key %s" % url.strip(),
-            u"real url %s" % url.strip(),
-            u"warning Leading or trailing whitespace in URL `%s'." % url,
-            u"valid",
+            "url %s" % url.strip(),
+            "cache key %s" % url.strip(),
+            "real url %s" % url.strip(),
+            "warning Leading or trailing whitespace in URL `%s'." % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = u"http://www.example.org/\n"
+        url = "http://www.example.org/\n"
         resultlines = [
-            u"url %s" % url.strip(),
-            u"cache key %s" % url.strip(),
-            u"real url %s" % url.strip(),
-            u"warning Leading or trailing whitespace in URL `%s'." % url,
-            u"valid",
+            "url %s" % url.strip(),
+            "cache key %s" % url.strip(),
+            "real url %s" % url.strip(),
+            "warning Leading or trailing whitespace in URL `%s'." % url,
+            "valid",
         ]
         self.direct(url, resultlines)

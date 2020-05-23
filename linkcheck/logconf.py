@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -64,7 +63,7 @@ def init_log_config(handler=None):
     add_loghandler(handler)
 
 
-def add_loghandler (handler):
+def add_loghandler(handler):
     """Add log handler to root logger and LOG_ROOT and set formatting."""
     format = "%(levelname)s %(name)s %(asctime)s %(threadName)s %(message)s"
     handler.setFormatter(logging.Formatter(format))
@@ -72,7 +71,7 @@ def add_loghandler (handler):
     logging.getLogger().addHandler(handler)
 
 
-def remove_loghandler (handler):
+def remove_loghandler(handler):
     """Remove log handler from root logger and LOG_ROOT."""
     logging.getLogger(LOG_ROOT).removeHandler(handler)
     logging.getLogger().removeHandler(handler)

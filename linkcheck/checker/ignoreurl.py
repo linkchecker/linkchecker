@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,9 +19,9 @@ Handle ignored URLs.
 
 from . import unknownurl
 
-class IgnoreUrl (unknownurl.UnknownUrl):
+class IgnoreUrl(unknownurl.UnknownUrl):
     """Always ignored URL."""
 
-    def is_ignored (self):
+    def is_ignored(self):
         """Return True if this URL scheme is ignored."""
         return True

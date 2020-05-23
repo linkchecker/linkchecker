@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,21 +20,20 @@ Test config parsing.
 import unittest
 import os
 import linkcheck.configuration
-from builtins import str as str_text
 
 
-def get_file (filename=None):
+def get_file(filename=None):
     """Get file name located within 'data' directory."""
     directory = os.path.join("tests", "configuration", "data")
     if filename:
-        return str_text(os.path.join(directory, filename))
-    return str_text(directory)
+        return os.path.join(directory, filename)
+    return directory
 
 
-class TestConfig (unittest.TestCase):
+class TestConfig(unittest.TestCase):
     """Test configuration parsing."""
 
-    def test_confparse (self):
+    def test_confparse(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config0.ini")]
         config.read(files)
@@ -148,12 +146,12 @@ class TestConfig (unittest.TestCase):
         self.assertEqual(config["gxml"]["parts"], ["realurl"])
         self.assertEqual(config["gxml"]["encoding"], "utf-8")
 
-    def test_confparse_error1 (self):
+    def test_confparse_error1(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config1.ini")]
         self.assertRaises(linkcheck.LinkCheckerError, config.read, files)
 
-    def test_confparse_error2 (self):
+    def test_confparse_error2(self):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config2.ini")]
         self.assertRaises(linkcheck.LinkCheckerError, config.read, files)

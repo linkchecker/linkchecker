@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -23,16 +22,16 @@ from tests import need_network
 from linkcheck import configuration, robotparser2
 
 
-class TestRobotParser (unittest.TestCase):
+class TestRobotParser(unittest.TestCase):
     """
     Test robots.txt parser (needs internet access).
     """
 
-    def setUp (self):
+    def setUp(self):
         """Initialize self.rp as a robots.txt parser."""
         self.rp = robotparser2.RobotFileParser()
 
-    def check (self, a, b):
+    def check(self, a, b):
         """Helper function comparing two results a and b."""
         if not b:
             ac = "access denied"
@@ -42,7 +41,7 @@ class TestRobotParser (unittest.TestCase):
             self.fail("%s != %s (%s)" % (a, b, ac))
 
     @need_network
-    def test_nonexisting_robots (self):
+    def test_nonexisting_robots(self):
         # robots.txt that does not exist
         self.rp.set_url('http://www.lycos.com/robots.txt')
         self.rp.read()
@@ -50,7 +49,7 @@ class TestRobotParser (unittest.TestCase):
                                      'http://www.lycos.com/search'), True)
 
     @need_network
-    def test_disallowed_robots (self):
+    def test_disallowed_robots(self):
         self.rp.set_url('http://google.com/robots.txt')
         self.rp.read()
         self.check(self.rp.can_fetch(configuration.UserAgent,

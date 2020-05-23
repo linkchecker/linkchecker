@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 #
 # Copyright (c) 2012, Albert Zeyer, www.az2000.de
 # All rights reserved.
@@ -33,7 +32,6 @@
 
 # https://github.com/albertz/py_better_exchook
 
-from __future__ import print_function
 import sys
 import os
 

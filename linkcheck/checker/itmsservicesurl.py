@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,20 +20,18 @@ Handle itms-services URLs.
 from . import urlbase
 from .. import log, LOG_CHECK
 
-from builtins import str as str_text
-
 class ItmsServicesUrl(urlbase.UrlBase):
     """Apple iOS application download URLs."""
 
     def check_syntax(self):
         """Only logs that this URL is unknown."""
         super(ItmsServicesUrl, self).check_syntax()
-        if u"url=" not in self.urlparts[3]:
+        if "url=" not in self.urlparts[3]:
             self.set_result(_("Missing required url parameter"), valid=False)
 
     def local_check(self):
         """Disable content checks."""
-        log.debug(LOG_CHECK, "Checking %s", str_text(self))
+        log.debug(LOG_CHECK, "Checking %s", self)
         pass
 
     def check_content(self):

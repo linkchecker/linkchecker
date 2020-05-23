@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -23,12 +22,12 @@ import socket
 from . import urlbase
 
 
-class DnsUrl (urlbase.UrlBase):
+class DnsUrl(urlbase.UrlBase):
     """
     Url link with dns scheme.
     """
 
-    def can_get_content (self):
+    def can_get_content(self):
         """
         dns: URLs do not have any content
 

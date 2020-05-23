@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
 """
 Functions to load plugin modules.
@@ -7,7 +6,6 @@ Example usage:
     modules = loader.get_package_modules('plugins')
     plugins = loader.get_plugins(modules, PluginClass)
 """
-from __future__ import print_function
 import os
 import sys
 import zipfile
@@ -16,7 +14,7 @@ import imp
 from .fileutil import is_writable_by_others
 
 
-def is_frozen ():
+def is_frozen():
     """Return True if running inside a py2exe- or py2app-generated
     executable."""
     return hasattr(sys, "frozen")

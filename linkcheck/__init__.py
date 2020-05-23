@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,13 +19,9 @@ Main function module for link checking.
 
 # version checks
 import sys
-# Needs Python >= 2.7 because we use dictionary based logging config
-# Needs Python >= 2.7.2 which fixed http://bugs.python.org/issue11467
-if not (hasattr(sys, 'version_info') or
-        sys.version_info < (2, 7, 2, 'final', 0)):
+if sys.version_info < (3, 5, 0, 'final', 0):
     import platform
-    version = platform.python_version()
-    raise SystemExit("This program requires Python 2.7.2 or later instead of %s." % version)
+    raise SystemExit("This program requires Python 3.5.0 or later instead of %s." % platform.python_version())
 # require a reasonably recent requests module: 2.4.0 from 2014-08-29
 import requests
 # PEP 396 has only version strings, bummer! PEP 386 is also not helpful.
@@ -53,12 +48,12 @@ from .logconf import (
 import _LinkChecker_configdata as configdata
 
 
-def module_path ():
+def module_path():
     """Return absolute directory of system executable."""
     return os.path.dirname(os.path.abspath(sys.executable))
 
 
-def get_install_data ():
+def get_install_data():
     """Return absolute path of LinkChecker data installation directory."""
     from .loader import is_frozen
     if is_frozen():
@@ -75,7 +70,7 @@ class LinkCheckerInterrupt(Exception):
     pass
 
 
-def get_link_pat (arg, strict=False):
+def get_link_pat(arg, strict=False):
     """Get a link pattern matcher for intern/extern links.
     Returns a compiled pattern and a negate and strict option.
 
@@ -106,7 +101,7 @@ def get_link_pat (arg, strict=False):
     }
 
 
-def init_i18n (loc=None):
+def init_i18n(loc=None):
     """Initialize i18n with the configured locale dir. The environment
     variable LOCPATH can also specify a locale dir.
 
@@ -132,7 +127,7 @@ def init_i18n (loc=None):
 init_i18n()
 
 
-def drop_privileges ():
+def drop_privileges():
     """Make sure to drop root privileges on POSIX systems."""
     if os.name != 'posix':
         return

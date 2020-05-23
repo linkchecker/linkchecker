@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2012 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,49 +17,46 @@
 Test cgi form routines.
 """
 import unittest
-try:  # Python 3
-    from urllib import parse as urllib_parse
-except ImportError:  # Python 2
-    import urllib as urllib_parse
+import urllib.parse
 from io import BytesIO
 from wsgiref.util import setup_testing_defaults
 from linkcheck.lc_cgi import checkform, checklink, LCFormError, application
 from linkcheck.strformat import limit
 
-class TestWsgi (unittest.TestCase):
+class TestWsgi(unittest.TestCase):
     """Test wsgi application."""
 
-    def test_form_valid_url (self):
+    def test_form_valid_url(self):
         # Check url validity.
         env = dict()
         form = dict(url="http://www.example.com/", level="1")
         checkform(form, env)
 
-    def test_form_empty_url (self):
+    def test_form_empty_url(self):
         # Check with empty url.
         env = dict()
         form = dict(url="", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_form_default_url (self):
+    def test_form_default_url(self):
         # Check with default url.
         env = dict()
         form = dict(url="http://", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_form_invalid_url (self):
+    def test_form_invalid_url(self):
         # Check url (in)validity.
         env = dict()
         form = dict(url="http://www.foo bar/", level="0")
         self.assertRaises(LCFormError, checkform, form, env)
 
-    def test_checklink (self):
+    def test_checklink(self):
         form = dict(url="http://www.example.com/", level="0")
         checklink(form)
 
-    def test_application (self):
+    def test_application(self):
         form = dict(url="http://www.example.com/", level="0")
-        formdata = urllib_parse.urlencode(form)
+        formdata = urllib.parse.urlencode(form)
         formdata = formdata.encode('ascii')
         environ = {'wsgi.input': BytesIO(formdata)}
         setup_testing_defaults(environ)

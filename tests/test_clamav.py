@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,20 +21,20 @@ from tests import need_clamav
 from linkcheck.plugins import viruscheck as clamav
 
 
-class TestClamav (unittest.TestCase):
+class TestClamav(unittest.TestCase):
 
     def setUp(self):
         self.clamav_conf = clamav.get_clamav_conf("/etc/clamav/clamd.conf")
 
     @need_clamav
-    def testClean (self):
+    def testClean(self):
         data = b""
         infected, errors = clamav.scan(data, self.clamav_conf)
         self.assertFalse(infected)
         self.assertFalse(errors)
 
     @need_clamav
-    def testInfected (self):
+    def testInfected(self):
         # from the clamav test direcotry: the clamav test file as html data
         data = (
            b'<a href="data:application/octet-stream;base64,'
@@ -55,8 +54,8 @@ class TestClamav (unittest.TestCase):
         infected, errors = clamav.scan(data, self.clamav_conf)
         # different versions of clamav report different responses, apparently
         acceptable_responses = (
-            [u'stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n'],
-            [u'stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n'],
+            ['stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n'],
+            ['stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n'],
         )
         self.assertIn(infected, acceptable_responses)
         self.assertFalse(errors)

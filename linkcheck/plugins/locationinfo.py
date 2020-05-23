@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -51,7 +50,7 @@ class LocationInfo(_ConnectionPlugin):
 # no risks should be taken here by using a lock.
 _lock = get_lock("geoip")
 
-def get_geoip_dat ():
+def get_geoip_dat():
     """Find a GeoIP database, preferring city over country lookup."""
     datafiles = ("GeoIPCity.dat", "GeoIP.dat")
     if os.name == 'nt':
@@ -86,7 +85,7 @@ if geoip_dat:
 
 
 @synchronized(_lock)
-def get_location (host):
+def get_location(host):
     """Get translated country and optional city name.
 
     @return: country with optional city or an boolean False if not found
@@ -100,11 +99,11 @@ def get_location (host):
         log.debug(LOG_PLUGIN, "Geoip error for %r", host, exception=True)
         # ignore lookup errors
         return None
-    value = u""
+    value = ""
     if record and record.get("city"):
         value += unicode_safe(record["city"])
     if record and record.get("country_name"):
         if value:
-            value += u", "
+            value += ", "
         value += unicode_safe(record["country_name"])
     return value

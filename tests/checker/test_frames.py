@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2009 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,10 +19,10 @@ Test html <frame> tag parsing.
 from . import LinkCheckTest
 
 
-class TestFrames (LinkCheckTest):
+class TestFrames(LinkCheckTest):
     """
     Test link checking of HTML framesets.
     """
 
-    def test_frames (self):
+    def test_frames(self):
         self.file_test("frames.html")

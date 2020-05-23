@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -14,8 +13,6 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from __future__ import print_function
-
 import signal
 import subprocess
 import os
@@ -23,41 +20,15 @@ import sys
 import socket
 import pytest
 from contextlib import contextmanager
-from functools import wraps
+from functools import lru_cache, wraps
 from linkcheck import LinkCheckerInterrupt
-from builtins import str as str_text
 
 
 basedir = os.path.dirname(__file__)
 linkchecker_cmd = os.path.join(os.path.dirname(basedir), "linkchecker")
 
 
-class memoized (object):
-    """Decorator that caches a function's return value each time it is called.
-    If called later with the same arguments, the cached value is returned, and
-    not re-evaluated."""
-
-    def __init__(self, func):
-        self.func = func
-        self.cache = {}
-
-    def __call__(self, *args):
-        try:
-            return self.cache[args]
-        except KeyError:
-            self.cache[args] = value = self.func(*args)
-            return value
-        except TypeError:
-            # uncachable -- for instance, passing a list as an argument.
-            # Better to not cache than to blow up entirely.
-            return self.func(*args)
-
-    def __repr__(self):
-        """Return the function's docstring."""
-        return self.func.__doc__
-
-
-def run (cmd, verbosity=0, **kwargs):
+def run(cmd, verbosity=0, **kwargs):
     """Run command without error checking.
     @return: command return code"""
     if kwargs.get("shell"):
@@ -66,7 +37,7 @@ def run (cmd, verbosity=0, **kwargs):
     return subprocess.call(cmd, **kwargs)
 
 
-def run_checked (cmd, ret_ok=(0,), **kwargs):
+def run_checked(cmd, ret_ok=(0,), **kwargs):
     """Run command and raise OSError on error."""
     retcode = run(cmd, **kwargs)
     if retcode not in ret_ok:
@@ -76,7 +47,7 @@ def run_checked (cmd, ret_ok=(0,), **kwargs):
 
 
 
-def run_silent (cmd):
+def run_silent(cmd):
     """Run given command without output."""
     null = open(os.name == 'nt' and ':NUL' or "/dev/null", 'w')
     try:
@@ -85,11 +56,11 @@ def run_silent (cmd):
         null.close()
 
 
-def _need_func (testfunc, name):
+def _need_func(testfunc, name):
     """Decorator skipping test if given testfunc fails."""
-    def check_func (func):
+    def check_func(func):
         @wraps(func)
-        def newfunc (*args, **kwargs):
+        def newfunc(*args, **kwargs):
             if not testfunc():
                 pytest.skip("%s is not available" % name)
             return func(*args, **kwargs)
@@ -97,8 +68,8 @@ def _need_func (testfunc, name):
     return check_func
 
 
-@memoized
-def has_network ():
+@lru_cache(1)
+def has_network():
     """Test if network is up."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -112,40 +83,40 @@ def has_network ():
 need_network = _need_func(has_network, "network")
 
 
-@memoized
-def has_msgfmt ():
+@lru_cache(1)
+def has_msgfmt():
     """Test if msgfmt is available."""
     return run_silent(["msgfmt", "-V"]) == 0
 
 need_msgfmt = _need_func(has_msgfmt, "msgfmt")
 
 
-@memoized
-def has_posix ():
+@lru_cache(1)
+def has_posix():
     """Test if this is a POSIX system."""
     return os.name == "posix"
 
 need_posix = _need_func(has_posix, "POSIX system")
 
 
-@memoized
-def has_windows ():
+@lru_cache(1)
+def has_windows():
     """Test if this is a Windows system."""
     return os.name == "nt"
 
 need_windows = _need_func(has_windows, "Windows system")
 
 
-@memoized
-def has_linux ():
+@lru_cache(1)
+def has_linux():
     """Test if this is a Linux system."""
     return sys.platform.startswith("linux")
 
 need_linux = _need_func(has_linux, "Linux system")
 
 
-@memoized
-def has_clamav ():
+@lru_cache(1)
+def has_clamav():
     """Test if ClamAV daemon is installed and running."""
     try:
         cmd = ["grep", "LocalSocket", "/etc/clamav/clamd.conf"]
@@ -162,8 +133,8 @@ def has_clamav ():
 need_clamav = _need_func(has_clamav, "ClamAV")
 
 
-@memoized
-def has_proxy ():
+@lru_cache(1)
+def has_proxy():
     """Test if proxy is running on port 8081."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -176,8 +147,8 @@ def has_proxy ():
 need_proxy = _need_func(has_proxy, "proxy")
 
 
-@memoized
-def has_pyftpdlib ():
+@lru_cache(1)
+def has_pyftpdlib():
     """Test if pyftpdlib is available."""
     try:
         import pyftpdlib
@@ -188,8 +159,8 @@ def has_pyftpdlib ():
 need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 
 
-@memoized
-def has_biplist ():
+@lru_cache(1)
+def has_biplist():
     """Test if biplist is available."""
     try:
         import biplist
@@ -200,8 +171,8 @@ def has_biplist ():
 need_biplist = _need_func(has_biplist, "biplist")
 
 
-@memoized
-def has_newsserver (server):
+@lru_cache(1)
+def has_newsserver(server):
     import nntplib
     try:
         nntp = nntplib.NNTP(server, usenetrc=False)
@@ -211,10 +182,10 @@ def has_newsserver (server):
         return False
 
 
-def need_newsserver (server):
+def need_newsserver(server):
     """Decorator skipping test if newsserver is not available."""
-    def check_func (func):
-        def newfunc (*args, **kwargs):
+    def check_func(func):
+        def newfunc(*args, **kwargs):
             if not has_newsserver(server):
                 pytest.skip("Newsserver `%s' is not available" % server)
             return func(*args, **kwargs)
@@ -224,15 +195,15 @@ def need_newsserver (server):
 
 
 
-@memoized
-def has_x11 ():
+@lru_cache(1)
+def has_x11():
     """Test if DISPLAY variable is set."""
     return os.getenv('DISPLAY') is not None
 
 need_x11 = _need_func(has_x11, 'X11')
 
 
-@memoized
+@lru_cache(1)
 def has_word():
     """Test if Word is available."""
     from linkcheck.plugins import parseword
@@ -241,7 +212,7 @@ def has_word():
 need_word = _need_func(has_word, 'Word')
 
 
-@memoized
+@lru_cache(1)
 def has_pdflib():
     from linkcheck.plugins import parsepdf
     return parsepdf.has_pdflib
@@ -250,7 +221,7 @@ need_pdflib = _need_func(has_pdflib, 'pdflib')
 
 
 @contextmanager
-def _limit_time (seconds):
+def _limit_time(seconds):
     """Raises LinkCheckerInterrupt if given number of seconds have passed."""
     if os.name == 'posix':
         def signal_handler(signum, frame):
@@ -265,10 +236,10 @@ def _limit_time (seconds):
             signal.signal(signal.SIGALRM, old_handler)
 
 
-def limit_time (seconds, skip=False):
+def limit_time(seconds, skip=False):
     """Limit test time to the given number of seconds, else fail or skip."""
-    def run_limited (func):
-        def new_func (*args, **kwargs):
+    def run_limited(func):
+        def new_func(*args, **kwargs):
             try:
                 with _limit_time(seconds):
                     return func(*args, **kwargs)
@@ -281,14 +252,14 @@ def limit_time (seconds, skip=False):
     return run_limited
 
 
-def get_file (filename=None):
+def get_file(filename=None):
     """
     Get file name located within 'data' directory.
     """
     directory = os.path.join("tests", "checker", "data")
     if filename:
-        return str_text(os.path.join(directory, filename))
-    return str_text(directory)
+        return os.path.join(directory, filename)
+    return directory
 
 
 if __name__ == '__main__':

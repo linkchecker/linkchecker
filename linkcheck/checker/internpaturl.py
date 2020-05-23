@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,7 +21,7 @@ from . import urlbase, absolute_url
 from .. import strformat, url as urlutil
 
 
-def get_intern_pattern (url):
+def get_intern_pattern(url):
     """Return intern pattern for given URL. Redirections to the same
     domain with or without "www." prepended are allowed."""
     parts = strformat.url_unicode_split(url)
@@ -46,10 +45,10 @@ def get_intern_pattern (url):
     return "^%s://%s%s" % tuple(args)
 
 
-class InternPatternUrl (urlbase.UrlBase):
+class InternPatternUrl(urlbase.UrlBase):
     """Class supporting an intern URL pattern."""
 
-    def get_intern_pattern (self, url=None):
+    def get_intern_pattern(self, url=None):
         """
         Get pattern for intern URL matching.
 

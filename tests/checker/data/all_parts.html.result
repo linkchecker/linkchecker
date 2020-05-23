@@ -3,8 +3,8 @@ cache key file://%(curdir)s/%(datadir)s/all_parts.html
 real url file://%(curdir)s/%(datadir)s/all_parts.html
 name %(datadir)s/all_parts.html
 valid
-line 0
-col 0
+line None
+col None
 size 184
 parent_url 
 page 0
@@ -14,8 +14,8 @@ url base2.html
 cache key file://%(curdir)s/%(datadir)s/base2.html
 real url file://%(curdir)s/%(datadir)s/base2.html
 valid
-line 4
-col 1
+line None
+col None
 size 64
 parent_url file://%(curdir)s/%(datadir)s/all_parts.html
 page 0
@@ -25,8 +25,8 @@ url file.html
 cache key file://%(curdir)s/%(datadir)s/file.html
 real url file://%(curdir)s/%(datadir)s/file.html
 valid
-line 6
-col 1
+line None
+col None
 size 115
 parent_url file://%(curdir)s/%(datadir)s/all_parts.html
 page 0

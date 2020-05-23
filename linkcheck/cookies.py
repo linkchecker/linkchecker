@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,15 +17,12 @@
 Parsing of cookies.
 """
 
-try: # Python 3
-    from http.cookiejar import split_header_words
-except ImportError: # Python 2
-    from cookielib import split_header_words
+from http.cookiejar import split_header_words
 import email
 import requests
 
 
-def from_file (filename):
+def from_file(filename):
     """Parse cookie data from a text file in HTTP header format.
 
     @return: list of tuples (headers, scheme, host, path)
@@ -47,7 +43,7 @@ def from_file (filename):
         return entries
 
 
-def from_headers (strheader):
+def from_headers(strheader):
     """Parse cookie data from a string in HTTP header (RFC 2616) format.
 
     @return: list of cookies

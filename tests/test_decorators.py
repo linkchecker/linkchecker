@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2010 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,33 +17,28 @@
 Test decorators.
 """
 
-import unittest
+from io import StringIO
 import time
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    # Python 3
-    from io import StringIO
+import unittest
 
 import linkcheck.decorators
 
 
-class TestDecorators (unittest.TestCase):
+class TestDecorators(unittest.TestCase):
     """
     Test decorators.
     """
 
-    def test_timeit (self):
+    def test_timeit(self):
         @linkcheck.decorators.timed()
-        def f ():
+        def f():
             return 42
         self.assertEqual(f(), 42)
 
-    def test_timeit2 (self):
+    def test_timeit2(self):
         log = StringIO()
         @linkcheck.decorators.timed(log=log, limit=0)
-        def f ():
+        def f():
             time.sleep(1)
             return 42
         self.assertEqual(f(), 42)

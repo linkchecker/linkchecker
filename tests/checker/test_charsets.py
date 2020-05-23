@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
-# Copyright (C) 2011-2014 Bastian Kleineidam
+# Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,29 +14,26 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-Parse HTML given as file parameter or piped to stdin.
+Test html <base> tag parsing.
 """
-import sys
-import os
-sys.path.append(os.getcwd())
-import linkcheck.HtmlParser.htmlsax
-import linkcheck.HtmlParser.htmllib
+from . import LinkCheckTest
 
 
-def main (text):
-    parser = linkcheck.HtmlParser.htmlsax.parser()
-    handler = linkcheck.HtmlParser.htmllib.HtmlPrinter()
-    parser.handler = handler
-    # debug lexer
-    #parser.debug(1)
-    parser.feed(text)
-    parser.flush()
+class TestBase(LinkCheckTest):
+    """
+    Test, if charset encoding is done right.
+    The linkchecker should translate the encoding
+    from the original source and show it on the terminal
+    in most readable form.
+    Check the tested files with browser - the link text
+    should look the same in all of them.
+    """
 
-if __name__ == '__main__':
-    if len(sys.argv) <= 1:
-        text = sys.stdin.read()
-    else:
-        filename = sys.argv[1]
-        with open(filename) as fp:
-            text = fp.read()
-    main(text)
+    def test_utf8(self):
+        self.file_test("charsets/utf8.html")
+
+    def test_iso8859_2(self):
+        self.file_test("charsets/iso8859-2.html")
+
+    def test_cp1250(self):
+        self.file_test("charsets/cp1250.html")

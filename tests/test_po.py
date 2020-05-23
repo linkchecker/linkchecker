@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005 Joe Wreschnig
 # Copyright (C) 2005-2010 Bastian Kleineidam
 #
@@ -27,7 +26,7 @@ from tests import need_msgfmt, need_posix
 
 pofiles = None
 
-def get_pofiles ():
+def get_pofiles():
     """Find all .po files in this source."""
     global pofiles
     if pofiles is None:
@@ -37,29 +36,29 @@ def get_pofiles ():
     return pofiles
 
 
-class TestPo (unittest.TestCase):
+class TestPo(unittest.TestCase):
     """Test .po file syntax."""
 
     @need_posix
     @need_msgfmt
-    def test_pos (self):
+    def test_pos(self):
         """Test .po files syntax."""
         for f in get_pofiles():
             ret = os.system("msgfmt -c -o - %s > /dev/null" % f)
             self.assertEqual(ret, 0, msg="PO-file syntax error in %r" % f)
 
 
-class TestGTranslator (unittest.TestCase):
-    """GTranslator displays a middot · for a space. Unfortunately, it
+class TestGTranslator(unittest.TestCase):
+    """GTranslator displays a middot Â· for a space. Unfortunately, it
     gets copied with copy-and-paste, what a shame."""
 
-    def test_gtranslator (self):
+    def test_gtranslator(self):
         """Test all pofiles for GTranslator brokenness."""
         for f in get_pofiles():
             with open(f, 'rb') as fd:
                 self.check_file(fd, f)
 
-    def check_file (self, fd, f):
+    def check_file(self, fd, f):
         """Test for GTranslator broken syntax."""
         for line in fd:
             if line.strip().startswith(b"#"):

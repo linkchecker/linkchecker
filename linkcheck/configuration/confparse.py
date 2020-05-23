@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -16,16 +15,13 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Parse configuration files"""
 
-try: # Python 3
-    from configparser import RawConfigParser
-except ImportError: # Python 2
-    from ConfigParser import RawConfigParser
+from configparser import RawConfigParser
 import os
+
 from .. import LinkCheckerError, get_link_pat, LOG_CHECK, log, fileutil, plugins, logconf
-from builtins import str
 
 
-def read_multiline (value):
+def read_multiline(value):
     """Helper function reading multiline values."""
     for line in value.splitlines():
         line = line.strip()
@@ -34,17 +30,17 @@ def read_multiline (value):
         yield line
 
 
-class LCConfigParser (RawConfigParser, object):
+class LCConfigParser(RawConfigParser):
     """
     Parse a LinkChecker configuration file.
     """
 
-    def __init__ (self, config):
+    def __init__(self, config):
         """Initialize configuration."""
         super(LCConfigParser, self).__init__()
         self.config = config
 
-    def read (self, files):
+    def read(self, files):
         """Read settings from given config files.
 
         @raises: LinkCheckerError on syntax errors in the config file(s)
@@ -65,7 +61,7 @@ class LCConfigParser (RawConfigParser, object):
             raise LinkCheckerError(
               _("Error parsing configuration: %s") % str(msg))
 
-    def read_string_option (self, section, option, allowempty=False):
+    def read_string_option(self, section, option, allowempty=False):
         """Read a string option."""
         if self.has_option(section, option):
             value = self.get(section, option)
@@ -78,7 +74,7 @@ class LCConfigParser (RawConfigParser, object):
         if self.has_option(section, option):
             self.config[option] = self.getboolean(section, option)
 
-    def read_int_option (self, section, option, key=None, min=None, max=None):
+    def read_int_option(self, section, option, key=None, min=None, max=None):
         """Read an integer option."""
         if self.has_option(section, option):
             num = self.getint(section, option)
@@ -92,7 +88,7 @@ class LCConfigParser (RawConfigParser, object):
                 key = option
             self.config[key] = num
 
-    def read_output_config (self):
+    def read_output_config(self):
         """Read configuration options in section "output"."""
         section = "output"
         from ..logger import LoggerClasses
@@ -134,7 +130,7 @@ class LCConfigParser (RawConfigParser, object):
                 output = self.config.logger_new(val, fileoutput=1)
                 self.config['fileoutput'].append(output)
 
-    def read_checking_config (self):
+    def read_checking_config(self):
         """Read configuration options in section "checking"."""
         section = "checking"
         self.read_int_option(section, "threads", min=-1)
@@ -161,7 +157,7 @@ class LCConfigParser (RawConfigParser, object):
             self.read_string_option(section, "sslverify")
         self.read_int_option(section, "maxrunseconds", min=0)
 
-    def read_authentication_config (self):
+    def read_authentication_config(self):
         """Read configuration options in section "authentication"."""
         section = "authentication"
         password_fields = []
@@ -211,7 +207,7 @@ class LCConfigParser (RawConfigParser, object):
             elif os.name == 'nt':
                 log.warn(LOG_CHECK, _("See http://support.microsoft.com/kb/308419 for more info on setting file permissions."))
 
-    def read_filtering_config (self):
+    def read_filtering_config(self):
         """
         Read configuration options in section "filtering".
         """

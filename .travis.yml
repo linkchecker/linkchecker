@@ -1,9 +1,20 @@
 language: python
 python:
-  - "2.7"
   - "3.5"
   - "3.6"
   - "3.7"
+  - "3.8"
+jobs:
+  include:
+    - python: "3.5"
+      env: TOXENV=oldbs4
+    - name: flake8
+      env: TOXENV=flake8
+      before_script:
+      after_success:
+  allow_failures:
+    - name: flake8
+      env: TOXENV=flake8
 # command to install dependencies
 addons:
   apt:
@@ -26,11 +37,6 @@ notifications:
   email: false
 after_script:
   - coveralls
-matrix:
-  allow_failures:
-    - python: "3.5"
-    - python: "3.6"
-    - python: "3.7"
 cache:
   pip: true
   directories:

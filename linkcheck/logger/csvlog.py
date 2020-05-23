@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,22 +17,20 @@
 A CSV logger.
 """
 import csv
+from io import StringIO
 import os
-try:
-    from cStringIO import StringIO
-except ImportError: # Python 3
-    from io import StringIO
+
 from . import _Logger
 from .. import strformat
 
 Columns = (
-    u"urlname", u"parentname", u"baseref", u"result", u"warningstring",
-    u"infostring", u"valid", u"url", u"line", u"column", u"name",
-    u"dltime", u"size", u"checktime", u"cached", u"level", u"modified",
+    "urlname", "parentname", "baseref", "result", "warningstring",
+    "infostring", "valid", "url", "line", "column", "name",
+    "dltime", "size", "checktime", "cached", "level", "modified",
 )
 
 
-class CSVLogger (_Logger):
+class CSVLogger(_Logger):
     """
     CSV output, consisting of one line per entry. Entries are
     separated by a separator (a semicolon per default).
@@ -48,7 +45,7 @@ class CSVLogger (_Logger):
         "dialect": "excel",
     }
 
-    def __init__ (self, **kwargs):
+    def __init__(self, **kwargs):
         """Store default separator and (os dependent) line terminator."""
         args = self.get_args(kwargs)
         super(CSVLogger, self).__init__(**args)
@@ -58,11 +55,11 @@ class CSVLogger (_Logger):
         self.dialect = args['dialect']
         self.linesep = os.linesep
 
-    def comment (self, s, **args):
+    def comment(self, s, **args):
         """Write CSV comment."""
-        self.writeln(s=u"# %s" % s, **args)
+        self.writeln(s="# %s" % s, **args)
 
-    def start_output (self):
+    def start_output(self):
         """Write checking start info as csv comment."""
         super(CSVLogger, self).start_output()
         row = []
@@ -71,7 +68,7 @@ class CSVLogger (_Logger):
             self.flush()
         else:
             # write empty string to initialize file output
-            self.write(u"")
+            self.write("")
         self.queue = StringIO()
         self.writer = csv.writer(self.queue, dialect=self.dialect,
                delimiter=self.separator, lineterminator=self.linesep,
@@ -82,7 +79,7 @@ class CSVLogger (_Logger):
         if row:
             self.writerow(row)
 
-    def log_url (self, url_data):
+    def log_url(self, url_data):
         """Write csv formatted url check info."""
         row = []
         if self.has_part("urlname"):
@@ -101,9 +98,9 @@ class CSVLogger (_Logger):
             row.append(url_data.valid)
         if self.has_part("url"):
             row.append(url_data.url)
-        if self.has_part("line"):
+        if self.has_part("line") and url_data.line is not None:
             row.append(url_data.line)
-        if self.has_part("column"):
+        if self.has_part("column") and url_data.column is not None:
             row.append(url_data.column)
         if self.has_part("name"):
             row.append(url_data.name)
@@ -122,15 +119,9 @@ class CSVLogger (_Logger):
         self.writerow(map(strformat.unicode_safe, row))
         self.flush()
 
-    def encode_row_s(self, row_s):
-        if isinstance(row_s, str):
-            return row_s  # Python 3
-        else:
-            return row_s.encode("utf-8", self.codec_errors)  # Python 2
-
-    def writerow (self, row):
+    def writerow(self, row):
         """Write one row in CSV format."""
-        self.writer.writerow([self.encode_row_s(s) for s in row])
+        self.writer.writerow(row)
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
         try:
@@ -143,7 +134,7 @@ class CSVLogger (_Logger):
         self.queue.seek(0)
         self.queue.truncate(0)
 
-    def end_output (self, **kwargs):
+    def end_output(self, **kwargs):
         """Write end of checking info as csv comment."""
         if self.has_part("outro"):
             self.write_outro()

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2009-2010 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -79,12 +78,12 @@ patterns = (
 )
 
 
-class TestFtpparse (unittest.TestCase):
+class TestFtpparse(unittest.TestCase):
     """
     Test FTP LIST line parsing.
     """
 
-    def test_ftpparse (self):
+    def test_ftpparse(self):
         for line, expected in patterns:
             res = ftpparse(line)
             self.assertEqual(expected, res,

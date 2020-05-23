@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,43 +17,39 @@
 Store metadata and options.
 """
 
+from functools import lru_cache
 import os
 import re
-try:  # Python 3
-    from urllib import parse
-    from urllib import request
-except ImportError:  # Python 2
-    import urlparse as parse
-    import urllib as request
+import urllib.parse
+import urllib.request
 import shutil
 import socket
 import _LinkChecker_configdata as configdata
 from .. import (log, LOG_CHECK, get_install_data, fileutil)
 from . import confparse
-from ..decorators import memoized
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 Version = configdata.version
 ReleaseDate = configdata.release_date
 AppName = configdata.name
-App = AppName+u" "+Version
+App = AppName+" "+Version
 Author = configdata.author
-HtmlAuthor = Author.replace(u' ', u'&nbsp;')
-Copyright = u"Copyright (C) 2000-2014 "+Author
-HtmlCopyright = u"Copyright &copy; 2000-2014 "+HtmlAuthor
-AppInfo = App+u"              "+Copyright
-HtmlAppInfo = App+u", "+HtmlCopyright
+HtmlAuthor = Author.replace(' ', '&nbsp;')
+Copyright = "Copyright (C) 2000-2014 "+Author
+HtmlCopyright = "Copyright &copy; 2000-2014 "+HtmlAuthor
+AppInfo = App+"              "+Copyright
+HtmlAppInfo = App+", "+HtmlCopyright
 Url = configdata.url
-SupportUrl = u"https://github.com/linkchecker/linkchecker/issues"
+SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
 Email = configdata.author_email
-UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
-Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!
+UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
+Freeware = AppName+""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
 under certain conditions. Look at the file `LICENSE' within this
 distribution."""
 Portable = configdata.portable
 
-def normpath (path):
+def normpath(path):
     """Norm given system path with all available norm or expand functions
     in os.path."""
     expanded = os.path.expanduser(os.path.expandvars(path))
@@ -66,13 +61,13 @@ Modules = (
 # required modules
     ("requests", "Requests", "__version__"),
 # optional modules
-    ("argcomplete", u"Argcomplete", None),
-    ("GeoIP", u"GeoIP", 'lib_version'),   # on Unix systems
-    ("pygeoip", u"GeoIP", 'lib_version'), # on Windows systems
-    ("sqlite3", u"Pysqlite", 'version'),
-    ("sqlite3", u"Sqlite", 'sqlite_version'),
-    ("gconf", u"Gconf", '__version__'),
-    ("meliae", u"Meliae", '__version__'),
+    ("argcomplete", "Argcomplete", None),
+    ("GeoIP", "GeoIP", 'lib_version'),   # on Unix systems
+    ("pygeoip", "GeoIP", 'lib_version'), # on Windows systems
+    ("sqlite3", "Pysqlite", 'version'),
+    ("sqlite3", "Sqlite", 'sqlite_version'),
+    ("gconf", "Gconf", '__version__'),
+    ("meliae", "Meliae", '__version__'),
 )
 
 def get_modules_info():
@@ -89,15 +84,15 @@ def get_modules_info():
             # ignore attribute errors in case library developers
             # change the version information attribute
             module_infos.append(name)
-    return u"Modules: %s" % (u", ".join(module_infos))
+    return "Modules: %s" % (", ".join(module_infos))
 
 
-def get_share_dir ():
+def get_share_dir():
     """Return absolute path of LinkChecker example configuration."""
     return os.path.join(get_install_data(), "share", "linkchecker")
 
 
-def get_share_file (filename, devel_dir=None):
+def get_share_file(filename, devel_dir=None):
     """Return a filename in the share directory.
     @param devel_dir: directory to search when developing
     @ptype devel_dir: string
@@ -149,13 +144,13 @@ def get_certifi_file():
 
 
 # dynamic options
-class Configuration (dict):
+class Configuration(dict):
     """
     Storage for configuration options. Options can both be given from
     the command line as well as from configuration files.
     """
 
-    def __init__ (self):
+    def __init__(self):
         """
         Initialize the default options.
         """
@@ -173,7 +168,7 @@ class Configuration (dict):
         self["maxrequestspersecond"] = 10
         self["maxhttpredirects"] = 10
         self["nntpserver"] = os.environ.get("NNTP_SERVER", None)
-        self["proxy"] = request.getproxies()
+        self["proxy"] = urllib.request.getproxies()
         self["sslverify"] = True
         self["threads"] = 10
         self["timeout"] = 60
@@ -215,18 +210,18 @@ class Configuration (dict):
         """Set the status logger."""
         self.status_logger = status_logger
 
-    def logger_new (self, loggername, **kwargs):
+    def logger_new(self, loggername, **kwargs):
         """Instantiate new logger and return it."""
         args = self[loggername]
         args.update(kwargs)
         return self.loggers[loggername](**args)
 
-    def logger_add (self, loggerclass):
+    def logger_add(self, loggerclass):
         """Add a new logger type to the known loggers."""
         self.loggers[loggerclass.LoggerName] = loggerclass
         self[loggerclass.LoggerName] = {}
 
-    def read (self, files=None):
+    def read(self, files=None):
         """
         Read settings from given config files.
 
@@ -252,7 +247,7 @@ class Configuration (dict):
         log.debug(LOG_CHECK, "reading configuration from %s", filtered_cfiles)
         confparse.LCConfigParser(self).read(filtered_cfiles)
 
-    def add_auth (self, user=None, password=None, pattern=None):
+    def add_auth(self, user=None, password=None, pattern=None):
         """Add given authentication data."""
         if not user or not pattern:
             log.warn(LOG_CHECK,
@@ -265,7 +260,7 @@ class Configuration (dict):
         )
         self["authentication"].append(entry)
 
-    def get_user_password (self, url):
+    def get_user_password(self, url):
         """Get tuple (user, password) from configured authentication
         that matches the given URL.
         Both user and password can be None if not specified, or no
@@ -280,7 +275,7 @@ class Configuration (dict):
         """Get dict with limit per connection type."""
         return {key: self['maxconnections%s' % key] for key in ('http', 'https', 'ftp')}
 
-    def sanitize (self):
+    def sanitize(self):
         "Make sure the configuration is consistent."
         if self['logger'] is None:
             self.sanitize_logger()
@@ -292,14 +287,14 @@ class Configuration (dict):
         # set default socket timeout
         socket.setdefaulttimeout(self['timeout'])
 
-    def sanitize_logger (self):
+    def sanitize_logger(self):
         """Make logger configuration consistent."""
         if not self['output']:
             log.warn(LOG_CHECK, _("activating text logger output."))
             self['output'] = 'text'
         self['logger'] = self.logger_new(self['output'])
 
-    def sanitize_loginurl (self):
+    def sanitize_loginurl(self):
         """Make login configuration consistent."""
         url = self["loginurl"]
         disable = False
@@ -318,7 +313,7 @@ class Configuration (dict):
         if not url.lower().startswith(("http:", "https:")):
             log.warn(LOG_CHECK, _("login URL is not a HTTP URL."))
             disable = True
-        urlparts = parse.urlsplit(url)
+        urlparts = urllib.parse.urlsplit(url)
         if not urlparts[0] or not urlparts[1] or not urlparts[2]:
             log.warn(LOG_CHECK, _("login URL is incomplete."))
             disable = True
@@ -327,7 +322,7 @@ class Configuration (dict):
               _("disabling login URL %(url)s.") % {"url": url})
             self["loginurl"] = None
 
-    def sanitize_proxies (self):
+    def sanitize_proxies(self):
         """Try to read additional proxy settings which urllib does not
         support."""
         if os.name != 'posix':
@@ -433,7 +428,7 @@ def get_user_config():
     return userconf
 
 
-def get_gconf_http_proxy ():
+def get_gconf_http_proxy():
     """Return host:port for GConf HTTP proxy if found, else None."""
     try:
         import gconf
@@ -454,7 +449,7 @@ def get_gconf_http_proxy ():
     return None
 
 
-def get_gconf_ftp_proxy ():
+def get_gconf_ftp_proxy():
     """Return host:port for GConf FTP proxy if found, else None."""
     try:
         import gconf
@@ -474,7 +469,7 @@ def get_gconf_ftp_proxy ():
     return None
 
 
-def get_kde_http_proxy ():
+def get_kde_http_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
     config_dir = get_kde_config_dir()
     if not config_dir:
@@ -488,7 +483,7 @@ def get_kde_http_proxy ():
         pass
 
 
-def get_kde_ftp_proxy ():
+def get_kde_ftp_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
     config_dir = get_kde_config_dir()
     if not config_dir:
@@ -532,7 +527,7 @@ def get_kde_ftp_proxy ():
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-def get_kde_config_dir ():
+def get_kde_config_dir():
     """Return KDE configuration directory or None if not found."""
     kde_home = get_kde_home_dir()
     if not kde_home:
@@ -541,12 +536,12 @@ def get_kde_config_dir ():
     return kde_home_to_config(kde_home)
 
 
-def kde_home_to_config (kde_home):
+def kde_home_to_config(kde_home):
     """Add subdirectories for config path to KDE home directory."""
     return os.path.join(kde_home, "share", "config")
 
 
-def get_kde_home_dir ():
+def get_kde_home_dir():
     """Return KDE home directory or None if not found."""
     if os.environ.get("KDEHOME"):
         kde_home = os.path.abspath(os.environ["KDEHOME"])
@@ -576,8 +571,8 @@ def get_kde_home_dir ():
 
 loc_ro = re.compile(r"\[.*\]$")
 
-@memoized
-def read_kioslaverc (kde_config_dir):
+@lru_cache(1)
+def read_kioslaverc(kde_config_dir):
     """Read kioslaverc into data dictionary."""
     data = {}
     filename = os.path.join(kde_config_dir, "kioslaverc")
@@ -605,14 +600,14 @@ def read_kioslaverc (kde_config_dir):
     return data
 
 
-def add_kde_proxy (key, value, data):
+def add_kde_proxy(key, value, data):
     """Add a proxy value to data dictionary after sanity checks."""
     if not value or value[:3] == "//:":
         return
     data[key] = value
 
 
-def add_kde_setting (key, value, data):
+def add_kde_setting(key, value, data):
     """Add a KDE proxy setting value to data dictionary."""
     if key == "ProxyType":
         mode = None
@@ -646,12 +641,12 @@ def add_kde_setting (key, value, data):
         # XXX todo
 
 
-def split_hosts (value):
+def split_hosts(value):
     """Split comma-separated host list."""
     return [host for host in value.split(", ") if host]
 
 
-def resolve_indirect (data, key, splithosts=False):
+def resolve_indirect(data, key, splithosts=False):
     """Replace name of environment variable with its value."""
     value = data[key]
     env_value = os.environ.get(value)
@@ -664,7 +659,7 @@ def resolve_indirect (data, key, splithosts=False):
         del data[key]
 
 
-def resolve_kde_settings (data):
+def resolve_kde_settings(data):
     """Write final proxy configuration values in data dictionary."""
     if "mode" not in data:
         return

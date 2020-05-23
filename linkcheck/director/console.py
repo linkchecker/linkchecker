@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2006-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,7 +16,6 @@
 """
 Helpers for console output.
 """
-from __future__ import print_function
 import sys
 import os
 import time
@@ -28,49 +26,42 @@ stderr = i18n.get_encoded_writer(out=sys.stderr)
 stdout = i18n.get_encoded_writer()
 
 
-def encode (text):
-    """Encode text with default encoding if its Unicode."""
-    if isinstance(text, unicode):
-        return text.encode(i18n.default_encoding, 'ignore')
-    return text
-
-
-class StatusLogger (object):
+class StatusLogger:
     """Standard status logger. Default output is stderr."""
 
-    def __init__ (self, fd=stderr):
+    def __init__(self, fd=stderr):
         """Save file descriptor for logging."""
         self.fd = fd
 
-    def log_status (self, checked, in_progress, queue, duration, num_urls):
+    def log_status(self, checked, in_progress, queue, duration, num_urls):
         """Write status message to file descriptor."""
         msg = _n("%2d thread active", "%2d threads active", in_progress) % \
           in_progress
-        self.write(u"%s, " % msg)
+        self.write("%s, " % msg)
         msg = _n("%5d link queued", "%5d links queued", queue) % queue
-        self.write(u"%s, " % msg)
+        self.write("%s, " % msg)
         msg = _n("%4d link", "%4d links", checked) % checked
-        self.write(u"%s" % msg)
+        self.write("%s" % msg)
         msg = _n("%3d URL", "%3d URLs", num_urls) % num_urls
-        self.write(u" in %s checked, " % msg)
+        self.write(" in %s checked, " % msg)
         msg = _("runtime %s") % strformat.strduration_long(duration)
         self.writeln(msg)
         self.flush()
 
-    def write (self, msg):
+    def write(self, msg):
         """Write message to file descriptor."""
         self.fd.write(msg)
 
-    def writeln (self, msg):
+    def writeln(self, msg):
         """Write status message and line break to file descriptor."""
-        self.fd.write(u"%s%s" % (msg, os.linesep))
+        self.fd.write("%s%s" % (msg, os.linesep))
 
-    def flush (self):
+    def flush(self):
         """Flush file descriptor."""
         self.fd.flush()
 
 
-def internal_error (out=stderr, etype=None, evalue=None, tb=None):
+def internal_error(out=stderr, etype=None, evalue=None, tb=None):
     """Print internal error message (output defaults to stderr)."""
     print(os.linesep, file=out)
     print(_("""********** Oops, I did it again. *************
@@ -103,20 +94,20 @@ I can work with ;) .
       _("******** LinkChecker internal error, over and out ********"), file=out)
 
 
-def print_env_info (key, out=stderr):
+def print_env_info(key, out=stderr):
     """If given environment key is defined, print it out."""
     value = os.getenv(key)
     if value is not None:
         print(key, "=", repr(value), file=out)
 
 
-def print_proxy_info (out=stderr):
+def print_proxy_info(out=stderr):
     """Print proxy info."""
     for key in ("http_proxy", "ftp_proxy", "no_proxy"):
         print_env_info(key, out=out)
 
 
-def print_locale_info (out=stderr):
+def print_locale_info(out=stderr):
     """Print locale info."""
     for key in ("LANGUAGE", "LC_ALL", "LC_CTYPE", "LANG"):
         print_env_info(key, out=out)
@@ -140,7 +131,7 @@ PYTHON_ENV_VARS = (
     'PYTHONWARNINGS',
     'PYTHONHASHSEED',
 )
-def print_app_info (out=stderr):
+def print_app_info(out=stderr):
     """Print system and application info (output defaults to stderr)."""
     print(_("System info:"), file=out)
     print(configuration.App, file=out)
@@ -155,7 +146,7 @@ def print_app_info (out=stderr):
     print(_("sys.argv:"), sys.argv, file=out)
 
 
-def print_version (out=stdout):
+def print_version(out=stdout):
     """Print the program version (output defaults to stdout)."""
     print(configuration.App, _("released"),
           configuration.ReleaseDate, file=out)

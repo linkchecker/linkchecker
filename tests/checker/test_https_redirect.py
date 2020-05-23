@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -19,35 +18,35 @@ Test http checking.
 """
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
-class TestHttpsRedirect (HttpServerTest):
+class TestHttpsRedirect(HttpServerTest):
     """Test https:// link redirection checking."""
 
     def __init__(self, methodName='runTest'):
         super(TestHttpsRedirect, self).__init__(methodName=methodName)
         self.handler = RedirectHttpsRequestHandler
 
-    def test_redirect (self):
-        url = u"http://localhost:%d/redirect1" % self.port
+    def test_redirect(self):
+        url = "http://localhost:%d/redirect1" % self.port
         nurl = url
-        #rurl = u"https://localhost:%d/newurl1" % self.port
+        #rurl = "https://localhost:%d/newurl1" % self.port
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % nurl,
-            u"real url %s" % url,
+            "url %s" % url,
+            "cache key %s" % nurl,
+            "real url %s" % url,
             # XXX the redirect fails because this is not an SSL server
-            #u"info Redirected to `%s'." % rurl.replace('http:', 'https:'),
-            #u"valid",
-            #u"url %s" % rurl,
-            #u"cache key %s" % rurl,
-            #u"real url %s" % rurl,
-            u"error",
+            #"info Redirected to `%s'." % rurl.replace('http:', 'https:'),
+            #"valid",
+            #"url %s" % rurl,
+            #"cache key %s" % rurl,
+            #"real url %s" % rurl,
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=0)
 
 
-class RedirectHttpsRequestHandler (CookieRedirectHttpRequestHandler):
+class RedirectHttpsRequestHandler(CookieRedirectHttpRequestHandler):
 
-    def redirect (self):
+    def redirect(self):
         """Redirect request."""
         path = self.path.replace("redirect", "newurl")
         port = self.server.server_address[1]

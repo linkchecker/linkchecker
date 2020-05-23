@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2000-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,21 +19,8 @@ Handle local file: links.
 
 import re
 import os
-try:
-    import urlparse
-except ImportError:
-    # Python 3
-    from urllib import parse as urlparse
-try:  # Python 3
-    from urllib import request as urlrequest
-except ImportError:
-    import urllib as urlrequest
-try:
-    from urllib2 import urlopen
-except ImportError:
-    # Python 3
-    from urllib.request import urlopen
-from builtins import str as str_text
+import urllib.parse
+import urllib.request
 from datetime import datetime
 
 from . import urlbase, get_index_html
@@ -43,7 +29,7 @@ from ..bookmarks import firefox
 from .const import WARN_FILE_MISSING_SLASH, WARN_FILE_SYSTEM_PATH
 
 
-def get_files (dirname):
+def get_files(dirname):
     """Get iterator of entries in directory. Only allows regular files
     and directories, no symlinks."""
     for entry in os.listdir(dirname):
@@ -56,7 +42,7 @@ def get_files (dirname):
             yield entry+"/"
 
 
-def prepare_urlpath_for_nt (path):
+def prepare_urlpath_for_nt(path):
     """
     URLs like 'file://server/path/' result in a path named '/server/path'.
     However urllib.url2pathname expects '////server/path'.
@@ -66,7 +52,7 @@ def prepare_urlpath_for_nt (path):
     return path
 
 
-def get_nt_filename (path):
+def get_nt_filename(path):
     """Return case sensitive filename for NT path."""
     unc, rest = os.path.splitunc(path)
     head, tail = os.path.split(rest)
@@ -79,18 +65,18 @@ def get_nt_filename (path):
     return path
 
 
-def get_os_filename (path):
+def get_os_filename(path):
     """Return filesystem path for given URL path."""
     if os.name == 'nt':
         path = prepare_urlpath_for_nt(path)
-    res = urlrequest.url2pathname(fileutil.pathencode(path))
+    res = urllib.request.url2pathname(fileutil.path_safe(path))
     if os.name == 'nt' and res.endswith(':') and len(res) == 2:
         # Work around http://bugs.python.org/issue11474
         res += os.sep
     return res
 
 
-def is_absolute_path (path):
+def is_absolute_path(path):
     """Check if given path is absolute. On Windows absolute paths start
     with a drive letter. On all other systems absolute paths start with
     a slash."""
@@ -101,17 +87,17 @@ def is_absolute_path (path):
     return path.startswith("/")
 
 
-class FileUrl (urlbase.UrlBase):
+class FileUrl(urlbase.UrlBase):
     """
     Url link with file scheme.
     """
 
-    def init (self, base_ref, base_url, parent_url, recursion_level,
+    def init(self, base_ref, base_url, parent_url, recursion_level,
               aggregate, line, column, page, name, url_encoding, extern):
         """Initialize the scheme."""
         super(FileUrl, self).init(base_ref, base_url, parent_url,
          recursion_level, aggregate, line, column, page, name, url_encoding, extern)
-        self.scheme = u'file'
+        self.scheme = 'file'
 
     def build_base_url(self):
         """The URL is normed according to the platform:
@@ -139,12 +125,9 @@ class FileUrl (urlbase.UrlBase):
             base_url = re.sub("^file://(/?)([a-zA-Z]):", r"file:///\2|", base_url)
             # transform file://path into file:///path
             base_url = re.sub("^file://([^/])", r"file:///\1", base_url)
-        try:
-            self.base_url = unicode(base_url)
-        except NameError:
-            self.base_url = base_url
+        self.base_url = base_url
 
-    def build_url (self):
+    def build_url(self):
         """
         Calls super.build_url() and adds a trailing slash to directories.
         """
@@ -157,7 +140,7 @@ class FileUrl (urlbase.UrlBase):
             from .urlbase import url_norm
             # norm base url - can raise UnicodeError from url.idna_encode()
             base_url, is_idn = url_norm(self.base_url, self.encoding)
-            urlparts = list(urlparse.urlsplit(base_url))
+            urlparts = list(urllib.parse.urlsplit(base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
@@ -170,7 +153,7 @@ class FileUrl (urlbase.UrlBase):
             self.urlparts[2] += '/'
         self.url = urlutil.urlunsplit(self.urlparts)
 
-    def add_size_info (self):
+    def add_size_info(self):
         """Get size of file content and modification time from filename path."""
         if self.is_directory():
             # Directory size always differs from the customer index.html
@@ -180,23 +163,23 @@ class FileUrl (urlbase.UrlBase):
         self.size = fileutil.get_size(filename)
         self.modified = datetime.utcfromtimestamp(fileutil.get_mtime(filename))
 
-    def check_connection (self):
+    def check_connection(self):
         """
         Try to open the local file. Under NT systems the case sensitivity
         is checked.
         """
         if (self.parent_url is not None and
-           not self.parent_url.startswith(u"file:")):
+           not self.parent_url.startswith("file:")):
             msg = _("local files are only checked without parent URL or when the parent URL is also a file")
             raise LinkCheckerError(msg)
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.pathencode(self.url)
-            self.url_connection = urlopen(url)
+            url = fileutil.path_safe(self.url)
+            self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
-    def check_case_sensitivity (self):
+    def check_case_sensitivity(self):
         """
         Check if url and windows path name match cases
         else there might be problems when copying such
@@ -213,18 +196,18 @@ class FileUrl (urlbase.UrlBase):
                             {"path": path, "realpath": realpath},
                                tag=WARN_FILE_SYSTEM_PATH)
 
-    def read_content (self):
+    def read_content(self):
         """Return file content, or in case of directories a dummy HTML file
         with links to the files."""
         if self.is_directory():
             data = get_index_html(get_files(self.get_os_filename()))
-            if isinstance(data, str_text):
+            if isinstance(data, str):
                 data = data.encode("iso8859-1", "ignore")
         else:
             data = super(FileUrl, self).read_content()
         return data
 
-    def get_os_filename (self):
+    def get_os_filename(self):
         """
         Construct os specific file path out of the file:// URL.
 
@@ -233,11 +216,11 @@ class FileUrl (urlbase.UrlBase):
         """
         return get_os_filename(self.urlparts[2])
 
-    def get_temp_filename (self):
+    def get_temp_filename(self):
         """Get filename for content to parse."""
         return self.get_os_filename()
 
-    def is_directory (self):
+    def is_directory(self):
         """
         Check if file is a directory.
 
@@ -247,7 +230,7 @@ class FileUrl (urlbase.UrlBase):
         filename = self.get_os_filename()
         return os.path.isdir(filename) and not os.path.islink(filename)
 
-    def is_parseable (self):
+    def is_parseable(self):
         """Check if content is parseable for recursion.
 
         @return: True if content is parseable
@@ -262,15 +245,15 @@ class FileUrl (urlbase.UrlBase):
         log.debug(LOG_CHECK, "File with content type %r is not parseable.", self.content_type)
         return False
 
-    def set_content_type (self):
+    def set_content_type(self):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
             self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
         else:
-            self.content_type = u""
+            self.content_type = ""
 
-    def get_intern_pattern (self, url=None):
+    def get_intern_pattern(self, url=None):
         """Get pattern for intern URL matching.
 
         @return non-empty regex pattern or None
@@ -287,11 +270,11 @@ class FileUrl (urlbase.UrlBase):
                 url = url[:i+1]
         return re.escape(url)
 
-    def add_url (self, url, line=0, column=0, page=0, name=u"", base=None):
+    def add_url(self, url, line=0, column=0, page=0, name="", base=None):
         """If a local webroot directory is configured, replace absolute URLs
         with it. After that queue the URL data for checking."""
         webroot = self.aggregate.config["localwebroot"]
-        if webroot and url and url.startswith(u"/"):
+        if webroot and url and url.startswith("/"):
             url = webroot + url[1:]
             log.debug(LOG_CHECK, "Applied local webroot `%s' to `%s'.", webroot, url)
         super(FileUrl, self).add_url(url, line=line, column=column, page=page, name=name, base=base)

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,149 +20,149 @@ from tests import need_network
 from . import MailTest
 
 
-class TestMailGood (MailTest):
+class TestMailGood(MailTest):
     """
     Test mailto: link checking.
     """
 
     @need_network
-    def test_good_mail (self):
+    def test_good_mail(self):
         # some good mailto addrs
-        url = self.norm(u"mailto:Dude <calvin@users.sourceforge.net> , "\
+        url = self.norm("mailto:Dude <calvin@users.sourceforge.net> , "\
                 "Killer <calvin@users.sourceforge.net>?subject=bla")
         resultlines = [
-          u"url %s" % url,
-          u"cache key mailto:calvin@users.sourceforge.net",
-          u"real url %s" % url,
-          u"valid",
+          "url %s" % url,
+          "cache key mailto:calvin@users.sourceforge.net",
+          "real url %s" % url,
+          "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm(u"mailto:Bastian Kleineidam <calvin@users.sourceforge.net>?"\
+        url = self.norm("mailto:Bastian Kleineidam <calvin@users.sourceforge.net>?"\
                 "bcc=calvin%40users.sourceforge.net")
         resultlines = [
-          u"url %s" % url,
-          u"cache key mailto:calvin@users.sourceforge.net",
-          u"real url %s" % url,
-          u"valid",
+          "url %s" % url,
+          "cache key mailto:calvin@users.sourceforge.net",
+          "real url %s" % url,
+          "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm(u"mailto:Bastian Kleineidam <calvin@users.sourceforge.net>")
+        url = self.norm("mailto:Bastian Kleineidam <calvin@users.sourceforge.net>")
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:calvin@users.sourceforge.net",
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm(u"mailto:o'hara@users.sourceforge.net")
+        url = self.norm("mailto:o'hara@users.sourceforge.net")
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:o'hara@users.sourceforge.net",
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:o'hara@users.sourceforge.net",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm(u"mailto:?to=calvin@users.sourceforge.net&subject=blubb&"
-                       u"cc=calvin_cc@users.sourceforge.net&CC=calvin_CC@users.sourceforge.net")
+        url = self.norm("mailto:?to=calvin@users.sourceforge.net&subject=blubb&"
+                       "cc=calvin_cc@users.sourceforge.net&CC=calvin_CC@users.sourceforge.net")
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:calvin@users.sourceforge.net,"
-             u"calvin_CC@users.sourceforge.net,calvin_cc@users.sourceforge.net",
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net,"
+             "calvin_CC@users.sourceforge.net,calvin_cc@users.sourceforge.net",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm(u"mailto:news-admins@freshcode.club?subject="
+        url = self.norm("mailto:news-admins@freshcode.club?subject="
                 "Re:%20[fm%20#11093]%20(news-admins)%20Submission%20"
                 "report%20-%20Pretty%20CoLoRs")
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:news-admins@freshcode.club",
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:news-admins@freshcode.club",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
 
     @need_network
-    def test_warn_mail (self):
+    def test_warn_mail(self):
         # some mailto addrs with warnings
         # contains non-quoted characters
-        url = u"mailto:calvin@users.sourceforge.net?subject=äöü"
+        url = "mailto:calvin@users.sourceforge.net?subject=\xe4\xf6\xfc"
+        qurl = self.norm(url, encoding="iso-8859-1")
+        resultlines = [
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net",
+            "real url %s" % qurl,
+            "valid",
+        ]
+        self.direct(url, resultlines, url_encoding="iso-8859-1")
+        url = "mailto:calvin@users.sourceforge.net?subject=Halli hallo"
         qurl = self.norm(url)
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:calvin@users.sourceforge.net",
-            u"real url %s" % qurl,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net",
+            "real url %s" % qurl,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = u"mailto:calvin@users.sourceforge.net?subject=Halli hallo"
-        qurl = self.norm(url)
+        url = "mailto:"
         resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:calvin@users.sourceforge.net",
-            u"real url %s" % qurl,
-            u"valid",
-        ]
-        self.direct(url, resultlines)
-        url = u"mailto:"
-        resultlines = [
-            u"url %s" % url,
-            u"cache key mailto:",
-            u"real url %s" % url,
-            u"warning No mail addresses or email subject found in `%s'." % url,
-            u"valid",
+            "url %s" % url,
+            "cache key mailto:",
+            "real url %s" % url,
+            "warning No mail addresses or email subject found in `%s'." % url,
+            "valid",
         ]
         self.direct(url, resultlines)
 
     def _mail_valid_unverified(self, char):
         # valid mail addresses
-        addr = u'abc%sdef@sourceforge.net' % char
-        url = u"mailto:%s" % addr
+        addr = 'abc%sdef@sourceforge.net' % char
+        url = "mailto:%s" % addr
         self.mail_valid(url,
           cache_key=url)
 
     @need_network
-    def test_valid_mail1 (self):
-        for char in u"!#$&'":
+    def test_valid_mail1(self):
+        for char in "!#$&'":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail2 (self):
-        for char in u"*+-/=":
+    def test_valid_mail2(self):
+        for char in "*+-/=":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail3 (self):
-        for char in u"^_`.":
+    def test_valid_mail3(self):
+        for char in "^_`.":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_valid_mail4 (self):
-        for char in u"{|}~":
+    def test_valid_mail4(self):
+        for char in "{|}~":
             self._mail_valid_unverified(char)
 
     @need_network
-    def test_unicode_mail (self):
-        mailto = u"mailto:ölvin@users.sourceforge.net"
+    def test_unicode_mail(self):
+        mailto = "mailto:\xf6lvin@users.sourceforge.net"
         url = self.norm(mailto, encoding="iso-8859-1")
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % mailto,
-            u"real url %s" % url,
-            u"valid",
+            "url %s" % mailto,
+            "cache key %s" % mailto,
+            "real url %s" % url,
+            "valid",
         ]
-        self.direct(url, resultlines)
+        self.direct(mailto, resultlines, url_encoding="iso-8859-1")
 
     @need_network
     def test_mail_subject(self):
-        url = u"mailto:?subject=Halli hallo"
+        url = "mailto:?subject=Halli hallo"
         nurl = self.norm(url)
-        curl = u"mailto:"
+        curl = "mailto:"
         resultlines = [
-            u"url %s" % url,
-            u"cache key %s" % curl,
-            u"real url %s" % nurl,
-            u"valid",
+            "url %s" % url,
+            "cache key %s" % curl,
+            "real url %s" % nurl,
+            "valid",
         ]
         self.direct(url, resultlines)

@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2005-2011 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -18,27 +17,24 @@
 Test dummy object.
 """
 
-import sys
 import unittest
-
-from builtins import str
 
 import linkcheck.dummy
 
 
-class TestDummy (unittest.TestCase):
+class TestDummy(unittest.TestCase):
     """
     Test dummy object.
     """
 
-    def test_creation (self):
+    def test_creation(self):
         dummy = linkcheck.dummy.Dummy()
         dummy = linkcheck.dummy.Dummy("1")
         dummy = linkcheck.dummy.Dummy("1", "2")
         dummy = linkcheck.dummy.Dummy(a=1, b=2)
         dummy = linkcheck.dummy.Dummy("1", a=None, b=2)
 
-    def test_attributes (self):
+    def test_attributes(self):
         dummy = linkcheck.dummy.Dummy()
         dummy.hulla
         dummy.hulla.bulla
@@ -46,14 +42,14 @@ class TestDummy (unittest.TestCase):
         del dummy.wulla
         del dummy.wulla.mulla
 
-    def test_methods (self):
+    def test_methods(self):
         dummy = linkcheck.dummy.Dummy()
         dummy.hulla()
         dummy.hulla().bulla()
         if "a" in dummy:
             pass
 
-    def test_indexes (self):
+    def test_indexes(self):
         dummy = linkcheck.dummy.Dummy()
         len(dummy)
         dummy[1] = dummy[2]
@@ -64,5 +60,3 @@ class TestDummy (unittest.TestCase):
         del dummy[2:3]
         str(dummy)
         repr(dummy)
-        if sys.version_info.major == 2:
-            unicode(dummy)

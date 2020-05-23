@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2010-2014 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
@@ -25,13 +24,13 @@ file_existing = __file__
 file_non_existing = "ZZZ.i_dont_exist"
 
 
-class TestFileutil (unittest.TestCase):
+class TestFileutil(unittest.TestCase):
     """Test file utility functions."""
 
-    def test_size (self):
+    def test_size(self):
         self.assertTrue(linkcheck.fileutil.get_size(file_existing) > 0)
         self.assertEqual(linkcheck.fileutil.get_size(file_non_existing), -1)
 
-    def test_mtime (self):
+    def test_mtime(self):
         self.assertTrue(linkcheck.fileutil.get_mtime(file_existing) > 0)
         self.assertEqual(linkcheck.fileutil.get_mtime(file_non_existing), 0)
