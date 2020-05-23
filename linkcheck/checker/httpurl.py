@@ -169,6 +169,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.url_connection = self.session.send(request, **kwargs)
         self.headers = self.url_connection.headers
         self.encoding = self.url_connection.encoding
+        log.debug(LOG_CHECK, "Response encoding %s", self.encoding)
         self._add_ssl_info()
 
     def _add_response_info(self):
@@ -299,11 +300,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 self.set_result(_("OK"))
 
     def get_content(self):
-        if self.text is None:
-            self.get_raw_content()
-            self.soup = htmlsoup.make_soup(self.data, self.encoding)
-            self.text = self.data.decode(self.soup.original_encoding)
-        return self.text
+        return super().get_content(self.encoding)
 
     def read_content(self):
         """Return data and data size for this URL.
