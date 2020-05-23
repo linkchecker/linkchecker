@@ -169,6 +169,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.url_connection = self.session.send(request, **kwargs)
         self.headers = self.url_connection.headers
         self.encoding = self.url_connection.encoding
+        log.debug(LOG_CHECK, "Response encoding %s", self.encoding)
         self._add_ssl_info()
 
     def _add_response_info(self):

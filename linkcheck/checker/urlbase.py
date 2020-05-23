@@ -636,7 +636,10 @@ class UrlBase:
             # than an internal crash, eh?  ISO-8859-1 is a safe fallback in the
             # sense that any binary blob can be decoded, it'll never cause a
             # UnicodeDecodeError.
+            log.debug(LOG_CHECK, "Beautiful Soup detected %s",
+                      self.soup.original_encoding)
             self.encoding = self.soup.original_encoding or 'ISO-8859-1'
+            log.debug(LOG_CHECK, "Content encoding %s", self.encoding)
             self.text = self.data.decode(self.encoding)
         return self.text
 
