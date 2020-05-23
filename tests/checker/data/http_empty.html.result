@@ -1,0 +1,5 @@
+url http://localhost:%(port)d/%(datadir)s/http_empty.html
+cache key http://localhost:%(port)d/%(datadir)s/http_empty.html
+real url http://localhost:%(port)d/%(datadir)s/http_empty.html
+warning Content size is zero.
+valid
