@@ -28,8 +28,6 @@ from . import LinkCheckTest, get_file
 
 def unzip(filename, targetdir):
     """Unzip given zipfile into targetdir."""
-    if isinstance(targetdir, unicode):
-        targetdir = str(targetdir)
     zf = zipfile.ZipFile(filename)
     for name in zf.namelist():
         if name.endswith('/'):

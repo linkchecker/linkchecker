@@ -27,13 +27,10 @@ except ImportError:
 extension = re.compile(r'/places.sqlite$', re.IGNORECASE)
 
 
-# Windows filename encoding
-nt_filename_encoding="mbcs"
-
 def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
-        basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
+        basedir = os.environ["APPDATA"]
         dirpath = os.path.join(basedir, "Mozilla", "Firefox", "Profiles")
     elif os.name == 'posix':
         dirpath = os.path.join(os.environ["HOME"], ".mozilla", "firefox")

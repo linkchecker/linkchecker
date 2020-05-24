@@ -122,14 +122,14 @@ def pp_extra_info(obj, depthlimit = 3):
 	s = []
 	if hasattr(obj, "__len__"):
 		try:
-			if type(obj) in (str,unicode,list,tuple,dict) and len(obj) <= 5:
+			if type(obj) in (bytes,str,list,tuple,dict) and len(obj) <= 5:
 				pass # don't print len in this case
 			else:
 				s += ["len = " + str(obj.__len__())]
 		except: pass
 	if depthlimit > 0 and hasattr(obj, "__getitem__"):
 		try:
-			if type(obj) in (str,unicode):
+			if type(obj) in (bytes,str):
 				pass # doesn't make sense to get subitems here
 			else:
 				subobj = obj.__getitem__(0)
