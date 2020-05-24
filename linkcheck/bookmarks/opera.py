@@ -15,9 +15,6 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 import os
 
-# Windows filename encoding
-nt_filename_encoding="mbcs"
-
 # List of possible Opera bookmark files.
 OperaBookmarkFiles = (
   "bookmarks.adr", # for Opera >= 10.0
@@ -28,7 +25,7 @@ OperaBookmarkFiles = (
 def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
-        basedir = unicode(os.environ["APPDATA"], nt_filename_encoding)
+        basedir = os.environ["APPDATA"]
         dirpath = os.path.join(basedir, "Opera", "Opera")
     elif os.name == 'posix':
         dirpath = os.path.join(os.environ["HOME"], ".opera")

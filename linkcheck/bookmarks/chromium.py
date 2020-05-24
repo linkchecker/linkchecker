@@ -20,15 +20,11 @@ import json
 from xdg.BaseDirectory import xdg_config_home
 
 
-# Windows filename encoding
-nt_filename_encoding="mbcs"
-
-
 def get_profile_dir():
     """Return path where all profiles of current user are stored."""
     if os.name == 'nt':
         if "LOCALAPPDATA" in os.environ:
-            basedir = unicode(os.environ["LOCALAPPDATA"], nt_filename_encoding)
+            basedir = os.environ["LOCALAPPDATA"]
         else:
             # read local appdata directory from registry
             from ..winutil import get_shell_folder
