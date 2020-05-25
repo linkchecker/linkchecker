@@ -16,7 +16,7 @@
 """
 Main functions for link parsing
 """
-from .. import log, LOG_CHECK, strformat, url as urlutil
+from .. import strformat, url as urlutil
 from ..htmlutil import linkparse
 from ..bookmarks import firefox
 
