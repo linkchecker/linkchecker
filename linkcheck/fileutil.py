@@ -22,7 +22,6 @@ import locale
 import stat
 import tempfile
 import importlib
-from distutils.spawn import find_executable
 from functools import lru_cache
 
 

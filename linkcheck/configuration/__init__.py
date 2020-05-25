@@ -552,7 +552,7 @@ def get_kde_home_dir():
             return
         kde3_home = os.path.join(home, ".kde")
         kde4_home = os.path.join(home, ".kde4")
-        if fileutil.find_executable("kde4-config"):
+        if shutil.which("kde4-config"):
             # kde4
             kde3_file = kde_home_to_config(kde3_home)
             kde4_file = kde_home_to_config(kde4_home)
