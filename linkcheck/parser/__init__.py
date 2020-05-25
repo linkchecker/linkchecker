@@ -131,4 +131,4 @@ def parse_itms_services(url_data):
             break
 
 
-from .sitemap import parse_sitemap, parse_sitemapindex
+from .sitemap import parse_sitemap, parse_sitemapindex  # noqa: F401
