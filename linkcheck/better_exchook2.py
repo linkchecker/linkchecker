@@ -34,6 +34,10 @@
 
 import sys
 import os
+import keyword
+
+pykeywords = set(keyword.kwlist)
+
 
 def parse_py_statement(line):
 	state = 0
@@ -89,9 +93,6 @@ def parse_py_statement(line):
 	if state == 3: yield ("id", curtoken)
 	elif state == 6: yield ("comment", curtoken)
 
-
-import keyword
-pykeywords = set(keyword.kwlist)
 
 def grep_full_py_identifiers(tokens):
 	global pykeywords
