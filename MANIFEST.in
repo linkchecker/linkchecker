@@ -1,30 +1,93 @@
-include README.rst COPYING MANIFEST.in
+include *.ini
 include *.md
-include config/linkchecker-completion config/create.sql
-include config/linkcheckerrc
-include config/linkchecker.apache2.conf install-rpm.sh
-include linkchecker.freecode
-include cgi-bin/lc.wsgi cgi-bin/README
+include *.rst
+include *.txt
+include COPYING
+include Dockerfile
+include MANIFEST.in
 include Makefile
-include cgi-bin/lconline/*.html cgi-bin/lconline/*.de cgi-bin/lconline/*.en
-include cgi-bin/lconline/*.js cgi-bin/lconline/*.css cgi-bin/lconline/*.ico
-include po/*.po po/*.mo po/*.pot po/Makefile
-include doc/*.example doc/*.md doc/*.txt
-include doc/html/*.ico
-include doc/html/*.html
-include doc/html/*.txt
-include doc/html/*.png
-include doc/html/*.qhp
-include doc/html/*.qhcp
-include doc/html/Makefile
-include doc/po4a.conf doc/*.po doc/*.pot
-include doc/en/*.1 doc/en/*.5
-include doc/de/*.1 doc/de/*.5
-include doc/Makefile
-include doc/examples/*.sh doc/examples/*.bat doc/examples/*.py
-include doc/examples/linkcheckerrc_loginurl
-include scripts/*.sh scripts/*.py
-# tests
-include robots.txt
-include tests/configuration/data/*.ini
-recursive-include tests *.py *.result *.html *.ico *.txt *.zip *.asc *.css *.xhtml *.sqlite *.adr *.swf *.bin *.markdown *.pdf *.php *.plist *.wml *.xml
+include install-rpm.sh
+include linkchecker.freecode
+include .project
+include .pydevproject
+  doc/web/wokconfig
+
+recursive-include cgi-bin               \
+    *.css                               \
+    *.de                                \
+    *.en                                \
+    *.html                              \
+    *.ico                               \
+    *.js                                \
+    README
+recursive-include config                \
+    *.sql                               \
+    linkchecker-completion              \
+    linkchecker.apache2.conf            \
+    linkcheckerrc
+recursive-include doc                   \
+    *.1                                 \
+    *.5                                 \
+    *.bat                               \
+    *.css                               \
+    *.example                           \
+    *.html                              \
+    *.ico                               \
+    *.jpg                               \
+    *.md                                \
+    *.png                               \
+    *.po                                \
+    *.pot                               \
+    *.py                                \
+    *.qhcp                              \
+    *.qhp                               \
+    *.rej                               \
+    *.sh                                \
+    *.txt                               \
+    *.yaml                              \
+    *.yml                               \
+    Makefile                            \
+    linkcheckerrc_*                     \
+    po4a.conf                           \
+    wokconfig
+recursive-include po                    \
+    *.mo                                \
+    *.po                                \
+    *.pot                               \
+    Makefile
+recursive-include                       \
+    scripts                             \
+    *.sh                                \
+    *.py
+recursive-include tests                 \
+    *.adr                               \
+    *.asc                               \
+    *.bat                               \
+    *.bin                               \
+    *.cer                               \
+    *.css                               \
+    *.doc                               \
+    *.html                              \
+    *.ico                               \
+    *.ini                               \
+    *.markdown                          \
+    *.pdf                               \
+    *.pfx                               \
+    *.php                               \
+    *.plist                             \
+    *.pvk                               \
+    *.py                                \
+    *.result                            \
+    *.sqlite                            \
+    *.swf                               \
+    *.txt                               \
+    *.wml                               \
+    *.xhtml                             \
+    *.xml                               \
+    *.zip                               \
+    Bookmarks
+recursive-include windows               \
+    *.bat                               \
+    *.cer                               \
+    *.pfx                               \
+    *.pvk
