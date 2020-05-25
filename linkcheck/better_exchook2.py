@@ -109,10 +109,6 @@ def grep_full_py_identifiers(tokens):
 		if token[0] in ".0123456789": continue
 		yield token
 
-def set_linecache(filename, source):
-	import linecache
-	linecache.cache[filename] = None, None, [line+'\n' for line in source.splitlines()], filename
-
 def output(s, out=sys.stdout): print(s, file=out)
 
 def output_limit():
