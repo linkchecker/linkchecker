@@ -19,7 +19,6 @@ Setup file for the distuils module.
 
 It includes the following features:
 - creation and installation of configuration files with installation data
-- automatic MANIFEST.in check
 - automatic generation of .mo locale files
 - automatic permission setting on POSIX systems for installed files
 
@@ -263,36 +262,6 @@ def list_message_files(package, suffix=".mo"):
             "share", "locale", localename, "LC_MESSAGES", domainname))
 
 
-def check_manifest():
-    """Snatched from roundup.sf.net.
-    Check that the files listed in the MANIFEST are present when the
-    source is unpacked."""
-    try:
-        f = open('MANIFEST')
-    except Exception:
-        print('\n*** SOURCE WARNING: The MANIFEST file is missing!')
-        return
-    try:
-        manifest = [l.strip() for l in f.readlines() if not l.startswith('#')]
-    finally:
-        f.close()
-    err = [line for line in manifest if not os.path.exists(line)]
-    if err:
-        n = len(manifest)
-        print('\n*** SOURCE WARNING: There are files missing (%d/%d found)!' %
-            (n - len(err), n))
-        print('\nMissing: '.join(err))
-
-
-class MyBuild(build):
-    """Custom build command."""
-
-    def run(self):
-        """Check MANIFEST before building."""
-        check_manifest()
-        build.run(self)
-
-
 class MyClean(clean):
     """Custom clean command."""
 
@@ -306,15 +275,6 @@ class MyClean(clean):
             else:
                 log.warn("'%s' does not exist -- can't clean it", directory)
         clean.run(self)
-
-
-class MySdist(sdist):
-    """Custom sdist command."""
-
-    def get_file_list(self):
-        """Add MANIFEST to the file list."""
-        super(MySdist, self).get_file_list()
-        self.filelist.append("MANIFEST")
 
 
 # scripts
@@ -368,9 +328,7 @@ setup(
     cmdclass = {
         'install_lib': MyInstallLib,
         'install_data': MyInstallData,
-        'build': MyBuild,
         'clean': MyClean,
-        'sdist': MySdist,
     },
     packages = find_packages(include=["linkcheck", "linkcheck.*"]),
     scripts = scripts,
