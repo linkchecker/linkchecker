@@ -22,7 +22,7 @@ import zipfile
 
 import pytest
 
-from tests import need_word, need_pdflib
+from tests import need_network, need_word, need_pdflib
 from . import LinkCheckTest, get_file
 
 
@@ -48,6 +48,7 @@ class TestFile(LinkCheckTest):
     def test_html(self):
         self.file_test("file.html")
 
+    @need_network
     def test_html_url_quote(self):
         self.file_test("file_url_quote.html")
 
