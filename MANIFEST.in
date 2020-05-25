@@ -10,7 +10,6 @@ include install-rpm.sh
 include linkchecker.freecode
 include .project
 include .pydevproject
-  doc/web/wokconfig
 
 recursive-include cgi-bin               \
     *.css                               \
