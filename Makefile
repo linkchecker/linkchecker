@@ -66,14 +66,11 @@ distclean: clean
 	rm -rf $(APPNAME)-$(VERSION)
 	rm -rf coverage dist-stamp python-build-stamp*
 
-MANIFEST: MANIFEST.in setup.py
-	$(PYTHON) setup.py sdist --manifest-only
-
 locale:
 	$(MAKE) -C po
 
 # to build in the current directory
-localbuild: MANIFEST locale
+localbuild: locale
 	$(PYTHON) setup.py build
 
 release: distclean releasecheck filescheck
@@ -122,7 +119,7 @@ chmod:
 	-chmod -R a+rX,u+w,go-w $(CHMODMINUSMINUS) *
 	find . -type d -exec chmod 755 {} \;
 
-dist: locale MANIFEST chmod
+dist: locale chmod
 	rm -f dist/$(ARCHIVE_SOURCE)
 	$(PYTHON) setup.py sdist --formats=tar
 	gzip --best dist/$(APPNAME)-$(VERSION).tar
