@@ -12,6 +12,10 @@ jobs:
       env: TOXENV=flake8
       before_script:
       after_success:
+    - name: check-manifest
+      env: TOXENV=check-manifest
+      before_script:
+      after_success:
   allow_failures:
     - name: flake8
       env: TOXENV=flake8

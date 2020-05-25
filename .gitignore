@@ -40,3 +40,4 @@ Changelog.linkchecker*
 .tox
 tests/checker/data/https_cert.pem
 tests/checker/data/https_key.pem
+coverage.xml
