@@ -38,9 +38,6 @@ recursive-include doc                   \
     *.po                                \
     *.pot                               \
     *.py                                \
-    *.qhcp                              \
-    *.qhp                               \
-    *.rej                               \
     *.sh                                \
     *.txt                               \
     *.yaml                              \
@@ -61,9 +58,7 @@ recursive-include                       \
 recursive-include tests                 \
     *.adr                               \
     *.asc                               \
-    *.bat                               \
     *.bin                               \
-    *.cer                               \
     *.css                               \
     *.doc                               \
     *.html                              \
@@ -71,10 +66,8 @@ recursive-include tests                 \
     *.ini                               \
     *.markdown                          \
     *.pdf                               \
-    *.pfx                               \
     *.php                               \
     *.plist                             \
-    *.pvk                               \
     *.py                                \
     *.result                            \
     *.sqlite                            \
