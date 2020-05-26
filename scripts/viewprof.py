@@ -7,6 +7,7 @@ Usage: $0 <filename>
 import sys
 import yappi
 
+
 def main(args):
     filename = args[0]
     stats = yappi.YFuncStats()
@@ -14,6 +15,5 @@ def main(args):
     stats.print_all()
 
 
-if __name__ == '__main__':
-   main(sys.argv[1:])
-
+if __name__ == "__main__":
+    main(sys.argv[1:])

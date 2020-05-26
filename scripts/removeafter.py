@@ -6,6 +6,7 @@ from __future__ import print_function
 import fileinput
 import sys
 
+
 def main(args):
     """Remove lines after marker."""
     filename = args[0]
@@ -15,5 +16,6 @@ def main(args):
         if line.startswith(marker):
             break
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main(sys.argv[1:])
