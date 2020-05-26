@@ -59,4 +59,4 @@ def find_bookmark_file(profile="Default"):
     return ""
 
 
-from .chromium import parse_bookmark_data, parse_bookmark_file
+from .chromium import parse_bookmark_data, parse_bookmark_file  # noqa: F401

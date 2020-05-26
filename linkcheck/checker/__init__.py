@@ -176,4 +176,4 @@ def get_index_html(urls):
 
 # all the URL classes
 from . import (fileurl, unknownurl, ftpurl, httpurl, dnsurl,
-    mailtourl, telneturl, nntpurl, ignoreurl, itmsservicesurl)
+    mailtourl, telneturl, nntpurl, ignoreurl, itmsservicesurl)  # noqa: E402
