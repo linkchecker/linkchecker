@@ -87,7 +87,7 @@ def main(args):
         other=get_regex(iana_uri_schemes_other),
     )
     res = template % args
-    print res
+    print(res)
     return 0
 
 

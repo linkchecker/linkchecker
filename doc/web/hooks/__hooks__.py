@@ -28,9 +28,9 @@ def chmod(config):
     output_dir = config["output_dir"]
     for dirpath, dirnames, filenames in os.walk(output_dir):
         for dirname in dirnames:
-            os.chmod(os.path.join(dirpath, dirname), 0755)
+            os.chmod(os.path.join(dirpath, dirname), 0o755)
         for filename in filenames:
-            os.chmod(os.path.join(dirpath, filename), 0644)
+            os.chmod(os.path.join(dirpath, filename), 0o644)
 
 
 hooks = {

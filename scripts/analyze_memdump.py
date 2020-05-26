@@ -39,7 +39,7 @@ def print_memorydump(filename):
 
     om = loader.load(filename, collapse=True)
     om.remove_expensive_references()
-    print om.summarize()
+    print(om.summarize())
     return om
 
 
@@ -82,7 +82,8 @@ def write_html_header(fp, type_str, encoding):
     fp.write(HtmlHeader % encoding)
     fp.write("<h1>Type %s</h1>\n" % type_str)
     fp.write(
-        "<table><tr><th>Address</th><th>Name</th><th>Size</th><th>Parents</th><th>References</th></tr>\n"
+        "<table><tr><th>Address</th><th>Name</th><th>Size</th><th>Parents</th>"
+        "<th>References</th></tr>\n"
     )
 
 
@@ -129,8 +130,8 @@ def write_html_obj(fp, obj, objs):
         value=value,
     )
     fp.write(
-        "<tr><td>%(address)d</td><td>%(value)s</td><td>%(size)s</td><td>%(children)s</td></tr>\n"
-        % attrs
+        "<tr><td>%(address)d</td><td>%(value)s</td><td>%(size)s</td>"
+        "<td>%(children)s</td></tr>\n" % attrs
     )
 
 
