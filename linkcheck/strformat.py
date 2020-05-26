@@ -21,10 +21,6 @@
 Various string utility functions. Note that these functions are not
 necessarily optimised for large strings, so use with care.
 """
-# some handy time constants
-SECONDS_PER_MINUTE = 60
-SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE
-SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
 
 import re
 import textwrap
@@ -36,6 +32,11 @@ import urllib.parse
 import locale
 import pydoc
 from . import i18n
+
+# some handy time constants
+SECONDS_PER_MINUTE = 60
+SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE
+SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
 
 
 def unicode_safe(s, encoding=i18n.default_encoding, errors='replace'):

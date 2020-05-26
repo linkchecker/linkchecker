@@ -22,14 +22,6 @@ import sys
 if sys.version_info < (3, 5, 0, 'final', 0):
     import platform
     raise SystemExit("This program requires Python 3.5.0 or later instead of %s." % platform.python_version())
-# require a reasonably recent requests module: 2.4.0 from 2014-08-29
-import requests
-# PEP 396 has only version strings, bummer! PEP 386 is also not helpful.
-requests_version = requests.__version__.split('.')
-# Depends on the version scheme of Python requests
-if int(requests_version[0]) < 2 or \
-   (int(requests_version[0]) == 2 and int(requests_version[1]) < 4):
-    raise SystemExit("This program requires Python requests 2.4.0 or later instead of %s." % requests.__version__)
 
 import os
 import re

@@ -30,7 +30,6 @@ import re
 from .. import (log, LOG_CHECK, strformat, mimeutil,
     url as urlutil, LinkCheckerError, httputil)
 from . import (internpaturl, proxysupport)
-from ..htmlutil import htmlsoup
 # import warnings
 from .const import (WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED)
 from requests.sessions import REDIRECT_STATI

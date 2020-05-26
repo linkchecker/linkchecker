@@ -34,6 +34,10 @@
 
 import sys
 import os
+import keyword
+
+pykeywords = set(keyword.kwlist)
+
 
 def parse_py_statement(line):
 	state = 0
@@ -90,9 +94,6 @@ def parse_py_statement(line):
 	elif state == 6: yield ("comment", curtoken)
 
 
-import keyword
-pykeywords = set(keyword.kwlist)
-
 def grep_full_py_identifiers(tokens):
 	global pykeywords
 	tokens = list(tokens)
@@ -108,10 +109,6 @@ def grep_full_py_identifiers(tokens):
 		if token in pykeywords: continue
 		if token[0] in ".0123456789": continue
 		yield token
-
-def set_linecache(filename, source):
-	import linecache
-	linecache.cache[filename] = None, None, [line+'\n' for line in source.splitlines()], filename
 
 def output(s, out=sys.stdout): print(s, file=out)
 

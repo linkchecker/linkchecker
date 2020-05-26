@@ -26,13 +26,12 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from ctypes import (windll, byref, Structure, c_char, c_short, c_uint32,
+                    c_ushort, ArgumentError, WinError)
 
 # from winbase.h
 STDOUT = -11
 STDERR = -12
-
-from ctypes import (windll, byref, Structure, c_char, c_short, c_uint32,
-  c_ushort, ArgumentError, WinError)
 
 handles = {
     STDOUT: windll.kernel32.GetStdHandle(STDOUT),
