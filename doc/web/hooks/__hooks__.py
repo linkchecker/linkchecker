@@ -34,6 +34,6 @@ def chmod(config):
 
 
 hooks = {
-    'site.output.post': [compress_javascript, compress_css],
-    'site.done': [chmod],
+    "site.output.post": [compress_javascript, compress_css],
+    "site.done": [chmod],
 }

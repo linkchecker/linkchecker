@@ -28,21 +28,24 @@ def main(args):
     with open(filename) as fd:
         tree = parse(fd)
         filter_tree(tree)
-        tree.write(sys.stdout, encoding='utf-8')
+        tree.write(sys.stdout, encoding="utf-8")
 
 
 def filter_tree(tree):
     """Filter all 401 errors."""
     to_remove = []
-    for elem in tree.findall('urldata'):
-        valid = elem.find('valid')
-        if valid is not None and valid.text == '0' and \
-           valid.attrib.get('result', '').startswith('401'):
+    for elem in tree.findall("urldata"):
+        valid = elem.find("valid")
+        if (
+            valid is not None
+            and valid.text == "0"
+            and valid.attrib.get("result", "").startswith("401")
+        ):
             to_remove.append(elem)
     root = tree.getroot()
     for elem in to_remove:
         root.remove(elem)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(sys.argv[1:])
