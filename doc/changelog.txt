@@ -1,4 +1,9 @@
-9.4 "" (released xx.xx.xxxx)
+10.0 "" (released xx.xx.xxxx)
+
+Changes:
+- cmdline: Remove options replaced by plugins and made ineffective in 9.0
+
+9.4 "just passing by" (released 12.4.2018)
 
 Features:
 - checking: Support itms-services: URLs.

@@ -238,15 +238,6 @@ group.add_argument("--stdin", action="store_true",
 
 ################# output options ##################
 group = argparser.add_argument_group(_("Output options"))
-# XXX deprecated: --check-css moved to plugin CssSyntaxCheck
-group.add_argument("--check-css", action="store_true", dest="checkcss",
-                 help=argparse.SUPPRESS)
-# XXX deprecated: --check-html moved to plugin HtmlSyntaxCheck
-group.add_argument("--check-html", action="store_true", dest="checkhtml",
-                 help=argparse.SUPPRESS)
-# XXX deprecated: --complete is removed
-group.add_argument("--complete", action="store_true", dest="complete",
-                 help=argparse.SUPPRESS)
 group.add_argument("-D", "--debug", action="append", metavar="STRING",
                  help=_("""Print debugging output for the given logger.
 Available loggers are %(lognamelist)s.
@@ -290,32 +281,14 @@ group.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                  help=_(
 """Quiet operation, an alias for '-o none'.
 This is only useful with -F."""))
-# XXX deprecated: moved to plugin VirusCheck
-group.add_argument("--scan-virus", action="store_true", dest="scanvirus",
-                 help=argparse.SUPPRESS)
 group.add_argument("--trace", action="store_true", dest="trace",
                  help=argparse.SUPPRESS)
 group.add_argument("-v", "--verbose", action="store_true", dest="verbose",
                  help=_(
 """Log all URLs. Default is to log only errors and warnings."""))
-# XXX deprecated: moved to plugin RegexCheck
-group.add_argument("-W", "--warning-regex", dest="warningregex",
-                 metavar="REGEX",
-                 help=argparse.SUPPRESS)
-# XXX deprecated: removed
-group.add_argument("--warning-size-bytes", dest="warningsizebytes",
-                 metavar="NUMBER",
-                 help=argparse.SUPPRESS)
-
 
 ################# checking options ##################
 group = argparser.add_argument_group(_("Checking options"))
-# XXX deprecated: moved to plugin AnchorCheck
-group.add_argument("-a", "--anchors", action="store_true", dest="anchors",
-                 help=argparse.SUPPRESS)
-# XXX deprecated: replaced with requests session cookie handling
-group.add_argument("-C", "--cookies", action="store_true", dest="cookies",
-                 help=argparse.SUPPRESS)
 group.add_argument("--cookiefile", dest="cookiefile", metavar="FILENAME",
                  help=_(
 """Read a file with initial cookie data. The cookie data format is
@@ -344,10 +317,6 @@ group.add_argument("-p", "--password", action="store_false", dest="password",
 """Read a password from console and use it for HTTP and FTP authorization.
 For FTP the default password is 'anonymous@'. For HTTP there is
 no default password. See also -u."""))
-# XXX deprecated: replaced with numrequestsperpage
-group.add_argument("-P", "--pause", type=int, dest="pause",
-                 metavar="NUMBER",
-                 help=argparse.SUPPRESS)
 group.add_argument("-r", "--recursion-level", type=int,
                  dest="recursionlevel", metavar="NUMBER",
                  help=_(
