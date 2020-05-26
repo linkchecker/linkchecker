@@ -5,8 +5,8 @@ LinkChecker
 
 .. |Build Status| image:: https://travis-ci.com/linkchecker/linkchecker.svg?branch=master
 .. _Build Status: https://travis-ci.com/linkchecker/linkchecker
-.. |License| image:: http://img.shields.io/badge/license-GPL2-d49a6a.svg
-.. _License: http://opensource.org/licenses/GPL-2.0
+.. |License| image:: https://img.shields.io/badge/license-GPL2-d49a6a.svg
+.. _License: https://opensource.org/licenses/GPL-2.0
 
 Check for broken links in web sites.
 
@@ -34,7 +34,7 @@ See `doc/install.txt`_ in the source code archive for general information. Excep
 
 Python 3 or later is needed.
 
-The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip install git+https://github.com/linkchecker/linkchecker.git@v9.4.0``. See `#4 <https://github.com/linkchecker/linkchecker/pull/4>`_.
+The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
 
 Windows builds are seriously lagging behind the Linux releases, see `#53 <https://github.com/linkchecker/linkchecker/issues/53>`_ for details. For now, the only two options are to install from source or use `Docker for Windows <https://www.docker.com/docker-windows>`_.
 
