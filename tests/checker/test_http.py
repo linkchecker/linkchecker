@@ -28,17 +28,20 @@ class TestHttp(HttpServerTest):
         self.handler = CookieRedirectHttpRequestHandler
 
     @need_network
-    def test_html(self):
+    def test_html_internet(self):
         confargs = dict(recursionlevel=1)
         self.file_test("http.html", confargs=confargs)
         self.file_test("http_lowercase.html", confargs=confargs)
         self.file_test("http_quotes.html", confargs=confargs)
         self.file_test("http_slash.html", confargs=confargs)
-        self.file_test("http.xhtml", confargs=confargs)
+        self.file_test("http_url_quote.html", confargs=confargs)
+
+    def test_html(self):
+        confargs = dict(recursionlevel=1)
+        self.file_test("http_empty.html", confargs=confargs)
         self.file_test("http_file.html", confargs=confargs)
         self.file_test("http_utf8.html", confargs=confargs)
-        self.file_test("http_url_quote.html", confargs=confargs)
-        self.file_test("http_empty.html", confargs=confargs)
+        self.file_test("http.xhtml", confargs=confargs)
 
     def test_status(self):
         for status in sorted(self.handler.responses.keys()):
