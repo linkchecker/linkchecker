@@ -1,0 +1,8 @@
+url http://localhost:%(port)d/%(datadir)s/sitemapindex.xml
+cache key http://localhost:%(port)d/%(datadir)s/sitemapindex.xml
+real url http://localhost:%(port)d/%(datadir)s/sitemapindex.xml
+valid
+url sitemap.xml
+cache key http://localhost:%(port)d/%(datadir)s/sitemap.xml
+real url http://localhost:%(port)d/%(datadir)s/sitemap.xml
+valid
