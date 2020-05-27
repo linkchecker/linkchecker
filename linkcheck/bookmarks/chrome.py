@@ -16,7 +16,7 @@
 
 import os
 import sys
-from xdg import xdg_config_home
+from xdg.BaseDirectory import xdg_config_home
 
 
 def get_profile_dir():
