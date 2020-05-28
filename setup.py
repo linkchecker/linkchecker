@@ -37,14 +37,12 @@ import glob
 # import Distutils stuff
 from setuptools import find_packages, setup
 from distutils.command.install_lib import install_lib
-from distutils.command.sdist import sdist
 from distutils.command.clean import clean
 from distutils.command.install_data import install_data
 from distutils.dir_util import remove_tree
 from distutils.file_util import write_file
 from distutils import util, log
 from distutils.core import Distribution
-from distutils.command.build import build
 
 # the application version
 AppVersion = "10.0.0.dev0"
@@ -58,7 +56,7 @@ def get_long_description():
     try:
         with open("README.rst") as f:
             return f.read()
-    except:
+    except Exception:
         return Description
 
 
@@ -378,7 +376,7 @@ setup(
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
     python_requires=">= 3.5",
-    install_requires=["requests >= 2.4", "dnspython", "beautifulsoup4", "pyxdg",],
+    install_requires=["requests >= 2.4", "dnspython", "beautifulsoup4", "pyxdg"],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
     # extra_requires = {

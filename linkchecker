@@ -256,7 +256,7 @@ argparser = LCArgumentParser(
 config = linkcheck.configuration.Configuration()
 config.set_status_logger(console.StatusLogger())
 
-################# general options ##################
+# ================== general options =====================
 group = argparser.add_argument_group(_("General options"))
 group.add_argument(
     "-f",
@@ -294,7 +294,7 @@ group.add_argument(
     help=_("""Read list of white-space separated URLs to check from stdin."""),
 )
 
-################# output options ##################
+# ================== output options =====================
 group = argparser.add_argument_group(_("Output options"))
 group.add_argument(
     "-D",
@@ -382,7 +382,7 @@ group.add_argument(
     help=_("""Log all URLs. Default is to log only errors and warnings."""),
 )
 
-################# checking options ##################
+# =================== checking options ====================
 group = argparser.add_argument_group(_("Checking options"))
 group.add_argument(
     "--cookiefile",
@@ -495,7 +495,7 @@ version of LinkChecker."""
 )
 
 argparser.add_argument("url", nargs="*")
-################# auto completion #####################
+# ================= auto completion =====================
 if has_argcomplete:
     import argcomplete
 
