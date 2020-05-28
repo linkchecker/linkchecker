@@ -18,7 +18,6 @@ Test https.
 """
 from OpenSSL import crypto
 
-from tests import need_network
 from .httpserver import HttpsServerTest, CookieRedirectHttpRequestHandler
 from .. import get_file
 

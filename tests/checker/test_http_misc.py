@@ -27,7 +27,7 @@ class TestHttpMisc(HttpServerTest):
     def test_html_internet(self):
         self.swf_test()
         self.file_test("sitemap.xml")
-    
+
     def test_html(self):
         self.file_test("sitemapindex.xml")
 

@@ -52,7 +52,7 @@ class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
 
 # serve .xhtml files as application/xhtml+xml
 StoppableHttpRequestHandler.extensions_map.update(
-    {".xhtml": "application/xhtml+xml",}
+    {".xhtml": "application/xhtml+xml"}
 )
 
 
@@ -221,7 +221,7 @@ def start_server(handler, https=False):
             conn.request("GET", "/")
             conn.getresponse()
             break
-        except:
+        except Exception:
             time.sleep(0.5)
     return port
 

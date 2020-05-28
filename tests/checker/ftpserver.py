@@ -91,7 +91,7 @@ def start_server(host, port):
             ftp.login()
             ftp.close()
             break
-        except:
+        except Exception:
             time.sleep(0.5)
     return port
 

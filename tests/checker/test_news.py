@@ -31,6 +31,7 @@ NNTP_INFO = (
 # Most free NNTP servers are slow, so don't waist a lot of time running those.
 NNTP_TIMEOUT_SECS = 30
 
+
 # disabled for now until some stable news server comes up
 @pytest.mark.skip(reason="disabled for now until some stable news server comes up")
 class TestNews(LinkCheckTest):

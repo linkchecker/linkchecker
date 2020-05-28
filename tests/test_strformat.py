@@ -59,13 +59,13 @@ class TestStrFormat(unittest.TestCase):
         # testing width <= 0
         self.assertEqual(wrap(s, -1), s)
         self.assertEqual(wrap(s, 0), s)
-        l = len(os.linesep)
+        n = len(os.linesep)
         gap = " "
         s2 = "11%(gap)s22%(sep)s33%(gap)s44%(sep)s55" % {"sep": os.linesep, "gap": gap}
         # splitting lines
         self.assertEqual(wrap(s2, 2), s)
         # combining lines
-        self.assertEqual(wrap(s, 4 + l), s2)
+        self.assertEqual(wrap(s, 4 + n), s2)
         # misc
         self.assertEqual(wrap(s, -1), s)
         self.assertEqual(wrap(s, 0), s)
@@ -133,7 +133,8 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(duration(60 * 60 * 24), "24:00:00")
 
     def test_duration_long(self):
-        duration = lambda s: linkcheck.strformat.strduration_long(s, do_translate=False)
+        def duration(s):
+            return linkcheck.strformat.strduration_long(s, do_translate=False)
         self.assertEqual(duration(-0.5), "-0.50 seconds")
         self.assertEqual(duration(0), "0.00 seconds")
         self.assertEqual(duration(0.9), "0.90 seconds")

@@ -68,7 +68,8 @@ class TestLogger(linkcheck.logger._Logger):
         self.diff = []
 
     def normalize(self, result_log):
-        # XXX we assume that each log entry has a URL key, maybe we should add an assert into log_url() to that effect?
+        # XXX we assume that each log entry has a URL key,
+        # maybe we should add an assert into log_url() to that effect?
         # Ensure that log entries are sorted by URL key:
         # - join the result_log items together
         # - split into entries (starting with a URL key)
@@ -289,9 +290,9 @@ class LinkCheckTest(unittest.TestCase):
         linkcheck.director.check_urls(aggregate)
         diff = aggregate.config["logger"].diff
         if diff:
-            l = ["Differences found testing %s" % url]
-            l.extend(x.rstrip() for x in diff[2:])
-            self.fail(os.linesep.join(l))
+            d = ["Differences found testing %s" % url]
+            d.extend(x.rstrip() for x in diff[2:])
+            self.fail(os.linesep.join(d))
 
 
 class MailTest(LinkCheckTest):

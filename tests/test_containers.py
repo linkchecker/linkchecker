@@ -37,6 +37,7 @@ class TestLFUCache(unittest.TestCase):
         self.assertEqual(self.d.uses("a"), 0)
         dummy = self.d["a"]
         self.assertEqual(self.d.uses("a"), 1)
+        del dummy
 
     def test_values(self):
         self.assertTrue(not self.d)

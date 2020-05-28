@@ -33,6 +33,7 @@ class TestDummy(unittest.TestCase):
         dummy = linkcheck.dummy.Dummy("1", "2")
         dummy = linkcheck.dummy.Dummy(a=1, b=2)
         dummy = linkcheck.dummy.Dummy("1", a=None, b=2)
+        del dummy
 
     def test_attributes(self):
         dummy = linkcheck.dummy.Dummy()

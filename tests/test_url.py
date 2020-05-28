@@ -125,7 +125,10 @@ class TestUrl(unittest.TestCase):
         # the no-quote chars
         url = "http://example.com/a*+-();b"
         self.urlnormtest(url, url)
-        url = "http://linkchecker.git.sourceforge.net/git/gitweb.cgi?p=linkchecker/linkchecker;a=blob;f=doc/changelog.txt;hb=HEAD"
+        url = (
+            "http://linkchecker.git.sourceforge.net/git/gitweb.cgi"
+            "?p=linkchecker/linkchecker;a=blob;f=doc/changelog.txt;hb=HEAD"
+        )
         self.urlnormtest(url, url)
         url = "http://www.company.com/path/doc.html?url=/path2/doc2.html?foo=bar"
         self.urlnormtest(url, url)

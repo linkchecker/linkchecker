@@ -81,7 +81,7 @@ def start_server(host, port, stop_event):
             client.open(host, port)
             client.write(b"exit\n")
             break
-        except:
+        except Exception:
             time.sleep(0.5)
     return port, t
 
