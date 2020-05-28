@@ -38,18 +38,17 @@ login_form = """
 </html>
 """
 
+
 class TestFormSearch(unittest.TestCase):
     """Test processing of a login form."""
 
     def test_search_form(self):
-        form = loginformsearch.search_form(login_form,
-                                           "User_Field", "Password_Field")
+        form = loginformsearch.search_form(login_form, "User_Field", "Password_Field")
         self.assertIsNotNone(form)
         self.assertEqual(form.url, "/log_me_in")
         self.assertIn("User_Field", form.data)
         self.assertIn("Password_Field", form.data)
 
     def test_search_form_none(self):
-        form = loginformsearch.search_form(login_form,
-                                           "user_field", "password_field")
+        form = loginformsearch.search_form(login_form, "user_field", "password_field")
         self.assertIsNone(form)

@@ -28,20 +28,20 @@ class TestFtp(FtpServerTest):
         # ftp two slashes
         url = "ftp://%s:%d/" % (self.host, self.port)
         resultlines = [
-          "url %s" % url,
-          "cache key %s" % url,
-          "real url %s" % url,
-          "valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         # ftp use/password
         user = "anonymous"
         passwd = "Ftp"
         url = "ftp://%s:%s@%s:%d/" % (user, passwd, self.host, self.port)
         resultlines = [
-          "url %s" % url,
-          "cache key %s" % url,
-          "real url %s" % url,
-          "valid",
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
         # ftp one slash
@@ -68,7 +68,7 @@ class TestFtp(FtpServerTest):
         url = "ftp://%s:%d/base" % (self.host, self.port)
         nurl = self.norm(url)
         resultlines = [
-        "url %s" % url,
+            "url %s" % url,
             "cache key %s" % nurl,
             "real url %s/" % nurl,
             "warning Missing trailing directory slash in ftp url.",

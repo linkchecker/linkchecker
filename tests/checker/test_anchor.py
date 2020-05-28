@@ -38,4 +38,3 @@ class TestAnchor(LinkCheckTest):
             "valid",
         ]
         self.direct(urlanchor, resultlines, confargs=confargs)
-

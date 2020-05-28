@@ -19,6 +19,7 @@ Test http checking.
 from .httpserver import HttpServerTest
 from tests import need_network
 
+
 class TestHttpMisc(HttpServerTest):
     """Test http:// misc link checking."""
 

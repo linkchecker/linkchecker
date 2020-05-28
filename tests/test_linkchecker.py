@@ -30,4 +30,4 @@ class TestLinkchecker(unittest.TestCase):
         for option in ("-V", "--version", "-h", "--help", "--list-plugins", "-Dall"):
             run_with_options([option])
         # unknown option
-        self.assertRaises(OSError, run_with_options, ['--imadoofus'])
+        self.assertRaises(OSError, run_with_options, ["--imadoofus"])

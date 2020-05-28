@@ -43,14 +43,18 @@ class TestRobotParser(unittest.TestCase):
     @need_network
     def test_nonexisting_robots(self):
         # robots.txt that does not exist
-        self.rp.set_url('http://www.lycos.com/robots.txt')
+        self.rp.set_url("http://www.lycos.com/robots.txt")
         self.rp.read()
-        self.check(self.rp.can_fetch(configuration.UserAgent,
-                                     'http://www.lycos.com/search'), True)
+        self.check(
+            self.rp.can_fetch(configuration.UserAgent, "http://www.lycos.com/search"),
+            True,
+        )
 
     @need_network
     def test_disallowed_robots(self):
-        self.rp.set_url('http://google.com/robots.txt')
+        self.rp.set_url("http://google.com/robots.txt")
         self.rp.read()
-        self.check(self.rp.can_fetch(configuration.UserAgent,
-                                     "http://google.com/search"), False)
+        self.check(
+            self.rp.can_fetch(configuration.UserAgent, "http://google.com/search"),
+            False,
+        )

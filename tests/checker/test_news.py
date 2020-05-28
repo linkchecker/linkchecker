@@ -25,8 +25,9 @@ from . import LinkCheckTest
 # to enable the has_newsserver() resource manually.
 NNTP_SERVER = "news.uni-stuttgart.de"
 # info string returned by news server
-NNTP_INFO = "200 news.uni-stuttgart.de InterNetNews NNRP server " \
-            "INN 2.5.2 ready (no posting)"
+NNTP_INFO = (
+    "200 news.uni-stuttgart.de InterNetNews NNRP server " "INN 2.5.2 ready (no posting)"
+)
 # Most free NNTP servers are slow, so don't waist a lot of time running those.
 NNTP_TIMEOUT_SECS = 30
 

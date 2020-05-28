@@ -166,8 +166,8 @@ class TestRobotsTxt(unittest.TestCase):
         ]
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
-        good = ['/', '/test.html']
-        bad = ['/cyberworld/map/index.html', '/tmp/xxx', '/foo.html']
+        good = ["/", "/test.html"]
+        bad = ["/cyberworld/map/index.html", "/tmp/xxx", "/foo.html"]
         self.check_urls(good, bad)
 
     def test_access2(self):
@@ -191,8 +191,8 @@ class TestRobotsTxt(unittest.TestCase):
         ]
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
-        good = ['/', '/test.html', ('cybermapper', '/cyberworld/map/index.html')]
-        bad = ['/cyberworld/map/index.html']
+        good = ["/", "/test.html", ("cybermapper", "/cyberworld/map/index.html")]
+        bad = ["/cyberworld/map/index.html"]
         self.check_urls(good, bad)
 
     def test_access3(self):
@@ -208,7 +208,7 @@ class TestRobotsTxt(unittest.TestCase):
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
         good = []
-        bad = ['/cyberworld/map/index.html', '/', '/tmp/']
+        bad = ["/cyberworld/map/index.html", "/", "/tmp/"]
         self.check_urls(good, bad)
 
     def test_access4(self):
@@ -224,18 +224,25 @@ class TestRobotsTxt(unittest.TestCase):
             "Disallow: /tmp",
             "Disallow: /a%3Cd.html",
             "Disallow: /a/b.html",
-            "Disallow: /%7Ejoe/index.html" if sys.version_info < (3, 7) \
+            "Disallow: /%7Ejoe/index.html"
+            if sys.version_info < (3, 7)
             else "Disallow: /~joe/index.html",
         ]
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
         good = []
-        bad = ['/tmp', '/tmp.html', '/tmp/a.html',
-               '/a%3cd.html', '/a%3Cd.html', '/a%2fb.html',
-               '/~joe/index.html', '/a/b.html',
+        bad = [
+            "/tmp",
+            "/tmp.html",
+            "/tmp/a.html",
+            "/a%3cd.html",
+            "/a%3Cd.html",
+            "/a%2fb.html",
+            "/~joe/index.html",
+            "/a/b.html",
         ]
-        self.check_urls(good, bad, 'figtree')
-        self.check_urls(good, bad, 'FigTree/1.0 Robot libwww-perl/5.04')
+        self.check_urls(good, bad, "figtree")
+        self.check_urls(good, bad, "FigTree/1.0 Robot libwww-perl/5.04")
 
     def test_access5(self):
         lines = [
@@ -250,15 +257,21 @@ class TestRobotsTxt(unittest.TestCase):
             "Disallow: /tmp/",
             "Disallow: /a%3Cd.html",
             "Disallow: /a/b.html",
-            "Disallow: /%7Ejoe/index.html" if sys.version_info < (3, 7) \
+            "Disallow: /%7Ejoe/index.html"
+            if sys.version_info < (3, 7)
             else "Disallow: /~joe/index.html",
         ]
         self.rp.parse(lines)
         self.assertEqual(str(self.rp), "\n".join(lines2))
-        good = ['/tmp'] # XFAIL: '/a%2fb.html'
-        bad = ['/tmp/', '/tmp/a.html',
-               '/a%3cd.html', '/a%3Cd.html', "/a/b.html",
-               '/%7Ejoe/index.html']
+        good = ["/tmp"]  # XFAIL: '/a%2fb.html'
+        bad = [
+            "/tmp/",
+            "/tmp/a.html",
+            "/a%3cd.html",
+            "/a%3Cd.html",
+            "/a/b.html",
+            "/%7Ejoe/index.html",
+        ]
         self.check_urls(good, bad)
 
     def test_access6(self):
@@ -267,8 +280,8 @@ class TestRobotsTxt(unittest.TestCase):
             "Disallow: /.",
         ]
         self.rp.parse(lines)
-        good = ['/foo.html']
-        bad = [] # Bug report says "/" should be denied, but that is not in the RFC
+        good = ["/foo.html"]
+        bad = []  # Bug report says "/" should be denied, but that is not in the RFC
         self.check_urls(good, bad)
 
     def test_access7(self):

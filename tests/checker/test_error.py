@@ -29,7 +29,7 @@ class TestError(LinkCheckTest):
         # Unrecognized scheme
         url = "hutzli:"
         attrs = self.get_attrs(url=url)
-        attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
+        attrs["nurl"] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
             "url file://%(curdir)s/%(url)s" % attrs,
             "cache key %(nurl)s" % attrs,
@@ -42,7 +42,7 @@ class TestError(LinkCheckTest):
         # invalid scheme chars
         url = "äöü:"
         attrs = self.get_attrs(url=url)
-        attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
+        attrs["nurl"] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
             "url file://%(curdir)s/%(url)s" % attrs,
             "cache key %(nurl)s" % attrs,
@@ -56,7 +56,7 @@ class TestError(LinkCheckTest):
         # missing scheme alltogether
         url = "äöü"
         attrs = self.get_attrs(url=url)
-        attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
+        attrs["nurl"] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
             "url file://%(curdir)s/%(url)s" % attrs,
             "cache key %(nurl)s" % attrs,
@@ -70,7 +70,7 @@ class TestError(LinkCheckTest):
         # really fucked up
         url = "@³²¼][½ ³@] ¬½"
         attrs = self.get_attrs(url=url)
-        attrs['nurl'] = self.norm("file://%(curdir)s/%(url)s" % attrs)
+        attrs["nurl"] = self.norm("file://%(curdir)s/%(url)s" % attrs)
         resultlines = [
             "url file://%(curdir)s/%(url)s" % attrs,
             "cache key %(nurl)s" % attrs,

@@ -30,10 +30,10 @@ import linkcheck.url
 # '-':                             '-',
 
 # All portions of the URI must be utf-8 encoded NFC form Unicode strings
-#valid:  http://example.com/?q=%C3%87   (C-cedilla U+00C7)
-#valid: http://example.com/?q=%E2%85%A0 (Roman numeral one U+2160)
-#invalid: http://example.com/?q=%C7      (C-cedilla ISO-8859-1)
-#invalid: http://example.com/?q=C%CC%A7
+# valid:  http://example.com/?q=%C3%87   (C-cedilla U+00C7)
+# valid: http://example.com/?q=%E2%85%A0 (Roman numeral one U+2160)
+# invalid: http://example.com/?q=%C7      (C-cedilla ISO-8859-1)
+# invalid: http://example.com/?q=C%CC%A7
 #         (Latin capital letter C + Combining cedilla U+0327)
 
 
@@ -45,11 +45,14 @@ class TestUrl(unittest.TestCase):
     """Test url norming and quoting."""
 
     def urlnormtest(self, url, nurl, encoding=None):
-        self.assertFalse(linkcheck.url.url_needs_quoting(nurl),
-            "Result URL %r must not need quoting" % nurl)
+        self.assertFalse(
+            linkcheck.url.url_needs_quoting(nurl),
+            "Result URL %r must not need quoting" % nurl,
+        )
         nurl1 = url_norm(url, encoding=encoding)
-        self.assertFalse(linkcheck.url.url_needs_quoting(nurl1),
-            "Normed URL %r needs quoting" % nurl)
+        self.assertFalse(
+            linkcheck.url.url_needs_quoting(nurl1), "Normed URL %r needs quoting" % nurl
+        )
         self.assertEqual(nurl1, nurl)
 
     def test_wayback(self):
@@ -58,10 +61,11 @@ class TestUrl(unittest.TestCase):
 
     def test_pathattack(self):
         # Windows winamp path attack prevention.
-        url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.."\
-              "%5ccskin.zip"
+        url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.." "%5ccskin.zip"
         nurl = "http://server/cskin.zip"
-        self.assertEqual(linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl)
+        self.assertEqual(
+            linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl
+        )
 
     def test_safe_patterns(self):
         is_safe_host = linkcheck.url.is_safe_host
@@ -76,6 +80,7 @@ class TestUrl(unittest.TestCase):
     def test_url_quote(self):
         def url_quote(url):
             return linkcheck.url.url_quote(url, encoding="utf-8")
+
         url = "http://a:80/bcd"
         self.assertEqual(url_quote(url), url)
         url = "http://a:80/bcd?"
@@ -95,14 +100,15 @@ class TestUrl(unittest.TestCase):
 
     def test_norm_quote(self):
         # Test url norm quoting.
-        url = "http://groups.google.com/groups?hl=en&lr&ie=UTF-8&"\
-              "threadm=3845B54D.E546F9BD%40monmouth.com&rnum=2&"\
-              "prev=/groups%3Fq%3Dlogitech%2Bwingman%2Bextreme%2Bdigital"\
-              "%2B3d%26hl%3Den%26lr%3D%26ie%3DUTF-8%26selm%3D3845B54D.E5"\
-              "46F9BD%2540monmouth.com%26rnum%3D2"
+        url = (
+            "http://groups.google.com/groups?hl=en&lr&ie=UTF-8&"
+            "threadm=3845B54D.E546F9BD%40monmouth.com&rnum=2&"
+            "prev=/groups%3Fq%3Dlogitech%2Bwingman%2Bextreme%2Bdigital"
+            "%2B3d%26hl%3Den%26lr%3D%26ie%3DUTF-8%26selm%3D3845B54D.E5"
+            "46F9BD%2540monmouth.com%26rnum%3D2"
+        )
         self.urlnormtest(url, url)
-        url = "http://redirect.alexa.com/redirect?"\
-              "http://www.offeroptimizer.com"
+        url = "http://redirect.alexa.com/redirect?" "http://www.offeroptimizer.com"
         self.urlnormtest(url, url)
         url = "http://www.lesgensducinema.com/photo/Philippe%20Nahon.jpg"
         self.urlnormtest(url, url)
@@ -239,125 +245,127 @@ class TestUrl(unittest.TestCase):
     def test_norm_path_relative_dots(self):
         # Test url norm relative path handling with dots.
         # normalize redundant path segments
-        url = '/foo/bar/.'
-        nurl = '/foo/bar/'
+        url = "/foo/bar/."
+        nurl = "/foo/bar/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/./'
-        nurl = '/foo/bar/'
+        url = "/foo/bar/./"
+        nurl = "/foo/bar/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/..'
-        nurl = '/foo/'
+        url = "/foo/bar/.."
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../'
-        nurl = '/foo/'
+        url = "/foo/bar/../"
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../baz'
-        nurl = '/foo/baz'
+        url = "/foo/bar/../baz"
+        nurl = "/foo/baz"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../..'
-        nurl = '/'
+        url = "/foo/bar/../.."
+        nurl = "/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../../'
-        nurl = '/'
+        url = "/foo/bar/../../"
+        nurl = "/"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../../baz'
-        nurl = '/baz'
+        url = "/foo/bar/../../baz"
+        nurl = "/baz"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../../../baz'
-        nurl = '/baz'
+        url = "/foo/bar/../../../baz"
+        nurl = "/baz"
         self.urlnormtest(url, nurl)
-        url = '/foo/bar/../../../../baz'
-        nurl = '/baz'
+        url = "/foo/bar/../../../../baz"
+        nurl = "/baz"
         self.urlnormtest(url, nurl)
-        url = '/./foo'
-        nurl = '/foo'
+        url = "/./foo"
+        nurl = "/foo"
         self.urlnormtest(url, nurl)
-        url = '/../foo'
-        nurl = '/foo'
+        url = "/../foo"
+        nurl = "/foo"
         self.urlnormtest(url, nurl)
-        url = '/foo.'
+        url = "/foo."
         nurl = url
         self.urlnormtest(url, nurl)
-        url = '/.foo'
+        url = "/.foo"
         nurl = url
         self.urlnormtest(url, nurl)
-        url = '/foo..'
+        url = "/foo.."
         nurl = url
         self.urlnormtest(url, nurl)
-        url = '/..foo'
+        url = "/..foo"
         nurl = url
         self.urlnormtest(url, nurl)
-        url = '/./../foo'
-        nurl = '/foo'
+        url = "/./../foo"
+        nurl = "/foo"
         self.urlnormtest(url, nurl)
-        url = '/./foo/.'
-        nurl = '/foo/'
+        url = "/./foo/."
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = '/foo/./bar'
-        nurl = '/foo/bar'
+        url = "/foo/./bar"
+        nurl = "/foo/bar"
         self.urlnormtest(url, nurl)
-        url = '/foo/../bar'
-        nurl = '/bar'
+        url = "/foo/../bar"
+        nurl = "/bar"
         self.urlnormtest(url, nurl)
-        url = '../../../images/miniXmlButton.gif'
+        url = "../../../images/miniXmlButton.gif"
         nurl = url
         self.urlnormtest(url, nurl)
-        url = '/a..b/../images/miniXmlButton.gif'
-        nurl = '/images/miniXmlButton.gif'
+        url = "/a..b/../images/miniXmlButton.gif"
+        nurl = "/images/miniXmlButton.gif"
         self.urlnormtest(url, nurl)
-        url = '/.a.b/../foo/'
-        nurl = '/foo/'
+        url = "/.a.b/../foo/"
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = '/..a.b/../foo/'
-        nurl = '/foo/'
+        url = "/..a.b/../foo/"
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = 'b/../../foo/'
-        nurl = '../foo/'
+        url = "b/../../foo/"
+        nurl = "../foo/"
         self.urlnormtest(url, nurl)
-        url = './foo'
-        nurl = 'foo'
+        url = "./foo"
+        nurl = "foo"
         self.urlnormtest(url, nurl)
 
     def test_norm_path_relative_slashes(self):
         # Test url norm relative path handling with slashes.
-        url = '/foo//'
-        nurl = '/foo/'
+        url = "/foo//"
+        nurl = "/foo/"
         self.urlnormtest(url, nurl)
-        url = '/foo///bar//'
-        nurl = '/foo/bar/'
+        url = "/foo///bar//"
+        nurl = "/foo/bar/"
         self.urlnormtest(url, nurl)
 
     def test_mail_url(self):
         # Test mailto URLs.
         # no netloc and no path
-        url = 'mailto:'
+        url = "mailto:"
         nurl = url
         self.urlnormtest(url, nurl)
         # standard email
-        url = 'mailto:user@www.example.org'
+        url = "mailto:user@www.example.org"
         nurl = url
         self.urlnormtest(url, nurl)
         # emails with subject
-        url = 'mailto:user@www.example.org?subject=a_b'
+        url = "mailto:user@www.example.org?subject=a_b"
         nurl = url
         self.urlnormtest(url, nurl)
-        url = 'mailto:business.inquiries@designingpatterns.com?subject=Business%20Inquiry'
+        url = (
+            "mailto:business.inquiries@designingpatterns.com?subject=Business%20Inquiry"
+        )
         nurl = url
         self.urlnormtest(url, nurl)
 
     def test_norm_other(self):
         # Test norming of other schemes.
-        url = 'news:'
-        nurl = 'news:'
+        url = "news:"
+        nurl = "news:"
         self.urlnormtest(url, nurl)
-        url = 'snews:'
-        nurl = 'snews://'
+        url = "snews:"
+        nurl = "snews://"
         self.urlnormtest(url, nurl)
-        url = 'nntp:'
-        nurl = 'nntp://'
+        url = "nntp:"
+        nurl = "nntp://"
         self.urlnormtest(url, nurl)
         url = "news:!$%&/()="
-        nurl = 'news:!%24%25%26/()='
+        nurl = "news:!%24%25%26/()="
         self.urlnormtest(url, nurl)
         url = "news:comp.infosystems.www.servers.unix"
         nurl = url
@@ -367,9 +375,9 @@ class TestUrl(unittest.TestCase):
         nurl = url
         self.urlnormtest(url, nurl)
         # ldap url # XXX failing on Travis build
-        #url = "ldap://[2001:db8::7]/c=GB?objectClass?one"
-        #nurl = "ldap://%5B2001:db8::7%5D/c=GB?objectClass?one"
-        #self.urlnormtest(url, nurl)
+        # url = "ldap://[2001:db8::7]/c=GB?objectClass?one"
+        # nurl = "ldap://%5B2001:db8::7%5D/c=GB?objectClass?one"
+        # self.urlnormtest(url, nurl)
         url = "tel:+1-816-555-1212"
         nurl = url
         self.urlnormtest(url, nurl)
@@ -409,9 +417,9 @@ class TestUrl(unittest.TestCase):
         url = "file:///a/ה.txt"
         nurl = "file:///a/%C3%A4.txt"
         self.urlnormtest(url, nurl)
-        #url = "file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
-        #nurl = "file:///a.bin" # XXX
-        #self.urlnormtest(url, nurl)
+        # url = "file:///\u041c\u043e\u0448\u043a\u043e\u0432\u0430.bin"
+        # nurl = "file:///a.bin" # XXX
+        # self.urlnormtest(url, nurl)
 
     def test_norm_invalid(self):
         url = "הצü?:"
@@ -471,7 +479,7 @@ class TestUrl(unittest.TestCase):
         self.assertTrue(not linkcheck.url.url_is_absolute(url), repr(url))
 
     def test_nopathquote_chars(self):
-        if os.name == 'nt':
+        if os.name == "nt":
             url = "file:///c|/msys/"
             nurl = url
             self.assertEqual(url_norm(url), nurl)
@@ -482,12 +490,12 @@ class TestUrl(unittest.TestCase):
 
     def test_idn_encoding(self):
         # Test idna encoding.
-        url = 'www.צko.de'
+        url = "www.צko.de"
         idna_encode = linkcheck.url.idna_encode
         encurl, is_idn = idna_encode(url)
         self.assertTrue(is_idn)
         self.assertTrue(encurl)
-        url = ''
+        url = ""
         encurl, is_idn = idna_encode(url)
         self.assertFalse(is_idn)
         self.assertFalse(encurl)
@@ -531,7 +539,7 @@ class TestUrl(unittest.TestCase):
         self.assertEqual(linkcheck.url.url_parse_query(u, encoding="utf-8"), u)
 
     def test_long_cgi(self):
-        u = "/test%s;" % ("?a="*1000)
+        u = "/test%s;" % ("?a=" * 1000)
         self.assertEqual(linkcheck.url.url_parse_query(u, encoding="utf-8"), u)
 
     def test_port(self):
@@ -560,7 +568,7 @@ class TestUrl(unittest.TestCase):
 
     @need_network
     def test_get_content(self):
-        linkcheck.url.get_content('http://www.debian.org/')
+        linkcheck.url.get_content("http://www.debian.org/")
 
     def test_duplicate_urls(self):
         is_dup = linkcheck.url.is_duplicate_content_url

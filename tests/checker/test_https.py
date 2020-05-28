@@ -30,7 +30,7 @@ class TestHttps(HttpsServerTest):
     Test https: link checking.
     """
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         super(TestHttps, self).__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
@@ -45,7 +45,7 @@ class TestHttps(HttpsServerTest):
         cert.set_notAfter(b"21190102030405Z")
         cert.set_issuer(cert.get_subject())
         cert.set_pubkey(key)
-        cert.sign(key, 'sha1')
+        cert.sign(key, "sha1")
         with open(get_file("https_key.pem"), "wb") as f:
             f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, key))
         with open(get_file("https_cert.pem"), "wb") as f:
@@ -59,13 +59,12 @@ class TestHttps(HttpsServerTest):
             "real url %s" % url,
             "valid",
         ]
-        confargs = dict(
-            sslverify=False
-        )
+        confargs = dict(sslverify=False)
         self.direct(url, resultlines, recursionlevel=0, confargs=confargs)
 
     def test_x509_to_dict(self):
         with open(get_file("https_cert.pem"), "rb") as f:
             cert = crypto.load_certificate(crypto.FILETYPE_PEM, f.read())
-        self.assertEqual(httputil.x509_to_dict(cert)["notAfter"],
-                         "Jan 02 03:04:05 2119 GMT")
+        self.assertEqual(
+            httputil.x509_to_dict(cert)["notAfter"], "Jan 02 03:04:05 2119 GMT"
+        )

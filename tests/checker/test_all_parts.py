@@ -24,22 +24,23 @@ from . import TestLogger
 
 bs_has_linenos = BeautifulSoup("<a>", "html.parser").a.sourceline is not None
 
+
 class AllPartsLogger(TestLogger):
     logparts = [
-        'cachekey',
-        'realurl',
-        'name',
-        'base',
-        'info',
-        'warning',
-        'result',
-        'url',
-        'line',
-        'col',
-        'size',
-        'parent_url',
-        'page',
-        'content_type',
+        "cachekey",
+        "realurl",
+        "name",
+        "base",
+        "info",
+        "warning",
+        "result",
+        "url",
+        "line",
+        "col",
+        "size",
+        "parent_url",
+        "page",
+        "content_type",
     ]
 
 
@@ -47,14 +48,15 @@ class TestAllParts(LinkCheckTest):
     """
     Test that all parts of logger are working properly.
     """
+
     logger = AllPartsLogger
 
-    @pytest.mark.skipif(bs_has_linenos,
-                        reason="Beautiful Soup supports line numbers")
+    @pytest.mark.skipif(bs_has_linenos, reason="Beautiful Soup supports line numbers")
     def test_all_parts(self):
         self.file_test("all_parts.html")
 
-    @pytest.mark.skipif(not bs_has_linenos,
-                        reason="Beautiful Soup does not support line numbers")
+    @pytest.mark.skipif(
+        not bs_has_linenos, reason="Beautiful Soup does not support line numbers"
+    )
     def test_all_parts_linenos(self):
         self.file_test("all_parts_linenos.html")

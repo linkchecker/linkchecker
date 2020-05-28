@@ -46,10 +46,9 @@ def run_checked(cmd, ret_ok=(0,), **kwargs):
     return retcode
 
 
-
 def run_silent(cmd):
     """Run given command without output."""
-    null = open(os.name == 'nt' and ':NUL' or "/dev/null", 'w')
+    null = open(os.name == "nt" and ":NUL" or "/dev/null", "w")
     try:
         return run(cmd, stdout=null, stderr=subprocess.STDOUT)
     finally:
@@ -58,13 +57,16 @@ def run_silent(cmd):
 
 def _need_func(testfunc, name):
     """Decorator skipping test if given testfunc fails."""
+
     def check_func(func):
         @wraps(func)
         def newfunc(*args, **kwargs):
             if not testfunc():
                 pytest.skip("%s is not available" % name)
             return func(*args, **kwargs)
+
         return newfunc
+
     return check_func
 
 
@@ -80,6 +82,7 @@ def has_network():
         pass
     return False
 
+
 need_network = _need_func(has_network, "network")
 
 
@@ -87,6 +90,7 @@ need_network = _need_func(has_network, "network")
 def has_msgfmt():
     """Test if msgfmt is available."""
     return run_silent(["msgfmt", "-V"]) == 0
+
 
 need_msgfmt = _need_func(has_msgfmt, "msgfmt")
 
@@ -96,6 +100,7 @@ def has_posix():
     """Test if this is a POSIX system."""
     return os.name == "posix"
 
+
 need_posix = _need_func(has_posix, "POSIX system")
 
 
@@ -104,6 +109,7 @@ def has_windows():
     """Test if this is a Windows system."""
     return os.name == "nt"
 
+
 need_windows = _need_func(has_windows, "Windows system")
 
 
@@ -111,6 +117,7 @@ need_windows = _need_func(has_windows, "Windows system")
 def has_linux():
     """Test if this is a Linux system."""
     return sys.platform.startswith("linux")
+
 
 need_linux = _need_func(has_linux, "Linux system")
 
@@ -130,6 +137,7 @@ def has_clamav():
         pass
     return False
 
+
 need_clamav = _need_func(has_clamav, "ClamAV")
 
 
@@ -144,6 +152,7 @@ def has_proxy():
     except Exception:
         return False
 
+
 need_proxy = _need_func(has_proxy, "proxy")
 
 
@@ -152,9 +161,11 @@ def has_pyftpdlib():
     """Test if pyftpdlib is available."""
     try:
         import pyftpdlib
+
         return True
     except ImportError:
         return False
+
 
 need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 
@@ -164,9 +175,11 @@ def has_biplist():
     """Test if biplist is available."""
     try:
         import biplist
+
         return True
     except ImportError:
         return False
+
 
 need_biplist = _need_func(has_biplist, "biplist")
 
@@ -174,6 +187,7 @@ need_biplist = _need_func(has_biplist, "biplist")
 @lru_cache(1)
 def has_newsserver(server):
     import nntplib
+
     try:
         nntp = nntplib.NNTP(server, usenetrc=False)
         nntp.quit()
@@ -184,53 +198,62 @@ def has_newsserver(server):
 
 def need_newsserver(server):
     """Decorator skipping test if newsserver is not available."""
+
     def check_func(func):
         def newfunc(*args, **kwargs):
             if not has_newsserver(server):
                 pytest.skip("Newsserver `%s' is not available" % server)
             return func(*args, **kwargs)
+
         newfunc.__name__ = func.__name__
         return newfunc
-    return check_func
 
+    return check_func
 
 
 @lru_cache(1)
 def has_x11():
     """Test if DISPLAY variable is set."""
-    return os.getenv('DISPLAY') is not None
+    return os.getenv("DISPLAY") is not None
 
-need_x11 = _need_func(has_x11, 'X11')
+
+need_x11 = _need_func(has_x11, "X11")
 
 
 @lru_cache(1)
 def has_word():
     """Test if Word is available."""
     from linkcheck.plugins import parseword
+
     return parseword.has_word()
 
-need_word = _need_func(has_word, 'Word')
+
+need_word = _need_func(has_word, "Word")
 
 
 @lru_cache(1)
 def has_pdflib():
     from linkcheck.plugins import parsepdf
+
     return parsepdf.has_pdflib
 
-need_pdflib = _need_func(has_pdflib, 'pdflib')
+
+need_pdflib = _need_func(has_pdflib, "pdflib")
 
 
 @contextmanager
 def _limit_time(seconds):
     """Raises LinkCheckerInterrupt if given number of seconds have passed."""
-    if os.name == 'posix':
+    if os.name == "posix":
+
         def signal_handler(signum, frame):
             raise LinkCheckerInterrupt("timed out")
+
         old_handler = signal.getsignal(signal.SIGALRM)
         signal.signal(signal.SIGALRM, signal_handler)
         signal.alarm(seconds)
     yield
-    if os.name == 'posix':
+    if os.name == "posix":
         signal.alarm(0)
         if old_handler is not None:
             signal.signal(signal.SIGALRM, old_handler)
@@ -238,6 +261,7 @@ def _limit_time(seconds):
 
 def limit_time(seconds, skip=False):
     """Limit test time to the given number of seconds, else fail or skip."""
+
     def run_limited(func):
         def new_func(*args, **kwargs):
             try:
@@ -247,8 +271,10 @@ def limit_time(seconds, skip=False):
                 if skip:
                     pytest.skip("time limit of %d seconds exceeded" % seconds)
                 assert False, msg
+
         new_func.__name__ = func.__name__
         return new_func
+
     return run_limited
 
 
@@ -262,7 +288,7 @@ def get_file(filename=None):
     return directory
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("has clamav", has_clamav())
     print("has network", has_network())
     print("has msgfmt", has_msgfmt())

@@ -31,4 +31,4 @@ class TestInternpat(LinkCheckTest):
         url = "http://example.org/foo/"
         url_data = get_url_from(url, 0, aggregate)
         internpat = url_data.get_intern_pattern()
-        self.assertTrue(internpat.endswith('/'))
+        self.assertTrue(internpat.endswith("/"))

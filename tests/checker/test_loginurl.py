@@ -22,6 +22,7 @@ import re
 from .httpserver import HttpServerTest, CGIHandler
 from . import get_test_aggregate
 
+
 class TestLoginUrl(HttpServerTest):
     """Test loginurl retrieval, search and posting credentials."""
 
@@ -34,10 +35,13 @@ class TestLoginUrl(HttpServerTest):
         confargs["loginurl"] = self.get_url(page)
         if extrafields:
             confargs["loginextrafields"] = {"extra_field": "default"}
-        confargs["authentication"] = [{
-            "user": user, "password": password,
-            "pattern": re.compile("^http://localhost.*")
-        }]
+        confargs["authentication"] = [
+            {
+                "user": user,
+                "password": password,
+                "pattern": re.compile("^http://localhost.*"),
+            }
+        ]
 
         aggregate = get_test_aggregate(confargs, {"expected": ""})
         aggregate.visit_loginurl()
@@ -45,8 +49,9 @@ class TestLoginUrl(HttpServerTest):
         return aggregate.cookies
 
     def test_loginurl(self):
-        cookies = self.visit_loginurl("loginform.html", "test_user",
-                                      "test_password", True)
+        cookies = self.visit_loginurl(
+            "loginform.html", "test_user", "test_password", True
+        )
 
         self.assertEqual(cookies["login"], "test_user")
         self.assertEqual(cookies["password"], "test_password")
@@ -58,7 +63,8 @@ class TestLoginUrl(HttpServerTest):
         self.assertEqual(cookies["login"], "test_user")
 
     def test_login_password(self):
-        cookies = self.visit_loginurl("loginform_password.html",
-                                      password="test_password")
+        cookies = self.visit_loginurl(
+            "loginform_password.html", password="test_password"
+        )
 
         self.assertEqual(cookies["password"], "test_password")

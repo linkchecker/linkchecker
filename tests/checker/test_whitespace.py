@@ -30,7 +30,7 @@ class TestWhitespace(LinkCheckTest):
         # Leading whitespace
         url = " http://www.example.org/"
         attrs = self.get_attrs(url=url)
-        attrs['surl'] = url.strip()
+        attrs["surl"] = url.strip()
         resultlines = [
             "url %(surl)s" % attrs,
             "cache key %(surl)s" % attrs,
@@ -41,7 +41,7 @@ class TestWhitespace(LinkCheckTest):
         self.direct(url, resultlines)
         url = "\nhttp://www.example.org/"
         attrs = self.get_attrs(url=url)
-        attrs['surl'] = url.strip()
+        attrs["surl"] = url.strip()
         resultlines = [
             "url %(surl)s" % attrs,
             "cache key %(surl)s" % attrs,

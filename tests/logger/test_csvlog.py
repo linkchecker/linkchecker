@@ -20,7 +20,6 @@ from linkcheck.logger.csvlog import CSVLogger
 
 
 class TestCsvLogger(unittest.TestCase):
-
     def test_parts(self):
         args = dict(
             filename=os.path.join(os.path.dirname(__file__), "testlog.csv"),

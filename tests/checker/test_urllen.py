@@ -28,7 +28,7 @@ class TestURLLength(LinkCheckTest):
     def test_url_warn(self):
         url = "http://www.example.org/" + ("a" * URL_MAX_LENGTH)
         attrs = self.get_attrs(url=url)
-        attrs['nurl'] = self.norm(url)
+        attrs["nurl"] = self.norm(url)
         resultlines = [
             "url %(nurl)s" % attrs,
             "cache key %(nurl)s" % attrs,

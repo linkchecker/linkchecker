@@ -25,13 +25,14 @@ from . import LinkCheckTest
 
 TIMEOUT = 5
 
+
 class TelnetServerTest(LinkCheckTest):
     """Start/stop a Telnet server that can be used for testing."""
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         """Init test class and store default ftp server port."""
         super(TelnetServerTest, self).__init__(methodName=methodName)
-        self.host = 'localhost'
+        self.host = "localhost"
         self.port = None
         self.stop_event = threading.Event()
         self.server_thread = None
@@ -62,9 +63,11 @@ class TelnetServerTest(LinkCheckTest):
 def start_server(host, port, stop_event):
     # Instantiate Telnet server class and listen to host:port
     clients = []
+
     def on_connect(client):
         clients.append(client)
         client.send("Telnet test server\nlogin: ")
+
     server = miniboa.TelnetServer(port=port, address=host, on_connect=on_connect)
     port = server.server_socket.getsockname()[1]
     t = threading.Thread(None, serve_forever, args=(server, clients, stop_event))
@@ -97,7 +100,7 @@ def serve_forever(server, clients, stop_event):
 def handle_cmd(client):
     """Handle telnet clients."""
     msg = client.get_command().lower()
-    if msg == 'exit':
+    if msg == "exit":
         client.active = False
     else:
         client.send("Password: ")

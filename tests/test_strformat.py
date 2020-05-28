@@ -35,14 +35,14 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(u(""), "")
         self.assertEqual(u(None), None)
         self.assertEqual(u("'"), "'")
-        self.assertEqual(u("\""), "\"")
-        self.assertEqual(u("\"\""), "")
+        self.assertEqual(u('"'), '"')
+        self.assertEqual(u('""'), "")
         self.assertEqual(u("''"), "")
         self.assertEqual(u("'a'"), "a")
-        self.assertEqual(u("'a\"'"), "a\"")
-        self.assertEqual(u("'\"a'"), "\"a")
-        self.assertEqual(u('"a\'"'), 'a\'')
-        self.assertEqual(u('"\'a"'), '\'a')
+        self.assertEqual(u("'a\"'"), 'a"')
+        self.assertEqual(u("'\"a'"), '"a')
+        self.assertEqual(u('"a\'"'), "a'")
+        self.assertEqual(u('"\'a"'), "'a")
         self.assertEqual(u("'a'", matching=True), "a")
         self.assertEqual(u('"a"', matching=True), "a")
         # even mis-matching quotes should be removed...
@@ -55,18 +55,17 @@ class TestStrFormat(unittest.TestCase):
     def test_wrap(self):
         # Test line wrapping.
         wrap = linkcheck.strformat.wrap
-        s = "11%(sep)s22%(sep)s33%(sep)s44%(sep)s55" % {'sep': os.linesep}
+        s = "11%(sep)s22%(sep)s33%(sep)s44%(sep)s55" % {"sep": os.linesep}
         # testing width <= 0
         self.assertEqual(wrap(s, -1), s)
         self.assertEqual(wrap(s, 0), s)
         l = len(os.linesep)
         gap = " "
-        s2 = "11%(gap)s22%(sep)s33%(gap)s44%(sep)s55" % \
-             {'sep': os.linesep, 'gap': gap}
+        s2 = "11%(gap)s22%(sep)s33%(gap)s44%(sep)s55" % {"sep": os.linesep, "gap": gap}
         # splitting lines
         self.assertEqual(wrap(s2, 2), s)
         # combining lines
-        self.assertEqual(wrap(s, 4+l), s2)
+        self.assertEqual(wrap(s, 4 + l), s2)
         # misc
         self.assertEqual(wrap(s, -1), s)
         self.assertEqual(wrap(s, 0), s)
@@ -88,13 +87,11 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(linkcheck.strformat.strsize(2), "2B")
         self.assertEqual(linkcheck.strformat.strsize(1023, grouping=False), "1023B")
         self.assertEqual(linkcheck.strformat.strsize(1024), "1KB")
-        self.assertEqual(linkcheck.strformat.strsize(1024*25), "25.00KB")
-        self.assertEqual(linkcheck.strformat.strsize(1024*1024), "1.00MB")
-        self.assertEqual(linkcheck.strformat.strsize(1024*1024*11), "11.0MB")
-        self.assertEqual(linkcheck.strformat.strsize(1024*1024*1024),
-            "1.00GB")
-        self.assertEqual(linkcheck.strformat.strsize(1024*1024*1024*14),
-            "14.0GB")
+        self.assertEqual(linkcheck.strformat.strsize(1024 * 25), "25.00KB")
+        self.assertEqual(linkcheck.strformat.strsize(1024 * 1024), "1.00MB")
+        self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 11), "11.0MB")
+        self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 1024), "1.00GB")
+        self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 1024 * 14), "14.0GB")
 
     def test_is_ascii(self):
         self.assertTrue(linkcheck.strformat.is_ascii("abcd./"))
@@ -103,7 +100,7 @@ class TestStrFormat(unittest.TestCase):
     def test_indent(self):
         s = "bla"
         self.assertEqual(linkcheck.strformat.indent(s, ""), s)
-        self.assertEqual(linkcheck.strformat.indent(s, " "), " "+s)
+        self.assertEqual(linkcheck.strformat.indent(s, " "), " " + s)
 
     def test_stripurl(self):
         self.assertEqual(linkcheck.strformat.stripurl("a\tb"), "a\tb")
@@ -121,7 +118,7 @@ class TestStrFormat(unittest.TestCase):
     def test_strtime(self):
         zone = linkcheck.strformat.strtimezone()
         t = linkcheck.strformat.strtime(0, func=time.gmtime)
-        self.assertEqual(t, "1970-01-01 00:00:00"+zone)
+        self.assertEqual(t, "1970-01-01 00:00:00" + zone)
 
     def test_duration(self):
         duration = linkcheck.strformat.strduration
@@ -132,8 +129,8 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(duration(2), "00:02")
         self.assertEqual(duration(60), "01:00")
         self.assertEqual(duration(120), "02:00")
-        self.assertEqual(duration(60*60), "01:00:00")
-        self.assertEqual(duration(60*60*24), "24:00:00")
+        self.assertEqual(duration(60 * 60), "01:00:00")
+        self.assertEqual(duration(60 * 60 * 24), "24:00:00")
 
     def test_duration_long(self):
         duration = lambda s: linkcheck.strformat.strduration_long(s, do_translate=False)
@@ -144,11 +141,12 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(duration(2), "2 seconds")
         self.assertEqual(duration(60), "1 minute")
         self.assertEqual(duration(120), "2 minutes")
-        self.assertEqual(duration(60*60), "1 hour")
-        self.assertEqual(duration(60*60*24), "1 day")
-        self.assertEqual(duration(60*60*24*365), "1 year")
-        self.assertEqual(duration(60*60*24*365 + 60*60*24 + 2),
-                         "1 year, 1 day")
+        self.assertEqual(duration(60 * 60), "1 hour")
+        self.assertEqual(duration(60 * 60 * 24), "1 day")
+        self.assertEqual(duration(60 * 60 * 24 * 365), "1 year")
+        self.assertEqual(
+            duration(60 * 60 * 24 * 365 + 60 * 60 * 24 + 2), "1 year, 1 day"
+        )
 
     def test_linenumber(self):
         get_line_number = linkcheck.strformat.get_line_number
@@ -158,8 +156,8 @@ class TestStrFormat(unittest.TestCase):
 
     def test_encoding(self):
         is_encoding = linkcheck.strformat.is_encoding
-        self.assertTrue(is_encoding('ascii'))
-        self.assertFalse(is_encoding('hulla'))
+        self.assertTrue(is_encoding("ascii"))
+        self.assertFalse(is_encoding("hulla"))
 
     def test_unicode_safe(self):
         unicode_safe = linkcheck.strformat.unicode_safe

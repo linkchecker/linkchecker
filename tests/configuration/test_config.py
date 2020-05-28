@@ -80,13 +80,24 @@ class TestConfig(unittest.TestCase):
         # output section
         self.assertTrue(linkcheck.log.is_debug(linkcheck.LOG_THREAD))
         self.assertFalse(config["status"])
-        self.assertTrue(isinstance(config["logger"], linkcheck.logger.customxml.CustomXMLLogger))
+        self.assertTrue(
+            isinstance(config["logger"], linkcheck.logger.customxml.CustomXMLLogger)
+        )
         self.assertTrue(config["verbose"])
         self.assertTrue(config["warnings"])
         self.assertFalse(config["quiet"])
         self.assertEqual(len(config["fileoutput"]), 8)
         # plugins
-        for plugin in ("AnchorCheck", "CssSyntaxCheck", "HtmlSyntaxCheck", "LocationInfo", "RegexCheck", "SslCertificateCheck", "VirusCheck", "HttpHeaderInfo"):
+        for plugin in (
+            "AnchorCheck",
+            "CssSyntaxCheck",
+            "HtmlSyntaxCheck",
+            "LocationInfo",
+            "RegexCheck",
+            "SslCertificateCheck",
+            "VirusCheck",
+            "HttpHeaderInfo",
+        ):
             self.assertTrue(plugin in config["enabledplugins"])
         # text logger section
         self.assertEqual(config["text"]["filename"], "imadoofus.txt")
