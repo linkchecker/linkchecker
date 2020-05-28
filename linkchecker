@@ -25,15 +25,22 @@ import os
 import pprint
 import argparse
 import getpass
+
 # installs _() and _n() gettext functions into global namespace
 import linkcheck
 from linkcheck import logconf, LOG_CMDLINE
+
 logconf.init_log_config()
 # override argparse gettext method with the one from linkcheck.init_i18n()
-#argparse._ = _
+# argparse._ = _
 # now import the rest of the linkchecker gang
-from linkcheck.cmdline import print_version, print_usage, aggregate_url, \
-  LCArgumentParser, print_plugins
+from linkcheck.cmdline import (
+    print_version,
+    print_usage,
+    aggregate_url,
+    LCArgumentParser,
+    print_plugins,
+)
 from linkcheck import log, i18n, strformat
 import linkcheck.checker
 import linkcheck.configuration
@@ -41,6 +48,7 @@ import linkcheck.fileutil
 import linkcheck.logger
 import linkcheck.ansicolor
 from linkcheck.director import console, check_urls, get_aggregate
+
 # optional modules
 has_argcomplete = linkcheck.fileutil.has_module("argcomplete")
 has_profile = linkcheck.fileutil.has_module("yappi")
@@ -52,7 +60,8 @@ _username = None
 _password = None
 
 # usage texts
-Notes = _("""NOTES
+Notes = _(
+    """NOTES
  o URLs on the command line starting with "ftp." are treated like
    "ftp://ftp.", URLs starting with "www." are treated like "http://www.".
    You can also give local files as arguments.
@@ -66,9 +75,11 @@ Notes = _("""NOTES
  o You can supply multiple user/password pairs in a configuration file.
  o When checking 'news:' links the given NNTP host doesn't need to be the
    same as the host of the user browsing your pages.
-""")
+"""
+)
 
-ProxySupport = _("""PROXY SUPPORT
+ProxySupport = _(
+    """PROXY SUPPORT
 To use a proxy on Unix or Windows set $http_proxy, $https_proxy or $ftp_proxy
 to the proxy URL. The URL should be of the form
 "http://[<user>:<pass>@]<host>[:<port>]".
@@ -91,18 +102,22 @@ Setting a proxy on the Windows command prompt:
 
   set http_proxy=http://proxy.example.com:8080
 
-""")
+"""
+)
 
-RegularExpressions = _("""REGULAR EXPRESSIONS
+RegularExpressions = _(
+    """REGULAR EXPRESSIONS
 Only Python regular expressions are accepted by LinkChecker.
 See http://www.amk.ca/python/howto/regex/ for an introduction in
 regular expressions.
 
 The only addition is that a leading exclamation mark negates
 the regular expression.
-""")
+"""
+)
 
-CookieFormat = _("""COOKIE FILES
+CookieFormat = _(
+    """COOKIE FILES
 A cookie file contains standard RFC 805 header data with the following
 possible names:
 Scheme (optional)
@@ -128,16 +143,20 @@ Set-cookie: spam="egg"
 Scheme: https
 Host: example.com
 Set-cookie: baggage="elitist"; comment="hologram"
-""")
+"""
+)
 
-Retval = _(r"""RETURN VALUE
+Retval = _(
+    r"""RETURN VALUE
 The return value is non-zero when
  o invalid links were found or
  o warnings were found warnings are enabled
  o a program error occurred
-""")
+"""
+)
 
-Examples = _(r"""EXAMPLES
+Examples = _(
+    r"""EXAMPLES
 The most common use checks the given domain recursively, plus any
 single URL pointing outside of the domain:
   linkchecker http://www.example.org/
@@ -159,9 +178,11 @@ You can skip the "http://" url part if the domain starts with "www.":
 
 You can skip the "ftp://" url part if the domain starts with "ftp.":
   linkchecker -r0 ftp.example.org
-""")
+"""
+)
 
-LoggerTypes = _(r"""OUTPUT TYPES
+LoggerTypes = _(
+    r"""OUTPUT TYPES
 Note that by default only errors and warnings are logged.
 You should use the --verbose option to see valid URLs,
 and when outputting a sitemap graph format.
@@ -184,16 +205,36 @@ blacklist
         ~/.linkchecker/blacklist which only contains entries with invalid
         URLs and the number of times they have failed.
 none    Logs nothing. Suitable for debugging or checking the exit code.
-""")
+"""
+)
 
-Warnings = _(r"""IGNORE WARNINGS
+Warnings = (
+    _(
+        r"""IGNORE WARNINGS
 The following warnings are recognized in the 'ignorewarnings' config
 file entry:
-""") + \
-"\n".join([" o %s - %s" % (tag, desc) \
-           for tag, desc in sorted(linkcheck.checker.const.Warnings.items())])
+"""
+    )
+    + "\n".join(
+        [
+            " o %s - %s" % (tag, desc)
+            for tag, desc in sorted(linkcheck.checker.const.Warnings.items())
+        ]
+    )
+)
 
-Epilog = "\n".join((Examples, LoggerTypes, RegularExpressions, CookieFormat, ProxySupport, Notes, Retval, Warnings))
+Epilog = "\n".join(
+    (
+        Examples,
+        LoggerTypes,
+        RegularExpressions,
+        CookieFormat,
+        ProxySupport,
+        Notes,
+        Retval,
+        Warnings,
+    )
+)
 
 
 def has_encoding(encoding):
@@ -204,10 +245,10 @@ def has_encoding(encoding):
     except LookupError:
         return False
 
+
 # instantiate option parser and configure options
 argparser = LCArgumentParser(
-  epilog=Epilog,
-  formatter_class=argparse.RawDescriptionHelpFormatter
+    epilog=Epilog, formatter_class=argparse.RawDescriptionHelpFormatter
 )
 
 
@@ -217,40 +258,68 @@ config.set_status_logger(console.StatusLogger())
 
 ################# general options ##################
 group = argparser.add_argument_group(_("General options"))
-group.add_argument("-f", "--config", dest="configfile",
-                 metavar="FILENAME",
-                 help=_(
-"""Use FILENAME as configuration file. Per default LinkChecker uses
+group.add_argument(
+    "-f",
+    "--config",
+    dest="configfile",
+    metavar="FILENAME",
+    help=_(
+        """Use FILENAME as configuration file. Per default LinkChecker uses
 ~/.linkchecker/linkcheckerrc (under Windows
-%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."""))
-group.add_argument("-t", "--threads", type=int, metavar="NUMBER",
-                 help=_(
-"""Generate no more than the given number of threads. Default number
-of threads is 10. To disable threading specify a non-positive number."""))
-group.add_argument("-V", "--version", action="store_true",
-                 help=_("""Print version and exit."""))
-group.add_argument("--list-plugins", action="store_true", dest="listplugins",
-                 help=_(
-"""Print available check plugins and exit."""))
-group.add_argument("--stdin", action="store_true",
-                 help=_(
-"""Read list of white-space separated URLs to check from stdin."""))
+%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."""
+    ),
+)
+group.add_argument(
+    "-t",
+    "--threads",
+    type=int,
+    metavar="NUMBER",
+    help=_(
+        """Generate no more than the given number of threads. Default number
+of threads is 10. To disable threading specify a non-positive number."""
+    ),
+)
+group.add_argument(
+    "-V", "--version", action="store_true", help=_("""Print version and exit.""")
+)
+group.add_argument(
+    "--list-plugins",
+    action="store_true",
+    dest="listplugins",
+    help=_("""Print available check plugins and exit."""),
+)
+group.add_argument(
+    "--stdin",
+    action="store_true",
+    help=_("""Read list of white-space separated URLs to check from stdin."""),
+)
 
 ################# output options ##################
 group = argparser.add_argument_group(_("Output options"))
-group.add_argument("-D", "--debug", action="append", metavar="STRING",
-                 help=_("""Print debugging output for the given logger.
+group.add_argument(
+    "-D",
+    "--debug",
+    action="append",
+    metavar="STRING",
+    help=_(
+        """Print debugging output for the given logger.
 Available loggers are %(lognamelist)s.
 Specifying 'all' is an alias for specifying all available loggers.
 The option can be given multiple times to debug with more
 than one logger.
 
-For accurate results, threading will be disabled during debug runs.""") % \
-{"lognamelist": logconf.lognamelist})
-group.add_argument("-F", "--file-output", action="append",
-                 dest="fileoutput", metavar="TYPE[/ENCODING[/FILENAME]]",
-                 help=_(
-"""Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for
+For accurate results, threading will be disabled during debug runs."""
+    )
+    % {"lognamelist": logconf.lognamelist},
+)
+group.add_argument(
+    "-F",
+    "--file-output",
+    action="append",
+    dest="fileoutput",
+    metavar="TYPE[/ENCODING[/FILENAME]]",
+    help=_(
+        """Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for
 'blacklist' output, or FILENAME if specified.
 The ENCODING specifies the output encoding, the default is that of your
 locale.
@@ -260,88 +329,176 @@ else if the file already exists, it will be overwritten.
 You can specify this option more than once. Valid file output types
 are %(loggertypes)s. You can specify this option multiple times to output
 to more than one file. Default is no file output. Note that you can
-suppress all console output with the option '-o none'.""") % \
-{'loggertypes': linkcheck.logger.LoggerKeys})
-group.add_argument("--no-status", action="store_false", dest="status",
-                 default=True, help=_(
-"""Do not print check status messages."""))
-group.add_argument("--no-warnings", action="store_false", dest="warnings",
-                help=_("""Don't log warnings. Default is to log warnings."""))
-group.add_argument("-o", "--output", dest="output", metavar="TYPE[/ENCODING]",
-                 help=_(
-"""Specify output as %(loggertypes)s. Default output type is text.
+suppress all console output with the option '-o none'."""
+    )
+    % {"loggertypes": linkcheck.logger.LoggerKeys},
+)
+group.add_argument(
+    "--no-status",
+    action="store_false",
+    dest="status",
+    default=True,
+    help=_("""Do not print check status messages."""),
+)
+group.add_argument(
+    "--no-warnings",
+    action="store_false",
+    dest="warnings",
+    help=_("""Don't log warnings. Default is to log warnings."""),
+)
+group.add_argument(
+    "-o",
+    "--output",
+    dest="output",
+    metavar="TYPE[/ENCODING]",
+    help=_(
+        """Specify output as %(loggertypes)s. Default output type is text.
 The ENCODING specifies the output encoding, the default is that of your
 locale.
-Valid encodings are listed at """ \
-"""http://docs.python.org/lib/standard-encodings.html.""") % \
-{'loggertypes': linkcheck.logger.LoggerKeys})
-group.add_argument("--profile", action="store_true", dest="profile",
-                 help=argparse.SUPPRESS)
-group.add_argument("-q", "--quiet", action="store_true", dest="quiet",
-                 help=_(
-"""Quiet operation, an alias for '-o none'.
-This is only useful with -F."""))
-group.add_argument("--trace", action="store_true", dest="trace",
-                 help=argparse.SUPPRESS)
-group.add_argument("-v", "--verbose", action="store_true", dest="verbose",
-                 help=_(
-"""Log all URLs. Default is to log only errors and warnings."""))
+Valid encodings are listed at """
+        """http://docs.python.org/lib/standard-encodings.html."""
+    )
+    % {"loggertypes": linkcheck.logger.LoggerKeys},
+)
+group.add_argument(
+    "--profile", action="store_true", dest="profile", help=argparse.SUPPRESS
+)
+group.add_argument(
+    "-q",
+    "--quiet",
+    action="store_true",
+    dest="quiet",
+    help=_(
+        """Quiet operation, an alias for '-o none'.
+This is only useful with -F."""
+    ),
+)
+group.add_argument("--trace", action="store_true", dest="trace", help=argparse.SUPPRESS)
+group.add_argument(
+    "-v",
+    "--verbose",
+    action="store_true",
+    dest="verbose",
+    help=_("""Log all URLs. Default is to log only errors and warnings."""),
+)
 
 ################# checking options ##################
 group = argparser.add_argument_group(_("Checking options"))
-group.add_argument("--cookiefile", dest="cookiefile", metavar="FILENAME",
-                 help=_(
-"""Read a file with initial cookie data. The cookie data format is
-explained below."""))
+group.add_argument(
+    "--cookiefile",
+    dest="cookiefile",
+    metavar="FILENAME",
+    help=_(
+        """Read a file with initial cookie data. The cookie data format is
+explained below."""
+    ),
+)
 # const because store_false doesn't detect absent flags
-group.add_argument("--no-robots", action="store_const", const=False,
-                   dest="norobotstxt", help=_("Disable robots.txt checks"))
-group.add_argument("--check-extern", action="store_true",
-                 dest="checkextern", help=_("""Check external URLs."""))
-group.add_argument("--ignore-url", action="append", metavar="REGEX",
-                 dest="externstrict", help=_(
-"""Only check syntax of URLs matching the given regular expression.
- This option can be given multiple times."""))
-group.add_argument("--no-follow-url", action="append", metavar="REGEX",
-                 dest="extern", help=_(
-"""Check but do not recurse into URLs matching the given regular
-expression. This option can be given multiple times."""))
-group.add_argument("-N", "--nntp-server", dest="nntpserver", metavar="STRING",
-                 help=_(
-"""Specify an NNTP server for 'news:...' links. Default is the
+group.add_argument(
+    "--no-robots",
+    action="store_const",
+    const=False,
+    dest="norobotstxt",
+    help=_("Disable robots.txt checks"),
+)
+group.add_argument(
+    "--check-extern",
+    action="store_true",
+    dest="checkextern",
+    help=_("""Check external URLs."""),
+)
+group.add_argument(
+    "--ignore-url",
+    action="append",
+    metavar="REGEX",
+    dest="externstrict",
+    help=_(
+        """Only check syntax of URLs matching the given regular expression.
+ This option can be given multiple times."""
+    ),
+)
+group.add_argument(
+    "--no-follow-url",
+    action="append",
+    metavar="REGEX",
+    dest="extern",
+    help=_(
+        """Check but do not recurse into URLs matching the given regular
+expression. This option can be given multiple times."""
+    ),
+)
+group.add_argument(
+    "-N",
+    "--nntp-server",
+    dest="nntpserver",
+    metavar="STRING",
+    help=_(
+        """Specify an NNTP server for 'news:...' links. Default is the
 environment variable NNTP_SERVER. If no host is given,
-only the syntax of the link is checked."""))
-group.add_argument("-p", "--password", action="store_false", dest="password",
-                 default=False,
-                 help=_(
-"""Read a password from console and use it for HTTP and FTP authorization.
+only the syntax of the link is checked."""
+    ),
+)
+group.add_argument(
+    "-p",
+    "--password",
+    action="store_false",
+    dest="password",
+    default=False,
+    help=_(
+        """Read a password from console and use it for HTTP and FTP authorization.
 For FTP the default password is 'anonymous@'. For HTTP there is
-no default password. See also -u."""))
-group.add_argument("-r", "--recursion-level", type=int,
-                 dest="recursionlevel", metavar="NUMBER",
-                 help=_(
-"""Check recursively all links up to given depth. A negative depth
-will enable infinite recursion. Default depth is infinite."""))
-group.add_argument("--timeout", type=int, dest="timeout",
-                 metavar="NUMBER",
-                 help=_(
-"""Set the timeout for connection attempts in seconds. The default
-timeout is %d seconds.""") % config["timeout"])
-group.add_argument("-u", "--user", dest="username", metavar="STRING",
-                 help=_(
-"""Try the given username for HTTP and FTP authorization.
+no default password. See also -u."""
+    ),
+)
+group.add_argument(
+    "-r",
+    "--recursion-level",
+    type=int,
+    dest="recursionlevel",
+    metavar="NUMBER",
+    help=_(
+        """Check recursively all links up to given depth. A negative depth
+will enable infinite recursion. Default depth is infinite."""
+    ),
+)
+group.add_argument(
+    "--timeout",
+    type=int,
+    dest="timeout",
+    metavar="NUMBER",
+    help=_(
+        """Set the timeout for connection attempts in seconds. The default
+timeout is %d seconds."""
+    )
+    % config["timeout"],
+)
+group.add_argument(
+    "-u",
+    "--user",
+    dest="username",
+    metavar="STRING",
+    help=_(
+        """Try the given username for HTTP and FTP authorization.
 For FTP the default username is 'anonymous'. For HTTP there is
-no default username. See also -p."""))
-group.add_argument("--user-agent", dest="useragent", metavar="STRING",
-                 help=_(
-"""Specify the User-Agent string to send to the HTTP server, for example
+no default username. See also -p."""
+    ),
+)
+group.add_argument(
+    "--user-agent",
+    dest="useragent",
+    metavar="STRING",
+    help=_(
+        """Specify the User-Agent string to send to the HTTP server, for example
 "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is the current
-version of LinkChecker."""))
+version of LinkChecker."""
+    ),
+)
 
-argparser.add_argument('url', nargs='*')
+argparser.add_argument("url", nargs="*")
 ################# auto completion #####################
 if has_argcomplete:
     import argcomplete
+
     argcomplete.autocomplete(argparser)
 
 
@@ -368,10 +525,13 @@ if options.debug:
     allowed_debugs = logconf.lognames.keys()
     for _name in options.debug:
         if _name not in allowed_debugs:
-            print_usage(_("Invalid debug level %(level)r") % {'level': _name})
+            print_usage(_("Invalid debug level %(level)r") % {"level": _name})
     logconf.set_debug(options.debug)
-log.debug(LOG_CMDLINE, _("Python %(version)s on %(platform)s") % \
-   {"version": sys.version, "platform": sys.platform})
+log.debug(
+    LOG_CMDLINE,
+    _("Python %(version)s on %(platform)s")
+    % {"version": sys.version, "platform": sys.platform},
+)
 # read configuration files
 try:
     files = []
@@ -380,8 +540,7 @@ try:
         if os.path.isfile(path):
             files.append(path)
         else:
-            log.warn(LOG_CMDLINE,
-                      _("Unreadable config file: %r"), options.configfile)
+            log.warn(LOG_CMDLINE, _("Unreadable config file: %r"), options.configfile)
     config.read(files=files)
 except linkcheck.LinkCheckerError as msg:
     # config error
@@ -398,18 +557,20 @@ if options.version:
 if not options.warnings:
     config["warnings"] = options.warnings
 if options.externstrict:
-    pats = [linkcheck.get_link_pat(arg, strict=True) \
-            for arg in options.externstrict]
+    pats = [linkcheck.get_link_pat(arg, strict=True) for arg in options.externstrict]
     config["externlinks"].extend(pats)
 if options.extern:
     pats = [linkcheck.get_link_pat(arg) for arg in options.extern]
     config["externlinks"].extend(pats)
 if options.norobotstxt is not None:
-    config['robotstxt'] = options.norobotstxt
+    config["robotstxt"] = options.norobotstxt
 if options.checkextern:
     config["checkextern"] = True
 elif not config["checkextern"]:
-    log.info(LOG_CMDLINE, "Checking intern URLs only; use --check-extern to check extern URLs.")
+    log.info(
+        LOG_CMDLINE,
+        "Checking intern URLs only; use --check-extern to check extern URLs.",
+    )
 
 if options.output:
     if "/" in options.output:
@@ -419,49 +580,61 @@ if options.output:
     logtype = logtype.lower()
     if logtype not in linkcheck.logger.LoggerNames:
         print_usage(
-     _("Unknown logger type %(type)r in %(output)r for option %(option)s") % \
-      {"type": logtype, "output": options.output, "option": "'-o, --output'"})
-    if logtype != 'none' and not has_encoding(encoding):
+            _("Unknown logger type %(type)r in %(output)r for option %(option)s")
+            % {"type": logtype, "output": options.output, "option": "'-o, --output'"}
+        )
+    if logtype != "none" and not has_encoding(encoding):
         print_usage(
-    _("Unknown encoding %(encoding)r in %(output)r for option %(option)s") % \
-     {"encoding": encoding, "output": options.output,
-      "option": "'-o, --output'"})
-    config['output'] = logtype
-    config['logger'] = config.logger_new(logtype, encoding=encoding)
+            _("Unknown encoding %(encoding)r in %(output)r for option %(option)s")
+            % {
+                "encoding": encoding,
+                "output": options.output,
+                "option": "'-o, --output'",
+            }
+        )
+    config["output"] = logtype
+    config["logger"] = config.logger_new(logtype, encoding=encoding)
 if options.fileoutput:
-    ns = {'fileoutput': 1}
+    ns = {"fileoutput": 1}
     for arg in options.fileoutput:
         ftype = arg
         # look for (optional) filename and encoding
-        if '/' in ftype:
-            ftype, suffix = ftype.split('/', 1)
+        if "/" in ftype:
+            ftype, suffix = ftype.split("/", 1)
             if suffix:
                 if has_encoding(suffix):
                     # it was an encoding
-                    ns['encoding'] = suffix
-                elif '/' in suffix:
+                    ns["encoding"] = suffix
+                elif "/" in suffix:
                     # look for (optional) encoding
-                    encoding, filename = suffix.split('/', 1)
+                    encoding, filename = suffix.split("/", 1)
                     if has_encoding(encoding):
-                        ns['encoding'] = encoding
-                        ns['filename'] = filename
+                        ns["encoding"] = encoding
+                        ns["filename"] = filename
                     else:
-                        ns['filename'] = suffix
+                        ns["filename"] = suffix
                 else:
-                    ns['filename'] = suffix
+                    ns["filename"] = suffix
         if ftype not in linkcheck.logger.LoggerNames:
             print_usage(
-     _("Unknown logger type %(type)r in %(output)r for option %(option)s") % \
-       {"type": ftype, "output": options.fileoutput,
-        "option": "'-F, --file-output'"})
-        if ftype != 'none' and 'encoding' in ns and \
-           not has_encoding(ns['encoding']):
+                _("Unknown logger type %(type)r in %(output)r for option %(option)s")
+                % {
+                    "type": ftype,
+                    "output": options.fileoutput,
+                    "option": "'-F, --file-output'",
+                }
+            )
+        if ftype != "none" and "encoding" in ns and not has_encoding(ns["encoding"]):
             print_usage(
-    _("Unknown encoding %(encoding)r in %(output)r for option %(option)s") % \
-     {"encoding": ns['encoding'], "output": options.fileoutput,
-      "option": "'-F, --file-output'"})
+                _("Unknown encoding %(encoding)r in %(output)r for option %(option)s")
+                % {
+                    "encoding": ns["encoding"],
+                    "output": options.fileoutput,
+                    "option": "'-F, --file-output'",
+                }
+            )
         logger = config.logger_new(ftype, **ns)
-        config['fileoutput'].append(logger)
+        config["fileoutput"].append(logger)
 if options.nntpserver:
     config["nntpserver"] = options.nntpserver
 if options.username:
@@ -469,8 +642,9 @@ if options.username:
     constructauth = True
 if options.password:
     if _username:
-        msg = _("Enter LinkChecker HTTP/FTP password for user %(user)s:") % \
-              {"user": _username}
+        msg = _("Enter LinkChecker HTTP/FTP password for user %(user)s:") % {
+            "user": _username
+        }
     else:
         msg = _("Enter LinkChecker HTTP/FTP password:")
     _password = getpass.getpass(console.encode(msg))
@@ -478,11 +652,11 @@ if options.password:
 if options.profile:
     do_profile = options.profile
 if options.quiet:
-    config['logger'] = config.logger_new('none')
+    config["logger"] = config.logger_new("none")
 if options.recursionlevel is not None:
     config["recursionlevel"] = options.recursionlevel
 if options.status:
-    config['status'] = options.status
+    config["status"] = options.status
 if options.threads is not None:
     if options.threads < 1:
         options.threads = 0
@@ -491,8 +665,10 @@ if options.timeout is not None:
     if options.timeout > 0:
         config["timeout"] = options.timeout
     else:
-        print_usage(_("Illegal argument %(arg)r for option %(option)s") % \
-                    {"arg": options.timeout, "option": "'--timeout'"})
+        print_usage(
+            _("Illegal argument %(arg)r for option %(option)s")
+            % {"arg": options.timeout, "option": "'--timeout'"}
+        )
 if options.listplugins:
     print_plugins(config["pluginfolders"])
 if options.verbose:
@@ -500,7 +676,7 @@ if options.verbose:
         config["verbose"] = True
         config["warnings"] = True
 if options.cookiefile is not None:
-    config['cookiefile'] = options.cookiefile
+    config["cookiefile"] = options.cookiefile
 if constructauth:
     config.add_auth(pattern=".+", user=_username, password=_password)
 # read missing passwords
@@ -508,8 +684,10 @@ for entry in config["authentication"]:
     if entry["password"] is None:
         attrs = entry.copy()
         attrs["strpattern"] = attrs["pattern"].pattern
-        msg = _("Enter LinkChecker password for user %(user)s" \
-                " at %(strpattern)s:") % attrs
+        msg = (
+            _("Enter LinkChecker password for user %(user)s" " at %(strpattern)s:")
+            % attrs
+        )
         entry["password"] = getpass.getpass(msg)
 if options.useragent is not None:
     config["useragent"] = options.useragent
@@ -522,8 +700,7 @@ if options.cookiefile is not None:
 # now sanitize the configuration
 config.sanitize()
 
-log.debug(LOG_CMDLINE, "configuration: %s",
-          pprint.pformat(sorted(config.items())))
+log.debug(LOG_CMDLINE, "configuration: %s", pprint.pformat(sorted(config.items())))
 
 # prepare checking queue
 aggregate = get_aggregate(config)
@@ -532,6 +709,7 @@ if options.trace:
     config["trace"] = True
     # start trace in mainthread
     import linkcheck.trace
+
     linkcheck.trace.trace_filter([r"^linkcheck"])
     linkcheck.trace.trace_on()
 # add urls to queue
@@ -547,22 +725,32 @@ else:
 if do_profile:
     if has_profile:
         if os.path.exists(_profile):
-            print(_("""Overwrite profiling file %(file)r?
-Press Ctrl-C to cancel, RETURN to continue.""") % {"file": _profile})
+            print(
+                _(
+                    """Overwrite profiling file %(file)r?
+Press Ctrl-C to cancel, RETURN to continue."""
+                )
+                % {"file": _profile}
+            )
             try:
                 input()
             except KeyboardInterrupt:
                 print("", _("Canceled."), file=sys.stderr, sep="\n")
                 sys.exit(1)
     else:
-        log.warn(LOG_CMDLINE,
-                   _("The `yappi' Python module is not installed,"
-                     " therefore the --profile option is disabled."))
+        log.warn(
+            LOG_CMDLINE,
+            _(
+                "The `yappi' Python module is not installed,"
+                " therefore the --profile option is disabled."
+            ),
+        )
         do_profile = False
 
 # finally, start checking
 if do_profile:
     import yappi
+
     yappi.start()
     check_urls(aggregate)
     yappi.stop()
@@ -571,6 +759,7 @@ else:
     check_urls(aggregate)
 if config["debugmemory"]:
     import linkcheck.memoryutil
+
     if has_meliae:
         log.info(LOG_CMDLINE, _("Dumping memory statistics..."))
         filename = linkcheck.memoryutil.write_memory_dump()
@@ -579,10 +768,10 @@ if config["debugmemory"]:
     else:
         log.warn(LOG_CMDLINE, linkcheck.memoryutil.MemoryDebugMsg)
 
-stats = config['logger'].stats
+stats = config["logger"].stats
 # on internal errors, exit with status 2
 if stats.internal_errors:
     sys.exit(2)
 # on errors or printed warnings, exit with status 1
-if stats.errors or (stats.warnings_printed and config['warnings']):
+if stats.errors or (stats.warnings_printed and config["warnings"]):
     sys.exit(1)
