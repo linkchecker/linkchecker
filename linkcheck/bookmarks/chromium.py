@@ -14,50 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import os
-import sys
 import json
-from xdg.BaseDirectory import xdg_config_home
-
-
-def get_profile_dir():
-    """Return path where all profiles of current user are stored."""
-    if os.name == 'nt':
-        if "LOCALAPPDATA" in os.environ:
-            basedir = os.environ["LOCALAPPDATA"]
-        else:
-            # read local appdata directory from registry
-            from ..winutil import get_shell_folder
-            try:
-                basedir = get_shell_folder("Local AppData")
-            except EnvironmentError:
-                basedir = os.path.join(os.environ["USERPROFILE"],
-                                       "Local Settings", "Application Data")
-        dirpath = os.path.join(basedir, "Chromium", "User Data")
-    elif os.name == 'posix':
-        if sys.platform == 'darwin':
-            dirpath = os.path.join(os.environ["HOME"], "Library",
-                                   "Application Support")
-        else:
-            dirpath = xdg_config_home
-        dirpath = os.path.join(dirpath, "chromium")
-    return dirpath
-
-
-def find_bookmark_file(profile="Default"):
-    """Return the bookmark file of the Default profile.
-    Returns absolute filename if found, or empty string if no bookmark file
-    could be found.
-    """
-    try:
-        dirname = os.path.join(get_profile_dir(), profile)
-        if os.path.isdir(dirname):
-            fname = os.path.join(dirname, "Bookmarks")
-            if os.path.isfile(fname):
-                return fname
-    except Exception:
-        pass
-    return ""
 
 
 def parse_bookmark_data(data):
@@ -66,15 +23,6 @@ def parse_bookmark_data(data):
     Bookmarks are not sorted.
     """
     for url, name in parse_bookmark_json(json.loads(data)):
-        yield url, name
-
-
-def parse_bookmark_file(file):
-    """Parse file object.
-    Return iterator for bookmarks of the form (url, name).
-    Bookmarks are not sorted.
-    """
-    for url, name in parse_bookmark_json(json.load(file)):
         yield url, name
 
 

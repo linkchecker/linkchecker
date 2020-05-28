@@ -14,8 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Parser for FireFox bookmark file."""
-import os
-import glob
+
 import re
 try:
     import sqlite3
@@ -25,33 +24,6 @@ except ImportError:
 
 
 extension = re.compile(r'/places.sqlite$', re.IGNORECASE)
-
-
-def get_profile_dir():
-    """Return path where all profiles of current user are stored."""
-    if os.name == 'nt':
-        basedir = os.environ["APPDATA"]
-        dirpath = os.path.join(basedir, "Mozilla", "Firefox", "Profiles")
-    elif os.name == 'posix':
-        dirpath = os.path.join(os.environ["HOME"], ".mozilla", "firefox")
-    return dirpath
-
-
-def find_bookmark_file(profile="*.default"):
-    """Return the first found places.sqlite file of the profile directories
-    ending with '.default' (or another given profile name).
-    Returns absolute filename if found, or empty string if no bookmark file
-    could be found.
-    """
-    try:
-        for dirname in glob.glob("%s/%s" % (get_profile_dir(), profile)):
-            if os.path.isdir(dirname):
-                fname = os.path.join(dirname, "places.sqlite")
-                if os.path.isfile(fname):
-                    return fname
-    except Exception:
-        pass
-    return ""
 
 
 def parse_bookmark_file(filename):
