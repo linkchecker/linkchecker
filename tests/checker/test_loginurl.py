@@ -40,7 +40,7 @@ class TestLoginUrl(HttpServerTest):
                 "user": user,
                 "password": password,
                 "pattern": re.compile("^http://localhost.*"),
-            }
+            },
         ]
 
         aggregate = get_test_aggregate(confargs, {"expected": ""})
