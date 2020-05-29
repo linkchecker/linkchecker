@@ -80,7 +80,7 @@ class TestLogger(linkcheck.logger._Logger):
                 [
                     "url %s" % x.strip()
                     for x in re.split(
-                        r"^url .*?",
+                        r"^url ",
                         "\n".join(result_log),
                         flags=re.DOTALL | re.MULTILINE,
                     )
