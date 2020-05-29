@@ -61,7 +61,7 @@ class TestUrl(unittest.TestCase):
 
     def test_pathattack(self):
         # Windows winamp path attack prevention.
-        url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c.." "%5ccskin.zip"
+        url = "http://server/..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5ccskin.zip"
         nurl = "http://server/cskin.zip"
         self.assertEqual(
             linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl
@@ -108,7 +108,7 @@ class TestUrl(unittest.TestCase):
             "46F9BD%2540monmouth.com%26rnum%3D2"
         )
         self.urlnormtest(url, url)
-        url = "http://redirect.alexa.com/redirect?" "http://www.offeroptimizer.com"
+        url = "http://redirect.alexa.com/redirect?http://www.offeroptimizer.com"
         self.urlnormtest(url, url)
         url = "http://www.lesgensducinema.com/photo/Philippe%20Nahon.jpg"
         self.urlnormtest(url, url)
