@@ -14,8 +14,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import os
-import sys
 import plistlib
 try:
     import biplist
@@ -24,54 +22,11 @@ except ImportError:
     has_biplist = False
 
 
-def get_profile_dir():
-    """Return path where all profiles of current user are stored."""
-    return os.path.join(os.environ["HOME"], "Library", "Safari")
-
-
-def find_bookmark_file():
-    """Return the bookmark file of the Default profile.
-    Returns absolute filename if found, or empty string if no bookmark file
-    could be found.
-    """
-    if sys.platform != 'darwin':
-        return ""
-    try:
-        dirname = get_profile_dir()
-        if os.path.isdir(dirname):
-            fname = os.path.join(dirname, "Bookmarks.plist")
-            if os.path.isfile(fname):
-                return fname
-    except Exception:
-        pass
-    return ""
-
-
-def parse_bookmark_file(filename):
-    """Return iterator for bookmarks of the form (url, name).
-    Bookmarks are not sorted.
-    """
-    return parse_plist(get_plist_data_from_file(filename))
-
-
 def parse_bookmark_data(data):
     """Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     """
     return parse_plist(get_plist_data_from_string(data))
-
-
-def get_plist_data_from_file(filename):
-    """Parse plist data for a file. Tries biplist, falling back to
-    plistlib."""
-    if has_biplist:
-        return biplist.readPlist(filename)
-    # fall back to normal plistlist
-    try:
-        return plistlib.readPlist(filename)
-    except Exception:
-        # not parseable (eg. not well-formed, or binary)
-        return {}
 
 
 def get_plist_data_from_string(data):

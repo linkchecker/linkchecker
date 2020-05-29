@@ -68,21 +68,6 @@ def asn1_generaltime_to_seconds(timestr):
             pass
     return res
 
-def has_header_value(headers, name, value):
-    """
-    Look in headers for a specific header name and value.
-    Both name and value are case insensitive.
-
-    @return: True if header name and value are found
-    @rtype: bool
-    """
-    name = name.lower()
-    value = value.lower()
-    for hname, hvalue in headers:
-        if hname.lower()==name and hvalue.lower()==value:
-            return True
-    return False
-
 
 def get_content_type(headers):
     """
