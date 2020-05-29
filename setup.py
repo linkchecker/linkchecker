@@ -376,7 +376,12 @@ setup(
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
     python_requires=">= 3.5",
-    install_requires=["requests >= 2.4", "dnspython", "beautifulsoup4", "pyxdg"],
+    install_requires=[
+        "requests >= 2.4",
+        "dnspython",
+        "beautifulsoup4",
+        "pyxdg",
+    ],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
     # extra_requires = {
