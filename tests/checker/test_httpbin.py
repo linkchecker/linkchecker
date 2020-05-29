@@ -55,7 +55,7 @@ class TestHttpbin(LinkCheckTest):
         password = "testpassword"
         url = get_httpbin_url("/basic-auth/%s/%s" % (user, password))
         nurl = self.norm(url)
-        entry = dict(user=user, password=password, pattern=re.compile(r".*"),)
+        entry = dict(user=user, password=password, pattern=re.compile(r".*"))
         confargs = dict(authentication=[entry])
         resultlines = [
             "url %s" % url,
