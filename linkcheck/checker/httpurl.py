@@ -231,7 +231,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         Session.resolve_redirects()."""
         kwargs = dict(stream=True, timeout=self.aggregate.config["timeout"])
         if self.proxy:
-            kwargs["proxies"] = {self.proxytype: self.proxy}
+            kwargs["proxies"] = {self.scheme: self.proxy}
         if self.scheme == "https" and self.aggregate.config["sslverify"]:
             kwargs['verify'] = self.aggregate.config["sslverify"]
         else:
