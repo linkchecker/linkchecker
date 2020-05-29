@@ -26,13 +26,14 @@ from . import LinkCheckTest
 
 TIMEOUT = 5
 
+
 class FtpServerTest(LinkCheckTest):
     """Start/stop an FTP server that can be used for testing."""
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         """Init test class and store default ftp server port."""
         super(FtpServerTest, self).__init__(methodName=methodName)
-        self.host = 'localhost'
+        self.host = "localhost"
         self.port = None
 
     def setUp(self):
@@ -62,7 +63,7 @@ def start_server(host, port):
         pytest.skip("pyftpdlib is not available")
         return
     authorizer = DummyAuthorizer()
-    datadir = os.path.join(os.path.dirname(__file__), 'data')
+    datadir = os.path.join(os.path.dirname(__file__), "data")
     authorizer.add_anonymous(datadir)
 
     # Instantiate FTP handler class
@@ -90,7 +91,7 @@ def start_server(host, port):
             ftp.login()
             ftp.close()
             break
-        except:
+        except Exception:
             time.sleep(0.5)
     return port
 

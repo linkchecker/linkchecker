@@ -30,10 +30,10 @@ def unzip(filename, targetdir):
     """Unzip given zipfile into targetdir."""
     zf = zipfile.ZipFile(filename)
     for name in zf.namelist():
-        if name.endswith('/'):
+        if name.endswith("/"):
             os.mkdir(os.path.join(targetdir, name), 0o700)
         else:
-            outfile = open(os.path.join(targetdir, name), 'wb')
+            outfile = open(os.path.join(targetdir, name), "wb")
             try:
                 outfile.write(zf.read(name))
             finally:
@@ -91,7 +91,7 @@ class TestFile(LinkCheckTest):
     def test_directory_listing(self):
         # unpack non-unicode filename which cannot be stored
         # in the SF subversion repository
-        if os.name != 'posix' or sys.platform != 'linux2':
+        if os.name != "posix" or sys.platform != "linux2":
             return
         dirname = get_file("dir")
         if not os.path.isdir(dirname):
@@ -114,7 +114,7 @@ class TestFile(LinkCheckTest):
         self.direct(url, resultlines)
 
     def test_bad_file(self):
-        if os.name == 'nt':
+        if os.name == "nt":
             # Fails on NT platforms and I am too lazy to fix
             # Cause: url get quoted %7C which gets lowercased to
             # %7c and this fails.

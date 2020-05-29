@@ -38,7 +38,7 @@ class TestHttpMetaRobots(HttpServerTest):
             "url %s" % url,
             "cache key %s" % url,
             "real url %s" % url,
-            "valid"
+            "valid",
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
@@ -59,7 +59,7 @@ class TestFileMetaRobots(LinkCheckTest):
             "cache key %s" % dncurl,
             "real url %s" % dncurl,
             "name bla",
-            "error"
+            "error",
         ]
         self.direct(url, resultlines, recursionlevel=1)
 
@@ -77,7 +77,9 @@ class TestMetaRobotsVariants(unittest.TestCase):
         url_data.soup = make_soup('<meta name="robots" content="nofollow">')
         self.assertFalse(url_data.content_allows_robots())
 
-        url_data.soup = make_soup('<meta name="robots" content="nocache, Nofollow, noimageindex">')
+        url_data.soup = make_soup(
+            '<meta name="robots" content="nocache, Nofollow, noimageindex">'
+        )
         self.assertFalse(url_data.content_allows_robots())
 
         url_data.soup = make_soup('<meta name="robots" content="noindex, follow">')

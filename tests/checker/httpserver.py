@@ -49,10 +49,11 @@ class StoppableHttpRequestHandler(SimpleHTTPRequestHandler):
         """
         pass
 
+
 # serve .xhtml files as application/xhtml+xml
-StoppableHttpRequestHandler.extensions_map.update({
-        '.xhtml': 'application/xhtml+xml',
-})
+StoppableHttpRequestHandler.extensions_map.update(
+    {".xhtml": "application/xhtml+xml"}
+)
 
 
 class StoppableHttpServer(HTTPServer):
@@ -79,15 +80,15 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
         """
         Remove everything after a question mark.
         """
-        i = self.path.find('?')
+        i = self.path.find("?")
         if i != -1:
             self.path = self.path[:i]
 
     def get_status(self):
-        dummy, status = self.path.rsplit('/', 1)
+        dummy, status = self.path.rsplit("/", 1)
         status = int(status)
         if status in self.responses:
-             return status
+            return status
         return 500
 
     def do_GET(self):
@@ -99,7 +100,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
             status = self.get_status()
             self.send_response(status)
             self.end_headers()
-            if  status >= 200 and status not in (204, 304):
+            if status >= 200 and status not in (204, 304):
                 self.wfile.write(b"testcontent")
         else:
             super(NoQueryHttpRequestHandler, self).do_GET()
@@ -131,9 +132,9 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
         list = ["example1.txt", "example2.html", "example3"]
         for name in list:
             displayname = linkname = name
-            list_item = (
-                '<li><a href="%s">%s</a>\n'
-                % (urllib.parse.quote(linkname), html.escape(displayname))
+            list_item = '<li><a href="%s">%s</a>\n' % (
+                urllib.parse.quote(linkname),
+                html.escape(displayname),
             )
             f.write(list_item.encode())
         f.write(b"</ul>\n<hr>\n</body>\n</html>\n")
@@ -152,7 +153,7 @@ class HttpServerTest(LinkCheckTest):
     Start/stop an HTTP server that can be used for testing.
     """
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         """
         Init test class and store default http server port.
         """
@@ -195,13 +196,16 @@ class HttpsServerTest(HttpServerTest):
 
 def start_server(handler, https=False):
     """Start an HTTP server thread and return its port number."""
-    server_address = ('localhost', 0)
+    server_address = ("localhost", 0)
     handler.protocol_version = "HTTP/1.0"
     httpd = StoppableHttpServer(server_address, handler)
     if https:
-        httpd.socket = ssl.wrap_socket(httpd.socket,
+        httpd.socket = ssl.wrap_socket(
+            httpd.socket,
             keyfile=get_file("https_key.pem"),
-            certfile=get_file("https_cert.pem"), server_side=True)
+            certfile=get_file("https_cert.pem"),
+            server_side=True,
+        )
     port = httpd.server_port
     t = threading.Thread(None, httpd.serve_forever)
     t.start()
@@ -209,14 +213,15 @@ def start_server(handler, https=False):
     while True:
         try:
             if https:
-                conn = HTTPSConnection("localhost:%d" % port,
-                        context=ssl._create_unverified_context())
+                conn = HTTPSConnection(
+                    "localhost:%d" % port, context=ssl._create_unverified_context()
+                )
             else:
                 conn = HTTPConnection("localhost:%d" % port)
             conn.request("GET", "/")
             conn.getresponse()
             break
-        except:
+        except Exception:
             time.sleep(0.5)
     return port
 
@@ -224,8 +229,9 @@ def start_server(handler, https=False):
 def stop_server(port, https=False):
     """Stop an HTTP server thread."""
     if https:
-        conn = HTTPSConnection("localhost:%d" % port,
-                               context=ssl._create_unverified_context())
+        conn = HTTPSConnection(
+            "localhost:%d" % port, context=ssl._create_unverified_context()
+        )
     else:
         conn = HTTPConnection("localhost:%d" % port)
     conn.request("QUIT", "/")
@@ -298,6 +304,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         else:
             super(CookieRedirectHttpRequestHandler, self).do_HEAD()
 
+
 class CGIHandler(CGIHTTPRequestHandler, StoppableHttpRequestHandler):
     cgi_path = "/tests/checker/cgi-bin/"
 
@@ -305,7 +312,9 @@ class CGIHandler(CGIHTTPRequestHandler, StoppableHttpRequestHandler):
         # CGIHTTPRequestHandler.is_cgi() can only handle a single-level path
         # override so that we can store scripts under /tests/checker
         if CGIHandler.cgi_path in self.path:
-            self.cgi_info = (CGIHandler.cgi_path,
-                             os.path.relpath(self.path, CGIHandler.cgi_path))
+            self.cgi_info = (
+                CGIHandler.cgi_path,
+                os.path.relpath(self.path, CGIHandler.cgi_path),
+            )
             return True
         return False

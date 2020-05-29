@@ -28,22 +28,25 @@ class TestLinkparser(unittest.TestCase):
 
     def _test_one_link(self, content, url):
         self.count_url = 0
-        linkparse.find_links(htmlsoup.make_soup(content),
-                             self._test_one_url(url), linkparse.LinkTags)
+        linkparse.find_links(
+            htmlsoup.make_soup(content), self._test_one_url(url), linkparse.LinkTags
+        )
         self.assertEqual(self.count_url, 1)
 
     def _test_one_url(self, origurl):
         """Return parser callback function."""
+
         def callback(url, line, column, name, base):
             self.count_url += 1
             self.assertEqual(origurl, url)
+
         return callback
 
     def _test_no_link(self, content):
         def callback(url, line, column, name, base):
-            self.assertTrue(False, 'URL %r found' % url)
-        linkparse.find_links(htmlsoup.make_soup(content), callback,
-                             linkparse.LinkTags)
+            self.assertTrue(False, "URL %r found" % url)
+
+        linkparse.find_links(htmlsoup.make_soup(content), callback, linkparse.LinkTags)
 
     def test_href_parsing(self):
         # Test <a href> parsing.
@@ -87,11 +90,11 @@ class TestLinkparser(unittest.TestCase):
         self._test_one_link(content % url, url)
         content = '<table style="background: url( %s ) no-repeat" >'
         self._test_one_link(content % url, url)
-        content = '<table style="background: url(\'%s\') no-repeat" >'
+        content = "<table style=\"background: url('%s') no-repeat\" >"
         self._test_one_link(content % url, url)
         content = "<table style='background: url(\"%s\") no-repeat' >"
         self._test_one_link(content % url, url)
-        content = '<table style="background: url(\'%s\' ) no-repeat" >'
+        content = "<table style=\"background: url('%s' ) no-repeat\" >"
         self._test_one_link(content % url, url)
         content = "<table style='background: url( \"%s\") no-repeat' >"
         self._test_one_link(content % url, url)
@@ -108,6 +111,6 @@ class TestLinkparser(unittest.TestCase):
         self.assertEqual(strip(content), "abc")
 
     def test_url_quoting(self):
-        url = 'http://example.com/bla/a=b'
+        url = "http://example.com/bla/a=b"
         content = '<a href="%s&quot;">'
         self._test_one_link(content % url, url + '"')

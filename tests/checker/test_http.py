@@ -20,10 +20,11 @@ Test http checking.
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
+
 class TestHttp(HttpServerTest):
     """Test http:// link checking."""
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         super(TestHttp, self).__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
@@ -58,7 +59,9 @@ class TestHttp(HttpServerTest):
             resultlines.append("warning No Content")
         if status == 429:
             resultlines.append("warning Rate limited (Retry-After: None)")
-        if (status not in [101, 102] and status < 200) or (status >= 400 and status != 429):
+        if (status not in [101, 102] and status < 200) or (
+            status >= 400 and status != 429
+        ):
             result = "error"
         else:
             result = "valid"

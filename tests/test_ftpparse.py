@@ -23,57 +23,95 @@ from linkcheck.ftpparse import ftpparse
 patterns = (
     # EPLF format
     # http://pobox.com/~djb/proto/eplf.html
-    ("+i8388621.29609,m824255902,/,\tdev",
-     dict(name='dev', tryretr=False, trycwd=True)),
-    ("+i8388621.44468,m839956783,r,s10376,\tRFCEPLF",
-     dict(name='RFCEPLF', tryretr=True, trycwd=False)),
+    (
+        "+i8388621.29609,m824255902,/,\tdev",
+        dict(name="dev", tryretr=False, trycwd=True),
+    ),
+    (
+        "+i8388621.44468,m839956783,r,s10376,\tRFCEPLF",
+        dict(name="RFCEPLF", tryretr=True, trycwd=False),
+    ),
     # UNIX-style listing, without inum and without blocks
-    ("-rw-r--r--   1 root     other        531 Jan 29 03:26 README",
-     dict(name='README', tryretr=True, trycwd=False)),
-    ("dr-xr-xr-x   2 root     other        512 Apr  8  1994 etc",
-     dict(name='etc', tryretr=False, trycwd=True)),
-    ("dr-xr-xr-x   2 root     512 Apr  8  1994 etc",
-     dict(name='etc', tryretr=False, trycwd=True)),
-    ("lrwxrwxrwx   1 root     other          7 Jan 25 00:17 bin -> usr/bin",
-     dict(name='usr/bin', tryretr=True, trycwd=True)),
+    (
+        "-rw-r--r--   1 root     other        531 Jan 29 03:26 README",
+        dict(name="README", tryretr=True, trycwd=False),
+    ),
+    (
+        "dr-xr-xr-x   2 root     other        512 Apr  8  1994 etc",
+        dict(name="etc", tryretr=False, trycwd=True),
+    ),
+    (
+        "dr-xr-xr-x   2 root     512 Apr  8  1994 etc",
+        dict(name="etc", tryretr=False, trycwd=True),
+    ),
+    (
+        "lrwxrwxrwx   1 root     other          7 Jan 25 00:17 bin -> usr/bin",
+        dict(name="usr/bin", tryretr=True, trycwd=True),
+    ),
     # Also produced by Microsoft's FTP servers for Windows:
-    ("----------   1 owner    group         1803128 Jul 10 10:18 ls-lR.Z",
-     dict(name='ls-lR.Z', tryretr=True, trycwd=False)),
-    ("d---------   1 owner    group               0 May  9 19:45 Softlib",
-     dict(name='Softlib', tryretr=False, trycwd=True)),
+    (
+        "----------   1 owner    group         1803128 Jul 10 10:18 ls-lR.Z",
+        dict(name="ls-lR.Z", tryretr=True, trycwd=False),
+    ),
+    (
+        "d---------   1 owner    group               0 May  9 19:45 Softlib",
+        dict(name="Softlib", tryretr=False, trycwd=True),
+    ),
     # Also WFTPD for MSDOS:
-    ("-rwxrwxrwx   1 noone    nogroup      322 Aug 19  1996 message.ftp",
-     dict(name='message.ftp', tryretr=True, trycwd=False)),
+    (
+        "-rwxrwxrwx   1 noone    nogroup      322 Aug 19  1996 message.ftp",
+        dict(name="message.ftp", tryretr=True, trycwd=False),
+    ),
     # Also NetWare:
-    ("d [R----F--] supervisor            512       Jan 16 18:53    login",
-     dict(name='login', tryretr=False, trycwd=True)),
-    ("- [R----F--] rhesus             214059       Oct 20 15:27    cx.exe",
-     dict(name='cx.exe', tryretr=True, trycwd=False)),
+    (
+        "d [R----F--] supervisor            512       Jan 16 18:53    login",
+        dict(name="login", tryretr=False, trycwd=True),
+    ),
+    (
+        "- [R----F--] rhesus             214059       Oct 20 15:27    cx.exe",
+        dict(name="cx.exe", tryretr=True, trycwd=False),
+    ),
     # Also NetPresenz for the Mac:
-    ("-------r--         326  1391972  1392298 Nov 22  1995 MegaPhone.sit",
-     dict(name='MegaPhone.sit', tryretr=True, trycwd=False)),
-    ("drwxrwxr-x               folder        2 May 10  1996 network",
-     dict(name='network', tryretr=False, trycwd=True)),
+    (
+        "-------r--         326  1391972  1392298 Nov 22  1995 MegaPhone.sit",
+        dict(name="MegaPhone.sit", tryretr=True, trycwd=False),
+    ),
+    (
+        "drwxrwxr-x               folder        2 May 10  1996 network",
+        dict(name="network", tryretr=False, trycwd=True),
+    ),
     # MultiNet (some spaces removed from examples)
-    ("00README.TXT;1      2 30-DEC-1996 17:44 [SYSTEM] (RWED,RWED,RE,RE)",
-     dict(name='00README.TXT', tryretr=True, trycwd=False)),
-    ("CORE.DIR;1          1  8-SEP-1996 16:09 [SYSTEM] (RWE,RWE,RE,RE)",
-     dict(name='CORE', tryretr=False, trycwd=True)),
+    (
+        "00README.TXT;1      2 30-DEC-1996 17:44 [SYSTEM] (RWED,RWED,RE,RE)",
+        dict(name="00README.TXT", tryretr=True, trycwd=False),
+    ),
+    (
+        "CORE.DIR;1          1  8-SEP-1996 16:09 [SYSTEM] (RWE,RWE,RE,RE)",
+        dict(name="CORE", tryretr=False, trycwd=True),
+    ),
     # and non-MutliNet VMS:
-    ("CII-MANUAL.TEX;1  213/216  29-JAN-1996 03:33:12  [ANONYMOU,ANONYMOUS]   (RWED,RWED,,)",
-     dict(name='CII-MANUAL.TEX', tryretr=True, trycwd=False)),
+    (
+        "CII-MANUAL.TEX;1  213/216  29-JAN-1996 03:33:12  [ANONYMOU,ANONYMOUS]   (RWED,RWED,,)",
+        dict(name="CII-MANUAL.TEX", tryretr=True, trycwd=False),
+    ),
     # MSDOS format
-    ("04-27-00  09:09PM       <DIR>          licensed",
-     dict(name='licensed', tryretr=False, trycwd=True)),
-    ("07-18-00  10:16AM       <DIR>          pub",
-     dict(name='pub', tryretr=False, trycwd=True)),
-    ("04-14-00  03:47PM                  589 readme.htm",
-     dict(name='readme.htm', tryretr=True, trycwd=False)),
+    (
+        "04-27-00  09:09PM       <DIR>          licensed",
+        dict(name="licensed", tryretr=False, trycwd=True),
+    ),
+    (
+        "07-18-00  10:16AM       <DIR>          pub",
+        dict(name="pub", tryretr=False, trycwd=True),
+    ),
+    (
+        "04-14-00  03:47PM                  589 readme.htm",
+        dict(name="readme.htm", tryretr=True, trycwd=False),
+    ),
     # Some useless lines, safely ignored:
-    ("Total of 11 Files, 10966 Blocks.", None), # (VMS)
-    ("total 14786", None), # (UNIX)
-    ("DISK$ANONFTP:[ANONYMOUS]", None), # (VMS)
-    ("Directory DISK$PCSA:[ANONYM]", None), # (VMS)
+    ("Total of 11 Files, 10966 Blocks.", None),  # (VMS)
+    ("total 14786", None),  # (UNIX)
+    ("DISK$ANONFTP:[ANONYMOUS]", None),  # (VMS)
+    ("Directory DISK$PCSA:[ANONYM]", None),  # (VMS)
     ("", None),
 )
 
@@ -86,5 +124,6 @@ class TestFtpparse(unittest.TestCase):
     def test_ftpparse(self):
         for line, expected in patterns:
             res = ftpparse(line)
-            self.assertEqual(expected, res,
-                "got %r\nexpected %r\n%r" % (res, expected, line))
+            self.assertEqual(
+                expected, res, "got %r\nexpected %r\n%r" % (res, expected, line)
+            )

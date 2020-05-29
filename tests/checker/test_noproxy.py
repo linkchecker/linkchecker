@@ -20,6 +20,7 @@ from test.support import EnvironmentVarGuard
 
 from . import httpserver
 
+
 class TestProxy(httpserver.HttpServerTest):
     """Test no_proxy env var handling."""
 

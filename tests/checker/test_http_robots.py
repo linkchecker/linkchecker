@@ -18,6 +18,7 @@ Test http checking.
 """
 from .httpserver import HttpServerTest
 
+
 class TestHttpRobots(HttpServerTest):
     """Test robots.txt link checking behaviour."""
 

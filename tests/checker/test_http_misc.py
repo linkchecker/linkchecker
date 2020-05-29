@@ -19,6 +19,7 @@ Test http checking.
 from .httpserver import HttpServerTest
 from tests import need_network
 
+
 class TestHttpMisc(HttpServerTest):
     """Test http:// misc link checking."""
 
@@ -26,7 +27,7 @@ class TestHttpMisc(HttpServerTest):
     def test_html_internet(self):
         self.swf_test()
         self.file_test("sitemap.xml")
-    
+
     def test_html(self):
         self.file_test("sitemapindex.xml")
 

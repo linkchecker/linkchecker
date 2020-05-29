@@ -28,22 +28,26 @@ class TestMailGood(MailTest):
     @need_network
     def test_good_mail(self):
         # some good mailto addrs
-        url = self.norm("mailto:Dude <calvin@users.sourceforge.net> , "\
-                "Killer <calvin@users.sourceforge.net>?subject=bla")
+        url = self.norm(
+            "mailto:Dude <calvin@users.sourceforge.net> , "
+            "Killer <calvin@users.sourceforge.net>?subject=bla"
+        )
         resultlines = [
-          "url %s" % url,
-          "cache key mailto:calvin@users.sourceforge.net",
-          "real url %s" % url,
-          "valid",
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm("mailto:Bastian Kleineidam <calvin@users.sourceforge.net>?"\
-                "bcc=calvin%40users.sourceforge.net")
+        url = self.norm(
+            "mailto:Bastian Kleineidam <calvin@users.sourceforge.net>?"
+            "bcc=calvin%40users.sourceforge.net"
+        )
         resultlines = [
-          "url %s" % url,
-          "cache key mailto:calvin@users.sourceforge.net",
-          "real url %s" % url,
-          "valid",
+            "url %s" % url,
+            "cache key mailto:calvin@users.sourceforge.net",
+            "real url %s" % url,
+            "valid",
         ]
         self.direct(url, resultlines)
         url = self.norm("mailto:Bastian Kleineidam <calvin@users.sourceforge.net>")
@@ -62,19 +66,23 @@ class TestMailGood(MailTest):
             "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm("mailto:?to=calvin@users.sourceforge.net&subject=blubb&"
-                       "cc=calvin_cc@users.sourceforge.net&CC=calvin_CC@users.sourceforge.net")
+        url = self.norm(
+            "mailto:?to=calvin@users.sourceforge.net&subject=blubb&"
+            "cc=calvin_cc@users.sourceforge.net&CC=calvin_CC@users.sourceforge.net"
+        )
         resultlines = [
             "url %s" % url,
             "cache key mailto:calvin@users.sourceforge.net,"
-             "calvin_CC@users.sourceforge.net,calvin_cc@users.sourceforge.net",
+            "calvin_CC@users.sourceforge.net,calvin_cc@users.sourceforge.net",
             "real url %s" % url,
             "valid",
         ]
         self.direct(url, resultlines)
-        url = self.norm("mailto:news-admins@freshcode.club?subject="
-                "Re:%20[fm%20#11093]%20(news-admins)%20Submission%20"
-                "report%20-%20Pretty%20CoLoRs")
+        url = self.norm(
+            "mailto:news-admins@freshcode.club?subject="
+            "Re:%20[fm%20#11093]%20(news-admins)%20Submission%20"
+            "report%20-%20Pretty%20CoLoRs"
+        )
         resultlines = [
             "url %s" % url,
             "cache key mailto:news-admins@freshcode.club",
@@ -117,10 +125,9 @@ class TestMailGood(MailTest):
 
     def _mail_valid_unverified(self, char):
         # valid mail addresses
-        addr = 'abc%sdef@sourceforge.net' % char
+        addr = "abc%sdef@sourceforge.net" % char
         url = "mailto:%s" % addr
-        self.mail_valid(url,
-          cache_key=url)
+        self.mail_valid(url, cache_key=url)
 
     @need_network
     def test_valid_mail1(self):

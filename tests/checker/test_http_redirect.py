@@ -19,10 +19,11 @@ Test http checking.
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
 
+
 class TestHttpRedirect(HttpServerTest):
     """Test http:// link redirection checking."""
 
-    def __init__(self, methodName='runTest'):
+    def __init__(self, methodName="runTest"):
         super(TestHttpRedirect, self).__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
@@ -68,17 +69,17 @@ class TestHttpRedirect(HttpServerTest):
     def redirect4(self):
         url = "http://localhost:%d/redirect_newscheme_ftp" % self.port
         nurl = url
-        #rurl = "ftp://example.com/"
+        # rurl = "ftp://example.com/"
         resultlines = [
             "url %s" % url,
             "cache key %s" % nurl,
             "real url %s" % nurl,
             # don't allow ftp redirects
-            #"info Redirected to `%s'." % rurl,
-            #"valid",
-            #"url %s" % rurl,
-            #"cache key %s" % rurl,
-            #"real url %s" % rurl,
+            # "info Redirected to `%s'." % rurl,
+            # "valid",
+            # "url %s" % rurl,
+            # "cache key %s" % rurl,
+            # "real url %s" % rurl,
             "error",
         ]
         self.direct(url, resultlines, recursionlevel=99)
@@ -86,21 +87,21 @@ class TestHttpRedirect(HttpServerTest):
     def redirect5(self):
         url = "http://localhost:%d/redirect_newscheme_file" % self.port
         nurl = url
-        #rurl = "file:README"
-        #rnurl = "file:///README"
+        # rurl = "file:README"
+        # rnurl = "file:///README"
         resultlines = [
             "url %s" % url,
             "cache key %s" % nurl,
             "real url %s" % nurl,
             # don't allow file redirects
-            #"info Redirected to `%s'." % rurl,
-            #"warning Redirection to url `%s' is not allowed." % rnurl,
+            # "info Redirected to `%s'." % rurl,
+            # "warning Redirection to url `%s' is not allowed." % rnurl,
             "error",
         ]
         self.direct(url, resultlines, recursionlevel=99)
 
     def redirect6(self):
-        #max_redirect = 10
+        # max_redirect = 10
         # url = "http://httpbin.org/redirect/" + max_redirect --> valid
         # url = "http://httpbin.org/redirect/" + (max_redirect+1) --> error
-        pass # XXX
+        pass  # XXX

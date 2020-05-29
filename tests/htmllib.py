@@ -57,7 +57,7 @@ def quote_attrval(s):
     for c in s:
         if ord(c) <= 127:
             # ASCII
-            if c == '&':
+            if c == "&":
                 res.append("&amp;")
             elif c == '"':
                 res.append("&quot;")

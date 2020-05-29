@@ -35,21 +35,21 @@ class TestLogger(linkcheck.logger._Logger):
     """
     Output logger for automatic regression tests.
     """
-    
+
     # don't attempt to collect this class because it has an __init__()
     __test__ = False
 
-    LoggerName = 'test'
+    LoggerName = "test"
 
     logparts = [
-        'cachekey',
-        'realurl',
-        'name',
-        'base',
-        'info',
-        'warning',
-        'result',
-        'url',
+        "cachekey",
+        "realurl",
+        "name",
+        "base",
+        "info",
+        "warning",
+        "result",
+        "url",
     ]
 
     def __init__(self, **kwargs):
@@ -58,27 +58,36 @@ class TestLogger(linkcheck.logger._Logger):
         output lines.
         """
         args = self.get_args(kwargs)
-        args['parts'] = self.logparts
+        args["parts"] = self.logparts
         super(TestLogger, self).__init__(**args)
         # list of expected output lines
-        self.expected = args['expected']
+        self.expected = args["expected"]
         # list of real output lines
         self.result = []
         # diff between expected and real output
         self.diff = []
 
     def normalize(self, result_log):
-        # XXX we assume that each log entry has a URL key, maybe we should add an assert into log_url() to that effect?
+        # XXX we assume that each log entry has a URL key,
+        # maybe we should add an assert into log_url() to that effect?
         # Ensure that log entries are sorted by URL key:
         # - join the result_log items together
         # - split into entries (starting with a URL key)
         # - sort the entries and join together
         # - split the entries back into a list
-        return '\n'.join(
-            sorted(['url %s' % x.strip() for x in
-                    re.split(r'^url .*?', '\n'.join(result_log),
-                             flags=re.DOTALL | re.MULTILINE)
-                    if x])).splitlines()
+        return "\n".join(
+            sorted(
+                [
+                    "url %s" % x.strip()
+                    for x in re.split(
+                        r"^url ",
+                        "\n".join(result_log),
+                        flags=re.DOTALL | re.MULTILINE,
+                    )
+                    if x
+                ]
+            )
+        ).splitlines()
 
     def start_output(self):
         """
@@ -90,42 +99,44 @@ class TestLogger(linkcheck.logger._Logger):
         """
         Append logger output to self.result.
         """
-        if self.has_part('url'):
+        if self.has_part("url"):
             url = "url %s" % url_data.base_url
             self.result.append(url)
-        if self.has_part('cachekey'):
+        if self.has_part("cachekey"):
             cache_key = url_data.cache_url if url_data.cache_url else None
             self.result.append("cache key %s" % cache_key)
-        if self.has_part('realurl'):
+        if self.has_part("realurl"):
             self.result.append("real url %s" % url_data.url)
-        if self.has_part('name') and url_data.name:
+        if self.has_part("name") and url_data.name:
             self.result.append("name %s" % url_data.name)
-        if self.has_part('base') and url_data.base_ref:
+        if self.has_part("base") and url_data.base_ref:
             self.result.append("baseurl %s" % url_data.base_ref)
-        if self.has_part('info'):
+        if self.has_part("info"):
             for info in url_data.info:
-                if "Last modified" not in info and \
-                   "is located in" not in info and \
-                   "Using proxy" not in info:
+                if (
+                    "Last modified" not in info
+                    and "is located in" not in info
+                    and "Using proxy" not in info
+                ):
                     self.result.append("info %s" % info)
-        if self.has_part('warning'):
+        if self.has_part("warning"):
             for tag, warning in url_data.warnings:
                 self.result.append("warning %s" % warning)
-        if self.has_part('result'):
+        if self.has_part("result"):
             self.result.append("valid" if url_data.valid else "error")
-        if self.has_part('line'):
+        if self.has_part("line"):
             self.result.append("line %s" % url_data.line)
-        if self.has_part('col'):
+        if self.has_part("col"):
             self.result.append("col %s" % url_data.column)
-        if self.has_part('size'):
+        if self.has_part("size"):
             self.result.append("size %s" % url_data.size)
-        if self.has_part('parent_url'):
+        if self.has_part("parent_url"):
             self.result.append("parent_url %s" % url_data.parent_url)
-        if self.has_part('page'):
+        if self.has_part("page"):
             self.result.append("page %s" % url_data.page)
-        if self.has_part('modified'):
+        if self.has_part("modified"):
             self.result.append("modified %s" % url_data.modified)
-        if self.has_part('content_type'):
+        if self.has_part("content_type"):
             self.result.append("content_type %s" % url_data.content_type)
         # note: do not append url_data.result since this is
         # platform dependent
@@ -136,10 +147,15 @@ class TestLogger(linkcheck.logger._Logger):
         """
         self.expected = self.normalize(self.expected)
         self.result = self.normalize(self.result)
-        self.diff = list(difflib.unified_diff(self.expected, self.result,
-                                              fromfile="expected",
-                                              tofile="result",
-                                              lineterm=""))
+        self.diff = list(
+            difflib.unified_diff(
+                self.expected,
+                self.result,
+                fromfile="expected",
+                tofile="result",
+                lineterm="",
+            )
+        )
 
 
 def get_file_url(filename):
@@ -147,31 +163,31 @@ def get_file_url(filename):
 
 
 def add_fileoutput_config(config):
-    if os.name == 'posix':
-        devnull = '/dev/null'
-    elif os.name == 'nt':
-        devnull = 'NUL'
+    if os.name == "posix":
+        devnull = "/dev/null"
+    elif os.name == "nt":
+        devnull = "NUL"
     else:
         return
     for ftype in linkcheck.logger.LoggerNames:
-        if ftype in ('test', 'blacklist'):
+        if ftype in ("test", "blacklist"):
             continue
         logger = config.logger_new(ftype, fileoutput=1, filename=devnull)
-        config['fileoutput'].append(logger)
+        config["fileoutput"].append(logger)
 
 
 def get_test_aggregate(confargs, logargs, logger=TestLogger):
     """Initialize a test configuration object."""
     config = linkcheck.configuration.Configuration()
     config.logger_add(logger)
-    config['recursionlevel'] = 1
-    config['logger'] = config.logger_new(logger.LoggerName, **logargs)
+    config["recursionlevel"] = 1
+    config["logger"] = config.logger_new(logger.LoggerName, **logargs)
     add_fileoutput_config(config)
     # uncomment for debugging
-    #config.init_logging(None, debug=["all"])
+    # config.init_logging(None, debug=["all"])
     config["verbose"] = True
-    config['threads'] = 0
-    config['status'] = False
+    config["threads"] = 0
+    config["status"] = False
     config["checkextern"] = True
     config.update(confargs)
     config.sanitize()
@@ -182,13 +198,14 @@ class LinkCheckTest(unittest.TestCase):
     """
     Functional test class with ability to test local files.
     """
+
     logger = TestLogger
 
     def setUp(self):
         """Ensure the current locale setting is the default.
         Otherwise, warnings will get translated and will break tests."""
         super(LinkCheckTest, self).setUp()
-        linkcheck.init_i18n(loc='C')
+        linkcheck.init_i18n(loc="C")
 
     def norm(self, url, encoding="utf-8"):
         """Helper function to norm a url."""
@@ -198,8 +215,8 @@ class LinkCheckTest(unittest.TestCase):
         """Return current and data directory as dictionary.
         You can augment the dict with keyword attributes."""
         d = {
-            'curdir': get_file_url(os.getcwd()),
-            'datadir': "tests/checker/data",
+            "curdir": get_file_url(os.getcwd()),
+            "datadir": "tests/checker/data",
         }
         d.update(kwargs)
         return d
@@ -210,16 +227,20 @@ class LinkCheckTest(unittest.TestCase):
         ignoring empty lines and lines starting with a hash sign (#).
         """
         resultfile = get_file("%s.result" % filename)
-        d = {'curdir': get_file_url(os.getcwd()),
-             'datadir': get_file_url(get_file()),
-            }
+        d = {
+            "curdir": get_file_url(os.getcwd()),
+            "datadir": get_file_url(get_file()),
+        }
         # the webserver uses the first free port number
-        if hasattr(self, 'port'):
-            d['port'] = self.port
+        if hasattr(self, "port"):
+            d["port"] = self.port
         # all result files are encoded in utf-8
         with codecs.open(resultfile, "r", "utf-8") as f:
-            return [line.rstrip('\r\n') % d for line in f
-                    if line.strip() and not line.startswith('#')]
+            return [
+                line.rstrip("\r\n") % d
+                for line in f
+                if line.strip() and not line.startswith("#")
+            ]
 
     def get_url(self, filename):
         """Get URL for given filename."""
@@ -230,42 +251,48 @@ class LinkCheckTest(unittest.TestCase):
         url = self.get_url(filename)
         if confargs is None:
             confargs = {}
-        logargs = {'expected': self.get_resultlines(filename)}
+        logargs = {"expected": self.get_resultlines(filename)}
         aggregate = get_test_aggregate(confargs, logargs, logger=self.logger)
         url_data = get_url_from(url, 0, aggregate, extern=(0, 0))
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
-        logger = aggregate.config['logger']
+        logger = aggregate.config["logger"]
         diff = logger.diff
         if diff:
             msg = os.linesep.join([url] + diff)
             self.fail(msg)
         if logger.stats.internal_errors:
-            self.fail("%d internal errors occurred!"
-                              % logger.stats.internal_errors)
+            self.fail("%d internal errors occurred!" % logger.stats.internal_errors)
 
-    def direct(self, url, resultlines, parts=None, recursionlevel=0,
-                confargs=None, url_encoding=None):
+    def direct(
+        self,
+        url,
+        resultlines,
+        parts=None,
+        recursionlevel=0,
+        confargs=None,
+        url_encoding=None,
+    ):
         """Check url with expected result."""
         assert isinstance(url, str), repr(url)
         if confargs is None:
-            confargs = {'recursionlevel': recursionlevel}
+            confargs = {"recursionlevel": recursionlevel}
         else:
-            confargs['recursionlevel'] = recursionlevel
-        logargs = {'expected': resultlines}
+            confargs["recursionlevel"] = recursionlevel
+        logargs = {"expected": resultlines}
         if parts is not None:
-            logargs['parts'] = parts
+            logargs["parts"] = parts
         aggregate = get_test_aggregate(confargs, logargs)
         # initial URL has recursion level zero
         url_reclevel = 0
         url_data = get_url_from(url, url_reclevel, aggregate, url_encoding=url_encoding)
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
-        diff = aggregate.config['logger'].diff
+        diff = aggregate.config["logger"].diff
         if diff:
-            l = ["Differences found testing %s" % url]
-            l.extend(x.rstrip() for x in diff[2:])
-            self.fail(os.linesep.join(l))
+            d = ["Differences found testing %s" % url]
+            d.extend(x.rstrip() for x in diff[2:])
+            self.fail(os.linesep.join(d))
 
 
 class MailTest(LinkCheckTest):

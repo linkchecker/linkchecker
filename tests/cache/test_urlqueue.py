@@ -20,21 +20,18 @@ from collections import namedtuple
 from linkcheck.cache.results import ResultCache
 from linkcheck.cache.urlqueue import Empty, NUM_PUTS_CLEANUP, UrlQueue
 
-UrlData = namedtuple('UrlData', 'url cache_url aggregate has_result')
-Aggregate = namedtuple('Aggregate', 'result_cache')
+UrlData = namedtuple("UrlData", "url cache_url aggregate has_result")
+Aggregate = namedtuple("Aggregate", "result_cache")
 
 
 class TestUrlQueue(unittest.TestCase):
-
     def setUp(self):
         self.result_cache = ResultCache()
         self.urlqueue = UrlQueue()
         self.urldata1 = UrlData(
             url="Foo",
             cache_url="Foo",
-            aggregate=Aggregate(
-                result_cache=self.result_cache,
-            ),
+            aggregate=Aggregate(result_cache=self.result_cache),
             has_result=True,
         )
 
@@ -72,9 +69,7 @@ class TestUrlQueue(unittest.TestCase):
         the item and it can be get only once
         """
         self.urlqueue.put(self.urldata1)
-        cached_item = (
-            self.result_cache.get_result(self.urldata1)
-        )
+        cached_item = self.result_cache.get_result(self.urldata1)
         self.assertEqual(cached_item, None)
         self.assertEqual(self.urlqueue.get(), self.urldata1)
         with self.assertRaises(Empty):
@@ -89,9 +84,7 @@ class TestUrlQueue(unittest.TestCase):
         urldata = UrlData(
             url="Bar",
             cache_url="Bar",
-            aggregate=Aggregate(
-                result_cache=self.result_cache,
-            ),
+            aggregate=Aggregate(result_cache=self.result_cache),
             has_result=False,
         )
         self.urlqueue.put(urldata)
@@ -109,9 +102,7 @@ class TestUrlQueue(unittest.TestCase):
         urldata = UrlData(
             url="Bar",
             cache_url="Bar",
-            aggregate=Aggregate(
-                result_cache=self.result_cache,
-            ),
+            aggregate=Aggregate(result_cache=self.result_cache),
             has_result=True,
         )
         self.urlqueue.put(urldata)
@@ -129,9 +120,7 @@ class TestUrlQueue(unittest.TestCase):
         urldata = UrlData(
             url="Bar",
             cache_url="Foo",
-            aggregate=Aggregate(
-                result_cache=self.result_cache,
-            ),
+            aggregate=Aggregate(result_cache=self.result_cache),
             has_result=True,
         )
         self.urlqueue.put(urldata)
@@ -152,9 +141,7 @@ class TestUrlQueue(unittest.TestCase):
                 UrlData(
                     url="Bar",
                     cache_url="Bar address %s" % i,
-                    aggregate=Aggregate(
-                        result_cache=self.result_cache,
-                    ),
+                    aggregate=Aggregate(result_cache=self.result_cache),
                     has_result=False,
                 ),
             )
@@ -162,9 +149,7 @@ class TestUrlQueue(unittest.TestCase):
         urldata = UrlData(
             url="Bar",
             cache_url="Bar address",
-            aggregate=Aggregate(
-                result_cache=self.result_cache,
-            ),
+            aggregate=Aggregate(result_cache=self.result_cache),
             has_result=False,
         )
         self.result_cache.add_result("Bar address 2", "asdf")

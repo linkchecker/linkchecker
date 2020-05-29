@@ -82,12 +82,16 @@ parsetests = [
     ("""<a  href='"' >""", """<a href="&quot;"/>"""),
     ("""<a  href="bla" %]" >""", """<a %]"="" href="bla"/>"""),
     ("""<a  href=bla" >""", """<a href="bla&quot;"/>"""),
-    ("""<a onmouseover=blubb('nav1','',"""\
-     """'/images/nav.gif',1);move(this); b="c">""",
-     """<a b="c" onmouseover="blubb('nav1','',"""\
-     """'/images/nav.gif',1);move(this);"/>"""),
-    ("""<a onClick=location.href('/index.htm') b="c">""",
-     """<a b="c" onclick="location.href('/index.htm')"/>"""),
+    (
+        """<a onmouseover=blubb('nav1','',"""
+        """'/images/nav.gif',1);move(this); b="c">""",
+        """<a b="c" onmouseover="blubb('nav1','',"""
+        """'/images/nav.gif',1);move(this);"/>""",
+    ),
+    (
+        """<a onClick=location.href('/index.htm') b="c">""",
+        """<a b="c" onclick="location.href('/index.htm')"/>""",
+    ),
     # entity resolving
     ("""<a  href="&#6D;ailto:" >""", """<a href="D;ailto:"/>"""),
     ("""<a  href="&amp;ailto:" >""", """<a href="&amp;ailto:"/>"""),
@@ -98,19 +102,31 @@ parsetests = [
     # note that \u8156 is not valid encoding and therefore gets removed
     ("""<a  href="&#8156;ailto:" >""", """<a href="&#8156;ailto:"/>"""),
     # mailto link
-    ("""<a  href=mailto:calvin@LocalHost?subject=Hallo&to=michi>1</a>""",
-     """<a href="mailto:calvin@LocalHost?subject=Hallo&amp;to=michi">1</a>"""),
+    (
+        """<a  href=mailto:calvin@LocalHost?subject=Hallo&to=michi>1</a>""",
+        """<a href="mailto:calvin@LocalHost?subject=Hallo&amp;to=michi">1</a>""",
+    ),
     # meta tag with charset encoding
-    ("""<meta http-equiv="content-type" content>""",
-     """<meta content="" http-equiv="content-type"/>"""),
-    ("""<meta http-equiv="content-type" content=>""",
-     """<meta content="" http-equiv="content-type"/>"""),
-    ("""<meta http-equiv="content-type" content="hulla">""",
-     """<meta content="hulla" http-equiv="content-type"/>"""),
-    ("""<meta http-equiv="content-type" content="text/html; charset=iso8859-1">""",
-     """<meta content="text/html; charset=iso8859-1" http-equiv="content-type"/>"""),
-    ("""<meta http-equiv="content-type" content="text/html; charset=hulla">""",
-     """<meta content="text/html; charset=hulla" http-equiv="content-type"/>"""),
+    (
+        """<meta http-equiv="content-type" content>""",
+        """<meta content="" http-equiv="content-type"/>""",
+    ),
+    (
+        """<meta http-equiv="content-type" content=>""",
+        """<meta content="" http-equiv="content-type"/>""",
+    ),
+    (
+        """<meta http-equiv="content-type" content="hulla">""",
+        """<meta content="hulla" http-equiv="content-type"/>""",
+    ),
+    (
+        """<meta http-equiv="content-type" content="text/html; charset=iso8859-1">""",
+        """<meta content="text/html; charset=iso8859-1" http-equiv="content-type"/>""",
+    ),
+    (
+        """<meta http-equiv="content-type" content="text/html; charset=hulla">""",
+        """<meta content="text/html; charset=hulla" http-equiv="content-type"/>""",
+    ),
     # missing > in end tag
     ("""</td <td  a="b" >""", """"""),
     ("""</td<td  a="b" >""", """"""),
@@ -149,8 +165,7 @@ class TestParser(unittest.TestCase):
         Check parse results.
         """
         res = out.getvalue()
-        msg = "Test error; in: %r, out: %r, expect: %r" % \
-           (_in, res, _out)
+        msg = "Test error; in: %r, out: %r, expect: %r" % (_in, res, _out)
         self.assertEqual(res, _out, msg=msg)
 
     def test_encoding_detection_utf_content(self):
@@ -162,7 +177,9 @@ class TestParser(unittest.TestCase):
         self.encoding_test(html, "utf-8")
 
     def test_encoding_detection_iso_content(self):
-        html = b'<meta http-equiv="content-type" content="text/html; charset=ISO8859-1">'
+        html = (
+            b'<meta http-equiv="content-type" content="text/html; charset=ISO8859-1">'
+        )
         self.encoding_test(html, "iso8859-1")
 
     def test_encoding_detection_iso_charset(self):

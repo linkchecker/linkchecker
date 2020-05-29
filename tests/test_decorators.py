@@ -33,13 +33,16 @@ class TestDecorators(unittest.TestCase):
         @linkcheck.decorators.timed()
         def f():
             return 42
+
         self.assertEqual(f(), 42)
 
     def test_timeit2(self):
         log = StringIO()
+
         @linkcheck.decorators.timed(log=log, limit=0)
         def f():
             time.sleep(1)
             return 42
+
         self.assertEqual(f(), 42)
-        self.assertEqual(log.getvalue(), 'f took 1.00 seconds\n()\n{}\n')
+        self.assertEqual(log.getvalue(), "f took 1.00 seconds\n()\n{}\n")

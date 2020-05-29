@@ -22,7 +22,6 @@ from linkcheck.plugins import viruscheck as clamav
 
 
 class TestClamav(unittest.TestCase):
-
     def setUp(self):
         self.clamav_conf = clamav.get_clamav_conf("/etc/clamav/clamd.conf")
 
@@ -37,25 +36,29 @@ class TestClamav(unittest.TestCase):
     def testInfected(self):
         # from the clamav test direcotry: the clamav test file as html data
         data = (
-           b'<a href="data:application/octet-stream;base64,'
-           b'TVpQAAIAAAAEAA8A//8AALgAAAAhAAAAQAAaAAAAAAAAAAAAAAAAAAAAAAAAAA'
-           b'AAAAAAAAAAAAAAAAAAAAEAALtxEEAAM8BQUIvzU1NQsClAMARmrHn5ujEAeA2t'
-           b'UP9mcA4fvjEA6eX/tAnNIbRMzSFiDAoBAnB2FwIeTgwEL9rMEAAAAAAAAAAAAA'
-           b'AAAAAAwBAAAIAQAAAAAAAAAAAAAAAAAADaEAAA9BAAAAAAAAAAAAAAAAAAAAAA'
-           b'AAAAAAAAS0VSTkVMMzIuRExMAABFeGl0UHJvY2VzcwBVU0VSMzIuRExMAENMQU'
-           b'1lc3NhZ2VCb3hBAOYQAAAAAAAAPz8/P1BFAABMAQEAYUNhQgAAAAAAAAAA4ACO'
-           b'gQsBAhkABAAAAAYAAAAAAABAEAAAABAAAEAAAAAAAEAAABAAAAACAAABAAAAAA'
-           b'AAAAMACgAAAAAAACAAAAAEAAAAAAAAAgAAAAAAEAAAIAAAAAAQAAAQAAAAAAAA'
-           b'EAAAAAAAAAAAAAAAhBAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-           b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-           b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAW0NMQU1BVl'
-           b'0AEAAAABAAAAACAAABAAAAAAAAAAAAAAAAAAAAAAAAwA==">t</a>'
+            b'<a href="data:application/octet-stream;base64,'
+            b"TVpQAAIAAAAEAA8A//8AALgAAAAhAAAAQAAaAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            b"AAAAAAAAAAAAAAAAAAAAEAALtxEEAAM8BQUIvzU1NQsClAMARmrHn5ujEAeA2t"
+            b"UP9mcA4fvjEA6eX/tAnNIbRMzSFiDAoBAnB2FwIeTgwEL9rMEAAAAAAAAAAAAA"
+            b"AAAAAAwBAAAIAQAAAAAAAAAAAAAAAAAADaEAAA9BAAAAAAAAAAAAAAAAAAAAAA"
+            b"AAAAAAAAS0VSTkVMMzIuRExMAABFeGl0UHJvY2VzcwBVU0VSMzIuRExMAENMQU"
+            b"1lc3NhZ2VCb3hBAOYQAAAAAAAAPz8/P1BFAABMAQEAYUNhQgAAAAAAAAAA4ACO"
+            b"gQsBAhkABAAAAAYAAAAAAABAEAAAABAAAEAAAAAAAEAAABAAAAACAAABAAAAAA"
+            b"AAAAMACgAAAAAAACAAAAAEAAAAAAAAAgAAAAAAEAAAIAAAAAAQAAAQAAAAAAAA"
+            b"EAAAAAAAAAAAAAAAhBAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            b"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            b"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAW0NMQU1BVl"
+            b'0AEAAAABAAAAACAAABAAAAAAAAAAAAAAAAAAAAAAAAwA==">t</a>'
         )
         infected, errors = clamav.scan(data, self.clamav_conf)
         # different versions of clamav report different responses, apparently
         acceptable_responses = (
-            ['stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n'],
-            ['stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n'],
+            [
+              "stream: ClamAV-Test-File(2d1206194bd704385e37000be6113f73:781) FOUND\n"
+            ],
+            [
+              "stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n"
+            ],
         )
         self.assertIn(infected, acceptable_responses)
         self.assertFalse(errors)
