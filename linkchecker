@@ -264,9 +264,9 @@ group.add_argument(
     dest="configfile",
     metavar="FILENAME",
     help=_(
-        """Use FILENAME as configuration file. Per default LinkChecker uses
-~/.linkchecker/linkcheckerrc (under Windows
-%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."""
+        "Use FILENAME as configuration file. Per default LinkChecker uses\n"
+        "~/.linkchecker/linkcheckerrc (under Windows\n"
+        "%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
     ),
 )
 group.add_argument(
@@ -275,23 +275,23 @@ group.add_argument(
     type=int,
     metavar="NUMBER",
     help=_(
-        """Generate no more than the given number of threads. Default number
-of threads is 10. To disable threading specify a non-positive number."""
+        "Generate no more than the given number of threads. Default number\n"
+        "of threads is 10. To disable threading specify a non-positive number."
     ),
 )
 group.add_argument(
-    "-V", "--version", action="store_true", help=_("""Print version and exit.""")
+    "-V", "--version", action="store_true", help=_("Print version and exit.")
 )
 group.add_argument(
     "--list-plugins",
     action="store_true",
     dest="listplugins",
-    help=_("""Print available check plugins and exit."""),
+    help=_("Print available check plugins and exit."),
 )
 group.add_argument(
     "--stdin",
     action="store_true",
-    help=_("""Read list of white-space separated URLs to check from stdin."""),
+    help=_("Read list of white-space separated URLs to check from stdin."),
 )
 
 # ================== output options =====================
@@ -302,13 +302,13 @@ group.add_argument(
     action="append",
     metavar="STRING",
     help=_(
-        """Print debugging output for the given logger.
-Available loggers are %(lognamelist)s.
-Specifying 'all' is an alias for specifying all available loggers.
-The option can be given multiple times to debug with more
-than one logger.
-
-For accurate results, threading will be disabled during debug runs."""
+        "Print debugging output for the given logger.\n"
+        "Available loggers are %(lognamelist)s.\n"
+        "Specifying 'all' is an alias for specifying all available loggers.\n"
+        "The option can be given multiple times to debug with more\n"
+        "than one logger.\n"
+        "\n"
+        "For accurate results, threading will be disabled during debug runs."
     )
     % {"lognamelist": logconf.lognamelist},
 )
@@ -319,17 +319,18 @@ group.add_argument(
     dest="fileoutput",
     metavar="TYPE[/ENCODING[/FILENAME]]",
     help=_(
-        """Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for
-'blacklist' output, or FILENAME if specified.
-The ENCODING specifies the output encoding, the default is that of your
-locale.
-Valid encodings are listed at http://docs.python.org/lib/standard-encodings.html.
-The FILENAME and ENCODING parts of the 'none' output type will be ignored,
-else if the file already exists, it will be overwritten.
-You can specify this option more than once. Valid file output types
-are %(loggertypes)s. You can specify this option multiple times to output
-to more than one file. Default is no file output. Note that you can
-suppress all console output with the option '-o none'."""
+        "Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for\n"
+        "'blacklist' output, or FILENAME if specified.\n"
+        "The ENCODING specifies the output encoding, the default is that of your\n"
+        "locale.\n"
+        "Valid encodings are listed at "
+        "http://docs.python.org/lib/standard-encodings.html.\n"
+        "The FILENAME and ENCODING parts of the 'none' output type will be ignored,\n"
+        "else if the file already exists, it will be overwritten.\n"
+        "You can specify this option more than once. Valid file output types\n"
+        "are %(loggertypes)s. You can specify this option multiple times to output\n"
+        "to more than one file. Default is no file output. Note that you can\n"
+        "suppress all console output with the option '-o none'."
     )
     % {"loggertypes": linkcheck.logger.LoggerKeys},
 )
@@ -338,13 +339,13 @@ group.add_argument(
     action="store_false",
     dest="status",
     default=True,
-    help=_("""Do not print check status messages."""),
+    help=_("Do not print check status messages."),
 )
 group.add_argument(
     "--no-warnings",
     action="store_false",
     dest="warnings",
-    help=_("""Don't log warnings. Default is to log warnings."""),
+    help=_("Don't log warnings. Default is to log warnings."),
 )
 group.add_argument(
     "-o",
@@ -352,11 +353,11 @@ group.add_argument(
     dest="output",
     metavar="TYPE[/ENCODING]",
     help=_(
-        """Specify output as %(loggertypes)s. Default output type is text.
-The ENCODING specifies the output encoding, the default is that of your
-locale.
-Valid encodings are listed at """
-        """http://docs.python.org/lib/standard-encodings.html."""
+        "Specify output as %(loggertypes)s. Default output type is text.\n"
+        "The ENCODING specifies the output encoding, the default is that of your\n"
+        "locale.\n"
+        "Valid encodings are listed at "
+        "http://docs.python.org/lib/standard-encodings.html."
     )
     % {"loggertypes": linkcheck.logger.LoggerKeys},
 )
@@ -369,8 +370,8 @@ group.add_argument(
     action="store_true",
     dest="quiet",
     help=_(
-        """Quiet operation, an alias for '-o none'.
-This is only useful with -F."""
+        "Quiet operation, an alias for '-o none'.\n"
+        "This is only useful with -F."
     ),
 )
 group.add_argument("--trace", action="store_true", dest="trace", help=argparse.SUPPRESS)
@@ -379,7 +380,7 @@ group.add_argument(
     "--verbose",
     action="store_true",
     dest="verbose",
-    help=_("""Log all URLs. Default is to log only errors and warnings."""),
+    help=_("Log all URLs. Default is to log only errors and warnings."),
 )
 
 # =================== checking options ====================
@@ -389,8 +390,8 @@ group.add_argument(
     dest="cookiefile",
     metavar="FILENAME",
     help=_(
-        """Read a file with initial cookie data. The cookie data format is
-explained below."""
+        "Read a file with initial cookie data. The cookie data format is\n"
+        "explained below."
     ),
 )
 # const because store_false doesn't detect absent flags
@@ -413,8 +414,8 @@ group.add_argument(
     metavar="REGEX",
     dest="externstrict",
     help=_(
-        """Only check syntax of URLs matching the given regular expression.
- This option can be given multiple times."""
+        "Only check syntax of URLs matching the given regular expression.\n"
+        "This option can be given multiple times."
     ),
 )
 group.add_argument(
@@ -423,8 +424,8 @@ group.add_argument(
     metavar="REGEX",
     dest="extern",
     help=_(
-        """Check but do not recurse into URLs matching the given regular
-expression. This option can be given multiple times."""
+        "Check but do not recurse into URLs matching the given regular\n"
+        "expression. This option can be given multiple times."
     ),
 )
 group.add_argument(
@@ -433,9 +434,9 @@ group.add_argument(
     dest="nntpserver",
     metavar="STRING",
     help=_(
-        """Specify an NNTP server for 'news:...' links. Default is the
-environment variable NNTP_SERVER. If no host is given,
-only the syntax of the link is checked."""
+        "Specify an NNTP server for 'news:...' links. Default is the\n"
+        "environment variable NNTP_SERVER. If no host is given,\n"
+        "only the syntax of the link is checked."
     ),
 )
 group.add_argument(
@@ -445,9 +446,9 @@ group.add_argument(
     dest="password",
     default=False,
     help=_(
-        """Read a password from console and use it for HTTP and FTP authorization.
-For FTP the default password is 'anonymous@'. For HTTP there is
-no default password. See also -u."""
+        "Read a password from console and use it for HTTP and FTP authorization.\n"
+        "For FTP the default password is 'anonymous@'. For HTTP there is\n"
+        "no default password. See also -u."
     ),
 )
 group.add_argument(
@@ -457,8 +458,8 @@ group.add_argument(
     dest="recursionlevel",
     metavar="NUMBER",
     help=_(
-        """Check recursively all links up to given depth. A negative depth
-will enable infinite recursion. Default depth is infinite."""
+        "Check recursively all links up to given depth. A negative depth\n"
+        "will enable infinite recursion. Default depth is infinite."
     ),
 )
 group.add_argument(
@@ -467,8 +468,8 @@ group.add_argument(
     dest="timeout",
     metavar="NUMBER",
     help=_(
-        """Set the timeout for connection attempts in seconds. The default
-timeout is %d seconds."""
+        "Set the timeout for connection attempts in seconds. The default\n"
+        "timeout is %d seconds."
     )
     % config["timeout"],
 )
@@ -478,9 +479,9 @@ group.add_argument(
     dest="username",
     metavar="STRING",
     help=_(
-        """Try the given username for HTTP and FTP authorization.
-For FTP the default username is 'anonymous'. For HTTP there is
-no default username. See also -p."""
+        "Try the given username for HTTP and FTP authorization.\n"
+        "For FTP the default username is 'anonymous'. For HTTP there is\n"
+        "no default username. See also -p."
     ),
 )
 group.add_argument(
@@ -488,9 +489,9 @@ group.add_argument(
     dest="useragent",
     metavar="STRING",
     help=_(
-        """Specify the User-Agent string to send to the HTTP server, for example
-"Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is the current
-version of LinkChecker."""
+        "Specify the User-Agent string to send to the HTTP server, for example\n"
+        '"Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is the current\n'
+        "version of LinkChecker."
     ),
 )
 
@@ -685,7 +686,7 @@ for entry in config["authentication"]:
         attrs = entry.copy()
         attrs["strpattern"] = attrs["pattern"].pattern
         msg = (
-            _("Enter LinkChecker password for user %(user)s" " at %(strpattern)s:")
+            _("Enter LinkChecker password for user %(user)s at %(strpattern)s:")
             % attrs
         )
         entry["password"] = getpass.getpass(msg)
@@ -727,8 +728,8 @@ if do_profile:
         if os.path.exists(_profile):
             print(
                 _(
-                    """Overwrite profiling file %(file)r?
-Press Ctrl-C to cancel, RETURN to continue."""
+                    "Overwrite profiling file %(file)r?\n"
+                    "Press Ctrl-C to cancel, RETURN to continue."
                 )
                 % {"file": _profile}
             )
