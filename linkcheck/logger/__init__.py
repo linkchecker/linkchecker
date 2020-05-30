@@ -46,7 +46,7 @@ Fields = dict(
 )
 del _
 
-ContentTypes = dict(image=0, text=0, video=0, audio=0, application=0, mail=0, other=0,)
+ContentTypes = dict(image=0, text=0, video=0, audio=0, application=0, mail=0, other=0)
 
 
 class LogStatistics:

@@ -261,7 +261,7 @@ class Configuration(dict):
                 LOG_CHECK, _("missing user or URL pattern in authentication data.")
             )
             return
-        entry = dict(user=user, password=password, pattern=re.compile(pattern),)
+        entry = dict(user=user, password=password, pattern=re.compile(pattern))
         self["authentication"].append(entry)
 
     def get_user_password(self, url):

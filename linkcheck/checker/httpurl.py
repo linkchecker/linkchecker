@@ -158,7 +158,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         clientheaders = {}
         if self.parent_url and self.parent_url.lower().startswith(HTTP_SCHEMAS):
             clientheaders["Referer"] = self.parent_url
-        kwargs = dict(method='GET', url=self.url, headers=clientheaders,)
+        kwargs = dict(method='GET', url=self.url, headers=clientheaders)
         if self.auth:
             kwargs['auth'] = self.auth
         log.debug(LOG_CHECK, "Prepare request with %s", kwargs)

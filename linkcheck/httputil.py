@@ -30,7 +30,7 @@ def x509_to_dict(x509):
 
     res = {
         'subject': ((('commonName', x509.get_subject().CN),),),
-        'subjectAltName': [('DNS', value) for value in get_subj_alt_name(x509)],
+        'subjectAltName': [('DNS', value) for value in get_subj_alt_name(x509)]
     }
     notAfter = x509.get_notAfter()
     if notAfter is not None:
