@@ -27,15 +27,30 @@ import select
 from io import BytesIO
 
 from . import absolute_url, get_url_from
-from .. import (log, LOG_CHECK,
-  strformat, LinkCheckerError, url as urlutil, trace, get_link_pat)
+from .. import (
+    log,
+    LOG_CHECK,
+    strformat,
+    LinkCheckerError,
+    url as urlutil,
+    trace,
+    get_link_pat,
+)
 from ..htmlutil import htmlsoup
 from ..network import iputil
-from .const import (WARN_URL_EFFECTIVE_URL,
-    WARN_URL_ERROR_GETTING_CONTENT, WARN_URL_OBFUSCATED_IP,
-    WARN_URL_CONTENT_SIZE_ZERO, WARN_URL_CONTENT_SIZE_TOO_LARGE,
-    WARN_URL_WHITESPACE, URL_MAX_LENGTH, WARN_URL_TOO_LONG,
-    ExcList, ExcSyntaxList, ExcNoCacheList)
+from .const import (
+    WARN_URL_EFFECTIVE_URL,
+    WARN_URL_ERROR_GETTING_CONTENT,
+    WARN_URL_OBFUSCATED_IP,
+    WARN_URL_CONTENT_SIZE_ZERO,
+    WARN_URL_CONTENT_SIZE_TOO_LARGE,
+    WARN_URL_WHITESPACE,
+    URL_MAX_LENGTH,
+    WARN_URL_TOO_LONG,
+    ExcList,
+    ExcSyntaxList,
+    ExcNoCacheList,
+)
 from ..url import url_fix_wayback_query
 
 # helper alias
@@ -43,6 +58,7 @@ unicode_safe = strformat.unicode_safe
 
 # schemes that are invalid with an empty hostname
 scheme_requires_host = ("ftp", "http", "telnet")
+
 
 def urljoin(parent, url):
     """
@@ -61,8 +77,9 @@ def url_norm(url, encoding):
     try:
         return urlutil.url_norm(url, encoding=encoding)
     except UnicodeError:
-        msg = _("URL has unparsable domain name: %(name)s") % \
-            {"name": sys.exc_info()[1]}
+        msg = _("URL has unparsable domain name: %(name)s") % {
+            "name": sys.exc_info()[1]
+        }
         raise LinkCheckerError(msg)
 
 
@@ -92,11 +109,22 @@ class UrlBase:
     }
 
     # Read in 16kb chunks
-    ReadChunkBytes = 1024*16
+    ReadChunkBytes = 1024 * 16
 
-    def __init__(self, base_url, recursion_level, aggregate,
-                  parent_url=None, base_ref=None, line=-1, column=-1, page=-1,
-                  name="", url_encoding=None, extern=None):
+    def __init__(
+        self,
+        base_url,
+        recursion_level,
+        aggregate,
+        parent_url=None,
+        base_ref=None,
+        line=-1,
+        column=-1,
+        page=-1,
+        name="",
+        url_encoding=None,
+        extern=None,
+    ):
         """
         Initialize check data, and store given variables.
 
@@ -113,20 +141,44 @@ class UrlBase:
         @param extern: None or (is_extern, is_strict)
         """
         self.reset()
-        self.init(base_ref, base_url, parent_url, recursion_level,
-                  aggregate, line, column, page, name, url_encoding, extern)
+        self.init(
+            base_ref,
+            base_url,
+            parent_url,
+            recursion_level,
+            aggregate,
+            line,
+            column,
+            page,
+            name,
+            url_encoding,
+            extern,
+        )
         self.check_syntax()
         if recursion_level == 0:
             self.add_intern_pattern()
         self.set_extern(self.url)
         if self.extern[0] and self.extern[1]:
-            self.add_info(_("The URL is outside of the domain "
-                          "filter, checked only syntax."))
+            self.add_info(
+                _("The URL is outside of the domain " "filter, checked only syntax.")
+            )
             if not self.has_result:
                 self.set_result(_("filtered"))
 
-    def init(self, base_ref, base_url, parent_url, recursion_level,
-              aggregate, line, column, page, name, url_encoding, extern):
+    def init(
+        self,
+        base_ref,
+        base_url,
+        parent_url,
+        recursion_level,
+        aggregate,
+        line,
+        column,
+        page,
+        name,
+        url_encoding,
+        extern,
+    ):
         """
         Initialize internal data.
         """
@@ -149,17 +201,22 @@ class UrlBase:
         self.encoding = url_encoding
         self.extern = extern
         if self.base_ref:
-            assert not urlutil.url_needs_quoting(self.base_ref), \
-                   "unquoted base reference URL %r" % self.base_ref
+            assert not urlutil.url_needs_quoting(self.base_ref), (
+                "unquoted base reference URL %r" % self.base_ref
+            )
         if self.parent_url:
-            assert not urlutil.url_needs_quoting(self.parent_url), \
-                   "unquoted parent URL %r" % self.parent_url
+            assert not urlutil.url_needs_quoting(self.parent_url), (
+                "unquoted parent URL %r" % self.parent_url
+            )
         url = absolute_url(self.base_url, base_ref, parent_url)
         # assume file link if no scheme is found
         self.scheme = url.split(":", 1)[0].lower() or "file"
         if self.base_url != base_url:
-            self.add_warning(_("Leading or trailing whitespace in URL `%(url)s'.") %
-                               {"url": base_url}, tag=WARN_URL_WHITESPACE)
+            self.add_warning(
+                _("Leading or trailing whitespace in URL `%(url)s'.")
+                % {"url": base_url},
+                tag=WARN_URL_WHITESPACE,
+            )
 
     def reset(self):
         """
@@ -219,8 +276,13 @@ class UrlBase:
         Set result string and validity.
         """
         if self.has_result and not overwrite:
-            log.warn(LOG_CHECK,
-              "Double result %r (previous %r) for %s", msg, self.result, self)
+            log.warn(
+                LOG_CHECK,
+                "Double result %r (previous %r) for %s",
+                msg,
+                self.result,
+                self,
+            )
         else:
             self.has_result = True
         if not msg:
@@ -288,8 +350,10 @@ class UrlBase:
         Add a warning string.
         """
         item = (tag, s)
-        if item not in self.warnings and \
-           tag not in self.aggregate.config["ignorewarnings"]:
+        if (
+            item not in self.warnings
+            and tag not in self.aggregate.config["ignorewarnings"]
+        ):
             self.warnings.append(item)
 
     def add_info(self, s):
@@ -303,7 +367,7 @@ class UrlBase:
         """Set the URL to be used for caching."""
         # remove anchor from cached target url since we assume
         # URLs with different anchors to have the same content
-        self.cache_url = urlutil.urlunsplit(self.urlparts[:4]+[''])
+        self.cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
         if self.cache_url is not None:
             assert isinstance(self.cache_url, str), repr(self.cache_url)
 
@@ -332,13 +396,17 @@ class UrlBase:
         """Check URL name and length."""
         effectiveurl = urlutil.urlunsplit(self.urlparts)
         if self.url != effectiveurl:
-            self.add_warning(_("Effective URL %(url)r.") %
-                             {"url": effectiveurl},
-                             tag=WARN_URL_EFFECTIVE_URL)
+            self.add_warning(
+                _("Effective URL %(url)r.") % {"url": effectiveurl},
+                tag=WARN_URL_EFFECTIVE_URL,
+            )
             self.url = effectiveurl
         if len(self.url) > URL_MAX_LENGTH and self.scheme != "data":
             args = dict(len=len(self.url), max=URL_MAX_LENGTH)
-            self.add_warning(_("URL length %(len)d is longer than %(max)d.") % args, tag=WARN_URL_TOO_LONG)
+            self.add_warning(
+                _("URL length %(len)d is longer than %(max)d.") % args,
+                tag=WARN_URL_TOO_LONG,
+            )
 
     def build_url(self):
         """
@@ -367,7 +435,9 @@ class UrlBase:
         if urlparts[2]:
             urlparts[2] = urlutil.collapse_segments(urlparts[2])
             if not urlparts[0].startswith("feed"):
-                urlparts[2] = url_fix_wayback_query(urlparts[2]) # restore second / in http[s]:// in wayback path
+                urlparts[2] = url_fix_wayback_query(
+                    urlparts[2]
+                )  # restore second / in http[s]:// in wayback path
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
         self.urlparts = strformat.url_unicode_split(self.url)
@@ -384,8 +454,9 @@ class UrlBase:
         port = urlutil.default_ports.get(self.scheme, 0)
         host, port = urlutil.splitport(host, port=port)
         if port is None:
-            raise LinkCheckerError(_("URL host %(host)r has invalid port") %
-                    {"host": host})
+            raise LinkCheckerError(
+                _("URL host %(host)r has invalid port") % {"host": host}
+            )
         self.port = port
         # set host lowercase
         self.host = host.lower()
@@ -415,9 +486,10 @@ class UrlBase:
             if ips:
                 self.host = ips[0]
                 self.add_warning(
-                   _("URL %(url)s has obfuscated IP address %(ip)s") % \
-                   {"url": self.base_url, "ip": ips[0]},
-                          tag=WARN_URL_OBFUSCATED_IP)
+                    _("URL %(url)s has obfuscated IP address %(ip)s")
+                    % {"url": self.base_url, "ip": ips[0]},
+                    tag=WARN_URL_OBFUSCATED_IP,
+                )
 
     def check(self):
         """Main check function for checking this URL."""
@@ -453,7 +525,10 @@ class UrlBase:
                 value = _('Hostname not found')
             elif isinstance(exc, UnicodeError):
                 # idna.encode(host) failed
-                value = _('Bad hostname %(host)r: %(msg)s') % {'host': self.host, 'msg': value}
+                value = _('Bad hostname %(host)r: %(msg)s') % {
+                    'host': self.host,
+                    'msg': value,
+                }
             self.set_result(unicode_safe(value), valid=False)
 
     def check_content(self):
@@ -469,8 +544,10 @@ class UrlBase:
                     return True
             except tuple(ExcList):
                 value = self.handle_exception()
-                self.add_warning(_("could not get content: %(msg)s") %
-                     {"msg": value}, tag=WARN_URL_ERROR_GETTING_CONTENT)
+                self.add_warning(
+                    _("could not get content: %(msg)s") % {"msg": value},
+                    tag=WARN_URL_ERROR_GETTING_CONTENT,
+                )
         return False
 
     def close_connection(self):
@@ -492,11 +569,15 @@ class UrlBase:
         An exception occurred. Log it and set the cache flag.
         """
         etype, evalue = sys.exc_info()[:2]
-        log.debug(LOG_CHECK, "Error in %s: %s %s", self.url, etype, evalue, exception=True)
+        log.debug(
+            LOG_CHECK, "Error in %s: %s %s", self.url, etype, evalue, exception=True
+        )
         # note: etype must be the exact class, not a subclass
-        if (etype in ExcNoCacheList) or \
-           (etype == socket.error and evalue.args[0]==errno.EBADF) or \
-            not evalue:
+        if (
+            (etype in ExcNoCacheList)
+            or (etype == socket.error and evalue.args[0] == errno.EBADF)
+            or not evalue
+        ):
             # EBADF occurs when operating on an already socket
             self.caching = False
         # format message "<exception name>: <error message>"
@@ -519,10 +600,13 @@ class UrlBase:
         maxbytes = self.aggregate.config["maxfilesizedownload"]
         if self.size > maxbytes:
             self.add_warning(
-              _("Content size %(size)s is larger than %(maxbytes)s.") %
-                  dict(size=strformat.strsize(self.size),
-                       maxbytes=strformat.strsize(maxbytes)),
-                tag=WARN_URL_CONTENT_SIZE_TOO_LARGE)
+                _("Content size %(size)s is larger than %(maxbytes)s.")
+                % dict(
+                    size=strformat.strsize(self.size),
+                    maxbytes=strformat.strsize(maxbytes),
+                ),
+                tag=WARN_URL_CONTENT_SIZE_TOO_LARGE,
+            )
 
     def allows_simple_recursion(self):
         """Check recursion level and extern status."""
@@ -579,15 +663,13 @@ class UrlBase:
             return
         for entry in self.aggregate.config["externlinks"]:
             match = entry['pattern'].search(url)
-            if (entry['negate'] and not match) or \
-               (match and not entry['negate']):
+            if (entry['negate'] and not match) or (match and not entry['negate']):
                 log.debug(LOG_CHECK, "Extern URL %r", url)
                 self.extern = (1, entry['strict'])
                 return
         for entry in self.aggregate.config["internlinks"]:
             match = entry['pattern'].search(url)
-            if (entry['negate'] and not match) or \
-               (match and not entry['negate']):
+            if (entry['negate'] and not match) or (match and not entry['negate']):
                 log.debug(LOG_CHECK, "Intern URL %r", url)
                 self.extern = (0, 0)
                 return
@@ -612,8 +694,7 @@ class UrlBase:
         self.size = len(content)
         self.dltime = time.time() - t
         if self.size == 0:
-            self.add_warning(_("Content size is zero."),
-                             tag=WARN_URL_CONTENT_SIZE_ZERO)
+            self.add_warning(_("Content size is zero."), tag=WARN_URL_CONTENT_SIZE_ZERO)
         else:
             self.aggregate.add_downloaded_bytes(self.size)
         return content
@@ -636,8 +717,9 @@ class UrlBase:
             # than an internal crash, eh?  ISO-8859-1 is a safe fallback in the
             # sense that any binary blob can be decoded, it'll never cause a
             # UnicodeDecodeError.
-            log.debug(LOG_CHECK, "Beautiful Soup detected %s",
-                      self.soup.original_encoding)
+            log.debug(
+                LOG_CHECK, "Beautiful Soup detected %s", self.soup.original_encoding
+            )
             self.encoding = self.soup.original_encoding or 'ISO-8859-1'
             log.debug(LOG_CHECK, "Content encoding %s", self.encoding)
             self.text = self.data.decode(self.encoding)
@@ -675,29 +757,41 @@ class UrlBase:
             base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
         else:
             base_ref = None
-        url_data = get_url_from(url, self.recursion_level+1, self.aggregate,
-            parent_url=self.url, base_ref=base_ref, line=line, column=column,
-            page=page, name=name, parent_content_type=self.content_type, url_encoding=self.encoding)
+        url_data = get_url_from(
+            url,
+            self.recursion_level + 1,
+            self.aggregate,
+            parent_url=self.url,
+            base_ref=base_ref,
+            line=line,
+            column=column,
+            page=page,
+            name=name,
+            parent_content_type=self.content_type,
+            url_encoding=self.encoding,
+        )
         self.aggregate.urlqueue.put(url_data)
 
     def serialized(self, sep=os.linesep):
         """
         Return serialized url check data as unicode string.
         """
-        return unicode_safe(sep).join([
-            "%s link" % self.scheme,
-            "base_url=%r" % self.base_url,
-            "parent_url=%r" % self.parent_url,
-            "base_ref=%r" % self.base_ref,
-            "recursion_level=%d" % self.recursion_level,
-            "url_connection=%s" % self.url_connection,
-            "line=%s" % self.line,
-            "column=%s" % self.column,
-            "page=%d" % self.page,
-            "name=%r" % self.name,
-            "anchor=%r" % self.anchor,
-            "cache_url=%s" % self.cache_url,
-           ])
+        return unicode_safe(sep).join(
+            [
+                "%s link" % self.scheme,
+                "base_url=%r" % self.base_url,
+                "parent_url=%r" % self.parent_url,
+                "base_ref=%r" % self.base_ref,
+                "recursion_level=%d" % self.recursion_level,
+                "url_connection=%s" % self.url_connection,
+                "line=%s" % self.line,
+                "column=%s" % self.column,
+                "page=%d" % self.page,
+                "name=%r" % self.name,
+                "anchor=%r" % self.anchor,
+                "cache_url=%s" % self.cache_url,
+            ]
+        )
 
     def get_intern_pattern(self, url=None):
         """Get pattern for intern URL matching.
@@ -717,8 +811,7 @@ class UrlBase:
                 log.debug(LOG_CHECK, "Add intern pattern %r", pat)
                 self.aggregate.config['internlinks'].append(get_link_pat(pat))
         except UnicodeError as msg:
-            res = _("URL has unparsable domain name: %(domain)s") % \
-                {"domain": msg}
+            res = _("URL has unparsable domain name: %(domain)s") % {"domain": msg}
             self.set_result(res, valid=False)
 
     def __str__(self):
@@ -792,28 +885,29 @@ class UrlBase:
         - url_data.last_modified: datetime
           Last modification date of retrieved page (or None).
         """
-        return dict(valid=self.valid,
-          extern=self.extern[0],
-          result=self.result,
-          warnings=self.warnings[:],
-          name=self.name or "",
-          title=self.get_title(),
-          parent_url=self.parent_url or "",
-          base_ref=self.base_ref or "",
-          base_url=self.base_url or "",
-          url=self.url or "",
-          domain=(self.urlparts[1] if self.urlparts else ""),
-          checktime=self.checktime,
-          dltime=self.dltime,
-          size=self.size,
-          info=self.info,
-          line=self.line,
-          column=self.column,
-          page=self.page,
-          cache_url=self.cache_url,
-          content_type=self.content_type,
-          level=self.recursion_level,
-          modified=self.modified,
+        return dict(
+            valid=self.valid,
+            extern=self.extern[0],
+            result=self.result,
+            warnings=self.warnings[:],
+            name=self.name or "",
+            title=self.get_title(),
+            parent_url=self.parent_url or "",
+            base_ref=self.base_ref or "",
+            base_url=self.base_url or "",
+            url=self.url or "",
+            domain=(self.urlparts[1] if self.urlparts else ""),
+            checktime=self.checktime,
+            dltime=self.dltime,
+            size=self.size,
+            info=self.info,
+            line=self.line,
+            column=self.column,
+            page=self.page,
+            cache_url=self.cache_url,
+            content_type=self.content_type,
+            level=self.recursion_level,
+            modified=self.modified,
         )
 
     def to_wire(self):
@@ -847,8 +941,10 @@ urlDataAttr = [
     'level',
 ]
 
+
 class CompactUrlData:
     """Store selected UrlData attributes in slots to minimize memory usage."""
+
     __slots__ = urlDataAttr
 
     def __init__(self, wired_url_data):

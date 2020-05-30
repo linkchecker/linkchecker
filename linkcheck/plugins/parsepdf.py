@@ -19,6 +19,7 @@ Parse links in PDF files with pdfminer.
 from io import BytesIO
 
 from . import _ParserPlugin
+
 try:
     from pdfminer.pdfparser import PDFParser
     from pdfminer.pdfdocument import PDFDocument
@@ -30,7 +31,6 @@ except ImportError:
 else:
     has_pdflib = True
 from .. import log, LOG_PLUGIN, strformat
-
 
 
 def search_url(obj, url_data, pageno, seen_objs):

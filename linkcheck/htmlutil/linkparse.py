@@ -25,41 +25,41 @@ unquote = strformat.unquote
 # HTML4/5 link tags
 # ripped mainly from HTML::Tagset.pm with HTML5 added
 LinkTags = {
-    'a':        ['href'],
-    'applet':   ['archive', 'src'],
-    'area':     ['href'],
-    'audio':    ['src'],  # HTML5
-    'bgsound':  ['src'],
+    'a': ['href'],
+    'applet': ['archive', 'src'],
+    'area': ['href'],
+    'audio': ['src'],  # HTML5
+    'bgsound': ['src'],
     'blockquote': ['cite'],
-    'body':     ['background'],
-    'button':   ['formaction'],  # HTML5
-    'del':      ['cite'],
-    'embed':    ['pluginspage', 'src'],
-    'form':     ['action'],
-    'frame':    ['src', 'longdesc'],
-    'head':     ['profile'],
-    'html':     ['manifest'],  # HTML5
-    'iframe':   ['src', 'longdesc'],
-    'ilayer':   ['background'],
-    'img':      ['src', 'lowsrc', 'longdesc', 'usemap', 'srcset'],
-    'input':    ['src', 'usemap', 'formaction'],
-    'ins':      ['cite'],
-    'isindex':  ['action'],
-    'layer':    ['background', 'src'],
-    'link':     ['href'],
-    'meta':     ['content', 'href'],
-    'object':   ['classid', 'data', 'archive', 'usemap', 'codebase'],
-    'q':        ['cite'],
-    'script':   ['src'],
-    'source':   ['src'],  # HTML5
-    'table':    ['background'],
-    'td':       ['background'],
-    'th':       ['background'],
-    'tr':       ['background'],
-    'track':    ['src'],  # HTML5
-    'video':    ['src'],  # HTML5
-    'xmp':      ['href'],
-    None:       ['style', 'itemtype'],
+    'body': ['background'],
+    'button': ['formaction'],  # HTML5
+    'del': ['cite'],
+    'embed': ['pluginspage', 'src'],
+    'form': ['action'],
+    'frame': ['src', 'longdesc'],
+    'head': ['profile'],
+    'html': ['manifest'],  # HTML5
+    'iframe': ['src', 'longdesc'],
+    'ilayer': ['background'],
+    'img': ['src', 'lowsrc', 'longdesc', 'usemap', 'srcset'],
+    'input': ['src', 'usemap', 'formaction'],
+    'ins': ['cite'],
+    'isindex': ['action'],
+    'layer': ['background', 'src'],
+    'link': ['href'],
+    'meta': ['content', 'href'],
+    'object': ['classid', 'data', 'archive', 'usemap', 'codebase'],
+    'q': ['cite'],
+    'script': ['src'],
+    'source': ['src'],  # HTML5
+    'table': ['background'],
+    'td': ['background'],
+    'th': ['background'],
+    'tr': ['background'],
+    'track': ['src'],  # HTML5
+    'video': ['src'],  # HTML5
+    'xmp': ['href'],
+    None: ['style', 'itemtype'],
 }
 
 # HTML anchor tags
@@ -70,8 +70,8 @@ AnchorTags = {
 
 # WML tags
 WmlTags = {
-    'a':   ['href'],
-    'go':  ['href'],
+    'a': ['href'],
+    'go': ['href'],
     'img': ['src'],
 }
 
@@ -219,6 +219,9 @@ def find_links(soup, callback, tags):
     lf = LinkFinder(callback, tags)
     for element in soup.find_all(True):
         lf.html_element(
-            element.name, element.attrs, element.text.strip(),
+            element.name,
+            element.attrs,
+            element.text.strip(),
             element.sourceline,
-            None if element.sourcepos is None else element.sourcepos + 1)
+            None if element.sourcepos is None else element.sourcepos + 1,
+        )

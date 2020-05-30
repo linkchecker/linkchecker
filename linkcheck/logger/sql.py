@@ -87,47 +87,50 @@ class SQLLogger(_Logger):
         """
         Store url check info into the database.
         """
-        self.writeln("insert into %(table)s(urlname,"
-              "parentname,baseref,valid,result,warning,info,url,line,col,"
-              "name,checktime,dltime,size,cached,level,modified) values ("
-              "%(base_url)s,"
-              "%(url_parent)s,"
-              "%(base_ref)s,"
-              "%(valid)d,"
-              "%(result)s,"
-              "%(warning)s,"
-              "%(info)s,"
-              "%(url)s,"
-              "%(line)s,"
-              "%(column)s,"
-              "%(name)s,"
-              "%(checktime)d,"
-              "%(dltime)d,"
-              "%(size)d,"
-              "%(cached)d,"
-              "%(level)d,"
-              "%(modified)s"
-              ")%(separator)s" %
-              {'table': self.dbname,
-               'base_url': sqlify(url_data.base_url),
-               'url_parent': sqlify((url_data.parent_url)),
-               'base_ref': sqlify((url_data.base_ref)),
-               'valid': intify(url_data.valid),
-               'result': sqlify(url_data.result),
-               'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),
-               'info': sqlify(os.linesep.join(url_data.info)),
-               'url': sqlify(urlutil.url_quote(url_data.url, encoding="utf-8")),
-               'line': 'NULL' if url_data.line is None else url_data.line,
-               'column': 'NULL' if url_data.column is None else url_data.column,
-               'name': sqlify(url_data.name),
-               'checktime': url_data.checktime,
-               'dltime': url_data.dltime,
-               'size': url_data.size,
-               'cached': 0,
-               'separator': self.separator,
-               "level": url_data.level,
-               "modified": sqlify(self.format_modified(url_data.modified)),
-              })
+        self.writeln(
+            "insert into %(table)s(urlname,"
+            "parentname,baseref,valid,result,warning,info,url,line,col,"
+            "name,checktime,dltime,size,cached,level,modified) values ("
+            "%(base_url)s,"
+            "%(url_parent)s,"
+            "%(base_ref)s,"
+            "%(valid)d,"
+            "%(result)s,"
+            "%(warning)s,"
+            "%(info)s,"
+            "%(url)s,"
+            "%(line)s,"
+            "%(column)s,"
+            "%(name)s,"
+            "%(checktime)d,"
+            "%(dltime)d,"
+            "%(size)d,"
+            "%(cached)d,"
+            "%(level)d,"
+            "%(modified)s"
+            ")%(separator)s"
+            % {
+                'table': self.dbname,
+                'base_url': sqlify(url_data.base_url),
+                'url_parent': sqlify((url_data.parent_url)),
+                'base_ref': sqlify((url_data.base_ref)),
+                'valid': intify(url_data.valid),
+                'result': sqlify(url_data.result),
+                'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),
+                'info': sqlify(os.linesep.join(url_data.info)),
+                'url': sqlify(urlutil.url_quote(url_data.url, encoding="utf-8")),
+                'line': 'NULL' if url_data.line is None else url_data.line,
+                'column': 'NULL' if url_data.column is None else url_data.column,
+                'name': sqlify(url_data.name),
+                'checktime': url_data.checktime,
+                'dltime': url_data.dltime,
+                'size': url_data.size,
+                'cached': 0,
+                'separator': self.separator,
+                "level": url_data.level,
+                "modified": sqlify(self.format_modified(url_data.modified)),
+            }
+        )
         self.flush()
 
     def end_output(self, **kwargs):

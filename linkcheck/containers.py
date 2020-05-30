@@ -17,6 +17,7 @@
 Special container classes.
 """
 
+
 class LFUCache(dict):
     """Limited cache which purges least frequently used items."""
 
@@ -40,7 +41,7 @@ class LFUCache(dict):
 
     def shrink(self):
         """Shrink ca. 5% of entries."""
-        trim = int(0.05*len(self))
+        trim = int(0.05 * len(self))
         if trim:
             items = super(LFUCache, self).items()
             # sorting function for items

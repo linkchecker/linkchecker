@@ -27,7 +27,7 @@ class GraphXMLLogger(_XMLLogger, _GraphLogger):
 
     LoggerName = 'gxml'
 
-    LoggerArgs =  {
+    LoggerArgs = {
         "filename": "linkchecker-out.gxml",
     }
 

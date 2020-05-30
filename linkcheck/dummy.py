@@ -17,6 +17,7 @@
 Dummy objects.
 """
 
+
 class Dummy:
     """A dummy object ignores all access to it. Useful for testing."""
 

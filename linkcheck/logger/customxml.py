@@ -55,8 +55,7 @@ class CustomXMLLogger(xmllog._XMLLogger):
                 'line': "%s" % url_data.line,
                 'column': "%s" % url_data.column,
             }
-            self.xml_tag("parent", url_data.parent_url,
-                         attrs=attrs)
+            self.xml_tag("parent", url_data.parent_url, attrs=attrs)
         if url_data.base_ref and self.has_part('base'):
             self.xml_tag("baseref", url_data.base_ref)
         if self.has_part("realurl"):

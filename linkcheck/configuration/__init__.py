@@ -25,29 +25,33 @@ import urllib.request
 import shutil
 import socket
 import _LinkChecker_configdata as configdata
-from .. import (log, LOG_CHECK, get_install_data, fileutil)
+from .. import log, LOG_CHECK, get_install_data, fileutil
 from . import confparse
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 Version = configdata.version
 ReleaseDate = configdata.release_date
 AppName = configdata.name
-App = AppName+" "+Version
+App = AppName + " " + Version
 Author = configdata.author
 HtmlAuthor = Author.replace(' ', '&nbsp;')
-Copyright = "Copyright (C) 2000-2014 "+Author
-HtmlCopyright = "Copyright &copy; 2000-2014 "+HtmlAuthor
-AppInfo = App+"              "+Copyright
-HtmlAppInfo = App+", "+HtmlCopyright
+Copyright = "Copyright (C) 2000-2014 " + Author
+HtmlCopyright = "Copyright &copy; 2000-2014 " + HtmlAuthor
+AppInfo = App + "              " + Copyright
+HtmlAppInfo = App + ", " + HtmlCopyright
 Url = configdata.url
 SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
 Email = configdata.author_email
 UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
-Freeware = AppName+""" comes with ABSOLUTELY NO WARRANTY!
+Freeware = (
+    AppName
+    + """ comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
 under certain conditions. Look at the file `LICENSE' within this
 distribution."""
+)
 Portable = configdata.portable
+
 
 def normpath(path):
     """Norm given system path with all available norm or expand functions
@@ -58,17 +62,18 @@ def normpath(path):
 
 # List Python modules in the form (module, name, version attribute)
 Modules = (
-# required modules
+    # required modules
     ("requests", "Requests", "__version__"),
-# optional modules
+    # optional modules
     ("argcomplete", "Argcomplete", None),
-    ("GeoIP", "GeoIP", 'lib_version'),   # on Unix systems
-    ("pygeoip", "GeoIP", 'lib_version'), # on Windows systems
+    ("GeoIP", "GeoIP", 'lib_version'),  # on Unix systems
+    ("pygeoip", "GeoIP", 'lib_version'),  # on Windows systems
     ("sqlite3", "Pysqlite", 'version'),
     ("sqlite3", "Sqlite", 'sqlite_version'),
     ("gconf", "Gconf", '__version__'),
     ("meliae", "Meliae", '__version__'),
 )
+
 
 def get_modules_info():
     """Return unicode string with detected module info."""
@@ -136,6 +141,7 @@ def get_certifi_file():
              the file is not found
     """
     import certifi
+
     filename = certifi.where()
     if os.path.isfile(filename):
         return filename
@@ -161,8 +167,8 @@ class Configuration(dict):
         self['robotstxt'] = True
         self["debugmemory"] = False
         self["localwebroot"] = None
-        self["maxfilesizeparse"] = 1*1024*1024
-        self["maxfilesizedownload"] = 5*1024*1024
+        self["maxfilesizeparse"] = 1 * 1024 * 1024
+        self["maxfilesizedownload"] = 5 * 1024 * 1024
         self["maxnumurls"] = None
         self["maxrunseconds"] = None
         self["maxrequestspersecond"] = 10
@@ -201,6 +207,7 @@ class Configuration(dict):
         self['logger'] = None
         self.loggers = {}
         from ..logger import LoggerClasses
+
         for c in LoggerClasses:
             key = c.LoggerName
             self[key] = {}
@@ -250,14 +257,11 @@ class Configuration(dict):
     def add_auth(self, user=None, password=None, pattern=None):
         """Add given authentication data."""
         if not user or not pattern:
-            log.warn(LOG_CHECK,
-            _("missing user or URL pattern in authentication data."))
+            log.warn(
+                LOG_CHECK, _("missing user or URL pattern in authentication data.")
+            )
             return
-        entry = dict(
-            user=user,
-            password=password,
-            pattern=re.compile(pattern),
-        )
+        entry = dict(user=user, password=password, pattern=re.compile(pattern),)
         self["authentication"].append(entry)
 
     def get_user_password(self, url):
@@ -299,16 +303,16 @@ class Configuration(dict):
         url = self["loginurl"]
         disable = False
         if not self["loginpasswordfield"]:
-            log.warn(LOG_CHECK,
-            _("no CGI password fieldname given for login URL."))
+            log.warn(LOG_CHECK, _("no CGI password fieldname given for login URL."))
             disable = True
         if not self["loginuserfield"]:
-            log.warn(LOG_CHECK,
-            _("no CGI user fieldname given for login URL."))
+            log.warn(LOG_CHECK, _("no CGI user fieldname given for login URL."))
             disable = True
         if self.get_user_password(url) == (None, None):
-            log.warn(LOG_CHECK,
-            _("no user/password authentication data found for login URL."))
+            log.warn(
+                LOG_CHECK,
+                _("no user/password authentication data found for login URL."),
+            )
             disable = True
         if not url.lower().startswith(("http:", "https:")):
             log.warn(LOG_CHECK, _("login URL is not a HTTP URL."))
@@ -318,8 +322,7 @@ class Configuration(dict):
             log.warn(LOG_CHECK, _("login URL is incomplete."))
             disable = True
         if disable:
-            log.warn(LOG_CHECK,
-              _("disabling login URL %(url)s.") % {"url": url})
+            log.warn(LOG_CHECK, _("disabling login URL %(url)s.") % {"url": url})
             self["loginurl"] = None
 
     def sanitize_proxies(self):
@@ -366,9 +369,13 @@ def get_user_data():
     @rtype string
     """
     homedotdir = normpath("~/.linkchecker/")
-    userdata = homedotdir if os.path.isdir(homedotdir) \
+    userdata = (
+        homedotdir
+        if os.path.isdir(homedotdir)
         else os.path.join(xdg_data_home, "linkchecker")
+    )
     return userdata
+
 
 def get_plugin_folders():
     """Get linkchecker plugin folders. Default is
@@ -413,16 +420,20 @@ def get_user_config():
     initialconf = normpath(os.path.join(get_share_dir(), "linkcheckerrc"))
     # per user config settings
     homedotfile = normpath("~/.linkchecker/linkcheckerrc")
-    userconf = homedotfile if os.path.isfile(homedotfile) \
+    userconf = (
+        homedotfile
+        if os.path.isfile(homedotfile)
         else os.path.join(xdg_config_home, "linkchecker", "linkcheckerrc")
-    if os.path.isfile(initialconf) and not os.path.exists(userconf) and \
-       not Portable:
+    )
+    if os.path.isfile(initialconf) and not os.path.exists(userconf) and not Portable:
         # copy the initial configuration to the user configuration
         try:
             make_userdir(userconf)
             shutil.copy(initialconf, userconf)
         except Exception as errmsg:
-            msg = _("could not copy initial configuration file %(src)r to %(dst)r: %(errmsg)r")
+            msg = _(
+                "could not copy initial configuration file %(src)r to %(dst)r: %(errmsg)r"
+            )
             args = dict(src=initialconf, dst=userconf, errmsg=errmsg)
             log.warn(LOG_CHECK, msg % args)
     return userconf
@@ -496,6 +507,7 @@ def get_kde_ftp_proxy():
         log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
         pass
 
+
 # The following KDE functions are largely ported and ajusted from
 # Google Chromium:
 # http://src.chromium.org/viewvc/chrome/trunk/src/net/proxy/proxy_config_service_linux.cc?revision=HEAD&view=markup
@@ -526,6 +538,7 @@ def get_kde_ftp_proxy():
 # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 
 def get_kde_config_dir():
     """Return KDE configuration directory or None if not found."""
@@ -571,6 +584,7 @@ def get_kde_home_dir():
 
 loc_ro = re.compile(r"\[.*\]$")
 
+
 @lru_cache(1)
 def read_kioslaverc(kde_config_dir):
     """Read kioslaverc into data dictionary."""
@@ -579,7 +593,7 @@ def read_kioslaverc(kde_config_dir):
     with open(filename) as fd:
         # First read all lines into dictionary since they can occur
         # in any order.
-        for line in  fd:
+        for line in fd:
             line = line.rstrip()
             if line.startswith('['):
                 in_proxy_settings = line.startswith("[Proxy Settings]")

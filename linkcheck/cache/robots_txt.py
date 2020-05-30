@@ -56,8 +56,7 @@ class RobotsTxt:
                 rp = self.cache[roboturl]
                 return rp.can_fetch(self.useragent, url_data.url)
             self.misses += 1
-        kwargs = dict(auth=url_data.auth, session=url_data.session,
-                      timeout=timeout)
+        kwargs = dict(auth=url_data.auth, session=url_data.session, timeout=timeout)
         if hasattr(url_data, "proxy") and hasattr(url_data, "proxy_type"):
             kwargs["proxies"] = {url_data.proxytype: url_data.proxy}
         rp = robotparser2.RobotFileParser(**kwargs)

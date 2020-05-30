@@ -42,15 +42,17 @@ def get_package_modules(packagename):
         parentmodule = os.path.basename(os.path.dirname(__file__))
         with zipfile.ZipFile(zipname, 'r') as f:
             prefix = "%s/%s/" % (parentmodule, packagename)
-            modnames = [os.path.splitext(n[len(prefix):])[0]
-              for n in f.namelist()
-              if n.startswith(prefix) and "__init__" not in n]
+            modnames = [
+                os.path.splitext(n[len(prefix) :])[0]
+                for n in f.namelist()
+                if n.startswith(prefix) and "__init__" not in n
+            ]
     else:
         dirname = os.path.join(os.path.dirname(__file__), packagename)
         modnames = [x[:-3] for x in get_importable_files(dirname)]
     for modname in modnames:
         try:
-            name ="..%s.%s" % (packagename, modname)
+            name = "..%s.%s" % (packagename, modname)
             yield importlib.import_module(name, __name__)
         except ImportError as msg:
             print("WARN: could not load module %s: %s" % (modname, msg))
@@ -63,7 +65,7 @@ def get_folder_modules(folder, parentpackage):
         return
     for filename in get_importable_files(folder):
         fullname = os.path.join(folder, filename)
-        modname = parentpackage+"."+filename[:-3]
+        modname = parentpackage + "." + filename[:-3]
         try:
             yield imp.load_source(modname, fullname)
         except ImportError as msg:
@@ -80,7 +82,10 @@ def get_importable_files(folder):
         if fname.endswith('.py') and not fname.startswith('_'):
             fullname = os.path.join(folder, fname)
             if check_writable_by_others(fullname):
-                print("ERROR: refuse to load module from world writable file %r" % fullname)
+                print(
+                    "ERROR: refuse to load module from world writable file %r"
+                    % fullname
+                )
             else:
                 yield fname
 

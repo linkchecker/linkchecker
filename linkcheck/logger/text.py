@@ -38,18 +38,18 @@ class TextLogger(_Logger):
 
     LoggerArgs = {
         "filename": "linkchecker-out.txt",
-        'colorparent':  "default",
-        'colorurl':     "default",
-        'colorname':    "default",
-        'colorreal':    "cyan",
-        'colorbase':    "purple",
-        'colorvalid':   "bold;green",
+        'colorparent': "default",
+        'colorurl': "default",
+        'colorname': "default",
+        'colorreal': "cyan",
+        'colorbase': "purple",
+        'colorvalid': "bold;green",
         'colorinvalid': "bold;red",
-        'colorinfo':    "default",
+        'colorinfo': "default",
         'colorwarning': "bold;yellow",
-        'colordltime':  "default",
-        'colordlsize':  "default",
-        'colorreset':   "default",
+        'colordltime': "default",
+        'colordlsize': "default",
+        'colorreset': "default",
     }
 
     def __init__(self, **kwargs):
@@ -95,14 +95,15 @@ class TextLogger(_Logger):
         """Log introduction text."""
         self.writeln(configuration.AppInfo)
         self.writeln(configuration.Freeware)
-        self.writeln(_("Get the newest version at %(url)s") %
-                     {'url': configuration.Url})
-        self.writeln(_("Write comments and bugs to %(url)s") %
-                     {'url': configuration.SupportUrl})
+        self.writeln(
+            _("Get the newest version at %(url)s") % {'url': configuration.Url}
+        )
+        self.writeln(
+            _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}
+        )
         self.check_date()
         self.writeln()
-        self.writeln(_("Start checking at %s") %
-                     strformat.strtime(self.starttime))
+        self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
 
     def log_url(self, url_data):
         """Write url checking info."""
@@ -175,20 +176,17 @@ class TextLogger(_Logger):
     def write_dltime(self, url_data):
         """Write url_data.dltime."""
         self.write(self.part("dltime") + self.spaces("dltime"))
-        self.writeln(_("%.3f seconds") % url_data.dltime,
-                     color=self.colordltime)
+        self.writeln(_("%.3f seconds") % url_data.dltime, color=self.colordltime)
 
     def write_size(self, url_data):
         """Write url_data.size."""
         self.write(self.part("dlsize") + self.spaces("dlsize"))
-        self.writeln(strformat.strsize(url_data.size),
-                     color=self.colordlsize)
+        self.writeln(strformat.strsize(url_data.size), color=self.colordlsize)
 
     def write_checktime(self, url_data):
         """Write url_data.checktime."""
         self.write(self.part("checktime") + self.spaces("checktime"))
-        self.writeln(_("%.3f seconds") % url_data.checktime,
-                     color=self.colordltime)
+        self.writeln(_("%.3f seconds") % url_data.checktime, color=self.colordltime)
 
     def write_info(self, url_data):
         """Write url_data.info."""
@@ -225,60 +223,88 @@ class TextLogger(_Logger):
         if interrupt:
             self.writeln(_("The check has been interrupted; results are not complete."))
         self.write(_("That's it.") + " ")
-        self.write(_n("%d link", "%d links",
-                      self.stats.number) % self.stats.number)
+        self.write(_n("%d link", "%d links", self.stats.number) % self.stats.number)
         self.write(" ")
         if self.stats.num_urls is not None:
-            self.write(_n("in %d URL", "in %d URLs",
-                          self.stats.num_urls) % self.stats.num_urls)
+            self.write(
+                _n("in %d URL", "in %d URLs", self.stats.num_urls) % self.stats.num_urls
+            )
         self.write(" checked. ")
-        warning_text = _n("%d warning found", "%d warnings found",
-             self.stats.warnings_printed) % self.stats.warnings_printed
+        warning_text = (
+            _n("%d warning found", "%d warnings found", self.stats.warnings_printed)
+            % self.stats.warnings_printed
+        )
         if self.stats.warnings_printed:
             warning_color = self.colorwarning
         else:
             warning_color = self.colorinfo
         self.write(warning_text, color=warning_color)
         if self.stats.warnings != self.stats.warnings_printed:
-            self.write(_(" (%d ignored or duplicates not printed)") %
-                (self.stats.warnings - self.stats.warnings_printed))
+            self.write(
+                _(" (%d ignored or duplicates not printed)")
+                % (self.stats.warnings - self.stats.warnings_printed)
+            )
         self.write(". ")
-        error_text = _n("%d error found", "%d errors found",
-             self.stats.errors_printed) % self.stats.errors_printed
+        error_text = (
+            _n("%d error found", "%d errors found", self.stats.errors_printed)
+            % self.stats.errors_printed
+        )
         if self.stats.errors_printed:
             error_color = self.colorinvalid
         else:
             error_color = self.colorvalid
         self.write(error_text, color=error_color)
         if self.stats.errors != self.stats.errors_printed:
-            self.write(_(" (%d duplicates not printed)") %
-                (self.stats.errors - self.stats.errors_printed))
+            self.write(
+                _(" (%d duplicates not printed)")
+                % (self.stats.errors - self.stats.errors_printed)
+            )
         self.writeln(".")
         num = self.stats.internal_errors
         if num:
-            self.writeln(_n("There was %(num)d internal error.",
-                "There were %(num)d internal errors.", num) % {"num": num})
+            self.writeln(
+                _n(
+                    "There was %(num)d internal error.",
+                    "There were %(num)d internal errors.",
+                    num,
+                )
+                % {"num": num}
+            )
         self.stoptime = time.time()
         duration = self.stoptime - self.starttime
-        self.writeln(_("Stopped checking at %(time)s (%(duration)s)") %
-             {"time": strformat.strtime(self.stoptime),
-              "duration": strformat.strduration_long(duration)})
+        self.writeln(
+            _("Stopped checking at %(time)s (%(duration)s)")
+            % {
+                "time": strformat.strtime(self.stoptime),
+                "duration": strformat.strduration_long(duration),
+            }
+        )
 
     def write_stats(self):
         """Write check statistic info."""
         self.writeln()
         self.writeln(_("Statistics:"))
         if self.stats.downloaded_bytes is not None:
-            self.writeln(_("Downloaded: %s.") % strformat.strsize(self.stats.downloaded_bytes))
+            self.writeln(
+                _("Downloaded: %s.") % strformat.strsize(self.stats.downloaded_bytes)
+            )
         if self.stats.number > 0:
-            self.writeln(_(
-              "Content types: %(image)d image, %(text)d text, %(video)d video, "
-              "%(audio)d audio, %(application)d application, %(mail)d mail"
-              " and %(other)d other.") % self.stats.link_types)
-            self.writeln(_("URL lengths: min=%(min)d, max=%(max)d, avg=%(avg)d.") %
-                         dict(min=self.stats.min_url_length,
-                         max=self.stats.max_url_length,
-                         avg=self.stats.avg_url_length))
+            self.writeln(
+                _(
+                    "Content types: %(image)d image, %(text)d text, %(video)d video, "
+                    "%(audio)d audio, %(application)d application, %(mail)d mail"
+                    " and %(other)d other."
+                )
+                % self.stats.link_types
+            )
+            self.writeln(
+                _("URL lengths: min=%(min)d, max=%(max)d, avg=%(avg)d.")
+                % dict(
+                    min=self.stats.min_url_length,
+                    max=self.stats.max_url_length,
+                    avg=self.stats.avg_url_length,
+                )
+            )
         else:
             self.writeln(_("No statistics available since no URLs were checked."))
 

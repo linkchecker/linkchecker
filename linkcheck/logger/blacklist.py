@@ -76,8 +76,9 @@ class BlacklistLogger(_Logger):
         """
         Read a previously stored blacklist from file fd.
         """
-        with codecs.open(self.filename, 'r', self.output_encoding,
-                         self.codec_errors) as fd:
+        with codecs.open(
+            self.filename, 'r', self.output_encoding, self.codec_errors
+        ) as fd:
             for line in fd:
                 line = line.rstrip()
                 if line.startswith('#') or not line:

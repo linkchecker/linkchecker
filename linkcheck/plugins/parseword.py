@@ -17,9 +17,11 @@
 Parse hyperlinks in Word files.
 """
 from . import _ParserPlugin
+
 try:
     import win32com
     import pythoncom
+
     has_win32com = True
     Error = pythoncom.com_error
 except ImportError:
@@ -29,14 +31,17 @@ from .. import fileutil, log, LOG_PLUGIN
 
 
 _initialized = False
+
+
 def init_win32com():
     """Initialize the win32com.client cache."""
     global _initialized
     if _initialized:
         return
     import win32com.client
+
     if win32com.client.gencache.is_readonly:
-        #allow gencache to create the cached wrapper objects
+        # allow gencache to create the cached wrapper objects
         win32com.client.gencache.is_readonly = False
         # under py2exe the call in gencache to __init__() does not happen
         # so we use Rebuild() to force the creation of the gen_py folder
@@ -79,6 +84,7 @@ def get_word_app():
     # the COM layer.
     pythoncom.CoInitialize()
     import win32com.client
+
     app = win32com.client.gencache.EnsureDispatch("Word.Application")
     app.Visible = False
     return app
@@ -91,8 +97,13 @@ def close_word_app(app):
 
 def open_wordfile(app, filename):
     """Open given Word file with application object."""
-    return app.Documents.Open(filename, ReadOnly=True,
-      AddToRecentFiles=False, Visible=False, NoEncodingDialog=True)
+    return app.Documents.Open(
+        filename,
+        ReadOnly=True,
+        AddToRecentFiles=False,
+        Visible=False,
+        NoEncodingDialog=True,
+    )
 
 
 def close_wordfile(doc):
@@ -128,7 +139,7 @@ class WordParser(_ParserPlugin):
                 try:
                     for link in doc.Hyperlinks:
                         line = get_line_number(link.Range)
-                        name=link.TextToDisplay
+                        name = link.TextToDisplay
                         url_data.add_url(link.Address, name=name, line=line)
                 finally:
                     close_wordfile(doc)
@@ -158,11 +169,9 @@ def get_line_number(doc, wrange):
 def get_temp_filename(content):
     """Get temporary filename for content to parse."""
     # store content in temporary file
-    fd, filename = fileutil.get_temp_file(mode='wb', suffix='.doc',
-        prefix='lc_')
+    fd, filename = fileutil.get_temp_file(mode='wb', suffix='.doc', prefix='lc_')
     try:
         fd.write(content)
     finally:
         fd.close()
     return filename
-

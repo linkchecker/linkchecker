@@ -47,6 +47,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
     """Check the syntax of HTML pages with the online W3C HTML validator.
     See http://validator.w3.org/docs/api.html.
     """
+
     def __init__(self, config):
         """Initialize plugin."""
         super(HtmlSyntaxCheck, self).__init__(config)
@@ -69,9 +70,11 @@ class HtmlSyntaxCheck(_ContentPlugin):
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:
-            pass # ignore service failures
+            pass  # ignore service failures
         except Exception as msg:
-            log.warn(LOG_PLUGIN, _("HTML syntax check plugin error: %(msg)s ") % {"msg": msg})
+            log.warn(
+                LOG_PLUGIN, _("HTML syntax check plugin error: %(msg)s ") % {"msg": msg}
+            )
 
 
 class CssSyntaxCheck(_ContentPlugin):
@@ -106,9 +109,11 @@ class CssSyntaxCheck(_ContentPlugin):
                 return
             check_w3_errors(url_data, response.text, "W3C HTML")
         except requests.exceptions.RequestException:
-            pass # ignore service failures
+            pass  # ignore service failures
         except Exception as msg:
-            log.warn(LOG_PLUGIN, _("CSS syntax check plugin error: %(msg)s ") % {"msg": msg})
+            log.warn(
+                LOG_PLUGIN, _("CSS syntax check plugin error: %(msg)s ") % {"msg": msg}
+            )
 
 
 def check_w3_errors(url_data, xml, w3type):
@@ -116,7 +121,9 @@ def check_w3_errors(url_data, xml, w3type):
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
     for error in dom.getElementsByTagName('m:error'):
-        warnmsg = _("%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s")
+        warnmsg = _(
+            "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
+        )
         attrs = {
             "w3type": w3type,
             "line": getXmlText(error, "m:line"),

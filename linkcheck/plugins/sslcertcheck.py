@@ -27,6 +27,7 @@ _lock = threading.Lock()
 # configuration option names
 sslcertwarndays = "sslcertwarndays"
 
+
 class SslCertificateCheck(_ConnectionPlugin):
     """Check SSL certificate expiration date. Only internal https: links
     will be checked. A domain will only be checked once to avoid duplicate
@@ -37,14 +38,20 @@ class SslCertificateCheck(_ConnectionPlugin):
     def __init__(self, config):
         """Initialize clamav configuration."""
         super(SslCertificateCheck, self).__init__(config)
-        self.warn_ssl_cert_secs_valid = config[sslcertwarndays] * strformat.SECONDS_PER_DAY
+        self.warn_ssl_cert_secs_valid = (
+            config[sslcertwarndays] * strformat.SECONDS_PER_DAY
+        )
         # do not check hosts multiple times
         self.checked_hosts = set()
 
     def applies_to(self, url_data):
         """Check validity, scheme, extern and url_connection."""
-        return url_data.valid and url_data.scheme == 'https' and \
-          not url_data.extern[0] and url_data.url_connection is not None
+        return (
+            url_data.valid
+            and url_data.scheme == 'https'
+            and not url_data.extern[0]
+            and url_data.url_connection is not None
+        )
 
     @synchronized(_lock)
     def check(self, url_data):
@@ -71,6 +78,7 @@ class SslCertificateCheck(_ConnectionPlugin):
         if it's at least a number of days valid.
         """
         import ssl
+
         try:
             notAfter = ssl.cert_time_to_seconds(cert['notAfter'])
         except ValueError as msg:
@@ -88,7 +96,9 @@ class SslCertificateCheck(_ConnectionPlugin):
         else:
             args['valid'] = strformat.strduration_long(secondsValid)
             if secondsValid < self.warn_ssl_cert_secs_valid:
-                msg = _('SSL certificate expires on %(expire)s and is only %(valid)s valid.')
+                msg = _(
+                    'SSL certificate expires on %(expire)s and is only %(valid)s valid.'
+                )
                 url_data.add_warning(msg % args)
             else:
                 msg = _('SSL certificate expires on %(expire)s and is %(valid)s valid.')
@@ -105,7 +115,11 @@ class SslCertificateCheck(_ConnectionPlugin):
             if num > 0:
                 config[option] = num
             else:
-                msg = _("invalid value for %s: %d must not be less than %d") % (option, num, 0)
+                msg = _("invalid value for %s: %d must not be less than %d") % (
+                    option,
+                    num,
+                    0,
+                )
                 raise LinkCheckerError(msg)
         else:
             # set the default

@@ -16,8 +16,10 @@
 """Parser for FireFox bookmark file."""
 
 import re
+
 try:
     import sqlite3
+
     has_sqlite = True
 except ImportError:
     has_sqlite = False

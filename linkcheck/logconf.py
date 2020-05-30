@@ -41,20 +41,18 @@ lognamelist = ", ".join(repr(name) for name in lognames)
 # logging configuration
 configdict = {
     'version': 1,
-    'loggers': {
-    },
-    'root': {
-      'level': 'WARN',
-    },
+    'loggers': {},
+    'root': {'level': 'WARN',},
     'incremental': True,
 }
+
 
 def init_log_config(handler=None):
     """Set up the application logging (not to be confused with check loggers).
     """
     for applog in lognames.values():
         # propagate except for root app logger 'linkcheck'
-        propagate = (applog != LOG_ROOT)
+        propagate = applog != LOG_ROOT
         configdict['loggers'][applog] = dict(level='INFO', propagate=propagate)
 
     logging.config.dictConfig(configdict)
@@ -86,8 +84,8 @@ def set_debug(loggers):
     """Set debugging log level."""
     set_loglevel(loggers, logging.DEBUG)
     # enable for httplib debugging (used by requests.packages.urllib3)
-    #import httplib
-    #httplib.HTTPConnection.debuglevel = 1
+    # import httplib
+    # httplib.HTTPConnection.debuglevel = 1
 
 
 def set_loglevel(loggers, level):

@@ -35,8 +35,7 @@ class AnchorCheck(_ContentPlugin):
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
         # list of parsed anchors
         self.anchors = []
-        linkparse.find_links(url_data.get_soup(), self.add_anchor,
-                             linkparse.AnchorTags)
+        linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
         self.check_anchor(url_data)
 
     def add_anchor(self, url, line, column, name, base):
@@ -56,6 +55,8 @@ class AnchorCheck(_ContentPlugin):
         else:
             anchors = "-"
         args = {"name": url_data.anchor, "anchors": anchors}
-        msg = "%s %s" % (_("Anchor `%(name)s' not found.") % args,
-                          _("Available anchors: %(anchors)s.") % args)
+        msg = "%s %s" % (
+            _("Anchor `%(name)s' not found.") % args,
+            _("Available anchors: %(anchors)s.") % args,
+        )
         url_data.add_warning(msg)

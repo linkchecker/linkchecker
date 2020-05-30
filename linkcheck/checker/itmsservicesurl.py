@@ -20,6 +20,7 @@ Handle itms-services URLs.
 from . import urlbase
 from .. import log, LOG_CHECK
 
+
 class ItmsServicesUrl(urlbase.UrlBase):
     """Apple iOS application download URLs."""
 

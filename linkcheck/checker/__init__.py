@@ -23,7 +23,7 @@ import urllib.parse
 
 from .. import strformat, url as urlutil, log, LOG_CHECK
 
-MAX_FILESIZE = 1024*1024*10 # 10MB
+MAX_FILESIZE = 1024 * 1024 * 10  # 10MB
 
 
 def guess_url(url):
@@ -64,9 +64,20 @@ def absolute_url(base_url, base_ref, parent_url):
     return ""
 
 
-def get_url_from(base_url, recursion_level, aggregate,
-                  parent_url=None, base_ref=None, line=None, column=None,
-                  page=0, name="", parent_content_type=None, extern=None, url_encoding=None):
+def get_url_from(
+    base_url,
+    recursion_level,
+    aggregate,
+    parent_url=None,
+    base_ref=None,
+    line=None,
+    column=None,
+    page=0,
+    name="",
+    parent_content_type=None,
+    extern=None,
+    url_encoding=None,
+):
     """
     Get url data from given base data.
 
@@ -112,17 +123,31 @@ def get_url_from(base_url, recursion_level, aggregate,
             name = base_url.replace("\\", "/")
     allowed_schemes = aggregate.config["allowedschemes"]
     # ignore local PHP files with execution directives
-    local_php = (parent_content_type == 'application/x-httpd-php' and
-       '<?' in base_url and '?>' in base_url and scheme == 'file')
+    local_php = (
+        parent_content_type == 'application/x-httpd-php'
+        and '<?' in base_url
+        and '?>' in base_url
+        and scheme == 'file'
+    )
     if local_php or (allowed_schemes and scheme not in allowed_schemes):
         klass = ignoreurl.IgnoreUrl
     else:
-        assume_local_file = (recursion_level == 0)
+        assume_local_file = recursion_level == 0
         klass = get_urlclass_from(scheme, assume_local_file=assume_local_file)
     log.debug(LOG_CHECK, "%s handles url %s", klass.__name__, base_url)
-    return klass(base_url, recursion_level, aggregate,
-                 parent_url=parent_url, base_ref=base_ref,
-                 line=line, column=column, page=page, name=name, extern=extern, url_encoding=url_encoding)
+    return klass(
+        base_url,
+        recursion_level,
+        aggregate,
+        parent_url=parent_url,
+        base_ref=base_ref,
+        line=line,
+        column=column,
+        page=page,
+        name=name,
+        extern=extern,
+        url_encoding=url_encoding,
+    )
 
 
 def get_urlclass_from(scheme, assume_local_file=False):
@@ -175,5 +200,15 @@ def get_index_html(urls):
 
 
 # all the URL classes
-from . import (fileurl, unknownurl, ftpurl, httpurl, dnsurl,
-    mailtourl, telneturl, nntpurl, ignoreurl, itmsservicesurl)  # noqa: E402
+from . import (
+    fileurl,
+    unknownurl,
+    ftpurl,
+    httpurl,
+    dnsurl,
+    mailtourl,
+    telneturl,
+    nntpurl,
+    ignoreurl,
+    itmsservicesurl,
+)  # noqa: E402

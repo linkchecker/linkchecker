@@ -93,6 +93,7 @@ class _GraphLogger(_Logger):
 
 _disallowed = re.compile(r"[^a-zA-Z0-9 '#(){}\-\[\]\.,;:\!\?]+")
 
+
 def quote(s):
     """Replace disallowed characters in node or edge labels.
     Also remove whitespace from beginning or end of label."""

@@ -25,6 +25,7 @@ from ..decorators import synchronized
 from ..strformat import unicode_safe
 from .. import log, LOG_PLUGIN
 
+
 class LocationInfo(_ConnectionPlugin):
     """Adds the country and if possible city name of the URL host as info.
     Needs GeoIP or pygeoip and a local country or city lookup DB installed."""
@@ -43,12 +44,15 @@ class LocationInfo(_ConnectionPlugin):
         """Try to ask GeoIP database for country info."""
         location = get_location(url_data.host)
         if location:
-            url_data.add_info(_("URL is located in %(location)s.") %
-            {"location": _(location)})
+            url_data.add_info(
+                _("URL is located in %(location)s.") % {"location": _(location)}
+            )
+
 
 # It is unknown if the geoip library is already thread-safe, so
 # no risks should be taken here by using a lock.
 _lock = get_lock("geoip")
+
 
 def get_geoip_dat():
     """Find a GeoIP database, preferring city over country lookup."""
@@ -63,17 +67,20 @@ def get_geoip_dat():
             if os.path.isfile(filename):
                 return filename
 
+
 # try importing both the C-library GeoIP and the pure-python pygeoip
 geoip_dat = get_geoip_dat()
 geoip = None
 if geoip_dat:
     try:
         import GeoIP
+
         geoip = GeoIP.open(geoip_dat, GeoIP.GEOIP_STANDARD)
         geoip_error = GeoIP.error
     except ImportError:
         try:
             import pygeoip
+
             geoip = pygeoip.GeoIP(geoip_dat)
             geoip_error = pygeoip.GeoIPError
         except ImportError:
@@ -81,7 +88,9 @@ if geoip_dat:
     if geoip_dat.endswith('GeoIPCity.dat'):
         get_geoip_record = lambda host: geoip.record_by_name(host)
     else:
-        get_geoip_record = lambda host: {'country_name': geoip.country_name_by_name(host)}
+        get_geoip_record = lambda host: {
+            'country_name': geoip.country_name_by_name(host)
+        }
 
 
 @synchronized(_lock)

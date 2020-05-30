@@ -19,9 +19,14 @@ Main function module for link checking.
 
 # version checks
 import sys
+
 if sys.version_info < (3, 5, 0, 'final', 0):
     import platform
-    raise SystemExit("This program requires Python 3.5.0 or later instead of %s." % platform.python_version())
+
+    raise SystemExit(
+        "This program requires Python 3.5.0 or later instead of %s."
+        % platform.python_version()
+    )
 
 import os
 import re
@@ -48,6 +53,7 @@ def module_path():
 def get_install_data():
     """Return absolute path of LinkChecker data installation directory."""
     from .loader import is_frozen
+
     if is_frozen():
         return module_path()
     return configdata.install_data
@@ -55,10 +61,13 @@ def get_install_data():
 
 class LinkCheckerError(Exception):
     """Exception to be raised on linkchecker-specific check errors."""
+
     pass
+
 
 class LinkCheckerInterrupt(Exception):
     """Used for testing."""
+
     pass
 
 
@@ -106,6 +115,7 @@ def init_i18n(loc=None):
     i18n.init(configdata.name.lower(), locdir, loc=loc)
     # install translated log level names
     import logging
+
     logging.addLevelName(logging.CRITICAL, _('CRITICAL'))
     logging.addLevelName(logging.ERROR, _('ERROR'))
     logging.addLevelName(logging.WARN, _('WARN'))
@@ -124,15 +134,22 @@ def drop_privileges():
     if os.name != 'posix':
         return
     if os.geteuid() == 0:
-        log.warn(LOG_CHECK, _("Running as root user; "
-                       "dropping privileges by changing user to nobody."))
+        log.warn(
+            LOG_CHECK,
+            _(
+                "Running as root user; "
+                "dropping privileges by changing user to nobody."
+            ),
+        )
         import pwd
+
         os.seteuid(pwd.getpwnam('nobody')[3])
 
 
 if hasattr(signal, "SIGUSR1"):
     # install SIGUSR1 handler
     from .decorators import signal_handler
+
     @signal_handler(signal.SIGUSR1)
     def print_threadstacks(sig, frame):
         """Print stack traces of all running threads."""
@@ -140,7 +157,9 @@ if hasattr(signal, "SIGUSR1"):
         for threadId, stack in sys._current_frames().items():
             log.warn(LOG_THREAD, "# ThreadID: %s" % threadId)
             for filename, lineno, name, line in traceback.extract_stack(stack):
-                log.warn(LOG_THREAD, 'File: "%s", line %d, in %s' % (filename, lineno, name))
+                log.warn(
+                    LOG_THREAD, 'File: "%s", line %d, in %s' % (filename, lineno, name)
+                )
                 line = line.strip()
                 if line:
                     log.warn(LOG_THREAD, "  %s" % line)

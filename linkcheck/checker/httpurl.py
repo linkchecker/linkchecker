@@ -17,21 +17,33 @@
 Handle http links.
 """
 import requests
+
 # The validity of SSL certs is ignored to be able
 # the check the URL and recurse into it.
 # The warning about invalid SSL certs is given to the
 # user instead.
 import warnings
-warnings.simplefilter('ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning)
+
+warnings.simplefilter(
+    'ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning
+)
 
 from io import BytesIO
 import re
 
-from .. import (log, LOG_CHECK, strformat, mimeutil,
-    url as urlutil, LinkCheckerError, httputil)
-from . import (internpaturl, proxysupport)
+from .. import (
+    log,
+    LOG_CHECK,
+    strformat,
+    mimeutil,
+    url as urlutil,
+    LinkCheckerError,
+    httputil,
+)
+from . import internpaturl, proxysupport
+
 # import warnings
-from .const import (WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED)
+from .const import WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED
 from requests.sessions import REDIRECT_STATI
 
 # assumed HTTP header encoding
@@ -72,9 +84,11 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         @return: True if access is granted, otherwise False
         @rtype: bool
         """
-        return (not self.aggregate.config['robotstxt']
-                or self.aggregate.robots_txt.allows_url(
-                    self, timeout=self.aggregate.config["timeout"]))
+        return not self.aggregate.config[
+            'robotstxt'
+        ] or self.aggregate.robots_txt.allows_url(
+            self, timeout=self.aggregate.config["timeout"]
+        )
 
     def content_allows_robots(self):
         """
@@ -89,8 +103,11 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def add_size_info(self):
         """Get size of URL content from HTTP header."""
-        if self.headers and "Content-Length" in self.headers and \
-           "Transfer-Encoding" not in self.headers:
+        if (
+            self.headers
+            and "Content-Length" in self.headers
+            and "Transfer-Encoding" not in self.headers
+        ):
             # Note that content-encoding causes size differences since
             # the content data is always decoded.
             try:
@@ -139,14 +156,9 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def build_request(self):
         """Build a prepared request object."""
         clientheaders = {}
-        if (self.parent_url and
-            self.parent_url.lower().startswith(HTTP_SCHEMAS)):
+        if self.parent_url and self.parent_url.lower().startswith(HTTP_SCHEMAS):
             clientheaders["Referer"] = self.parent_url
-        kwargs = dict(
-            method='GET',
-            url=self.url,
-            headers=clientheaders,
-        )
+        kwargs = dict(method='GET', url=self.url, headers=clientheaders,)
         if self.auth:
             kwargs['auth'] = self.auth
         log.debug(LOG_CHECK, "Prepare request with %s", kwargs)
@@ -223,8 +235,10 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def is_redirect(self):
         """Check if current response is a redirect."""
-        return ('location' in self.headers and
-                self.url_connection.status_code in REDIRECT_STATI)
+        return (
+            'location' in self.headers
+            and self.url_connection.status_code in REDIRECT_STATI
+        )
 
     def get_request_kwargs(self):
         """Construct keyword parameters for Session.request() and
@@ -241,8 +255,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
     def get_redirects(self, request):
         """Return iterator of redirects for given request."""
         kwargs = self.get_request_kwargs()
-        return self.session.resolve_redirects(self.url_connection,
-            request, **kwargs)
+        return self.session.resolve_redirects(self.url_connection, request, **kwargs)
 
     def follow_redirections(self, request):
         """Follow all redirections of http response."""
@@ -285,21 +298,32 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def check_response(self):
         """Check final result and log it."""
-        if self.url_connection.status_code >= 400 and self.url_connection.status_code != 429:
-            self.set_result("%d %s" % (self.url_connection.status_code, self.url_connection.reason),
-                            valid=False)
+        if (
+            self.url_connection.status_code >= 400
+            and self.url_connection.status_code != 429
+        ):
+            self.set_result(
+                "%d %s" % (self.url_connection.status_code, self.url_connection.reason),
+                valid=False,
+            )
         else:
             if self.url_connection.status_code == 204:
                 # no content
-                self.add_warning(self.url_connection.reason,
-                                 tag=WARN_HTTP_EMPTY_CONTENT)
+                self.add_warning(
+                    self.url_connection.reason, tag=WARN_HTTP_EMPTY_CONTENT
+                )
 
             if self.url_connection.status_code == 429:
-                self.add_warning("Rate limited (Retry-After: %s)" % self.getheader(_("Retry-After")),
-                                 tag=WARN_URL_RATE_LIMITED)
+                self.add_warning(
+                    "Rate limited (Retry-After: %s)" % self.getheader(_("Retry-After")),
+                    tag=WARN_URL_RATE_LIMITED,
+                )
 
             if self.url_connection.status_code >= 200:
-                self.set_result("%r %s" % (self.url_connection.status_code, self.url_connection.reason))
+                self.set_result(
+                    "%r %s"
+                    % (self.url_connection.status_code, self.url_connection.reason)
+                )
             else:
                 self.set_result(_("OK"))
 
@@ -325,6 +349,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             self.add_url(url, name=name)
         if 'Refresh' in self.headers:
             from ..htmlutil.linkparse import refresh_re
+
             value = self.headers['Refresh'].strip()
             mo = refresh_re.match(value)
             if mo:
@@ -352,7 +377,11 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 # XXX side effect
                 self.content_type = rtype
         if self.content_type not in self.ContentMimetypes:
-            log.debug(LOG_CHECK, "URL with content type %r is not parseable", self.content_type)
+            log.debug(
+                LOG_CHECK,
+                "URL with content type %r is not parseable",
+                self.content_type,
+            )
             return False
         return True
 

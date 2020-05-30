@@ -24,11 +24,13 @@ import inspect
 import traceback
 
 # memory leak debugging
-#import gc
-#gc.enable()
-#gc.set_debug(gc.DEBUG_LEAK)
+# import gc
+# gc.enable()
+# gc.set_debug(gc.DEBUG_LEAK)
 
 PRINT_LOCALVARS = False
+
+
 def _stack_format(stack):
     """Format a stack trace to a message.
 

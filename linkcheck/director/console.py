@@ -35,8 +35,7 @@ class StatusLogger:
 
     def log_status(self, checked, in_progress, queue, duration, num_urls):
         """Write status message to file descriptor."""
-        msg = _n("%2d thread active", "%2d threads active", in_progress) % \
-          in_progress
+        msg = _n("%2d thread active", "%2d threads active", in_progress) % in_progress
         self.write("%s, " % msg)
         msg = _n("%5d link queued", "%5d links queued", queue) % queue
         self.write("%s, " % msg)
@@ -64,7 +63,9 @@ class StatusLogger:
 def internal_error(out=stderr, etype=None, evalue=None, tb=None):
     """Print internal error message (output defaults to stderr)."""
     print(os.linesep, file=out)
-    print(_("""********** Oops, I did it again. *************
+    print(
+        _(
+            """********** Oops, I did it again. *************
 
 You have found an internal error in LinkChecker. Please write a bug report
 at %s
@@ -79,7 +80,11 @@ When using the commandline client:
 Not disclosing some of the information above due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
-""") % configuration.SupportUrl, file=out)
+"""
+        )
+        % configuration.SupportUrl,
+        file=out,
+    )
     if etype is None:
         etype = sys.exc_info()[0]
     if evalue is None:
@@ -90,8 +95,11 @@ I can work with ;) .
     print_app_info(out=out)
     print_proxy_info(out=out)
     print_locale_info(out=out)
-    print(os.linesep,
-      _("******** LinkChecker internal error, over and out ********"), file=out)
+    print(
+        os.linesep,
+        _("******** LinkChecker internal error, over and out ********"),
+        file=out,
+    )
 
 
 def print_env_info(key, out=stderr):
@@ -113,6 +121,7 @@ def print_locale_info(out=stderr):
         print_env_info(key, out=out)
     print(_("Default locale:"), i18n.get_locale(), file=out)
 
+
 # Environment variables influencing the interpreter execution
 # See python(1) man page.
 PYTHON_ENV_VARS = (
@@ -131,13 +140,18 @@ PYTHON_ENV_VARS = (
     'PYTHONWARNINGS',
     'PYTHONHASHSEED',
 )
+
+
 def print_app_info(out=stderr):
     """Print system and application info (output defaults to stderr)."""
     print(_("System info:"), file=out)
     print(configuration.App, file=out)
     print(_("Released on:"), configuration.ReleaseDate, file=out)
-    print(_("Python %(version)s on %(platform)s") %
-                    {"version": sys.version, "platform": sys.platform}, file=out)
+    print(
+        _("Python %(version)s on %(platform)s")
+        % {"version": sys.version, "platform": sys.platform},
+        file=out,
+    )
     for key in PYTHON_ENV_VARS:
         print_env_info(key, out=out)
     print(configuration.get_modules_info(), file=out)
@@ -148,6 +162,5 @@ def print_app_info(out=stderr):
 
 def print_version(out=stdout):
     """Print the program version (output defaults to stdout)."""
-    print(configuration.App, _("released"),
-          configuration.ReleaseDate, file=out)
+    print(configuration.App, _("released"), configuration.ReleaseDate, file=out)
     print(configuration.Copyright, file=out)

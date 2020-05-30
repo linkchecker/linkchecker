@@ -64,10 +64,10 @@ class TelnetUrl(urlbase.UrlBase):
         self.url_connection.open(self.host, self.port)
         if self.user:
             self.url_connection.read_until(b"login: ", 10)
-            self.url_connection.write(encode(self.user)+b"\n")
+            self.url_connection.write(encode(self.user) + b"\n")
             if self.password:
                 self.url_connection.read_until(b"Password: ", 10)
-                self.url_connection.write(encode(self.password)+b"\n")
+                self.url_connection.write(encode(self.password) + b"\n")
                 # XXX how to tell if we are logged in??
         self.url_connection.write(b"exit\n")
 

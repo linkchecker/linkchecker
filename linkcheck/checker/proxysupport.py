@@ -40,14 +40,14 @@ class ProxySupport:
         if self.proxytype not in ('http', 'https'):
             # Note that invalid proxies might raise TypeError in urllib2,
             # so make sure to stop checking at this point, not later.
-            msg = _("Proxy value `%(proxy)s' must start with 'http:' or 'https:'.") \
-                 % dict(proxy=proxy)
+            msg = _(
+                "Proxy value `%(proxy)s' must start with 'http:' or 'https:'."
+            ) % dict(proxy=proxy)
             raise LinkCheckerError(msg)
         if self.ignore_proxy_host():
             # log proxy without auth info
             log.debug(LOG_CHECK, "ignoring proxy %r", self.proxy)
-            self.add_info(_("Ignoring proxy setting `%(proxy)s'.") %
-                dict(proxy=proxy))
+            self.add_info(_("Ignoring proxy setting `%(proxy)s'.") % dict(proxy=proxy))
             self.proxy = None
             return
         log.debug(LOG_CHECK, "using proxy %r", self.proxy)
@@ -58,7 +58,7 @@ class ProxySupport:
             username = proxyurl.username
             password = proxyurl.password if proxy.password is not None else ""
             auth = "%s:%s" % (username, password)
-            self.proxyauth = "Basic "+httputil.encode_base64(auth)
+            self.proxyauth = "Basic " + httputil.encode_base64(auth)
 
     def ignore_proxy_host(self):
         """Check if self.host is in the $no_proxy ignore list."""

@@ -24,7 +24,9 @@ from distutils.version import LooseVersion
 
 # Use the Freecode submit file as source since that file gets updated
 # only when releasing a new version.
-UPDATE_URL = "https://raw.github.com/linkchecker/linkchecker/master/linkchecker.freecode"
+UPDATE_URL = (
+    "https://raw.github.com/linkchecker/linkchecker/master/linkchecker.freecode"
+)
 VERSION_TAG = 'Version:'
 if os.name == 'nt':
     URL_TAG = 'Windows-installer-URL:'

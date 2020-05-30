@@ -50,14 +50,16 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.set_proxy(self.aggregate.config["proxy"].get(self.scheme))
         if self.proxy:
             # using a (HTTP) proxy
-            http = httpurl.HttpUrl(self.base_url,
-                  self.recursion_level,
-                  self.aggregate,
-                  parent_url=self.parent_url,
-                  base_ref=self.base_ref,
-                  line=self.line,
-                  column=self.column,
-                  name=self.name)
+            http = httpurl.HttpUrl(
+                self.base_url,
+                self.recursion_level,
+                self.aggregate,
+                parent_url=self.parent_url,
+                base_ref=self.base_ref,
+                line=self.line,
+                column=self.column,
+                name=self.name,
+            )
             http.build_url()
             return http.check()
         self.login()
@@ -91,7 +93,8 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 raise LinkCheckerError(_("Got no answer from FTP server"))
         except EOFError as msg:
             raise LinkCheckerError(
-                      _("Remote host has closed connection: %(msg)s") % str(msg))
+                _("Remote host has closed connection: %(msg)s") % str(msg)
+            )
 
     def negotiate_encoding(self):
         """Check if server can handle UTF-8 encoded filenames.
@@ -137,8 +140,9 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         if "%s/" % self.filename in files:
             if not self.url.endswith('/'):
                 self.add_warning(
-                         _("Missing trailing directory slash in ftp url."),
-                         tag=WARN_FTP_MISSING_SLASH)
+                    _("Missing trailing directory slash in ftp url."),
+                    tag=WARN_FTP_MISSING_SLASH,
+                )
                 self.url += '/'
             return
         raise ftplib.error_perm("550 File not found")
@@ -147,11 +151,13 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Get list of filenames in directory. Subdirectories have an
         ending slash."""
         files = []
+
         def add_entry(line):
             """Parse list line and add the entry it points to to the file
             list."""
             log.debug(LOG_CHECK, "Directory entry %r", line)
             from ..ftpparse import ftpparse
+
             fpo = ftpparse(line)
             if fpo is not None and fpo["name"]:
                 name = fpo["name"]
@@ -159,6 +165,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                     name += "/"
                 if fpo["trycwd"] or fpo["tryretr"]:
                     files.append(name)
+
         self.url_connection.dir(add_entry)
         return files
 
@@ -168,7 +175,9 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             return True
         if self.content_type in self.ContentMimetypes:
             return True
-        log.debug(LOG_CHECK, "URL with content type %r is not parseable.", self.content_type)
+        log.debug(
+            LOG_CHECK, "URL with content type %r is not parseable.", self.content_type
+        )
         return False
 
     def is_directory(self):
@@ -194,12 +203,14 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # download file in BINARY mode
             ftpcmd = "RETR %s" % self.filename
             buf = StringIO()
+
             def stor_data(s):
                 """Helper method storing given data"""
                 # limit the download size
                 if (buf.tell() + len(s)) > self.max_size:
                     raise LinkCheckerError(_("FTP file size too large"))
                 buf.write(s)
+
             self.url_connection.retrbinary(ftpcmd, stor_data)
             data = buf.getvalue()
             buf.close()

@@ -34,15 +34,16 @@ _threads_lock = threading.RLock()
 _hosts_lock = threading.RLock()
 _downloadedbytes_lock = threading.RLock()
 
+
 def new_request_session(config, cookies):
     """Create a new request session."""
     session = requests.Session()
     if cookies:
         session.cookies = cookies
     session.max_redirects = config["maxhttpredirects"]
-    session.headers.update({
-        "User-Agent": config["useragent"],
-    })
+    session.headers.update(
+        {"User-Agent": config["useragent"],}
+    )
     if config["cookiefile"]:
         for cookie in from_file(config["cookiefile"]):
             session.cookies.set_cookie(cookie)
@@ -52,8 +53,7 @@ def new_request_session(config, cookies):
 class Aggregate:
     """Store thread-safe data collections for checker threads."""
 
-    def __init__(self, config, urlqueue, robots_txt, plugin_manager,
-                  result_cache):
+    def __init__(self, config, urlqueue, robots_txt, plugin_manager, result_cache):
         """Store given link checking objects."""
         self.config = config
         self.urlqueue = urlqueue
@@ -78,7 +78,8 @@ class Aggregate:
         user, password = self.config.get_user_password(url)
         if not user and not password:
             raise LinkCheckerError(
-                "loginurl is configured but neither user nor password are set")
+                "loginurl is configured but neither user nor password are set"
+            )
         session = new_request_session(self.config, self.cookies)
         log.debug(LOG_CHECK, "Getting login form %s", url)
         kwargs = dict(timeout=self.config["timeout"])
@@ -119,11 +120,15 @@ class Aggregate:
         num = self.config["threads"]
         if num > 0:
             for dummy in range(num):
-                t = checker.Checker(self.urlqueue, self.logger, self.add_request_session)
+                t = checker.Checker(
+                    self.urlqueue, self.logger, self.add_request_session
+                )
                 self.threads.append(t)
                 t.start()
         else:
-            self.request_sessions[threading.get_ident()] = new_request_session(self.config, self.cookies)
+            self.request_sessions[threading.get_ident()] = new_request_session(
+                self.config, self.cookies
+            )
             checker.check_urls(self.urlqueue, self.logger)
 
     @synchronized(_threads_lock)
@@ -162,10 +167,18 @@ class Aggregate:
                     first = False
                 log.info(LOG_CHECK, name[12:])
         args = dict(
-            num=len([x for x in self.threads if x.getName().startswith("CheckThread-")]),
+            num=len(
+                [x for x in self.threads if x.getName().startswith("CheckThread-")]
+            ),
             timeout=strformat.strduration_long(self.config["aborttimeout"]),
         )
-        log.info(LOG_CHECK, _("%(num)d URLs are still active. After a timeout of %(timeout)s the active URLs will stop.") % args)
+        log.info(
+            LOG_CHECK,
+            _(
+                "%(num)d URLs are still active. After a timeout of %(timeout)s the active URLs will stop."
+            )
+            % args,
+        )
 
     @synchronized(_threads_lock)
     def get_check_threads(self):
@@ -187,7 +200,10 @@ class Aggregate:
         try:
             self.urlqueue.join(timeout=timeout)
         except urlqueue.Timeout:
-            log.warn(LOG_CHECK, "Abort timed out after %d seconds, stopping application." % timeout)
+            log.warn(
+                LOG_CHECK,
+                "Abort timed out after %d seconds, stopping application." % timeout,
+            )
             raise KeyboardInterrupt()
 
     @synchronized(_threads_lock)
@@ -219,8 +235,9 @@ class Aggregate:
 
     def end_log_output(self, **kwargs):
         """Print ending output to log."""
-        kwargs.update(dict(
-            downloaded_bytes=self.downloaded_bytes,
-            num_urls = len(self.result_cache),
-        ))
+        kwargs.update(
+            dict(
+                downloaded_bytes=self.downloaded_bytes, num_urls=len(self.result_cache),
+            )
+        )
         self.logger.end_log_output(**kwargs)

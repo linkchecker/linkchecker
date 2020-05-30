@@ -27,14 +27,10 @@ def x509_to_dict(x509):
     subject, subjectAltName and optional notAfter.
     """
     from requests.packages.urllib3.contrib.pyopenssl import get_subj_alt_name
+
     res = {
-            'subject': (
-                (('commonName', x509.get_subject().CN),),
-            ),
-            'subjectAltName': [
-                ('DNS', value)
-                for value in get_subj_alt_name(x509)
-            ]
+        'subject': ((('commonName', x509.get_subject().CN),),),
+        'subjectAltName': [('DNS', value) for value in get_subj_alt_name(x509)],
     }
     notAfter = x509.get_notAfter()
     if notAfter is not None:

@@ -56,11 +56,15 @@ def update_func_meta(fake_func, real_func):
 def deprecated(func):
     """A decorator which can be used to mark functions as deprecated.
     It emits a warning when the function is called."""
+
     def newfunc(*args, **kwargs):
         """Print deprecated warning and execute original function."""
-        warnings.warn("Call to deprecated function %s." % func.__name__,
-                      category=DeprecationWarning)
+        warnings.warn(
+            "Call to deprecated function %s." % func.__name__,
+            category=DeprecationWarning,
+        )
         return func(*args, **kwargs)
+
     return update_func_meta(newfunc, func)
 
 
@@ -83,19 +87,27 @@ def signal_handler(signal_number):
         if is_valid_signal and os.name == 'posix':
             signal.signal(signal_number, function)
         return function
+
     return newfunc
 
 
 def synchronize(lock, func, log_duration_secs=0):
     """Return synchronized function acquiring the given lock."""
+
     def newfunc(*args, **kwargs):
         """Execute function synchronized."""
         t = time.time()
         with lock:
             duration = time.time() - t
             if duration > log_duration_secs > 0:
-                print("WARN:", func.__name__, "locking took %0.2f seconds" % duration, file=sys.stderr)
+                print(
+                    "WARN:",
+                    func.__name__,
+                    "locking took %0.2f seconds" % duration,
+                    file=sys.stderr,
+                )
             return func(*args, **kwargs)
+
     return update_func_meta(newfunc, func)
 
 
@@ -106,11 +118,13 @@ def synchronized(lock):
 
 def notimplemented(func):
     """Raises a NotImplementedError if the function is called."""
+
     def newfunc(*args, **kwargs):
         """Raise NotImplementedError"""
         co = func.func_code
         attrs = (co.co_name, co.co_filename, co.co_firstlineno)
         raise NotImplementedError("function %s at %s:%d is not implemented" % attrs)
+
     return update_func_meta(newfunc, func)
 
 
@@ -127,6 +141,7 @@ def timeit(func, log, limit):
             print(args, file=log)
             print(kwargs, file=log)
         return res
+
     return update_func_meta(newfunc, func)
 
 
