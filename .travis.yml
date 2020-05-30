@@ -16,9 +16,6 @@ jobs:
       env: TOXENV=check-manifest
       before_script:
       after_success:
-  allow_failures:
-    - name: flake8
-      env: TOXENV=flake8
 # command to install dependencies
 addons:
   apt:
