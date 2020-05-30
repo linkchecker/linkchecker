@@ -160,7 +160,7 @@ class UrlBase:
         self.set_extern(self.url)
         if self.extern[0] and self.extern[1]:
             self.add_info(
-                _("The URL is outside of the domain " "filter, checked only syntax.")
+                _("The URL is outside of the domain filter, checked only syntax.")
             )
             if not self.has_result:
                 self.set_result(_("filtered"))

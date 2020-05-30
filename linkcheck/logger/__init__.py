@@ -230,7 +230,8 @@ class _Logger(abc.ABC):
             msg = sys.exc_info()[1]
             log.warn(
                 LOG_CHECK,
-                "Could not open file %r for writing: %s\n" "Disabling log output of %s",
+                "Could not open file %r for writing: %s\n"
+                "Disabling log output of %s",
                 self.filename,
                 msg,
                 self,
@@ -311,7 +312,8 @@ class _Logger(abc.ABC):
                 msg = sys.exc_info()[1]
                 log.warn(
                     LOG_CHECK,
-                    "Could not write to output file: %s\n" "Disabling log output of %s",
+                    "Could not write to output file: %s\n"
+                    "Disabling log output of %s",
                     msg,
                     self,
                 )
