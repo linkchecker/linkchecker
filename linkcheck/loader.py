@@ -43,7 +43,7 @@ def get_package_modules(packagename):
         with zipfile.ZipFile(zipname, 'r') as f:
             prefix = "%s/%s/" % (parentmodule, packagename)
             modnames = [
-                os.path.splitext(n[len(prefix) :])[0]
+                os.path.splitext(n[len(prefix):])[0]
                 for n in f.namelist()
                 if n.startswith(prefix) and "__init__" not in n
             ]

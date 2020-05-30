@@ -109,7 +109,8 @@ class MarkdownCheck(_ContentPlugin):
         self._check_inline_links(url_data, content)
 
     def _save_url(self, url_data, content, url_text, url_pos):
-        """Saves url. Converts url to 1-line text and url position as offset from the file beginning to (line, column).
+        """Saves url. Converts url to 1-line text and url position as offset
+        from the file beginning to (line, column).
 
         :param url_data: object for url storing
         :param content: file content
@@ -138,9 +139,9 @@ class MarkdownCheck(_ContentPlugin):
         end of string if it's reached before the balance point is found.
         """
         i = start
-        l = len(text)
+        n = len(text)
         count = 1
-        while count > 0 and i < l:
+        while count > 0 and i < n:
             if text[i] == open_c:
                 count += 1
             elif text[i] == close_c:
@@ -162,7 +163,7 @@ class MarkdownCheck(_ContentPlugin):
         match = self._inline_link_title.search(text, idx, end_idx)
         if not match:
             return None, None
-        url = text[idx : match.start()]
+        url = text[idx:match.start()]
         if has_anglebrackets:
             url = self._strip_anglebrackets.sub(r'\1', url)
         return url, end_idx

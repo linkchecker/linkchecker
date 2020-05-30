@@ -197,7 +197,8 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.parent_url is not None and not self.parent_url.startswith("file:"):
             msg = _(
-                "local files are only checked without parent URL or when the parent URL is also a file"
+                "local files are only checked without parent URL or when "
+                "the parent URL is also a file"
             )
             raise LinkCheckerError(msg)
         if self.is_directory():

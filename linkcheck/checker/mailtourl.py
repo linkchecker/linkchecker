@@ -119,7 +119,7 @@ class MailtoUrl(urlbase.UrlBase):
         if i < (len(url) - 1):
             self.addresses.update(getaddresses(url[:i]))
             try:
-                headers = urllib.parse.parse_qs(url[(i + 1) :], strict_parsing=True)
+                headers = urllib.parse.parse_qs(url[(i + 1):], strict_parsing=True)
                 for key, vals in headers.items():
                     if key.lower() in EMAIL_CGI_ADDRESS:
                         # Only the first header value is added
@@ -154,7 +154,8 @@ class MailtoUrl(urlbase.UrlBase):
         if len(mail) > 256:
             self.set_result(
                 _(
-                    "Mail address `%(addr)s' too long. Allowed 256 chars, was %(length)d chars."
+                    "Mail address `%(addr)s' too long. Allowed 256 chars, "
+                    "was %(length)d chars."
                 )
                 % {"addr": mail, "length": len(mail)},
                 valid=False,
@@ -187,7 +188,8 @@ class MailtoUrl(urlbase.UrlBase):
         if len(local) > 64:
             self.set_result(
                 _(
-                    "Local part of mail address `%(addr)s' too long. Allowed 64 chars, was %(length)d chars."
+                    "Local part of mail address `%(addr)s' too long. "
+                    "Allowed 64 chars, was %(length)d chars."
                 )
                 % {"addr": mail, "length": len(local)},
                 valid=False,
@@ -197,7 +199,8 @@ class MailtoUrl(urlbase.UrlBase):
         if len(domain) > 255:
             self.set_result(
                 _(
-                    "Domain part of mail address `%(addr)s' too long. Allowed 255 chars, was %(length)d chars."
+                    "Domain part of mail address `%(addr)s' too long. "
+                    "Allowed 255 chars, was %(length)d chars."
                 )
                 % {"addr": mail, "length": len(local)},
                 valid=False,
@@ -246,7 +249,8 @@ class MailtoUrl(urlbase.UrlBase):
                 if char in local.replace("\\%s" % char, ""):
                     self.set_result(
                         _(
-                            "Local part of mail address `%(addr)s' contains unquoted character `%(char)s."
+                            "Local part of mail address `%(addr)s' contains "
+                            "unquoted character `%(char)s."
                         )
                         % {"addr": mail, "char": char},
                         valid=False,

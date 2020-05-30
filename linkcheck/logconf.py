@@ -42,7 +42,7 @@ lognamelist = ", ".join(repr(name) for name in lognames)
 configdict = {
     'version': 1,
     'loggers': {},
-    'root': {'level': 'WARN',},
+    'root': {'level': 'WARN'},
     'incremental': True,
 }
 

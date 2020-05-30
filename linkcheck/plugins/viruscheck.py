@@ -92,7 +92,7 @@ class ClamdScanner:
                 data = self.sock.recv(self.sock_rcvbuf)
                 i = data.find(b"PORT")
                 if i != -1:
-                    port = int(data[i + 5 :])
+                    port = int(data[i + 5:])
                     break
         except socket.error:
             self.sock.close()

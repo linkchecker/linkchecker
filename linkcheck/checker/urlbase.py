@@ -242,7 +242,8 @@ class UrlBase:
         self.info = []
         # content size
         self.size = -1
-        # last modification time of content in HTTP-date format as specified in RFC2616 chapter 3.3.1
+        # last modification time of content in HTTP-date format
+        # as specified in RFC2616 chapter 3.3.1
         self.modified = None
         # download time
         self.dltime = -1

@@ -42,7 +42,7 @@ def new_request_session(config, cookies):
         session.cookies = cookies
     session.max_redirects = config["maxhttpredirects"]
     session.headers.update(
-        {"User-Agent": config["useragent"],}
+        {"User-Agent": config["useragent"]}
     )
     if config["cookiefile"]:
         for cookie in from_file(config["cookiefile"]):
@@ -175,7 +175,8 @@ class Aggregate:
         log.info(
             LOG_CHECK,
             _(
-                "%(num)d URLs are still active. After a timeout of %(timeout)s the active URLs will stop."
+                "%(num)d URLs are still active. After a timeout of %(timeout)s "
+                "the active URLs will stop."
             )
             % args,
         )

@@ -26,7 +26,7 @@ import abc
 
 from .. import log, LOG_CHECK, strformat, dummy, configuration, i18n
 
-_ = lambda x: x
+_ = lambda x: x  # noqa: E731
 Fields = dict(
     realurl=_("Real URL"),
     cachekey=_("Cache key"),
@@ -105,16 +105,16 @@ class LogStatistics:
             key = "other"
         self.link_types[key] += 1
         if url_data.url:
-            l = len(url_data.url)
-            self.max_url_length = max(l, self.max_url_length)
+            n = len(url_data.url)
+            self.max_url_length = max(n, self.max_url_length)
             if self.min_url_length == 0:
-                self.min_url_length = l
+                self.min_url_length = n
             else:
-                self.min_url_length = min(l, self.min_url_length)
+                self.min_url_length = min(n, self.min_url_length)
             # track average number separately since empty URLs do not count
             self.avg_number += 1
             # calculate running average
-            self.avg_url_length += (l - self.avg_url_length) / self.avg_number
+            self.avg_url_length += (n - self.avg_url_length) / self.avg_number
 
     def log_internal_error(self):
         """Increase internal error count."""

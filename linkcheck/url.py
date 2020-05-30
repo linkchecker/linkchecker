@@ -99,7 +99,7 @@ def splitparams(path):
         i = path.find(';')
     if i < 0:
         return path, ''
-    return path[:i], path[i + 1 :]
+    return path[:i], path[i + 1:]
 
 
 def is_numeric_port(portstr):
@@ -274,18 +274,18 @@ def url_parse_query(query, encoding):
     while '?' in query:
         query, rest = query.rsplit('?', 1)
         append = '?' + url_parse_query(rest, encoding=encoding) + append
-    l = []
+    f = []
     for k, v, sep in parse_qsl(query, keep_blank_values=True, encoding=encoding):
         k = urllib.parse.quote(k, safe='/-:,;')
         if v:
             v = urllib.parse.quote(v, safe='/-:,;')
-            l.append("%s=%s%s" % (k, v, sep))
+            f.append("%s=%s%s" % (k, v, sep))
         elif v is None:
-            l.append("%s%s" % (k, sep))
+            f.append("%s%s" % (k, sep))
         else:
             # some sites do not work when the equal sign is missing
-            l.append("%s=%s" % (k, sep))
-    return ''.join(l) + append
+            f.append("%s=%s" % (k, sep))
+    return ''.join(f) + append
 
 
 def urlunsplit(urlparts):
@@ -399,17 +399,17 @@ def url_quote(url, encoding):
     urlparts[1] = urllib.parse.quote(urlparts[1], safe=':')  # host
     urlparts[2] = urllib.parse.quote(urlparts[2], safe='/=,')  # path
     urlparts[3] = urllib.parse.quote(urlparts[3], safe='&=,')  # query
-    l = []
+    f = []
     for k, v, sep in parse_qsl(
         urlparts[3], encoding=encoding, keep_blank_values=True
     ):  # query
         k = urllib.parse.quote(k, safe='/-:,;')
         if v:
             v = urllib.parse.quote(v, safe='/-:,;')
-            l.append("%s=%s%s" % (k, v, sep))
+            f.append("%s=%s%s" % (k, v, sep))
         else:
-            l.append("%s%s" % (k, sep))
-    urlparts[3] = ''.join(l)
+            f.append("%s%s" % (k, sep))
+    urlparts[3] = ''.join(f)
     urlparts[4] = urllib.parse.quote(urlparts[4])  # anchor
     return urlunsplit(urlparts)
 

@@ -161,7 +161,7 @@ class Configuration(dict):
         Initialize the default options.
         """
         super(Configuration, self).__init__()
-        ## checking options
+        # checking options
         self["allowedschemes"] = []
         self['cookiefile'] = None
         self['robotstxt'] = True
@@ -181,21 +181,21 @@ class Configuration(dict):
         self["aborttimeout"] = 300
         self["recursionlevel"] = -1
         self["useragent"] = UserAgent
-        ## authentication
+        # authentication
         self["authentication"] = []
         self["loginurl"] = None
         self["loginuserfield"] = "login"
         self["loginpasswordfield"] = "password"
         self["loginextrafields"] = {}
-        ## filtering
+        # filtering
         self["externlinks"] = []
         self["ignorewarnings"] = []
         self["internlinks"] = []
         self["checkextern"] = False
-        ## plugins
+        # plugins
         self["pluginfolders"] = get_plugin_folders()
         self["enabledplugins"] = []
-        ## output
+        # output
         self['trace'] = False
         self['quiet'] = False
         self["verbose"] = False
@@ -432,7 +432,8 @@ def get_user_config():
             shutil.copy(initialconf, userconf)
         except Exception as errmsg:
             msg = _(
-                "could not copy initial configuration file %(src)r to %(dst)r: %(errmsg)r"
+                "could not copy initial configuration file %(src)r "
+                "to %(dst)r: %(errmsg)r"
             )
             args = dict(src=initialconf, dst=userconf, errmsg=errmsg)
             log.warn(LOG_CHECK, msg % args)

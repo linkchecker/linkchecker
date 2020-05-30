@@ -154,7 +154,8 @@ class RobotFileParser:
                 if state == 1:
                     log.debug(
                         LOG_CHECK,
-                        "%r line %d: allow or disallow directives without any user-agent line",
+                        "%r line %d: allow or disallow directives without any "
+                        "user-agent line",
                         self.url,
                         linenumber,
                     )
@@ -179,7 +180,8 @@ class RobotFileParser:
                     if state == 2:
                         log.debug(
                             LOG_CHECK,
-                            "%r line %d: missing blank line before user-agent directive",
+                            "%r line %d: missing blank line before "
+                            "user-agent directive",
                             self.url,
                             linenumber,
                         )

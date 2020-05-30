@@ -25,7 +25,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-# This is a simple replacement for the standard Python exception handler (sys.excepthook).
+# This is a replacement for the standard Python exception handler (sys.excepthook).
 # In addition to what the standard handler does, it also prints all referenced variables
 # (no matter if local, global or builtin) of the code line of each stack frame.
 # See below for some examples and some example output.
@@ -152,7 +152,7 @@ def pp_extra_info(obj, depthlimit=3):
                 pass  # don't print len in this case
             else:
                 s += ["len = " + str(obj.__len__())]
-        except:
+        except Exception:
             pass
     if depthlimit > 0 and hasattr(obj, "__getitem__"):
         try:
@@ -163,7 +163,7 @@ def pp_extra_info(obj, depthlimit=3):
                 extra_info = pp_extra_info(subobj, depthlimit - 1)
                 if extra_info != "":
                     s += ["_[0]: {" + extra_info + "}"]
-        except:
+        except Exception:
             pass
     return ", ".join(s)
 
@@ -286,8 +286,8 @@ def better_exchook(etype, value, tb, out=sys.stdout):
         output("ERROR: cannot get more detailed exception info because:", out=out)
         import traceback
 
-        for l in traceback.format_exc().split("\n"):
-            output("   " + l, out=out)
+        for line in traceback.format_exc().split("\n"):
+            output("   " + line, out=out)
         output("simple traceback:", out=out)
         traceback.print_tb(tb, None, out)
 
@@ -296,7 +296,7 @@ def better_exchook(etype, value, tb, out=sys.stdout):
     def _some_str(value):
         try:
             return str(value)
-        except:
+        except Exception:
             return '<unprintable %s object>' % type(value).__name__
 
     def _format_final_exc_line(etype, value):

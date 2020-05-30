@@ -178,7 +178,7 @@ def remove_markup(s):
     """Remove all <*> html markup tags from s."""
     mo = _markup_re.search(s)
     while mo:
-        s = s[0 : mo.start()] + s[mo.end() :]
+        s = s[0:mo.start()] + s[mo.end():]
         mo = _markup_re.search(s)
     return s
 
@@ -250,8 +250,8 @@ def strduration_long(duration, do_translate=True):
         global _, _n
     else:
         # do not translate
-        _ = lambda x: x
-        _n = lambda a, b, n: a if n == 1 else b
+        def _(x): return x
+        def _n(a, b, n): return a if n == 1 else b
     if duration < 0:
         duration = abs(duration)
         prefix = "-"
@@ -338,7 +338,8 @@ def format_feature_warning(**kwargs):
     """
     return (
         _(
-            "Could not import %(module)s for %(feature)s. Install %(module)s from %(url)s to use this feature."
+            "Could not import %(module)s for %(feature)s. "
+            "Install %(module)s from %(url)s to use this feature."
         )
         % kwargs
     )

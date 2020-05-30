@@ -45,7 +45,7 @@ class LFUCache(dict):
         if trim:
             items = super(LFUCache, self).items()
             # sorting function for items
-            keyfunc = lambda x: x[1][0]
+            def keyfunc(x): return x[1][0]
             values = sorted(items, key=keyfunc)
             for item in values[0:trim]:
                 del self[item[0]]

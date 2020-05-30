@@ -200,7 +200,7 @@ def get_index_html(urls):
 
 
 # all the URL classes
-from . import (
+from . import (  # noqa: E402
     fileurl,
     unknownurl,
     ftpurl,
@@ -211,4 +211,4 @@ from . import (
     nntpurl,
     ignoreurl,
     itmsservicesurl,
-)  # noqa: E402
+)
