@@ -385,9 +385,9 @@ setup(
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
     # extra_requires = {
-    #    "IP country info": ['GeoIP'], # http://www.maxmind.com/app/python
+    #    "IP country info": ['GeoIP'], # https://pypi.org/project/GeoIP/
     #    "GNOME proxies": ['pygtk'], # http://www.pygtk.org/downloads.html
-    #    "Bash completion": ['argcomplete'], # https://pypi.python.org/pypi/argcomplete
-    #    "Memory debugging": ['meliae'], # https://launchpad.net/meliae
+    #    "Bash completion": ['argcomplete'], # https://pypi.org/project/argcomplete/
+    #    "Memory debugging": ['meliae'], # https://pypi.org/project/meliae/
     # }
 )

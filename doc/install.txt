@@ -8,71 +8,61 @@ Setup with pip
 If pip_ is available, this command should install LinkChecker on
 the local system:
 
-.. _pip: https://pypi.python.org/pypi/pip
+.. _pip: https://pypi.org/project/pip/
 
-``sudo pip install LinkChecker``
+``pip3 install LinkChecker``
 
-Note that this needs the Python development and a C compiler installed.
-For example on Debian Linux systems use ``sudo apt-get install python-dev``.
-
+You can also use pip to install the latest from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``.
 
 Setup for Windows
 -----------------
-Execute ``LinkChecker-x.y.exe`` and follow the instructions.
-
+Python from the Microsoft Store does include pip_, but installing
+within Windows Subsystem for Linux (WSL) is the preferred option:
+https://docs.microsoft.com/en-us/windows/python/beginners
 
 Setup for Mac OS X
 ------------------
-Nobody is currently offering a "dmg" download for Mac OS X in your programs folder
-See https://github.com/linkchecker/linkchecker/issues/60
-...however the steps for compiling it from source are given below.
+Obtain ``get-pip.py`` to install pip_ (untested):
+https://pip.pypa.io/en/stable/installing/
 
 Setup for GNU/Linux
 -------------------
 On all major Linux distributions (Debian, Mandriva, Redhat, Suse, Ubuntu),
 the ``linkchecker`` package is available for install.
 
-
 Manual setup for Unix systems
 -----------------------------
 First, install the required software.
 
-1. You need a standard GNU development environment with
-   
-   - C compiler (for example the GNU C Compiler gcc)
-     
-     Depending on your distribution, several development packages
-     might be needed to provide a fully functional C development
-     environment.
-   
-   Note for developers: if you want to regenerate the po/linkchecker.pot
-   template from the source files, you will need xgettext with Python
-   support. This is available in gettext >= 0.12.
+1. Python >= 3.5.0 from https://www.python.org/
 
-2. Python >= 2.7.2 from http://www.python.org/
-   
    Be sure to also have installed the included distutils module.
    On most distributions, the distutils module is included in
    an extra ``python-dev`` package.
 
-3. Python requests module from https://pypi.python.org/pypi/requests
+2. Python requests package from https://pypi.org/project/requests/
+
+3. Python Beautiful Soup package from https://pypi.org/project/beautifulsoup4/
 
 4. *Optional, for bash-completion:*
-   argcomplete Python module from https://pypi.python.org/pypi/argcomplete
+   argcomplete Python module from https://pypi.org/project/argcomplete/
 
 5. *Optional, for displaying country codes:*
-   GeoIP from http://www.maxmind.com/app/python
+   GeoIP from https://pypi.org/project/GeoIP/
 
 6. *Optional, used for Virus checking:*
-   ClamAv from http://www.clamav.net/
+   ClamAv from https://www.clamav.net/
 
 7. *Optional, for GNOME proxy setting parsing:*
     Python Gtk from http://www.pygtk.org/downloads.html
 
 8. *Optional, to run the WSGI web interface:*
-   Apache from http://httpd.apache.org/
-   mod_wsgi from http://code.google.com/p/modwsgi/
+   Apache from https://httpd.apache.org/
+   mod_wsgi from https://pypi.org/project/mod-wsgi/
 
+Note for developers: if you want to regenerate the po/linkchecker.pot template
+from the source files, you will need xgettext with Python support. This is
+available in gettext >= 0.12.
 
 Now install the application.
 
@@ -83,8 +73,6 @@ Now install the application.
    Run ``python setup.py build`` to compile the Python files.
    For help about the setup.py script options, run
    ``python setup.py --help``.
-   The CC environment variable is checked before compilation, so you can
-   change the default C compiler with ``export CC=myccompiler``.
 
 2.
    a) Installation as root
@@ -117,7 +105,7 @@ Manual setup for OSX systems
 
 2. Install homebrew_
    
-   .. _homebrew: http://mxcl.github.com/homebrew/
+   .. _homebrew: https://brew.sh/
 
 3. Install dependencies
 
@@ -147,7 +135,7 @@ Manual setup for OSX systems
    mkdir -p dist/mnt
    hdiutil attach -mountpoint dist/mnt dist/LinkChecker-x.y.z.dmg
    # to run directly
-   open -n dist/mnt/LinkChecker.app --args http://www.example.org
+   open -n dist/mnt/LinkChecker.app --args https://www.example.org
    # install the app
    sudo cp -r dist/mnt/LinkChecker.app /Applications
    # unmount DMG
