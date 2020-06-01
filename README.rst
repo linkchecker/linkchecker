@@ -32,15 +32,15 @@ See `doc/install.txt`_ in the source code archive for general information. Excep
 
 .. _doc/install.txt: doc/install.txt
 
-Python 3 or later is needed.
+Python 3.5 or later is needed.
 
-The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
+The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``sudo pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
 
 Windows builds are seriously lagging behind the Linux releases, see `#53 <https://github.com/linkchecker/linkchecker/issues/53>`_ for details. For now, the only two options are to install from source or use `Docker for Windows <https://www.docker.com/docker-windows>`_.
 
 Usage
 ------
-Execute ``linkchecker http://www.example.com``.
+Execute ``linkchecker https://www.example.com``.
 For other options see ``linkchecker --help``.
 
 Docker usage
@@ -48,12 +48,10 @@ Docker usage
 
 If you do not want to install any additional libraries/dependencies you can use the Docker image.
 
-Example for external web site check:
-```
-docker run --rm -it -u $(id -u):$(id -g) linkchecker/linkchecker --verbose https://google.com
-```
+Example for external web site check::
 
-Local HTML file check:
-```
-docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt linkchecker/linkchecker --verbose index.html
-```
+  docker run --rm -it -u $(id -u):$(id -g) linkchecker/linkchecker --verbose https://www.example.com
+
+Local HTML file check::
+
+  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt linkchecker/linkchecker --verbose index.html
