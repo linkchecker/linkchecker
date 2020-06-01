@@ -138,9 +138,8 @@ class UrlQueue:
                 self.cleanup()
             self.queue.append(url_data)
         self.unfinished_tasks += 1
-        cache.add_result(
-            key, None
-        )  # add none value to cache to prevent checking this url multiple times
+        # add none value to cache to prevent checking this url multiple times
+        cache.add_result(key, None)
 
     def cleanup(self):
         """Move cached elements to top."""

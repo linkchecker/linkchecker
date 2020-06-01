@@ -436,9 +436,8 @@ class UrlBase:
         if urlparts[2]:
             urlparts[2] = urlutil.collapse_segments(urlparts[2])
             if not urlparts[0].startswith("feed"):
-                urlparts[2] = url_fix_wayback_query(
-                    urlparts[2]
-                )  # restore second / in http[s]:// in wayback path
+                # restore second / in http[s]:// in wayback path
+                urlparts[2] = url_fix_wayback_query(urlparts[2])
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
         self.urlparts = strformat.url_unicode_split(self.url)

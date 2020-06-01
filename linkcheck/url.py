@@ -336,9 +336,8 @@ def url_norm(url, encoding):
     urlparts[1] = urllib.parse.quote(urlparts[1], safe='@:')  # host
     urlparts[2] = urllib.parse.quote(urlparts[2], safe=_nopathquote_chars)  # path
     if not urlparts[0].startswith("feed"):
-        urlparts[2] = url_fix_wayback_query(
-            urlparts[2]
-        )  # unencode colon in http[s]:// in wayback path
+        # unencode colon in http[s]:// in wayback path
+        urlparts[2] = url_fix_wayback_query(urlparts[2])
     urlparts[4] = urllib.parse.quote(urlparts[4], safe="!$&'()*+,-./;=?@_~")  # anchor
     res = urlunsplit(urlparts)
     if url.endswith('#') and not urlparts[4]:

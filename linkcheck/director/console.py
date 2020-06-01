@@ -63,9 +63,7 @@ class StatusLogger:
 def internal_error(out=stderr, etype=None, evalue=None, tb=None):
     """Print internal error message (output defaults to stderr)."""
     print(os.linesep, file=out)
-    print(
-        _(
-            """********** Oops, I did it again. *************
+    print(_("""********** Oops, I did it again. *************
 
 You have found an internal error in LinkChecker. Please write a bug report
 at %s
@@ -80,11 +78,7 @@ When using the commandline client:
 Not disclosing some of the information above due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
-"""
-        )
-        % configuration.SupportUrl,
-        file=out,
-    )
+""") % configuration.SupportUrl, file=out)
     if etype is None:
         etype = sys.exc_info()[0]
     if evalue is None:
