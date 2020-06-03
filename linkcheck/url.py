@@ -60,12 +60,16 @@ _basic = {
     "_hex_full": r"0-9a-f",
     "_part": r"([a-z0-9][-a-z0-9]{0,61}|[a-z])",
 }
-_safe_char = r"([a-z0-9%(_path)s\+]|" r"(%%[%(_hex_safe)s][%(_hex_full)s]))" % _basic
+_safe_char = (
+    r"([a-z0-9%(_path)s\+]|"
+    r"(%%[%(_hex_safe)s][%(_hex_full)s]))" % _basic
+)
 _safe_scheme_pattern = r"(https?|ftp)"
 _safe_domain_pattern = r"(%(_part)s(\.%(_part)s)*\.?)" % _basic
 _safe_host_pattern = _safe_domain_pattern + r"(:(80|8080|8000|443))?" % _basic
 _safe_path_pattern = (
-    r"((/([a-z0-9%(_path)s]|" r"(%%[%(_hex_safe)s][%(_hex_full)s]))+)*/?)" % _basic
+    r"((/([a-z0-9%(_path)s]|"
+    r"(%%[%(_hex_safe)s][%(_hex_full)s]))+)*/?)" % _basic
 )
 _safe_fragment_pattern = r"%s*" % _safe_char
 _safe_cgi = r"%s+(=(%s|/)+)?" % (_safe_char, _safe_char)

@@ -432,8 +432,8 @@ def get_user_config():
             shutil.copy(initialconf, userconf)
         except Exception as errmsg:
             msg = _(
-                "could not copy initial configuration file %(src)r "
-                "to %(dst)r: %(errmsg)r"
+                "could not copy initial configuration file %(src)r"
+                " to %(dst)r: %(errmsg)r"
             )
             args = dict(src=initialconf, dst=userconf, errmsg=errmsg)
             log.warn(LOG_CHECK, msg % args)

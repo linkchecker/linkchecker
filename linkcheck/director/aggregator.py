@@ -175,8 +175,8 @@ class Aggregate:
         log.info(
             LOG_CHECK,
             _(
-                "%(num)d URLs are still active. After a timeout of %(timeout)s "
-                "the active URLs will stop."
+                "%(num)d URLs are still active. After a timeout of %(timeout)s"
+                " the active URLs will stop."
             )
             % args,
         )

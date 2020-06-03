@@ -338,8 +338,8 @@ def format_feature_warning(**kwargs):
     """
     return (
         _(
-            "Could not import %(module)s for %(feature)s. "
-            "Install %(module)s from %(url)s to use this feature."
+            "Could not import %(module)s for %(feature)s."
+            " Install %(module)s from %(url)s to use this feature."
         )
         % kwargs
     )

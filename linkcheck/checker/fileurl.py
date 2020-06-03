@@ -197,8 +197,8 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.parent_url is not None and not self.parent_url.startswith("file:"):
             msg = _(
-                "local files are only checked without parent URL or when "
-                "the parent URL is also a file"
+                "local files are only checked without parent URL or when"
+                " the parent URL is also a file"
             )
             raise LinkCheckerError(msg)
         if self.is_directory():
@@ -221,9 +221,9 @@ class FileUrl(urlbase.UrlBase):
         if path != realpath:
             self.add_warning(
                 _(
-                    "The URL path %(path)r is not the same as the "
-                    "system path %(realpath)r. You should always use "
-                    "the system path in URLs."
+                    "The URL path %(path)r is not the same as the"
+                    " system path %(realpath)r. You should always use"
+                    " the system path in URLs."
                 )
                 % {"path": path, "realpath": realpath},
                 tag=WARN_FILE_SYSTEM_PATH,

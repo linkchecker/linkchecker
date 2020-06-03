@@ -295,8 +295,7 @@ class HtmlLogger(_Logger):
         sep = "<br/>" + os.linesep
         text = sep.join(html.escape(x[1]) for x in url_data.warnings)
         self.writeln(
-            '<tr><td class="warning" '
-            + 'valign="top">'
+            '<tr><td class="warning" valign="top">'
             + self.part("warning")
             + '</td><td class="warning">'
             + text
