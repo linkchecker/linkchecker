@@ -78,7 +78,7 @@ class MarkdownCheck(_ContentPlugin):
     )
 
     def __init__(self, config):
-        super(MarkdownCheck, self).__init__(config)
+        super().__init__(config)
         self.filename_re = self._default_filename_re
         pattern = config.get(self._filename_re_key)
         if pattern:

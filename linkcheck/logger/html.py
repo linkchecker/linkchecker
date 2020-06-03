@@ -80,7 +80,7 @@ class HtmlLogger(_Logger):
     def __init__(self, **kwargs):
         """Initialize default HTML color values."""
         args = self.get_args(kwargs)
-        super(HtmlLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.colorbackground = args['colorbackground']
         self.colorurl = args['colorurl']
@@ -92,7 +92,7 @@ class HtmlLogger(_Logger):
 
     def part(self, name):
         """Return non-space-breakable part name."""
-        return super(HtmlLogger, self).part(name).replace(" ", "&nbsp;")
+        return super().part(name).replace(" ", "&nbsp;")
 
     def comment(self, s, **args):
         """Write HTML comment."""
@@ -102,7 +102,7 @@ class HtmlLogger(_Logger):
 
     def start_output(self):
         """Write start of checking info."""
-        super(HtmlLogger, self).start_output()
+        super().start_output()
         header = {
             "encoding": self.get_charset_encoding(),
             "title": configuration.App,

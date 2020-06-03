@@ -34,7 +34,7 @@ class LocationInfo(_ConnectionPlugin):
         """Check for geoip module."""
         if not geoip:
             log.warn(LOG_PLUGIN, "GeoIP or pygeoip not found for LocationInfo plugin.")
-        super(LocationInfo, self).__init__(config)
+        super().__init__(config)
 
     def applies_to(self, url_data):
         """Check for validity, host existence and geoip module."""

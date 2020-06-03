@@ -102,7 +102,7 @@ class MyInstallLib(install_lib):
 
     def install(self):
         """Install the generated config file."""
-        outs = super(MyInstallLib, self).install()
+        outs = super().install()
         infile = self.create_conf_file()
         outfile = os.path.join(self.install_dir, os.path.basename(infile))
         self.copy_file(infile, outfile)
@@ -149,7 +149,7 @@ class MyInstallLib(install_lib):
 
     def get_outputs(self):
         """Add the generated config file to the list of outputs."""
-        outs = super(MyInstallLib, self).get_outputs()
+        outs = super().get_outputs()
         conf_output = self.get_conf_output()
         outs.append(conf_output)
         if self.compile:
@@ -163,7 +163,7 @@ class MyInstallData(install_data):
     def run(self):
         """Adjust permissions on POSIX systems."""
         self.install_translations()
-        super(MyInstallData, self).run()
+        super().run()
         self.fix_permissions()
 
     def install_translations(self):
@@ -212,7 +212,7 @@ class MyDistribution(Distribution):
 
     def __init__(self, attrs):
         """Set console and windows scripts."""
-        super(MyDistribution, self).__init__(attrs)
+        super().__init__(attrs)
         self.console = ["linkchecker"]
 
     def run_commands(self):
@@ -223,7 +223,7 @@ class MyDistribution(Distribution):
         data.append("install_data = %r" % cwd)
         data.append("install_scripts = %r" % cwd)
         self.create_conf_file(data)
-        super(MyDistribution, self).run_commands()
+        super().run_commands()
 
     def get_conf_filename(self, directory):
         """Get name for config file."""

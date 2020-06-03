@@ -49,7 +49,7 @@ class _XMLLogger(_Logger):
     def __init__(self, **kwargs):
         """ Initialize graph node list and internal id counter. """
         args = self.get_args(kwargs)
-        super(_XMLLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.indent = "  "
         self.level = 0

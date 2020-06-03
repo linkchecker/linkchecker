@@ -107,7 +107,7 @@ class FileUrl(urlbase.UrlBase):
         extern,
     ):
         """Initialize the scheme."""
-        super(FileUrl, self).init(
+        super().init(
             base_ref,
             base_url,
             parent_url,
@@ -170,7 +170,7 @@ class FileUrl(urlbase.UrlBase):
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
-        super(FileUrl, self).build_url()
+        super().build_url()
         # ignore query and fragment url parts for filesystem urls
         self.urlparts[3] = self.urlparts[4] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
@@ -237,7 +237,7 @@ class FileUrl(urlbase.UrlBase):
             if isinstance(data, str):
                 data = data.encode("iso8859-1", "ignore")
         else:
-            data = super(FileUrl, self).read_content()
+            data = super().read_content()
         return data
 
     def get_os_filename(self):
@@ -312,6 +312,4 @@ class FileUrl(urlbase.UrlBase):
         if webroot and url and url.startswith("/"):
             url = webroot + url[1:]
             log.debug(LOG_CHECK, "Applied local webroot `%s' to `%s'.", webroot, url)
-        super(FileUrl, self).add_url(
-            url, line=line, column=column, page=page, name=name, base=base
-        )
+        super().add_url(url, line=line, column=column, page=page, name=name, base=base)

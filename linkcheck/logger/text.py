@@ -55,7 +55,7 @@ class TextLogger(_Logger):
     def __init__(self, **kwargs):
         """Initialize error counter and optional file output."""
         args = self.get_args(kwargs)
-        super(TextLogger, self).__init__(**args)
+        super().__init__(**args)
         self.output_encoding = args.get("encoding", i18n.default_encoding)
         self.init_fileoutput(args)
         self.colorparent = args.get('colorparent', 'default')
@@ -73,20 +73,20 @@ class TextLogger(_Logger):
 
     def init_fileoutput(self, args):
         """Colorize file output if possible."""
-        super(TextLogger, self).init_fileoutput(args)
+        super().init_fileoutput(args)
         if self.fd is not None:
             self.fd = ansicolor.Colorizer(self.fd)
 
     def start_fileoutput(self):
         """Needed to make file descriptor color aware."""
         init_color = self.fd is None
-        super(TextLogger, self).start_fileoutput()
+        super().start_fileoutput()
         if init_color:
             self.fd = ansicolor.Colorizer(self.fd)
 
     def start_output(self):
         """Write generic start checking info."""
-        super(TextLogger, self).start_output()
+        super().start_output()
         if self.has_part('intro'):
             self.write_intro()
         self.flush()

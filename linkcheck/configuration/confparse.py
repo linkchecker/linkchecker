@@ -45,7 +45,7 @@ class LCConfigParser(RawConfigParser):
 
     def __init__(self, config):
         """Initialize configuration."""
-        super(LCConfigParser, self).__init__()
+        super().__init__()
         self.config = config
 
     def read(self, files):
@@ -55,7 +55,7 @@ class LCConfigParser(RawConfigParser):
         """
         assert isinstance(files, list), "Invalid file list %r" % files
         try:
-            self.read_ok = super(LCConfigParser, self).read(files)
+            self.read_ok = super().read(files)
             if len(self.read_ok) < len(files):
                 failed_files = set(files) - set(self.read_ok)
                 log.warn(

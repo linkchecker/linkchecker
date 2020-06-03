@@ -29,7 +29,7 @@ class VirusCheck(_ContentPlugin):
 
     def __init__(self, config):
         """Initialize clamav configuration."""
-        super(VirusCheck, self).__init__(config)
+        super().__init__(config)
         # XXX read config
         self.clamav_conf = get_clamav_conf(canonical_clamav_conf())
         if not self.clamav_conf:
@@ -154,7 +154,7 @@ class ClamavConfig(dict):
 
     def __init__(self, filename):
         """Parse clamav configuration file."""
-        super(ClamavConfig, self).__init__()
+        super().__init__()
         self.parseconf(filename)
         if self.get('ScannerDaemonOutputFormat'):
             raise ClamavError(_("ScannerDaemonOutputFormat must be disabled"))

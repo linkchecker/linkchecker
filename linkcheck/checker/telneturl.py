@@ -37,7 +37,7 @@ class TelnetUrl(urlbase.UrlBase):
         Call super.build_url(), set default telnet port and initialize
         the login credentials.
         """
-        super(TelnetUrl, self).build_url()
+        super().build_url()
         # default port
         if self.port is None:
             self.port = 23
@@ -51,7 +51,7 @@ class TelnetUrl(urlbase.UrlBase):
         if not self.host:
             self.set_result(_("Host is empty"), valid=False)
             return
-        super(TelnetUrl, self).local_check()
+        super().local_check()
 
     def check_connection(self):
         """

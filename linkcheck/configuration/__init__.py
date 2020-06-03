@@ -160,7 +160,7 @@ class Configuration(dict):
         """
         Initialize the default options.
         """
-        super(Configuration, self).__init__()
+        super().__init__()
         # checking options
         self["allowedschemes"] = []
         self['cookiefile'] = None

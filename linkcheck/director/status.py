@@ -31,7 +31,7 @@ class Status(task.LoggedCheckedTask):
         @ptype wait_seconds: int
         """
         logger = aggregator.config.status_logger
-        super(Status, self).__init__(logger)
+        super().__init__(logger)
         self.aggregator = aggregator
         self.wait_seconds = wait_seconds
         assert self.wait_seconds >= 1

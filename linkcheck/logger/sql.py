@@ -61,7 +61,7 @@ class SQLLogger(_Logger):
     def __init__(self, **kwargs):
         """Initialize database access data."""
         args = self.get_args(kwargs)
-        super(SQLLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.dbname = args['dbname']
         self.separator = args['separator']
@@ -77,7 +77,7 @@ class SQLLogger(_Logger):
         """
         Write start of checking info as sql comment.
         """
-        super(SQLLogger, self).start_output()
+        super().start_output()
         if self.has_part("intro"):
             self.write_intro()
             self.writeln()

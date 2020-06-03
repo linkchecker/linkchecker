@@ -34,7 +34,7 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """
         Initialize FTP url data.
         """
-        super(FtpUrl, self).reset()
+        super().reset()
         # list of files for recursion
         self.files = []
         # last part of URL filename

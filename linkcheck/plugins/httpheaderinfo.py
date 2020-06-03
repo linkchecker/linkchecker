@@ -24,7 +24,7 @@ class HttpHeaderInfo(_ConnectionPlugin):
 
     def __init__(self, config):
         """Initialize configuration."""
-        super(HttpHeaderInfo, self).__init__(config)
+        super().__init__(config)
         self.prefixes = tuple(config["prefixes"])
 
     def applies_to(self, url_data):

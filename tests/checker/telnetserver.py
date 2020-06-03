@@ -31,7 +31,7 @@ class TelnetServerTest(LinkCheckTest):
 
     def __init__(self, methodName="runTest"):
         """Init test class and store default ftp server port."""
-        super(TelnetServerTest, self).__init__(methodName=methodName)
+        super().__init__(methodName=methodName)
         self.host = "localhost"
         self.port = None
         self.stop_event = threading.Event()

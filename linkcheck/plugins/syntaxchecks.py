@@ -50,7 +50,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
 
     def __init__(self, config):
         """Initialize plugin."""
-        super(HtmlSyntaxCheck, self).__init__(config)
+        super().__init__(config)
         self.timer = W3Timer()
 
     def applies_to(self, url_data):
@@ -84,7 +84,7 @@ class CssSyntaxCheck(_ContentPlugin):
 
     def __init__(self, config):
         """Initialize plugin."""
-        super(CssSyntaxCheck, self).__init__(config)
+        super().__init__(config)
         self.timer = W3Timer()
 
     def applies_to(self, url_data):

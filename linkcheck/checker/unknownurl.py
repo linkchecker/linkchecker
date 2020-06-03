@@ -26,7 +26,7 @@ class UnknownUrl(urlbase.UrlBase):
 
     def build_url(self):
         """Only logs that this URL is unknown."""
-        super(UnknownUrl, self).build_url()
+        super().build_url()
         if self.is_ignored():
             self.add_info(
                 _("%(scheme)s URL ignored.") % {"scheme": self.scheme.capitalize()}

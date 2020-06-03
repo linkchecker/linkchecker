@@ -74,7 +74,7 @@ class MailtoUrl(urlbase.UrlBase):
         """Call super.build_url(), extract list of mail addresses from URL,
         and check their syntax.
         """
-        super(MailtoUrl, self).build_url()
+        super().build_url()
         self.addresses = set()
         self.subject = None
         self.parse_addresses()

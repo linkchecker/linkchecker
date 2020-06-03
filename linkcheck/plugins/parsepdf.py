@@ -68,7 +68,7 @@ class PdfParser(_ParserPlugin):
         """Check for pdfminer."""
         if not has_pdflib:
             log.warn(LOG_PLUGIN, "pdfminer not found for PdfParser plugin")
-        super(PdfParser, self).__init__(config)
+        super().__init__(config)
 
     def applies_to(self, url_data, pagetype=None):
         """Check for PDF pagetype."""

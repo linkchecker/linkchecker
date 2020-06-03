@@ -47,7 +47,7 @@ class SitemapXmlLogger(xmllog._XMLLogger):
     def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
-        super(SitemapXmlLogger, self).__init__(**args)
+        super().__init__(**args)
         # All URLs must have the given prefix, which is determined
         # by the first logged URL.
         self.prefix = None
@@ -66,7 +66,7 @@ class SitemapXmlLogger(xmllog._XMLLogger):
 
     def start_output(self):
         """Write start of checking info as xml comment."""
-        super(SitemapXmlLogger, self).start_output()
+        super().start_output()
         self.xml_start_output()
         attrs = {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         self.xml_starttag('urlset', attrs)

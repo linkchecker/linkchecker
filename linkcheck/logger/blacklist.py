@@ -39,7 +39,7 @@ class BlacklistLogger(_Logger):
     def __init__(self, **kwargs):
         """Intialize with old blacklist data (if found, else not)."""
         args = self.get_args(kwargs)
-        super(BlacklistLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.blacklist = {}
         if self.filename is not None and os.path.exists(self.filename):

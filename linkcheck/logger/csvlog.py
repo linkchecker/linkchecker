@@ -62,7 +62,7 @@ class CSVLogger(_Logger):
     def __init__(self, **kwargs):
         """Store default separator and (os dependent) line terminator."""
         args = self.get_args(kwargs)
-        super(CSVLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.separator = args['separator']
         self.quotechar = args['quotechar']
@@ -75,7 +75,7 @@ class CSVLogger(_Logger):
 
     def start_output(self):
         """Write checking start info as csv comment."""
-        super(CSVLogger, self).start_output()
+        super().start_output()
         row = []
         if self.has_part("intro"):
             self.write_intro()

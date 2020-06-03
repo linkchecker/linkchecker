@@ -82,7 +82,7 @@ class Checker(task.LoggedCheckedTask):
 
     def __init__(self, urlqueue, logger, add_request_session):
         """Store URL queue and logger."""
-        super(Checker, self).__init__(logger)
+        super().__init__(logger)
         self.urlqueue = urlqueue
         self.origname = self.getName()
         self.add_request_session = add_request_session

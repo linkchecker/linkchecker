@@ -66,7 +66,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """
         Initialize HTTP specific variables.
         """
-        super(HttpUrl, self).reset()
+        super().reset()
         # initialize check data
         # server headers
         self.headers = {}

@@ -59,7 +59,7 @@ class TestLogger(linkcheck.logger._Logger):
         """
         args = self.get_args(kwargs)
         args["parts"] = self.logparts
-        super(TestLogger, self).__init__(**args)
+        super().__init__(**args)
         # list of expected output lines
         self.expected = args["expected"]
         # list of real output lines
@@ -204,7 +204,7 @@ class LinkCheckTest(unittest.TestCase):
     def setUp(self):
         """Ensure the current locale setting is the default.
         Otherwise, warnings will get translated and will break tests."""
-        super(LinkCheckTest, self).setUp()
+        super().setUp()
         linkcheck.init_i18n(loc="C")
 
     def norm(self, url, encoding="utf-8"):

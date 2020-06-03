@@ -25,7 +25,7 @@ class StoppableThread(threading.Thread):
 
     def __init__(self):
         """Store stop event."""
-        super(StoppableThread, self).__init__()
+        super().__init__()
         self._stopper = threading.Event()
 
     def stop(self):

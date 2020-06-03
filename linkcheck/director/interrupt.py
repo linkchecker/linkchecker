@@ -32,7 +32,7 @@ class Interrupt(task.CheckedTask):
         @param duration: raise KeyboardInterrupt after given number of seconds
         @ptype duration: int
         """
-        super(Interrupt, self).__init__()
+        super().__init__()
         self.duration = duration
 
     def run_checked(self):

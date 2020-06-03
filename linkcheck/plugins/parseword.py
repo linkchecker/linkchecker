@@ -119,7 +119,7 @@ class WordParser(_ParserPlugin):
         init_win32com()
         if not has_word():
             log.warn(LOG_PLUGIN, "Microsoft Word not found for WordParser plugin")
-        super(WordParser, self).__init__(config)
+        super().__init__(config)
 
     def applies_to(self, url_data, pagetype=None):
         """Check for Word pagetype."""

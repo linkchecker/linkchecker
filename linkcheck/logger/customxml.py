@@ -35,7 +35,7 @@ class CustomXMLLogger(xmllog._XMLLogger):
         """
         Write start of checking info as xml comment.
         """
-        super(CustomXMLLogger, self).start_output()
+        super().start_output()
         self.xml_start_output()
         attrs = {"created": strformat.strtime(self.starttime)}
         self.xml_starttag('linkchecker', attrs)
