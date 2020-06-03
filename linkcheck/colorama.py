@@ -26,17 +26,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from ctypes import (
-    windll,
-    byref,
-    Structure,
-    c_char,
-    c_short,
-    c_uint32,
-    c_ushort,
-    ArgumentError,
-    WinError,
-)
+from ctypes import (windll, byref, Structure, c_char, c_short, c_uint32,
+                    c_ushort, ArgumentError, WinError)
 
 # from winbase.h
 STDOUT = -11
@@ -52,19 +43,15 @@ WORD = c_ushort
 DWORD = c_uint32
 TCHAR = c_char
 
-
 class COORD(Structure):
     """struct in wincon.h"""
-
     _fields_ = [
         ('X', SHORT),
         ('Y', SHORT),
     ]
 
-
-class SMALL_RECT(Structure):
+class  SMALL_RECT(Structure):
     """struct in wincon.h."""
-
     _fields_ = [
         ("Left", SHORT),
         ("Top", SHORT),
@@ -72,10 +59,8 @@ class SMALL_RECT(Structure):
         ("Bottom", SHORT),
     ]
 
-
 class CONSOLE_SCREEN_BUFFER_INFO(Structure):
     """struct in wincon.h."""
-
     _fields_ = [
         ("dwSize", COORD),
         ("dwCursorPosition", COORD),
@@ -83,29 +68,22 @@ class CONSOLE_SCREEN_BUFFER_INFO(Structure):
         ("srWindow", SMALL_RECT),
         ("dwMaximumWindowSize", COORD),
     ]
-
     def __str__(self):
         """Get string representation of console screen buffer info."""
         return '(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d)' % (
-            self.dwSize.Y,
-            self.dwSize.X,
-            self.dwCursorPosition.Y,
-            self.dwCursorPosition.X,
-            self.wAttributes,
-            self.srWindow.Top,
-            self.srWindow.Left,
-            self.srWindow.Bottom,
-            self.srWindow.Right,
-            self.dwMaximumWindowSize.Y,
-            self.dwMaximumWindowSize.X,
+            self.dwSize.Y, self.dwSize.X
+            , self.dwCursorPosition.Y, self.dwCursorPosition.X
+            , self.wAttributes
+            , self.srWindow.Top, self.srWindow.Left, self.srWindow.Bottom, self.srWindow.Right
+            , self.dwMaximumWindowSize.Y, self.dwMaximumWindowSize.X
         )
-
 
 def GetConsoleScreenBufferInfo(stream_id=STDOUT):
     """Get console screen buffer info object."""
     handle = handles[stream_id]
     csbi = CONSOLE_SCREEN_BUFFER_INFO()
-    success = windll.kernel32.GetConsoleScreenBufferInfo(handle, byref(csbi))
+    success = windll.kernel32.GetConsoleScreenBufferInfo(
+        handle, byref(csbi))
     if not success:
         raise WinError()
     return csbi
@@ -118,18 +96,18 @@ def SetConsoleTextAttribute(stream_id, attrs):
 
 
 # from wincon.h
-BLACK = 0
-BLUE = 1
-GREEN = 2
-CYAN = 3
-RED = 4
+BLACK   = 0
+BLUE    = 1
+GREEN   = 2
+CYAN    = 3
+RED     = 4
 MAGENTA = 5
-YELLOW = 6
-GREY = 7
+YELLOW  = 6
+GREY    = 7
 
 # from wincon.h
-NORMAL = 0x00  # dim text, dim background
-BRIGHT = 0x08  # bright text, dim background
+NORMAL = 0x00 # dim text, dim background
+BRIGHT = 0x08 # bright text, dim background
 
 _default_foreground = None
 _default_background = None
