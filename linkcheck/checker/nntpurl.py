@@ -28,6 +28,7 @@ from .const import WARN_NNTP_NO_SERVER, WARN_NNTP_NO_NEWSGROUP
 
 random.seed()
 
+
 class NntpUrl(urlbase.UrlBase):
     """
     Url link with NNTP scheme.
@@ -41,8 +42,9 @@ class NntpUrl(urlbase.UrlBase):
         nntpserver = self.host or self.aggregate.config["nntpserver"]
         if not nntpserver:
             self.add_warning(
-                    _("No NNTP server was specified, skipping this URL."),
-                    tag=WARN_NNTP_NO_SERVER)
+                _("No NNTP server was specified, skipping this URL."),
+                tag=WARN_NNTP_NO_SERVER,
+            )
             return
         nntp = self._connect_nntp(nntpserver)
         group = self.urlparts[2]
@@ -50,7 +52,7 @@ class NntpUrl(urlbase.UrlBase):
             group = group[1:]
         if '@' in group:
             # request article info (resp, number mid)
-            number = nntp.stat("<"+group+">")[1]
+            number = nntp.stat("<" + group + ">")[1]
             self.add_info(_('Article number %(num)s found.') % {"num": number})
         else:
             # split off trailing articel span
@@ -61,8 +63,9 @@ class NntpUrl(urlbase.UrlBase):
                 self.add_info(_("News group %(name)s found.") % {"name": name})
             else:
                 # group name is the empty string
-                self.add_warning(_("No newsgroup specified in NNTP URL."),
-                            tag=WARN_NNTP_NO_NEWSGROUP)
+                self.add_warning(
+                    _("No newsgroup specified in NNTP URL."), tag=WARN_NNTP_NO_NEWSGROUP
+                )
 
     def _connect_nntp(self, nntpserver):
         """
@@ -85,7 +88,8 @@ class NntpUrl(urlbase.UrlBase):
                     raise
         if nntp is None:
             raise LinkCheckerError(
-               _("NNTP server too busy; tried more than %d times.") % tries)
+                _("NNTP server too busy; tried more than %d times.") % tries
+            )
         if log.is_debug(LOG_CHECK):
             nntp.set_debuglevel(1)
         self.add_info(nntp.getwelcome())

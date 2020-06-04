@@ -49,7 +49,7 @@ class _XMLLogger(_Logger):
     def __init__(self, **kwargs):
         """ Initialize graph node list and internal id counter. """
         args = self.get_args(kwargs)
-        super(_XMLLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.indent = "  "
         self.level = 0
@@ -66,8 +66,10 @@ class _XMLLogger(_Logger):
         """
         Write start of checking info as xml comment.
         """
-        self.writeln('<?xml version="1.0" encoding="%s"?>' %
-             xmlquoteattr(self.get_charset_encoding()))
+        self.writeln(
+            '<?xml version="1.0" encoding="%s"?>'
+            % xmlquoteattr(self.get_charset_encoding())
+        )
         if self.has_part("intro"):
             self.write_intro()
             self.writeln()
@@ -83,7 +85,7 @@ class _XMLLogger(_Logger):
         """
         Write XML start tag.
         """
-        self.write(self.indent*self.level)
+        self.write(self.indent * self.level)
         self.write("<%s" % xmlquote(name))
         if attrs:
             for name, value in attrs.items():
@@ -98,14 +100,14 @@ class _XMLLogger(_Logger):
         """
         self.level -= 1
         assert self.level >= 0
-        self.write(self.indent*self.level)
+        self.write(self.indent * self.level)
         self.writeln("</%s>" % xmlquote(name))
 
     def xml_tag(self, name, content, attrs=None):
         """
         Write XML tag with content.
         """
-        self.write(self.indent*self.level)
+        self.write(self.indent * self.level)
         self.write("<%s" % xmlquote(name))
         if attrs:
             for aname, avalue in attrs.items():

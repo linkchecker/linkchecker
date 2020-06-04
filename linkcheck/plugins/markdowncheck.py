@@ -37,8 +37,10 @@ class MarkdownCheck(_ContentPlugin):
     _filename_re_key = "filename_re"
     _default_filename_re = re.compile(r'.*\.(markdown|md(own)?|mkdn?)$')
 
-    _link_res = [re.compile(r'<((https?|ftp):[^\'">\s]+)>', re.I),
-                 re.compile(r"""
+    _link_res = [
+        re.compile(r'<((https?|ftp):[^\'">\s]+)>', re.I),
+        re.compile(
+            r"""
                     \[.+\]: # id
                     [ \t]*\n?               # maybe *one* newline
                     [ \t]*
@@ -54,23 +56,29 @@ class MarkdownCheck(_ContentPlugin):
                     [ \t]*
                     )?  # title is optional
                     (?:\n+|\Z)
-                    """, re.X | re.M | re.U)]
+                    """,
+            re.X | re.M | re.U,
+        ),
+    ]
 
     _whitespace = re.compile(r'\s*')
 
     _strip_anglebrackets = re.compile(r'<(.*)>.*')
 
-    _inline_link_title = re.compile(r'''
+    _inline_link_title = re.compile(
+        r'''
             (                   # \1
               [ \t]+
               (['"])            # quote char
               (.*?)
             )?                  # title is optional
           \)$
-        ''', re.X | re.S)
+        ''',
+        re.X | re.S,
+    )
 
     def __init__(self, config):
-        super(MarkdownCheck, self).__init__(config)
+        super().__init__(config)
         self.filename_re = self._default_filename_re
         pattern = config.get(self._filename_re_key)
         if pattern:
@@ -83,8 +91,11 @@ class MarkdownCheck(_ContentPlugin):
     def read_config(cls, configparser):
         """Read configuration file options."""
         config = dict()
-        config[cls._filename_re_key] = configparser.get(cls.__name__, cls._filename_re_key) \
-            if configparser.has_option(cls.__name__, cls._filename_re_key) else None
+        config[cls._filename_re_key] = (
+            configparser.get(cls.__name__, cls._filename_re_key)
+            if configparser.has_option(cls.__name__, cls._filename_re_key)
+            else None
+        )
         return config
 
     def applies_to(self, url_data, pagetype=None):
@@ -98,7 +109,8 @@ class MarkdownCheck(_ContentPlugin):
         self._check_inline_links(url_data, content)
 
     def _save_url(self, url_data, content, url_text, url_pos):
-        """Saves url. Converts url to 1-line text and url position as offset from the file beginning to (line, column).
+        """Saves url. Converts url to 1-line text and url position as offset
+        from the file beginning to (line, column).
 
         :param url_data: object for url storing
         :param content: file content
@@ -107,7 +119,9 @@ class MarkdownCheck(_ContentPlugin):
         """
         line = content.count('\n', 0, url_pos) + 1
         column = url_pos - content.rfind('\n', 0, url_pos)
-        url_data.add_url(url_text.translate(str.maketrans("", "", '\n ')), line=line, column=column)
+        url_data.add_url(
+            url_text.translate(str.maketrans("", "", '\n ')), line=line, column=column
+        )
 
     def _check_by_re(self, url_data, content):
         """ Finds urls by re.
@@ -125,9 +139,9 @@ class MarkdownCheck(_ContentPlugin):
         end of string if it's reached before the balance point is found.
         """
         i = start
-        l = len(text)
+        n = len(text)
         count = 1
-        while count > 0 and i < l:
+        while count > 0 and i < n:
             if text[i] == open_c:
                 count += 1
             elif text[i] == close_c:
@@ -144,7 +158,7 @@ class MarkdownCheck(_ContentPlugin):
         end_idx = idx
         has_anglebrackets = text[idx] == "<"
         if has_anglebrackets:
-            end_idx = self._find_balanced(text, end_idx+1, "<", ">")
+            end_idx = self._find_balanced(text, end_idx + 1, "<", ">")
         end_idx = self._find_balanced(text, end_idx, "(", ")")
         match = self._inline_link_title.search(text, idx, end_idx)
         if not match:
@@ -175,7 +189,9 @@ class MarkdownCheck(_ContentPlugin):
 
             # Find the matching closing ']'.
             bracket_depth = 0
-            for p in range(start_idx+1, min(start_idx+MAX_LINK_TEXT_SENTINEL, content_length)):
+            for p in range(
+                start_idx + 1, min(start_idx + MAX_LINK_TEXT_SENTINEL, content_length)
+            ):
                 if content[p] == ']':
                     bracket_depth -= 1
                     if bracket_depth < 0:

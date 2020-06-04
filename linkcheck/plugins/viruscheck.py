@@ -29,7 +29,7 @@ class VirusCheck(_ContentPlugin):
 
     def __init__(self, config):
         """Initialize clamav configuration."""
-        super(VirusCheck, self).__init__(config)
+        super().__init__(config)
         # XXX read config
         self.clamav_conf = get_clamav_conf(canonical_clamav_conf())
         if not self.clamav_conf:
@@ -67,6 +67,7 @@ class VirusCheck(_ContentPlugin):
 
 class ClamavError(Exception):
     """Raised on clamav errors."""
+
     pass
 
 
@@ -78,8 +79,7 @@ class ClamdScanner:
         self.infected = []
         self.errors = []
         self.sock, self.host = clamav_conf.new_connection()
-        self.sock_rcvbuf = \
-             self.sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)
+        self.sock_rcvbuf = self.sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)
         self.wsock = self.new_scansock()
 
     def new_scansock(self):
@@ -92,7 +92,7 @@ class ClamdScanner:
                 data = self.sock.recv(self.sock_rcvbuf)
                 i = data.find(b"PORT")
                 if i != -1:
-                    port = int(data[i+5:])
+                    port = int(data[i + 5:])
                     break
         except socket.error:
             self.sock.close()
@@ -154,12 +154,14 @@ class ClamavConfig(dict):
 
     def __init__(self, filename):
         """Parse clamav configuration file."""
-        super(ClamavConfig, self).__init__()
+        super().__init__()
         self.parseconf(filename)
         if self.get('ScannerDaemonOutputFormat'):
             raise ClamavError(_("ScannerDaemonOutputFormat must be disabled"))
         if self.get('TCPSocket') and self.get('LocalSocket'):
-            raise ClamavError(_("only one of TCPSocket and LocalSocket must be enabled"))
+            raise ClamavError(
+                _("only one of TCPSocket and LocalSocket must be enabled")
+            )
 
     def parseconf(self, filename):
         """Parse clamav configuration from given file."""

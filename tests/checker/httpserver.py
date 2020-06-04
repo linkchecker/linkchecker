@@ -103,7 +103,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
             if status >= 200 and status not in (204, 304):
                 self.wfile.write(b"testcontent")
         else:
-            super(NoQueryHttpRequestHandler, self).do_GET()
+            super().do_GET()
 
     def do_HEAD(self):
         """
@@ -114,7 +114,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
             self.send_response(self.get_status())
             self.end_headers()
         else:
-            super(NoQueryHttpRequestHandler, self).do_HEAD()
+            super().do_HEAD()
 
     def list_directory(self, path):
         """Helper to produce a directory listing (absent index.html).
@@ -157,7 +157,7 @@ class HttpServerTest(LinkCheckTest):
         """
         Init test class and store default http server port.
         """
-        super(HttpServerTest, self).__init__(methodName=methodName)
+        super().__init__(methodName=methodName)
         self.port = None
         self.handler = NoQueryHttpRequestHandler
 
@@ -256,7 +256,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         """Send cookie before ending headers."""
         self.send_header("Set-Cookie", get_cookie())
         self.send_header("Set-Cookie", get_cookie(maxage=0))
-        super(CookieRedirectHttpRequestHandler, self).end_headers()
+        super().end_headers()
 
     def redirect(self):
         """Redirect request."""
@@ -291,7 +291,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         elif "redirect" in self.path:
             self.redirect()
         else:
-            super(CookieRedirectHttpRequestHandler, self).do_GET()
+            super().do_GET()
 
     def do_HEAD(self):
         """Handle redirections for HEAD."""
@@ -302,7 +302,7 @@ class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):
         elif "redirect" in self.path:
             self.redirect()
         else:
-            super(CookieRedirectHttpRequestHandler, self).do_HEAD()
+            super().do_HEAD()
 
 
 class CGIHandler(CGIHTTPRequestHandler, StoppableHttpRequestHandler):

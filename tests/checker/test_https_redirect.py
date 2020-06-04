@@ -23,7 +23,7 @@ class TestHttpsRedirect(HttpServerTest):
     """Test https:// link redirection checking."""
 
     def __init__(self, methodName="runTest"):
-        super(TestHttpsRedirect, self).__init__(methodName=methodName)
+        super().__init__(methodName=methodName)
         self.handler = RedirectHttpsRequestHandler
 
     def test_redirect(self):

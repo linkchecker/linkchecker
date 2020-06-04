@@ -24,14 +24,18 @@ from .. import log, LOG_CACHE
 
 class Timeout(Exception):
     """Raised by join()"""
+
     pass
+
 
 class Empty(Exception):
     """Exception raised by get()."""
+
     pass
 
 
 NUM_PUTS_CLEANUP = 10000
+
 
 class UrlQueue:
     """A queue supporting several consumer tasks. The task_done() idea is
@@ -58,7 +62,9 @@ class UrlQueue:
         # Each put() decreases the number of allowed puts.
         # This way we can restrict the number of URLs that are checked.
         if max_allowed_urls is not None and max_allowed_urls <= 0:
-            raise ValueError("Non-positive number of allowed URLs: %d" % max_allowed_urls)
+            raise ValueError(
+                "Non-positive number of allowed URLs: %d" % max_allowed_urls
+            )
         self.max_allowed_urls = max_allowed_urls
         self.num_puts = 0
 
@@ -132,7 +138,8 @@ class UrlQueue:
                 self.cleanup()
             self.queue.append(url_data)
         self.unfinished_tasks += 1
-        cache.add_result(key, None)  # add none value to cache to prevent checking this url multiple times
+        # add none value to cache to prevent checking this url multiple times
+        cache.add_result(key, None)
 
     def cleanup(self):
         """Move cached elements to top."""

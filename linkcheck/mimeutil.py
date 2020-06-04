@@ -26,6 +26,7 @@ from .logconf import LOG_CHECK
 
 mimedb = None
 
+
 def init_mimedb():
     """Initialize the local MIME database."""
     global mimedb
@@ -58,6 +59,7 @@ PARSE_CONTENTS = {
     "application/xml+sitemapindex": re.compile(r'(?i)<\?xml[^<]+<sitemapindex\s+'),
     "application/xml+sitemap": re.compile(r'<\?xml[^<]+<urlset\s+', re.IGNORECASE),
 }
+
 
 def guess_mimetype(filename, read=None):
     """Return MIME type of file, or 'application/octet-stream' if it could

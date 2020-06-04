@@ -22,9 +22,9 @@ from . import strformat, log, LOG_CHECK
 from .fileutil import get_temp_file
 
 # Message to display when meliae package is not installed
-MemoryDebugMsg = strformat.format_feature_warning(module='meliae',
-            feature='memory debugging',
-            url='https://launchpad.net/meliae')
+MemoryDebugMsg = strformat.format_feature_warning(
+    module='meliae', feature='memory debugging', url='https://launchpad.net/meliae'
+)
 
 
 def write_memory_dump():
@@ -37,10 +37,10 @@ def write_memory_dump():
     if gc.garbage:
         log.warn(LOG_CHECK, "Unreachabe objects: %s", pprint.pformat(gc.garbage))
     from meliae import scanner
+
     fo, filename = get_temp_file(mode='wb', suffix='.json', prefix='lcdump_')
     try:
         scanner.dump_all_objects(fo)
     finally:
         fo.close()
     return filename
-

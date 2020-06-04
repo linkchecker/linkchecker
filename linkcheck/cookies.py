@@ -60,7 +60,8 @@ def from_headers(strheader):
     for headervalue in headers.get_all("Set-Cookie"):
         for pairs in split_header_words([headervalue]):
             for name, value in pairs:
-                cookie = requests.cookies.create_cookie(name, value,
-                    domain=host, path=path)
+                cookie = requests.cookies.create_cookie(
+                    name, value, domain=host, path=path
+                )
                 res.append(cookie)
     return res

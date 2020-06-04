@@ -20,12 +20,13 @@ Handle itms-services URLs.
 from . import urlbase
 from .. import log, LOG_CHECK
 
+
 class ItmsServicesUrl(urlbase.UrlBase):
     """Apple iOS application download URLs."""
 
     def check_syntax(self):
         """Only logs that this URL is unknown."""
-        super(ItmsServicesUrl, self).check_syntax()
+        super().check_syntax()
         if "url=" not in self.urlparts[3]:
             self.set_result(_("Missing required url parameter"), valid=False)
 

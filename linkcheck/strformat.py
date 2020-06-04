@@ -123,6 +123,7 @@ _para_posix = r"(?:%(sep)s)(?:(?:%(sep)s)\s*)+" % {'sep': '\n'}
 _para_win = r"(?:%(sep)s)(?:(?:%(sep)s)\s*)+" % {'sep': '\r\n'}
 _para_ro = re.compile("%s|%s|%s" % (_para_mac, _para_posix, _para_win))
 
+
 def get_paragraphs(text):
     """A new paragraph is considered to start at a line which follows
     one or more blank lines (lines containing nothing or just spaces).
@@ -148,8 +149,7 @@ def wrap(text, width, **kwargs):
 
 def indent(text, indent_string="  "):
     """Indent each line of text with the given indent string."""
-    return os.linesep.join("%s%s" % (indent_string, x)
-                           for x in text.splitlines())
+    return os.linesep.join("%s%s" % (indent_string, x) for x in text.splitlines())
 
 
 def get_line_number(s, index):
@@ -173,6 +173,7 @@ def paginate(text):
 
 _markup_re = re.compile("<.*?>", re.DOTALL)
 
+
 def remove_markup(s):
     """Remove all <*> html markup tags from s."""
     mo = _markup_re.search(s)
@@ -194,12 +195,20 @@ def strsize(b, grouping=True):
     if b < 1024 * 1024:
         return "%sKB" % locale.format_string("%.2f", (float(b) / 1024), grouping)
     if b < 1024 * 1024 * 10:
-        return "%sMB" % locale.format_string("%.2f", (float(b) / (1024*1024)), grouping)
+        return "%sMB" % locale.format_string(
+            "%.2f", (float(b) / (1024 * 1024)), grouping
+        )
     if b < 1024 * 1024 * 1024:
-        return "%sMB" % locale.format_string("%.1f", (float(b) / (1024*1024)), grouping)
+        return "%sMB" % locale.format_string(
+            "%.1f", (float(b) / (1024 * 1024)), grouping
+        )
     if b < 1024 * 1024 * 1024 * 10:
-        return "%sGB" % locale.format_string("%.2f", (float(b) / (1024*1024*1024)), grouping)
-    return "%sGB" % locale.format_string("%.1f", (float(b) / (1024*1024*1024)), grouping)
+        return "%sGB" % locale.format_string(
+            "%.2f", (float(b) / (1024 * 1024 * 1024)), grouping
+        )
+    return "%sGB" % locale.format_string(
+        "%.1f", (float(b) / (1024 * 1024 * 1024)), grouping
+    )
 
 
 def strtime(t, func=time.localtime):
@@ -216,15 +225,21 @@ def strduration(duration):
     else:
         prefix = ""
     duration = math.ceil(duration)
-    if duration >= SECONDS_PER_HOUR: # 1 hour
+    if duration >= SECONDS_PER_HOUR:  # 1 hour
         # time, in hours:minutes:seconds
-        return "%s%02d:%02d:%02d" % (prefix, duration // SECONDS_PER_HOUR,
-                                   (duration % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE,
-                                    duration % SECONDS_PER_MINUTE)
+        return "%s%02d:%02d:%02d" % (
+            prefix,
+            duration // SECONDS_PER_HOUR,
+            (duration % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE,
+            duration % SECONDS_PER_MINUTE,
+        )
     else:
         # time, in minutes:seconds
-        return "%s%02d:%02d" % (prefix, duration // SECONDS_PER_MINUTE,
-                                 duration % SECONDS_PER_MINUTE)
+        return "%s%02d:%02d" % (
+            prefix,
+            duration // SECONDS_PER_MINUTE,
+            duration % SECONDS_PER_MINUTE,
+        )
 
 
 # from quodlibet
@@ -235,16 +250,18 @@ def strduration_long(duration, do_translate=True):
         global _, _n
     else:
         # do not translate
-        _ = lambda x: x
-        _n = lambda a, b, n: a if n==1 else b
+        def _(x): return x
+        def _n(a, b, n): return a if n == 1 else b
     if duration < 0:
         duration = abs(duration)
         prefix = "-"
     else:
         prefix = ""
     if duration < 1:
-        return _("%(prefix)s%(duration).02f seconds") % \
-               {"prefix": prefix, "duration": duration}
+        return _("%(prefix)s%(duration).02f seconds") % {
+            "prefix": prefix,
+            "duration": duration,
+        }
     # translation dummies
     _n("%d second", "%d seconds", 1)
     _n("%d minute", "%d minutes", 1)
@@ -281,7 +298,7 @@ def strtimezone():
         zone = time.altzone
     else:
         zone = time.timezone
-    return "%+04d" % (-zone//SECONDS_PER_HOUR)
+    return "%+04d" % (-zone // SECONDS_PER_HOUR)
 
 
 def stripurl(s):
@@ -319,7 +336,13 @@ def format_feature_warning(**kwargs):
     """Format warning that a module could not be imported and that it should
     be installed for a certain URL.
     """
-    return _("Could not import %(module)s for %(feature)s. Install %(module)s from %(url)s to use this feature.") % kwargs
+    return (
+        _(
+            "Could not import %(module)s for %(feature)s."
+            " Install %(module)s from %(url)s to use this feature."
+        )
+        % kwargs
+    )
 
 
 def strip_control_chars(text):

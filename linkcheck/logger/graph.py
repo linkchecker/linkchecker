@@ -27,7 +27,7 @@ class _GraphLogger(_Logger):
     def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
-        super(_GraphLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.nodes = {}
         self.nodeid = 0
@@ -92,6 +92,7 @@ class _GraphLogger(_Logger):
 
 
 _disallowed = re.compile(r"[^a-zA-Z0-9 '#(){}\-\[\]\.,;:\!\?]+")
+
 
 def quote(s):
     """Replace disallowed characters in node or edge labels.

@@ -39,7 +39,7 @@ def get_files(dirname):
         if os.path.isfile(fullentry):
             yield entry
         elif os.path.isdir(fullentry):
-            yield entry+"/"
+            yield entry + "/"
 
 
 def prepare_urlpath_for_nt(path):
@@ -48,7 +48,7 @@ def prepare_urlpath_for_nt(path):
     However urllib.url2pathname expects '////server/path'.
     """
     if '|' not in path:
-        return "////"+path.lstrip("/")
+        return "////" + path.lstrip("/")
     return path
 
 
@@ -58,9 +58,9 @@ def get_nt_filename(path):
     head, tail = os.path.split(rest)
     if not tail:
         return path
-    for fname in os.listdir(unc+head):
+    for fname in os.listdir(unc + head):
         if fname.lower() == tail.lower():
-            return os.path.join(get_nt_filename(unc+head), fname)
+            return os.path.join(get_nt_filename(unc + head), fname)
     log.error(LOG_CHECK, "could not find %r in %r", tail, head)
     return path
 
@@ -92,11 +92,34 @@ class FileUrl(urlbase.UrlBase):
     Url link with file scheme.
     """
 
-    def init(self, base_ref, base_url, parent_url, recursion_level,
-              aggregate, line, column, page, name, url_encoding, extern):
+    def init(
+        self,
+        base_ref,
+        base_url,
+        parent_url,
+        recursion_level,
+        aggregate,
+        line,
+        column,
+        page,
+        name,
+        url_encoding,
+        extern,
+    ):
         """Initialize the scheme."""
-        super(FileUrl, self).init(base_ref, base_url, parent_url,
-         recursion_level, aggregate, line, column, page, name, url_encoding, extern)
+        super().init(
+            base_ref,
+            base_url,
+            parent_url,
+            recursion_level,
+            aggregate,
+            line,
+            column,
+            page,
+            name,
+            url_encoding,
+            extern,
+        )
         self.scheme = 'file'
 
     def build_base_url(self):
@@ -111,14 +134,16 @@ class FileUrl(urlbase.UrlBase):
             base_url = os.path.expanduser(base_url)
             if not is_absolute_path(base_url):
                 try:
-                    base_url = os.getcwd()+"/"+base_url
+                    base_url = os.getcwd() + "/" + base_url
                 except OSError as msg:
                     # occurs on stale remote filesystems (eg. NFS)
-                    errmsg = _("Could not get current working directory: %(msg)s") % dict(msg=msg)
+                    errmsg = _(
+                        "Could not get current working directory: %(msg)s"
+                    ) % dict(msg=msg)
                     raise LinkCheckerError(errmsg)
                 if os.path.isdir(base_url):
                     base_url += "/"
-            base_url = "file://"+base_url
+            base_url = "file://" + base_url
         if os.name == "nt":
             base_url = base_url.replace("\\", "/")
             # transform c:/windows into /c|/windows
@@ -138,18 +163,20 @@ class FileUrl(urlbase.UrlBase):
             # Otherwise the join function thinks the query is part of
             # the file name.
             from .urlbase import url_norm
+
             # norm base url - can raise UnicodeError from url.idna_encode()
             base_url, is_idn = url_norm(self.base_url, self.encoding)
             urlparts = list(urllib.parse.urlsplit(base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
-        super(FileUrl, self).build_url()
+        super().build_url()
         # ignore query and fragment url parts for filesystem urls
         self.urlparts[3] = self.urlparts[4] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
-            self.add_warning(_("Added trailing slash to directory."),
-                           tag=WARN_FILE_MISSING_SLASH)
+            self.add_warning(
+                _("Added trailing slash to directory."), tag=WARN_FILE_MISSING_SLASH
+            )
             self.urlparts[2] += '/'
         self.url = urlutil.urlunsplit(self.urlparts)
 
@@ -168,9 +195,11 @@ class FileUrl(urlbase.UrlBase):
         Try to open the local file. Under NT systems the case sensitivity
         is checked.
         """
-        if (self.parent_url is not None and
-           not self.parent_url.startswith("file:")):
-            msg = _("local files are only checked without parent URL or when the parent URL is also a file")
+        if self.parent_url is not None and not self.parent_url.startswith("file:"):
+            msg = _(
+                "local files are only checked without parent URL or when"
+                " the parent URL is also a file"
+            )
             raise LinkCheckerError(msg)
         if self.is_directory():
             self.set_result(_("directory"))
@@ -190,11 +219,15 @@ class FileUrl(urlbase.UrlBase):
         path = self.get_os_filename()
         realpath = get_nt_filename(path)
         if path != realpath:
-            self.add_warning(_("The URL path %(path)r is not the same as the "
-                            "system path %(realpath)r. You should always use "
-                            "the system path in URLs.") % \
-                            {"path": path, "realpath": realpath},
-                               tag=WARN_FILE_SYSTEM_PATH)
+            self.add_warning(
+                _(
+                    "The URL path %(path)r is not the same as the"
+                    " system path %(realpath)r. You should always use"
+                    " the system path in URLs."
+                )
+                % {"path": path, "realpath": realpath},
+                tag=WARN_FILE_SYSTEM_PATH,
+            )
 
     def read_content(self):
         """Return file content, or in case of directories a dummy HTML file
@@ -204,7 +237,7 @@ class FileUrl(urlbase.UrlBase):
             if isinstance(data, str):
                 data = data.encode("iso8859-1", "ignore")
         else:
-            data = super(FileUrl, self).read_content()
+            data = super().read_content()
         return data
 
     def get_os_filename(self):
@@ -242,7 +275,9 @@ class FileUrl(urlbase.UrlBase):
             return True
         if self.content_type in self.ContentMimetypes:
             return True
-        log.debug(LOG_CHECK, "File with content type %r is not parseable.", self.content_type)
+        log.debug(
+            LOG_CHECK, "File with content type %r is not parseable.", self.content_type
+        )
         return False
 
     def set_content_type(self):
@@ -267,7 +302,7 @@ class FileUrl(urlbase.UrlBase):
             i = url.rindex('/')
             if i > 6:
                 # remove last filename to make directory internal
-                url = url[:i+1]
+                url = url[: i + 1]
         return re.escape(url)
 
     def add_url(self, url, line=0, column=0, page=0, name="", base=None):
@@ -277,4 +312,4 @@ class FileUrl(urlbase.UrlBase):
         if webroot and url and url.startswith("/"):
             url = webroot + url[1:]
             log.debug(LOG_CHECK, "Applied local webroot `%s' to `%s'.", webroot, url)
-        super(FileUrl, self).add_url(url, line=line, column=column, page=page, name=name, base=base)
+        super().add_url(url, line=line, column=column, page=page, name=name, base=base)

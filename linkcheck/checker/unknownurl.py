@@ -26,14 +26,14 @@ class UnknownUrl(urlbase.UrlBase):
 
     def build_url(self):
         """Only logs that this URL is unknown."""
-        super(UnknownUrl, self).build_url()
+        super().build_url()
         if self.is_ignored():
-            self.add_info(_("%(scheme)s URL ignored.") %
-                          {"scheme": self.scheme.capitalize()})
+            self.add_info(
+                _("%(scheme)s URL ignored.") % {"scheme": self.scheme.capitalize()}
+            )
             self.set_result(_("ignored"))
         else:
-            self.set_result(_("URL is unrecognized or has invalid syntax"),
-                        valid=False)
+            self.set_result(_("URL is unrecognized or has invalid syntax"), valid=False)
 
     def is_ignored(self):
         """Return True if this URL scheme is ignored."""
@@ -223,7 +223,7 @@ ignored_schemes_provisional = r"""
 |ut2004     # ut2004
 |ventrilo   # ventrilo
 |view\-source # view-source
-|whatsapp   # whatsapp 
+|whatsapp   # whatsapp
 |webcal     # webcal
 |wtai       # wtai
 |wyciwyg    # wyciwyg
@@ -260,4 +260,3 @@ ignored_schemes = "^(%s%s%s%s)$" % (
 ignored_schemes_re = re.compile(ignored_schemes, re.VERBOSE)
 
 is_unknown_scheme = ignored_schemes_re.match
-

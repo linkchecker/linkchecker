@@ -27,20 +27,20 @@ class GraphXMLLogger(_XMLLogger, _GraphLogger):
 
     LoggerName = 'gxml'
 
-    LoggerArgs =  {
+    LoggerArgs = {
         "filename": "linkchecker-out.gxml",
     }
 
     def __init__(self, **kwargs):
         """Initialize graph node list and internal id counter."""
         args = self.get_args(kwargs)
-        super(GraphXMLLogger, self).__init__(**args)
+        super().__init__(**args)
         self.nodes = {}
         self.nodeid = 0
 
     def start_output(self):
         """Write start of checking info as xml comment."""
-        super(GraphXMLLogger, self).start_output()
+        super().start_output()
         self.xml_start_output()
         self.xml_starttag('GraphXML')
         self.xml_starttag('graph', attrs={"isDirected": "true"})

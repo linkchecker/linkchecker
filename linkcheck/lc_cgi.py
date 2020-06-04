@@ -25,8 +25,15 @@ import re
 import time
 import urllib.parse
 
-from . import configuration, strformat, checker, director, get_link_pat, \
-    init_i18n, url as urlutil
+from . import (
+    configuration,
+    strformat,
+    checker,
+    director,
+    get_link_pat,
+    init_i18n,
+    url as urlutil,
+)
 from .decorators import synchronized
 
 # 5 minutes timeout for requests
@@ -67,17 +74,20 @@ lang_locale = {
 }
 _is_level = re.compile(r'^(0|1|2|3|-1)$').match
 
+
 class LCFormError(Exception):
     """Form related errors."""
+
     pass
 
 
 def get_response_headers():
     """Get list of response headers in key-value form."""
-    return [("Content-type", "text/html"),
-            ("Cache-Control", "no-cache"),
-            ("Pragma:", "no-cache")
-           ]
+    return [
+        ("Content-type", "text/html"),
+        ("Cache-Control", "no-cache"),
+        ("Pragma:", "no-cache"),
+    ]
 
 
 def formvalue(form, key):
@@ -89,6 +99,8 @@ def formvalue(form, key):
 
 
 _lock = threading.Lock()
+
+
 class ThreadsafeIO:
     """Thread-safe unicode I/O class."""
 
@@ -235,7 +247,7 @@ def log(env, msg):
 def dump(env, form):
     """Log environment and form."""
     for var, value in env.items():
-        log(env, var+"="+value)
+        log(env, var + "=" + value)
     for key in form:
         log(env, str(formvalue(form, key)))
 
@@ -247,7 +259,9 @@ def format_error(why):
     @return: HTML page content
     @rtype: unicode
     """
-    return _("""<!DOCTYPE HTML>
+    return (
+        _(
+            """<!DOCTYPE HTML>
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LinkChecker Online Error</title></head>
@@ -260,4 +274,7 @@ contains only these characters: <code>A-Za-z0-9./_~-</code><br/><br/>
 Errors are logged.
 </blockquote>
 </body>
-</html>""") % html.escape(why)
+</html>"""
+        )
+        % html.escape(why)
+    )

@@ -35,8 +35,7 @@ class RobotFileParser:
     """This class provides a set of methods to read, parse and answer
     questions about a single robots.txt file."""
 
-    def __init__(self, url='', session=None, proxies=None, auth=None,
-                 timeout=None):
+    def __init__(self, url='', session=None, proxies=None, auth=None, timeout=None):
         """Initialize internal entry lists and store given url and
         credentials."""
         self.set_url(url)
@@ -85,7 +84,7 @@ class RobotFileParser:
         """Read the robots.txt URL and feeds it to the parser."""
         self._reset()
         kwargs = dict(
-            headers = {
+            headers={
                 'User-Agent': configuration.UserAgent,
                 'Accept-Encoding': ACCEPT_ENCODING,
             }
@@ -109,7 +108,12 @@ class RobotFileParser:
         except requests.HTTPError as x:
             if x.response.status_code in (401, 403):
                 self.disallow_all = True
-                log.debug(LOG_CHECK, "%r disallow all (code %d)", self.url, x.response.status_code)
+                log.debug(
+                    LOG_CHECK,
+                    "%r disallow all (code %d)",
+                    self.url,
+                    x.response.status_code,
+                )
             else:
                 self.allow_all = True
                 log.debug(LOG_CHECK, "%r allow all (HTTP error)", self.url)
@@ -148,7 +152,13 @@ class RobotFileParser:
             linenumber += 1
             if not line:
                 if state == 1:
-                    log.debug(LOG_CHECK, "%r line %d: allow or disallow directives without any user-agent line", self.url, linenumber)
+                    log.debug(
+                        LOG_CHECK,
+                        "%r line %d: allow or disallow directives without any"
+                        " user-agent line",
+                        self.url,
+                        linenumber,
+                    )
                     entry = Entry()
                     state = 0
                 elif state == 2:
@@ -168,35 +178,62 @@ class RobotFileParser:
                 line[1] = urllib.parse.unquote(line[1].strip(), self.encoding)
                 if line[0] == "user-agent":
                     if state == 2:
-                        log.debug(LOG_CHECK, "%r line %d: missing blank line before user-agent directive", self.url, linenumber)
+                        log.debug(
+                            LOG_CHECK,
+                            "%r line %d: missing blank line before"
+                            " user-agent directive",
+                            self.url,
+                            linenumber,
+                        )
                         self._add_entry(entry)
                         entry = Entry()
                     entry.useragents.append(line[1])
                     state = 1
                 elif line[0] == "disallow":
                     if state == 0:
-                        log.debug(LOG_CHECK, "%r line %d: missing user-agent directive before this line", self.url, linenumber)
+                        log.debug(
+                            LOG_CHECK,
+                            "%r line %d: missing user-agent directive before this line",
+                            self.url,
+                            linenumber,
+                        )
                         pass
                     else:
                         entry.rulelines.append(RuleLine(line[1], False))
                         state = 2
                 elif line[0] == "allow":
                     if state == 0:
-                        log.debug(LOG_CHECK, "%r line %d: missing user-agent directive before this line", self.url, linenumber)
+                        log.debug(
+                            LOG_CHECK,
+                            "%r line %d: missing user-agent directive before this line",
+                            self.url,
+                            linenumber,
+                        )
                         pass
                     else:
                         entry.rulelines.append(RuleLine(line[1], True))
                         state = 2
                 elif line[0] == "crawl-delay":
                     if state == 0:
-                        log.debug(LOG_CHECK, "%r line %d: missing user-agent directive before this line", self.url, linenumber)
+                        log.debug(
+                            LOG_CHECK,
+                            "%r line %d: missing user-agent directive before this line",
+                            self.url,
+                            linenumber,
+                        )
                         pass
                     else:
                         try:
                             entry.crawldelay = max(0, int(line[1]))
                             state = 2
                         except (ValueError, OverflowError):
-                            log.debug(LOG_CHECK, "%r line %d: invalid delay number %r", self.url, linenumber, line[1])
+                            log.debug(
+                                LOG_CHECK,
+                                "%r line %d: invalid delay number %r",
+                                self.url,
+                                linenumber,
+                                line[1],
+                            )
                             pass
                 elif line[0] == "sitemap":
                     # Note that sitemap URLs must be absolute according to
@@ -204,10 +241,22 @@ class RobotFileParser:
                     # But this should be checked by the calling layer.
                     self.sitemap_urls.append((line[1], linenumber))
                 else:
-                    log.debug(LOG_CHECK, "%r line %d: unknown key %r", self.url, linenumber, line[0])
+                    log.debug(
+                        LOG_CHECK,
+                        "%r line %d: unknown key %r",
+                        self.url,
+                        linenumber,
+                        line[0],
+                    )
                     pass
             else:
-                log.debug(LOG_CHECK, "%r line %d: malformed line %r", self.url, linenumber, line)
+                log.debug(
+                    LOG_CHECK,
+                    "%r line %d: malformed line %r",
+                    self.url,
+                    linenumber,
+                    line,
+                )
                 pass
         if state in (1, 2):
             self.entries.append(entry)
@@ -220,7 +269,13 @@ class RobotFileParser:
         @return: True if agent can fetch url, else False
         @rtype: bool
         """
-        log.debug(LOG_CHECK, "%r check allowance for:\n  user agent: %r\n  url: %r ...", self.url, useragent, url)
+        log.debug(
+            LOG_CHECK,
+            "%r check allowance for:\n  user agent: %r\n  url: %r ...",
+            self.url,
+            useragent,
+            url,
+        )
         if not isinstance(useragent, str):
             useragent = useragent.encode("ascii", "ignore")
         if not isinstance(url, str):
@@ -233,7 +288,10 @@ class RobotFileParser:
             return True
         # search for given user agent matches
         # the first match counts
-        url = urllib.parse.quote(urllib.parse.urlparse(urllib.parse.unquote(url))[2]) or "/"
+        url = (
+            urllib.parse.quote(urllib.parse.urlparse(urllib.parse.unquote(url))[2])
+            or "/"
+        )
         for entry in self.entries:
             if entry.applies_to(useragent):
                 return entry.allowance(url)
@@ -296,7 +354,7 @@ class RuleLine:
         @return: robots.txt format
         @rtype: string
         """
-        return ("Allow" if self.allowance else "Disallow")+": "+self.path
+        return ("Allow" if self.allowance else "Disallow") + ": " + self.path
 
 
 class Entry:
@@ -352,5 +410,10 @@ class Entry:
             if line.applies_to(filename):
                 log.debug(LOG_CHECK, " ... rule line %s", line)
                 return line.allowance
-        log.debug(LOG_CHECK, " ... no rule lines of %s applied to %s; allowed.", self.useragents, filename)
+        log.debug(
+            LOG_CHECK,
+            " ... no rule lines of %s applied to %s; allowed.",
+            self.useragents,
+            filename,
+        )
         return True

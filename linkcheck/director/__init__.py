@@ -32,14 +32,12 @@ def check_urls(aggregate):
     try:
         aggregate.visit_loginurl()
     except Exception as msg:
-        log.warn(LOG_CHECK, _("Error using login URL: %(msg)s.") % \
-                 dict(msg=msg))
+        log.warn(LOG_CHECK, _("Error using login URL: %(msg)s.") % dict(msg=msg))
         raise
     try:
         aggregate.logger.start_log_output()
     except Exception as msg:
-        log.error(LOG_CHECK, _("Error starting log output: %(msg)s.") % \
-            dict(msg=msg))
+        log.error(LOG_CHECK, _("Error starting log output: %(msg)s.") % dict(msg=msg))
         raise
     try:
         if not aggregate.urlqueue.empty():
@@ -52,9 +50,13 @@ def check_urls(aggregate):
     except KeyboardInterrupt:
         interrupt(aggregate)
     except RuntimeError:
-        log.warn(LOG_CHECK,
-             _("Could not start a new thread. Check that the current user" \
-               " is allowed to start new threads."))
+        log.warn(
+            LOG_CHECK,
+            _(
+                "Could not start a new thread. Check that the current user"
+                " is allowed to start new threads."
+            ),
+        )
         abort(aggregate)
     except Exception:
         # Catching "Exception" is intentionally done. This saves the program
@@ -84,10 +86,8 @@ def interrupt(aggregate):
     interrupts."""
     while True:
         try:
-            log.warn(LOG_CHECK,
-               _("interrupt; waiting for active threads to finish"))
-            log.warn(LOG_CHECK,
-               _("another interrupt will exit immediately"))
+            log.warn(LOG_CHECK, _("interrupt; waiting for active threads to finish"))
+            log.warn(LOG_CHECK, _("another interrupt will exit immediately"))
             abort(aggregate)
             break
         except KeyboardInterrupt:
@@ -113,6 +113,7 @@ def abort_now():
     if os.name == 'posix':
         # Unix systems can use signals
         import signal
+
         os.kill(os.getpid(), signal.SIGTERM)
         time.sleep(1)
         os.kill(os.getpid(), signal.SIGKILL)
@@ -130,5 +131,6 @@ def get_aggregate(config):
     _robots_txt = robots_txt.RobotsTxt(config["useragent"])
     plugin_manager = plugins.PluginManager(config)
     result_cache = results.ResultCache()
-    return aggregator.Aggregate(config, _urlqueue, _robots_txt, plugin_manager,
-        result_cache)
+    return aggregator.Aggregate(
+        config, _urlqueue, _robots_txt, plugin_manager, result_cache
+    )

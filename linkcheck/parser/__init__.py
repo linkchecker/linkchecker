@@ -26,7 +26,11 @@ def parse_url(url_data):
     if url_data.is_directory():
         # both ftp and file links represent directories as HTML data
         key = "html"
-    elif url_data.is_file() and firefox.has_sqlite and firefox.extension.search(url_data.url):
+    elif (
+        url_data.is_file()
+        and firefox.has_sqlite
+        and firefox.extension.search(url_data.url)
+    ):
         key = "firefox"
     elif url_data.scheme == "itms-services":
         key = "itms_services"
@@ -34,7 +38,7 @@ def parse_url(url_data):
         # determine parse routine according to content types
         mime = url_data.content_type
         key = url_data.ContentMimetypes[mime]
-    funcname = "parse_"+key
+    funcname = "parse_" + key
     if funcname in globals():
         globals()[funcname](url_data)
     else:
@@ -51,6 +55,7 @@ def parse_html(url_data):
 def parse_opera(url_data):
     """Parse an opera bookmark file."""
     from ..bookmarks.opera import parse_bookmark_data
+
     for url, name, lineno in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, line=lineno, name=name)
 
@@ -58,6 +63,7 @@ def parse_opera(url_data):
 def parse_chromium(url_data):
     """Parse a Chromium or Google Chrome bookmark file."""
     from ..bookmarks.chromium import parse_bookmark_data
+
     for url, name in parse_bookmark_data(url_data.get_content()):
         url_data.add_url(url, name=name)
 
@@ -65,6 +71,7 @@ def parse_chromium(url_data):
 def parse_safari(url_data):
     """Parse a Safari bookmark file."""
     from ..bookmarks.safari import parse_bookmark_data
+
     for url, name in parse_bookmark_data(url_data.get_raw_content()):
         url_data.add_url(url, name=name)
 
@@ -124,8 +131,9 @@ def parse_firefox(url_data):
 def parse_itms_services(url_data):
     """Get "url" CGI parameter value as child URL."""
     query = url_data.urlparts[3]
-    for k, v, sep in urlutil.parse_qsl(query, encoding=url_data.encoding,
-                                       keep_blank_values=True):
+    for k, v, sep in urlutil.parse_qsl(
+        query, encoding=url_data.encoding, keep_blank_values=True
+    ):
         if k == "url":
             url_data.add_url(v)
             break

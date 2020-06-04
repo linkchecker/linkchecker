@@ -24,7 +24,7 @@ class HttpHeaderInfo(_ConnectionPlugin):
 
     def __init__(self, config):
         """Initialize configuration."""
-        super(HttpHeaderInfo, self).__init__(config)
+        super().__init__(config)
         self.prefixes = tuple(config["prefixes"])
 
     def applies_to(self, url_data):
@@ -38,7 +38,10 @@ class HttpHeaderInfo(_ConnectionPlugin):
             if name.lower().startswith(self.prefixes):
                 headers.append(name.lower())
         if headers:
-            items = ["%s=%s" % (name.capitalize(), url_data.headers[name]) for name in headers]
+            items = [
+                "%s=%s" % (name.capitalize(), url_data.headers[name])
+                for name in headers
+            ]
             info = "HTTP headers %s" % ", ".join(items)
             url_data.add_info(info)
 
@@ -55,4 +58,3 @@ class HttpHeaderInfo(_ConnectionPlugin):
             names = []
         config[option] = names
         return config
-

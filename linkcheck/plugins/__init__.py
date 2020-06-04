@@ -46,21 +46,23 @@ class _PluginBase:
 
 class _ConnectionPlugin(_PluginBase):
     """Plugins run after connection checks."""
+
     pass
 
 
 class _ContentPlugin(_PluginBase):
     """Plugins run for valid URLs with content."""
+
     pass
 
 
 class _ParserPlugin(_PluginBase):
     """Plugins run for valid URLs to parse their contents."""
+
     pass
 
 
-def get_plugin_modules(folders, package='plugins',
-                       parentpackage='linkcheck.dummy'):
+def get_plugin_modules(folders, package='plugins', parentpackage='linkcheck.dummy'):
     """Get plugin modules for given folders."""
     for folder in folders:
         for module in loader.get_folder_modules(folder, parentpackage):
@@ -114,7 +116,9 @@ class PluginManager:
 
     def run_parser_plugins(self, url_data, pagetype):
         """Run parser plugins for given pagetype."""
-        run_plugins(self.parser_plugins, url_data, stop_after_match=True, pagetype=pagetype)
+        run_plugins(
+            self.parser_plugins, url_data, stop_after_match=True, pagetype=pagetype
+        )
 
 
 def run_plugins(plugins, url_data, stop_after_match=False, **kwargs):

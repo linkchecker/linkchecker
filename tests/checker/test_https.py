@@ -30,7 +30,7 @@ class TestHttps(HttpsServerTest):
     """
 
     def __init__(self, methodName="runTest"):
-        super(TestHttps, self).__init__(methodName=methodName)
+        super().__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
     @classmethod

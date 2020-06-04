@@ -19,8 +19,22 @@ Python implementation of a part of Dan Bernstein's ftpparse library.
 See also http://cr.yp.to/ftpparse.html
 """
 
-months = ("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep",
-          "oct", "nov", "dec")
+months = (
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
+)
+
+
 def ismonth(txt):
     """Check if given text is a month name."""
     return txt.lower() in months
@@ -78,20 +92,20 @@ def ftpparse(line):
         parts = line.split()
         if len(parts) < 7:
             return None
-        del parts[0] # skip permissions
+        del parts[0]  # skip permissions
         if parts[0] != 'folder':
-            del parts[0] # skip nlink
-        del parts[0] # skip uid
-        del parts[0] # skip gid or size
+            del parts[0]  # skip nlink
+        del parts[0]  # skip uid
+        del parts[0]  # skip gid or size
         if not ismonth(parts[0]):
-            del parts[0] # skip size
+            del parts[0]  # skip size
         if not ismonth(parts[0]):
             return None
-        del parts[0] # skip month
-        del parts[0] # skip day
+        del parts[0]  # skip month
+        del parts[0]  # skip day
         if not parts:
             return None
-        del parts[0] # skip year or time
+        del parts[0]  # skip year or time
         name = " ".join(parts)
         # resolve links
         if line[0] == 'l' and ' -> ' in name:

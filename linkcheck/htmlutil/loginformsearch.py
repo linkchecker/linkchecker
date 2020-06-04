@@ -19,6 +19,7 @@ HTML form utils
 from ..htmlutil import htmlsoup
 from .. import log, LOG_CHECK
 
+
 class Form:
     """Store HTML form URL and form data."""
 
@@ -44,10 +45,8 @@ def search_form(content, cgiuser, cgipassword):
     cginames = {cgiuser, cgipassword} - {None}
     for form_element in soup.find_all("form", action=True):
         form = Form(form_element["action"])
-        for input_element in form_element.find_all("input",
-                                                   attrs={"name": True}):
-            form.add_value(
-                input_element["name"], input_element.attrs.get("value"))
+        for input_element in form_element.find_all("input", attrs={"name": True}):
+            form.add_value(input_element["name"], input_element.attrs.get("value"))
         if cginames <= set(form.data):
             log.debug(LOG_CHECK, "Found form %s", form)
             return form

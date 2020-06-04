@@ -48,7 +48,7 @@ class LoggedCheckedTask(CheckedTask):
 
     def __init__(self, logger):
         """Initialize super instance and store given logger."""
-        super(CheckedTask, self).__init__()
+        super().__init__()
         self.logger = logger
 
     def internal_error(self):

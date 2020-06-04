@@ -24,7 +24,7 @@ class TestHttpRedirect(HttpServerTest):
     """Test http:// link redirection checking."""
 
     def __init__(self, methodName="runTest"):
-        super(TestHttpRedirect, self).__init__(methodName=methodName)
+        super().__init__(methodName=methodName)
         self.handler = CookieRedirectHttpRequestHandler
 
     @need_network

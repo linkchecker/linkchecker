@@ -24,6 +24,7 @@ class Interrupt(task.CheckedTask):
     This gives us a portable SIGALRM implementation.
     The duration is checked every 5 seconds.
     """
+
     WaitSeconds = 5
 
     def __init__(self, duration):
@@ -31,7 +32,7 @@ class Interrupt(task.CheckedTask):
         @param duration: raise KeyboardInterrupt after given number of seconds
         @ptype duration: int
         """
-        super(Interrupt, self).__init__()
+        super().__init__()
         self.duration = duration
 
     def run_checked(self):
@@ -41,5 +42,8 @@ class Interrupt(task.CheckedTask):
         while not self.stopped(self.WaitSeconds):
             duration = time.time() - self.start_time
             if duration > self.duration:
-                log.warn(LOG_CHECK, "Interrupt after %s" % strformat.strduration_long(duration))
+                log.warn(
+                    LOG_CHECK,
+                    "Interrupt after %s" % strformat.strduration_long(duration),
+                )
                 raise KeyboardInterrupt()

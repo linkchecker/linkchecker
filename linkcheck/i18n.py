@@ -30,12 +30,15 @@ default_language = default_encoding = None
 default_directory = None
 default_domain = None
 
+
 def install_builtin(translator, do_unicode):
     """Install _() and _n() gettext methods into default namespace."""
     import builtins
+
     builtins.__dict__['_'] = translator.gettext
     # also install ngettext
     builtins.__dict__['_n'] = translator.ngettext
+
 
 class Translator(gettext.GNUTranslations):
     """A translation class always installing its gettext methods into the
@@ -84,18 +87,29 @@ def init(domain, directory, loc=None):
 
 def install_language(language):
     """Install translation service routines into default namespace."""
-    translator = get_translator(default_domain, default_directory,
-        languages=[get_lang(language)], fallback=True)
+    translator = get_translator(
+        default_domain, default_directory, languages=[get_lang(language)], fallback=True
+    )
     do_unicode = True
     translator.install(do_unicode)
 
 
-def get_translator(domain, directory, languages=None,
-                    translatorklass=Translator, fallback=False,
-                    fallbackklass=NullTranslator):
+def get_translator(
+    domain,
+    directory,
+    languages=None,
+    translatorklass=Translator,
+    fallback=False,
+    fallbackklass=NullTranslator,
+):
     """Search the appropriate GNUTranslations class."""
-    translator = gettext.translation(domain, localedir=directory,
-            languages=languages, class_=translatorklass, fallback=fallback)
+    translator = gettext.translation(
+        domain,
+        localedir=directory,
+        languages=languages,
+        class_=translatorklass,
+        fallback=fallback,
+    )
     if not isinstance(translator, gettext.GNUTranslations) and fallbackklass:
         translator = fallbackklass()
     return translator
@@ -174,6 +188,7 @@ lang_transis = {
     'de': {'en': 'German'},
     'en': {'de': 'Englisch'},
 }
+
 
 def lang_name(lang):
     """Return full name of given language."""

@@ -15,8 +15,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import plistlib
+
 try:
     import biplist
+
     has_biplist = True
 except ImportError:
     has_biplist = False
@@ -47,6 +49,7 @@ KEY_URLSTRING = 'URLString'
 KEY_URIDICTIONARY = 'URIDictionary'
 KEY_CHILDREN = 'Children'
 KEY_WEBBOOKMARKTYPE = 'WebBookmarkType'
+
 
 def parse_plist(entry):
     """Parse a XML dictionary entry."""

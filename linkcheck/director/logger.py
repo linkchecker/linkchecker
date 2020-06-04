@@ -18,6 +18,7 @@ import threading
 import _thread
 
 from ..decorators import synchronized
+
 _lock = threading.Lock()
 
 

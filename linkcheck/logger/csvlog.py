@@ -24,9 +24,23 @@ from . import _Logger
 from .. import strformat
 
 Columns = (
-    "urlname", "parentname", "baseref", "result", "warningstring",
-    "infostring", "valid", "url", "line", "column", "name",
-    "dltime", "size", "checktime", "cached", "level", "modified",
+    "urlname",
+    "parentname",
+    "baseref",
+    "result",
+    "warningstring",
+    "infostring",
+    "valid",
+    "url",
+    "line",
+    "column",
+    "name",
+    "dltime",
+    "size",
+    "checktime",
+    "cached",
+    "level",
+    "modified",
 )
 
 
@@ -48,7 +62,7 @@ class CSVLogger(_Logger):
     def __init__(self, **kwargs):
         """Store default separator and (os dependent) line terminator."""
         args = self.get_args(kwargs)
-        super(CSVLogger, self).__init__(**args)
+        super().__init__(**args)
         self.init_fileoutput(args)
         self.separator = args['separator']
         self.quotechar = args['quotechar']
@@ -61,7 +75,7 @@ class CSVLogger(_Logger):
 
     def start_output(self):
         """Write checking start info as csv comment."""
-        super(CSVLogger, self).start_output()
+        super().start_output()
         row = []
         if self.has_part("intro"):
             self.write_intro()
@@ -70,9 +84,13 @@ class CSVLogger(_Logger):
             # write empty string to initialize file output
             self.write("")
         self.queue = StringIO()
-        self.writer = csv.writer(self.queue, dialect=self.dialect,
-               delimiter=self.separator, lineterminator=self.linesep,
-               quotechar=self.quotechar)
+        self.writer = csv.writer(
+            self.queue,
+            dialect=self.dialect,
+            delimiter=self.separator,
+            lineterminator=self.linesep,
+            quotechar=self.quotechar,
+        )
         for s in Columns:
             if self.has_part(s):
                 row.append(s)

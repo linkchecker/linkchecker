@@ -48,7 +48,7 @@ def _trace(frame, event, arg):
     elif event in ('return', 'c_return'):
         _trace_line(frame, event, arg)
         print("  return:", arg)
-    #elif event in ('exception', 'c_exception'):
+    # elif event in ('exception', 'c_exception'):
     #    _trace_line(frame, event, arg)
     return _trace
 

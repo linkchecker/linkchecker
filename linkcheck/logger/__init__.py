@@ -26,7 +26,7 @@ import abc
 
 from .. import log, LOG_CHECK, strformat, dummy, configuration, i18n
 
-_ = lambda x: x
+_ = lambda x: x  # noqa: E731
 Fields = dict(
     realurl=_("Real URL"),
     cachekey=_("Cache key"),
@@ -46,15 +46,7 @@ Fields = dict(
 )
 del _
 
-ContentTypes = dict(
-    image=0,
-    text=0,
-    video=0,
-    audio=0,
-    application=0,
-    mail=0,
-    other=0,
-)
+ContentTypes = dict(image=0, text=0, video=0, audio=0, application=0, mail=0, other=0)
 
 
 class LogStatistics:
@@ -113,16 +105,16 @@ class LogStatistics:
             key = "other"
         self.link_types[key] += 1
         if url_data.url:
-            l = len(url_data.url)
-            self.max_url_length = max(l, self.max_url_length)
+            n = len(url_data.url)
+            self.max_url_length = max(n, self.max_url_length)
             if self.min_url_length == 0:
-                self.min_url_length = l
+                self.min_url_length = n
             else:
-                self.min_url_length = min(l, self.min_url_length)
+                self.min_url_length = min(n, self.min_url_length)
             # track average number separately since empty URLs do not count
             self.avg_number += 1
             # calculate running average
-            self.avg_url_length += (l - self.avg_url_length) / self.avg_number
+            self.avg_url_length += (n - self.avg_url_length) / self.avg_number
 
     def log_internal_error(self):
         """Increase internal error count."""
@@ -236,9 +228,14 @@ class _Logger(abc.ABC):
             self.close_fd = True
         except IOError:
             msg = sys.exc_info()[1]
-            log.warn(LOG_CHECK,
+            log.warn(
+                LOG_CHECK,
                 "Could not open file %r for writing: %s\n"
-                "Disabling log output of %s", self.filename, msg, self)
+                "Disabling log output of %s",
+                self.filename,
+                msg,
+                self,
+            )
             self.fd = dummy.Dummy()
             self.is_active = False
         self.filename = None
@@ -246,10 +243,10 @@ class _Logger(abc.ABC):
     def create_fd(self):
         """Create open file descriptor."""
         if self.filename is None:
-            return i18n.get_encoded_writer(encoding=self.output_encoding,
-                                           errors=self.codec_errors)
-        return codecs.open(self.filename, "wb", self.output_encoding,
-                           self.codec_errors)
+            return i18n.get_encoded_writer(
+                encoding=self.output_encoding, errors=self.codec_errors
+            )
+        return codecs.open(self.filename, "wb", self.output_encoding, self.codec_errors)
 
     def close_fileoutput(self):
         """
@@ -289,12 +286,14 @@ class _Logger(abc.ABC):
         """
         Return wrapped version of given lines.
         """
-        sep = os.linesep+os.linesep
+        sep = os.linesep + os.linesep
         text = sep.join(lines)
-        kwargs = dict(subsequent_indent=" "*self.max_indent,
-                      initial_indent=" "*self.max_indent,
-                      break_long_words=False,
-                      break_on_hyphens=False)
+        kwargs = dict(
+            subsequent_indent=" " * self.max_indent,
+            initial_indent=" " * self.max_indent,
+            break_long_words=False,
+            break_on_hyphens=False,
+        )
         return strformat.wrap(text, width, **kwargs).lstrip()
 
     def write(self, s, **args):
@@ -311,9 +310,13 @@ class _Logger(abc.ABC):
                 self.fd.write(s, **args)
             except IOError:
                 msg = sys.exc_info()[1]
-                log.warn(LOG_CHECK,
+                log.warn(
+                    LOG_CHECK,
                     "Could not write to output file: %s\n"
-                    "Disabling log output of %s", msg, self)
+                    "Disabling log output of %s",
+                    msg,
+                    self,
+                )
                 self.close_fileoutput()
                 self.fd = dummy.Dummy()
                 self.is_active = False
@@ -356,9 +359,9 @@ class _Logger(abc.ABC):
             parts = self.logparts
         values = (self.part(x) for x in parts)
         # maximum indent for localized log part names
-        self.max_indent = max(len(x) for x in values)+1
+        self.max_indent = max(len(x) for x in values) + 1
         for key in parts:
-            numspaces = (self.max_indent - len(self.part(key)))
+            numspaces = self.max_indent - len(self.part(key))
             self.logspaces[key] = " " * numspaces
         self.stats.reset()
         self.starttime = time.time()
@@ -374,22 +377,29 @@ class _Logger(abc.ABC):
 
     def write_intro(self):
         """Write intro comments."""
-        self.comment(_("created by %(app)s at %(time)s") %
-                    {"app": configuration.AppName,
-                     "time": strformat.strtime(self.starttime)})
-        self.comment(_("Get the newest version at %(url)s") %
-                     {'url': configuration.Url})
-        self.comment(_("Write comments and bugs to %(url)s") %
-                     {'url': configuration.SupportUrl})
+        self.comment(
+            _("created by %(app)s at %(time)s")
+            % {"app": configuration.AppName, "time": strformat.strtime(self.starttime)}
+        )
+        self.comment(
+            _("Get the newest version at %(url)s") % {'url': configuration.Url}
+        )
+        self.comment(
+            _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}
+        )
         self.check_date()
 
     def write_outro(self):
         """Write outro comments."""
         self.stoptime = time.time()
         duration = self.stoptime - self.starttime
-        self.comment(_("Stopped checking at %(time)s (%(duration)s)") %
-             {"time": strformat.strtime(self.stoptime),
-              "duration": strformat.strduration_long(duration)})
+        self.comment(
+            _("Stopped checking at %(time)s (%(duration)s)")
+            % {
+                "time": strformat.strtime(self.stoptime),
+                "duration": strformat.strduration_long(duration),
+            }
+        )
 
     @abc.abstractmethod
     def log_url(self, url_data):
@@ -445,9 +455,11 @@ class _Logger(abc.ABC):
             return modified.strftime("%Y-%m-%d{0}%H:%M:%S.%fZ".format(sep))
         return ""
 
+
 def _get_loggers():
     """Return list of Logger classes."""
     from .. import loader
+
     modules = loader.get_package_modules('logger')
     return list(loader.get_plugins(modules, [_Logger]))
 

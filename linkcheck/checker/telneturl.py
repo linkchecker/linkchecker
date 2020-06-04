@@ -37,7 +37,7 @@ class TelnetUrl(urlbase.UrlBase):
         Call super.build_url(), set default telnet port and initialize
         the login credentials.
         """
-        super(TelnetUrl, self).build_url()
+        super().build_url()
         # default port
         if self.port is None:
             self.port = 23
@@ -51,7 +51,7 @@ class TelnetUrl(urlbase.UrlBase):
         if not self.host:
             self.set_result(_("Host is empty"), valid=False)
             return
-        super(TelnetUrl, self).local_check()
+        super().local_check()
 
     def check_connection(self):
         """
@@ -64,10 +64,10 @@ class TelnetUrl(urlbase.UrlBase):
         self.url_connection.open(self.host, self.port)
         if self.user:
             self.url_connection.read_until(b"login: ", 10)
-            self.url_connection.write(encode(self.user)+b"\n")
+            self.url_connection.write(encode(self.user) + b"\n")
             if self.password:
                 self.url_connection.read_until(b"Password: ", 10)
-                self.url_connection.write(encode(self.password)+b"\n")
+                self.url_connection.write(encode(self.password) + b"\n")
                 # XXX how to tell if we are logged in??
         self.url_connection.write(b"exit\n")
 

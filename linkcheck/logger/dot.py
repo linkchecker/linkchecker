@@ -34,7 +34,7 @@ class DOTLogger(_GraphLogger):
 
     def start_output(self):
         """Write start of checking info as DOT comment."""
-        super(DOTLogger, self).start_output()
+        super().start_output()
         if self.has_part("intro"):
             self.write_intro()
             self.writeln()

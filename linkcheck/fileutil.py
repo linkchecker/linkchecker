@@ -67,6 +67,7 @@ elif "G_BROKEN_FILENAMES" in os.environ:
 else:
     FSCODING = "utf-8"
 
+
 def path_safe(path):
     """Ensure path string is compatible with the platform file system encoding."""
     if isinstance(path, str) and not os.path.supports_unicode_filenames:
@@ -83,7 +84,7 @@ def get_temp_file(mode='r', **kwargs):
 
 def is_tty(fp):
     """Check if is a file object pointing to a TTY."""
-    return (hasattr(fp, "isatty") and fp.isatty())
+    return hasattr(fp, "isatty") and fp.isatty()
 
 
 @lru_cache(128)
