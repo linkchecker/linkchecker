@@ -91,7 +91,7 @@ if geoip_dat:
     else:
         def get_geoip_record(host):
             return {
-                    'country_name': geoip.country_name_by_name(host)
+                'country_name': geoip.country_name_by_name(host),
             }
 
 
