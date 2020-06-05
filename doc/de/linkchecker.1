@@ -3,16 +3,14 @@
 .\" This file was generated with po4a. Translate the source file.
 .\"
 .\"*******************************************************************
-.TH LINKCHECKER 1 2010\-07\-01 LinkChecker "LinkChecker auf der Kommandozeile"
+.TH LINKCHECKER 1 2020\-04\-24 LinkChecker "LinkChecker User Manual"
 .SH NAME
 linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und
 Webseiten auf ungültige Verknüpfungen
-.
 .SH SYNTAX
 \fBlinkchecker\fP [\fIOptionen\fP] [\fIDatei\-oder\-URL\fP]...
-.
 .SH BESCHREIBUNG
-.LP
+.TP  2
 LinkChecker beinhaltet
 .IP \(bu
 rekursives Prüfen und Multithreading
@@ -41,31 +39,31 @@ Antivirusprüfung
 .IP \(bu
 ein Kommandozeilenprogramm und web interface
 .SH BEISPIELE
+.TP  2
 The most common use checks the given domain recursively:
-  \fBlinkchecker http://www.example.com/\fP
+\fBlinkchecker http://www.example.com/\fP
 .br
 Beachten Sie dass dies die komplette Domäne überprüft, welche aus mehreren
 tausend URLs bestehen kann. Benutzen Sie die Option \fB\-r\fP, um die
 Rekursionstiefe zu beschränken.
-.br
+.TP 
 Don't check URLs with \fB/secret\fP in its name. All other links are checked as usual:
-  \fBlinkchecker \-\-ignore\-url=/secret mysite.example.com\fP
-.br
-Überprüfung einer lokalen HTML Datei unter Unix:
-  \fBlinkchecker ../bla.html\fP
-.br
-Überprüfung einer lokalen HTML Datei unter Windows:
-  \fBlinkchecker c:\etemp\etest.html\fP
-.br
-Sie können den \fBhttp://\fP URL Anteil weglassen wenn die Domäne mit \fBwww.\fP beginnt:
-  \fBlinkchecker www.example.com\fP
-.br
+\fBlinkchecker \-\-ignore\-url=/secret mysite.example.com\fP
+.TP 
+Checking a local HTML file on Unix:
+\fBlinkchecker ../bla.html\fP
+.TP 
+Checking a local HTML file on Windows:
+\fBlinkchecker c:\temp\test.html\fP
+.TP 
+You can skip the \fBhttp://\fP url part if the domain starts with \fBwww.\fP:
+\fBlinkchecker www.example.com\fP
+.TP 
 You can skip the \fBftp://\fP url part if the domain starts with \fBftp.\fP:
-  \fBlinkchecker \-r0 ftp.example.com\fP
-.br
-Erzeuge einen Sitemap Graphen und konvertiere ihn mit dem graphviz dot Programm:
-  \fBlinkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps\fP
-.
+\fBlinkchecker \-r0 ftp.example.com\fP
+.TP 
+Generate a sitemap graph and convert it with the graphviz dot utility:
+\fBlinkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps\fP
 .SH OPTIONEN
 .SS "Allgemeine Optionen"
 .TP 
@@ -93,19 +91,19 @@ Print available check plugins and exit.
 .SS Ausgabeoptionen
 .TP 
 \fB\-D\fP\fINAME\fP, \fB\-\-debug=\fP\fINAME\fP
-Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind
-\fBcmdline\fP, \fBchecking\fP,\fBcache\fP, \fBdns\fP, \fBplugins\fP und \fBall\fP. Die Angabe
-\fBall\fP ist ein Synonym für alle verfügbaren Logger. Diese Option kann
-mehrmals angegeben werden, um mit mehr als einem Logger zu testen. Um
-akkurate Ergebnisse zu erzielen, werden Threads deaktiviert.
+Print debugging output for the given logger.  Available loggers are
+\fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBplugin\fP and \fBall\fP.  Specifying
+\fBall\fP is an alias for specifying all available loggers.  The option can be
+given multiple times to debug with more than one logger.  For accurate
+results, threading will be disabled during debug runs.
 .TP 
 \fB\-F\fP\fITYP\fP[\fB/\fP\fIENKODIERUNG\fP][\fB/\fP\fIDATEINAME\fP], \fB\-\-file\-output=\fP\fITYP\fP[\fB/\fP\fIENKODIERUNG\fP][\fB/\fP\fIDATEINAME\fP]
-Ausgabe in eine Datei namens \fBlinkchecker\-out.\fP\fITYP\fP,
-\fB$HOME/.linkchecker/blacklist\fP bei \fBblacklist\fP Ausgabe, oder \fIDATEINAME\fP
-falls angegeben. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard
-ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind
-aufgelistet unter
-\fBhttp://docs.python.org/library/\:codecs.html#standard\-encodings\fP.
+Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP, \fB$HOME/.linkchecker/blacklist\fP
+for \fBblacklist\fP output, or \fIFILENAME\fP if specified.  The \fIENCODING\fP
+specifies the output encoding, the default is that of your locale.  Valid
+encodings are listed at
+.UR https://docs.python.org/library/codecs.html#standard\-encodings
+.UE .
 .br
 Der \fIDATEINAME\fP und \fIENKODIERUNG\fP Teil wird beim Ausgabetyp \fBnone\fP
 ignoriert, ansonsten wird die Datei überschrieben falls sie existiert. Sie
@@ -127,9 +125,10 @@ Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBd
 \fBsitemap\fP, \fBnone\fP oder \fBblacklist\fP an.  Stadard Typ ist \fBtext\fP. Die
 verschiedenen Ausgabetypen sind unten dokumentiert.
 .br
-Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der
-lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter
-\fBhttp://docs.python.org/library/\:codecs.html#standard\-encodings\fP.
+The \fIENCODING\fP specifies the output encoding, the default is that of your
+locale. Valid encodings are listed at
+.UR https://docs.python.org/library/codecs.html#standard\-encodings
+.UE .
 .TP 
 \fB\-q\fP, \fB\-\-quiet\fP
 Keine Ausgabe, ein Alias für \fB\-o none\fP. Dies ist nur in Verbindung mit
@@ -207,9 +206,9 @@ z.B. "Mozilla/4.0". Der Standard ist "LinkChecker/X.Y", wobei X.Y die
 aktuelle Version von LinkChecker ist.
 
 .SH KONFIGURATIONSDATEIEN
-Konfigurationsdateien können alle obigen Optionen enthalten. Sie können
-zudem Optionen enthalten, welche nicht auf der Kommandozeile gesetzt werden
-können. Siehe \fBlinkcheckerrc\fP(5) für mehr Informationen.
+Configuration files can specify all options above. They can also specify
+some options that cannot be set on the command line.  See
+\fBlinkcheckerrc\fP(5)  for more info.
 
 .SH AUSGABETYPEN
 Beachten Sie, dass standardmäßig nur Fehler und Warnungen protokolliert
@@ -241,8 +240,9 @@ Gebe Prüfresultat als GraphXML\-Datei aus.
 Gebe Prüfresultat als maschinenlesbare XML\-Datei aus.
 .TP 
 \fBsitemap\fP
-Protokolliere Prüfergebnisse als XML Sitemap dessen Format unter
-\fBhttp://www.sitemaps.org/protocol.html\fP dokumentiert ist.
+Log check result as an XML sitemap whose protocol is documented at
+.UR https://www.sitemaps.org/protocol.html
+.UE .
 .TP 
 \fBsql\fP
 Gebe Prüfresultat als SQL Skript mit INSERT Befehlen aus. Ein
@@ -258,8 +258,10 @@ und die Anzahl der Fehlversuche enthält.
 Gibt nichts aus. Für Debugging oder Prüfen des Rückgabewerts geeignet.
 .
 .SH "REGULÄRE AUSDRÜCKE"
-LinkChecker akzeptiert Pythons reguläre Ausdrücke. Siehe
-\fBhttp://docs.python.org/\:howto/regex.html\fP für eine Einführung.
+LinkChecker accepts Python regular expressions.  See
+.UR https://docs.python.org/howto/regex.html
+.UE
+for an introduction.
 
 Eine Ergänzung ist, dass ein regulärer Ausdruck negiert wird falls er mit
 einem Ausrufezeichen beginnt.
@@ -283,15 +285,15 @@ Mehrere Einträge sind durch eine Leerzeile zu trennen.
 Das untige Beispiel sendet zwei Cookies zu allen URLs die mit
 \fBhttp://example.org/hello/\fP beginnen, und eins zu allen URLs die mit
 \fBhttps://example.org\fP beginnen:
-
- Host: example.com
- Path: /hello
- Set\-cookie: ID="smee"
- Set\-cookie: spam="egg"
-
- Host: example.org
- Set\-cookie: baggage="elitist"; comment="hologram"
-
+.EX
+  Host: example.com
+  Path: /hello
+  Set\-cookie: ID="smee"
+  Set\-cookie: spam="egg"
+.PP
+  Host: example.org
+  Set\-cookie: baggage="elitist"; comment="hologram"
+.EE
 .SH "PROXY UNTERSTÜTZUNG"
 To use a proxy on Unix or Windows set the $http_proxy, $https_proxy or
 $ftp_proxy environment variables to the proxy URL. The URL should be of the
@@ -299,37 +301,32 @@ form \fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\
 also detects manual proxy settings of Internet Explorer under Windows
 systems, and gconf or KDE on Linux systems.  On a Mac use the Internet
 Config to select a proxy.
-.
+.PP
 Sie können eine komma\-separierte Liste von Domainnamen in der $no_proxy
 Umgebungsvariable setzen, um alle Proxies für diese Domainnamen zu
 ignorieren.
-.
+.TP 
 Einen HTTP\-Proxy unter Unix anzugeben sieht beispielsweise so aus:
-
-  export http_proxy="http://proxy.example.com:8080"
-
+\fBexport http_proxy="http://proxy.example.com:8080"\fP
+.TP 
 Proxy\-Authentifizierung wird ebenfalls unterstützt:
-
-  export http_proxy="http://user1:mypass@proxy.example.org:8081"
-
+\fBexport http_proxy="http://user1:mypass@proxy.example.org:8081"\fP
+.TP 
 Setzen eines Proxies unter der Windows Befehlszeile:
-
-  set http_proxy=http://proxy.example.com:8080
-
+\fBset http_proxy=http://proxy.example.com:8080\fP
 .SH "Durchgeführte Prüfungen"
 Alle URLs müssen einen ersten Syntaxtest bestehen. Kleine Kodierungsfehler
 ergeben eine Warnung, jede andere ungültige Syntaxfehler sind Fehler. Nach
 dem Bestehen des Syntaxtests wird die URL in die Schlange zum
 Verbindungstest gestellt. Alle Verbindungstests sind weiter unten
 beschrieben.
-.
 .TP 
 HTTP Verknüpfungen (\fBhttp:\fP, \fBhttps:\fP)
 After connecting to the given HTTP server the given path or query is
 requested. All redirections are followed, and if user/password is given it
 will be used as authorization when necessary.  All final HTTP status codes
 other than 2xx are errors.
-.
+.IP
 Der Inhalt von HTML\-Seiten wird rekursiv geprüft.
 .TP 
 Lokale Dateien (\fBfile:\fP)
@@ -337,57 +334,64 @@ Eine reguläre, lesbare Datei die geöffnet werden kann ist gültig. Ein
 lesbares Verzeichnis ist ebenfalls gültig. Alle anderen Dateien, zum
 Beispiel Gerätedateien, unlesbare oder nicht existente Dateien ergeben einen
 Fehler.
-.
+.IP
 HTML\- oder andere untersuchbare Dateiinhalte werden rekursiv geprüft.
 .TP 
 Mail\-Links (\fBmailto:\fP)
 Ein mailto:\-Link ergibt eine Liste von E\-Mail\-Adressen. Falls eine Adresse
 fehlerhaft ist, wird die ganze Liste als fehlerhaft angesehen. Für jede
 E\-Mail\-Adresse werden die folgenden Dinge geprüft:
-.
-  1) Prüfe die Syntax der Adresse, sowohl den Teil vor als auch nach dem @\-Zeichen.
-  2) Schlage den MX DNS\-Datensatz nach. Falls kein MX Datensatz gefunden wurde, wird ein Fehler ausgegeben.
-  3) Prüfe, ob einer der Mail\-Rechner eine SMTP\-Verbindung akzeptiert.
-     Rechner mit höherer Priorität werden zuerst geprüft.
-     Fall kein Rechner SMTP\-Verbindungen akzeptiert, wird eine Warnung ausgegeben.
-  4) Versuche, die Adresse mit dem VRFY\-Befehl zu verifizieren. Falls eine Antwort kommt, wird die verifizierte Adresse als Information ausgegeben.
+.br
+1) Check the adress syntax, both of the part before and after the @ sign.
+.br
+2) Look up the MX DNS records. If we found no MX record, print an error.
+.br
+3) Check if one of the mail hosts accept an SMTP connection.  Check hosts
+with higher priority first.  If no host accepts SMTP, we print a warning.
+.br
+4) Try to verify the address with the VRFY command. If we got an answer,
+print the verified address as an info.
+
 .TP 
 FTP\-Links (\fBftp:\fP)
-  
-Für FTP\-Links wird Folgendes geprüft:
-  
-  1) Eine Verbindung zum angegeben Rechner wird aufgebaut
-  2) Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der Standardbenutzer ist \*(lqanonymous\*(lq, das Standardpasswort ist \*(lqanonymous@\*(lq.
-  3) Versuche, in das angegebene Verzeichnis zu wechseln
-  4) Liste die Dateien im Verzeichnis auf mit dem NLST\-Befehl
+For FTP links we do:
+.br
+1) connect to the specified host
+.br
+2) try to login with the given user and password. The default user is
+\fBanonymous\fP, the default password is \fBanonymous@\fP.
+.br
+3) try to change to the given directory
+.br
+4) list the file with the NLST command
 
 .TP 
-Telnet\-Links (\*(lqtelnet:\*(lq)
-  
-  Versuche, zu dem angegeben Telnetrechner zu verginden und falls Benutzer/Passwort angegeben sind, wird versucht, sich anzumelden.
+Telnet links (\fBtelnet:\fP)
+We try to connect and if user/password are given, login to the given telnet
+server.
 
 .TP 
-NNTP\-Links (\*(lqnews:\*(lq, \*(lqsnews:\*(lq, \*(lqnntp\*(lq)
-  
-  Versuche, zu dem angegebenen NNTP\-Rechner eine Verbindung aufzubaucne. Falls eine Nachrichtengruppe oder ein bestimmter Artikel angegeben ist, wird versucht, diese Gruppe oder diesen Artikel vom Rechner anzufragen.
+NNTP links (\fBnews:\fP, \fBsnews:\fP, \fBnntp\fP)
+We try to connect to the given NNTP server. If a news group or article is
+specified, try to request it from the server.
 
 .TP 
-Nicht unterstützte Links (\*(lqjavascript:\*(lq, etc.)
-  
-  Ein nicht unterstützter Link wird nur eine Warnung ausgeben. Weitere Prüfungen werden nicht durchgeführt.
-  
-  Die komplette Liste von erkannten, aber nicht unterstützten Links ist in der
-  Quelldatei \fBlinkcheck/checker/unknownurl.py\fP. Die bekanntesten davon dürften JavaScript\-Links sein.
-
+Unsupported links (\fBjavascript:\fP, etc.)
+An unsupported link will only print a warning. No further checking will be
+made.
+.IP
+The complete list of recognized, but unsupported links can be found in the
+.UR https://github.com/linkchecker/linkchecker/blob/master/linkcheck/checker/unknownurl.py
+linkcheck/checker/unknownurl.py
+.UE
+source file.  The most prominent of
+them should be JavaScript links.
 .SH PLUGINS
-There are two plugin types: connection and content plugins.
-.
-Connection plugins are run after a successful connection to the URL host.
-.
-Content plugins are run if the URL type has content (mailto: URLs have no
-content for example) and if the check is not forbidden (ie. by HTTP
-robots.txt).
-.
+There are two plugin types: connection and content plugins.  Connection
+plugins are run after a successful connection to the URL host.  Content
+plugins are run if the URL type has content (mailto: URLs have no content
+for example) and if the check is not forbidden (ie. by HTTP robots.txt).
+.PP
 See \fBlinkchecker \-\-list\-plugins\fP for a list of plugins and their
 documentation. All plugins are enabled via the \fBlinkcheckerrc\fP(5)
 configuration file.
@@ -446,11 +450,11 @@ Proxy\-Server kontaktiert werden
 .
 .SH RÜCKGABEWERT
 Der Rückgabewert ist 2 falls
-.IP \(bu
+.IP \(bu 2
 ein Programmfehler aufgetreten ist.
 .PP
 Der Rückgabewert ist 1 falls
-.IP \(bu
+.IP \(bu 2
 ungültige Verknüpfungen gefunden wurden oder
 .IP \(bu
 Warnungen gefunden wurden und Warnungen aktiviert sind
@@ -471,11 +475,14 @@ Ausgabe
 .br
 \fBlinkchecker\-out.\fP\fITYP\fP \- Standard Dateiname der Logausgabe
 .br
-\fBhttp://docs.python.org/library/codecs.html#standard\-encodings\fP \- gültige
-Ausgabe Enkodierungen
+.UR https://docs.python.org/library/codecs.html#standard\-encodings
+.UE
+\- valid output encodings
 .br
-\fBhttp://docs.python.org/howto/regex.html\fP \- Dokumentation zu regulären
-Ausdrücken
+.UR https://docs.python.org/howto/regex.html
+.UE
+\- regular expression
+documentation
 
 .SH "SIEHE AUCH"
 \fBlinkcheckerrc\fP(5)

@@ -3,7 +3,7 @@
 .\" This file was generated with po4a. Translate the source file.
 .\"
 .\"*******************************************************************
-.TH linkcheckerrc 5 2007\-11\-30 LinkChecker 
+.TH LINKCHECKERRC 5 2020\-04\-24 LinkChecker "LinkChecker User Manual"
 .SH NAME
 linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .
@@ -17,8 +17,8 @@ Die Standarddatei ist \fB~/.linkchecker/linkcheckerrc\fP unter Unix\-,
 .SS [checking]
 .TP 
 \fBcookiefile=\fP\fIDateiname\fP
-Lese eine Datei mit Cookie\-Daten. Das Cookie Datenformat wird in
-linkchecker(1) erklärt.
+Read a file with initial cookie data. The cookie data format is explained in
+\fBlinkchecker\fP(1).
 .br
 Kommandozeilenoption: \fB\-\-cookiefile\fP
 .TP 
@@ -188,9 +188,10 @@ Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBd
 \fBnone\fP oder \fBblacklist\fP an.  Stadard Typ ist \fBtext\fP. Die verschiedenen
 Ausgabetypen sind unten dokumentiert.
 .br
-Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der
-lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter
-\fBhttp://docs.python.org/library/codecs.html#standard\-encodings\fP.
+The \fIENCODING\fP specifies the output encoding, the default is that of your
+locale. Valid encodings are listed at
+.UR https://docs.python.org/library/codecs.html#standard\-encodings
+.UE .
 .br
 Kommandozeilenoption: \fB\-\-output\fP
 .TP 
@@ -231,8 +232,9 @@ Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe
 Kommandozeilenoption: keine
 .TP 
 \fBencoding=\fP\fISTRING\fP
-Gültige Enkodierungen sind aufgelistet unter
-\fBhttp://docs.python.org/library/codecs.html#standard\-encodings\fP.
+Valid encodings are listed in
+.UR https://docs.python.org/library/codecs.html#standard\-encodings
+.UE .
 .br
 Die Standardenkodierung ist \fBiso\-8859\-15\fP.
 .TP 
@@ -406,41 +408,47 @@ Standardpriorität für die erste URL ist 1.0, für alle Kind\-URLs ist sie 0.5.
 How frequently pages are changing.
 .
 .SH "AUSGABE PARTS"
- \fBall\fP       (für alle Teile)
- \fBid\fP        (eine eindeutige ID für jeden Logeintrag)
- \fBrealurl\fP   (die volle URL Verknüpfung)
- \fBresult\fP    (gültig oder ungültig, mit Nachrichten)
- \fBextern\fP    (1 oder 0, nur in einigen Ausgabetypen protokolliert)
- \fBbase\fP      (base href=...)
- \fBname\fP      (<a href=...>name</a> and <img alt="name">)
- \fBparenturl\fP (falls vorhanden)
- \fBinfo\fP      (einige zusätzliche Infos, z.B. FTP Willkommensnachrichten)
- \fBwarning\fP   (Warnungen)
- \fBdltime\fP    (Downloadzeit)
- \fBchecktime\fP (Prüfzeit)
- \fBurl\fP       (Der Original URL Name, kann relativ sein)
- \fBintro\fP     (Das Zeug am Anfang, "Beginne am ...")
- \fBoutro\fP     (Das Zeug am Ende, "X Fehler gefunden ...")
+.TS
+nokeep, tab(@);
+ll.
+\fBall\fP@(for all parts)
+\fBid\fP@(a unique ID for each logentry)
+\fBrealurl\fP@(the full url link)
+\fBresult\fP@(valid or invalid, with messages)
+\fBextern\fP@(1 or 0, only in some logger types reported)
+\fBbase\fP@(base href=...)
+\fBname\fP@(<a href=...>name</a> and <img alt="name">)
+\fBparenturl\fP@(if any)
+\fBinfo\fP@(some additional info, e.g. FTP welcome messages)
+\fBwarning\fP@(warnings)
+\fBdltime\fP@(download time)
+\fBchecktime\fP@(check time)
+\fBurl\fP@(the original url name, can be relative)
+\fBintro\fP@(the blurb at the beginning, "starting at ...")
+\fBoutro\fP@(the blurb at the end, "found x errors ...")
+.TE
 .SH MULTILINE
 Einige Optionen können mehrere Zeilen lang sein. Jede Zeile muss dafür
 eingerückt werden. Zeilen die mit einer Raute (\fB#\fP) beginnen werden
 ignoriert, müssen aber eingerückt sein.
-
- ignore=
-   lconline
-   bookmark
-   # a comment   ^mailto:
-.
+.EX
+ignore=
+  lconline
+  bookmark
+  # a comment
+  ^mailto:
+.EE
 .SH BEISPIEL
- [output]
- log=html
-
- [checking]
- threads=5
-
- [filtering]
- ignorewarnings=http\-moved\-permanent
-
+.EX
+[output]
+log=html
+.PP
+[checking]
+threads=5
+.PP
+[filtering]
+ignorewarnings=http\-moved\-permanent
+.EE
 .SH PLUGINS
 All plugins have a separate section. If the section appears in the
 configuration file the plugin is enabled.  Some plugins read extra options
@@ -476,7 +484,8 @@ Configures the expiration warning time in days.
 
 .SS [HtmlSyntaxCheck]
 Check the syntax of HTML pages with the online W3C HTML validator.  See
-http://validator.w3.org/docs/api.html.
+.UR https://validator.w3.org/docs/api.html
+.UE .
 
 .SS [HttpHeaderInfo]
 Print HTTP headers in URL info.
@@ -487,7 +496,8 @@ headers that start with "X\-".
 
 .SS [CssSyntaxCheck]
 Check the syntax of HTML pages with the online W3C CSS validator.  See
-http://jigsaw.w3.org/css\-validator/manual.html#expert.
+.UR https://jigsaw.w3.org/css\-validator/manual.html#expert
+.UE .
 
 .SS [VirusCheck]
 Checks the page content for virus infections with clamav.  A local clamav
@@ -552,7 +562,7 @@ Die IP\-Adresse ist verschleiert.
 Die URL %(url)s enthält Leerzeichen am Anfang oder Ende.
 
 .SH "SIEHE AUCH"
-BEISPIEL
+\fBlinkchecker\fP(1)
 .
 .SH AUTHOR
 Bastian Kleineidam <bastian.kleineidam@web.de>
