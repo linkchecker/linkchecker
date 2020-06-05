@@ -50,19 +50,19 @@ Rekursionstiefe zu beschränken.
 Don't check URLs with \fB/secret\fP in its name. All other links are checked as usual:
 \fBlinkchecker \-\-ignore\-url=/secret mysite.example.com\fP
 .TP 
-Checking a local HTML file on Unix:
+Überprüfung einer lokalen HTML Datei unter Unix:
 \fBlinkchecker ../bla.html\fP
 .TP 
-Checking a local HTML file on Windows:
+Überprüfung einer lokalen HTML Datei unter Windows:
 \fBlinkchecker c:\temp\test.html\fP
 .TP 
-You can skip the \fBhttp://\fP url part if the domain starts with \fBwww.\fP:
+Sie können den \fBhttp://\fP URL Anteil weglassen wenn die Domäne mit \fBwww.\fP beginnt:
 \fBlinkchecker www.example.com\fP
 .TP 
-You can skip the \fBftp://\fP url part if the domain starts with \fBftp.\fP:
+Sie können den \fBftp://\fP URL Anteil weglassen wenn die Domäne mit \fBftp.\fP
 \fBlinkchecker \-r0 ftp.example.com\fP
 .TP 
-Generate a sitemap graph and convert it with the graphviz dot utility:
+Erzeuge einen Sitemap Graphen und konvertiere ihn mit dem graphviz dot Programm:
 \fBlinkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps\fP
 .SH OPTIONEN
 .SS "Allgemeine Optionen"
@@ -79,8 +79,9 @@ Lese Liste von URLs zum Prüfen von der Standardeingabe, getrennt durch
 Leerzeichen.
 .TP 
 \fB\-t\fP\fINUMMER\fP, \fB\-\-threads=\fP\fINUMMER\fP
-Generate no more than the given number of threads. Default number of threads
-is 10. To disable threading specify a non\-positive number.
+Generiere nicht mehr als die angegebene Anzahl von Threads. Die
+Standardanzahl von Threads ist 10. Um Threads zu deaktivieren, geben Sie
+eine nicht positive Nummer an.
 .TP 
 \fB\-V\fP, \fB\-\-version\fP
 Gebe die Version aus und beende das Programm.
@@ -91,17 +92,18 @@ Print available check plugins and exit.
 .SS Ausgabeoptionen
 .TP 
 \fB\-D\fP\fINAME\fP, \fB\-\-debug=\fP\fINAME\fP
-Print debugging output for the given logger.  Available loggers are
-\fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBplugin\fP and \fBall\fP.  Specifying
-\fBall\fP is an alias for specifying all available loggers.  The option can be
-given multiple times to debug with more than one logger.  For accurate
-results, threading will be disabled during debug runs.
+Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind
+\fBcmdline\fP, \fBchecking\fP,\fBcache\fP, \fBdns\fP, \fBplugins\fP und \fBall\fP. Die Angabe
+\fBall\fP ist ein Synonym für alle verfügbaren Logger. Diese Option kann
+mehrmals angegeben werden, um mit mehr als einem Logger zu testen. Um
+akkurate Ergebnisse zu erzielen, werden Threads deaktiviert.
 .TP 
 \fB\-F\fP\fITYP\fP[\fB/\fP\fIENKODIERUNG\fP][\fB/\fP\fIDATEINAME\fP], \fB\-\-file\-output=\fP\fITYP\fP[\fB/\fP\fIENKODIERUNG\fP][\fB/\fP\fIDATEINAME\fP]
-Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP, \fB$HOME/.linkchecker/blacklist\fP
-for \fBblacklist\fP output, or \fIFILENAME\fP if specified.  The \fIENCODING\fP
-specifies the output encoding, the default is that of your locale.  Valid
-encodings are listed at
+Ausgabe in eine Datei namens \fBlinkchecker\-out.\fP\fITYP\fP,
+\fB$HOME/.linkchecker/blacklist\fP bei \fBblacklist\fP Ausgabe, oder \fIDATEINAME\fP
+falls angegeben. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard
+ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind
+aufgelistet unter
 .UR https://docs.python.org/library/codecs.html#standard\-encodings
 .UE .
 .br
@@ -125,8 +127,8 @@ Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBd
 \fBsitemap\fP, \fBnone\fP oder \fBblacklist\fP an.  Stadard Typ ist \fBtext\fP. Die
 verschiedenen Ausgabetypen sind unten dokumentiert.
 .br
-The \fIENCODING\fP specifies the output encoding, the default is that of your
-locale. Valid encodings are listed at
+Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der
+lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter
 .UR https://docs.python.org/library/codecs.html#standard\-encodings
 .UE .
 .TP 
@@ -206,9 +208,9 @@ z.B. "Mozilla/4.0". Der Standard ist "LinkChecker/X.Y", wobei X.Y die
 aktuelle Version von LinkChecker ist.
 
 .SH KONFIGURATIONSDATEIEN
-Configuration files can specify all options above. They can also specify
-some options that cannot be set on the command line.  See
-\fBlinkcheckerrc\fP(5)  for more info.
+Konfigurationsdateien können alle obigen Optionen enthalten. Sie können
+zudem Optionen enthalten, welche nicht auf der Kommandozeile gesetzt werden
+können. Siehe \fBlinkcheckerrc\fP(5) für mehr Informationen.
 
 .SH AUSGABETYPEN
 Beachten Sie, dass standardmäßig nur Fehler und Warnungen protokolliert
@@ -240,9 +242,10 @@ Gebe Prüfresultat als GraphXML\-Datei aus.
 Gebe Prüfresultat als maschinenlesbare XML\-Datei aus.
 .TP 
 \fBsitemap\fP
-Log check result as an XML sitemap whose protocol is documented at
+Protokolliere Prüfergebnisse als XML Sitemap dessen Format unter
 .UR https://www.sitemaps.org/protocol.html
 .UE .
+dokumentiert ist.
 .TP 
 \fBsql\fP
 Gebe Prüfresultat als SQL Skript mit INSERT Befehlen aus. Ein
@@ -258,10 +261,10 @@ und die Anzahl der Fehlversuche enthält.
 Gibt nichts aus. Für Debugging oder Prüfen des Rückgabewerts geeignet.
 .
 .SH "REGULÄRE AUSDRÜCKE"
-LinkChecker accepts Python regular expressions.  See
+LinkChecker akzeptiert Pythons reguläre Ausdrücke. Siehe
 .UR https://docs.python.org/howto/regex.html
 .UE
-for an introduction.
+für eine Einführung.
 
 Eine Ergänzung ist, dass ein regulärer Ausdruck negiert wird falls er mit
 einem Ausrufezeichen beginnt.
@@ -277,7 +280,7 @@ Setzt die Domäne für die die Cookies gültig sind.
 \fBPath\fP (optional)
 Gibt den Pfad für den die Cookies gültig sind; Standardpfad ist \fB/\fP.
 .TP 
-\fBSet\-cookie\fP (required)
+\fBSet\-cookie\fP (erforderlich)
 Setzt den Cookie Name/Wert. Kann mehrmals angegeben werden.
 .PP
 Mehrere Einträge sind durch eine Leerzeile zu trennen.
@@ -286,21 +289,21 @@ Das untige Beispiel sendet zwei Cookies zu allen URLs die mit
 \fBhttp://example.org/hello/\fP beginnen, und eins zu allen URLs die mit
 \fBhttps://example.org\fP beginnen:
 .EX
-  Host: example.com
-  Path: /hello
-  Set\-cookie: ID="smee"
-  Set\-cookie: spam="egg"
+ Host: example.com
+ Path: /hello
+ Set\-cookie: ID="smee"
+ Set\-cookie: spam="egg"
 .PP
   Host: example.org
   Set\-cookie: baggage="elitist"; comment="hologram"
 .EE
 .SH "PROXY UNTERSTÜTZUNG"
-To use a proxy on Unix or Windows set the $http_proxy, $https_proxy or
-$ftp_proxy environment variables to the proxy URL. The URL should be of the
-form \fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP].  LinkChecker
-also detects manual proxy settings of Internet Explorer under Windows
-systems, and gconf or KDE on Linux systems.  On a Mac use the Internet
-Config to select a proxy.
+Um einen Proxy unter Unix oder Windows zu benutzen, setzen Sie die
+$http_proxy, $https_proxy oder $ftp_proxy Umgebungsvariablen auf die Proxy
+URL. Die URL sollte die Form
+\fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP] besitzen. LinkChecker
+erkennt auch die Proxy\-Einstellungen des Internet Explorers auf einem
+Windows\-System. Auf einem Mac benutzen Sie die Internet Konfiguration.
 .PP
 Sie können eine komma\-separierte Liste von Domainnamen in der $no_proxy
 Umgebungsvariable setzen, um alle Proxies für diese Domainnamen zu
@@ -356,29 +359,30 @@ print the verified address as an info.
 FTP\-Links (\fBftp:\fP)
 For FTP links we do:
 .br
-1) connect to the specified host
+1) Eine Verbindung zum angegeben Rechner wird aufgebaut
 .br
-2) try to login with the given user and password. The default user is
-\fBanonymous\fP, the default password is \fBanonymous@\fP.
+2) Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der
+Standardbenutzer ist \*(lqanonymous\*(lq, das Standardpasswort ist \*(lqanonymous@\*(lq.
 .br
-3) try to change to the given directory
+3) Versuche, in das angegebene Verzeichnis zu wechseln
 .br
-4) list the file with the NLST command
+4) Liste die Dateien im Verzeichnis auf mit dem NLST\-Befehl
 
 .TP 
 Telnet links (\fBtelnet:\fP)
-We try to connect and if user/password are given, login to the given telnet
-server.
+Versuche, zu dem angegeben Telnetrechner zu verginden und falls
+Benutzer/Passwort angegeben sind, wird versucht, sich anzumelden.
 
 .TP 
 NNTP links (\fBnews:\fP, \fBsnews:\fP, \fBnntp\fP)
-We try to connect to the given NNTP server. If a news group or article is
-specified, try to request it from the server.
+Versuche, zu dem angegebenen NNTP\-Rechner eine Verbindung aufzubaucne. Falls
+eine Nachrichtengruppe oder ein bestimmter Artikel angegeben ist, wird
+versucht, diese Gruppe oder diesen Artikel vom Rechner anzufragen.
 
 .TP 
-Unsupported links (\fBjavascript:\fP, etc.)
-An unsupported link will only print a warning. No further checking will be
-made.
+Nicht unterstützte Links (\fBjavascript:\fP, etc.)
+Ein nicht unterstützter Link wird nur eine Warnung ausgeben. Weitere
+Prüfungen werden nicht durchgeführt.
 .IP
 The complete list of recognized, but unsupported links can be found in the
 .UR https://github.com/linkchecker/linkchecker/blob/master/linkcheck/checker/unknownurl.py
@@ -477,12 +481,12 @@ Ausgabe
 .br
 .UR https://docs.python.org/library/codecs.html#standard\-encodings
 .UE
-\- valid output encodings
+\- gültige Ausgabe Enkodierungen
 .br
 .UR https://docs.python.org/howto/regex.html
 .UE
-\- regular expression
-documentation
+\- Dokumentation zu
+regulären Ausdrücken
 
 .SH "SIEHE AUCH"
 \fBlinkcheckerrc\fP(5)

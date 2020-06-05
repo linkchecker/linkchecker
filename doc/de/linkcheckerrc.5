@@ -17,8 +17,8 @@ Die Standarddatei ist \fB~/.linkchecker/linkcheckerrc\fP unter Unix\-,
 .SS [checking]
 .TP 
 \fBcookiefile=\fP\fIDateiname\fP
-Read a file with initial cookie data. The cookie data format is explained in
-\fBlinkchecker\fP(1).
+Lese eine Datei mit Cookie\-Daten. Das Cookie Datenformat wird in
+\fBlinkchecker\fP(1) erklärt.
 .br
 Kommandozeilenoption: \fB\-\-cookiefile\fP
 .TP 
@@ -47,8 +47,9 @@ bewirkt unendliche Rekursion. Standard Tiefe ist unendlich.
 Kommandozeilenoption: \fB\-\-recursion\-level\fP
 .TP 
 \fBthreads=\fP\fINUMBER\fP
-Generate no more than the given number of threads. Default number of threads
-is 10. To disable threading specify a non\-positive number.
+Generiere nicht mehr als die angegebene Anzahl von Threads. Die
+Standardanzahl von Threads ist 10. Um Threads zu deaktivieren, geben Sie
+eine nicht positive Nummer an.
 .br
 Kommandozeilenoption: \fB\-\-threads\fP
 .TP 
@@ -58,7 +59,7 @@ Setze den Timeout für TCP\-Verbindungen in Sekunden. Der Standard Timeout ist
 .br
 Kommandozeilenoption: \fB\-\-timeout\fP
 .TP 
-\fBaborttimeout=\fP\fINUMBER\fP
+\fBaborttimeout=\fP\fINUMMER\fP
 Time to wait for checks to finish after the user aborts the first time (with
 Ctrl\-C or the abort button).  The default abort timeout is 300 seconds.
 .br
@@ -96,7 +97,7 @@ Standard ist alle URLs anzunehmen und zu prüfen.
 .br
 Kommandozeilenoption: keine
 .TP 
-\fBmaxrequestspersecond=\fP\fINUMBER\fP
+\fBmaxrequestspersecond=\fP\fINUMMER\fP
 Limit the maximum number of requests per second to one host.
 .TP 
 \fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP...]
@@ -130,7 +131,7 @@ Kommandozeilenoption: \fB\-\-no\-follow\-url\fP
 \fBcheckextern=\fP[\fB0\fP|\fB1\fP]
 Check external links. Default is to check internal links only.
 .br
-Command line option: \fB\-\-checkextern\fP
+Kommandozeilenoption: \fB\-\-checkextern\fP
 .SS [authentication]
 .TP 
 \fBentry=\fP\fIREGEX\fP \fIBENUTZER\fP [\fIPASSWORT\fP] (MULTILINE)
@@ -188,8 +189,8 @@ Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBd
 \fBnone\fP oder \fBblacklist\fP an.  Stadard Typ ist \fBtext\fP. Die verschiedenen
 Ausgabetypen sind unten dokumentiert.
 .br
-The \fIENCODING\fP specifies the output encoding, the default is that of your
-locale. Valid encodings are listed at
+Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der
+lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter
 .UR https://docs.python.org/library/codecs.html#standard\-encodings
 .UE .
 .br
@@ -232,7 +233,7 @@ Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe
 Kommandozeilenoption: keine
 .TP 
 \fBencoding=\fP\fISTRING\fP
-Valid encodings are listed in
+Gültige Enkodierungen sind aufgelistet unter
 .UR https://docs.python.org/library/codecs.html#standard\-encodings
 .UE .
 .br
@@ -330,7 +331,7 @@ Siehe [text] Sektion weiter oben.
 Setze Datenbankname zum Speichern. Standard ist \fBlinksdb\fP.
 .TP 
 \fBseparator=\fP\fICHAR\fP
-Set SQL command separator character. Default is a semicolon (\fB;\fP).
+Setze SQL Kommandotrennzeichen. Standard ist ein Strichpunkt (\fB;\fP).
 .SS [html]
 .TP 
 \fBfilename=\fP\fISTRING\fP
@@ -405,7 +406,7 @@ Eine Nummer zwischen 0.0 und 1.0, welche die Priorität festlegt. Die
 Standardpriorität für die erste URL ist 1.0, für alle Kind\-URLs ist sie 0.5.
 .TP 
 \fBfrequency=\fP[\fBalways\fP|\fBhourly\fP|\fBdaily\fP|\fBweekly\fP|\fBmonthly\fP|\fByearly\fP|\fBnever\fP]
-How frequently pages are changing.
+Die Häufigkeit mit der Seiten sich ändern.
 .
 .SH "AUSGABE PARTS"
 .TS
