@@ -248,9 +248,8 @@ class LCConfigParser(RawConfigParser):
                 log.warn(
                     LOG_CHECK,
                     _(
-                        "See http://support.microsoft.com/kb/308419 for"
-                        " more info on setting file permissions."
-                    ),
+                        "See %(url)s for more info on setting file permissions."
+                    ) % {"url": "https://support.microsoft.com/kb/308419"}
                 )
 
     def read_filtering_config(self):
