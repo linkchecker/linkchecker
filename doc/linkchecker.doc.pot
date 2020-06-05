@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-04 17:30+0100\n"
+"POT-Creation-Date: 2020-06-05 16:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,9 @@ msgid "LINKCHECKER"
 msgstr ""
 
 #. type: TH
-#: en/linkchecker.1:1 en/linkcheckerrc.5:1
+#: en/linkchecker.1:1
 #, no-wrap
-msgid "2020-04-24"
+msgid "2020-06-05"
 msgstr ""
 
 #. type: TH
@@ -883,7 +883,7 @@ msgid ""
 "$ftp_proxy environment variables to the proxy URL. The URL should be of the "
 "form B<http://>[I<user>B<:>I<pass>B<@>]I<host>[B<:>I<port>].  LinkChecker "
 "also detects manual proxy settings of Internet Explorer under Windows "
-"systems, and gconf or KDE on Linux systems.  On a Mac use the Internet "
+"systems, and GNOME or KDE on Linux systems.  On a Mac use the Internet "
 "Config to select a proxy."
 msgstr ""
 
@@ -1395,6 +1395,12 @@ msgstr ""
 #: en/linkcheckerrc.5:1
 #, no-wrap
 msgid "LINKCHECKERRC"
+msgstr ""
+
+#. type: TH
+#: en/linkcheckerrc.5:1
+#, no-wrap
+msgid "2020-04-24"
 msgstr ""
 
 #. type: Plain text
