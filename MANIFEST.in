@@ -7,7 +7,6 @@ include Dockerfile
 include MANIFEST.in
 include Makefile
 include install-rpm.sh
-include linkchecker.freecode
 include .project
 include .pydevproject
 
