@@ -34,7 +34,7 @@ HTML_TYPES = ('text/html', "application/xhtml+xml")
 
 
 class SitemapXmlLogger(xmllog._XMLLogger):
-    """Sitemap XML output according to http://www.sitemaps.org/protocol.html
+    """Sitemap XML output according to https://www.sitemaps.org/protocol.html
     """
 
     LoggerName = 'sitemap'

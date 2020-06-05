@@ -15,7 +15,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 A DOT graph format logger. The specification has been taken from
-http://www.graphviz.org/doc/info/lang.html
+https://www.graphviz.org/doc/info/lang.html
 """
 from .graph import _GraphLogger
 

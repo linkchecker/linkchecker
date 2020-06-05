@@ -137,20 +137,20 @@ class MailtoUrl(urlbase.UrlBase):
     def check_email_syntax(self, mail):
         """Check email syntax. The relevant RFCs:
         - How to check names (memo):
-          http://tools.ietf.org/html/rfc3696
+          https://tools.ietf.org/html/rfc3696
         - Email address syntax
-          http://tools.ietf.org/html/rfc2822
+          https://tools.ietf.org/html/rfc2822
         - SMTP protocol
-          http://tools.ietf.org/html/rfc5321#section-4.1.3
+          https://tools.ietf.org/html/rfc5321#section-4.1.3
         - IPv6
-          http://tools.ietf.org/html/rfc4291#section-2.2
+          https://tools.ietf.org/html/rfc4291#section-2.2
         - Host syntax
-          http://tools.ietf.org/html/rfc1123#section-2
+          https://tools.ietf.org/html/rfc1123#section-2
         """
         # length checks
 
         # restrict email length to 256 characters
-        # http://www.rfc-editor.org/errata_search.php?eid=1003
+        # https://www.rfc-editor.org/errata_search.php?eid=1003
         if len(mail) > 256:
             self.set_result(
                 _(
@@ -210,7 +210,7 @@ class MailtoUrl(urlbase.UrlBase):
 
         # local part syntax check
 
-        # Rules taken from http://tools.ietf.org/html/rfc3696#section-3
+        # Rules taken from https://tools.ietf.org/html/rfc3696#section-3
         if is_quoted(local):
             if is_missing_quote(local):
                 self.set_result(

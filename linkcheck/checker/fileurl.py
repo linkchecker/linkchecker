@@ -71,7 +71,7 @@ def get_os_filename(path):
         path = prepare_urlpath_for_nt(path)
     res = urllib.request.url2pathname(fileutil.path_safe(path))
     if os.name == 'nt' and res.endswith(':') and len(res) == 2:
-        # Work around http://bugs.python.org/issue11474
+        # Work around https://bugs.python.org/issue11474
         res += os.sep
     return res
 
