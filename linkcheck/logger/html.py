@@ -194,7 +194,7 @@ class HtmlLogger(_Logger):
             "<tr><td>"
             + self.part("parenturl")
             + '</td><td><a target="top" href="'
-            + url_data.parent_url
+            + html.escape(url_data.parent_url)
             + '">'
             + html.escape(url_data.parent_url)
             + "</a>"
@@ -231,7 +231,7 @@ class HtmlLogger(_Logger):
             + self.part("realurl")
             + "</td><td>"
             + '<a target="top" href="'
-            + url_data.url
+            + html.escape(url_data.url)
             + '">'
             + html.escape(url_data.url)
             + "</a></td></tr>"
