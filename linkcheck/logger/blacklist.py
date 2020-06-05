@@ -18,7 +18,7 @@ A blacklist logger.
 """
 
 import os
-import codecs
+
 from linkcheck.configuration import get_user_data
 from . import _Logger
 
@@ -76,9 +76,8 @@ class BlacklistLogger(_Logger):
         """
         Read a previously stored blacklist from file fd.
         """
-        with codecs.open(
-            self.filename, 'r', self.output_encoding, self.codec_errors
-        ) as fd:
+        with open(self.filename, 'r', encoding=self.output_encoding,
+                  errors=self.codec_errors) as fd:
             for line in fd:
                 line = line.rstrip()
                 if line.startswith('#') or not line:
