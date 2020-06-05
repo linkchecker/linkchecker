@@ -233,9 +233,11 @@ class LCConfigParser(RawConfigParser):
         if fileutil.is_accessable_by_others(fn):
             log.warn(
                 LOG_CHECK,
-                "The configuration file %s contains password information (in"
-                " section [%s] and options %s) and the file is readable by"
-                " others. Please make the file only readable by you.",
+                _(
+                    "The configuration file %s contains password information (in"
+                    " section [%s] and options %s) and the file is readable by"
+                    " others. Please make the file only readable by you."
+                ),
                 fn,
                 section,
                 fields,
