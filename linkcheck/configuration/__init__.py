@@ -483,12 +483,8 @@ def get_gconf_ftp_proxy():
 
 def get_kde_http_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
-    config_dir = get_kde_config_dir()
-    if not config_dir:
-        # could not find any KDE configuration directory
-        return
     try:
-        data = read_kioslaverc(config_dir)
+        data = read_kioslaverc()
         return data.get("http_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting HTTP proxy from KDE: %s", msg)
@@ -497,12 +493,8 @@ def get_kde_http_proxy():
 
 def get_kde_ftp_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
-    config_dir = get_kde_config_dir()
-    if not config_dir:
-        # could not find any KDE configuration directory
-        return
     try:
-        data = read_kioslaverc(config_dir)
+        data = read_kioslaverc()
         return data.get("ftp_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
@@ -548,24 +540,34 @@ def get_kde_config_dir():
     else:
         home = os.environ.get("HOME")
     if not home:
+        log.debug(LOG_CHECK, "KDEHOME and HOME not set")
         return
     if shutil.which("kde4-config"):
         kde_config_dir = os.path.join(home, ".kde4", "share", "config")
     else:
         # KDE 5
         kde_config_dir = os.path.join(home, ".config")
-    return kde_config_dir if os.path.exists(kde_config_dir) else None
+    if not os.path.exists(kde_config_dir):
+        log.debug(LOG_CHECK, "%s does not exist" % kde_config_dir)
+        return
+    return kde_config_dir
 
 
 loc_ro = re.compile(r"\[.*\]$")
 
 
 @lru_cache(1)
-def read_kioslaverc(kde_config_dir):
+def read_kioslaverc():
     """Read kioslaverc into data dictionary."""
     data = {}
+    kde_config_dir = get_kde_config_dir()
+    if not kde_config_dir:
+        return data
     in_proxy_settings = False
     filename = os.path.join(kde_config_dir, "kioslaverc")
+    if not os.path.exists(filename):
+        log.debug(LOG_CHECK, "%s does not exist" % filename)
+        return data
     with open(filename) as fd:
         # First read all lines into dictionary since they can occur
         # in any order.
