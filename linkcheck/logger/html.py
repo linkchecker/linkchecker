@@ -26,10 +26,10 @@ from .. import strformat, configuration
 
 
 # ss=1 enables show source
-validate_html = "http://validator.w3.org/check?ss=1&amp;uri=%(uri)s"
+validate_html = "https://validator.w3.org/check?ss=1&amp;uri=%(uri)s"
 # options are the default
 validate_css = (
-    "http://jigsaw.w3.org/css-validator/validator?"
+    "https://jigsaw.w3.org/css-validator/validator?"
     "uri=%(uri)s&amp;warning=1&amp;profile=css2&amp;usermedium=all"
 )
 
@@ -194,7 +194,7 @@ class HtmlLogger(_Logger):
             "<tr><td>"
             + self.part("parenturl")
             + '</td><td><a target="top" href="'
-            + url_data.parent_url
+            + html.escape(url_data.parent_url)
             + '">'
             + html.escape(url_data.parent_url)
             + "</a>"
@@ -231,7 +231,7 @@ class HtmlLogger(_Logger):
             + self.part("realurl")
             + "</td><td>"
             + '<a target="top" href="'
-            + url_data.url
+            + html.escape(url_data.url)
             + '">'
             + html.escape(url_data.url)
             + "</a></td></tr>"

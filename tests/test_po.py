@@ -34,6 +34,8 @@ def get_pofiles():
         pofiles = []
         pofiles.extend(glob.glob("po/*.po"))
         pofiles.extend(glob.glob("doc/*.po"))
+    if not pofiles:
+        raise Exception("No .po files found")
     return pofiles
 
 
@@ -56,15 +58,15 @@ class TestGTranslator(unittest.TestCase):
     def test_gtranslator(self):
         """Test all pofiles for GTranslator brokenness."""
         for f in get_pofiles():
-            with open(f, "rb") as fd:
+            with open(f, encoding="UTF-8") as fd:
                 self.check_file(fd, f)
 
     def check_file(self, fd, f):
         """Test for GTranslator broken syntax."""
         for line in fd:
-            if line.strip().startswith(b"#"):
+            if line.strip().startswith("#"):
                 continue
             self.assertFalse(
-                b"\xc2\xb7" in line,
-                "Broken GTranslator copy/paste in %r:\n%r" % (f, line),
+                "·" in line,
+                "Broken GTranslator copy/paste in %r:\n%s" % (f, line),
             )

@@ -45,7 +45,7 @@ class W3Timer:
 
 class HtmlSyntaxCheck(_ContentPlugin):
     """Check the syntax of HTML pages with the online W3C HTML validator.
-    See http://validator.w3.org/docs/api.html.
+    See https://validator.w3.org/docs/api.html.
     """
 
     def __init__(self, config):
@@ -63,7 +63,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
         session = url_data.session
         try:
             body = {'uri': url_data.url, 'output': 'soap12'}
-            response = session.post('http://validator.w3.org/check', data=body)
+            response = session.post('https://validator.w3.org/check', data=body)
             response.raise_for_status()
             if response.headers.get('x-w3c-validator-status', 'Invalid') == 'Valid':
                 url_data.add_info("W3C Validator: %s" % _("valid HTML syntax"))
@@ -79,7 +79,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
 
 class CssSyntaxCheck(_ContentPlugin):
     """Check the syntax of HTML pages with the online W3C CSS validator.
-    See http://jigsaw.w3.org/css-validator/manual.html#expert.
+    See https://jigsaw.w3.org/css-validator/manual.html#expert.
     """
 
     def __init__(self, config):
@@ -96,7 +96,7 @@ class CssSyntaxCheck(_ContentPlugin):
         self.timer.check_w3_time()
         session = url_data.session
         try:
-            url = 'http://jigsaw.w3.org/css-validator/validator'
+            url = 'https://jigsaw.w3.org/css-validator/validator'
             params = {
                 'uri': url_data.url,
                 'warning': '2',

@@ -18,7 +18,6 @@ Define standard test support classes funtional for LinkChecker tests.
 """
 import os
 import re
-import codecs
 import difflib
 import unittest
 import linkcheck.checker
@@ -235,7 +234,7 @@ class LinkCheckTest(unittest.TestCase):
         if hasattr(self, "port"):
             d["port"] = self.port
         # all result files are encoded in utf-8
-        with codecs.open(resultfile, "r", "utf-8") as f:
+        with open(resultfile, "r", encoding="utf-8") as f:
             return [
                 line.rstrip("\r\n") % d
                 for line in f
