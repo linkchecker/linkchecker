@@ -2,6 +2,7 @@
 
 Changes:
 - cmdline: Remove options replaced by plugins and made ineffective in 9.0
+- configuration: Update proxy settings support for GNOME 3.
 
 9.4 "just passing by" (released 12.4.2018)
 

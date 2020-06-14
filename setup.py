@@ -386,7 +386,7 @@ setup(
     # See also doc/install.txt for more detailed dependency documentation.
     # extra_requires = {
     #    "IP country info": ['GeoIP'], # https://pypi.org/project/GeoIP/
-    #    "GNOME proxies": ['pygtk'], # http://www.pygtk.org/downloads.html
+    #    "GNOME proxies": ['PyGObject'], # https://pypi.org/project/PyGObject/
     #    "Bash completion": ['argcomplete'], # https://pypi.org/project/argcomplete/
     #    "Memory debugging": ['meliae'], # https://pypi.org/project/meliae/
     # }

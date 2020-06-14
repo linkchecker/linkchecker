@@ -70,7 +70,7 @@ Modules = (
     ("pygeoip", "GeoIP", 'lib_version'),  # on Windows systems
     ("sqlite3", "Pysqlite", 'version'),
     ("sqlite3", "Sqlite", 'sqlite_version'),
-    ("gconf", "Gconf", '__version__'),
+    ("gi", "PyGObject", '__version__'),
     ("meliae", "Meliae", '__version__'),
 )
 
@@ -331,11 +331,11 @@ class Configuration(dict):
         if os.name != 'posix':
             return
         if "http" not in self["proxy"]:
-            http_proxy = get_gconf_http_proxy() or get_kde_http_proxy()
+            http_proxy = get_gnome_proxy() or get_kde_http_proxy()
             if http_proxy:
                 self["proxy"]["http"] = http_proxy
         if "ftp" not in self["proxy"]:
-            ftp_proxy = get_gconf_ftp_proxy() or get_kde_ftp_proxy()
+            ftp_proxy = get_gnome_proxy(protocol="FTP") or get_kde_ftp_proxy()
             if ftp_proxy:
                 self["proxy"]["ftp"] = ftp_proxy
 
@@ -440,43 +440,26 @@ def get_user_config():
     return userconf
 
 
-def get_gconf_http_proxy():
-    """Return host:port for GConf HTTP proxy if found, else None."""
+def get_gnome_proxy(protocol="HTTP"):
+    """Return host:port for a GNOME proxy if found, else None."""
     try:
-        import gconf
+        import gi
+        gi.require_version('Gio', '2.0')
+        from gi.repository import Gio
     except ImportError:
         return None
     try:
-        client = gconf.client_get_default()
-        if client.get_bool("/system/http_proxy/use_http_proxy"):
-            host = client.get_string("/system/http_proxy/host")
-            port = client.get_int("/system/http_proxy/port")
-            if host:
-                if not port:
-                    port = 8080
-                return "%s:%d" % (host, port)
-    except Exception as msg:
-        log.debug(LOG_CHECK, "error getting HTTP proxy from gconf: %s", msg)
-        pass
-    return None
-
-
-def get_gconf_ftp_proxy():
-    """Return host:port for GConf FTP proxy if found, else None."""
-    try:
-        import gconf
-    except ImportError:
-        return None
-    try:
-        client = gconf.client_get_default()
-        host = client.get_string("/system/proxy/ftp_host")
-        port = client.get_int("/system/proxy/ftp_port")
+        settings = Gio.Settings.new("org.gnome.system.proxy.%s" % protocol.lower())
+        if protocol == "HTTP" and not settings.get_boolean("enabled"):
+            return None
+        host = settings.get_string("host")
+        port = settings.get_int("port")
         if host:
             if not port:
                 port = 8080
             return "%s:%d" % (host, port)
     except Exception as msg:
-        log.debug(LOG_CHECK, "error getting FTP proxy from gconf: %s", msg)
+        log.debug(LOG_CHECK, "error getting %s proxy from GNOME: %s", (protocol, msg))
         pass
     return None
 

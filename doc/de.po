@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: linkchecker 3.4\n"
-"POT-Creation-Date: 2020-06-04 17:30+0100\n"
-"PO-Revision-Date: 2020-06-04 17:33+0100\n"
+"POT-Creation-Date: 2020-06-05 16:18+0100\n"
+"PO-Revision-Date: 2020-06-11 19:31+0100\n"
 "Last-Translator: Chris Mayo <aklhfex@gmail.com>\n"
 "Language-Team: German - Germany <>\n"
 "Language: de_DE\n"
@@ -25,10 +25,10 @@ msgid "LINKCHECKER"
 msgstr "LINKCHECKER"
 
 #. type: TH
-#: en/linkchecker.1:1 en/linkcheckerrc.5:1
+#: en/linkchecker.1:1
 #, no-wrap
-msgid "2020-04-24"
-msgstr "2020-04-24"
+msgid "2020-06-05"
+msgstr "2020-06-05"
 
 # type: TH
 #. type: TH
@@ -1121,15 +1121,15 @@ msgid ""
 "$ftp_proxy environment variables to the proxy URL. The URL should be of the "
 "form B<http://>[I<user>B<:>I<pass>B<@>]I<host>[B<:>I<port>].  LinkChecker "
 "also detects manual proxy settings of Internet Explorer under Windows "
-"systems, and gconf or KDE on Linux systems.  On a Mac use the Internet "
+"systems, and GNOME or KDE on Linux systems.  On a Mac use the Internet "
 "Config to select a proxy."
 msgstr ""
 "Um einen Proxy unter Unix oder Windows zu benutzen, setzen Sie die "
 "$http_proxy, $https_proxy oder $ftp_proxy Umgebungsvariablen auf die Proxy "
 "URL. Die URL sollte die Form B<http://>[I<user>B<:>I<pass>B<@>]I<host>[B<:"
 ">I<port>] besitzen. LinkChecker erkennt auch die Proxy-Einstellungen des "
-"Internet Explorers auf einem Windows-System. Auf einem Mac benutzen Sie die "
-"Internet Konfiguration."
+"Internet Explorers auf einem Windows-System, und GNOME oder KDE auf Linux "
+"Systemen. Auf einem Mac benutzen Sie die Internet Konfiguration."
 
 #. type: Plain text
 #: en/linkchecker.1:306
@@ -1755,6 +1755,12 @@ msgstr "Copyright \\(co 2000-2014 Bastian Kleineidam"
 #, no-wrap
 msgid "LINKCHECKERRC"
 msgstr "LINKCHECKERRC"
+
+#. type: TH
+#: en/linkcheckerrc.5:1
+#, no-wrap
+msgid "2020-04-24"
+msgstr "2020-04-24"
 
 # type: Plain text
 #. type: Plain text
