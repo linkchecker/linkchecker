@@ -62,12 +62,12 @@ def ascii_safe(s):
     """Get ASCII string without raising encoding errors. Unknown
     characters of the given encoding will be ignored.
 
-    @param s: the Unicode string to be encoded
-    @type s: unicode or None
-    @return: encoded ASCII version of s, or None if s was None
-    @rtype: string
+    @param s: the string to be encoded
+    @type s: string or None
+    @return: version of s containing only ASCII characters, or None if s was None
+    @rtype: string or None
     """
-    if isinstance(s, str):
+    if s is not None:
         s = s.encode('ascii', 'ignore').decode('ascii')
     return s
 
