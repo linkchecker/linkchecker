@@ -183,7 +183,7 @@ def idna_encode(host):
     to RFC 3490.
     @raise: UnicodeError if hostname is not properly IDN encoded.
     """
-    if host and isinstance(host, str):
+    if host:
         try:
             host.encode('ascii')
             return host, False
