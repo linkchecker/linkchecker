@@ -276,10 +276,6 @@ class RobotFileParser:
             useragent,
             url,
         )
-        if not isinstance(useragent, str):
-            useragent = useragent.encode("ascii", "ignore")
-        if not isinstance(url, str):
-            url = url.encode("ascii", "ignore")
         if self.disallow_all:
             log.debug(LOG_CHECK, " ... disallow all.")
             return False
