@@ -72,13 +72,6 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(wrap(None, 10), None)
         self.assertFalse(linkcheck.strformat.get_paragraphs(None))
 
-    def test_remove_markup(self):
-        # Test markup removing.
-        self.assertEqual(linkcheck.strformat.remove_markup("<a>"), "")
-        self.assertEqual(linkcheck.strformat.remove_markup("<>"), "")
-        self.assertEqual(linkcheck.strformat.remove_markup("<<>"), "")
-        self.assertEqual(linkcheck.strformat.remove_markup("a < b"), "a < b")
-
     def test_strsize(self):
         # Test byte size strings.
         self.assertRaises(ValueError, linkcheck.strformat.strsize, -1)
@@ -92,10 +85,6 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 11), "11.0MB")
         self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 1024), "1.00GB")
         self.assertEqual(linkcheck.strformat.strsize(1024 * 1024 * 1024 * 14), "14.0GB")
-
-    def test_is_ascii(self):
-        self.assertTrue(linkcheck.strformat.is_ascii("abcd./"))
-        self.assertTrue(not linkcheck.strformat.is_ascii("ä"))
 
     def test_indent(self):
         s = "bla"
@@ -120,18 +109,6 @@ class TestStrFormat(unittest.TestCase):
         t = linkcheck.strformat.strtime(0, func=time.gmtime)
         self.assertEqual(t, "1970-01-01 00:00:00" + zone)
 
-    def test_duration(self):
-        duration = linkcheck.strformat.strduration
-        self.assertEqual(duration(-0.5), "-00:01")
-        self.assertEqual(duration(0), "00:00")
-        self.assertEqual(duration(0.9), "00:01")
-        self.assertEqual(duration(1), "00:01")
-        self.assertEqual(duration(2), "00:02")
-        self.assertEqual(duration(60), "01:00")
-        self.assertEqual(duration(120), "02:00")
-        self.assertEqual(duration(60 * 60), "01:00:00")
-        self.assertEqual(duration(60 * 60 * 24), "24:00:00")
-
     def test_duration_long(self):
         def duration(s):
             return linkcheck.strformat.strduration_long(s, do_translate=False)
@@ -148,17 +125,6 @@ class TestStrFormat(unittest.TestCase):
         self.assertEqual(
             duration(60 * 60 * 24 * 365 + 60 * 60 * 24 + 2), "1 year, 1 day"
         )
-
-    def test_linenumber(self):
-        get_line_number = linkcheck.strformat.get_line_number
-        self.assertEqual(get_line_number("a", -5), 0)
-        self.assertEqual(get_line_number("a", 0), 1)
-        self.assertEqual(get_line_number("a\nb", 2), 2)
-
-    def test_encoding(self):
-        is_encoding = linkcheck.strformat.is_encoding
-        self.assertTrue(is_encoding("ascii"))
-        self.assertFalse(is_encoding("hulla"))
 
     def test_unicode_safe(self):
         unicode_safe = linkcheck.strformat.unicode_safe
