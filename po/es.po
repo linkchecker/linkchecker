@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linkchecker 2.8\n"
 "Report-Msgid-Bugs-To: bastian.kleineidam@web.de\n"
-"POT-Creation-Date: 2020-05-18 13:32+0200\n"
+"POT-Creation-Date: 2020-06-19 16:25+0100\n"
 "PO-Revision-Date: 2011-02-16 15:24+0100\n"
 "Last-Translator: Bastian Kleineidam <calvin@users.sourceforge.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -53,10 +53,9 @@ msgstr ""
 msgid "For example execute 'chmod go-rw %s'."
 msgstr ""
 
-#: ../linkcheck/configuration/confparse.py:208
-msgid ""
-"See http://support.microsoft.com/kb/308419 for more info on setting file "
-"permissions."
+#: ../linkcheck/configuration/confparse.py:251
+#, python-format
+msgid "See %(url)s for more info on setting file permissions."
 msgstr ""
 
 #: ../linkcheck/configuration/__init__.py:242
