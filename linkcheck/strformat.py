@@ -24,9 +24,7 @@ necessarily optimised for large strings, so use with care.
 
 import re
 import textwrap
-import codecs
 import os
-import math
 import time
 import urllib.parse
 import locale
@@ -70,23 +68,6 @@ def ascii_safe(s):
     if isinstance(s, str):
         s = s.encode('ascii', 'ignore').decode('ascii')
     return s
-
-
-def is_ascii(s):
-    """Test if a string can be encoded in ASCII."""
-    try:
-        s.encode('ascii', 'strict')
-        return True
-    except (UnicodeEncodeError, UnicodeDecodeError):
-        return False
-
-
-def is_encoding(text):
-    """Check if string is a valid encoding."""
-    try:
-        return codecs.lookup(text)
-    except (LookupError, ValueError):
-        return False
 
 
 def url_unicode_split(url):
@@ -152,35 +133,9 @@ def indent(text, indent_string="  "):
     return os.linesep.join("%s%s" % (indent_string, x) for x in text.splitlines())
 
 
-def get_line_number(s, index):
-    r"""Return the line number of s[index] or zero on errors.
-    Lines are assumed to be separated by the ASCII character '\n'."""
-    i = 0
-    if index < 0:
-        return 0
-    line = 1
-    while i < index:
-        if s[i] == '\n':
-            line += 1
-        i += 1
-    return line
-
-
 def paginate(text):
     """Print text in pages of lines."""
     pydoc.pager(text)
-
-
-_markup_re = re.compile("<.*?>", re.DOTALL)
-
-
-def remove_markup(s):
-    """Remove all <*> html markup tags from s."""
-    mo = _markup_re.search(s)
-    while mo:
-        s = s[0:mo.start()] + s[mo.end():]
-        mo = _markup_re.search(s)
-    return s
 
 
 def strsize(b, grouping=True):
@@ -214,32 +169,6 @@ def strsize(b, grouping=True):
 def strtime(t, func=time.localtime):
     """Return ISO 8601 formatted time."""
     return time.strftime("%Y-%m-%d %H:%M:%S", func(t)) + strtimezone()
-
-
-# from quodlibet
-def strduration(duration):
-    """Turn a time value in seconds into hh:mm:ss or mm:ss."""
-    if duration < 0:
-        duration = abs(duration)
-        prefix = "-"
-    else:
-        prefix = ""
-    duration = math.ceil(duration)
-    if duration >= SECONDS_PER_HOUR:  # 1 hour
-        # time, in hours:minutes:seconds
-        return "%s%02d:%02d:%02d" % (
-            prefix,
-            duration // SECONDS_PER_HOUR,
-            (duration % SECONDS_PER_HOUR) // SECONDS_PER_MINUTE,
-            duration % SECONDS_PER_MINUTE,
-        )
-    else:
-        # time, in minutes:seconds
-        return "%s%02d:%02d" % (
-            prefix,
-            duration // SECONDS_PER_MINUTE,
-            duration % SECONDS_PER_MINUTE,
-        )
 
 
 # from quodlibet
