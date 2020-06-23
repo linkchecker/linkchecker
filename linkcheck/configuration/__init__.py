@@ -302,14 +302,6 @@ class Configuration(dict):
         """Make login configuration consistent."""
         url = self["loginurl"]
         disable = False
-        if not self["loginpasswordfield"]:
-            log.warn(LOG_CHECK,
-                     _("no password input name attribute given for login URL."))
-            disable = True
-        if not self["loginuserfield"]:
-            log.warn(LOG_CHECK,
-                     _("no username input name attribute given for login URL."))
-            disable = True
         if self.get_user_password(url) == (None, None):
             log.warn(
                 LOG_CHECK,
