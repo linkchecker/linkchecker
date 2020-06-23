@@ -1,4 +1,4 @@
-.TH LINKCHECKERRC 5 2020-04-24 "LinkChecker" "LinkChecker User Manual"
+.TH LINKCHECKERRC 5 2020-06-05 "LinkChecker" "LinkChecker User Manual"
 .SH NAME
 linkcheckerrc - configuration file for LinkChecker
 .
@@ -129,35 +129,40 @@ Command line option: \fB\-\-checkextern\fP
 .SS \fB[authentication]\fP
 .TP
 \fBentry=\fP\fIREGEX\fP \fIUSER\fP [\fIPASS\fP] (MULTILINE)
-Provide different user/password pairs for different link types.
-Entries are a triple (URL regex, username, password)
-or a tuple (URL regex, username), where the entries are
-separated by whitespace.
+Provide individual username/password pairs for different links. In addtion to a 
+single login page specified with \fBloginurl\fP multiple FTP,
+HTTP (Basic Authentication) and telnet links are supported. Entries are a
+triple (URL regex, username, password) or a tuple (URL regex, username),
+where the entries are separated by whitespace.
 .br
 The password is optional and if missing it has to be entered at the
 commandline.
 .br
-If the regular expression matches the checked URL, the given user/password
-pair is used for authentication. The commandline options
+If the regular expression matches the checked URL, the given username/password
+pair is used for authentication. The command line options
 \fB\-u\fP and \fB\-p\fP match every link and therefore override the entries
-given here. The first match wins. At the moment, authentication is
-used/needed for http[s] and ftp links.
+given here. The first match wins.
 .br
 Command line option: \fB\-u\fP, \fB\-p\fP
 .TP
 \fBloginurl=\fP\fIURL\fP
-A login URL to be visited before checking. Also needs authentication
-data set for it.
+The URL of a login page to be visited before link checking. The page is expected
+to contain an HTML form to collect credentials and submit them to the address in
+its action attribute.
+The name attributes of the input elements of the form and the values to be
+submitted need to be available (see \fBentry\fP for an explanation of username
+and password values).
 .TP
 \fBloginuserfield=\fP\fISTRING\fP
-The name of the user CGI field. Default name is \fBlogin\fP.
+The name attribute of the username input element. Default: \fBlogin\fP.
 .TP
 \fBloginpasswordfield=\fP\fISTRING\fP
-The name of the password CGI field. Default name is \fBpassword\fP.
+The name attribute of the password input element. Default: \fBpassword\fP.
 .TP
 \fBloginextrafields=\fP\fINAME\fP\fB:\fP\fIVALUE\fP (MULTILINE)
-Optionally any additional CGI name/value pairs. Note that the default
-values are submitted automatically.
+Optionally the name attributes of any additional input elements and the values
+to populate them with. Note that these are submitted without
+checking whether matching input elements exist in the HTML form.
 .SS \fB[output]\fP
 .TP
 \fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP...]
