@@ -99,49 +99,6 @@ After installation
 ------------------
 LinkChecker is now installed. Have fun!
 
-Manual setup for OSX systems
-----------------------------
-
-1. Install the XCode developer tools
-
-2. Install homebrew_
-   
-   .. _homebrew: https://brew.sh/
-
-3. Install dependencies
-
-   brew update
-   brew install python
-   brew install gettext
-   # link gettext or put the msgfmt binary in your PATH
-   brew link --force gettext
-
-4. Install py2app 
-   (from http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html#installation)
-   Requires 'easy_install' --
-   $ curl -O http://peak.telecommunity.com/dist/ez_setup.py
-   $ sudo python ez_setup.py -U setuptools
-   Now install py2app:
-   $ sudo easy_install -U py2app
-
-5. git clone https://github.com/linkchecker/linkchecker
-
-6. cd linkchecker
-
-7. Run ``pip install -r requirements.txt --use-mirrors`` and after that ``make app``
-
-8. Install the resulting .dmg
-
-   # mount DMG
-   mkdir -p dist/mnt
-   hdiutil attach -mountpoint dist/mnt dist/LinkChecker-x.y.z.dmg
-   # to run directly
-   open -n dist/mnt/LinkChecker.app --args https://www.example.org
-   # install the app
-   sudo cp -r dist/mnt/LinkChecker.app /Applications
-   # unmount DMG
-   hdiutil detach dist/mnt
-
 
 WSGI web interface
 -----------------------
