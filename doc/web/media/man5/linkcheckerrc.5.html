@@ -164,10 +164,10 @@ The default file location is <b>~/.linkchecker/linkcheckerrc</b> on Unix,
   <dt><b>loginurl=</b><i>URL</i></dt>
   <dd>The URL of a login page to be visited before link checking. The page is
       expected to contain an HTML form to collect credentials and submit them to
-      the address in its action attribute. The name attributes of the input
-      elements of the form and the values to be submitted need to be available
-      (see <b>entry</b> for an explanation of username and password
-    values).</dd>
+      the address in its action attribute using an HTTP POST request. The name
+      attributes of the input elements of the form and the values to be
+      submitted need to be available (see <b>entry</b> for an explanation of
+      username and password values).</dd>
   <dt><b>loginuserfield=</b><i>STRING</i></dt>
   <dd>The name attribute of the username input element. Default:
     <b>login</b>.</dd>
