@@ -38,8 +38,9 @@ class Form:
 
 
 def search_form(content, cgiuser, cgipassword):
-    """Search for a HTML form in the given HTML content that has the given
-    CGI fields. If no form is found return None.
+    """Search for a HTML form in the given HTML content that has input elements
+    with name attributes that match cgiuser and/or cgipassword. If no such form
+    is found return None.
     """
     soup = htmlsoup.make_soup(content)
     cginames = {cgiuser, cgipassword} - {None}

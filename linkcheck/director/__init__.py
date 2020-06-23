@@ -19,7 +19,7 @@ Management of checking a queue of links with several threads.
 import os
 import time
 
-from .. import log, LOG_CHECK, LinkCheckerInterrupt, plugins
+from .. import log, LOG_CHECK, LinkCheckerError, LinkCheckerInterrupt, plugins
 from ..cache import urlqueue, robots_txt, results
 from . import aggregator, console
 
@@ -31,6 +31,9 @@ def check_urls(aggregate):
     """
     try:
         aggregate.visit_loginurl()
+    except LinkCheckerError as msg:
+        log.warn(LOG_CHECK, _("Problem using login URL: %(msg)s.") % dict(msg=msg))
+        return
     except Exception as msg:
         log.warn(LOG_CHECK, _("Error using login URL: %(msg)s.") % dict(msg=msg))
         raise

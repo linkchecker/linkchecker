@@ -302,12 +302,6 @@ class Configuration(dict):
         """Make login configuration consistent."""
         url = self["loginurl"]
         disable = False
-        if not self["loginpasswordfield"]:
-            log.warn(LOG_CHECK, _("no CGI password fieldname given for login URL."))
-            disable = True
-        if not self["loginuserfield"]:
-            log.warn(LOG_CHECK, _("no CGI user fieldname given for login URL."))
-            disable = True
         if self.get_user_password(url) == (None, None):
             log.warn(
                 LOG_CHECK,
