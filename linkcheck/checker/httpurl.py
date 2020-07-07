@@ -272,7 +272,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # Reset extern and recalculate
             self.extern = None
             self.set_extern(newurl)
-            self.urlparts = urllib.parse.urlsplit(newurl)
+            self.urlparts = list(urllib.parse.urlsplit(newurl))
             self.build_url_parts()
             self.url_connection = response
             self.headers = response.headers

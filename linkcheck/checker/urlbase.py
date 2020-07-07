@@ -437,7 +437,7 @@ class UrlBase:
                 urlparts[2] = url_fix_wayback_query(urlparts[2])
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
-        self.urlparts = urllib.parse.urlsplit(self.url)
+        self.urlparts = list(urllib.parse.urlsplit(self.url))
         self.build_url_parts()
         # and unsplit again
         self.url = urlutil.urlunsplit(self.urlparts)
