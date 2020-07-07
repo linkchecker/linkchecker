@@ -542,14 +542,12 @@ def get_kde_config_dir():
     if not home:
         log.debug(LOG_CHECK, "KDEHOME and HOME not set")
         return
-    if shutil.which("kde4-config"):
-        kde_config_dir = os.path.join(home, ".kde4", "share", "config")
-    else:
-        # KDE 5
-        kde_config_dir = os.path.join(home, ".config")
+    kde_config_dir = os.path.join(home, ".config")
     if not os.path.exists(kde_config_dir):
-        log.debug(LOG_CHECK, "%s does not exist" % kde_config_dir)
-        return
+        kde_config_dir = os.path.join(home, ".kde4", "share", "config")
+        if not os.path.exists(kde_config_dir):
+            log.debug(LOG_CHECK, "%s does not exist" % kde_config_dir)
+            return
     return kde_config_dir
 
 
