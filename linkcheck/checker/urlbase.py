@@ -386,7 +386,7 @@ class UrlBase:
             self.build_url()
             self.check_url_warnings()
         except tuple(ExcSyntaxList) as msg:
-            self.set_result(msg, valid=False)
+            self.set_result(str(msg), valid=False)
         else:
             self.set_cache_url()
 
