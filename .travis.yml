@@ -21,6 +21,8 @@ addons:
   apt:
     packages:
       - clamav-daemon
+      - geoip-database
+      - libgeoip-dev
 install:
   - pip install tox-travis coveralls
 before_script:
