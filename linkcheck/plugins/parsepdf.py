@@ -44,7 +44,7 @@ def search_url(obj, url_data, pageno, seen_objs):
     if isinstance(obj, dict):
         for key, value in obj.items():
             if key == 'URI':
-                url_data.add_url(value, page=pageno)
+                url_data.add_url(value.decode("ascii"), page=pageno)
             else:
                 search_url(value, url_data, pageno, seen_objs)
     elif isinstance(obj, list):
