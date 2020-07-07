@@ -460,12 +460,8 @@ def get_gnome_proxy(protocol="HTTP"):
 
 def get_kde_http_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
-    config_dir = get_kde_config_dir()
-    if not config_dir:
-        # could not find any KDE configuration directory
-        return
     try:
-        data = read_kioslaverc(config_dir)
+        data = read_kioslaverc()
         return data.get("http_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting HTTP proxy from KDE: %s", msg)
@@ -474,12 +470,8 @@ def get_kde_http_proxy():
 
 def get_kde_ftp_proxy():
     """Return host:port for KDE HTTP proxy if found, else None."""
-    config_dir = get_kde_config_dir()
-    if not config_dir:
-        # could not find any KDE configuration directory
-        return
     try:
-        data = read_kioslaverc(config_dir)
+        data = read_kioslaverc()
         return data.get("ftp_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
@@ -520,54 +512,37 @@ def get_kde_ftp_proxy():
 
 def get_kde_config_dir():
     """Return KDE configuration directory or None if not found."""
-    kde_home = get_kde_home_dir()
-    if not kde_home:
-        # could not determine the KDE home directory
-        return
-    return kde_home_to_config(kde_home)
-
-
-def kde_home_to_config(kde_home):
-    """Add subdirectories for config path to KDE home directory."""
-    return os.path.join(kde_home, "share", "config")
-
-
-def get_kde_home_dir():
-    """Return KDE home directory or None if not found."""
     if os.environ.get("KDEHOME"):
-        kde_home = os.path.abspath(os.environ["KDEHOME"])
+        home = os.environ.get("KDEHOME")
     else:
         home = os.environ.get("HOME")
-        if not home:
-            # $HOME is not set
+    if not home:
+        log.debug(LOG_CHECK, "KDEHOME and HOME not set")
+        return
+    kde_config_dir = os.path.join(home, ".config")
+    if not os.path.exists(kde_config_dir):
+        kde_config_dir = os.path.join(home, ".kde4", "share", "config")
+        if not os.path.exists(kde_config_dir):
+            log.debug(LOG_CHECK, "%s does not exist" % kde_config_dir)
             return
-        kde3_home = os.path.join(home, ".kde")
-        kde4_home = os.path.join(home, ".kde4")
-        if shutil.which("kde4-config"):
-            # kde4
-            kde3_file = kde_home_to_config(kde3_home)
-            kde4_file = kde_home_to_config(kde4_home)
-            if os.path.exists(kde4_file) and os.path.exists(kde3_file):
-                if fileutil.get_mtime(kde4_file) >= fileutil.get_mtime(kde3_file):
-                    kde_home = kde4_home
-                else:
-                    kde_home = kde3_home
-            else:
-                kde_home = kde4_home
-        else:
-            # kde3
-            kde_home = kde3_home
-    return kde_home if os.path.exists(kde_home) else None
+    return kde_config_dir
 
 
 loc_ro = re.compile(r"\[.*\]$")
 
 
 @lru_cache(1)
-def read_kioslaverc(kde_config_dir):
+def read_kioslaverc():
     """Read kioslaverc into data dictionary."""
     data = {}
+    kde_config_dir = get_kde_config_dir()
+    if not kde_config_dir:
+        return data
+    in_proxy_settings = False
     filename = os.path.join(kde_config_dir, "kioslaverc")
+    if not os.path.exists(filename):
+        log.debug(LOG_CHECK, "%s does not exist" % filename)
+        return data
     with open(filename) as fd:
         # First read all lines into dictionary since they can occur
         # in any order.
@@ -625,7 +600,13 @@ def add_kde_setting(key, value, data):
     elif key == "ftpProxy":
         add_kde_proxy("ftp_proxy", value, data)
     elif key == "ReversedException":
-        data["reversed_bypass"] = bool(value == "true" or int(value))
+        if value == "true":
+            value = True
+        elif value == "false":
+            value = False
+        else:
+            value = int(value) != 0
+        data["reversed_bypass"] = value
     elif key == "NoProxyFor":
         data["ignore_hosts"] = split_hosts(value)
     elif key == "AuthMode":
