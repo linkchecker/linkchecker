@@ -16,15 +16,18 @@
 """
 Intern URL pattern support.
 """
+
 import re
+import urllib.parse
+
 from . import urlbase, absolute_url
-from .. import strformat, url as urlutil
+from .. import url as urlutil
 
 
 def get_intern_pattern(url):
     """Return intern pattern for given URL. Redirections to the same
     domain with or without "www." prepended are allowed."""
-    parts = strformat.url_unicode_split(url)
+    parts = urllib.parse.urlsplit(url)
     scheme = parts[0].lower()
     domain = parts[1].lower()
     domain, is_idn = urlutil.idna_encode(domain)

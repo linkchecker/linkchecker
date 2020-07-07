@@ -26,34 +26,13 @@ import re
 import textwrap
 import os
 import time
-import urllib.parse
 import locale
 import pydoc
-from . import i18n
 
 # some handy time constants
 SECONDS_PER_MINUTE = 60
 SECONDS_PER_HOUR = 60 * SECONDS_PER_MINUTE
 SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
-
-
-def unicode_safe(s, encoding=i18n.default_encoding, errors='replace'):
-    """Get unicode string without raising encoding errors. Unknown
-    characters of the given encoding will be ignored.
-
-    @param s: the string to be decoded
-    @type s: any object except None
-    @return: if s is already unicode, return s unchanged; else return
-        decoded unicode string of str(s)
-    @rtype: unicode
-    """
-    assert s is not None, "argument to unicode_safe was None"
-    if isinstance(s, str):
-        # s is already unicode, nothing to do
-        return s
-    elif isinstance(s, bytes):
-        return s.decode(encoding, errors)
-    return str(s)
 
 
 def ascii_safe(s):
@@ -68,11 +47,6 @@ def ascii_safe(s):
     if isinstance(s, str):
         s = s.encode('ascii', 'ignore').decode('ascii')
     return s
-
-
-def url_unicode_split(url):
-    """Like urllib.parse.urlsplit(), but always returning unicode parts."""
-    return [unicode_safe(s) for s in urllib.parse.urlsplit(url)]
 
 
 def unquote(s, matching=False):

@@ -126,10 +126,6 @@ class TestStrFormat(unittest.TestCase):
             duration(60 * 60 * 24 * 365 + 60 * 60 * 24 + 2), "1 year, 1 day"
         )
 
-    def test_unicode_safe(self):
-        unicode_safe = linkcheck.strformat.unicode_safe
-        self.assertEqual(unicode_safe("a"), "a")
-
     def test_ascii_safe(self):
         ascii_safe = linkcheck.strformat.ascii_safe
         self.assertEqual(ascii_safe("a"), "a")

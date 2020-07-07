@@ -22,7 +22,6 @@ import sys
 import socket
 from ..lock import get_lock
 from ..decorators import synchronized
-from ..strformat import unicode_safe
 from .. import log, LOG_PLUGIN
 
 
@@ -112,9 +111,9 @@ def get_location(host):
         return None
     value = ""
     if record and record.get("city"):
-        value += unicode_safe(record["city"])
+        value += record["city"]
     if record and record.get("country_name"):
         if value:
             value += ", "
-        value += unicode_safe(record["country_name"])
+        value += record["country_name"]
     return value
