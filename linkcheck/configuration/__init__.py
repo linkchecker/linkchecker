@@ -630,7 +630,7 @@ def add_kde_setting(key, value, data):
         elif value == "false":
             value = False
         else:
-            value = int(value)
+            value = int(value) != 0
         data["reversed_bypass"] = value
     elif key == "NoProxyFor":
         data["ignore_hosts"] = split_hosts(value)
