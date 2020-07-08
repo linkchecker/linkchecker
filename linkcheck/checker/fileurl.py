@@ -234,8 +234,7 @@ class FileUrl(urlbase.UrlBase):
         with links to the files."""
         if self.is_directory():
             data = get_index_html(get_files(self.get_os_filename()))
-            if isinstance(data, str):
-                data = data.encode("iso8859-1", "ignore")
+            data = data.encode("iso8859-1", "ignore")
         else:
             data = super().read_content()
         return data

@@ -70,7 +70,7 @@ else:
 
 def path_safe(path):
     """Ensure path string is compatible with the platform file system encoding."""
-    if isinstance(path, str) and not os.path.supports_unicode_filenames:
+    if path and not os.path.supports_unicode_filenames:
         path = path.encode(FSCODING, "replace").decode(FSCODING)
     return path
 
