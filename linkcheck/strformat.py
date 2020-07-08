@@ -67,7 +67,7 @@ def ascii_safe(s):
     @return: version of s containing only ASCII characters, or None if s was None
     @rtype: string or None
     """
-    if s is not None:
+    if s:
         s = s.encode('ascii', 'ignore').decode('ascii')
     return s
 
