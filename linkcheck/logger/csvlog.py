@@ -21,7 +21,6 @@ from io import StringIO
 import os
 
 from . import _Logger
-from .. import strformat
 
 Columns = (
     "urlname",
@@ -134,7 +133,7 @@ class CSVLogger(_Logger):
             row.append(url_data.level)
         if self.has_part("modified"):
             row.append(self.format_modified(url_data.modified))
-        self.writerow(map(strformat.unicode_safe, row))
+        self.writerow(row)
         self.flush()
 
     def writerow(self, row):

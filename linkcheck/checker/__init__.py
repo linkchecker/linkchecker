@@ -21,7 +21,7 @@ import os
 import html
 import urllib.parse
 
-from .. import strformat, url as urlutil, log, LOG_CHECK
+from .. import url as urlutil, log, LOG_CHECK
 
 MAX_FILESIZE = 1024 * 1024 * 10  # 10MB
 
@@ -103,16 +103,10 @@ def get_url_from(
     @type extern: tuple(int, int) or None
     """
     if base_url is not None:
-        base_url = strformat.unicode_safe(base_url)
         # left strip for detection of URL scheme
         base_url_stripped = base_url.lstrip()
     else:
         base_url_stripped = base_url
-    if parent_url is not None:
-        parent_url = strformat.unicode_safe(parent_url)
-    if base_ref is not None:
-        base_ref = strformat.unicode_safe(base_ref)
-    name = strformat.unicode_safe(name)
     url = absolute_url(base_url_stripped, base_ref, parent_url).lower()
     if ":" in url:
         scheme = url.split(":", 1)[0].lower()

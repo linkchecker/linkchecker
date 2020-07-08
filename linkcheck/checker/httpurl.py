@@ -16,6 +16,9 @@
 """
 Handle http links.
 """
+
+import urllib.parse
+
 import requests
 
 # The validity of SSL certs is ignored to be able
@@ -34,7 +37,6 @@ import re
 from .. import (
     log,
     LOG_CHECK,
-    strformat,
     mimeutil,
     url as urlutil,
     LinkCheckerError,
@@ -49,9 +51,6 @@ from requests.sessions import REDIRECT_STATI
 # assumed HTTP header encoding
 HEADER_ENCODING = "iso-8859-1"
 HTTP_SCHEMAS = ('http://', 'https://')
-
-# helper alias
-unicode_safe = strformat.unicode_safe
 
 # match for robots meta element content attribute
 nofollow_re = re.compile(r"\bnofollow\b", re.IGNORECASE)
@@ -111,7 +110,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # Note that content-encoding causes size differences since
             # the content data is always decoded.
             try:
-                self.size = int(self.getheader("Content-Length"))
+                self.size = int(self.headers["Content-Length"])
             except (ValueError, OverflowError):
                 pass
         else:
@@ -273,7 +272,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # Reset extern and recalculate
             self.extern = None
             self.set_extern(newurl)
-            self.urlparts = strformat.url_unicode_split(newurl)
+            self.urlparts = list(urllib.parse.urlsplit(newurl))
             self.build_url_parts()
             self.url_connection = response
             self.headers = response.headers
@@ -284,17 +283,6 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             if self.is_redirect():
                 # run connection plugins for old connection
                 self.aggregate.plugin_manager.run_connection_plugins(self)
-
-    def getheader(self, name, default=None):
-        """Get decoded header value.
-
-        @return: decoded header value or default of not found
-        @rtype: unicode or type of default
-        """
-        value = self.headers.get(name)
-        if value is None:
-            return default
-        return unicode_safe(value, encoding=HEADER_ENCODING)
 
     def check_response(self):
         """Check final result and log it."""
@@ -315,7 +303,8 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
             if self.url_connection.status_code == 429:
                 self.add_warning(
-                    "Rate limited (Retry-After: %s)" % self.getheader(_("Retry-After")),
+                    "Rate limited (Retry-After: %s)"
+                    % self.headers.get(_("Retry-After")),
                     tag=WARN_URL_RATE_LIMITED,
                 )
 
@@ -353,7 +342,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             value = self.headers['Refresh'].strip()
             mo = refresh_re.match(value)
             if mo:
-                url = unicode_safe(mo.group("url"))
+                url = mo.group("url")
                 name = "Refresh: header"
                 self.add_url(url, name=name)
         if 'Content-Location' in self.headers:

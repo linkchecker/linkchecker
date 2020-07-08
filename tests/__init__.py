@@ -221,6 +221,16 @@ need_x11 = _need_func(has_x11, "X11")
 
 
 @lru_cache(1)
+def has_geoip():
+    from linkcheck.plugins import locationinfo
+
+    return locationinfo.geoip is not None
+
+
+need_geoip = _need_func(has_geoip, "geoip")
+
+
+@lru_cache(1)
 def has_word():
     """Test if Word is available."""
     from linkcheck.plugins import parseword

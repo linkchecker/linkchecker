@@ -53,9 +53,6 @@ from .const import (
 )
 from ..url import url_fix_wayback_query
 
-# helper alias
-unicode_safe = strformat.unicode_safe
-
 # schemes that are invalid with an empty hostname
 scheme_requires_host = ("ftp", "http", "telnet")
 
@@ -389,7 +386,7 @@ class UrlBase:
             self.build_url()
             self.check_url_warnings()
         except tuple(ExcSyntaxList) as msg:
-            self.set_result(unicode_safe(msg), valid=False)
+            self.set_result(str(msg), valid=False)
         else:
             self.set_cache_url()
 
@@ -440,7 +437,7 @@ class UrlBase:
                 urlparts[2] = url_fix_wayback_query(urlparts[2])
         self.url = urlutil.urlunsplit(urlparts)
         # split into (modifiable) list
-        self.urlparts = strformat.url_unicode_split(self.url)
+        self.urlparts = list(urllib.parse.urlsplit(self.url))
         self.build_url_parts()
         # and unsplit again
         self.url = urlutil.urlunsplit(self.urlparts)
@@ -529,7 +526,7 @@ class UrlBase:
                     'host': self.host,
                     'msg': value,
                 }
-            self.set_result(unicode_safe(value), valid=False)
+            self.set_result(value, valid=False)
 
     def check_content(self):
         """Check content of URL.
@@ -776,7 +773,7 @@ class UrlBase:
         """
         Return serialized url check data as unicode string.
         """
-        return unicode_safe(sep).join(
+        return sep.join(
             [
                 "%s link" % self.scheme,
                 "base_url=%r" % self.base_url,
