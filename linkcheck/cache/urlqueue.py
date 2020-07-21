@@ -122,11 +122,12 @@ class UrlQueue:
         """Put URL in queue, increase number of unfinished tasks."""
         if self.shutdown or self.max_allowed_urls == 0:
             return
-        log.debug(LOG_CACHE, "queueing %s", url_data.url)
         key = url_data.cache_url
         cache = url_data.aggregate.result_cache
         if cache.has_result(key):
+            log.debug(LOG_CACHE, "skipping %s, %s already cached", url_data.url, key)
             return
+        log.debug(LOG_CACHE, "queueing %s", url_data.url)
         if url_data.has_result:
             self.queue.appendleft(url_data)
         else:
