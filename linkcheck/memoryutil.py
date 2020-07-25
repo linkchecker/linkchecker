@@ -29,6 +29,7 @@ MemoryDebugMsg = strformat.format_feature_warning(
 
 def write_memory_dump():
     """Dump memory to a temporary filename with the meliae package.
+
     @return: JSON filename where memory dump has been written to
     @rtype: string
     """

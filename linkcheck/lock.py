@@ -22,8 +22,9 @@ from . import log, LOG_THREAD
 
 def get_lock(name, debug=False):
     """Get a new lock.
+
     @param debug: if True, acquire() and release() will have debug messages
-    @ptype debug: boolean, default is False
+    @type debug: boolean, default is False
     @return: a lock object
     @rtype: threading.Lock or DebugLock
     """
@@ -58,10 +59,11 @@ class DebugLock:
 
 def get_semaphore(name, value=None, debug=False):
     """Get a new semaphore.
+
     @param value: if not None, a BoundedSemaphore will be used
-    @ptype debug: int or None
+    @type debug: int or None
     @param debug: if True, acquire() and release() will have debug messages
-    @ptype debug: boolean, default is False
+    @type debug: boolean, default is False
     @return: a semaphore object
     @rtype: threading.Semaphore or threading.BoundedSemaphore or DebugLock
     """

@@ -14,7 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-Handle for mailto: links.
+Handler for mailto: links.
 """
 
 import re
@@ -136,6 +136,7 @@ class MailtoUrl(urlbase.UrlBase):
 
     def check_email_syntax(self, mail):
         """Check email syntax. The relevant RFCs:
+
         - How to check names (memo):
           https://tools.ietf.org/html/rfc3696
         - Email address syntax

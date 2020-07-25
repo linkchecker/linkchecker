@@ -28,10 +28,11 @@ MAX_FILESIZE = 1024 * 1024 * 10  # 10MB
 
 def guess_url(url):
     """Guess if URL is a http or ftp URL.
+
     @param url: the URL to check
-    @ptype url: unicode
+    @type url: unicode
     @return: url with http:// or ftp:// prepended if it's detected as
-      a http respective ftp URL.
+        a http respective ftp URL.
     @rtype: unicode
     """
     if url.lower().startswith("www."):
@@ -90,7 +91,7 @@ def get_url_from(
     @param parent_url: parent url
     @type parent_url: string or None
     @param base_ref: base url from <base> tag
-    @type base_ref string or None
+    @type base_ref: string or None
     @param line: line number
     @type line: number
     @param column: column number

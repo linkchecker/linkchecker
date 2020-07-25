@@ -61,7 +61,7 @@ def urljoin(parent, url):
     """
     If url is relative, join parent and url. Else leave url as-is.
 
-    @return joined url
+    @return: joined url
     """
     if urlutil.url_is_absolute(url):
         return url
@@ -794,9 +794,9 @@ class UrlBase:
         """Get pattern for intern URL matching.
 
         @param url: the URL to set intern pattern for, else self.url
-        @ptype url: unicode or None
-        @return non-empty regex pattern or None
-        @rtype String or None
+        @type url: unicode or None
+        @return: non-empty regex pattern or None
+        @rtype: String or None
         """
         return None
 
@@ -843,6 +843,7 @@ class UrlBase:
         """Return a simplified transport object for logging and caching.
 
         The transport object must contain these attributes:
+
         - url_data.valid: bool
           Indicates if URL is valid
         - url_data.result: unicode

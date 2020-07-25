@@ -99,10 +99,11 @@ def get_share_dir():
 
 def get_share_file(filename, devel_dir=None):
     """Return a filename in the share directory.
+
     @param devel_dir: directory to search when developing
-    @ptype devel_dir: string
+    @type devel_dir: string
     @param filename: filename to search for
-    @ptype filename: string
+    @type filename: string
     @return: the found filename or None
     @rtype: string
     @raises: ValueError if not found
@@ -135,6 +136,7 @@ def get_system_cert_file():
 
 def get_certifi_file():
     """Get the SSL certifications installed by the certifi package.
+
     @return: the filename to the cert file
     @rtype: string
     @raises: ImportError when certifi is not installed or ValueError when

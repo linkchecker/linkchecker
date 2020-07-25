@@ -20,7 +20,7 @@ uses ctypes and Windows DLLs to generate colored output.
 From Term::ANSIColor, applies also to this module:
 
 The codes output by this module are standard terminal control codes,
-complying with ECMA-48 and ISO 6429 (generally referred to as ``ANSI color''
+complying with ECMA-48 and ISO 6429 (generally referred to as "ANSI color"
 for the color codes). The non-color control codes (bold, dark, italic,
 underline, and reverse) are part of the earlier ANSI X3.64 standard for
 control sequences for video terminals and peripherals.

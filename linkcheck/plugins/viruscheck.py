@@ -219,8 +219,9 @@ class ClamavConfig(dict):
 
 def scan(data, clamconf):
     """Scan data for viruses.
-    @return (infection msgs, errors)
-    @rtype ([], [])
+
+    @return: (infection msgs, errors)
+    @rtype: ([], [])
     """
     try:
         scanner = ClamdScanner(clamconf)
