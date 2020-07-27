@@ -363,11 +363,13 @@ class UrlBase:
 
     def set_cache_url(self):
         """Set the URL to be used for caching."""
-        # remove anchor from cached target url since we assume
-        # URLs with different anchors to have the same content
-        self.cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
-        if self.cache_url is not None:
-            assert isinstance(self.cache_url, str), repr(self.cache_url)
+        if "AnchorCheck" in self.aggregate.config["enabledplugins"]:
+            self.cache_url = self.url
+        else:
+            # remove anchor from cached target url since we assume
+            # URLs with different anchors to have the same content
+            self.cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
+        log.debug(LOG_CHECK, "cache_url '%s'", self.cache_url)
 
     def check_syntax(self):
         """
