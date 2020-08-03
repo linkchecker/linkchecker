@@ -8,7 +8,7 @@ Often the major browsers are very forgiving and good at handling HTML
 of HTTP errors, while LinkChecker complains in most cases of invalid
 content.
 
-Use the `--check-html` option, or check if you are using a proxy
+Enable the HtmlSyntaxCheck plugin, or check if you are using a proxy
 which produces the error.
 
 **Q: I still get an error, but the page is definitely ok.**
@@ -97,7 +97,7 @@ repository and access to your web server configuration.
 
 **Q: How do I check HTML/XML/CSS syntax with LinkChecker?**
 
-A: Use the `--check-html` and `--check-css` options.
+A: Enable the HtmlSyntaxCheck and CssSyntaxCheck plugins.
 
 
 **Q: I want to have my own logging class. How can I use it in LinkChecker?**
