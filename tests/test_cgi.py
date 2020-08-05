@@ -53,7 +53,7 @@ class TestWsgi(unittest.TestCase):
 
     def test_checklink(self):
         form = dict(url="http://www.example.com/", level="0")
-        checklink(form)
+        checklink(form, {})
 
     def test_application(self):
         form = dict(url="http://www.example.com/", level="0")
