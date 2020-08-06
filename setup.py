@@ -326,10 +326,10 @@ for (src, dst) in list_message_files(AppName):
     data_files.append((dst, [src]))
 
 if os.name == "posix":
-    data_files.append(("share/man/man1", ["doc/en/linkchecker.1"]))
-    data_files.append(("share/man/man5", ["doc/en/linkcheckerrc.5"]))
-    data_files.append(("share/man/de/man1", ["doc/de/linkchecker.1"]))
-    data_files.append(("share/man/de/man5", ["doc/de/linkcheckerrc.5"]))
+    data_files.append(("share/man/man1", ["doc/man/en/linkchecker.1"]))
+    data_files.append(("share/man/man5", ["doc/man/en/linkcheckerrc.5"]))
+    data_files.append(("share/man/de/man1", ["doc/man/de/linkchecker.1"]))
+    data_files.append(("share/man/de/man5", ["doc/man/de/linkcheckerrc.5"]))
     data_files.append(
         (
             "share/linkchecker/examples",
