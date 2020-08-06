@@ -28,7 +28,7 @@ Changelog.linkchecker*
 /doc/html/*.qhc
 /doc/html/*.qch
 /.achievements
-/doc/*.mo
+/doc/i18n/locales/*/LC_MESSAGES/*.mo
 /LinkChecker-*-portable.zip
 /LinkChecker-*.exe
 /LinkChecker.egg-info

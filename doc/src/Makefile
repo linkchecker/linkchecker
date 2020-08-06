@@ -10,13 +10,16 @@ LANGUAGE      = en
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
+gettext:
+	@$(SPHINXBUILD) -b gettext "$(SOURCEDIR)" -d "$(BUILDDIR)/i18n/doctrees" ../i18n/gettext $(SPHINXOPTS) $(O)
+
 html:
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../html $(SPHINXOPTS) $(O)
 
 man:
 	@$(SPHINXBUILD) -b man "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../man/$(LANGUAGE) $(SPHINXOPTS) $(O)
 
-.PHONY: help html man Makefile
+.PHONY: help gettext html man Makefile
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
