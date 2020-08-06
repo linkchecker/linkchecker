@@ -142,10 +142,10 @@ output
     for specifying all available loggers.
     Command line option: :option:`--debug`
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
-    Output to a files **linkchecker-out.**\ *TYPE*,
+    Output to a file **linkchecker-out.**\ *TYPE*, or
     **$HOME/.linkchecker/blacklist** for **blacklist** output.
     Valid file output types are **text**, **html**, **sql**, **csv**,
-    **gml**, **dot**, **xml**, **none** or **blacklist** Default is no
+    **gml**, **dot**, **xml**, **none** or **blacklist**. Default is no
     file output. The various output types are documented below. Note
     that you can suppress all console output with **output=none**.
     Command line option: :option:`--file-output`

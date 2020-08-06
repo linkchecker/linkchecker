@@ -378,7 +378,7 @@ Mail links (**mailto:**)
     If one address fails, the whole list will fail. For each mail
     address we check the following things:
 
-    1. Check the adress syntax, both of the part before and after the
+    1. Check the address syntax, both the parts before and after the
        @ sign.
     2. Look up the MX DNS records. If we found no MX record, print an
        error.

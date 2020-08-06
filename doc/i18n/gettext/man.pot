@@ -442,7 +442,7 @@ msgid "A mailto: link eventually resolves to a list of email addresses. If one a
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:381
-msgid "Check the adress syntax, both of the part before and after the @ sign."
+msgid "Check the address syntax, both the parts before and after the @ sign."
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:383
@@ -896,7 +896,7 @@ msgid "**fileoutput=**\\ *TYPE*\\ [**,**\\ *TYPE*...]"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:145
-msgid "Output to a files **linkchecker-out.**\\ *TYPE*, **$HOME/.linkchecker/blacklist** for **blacklist** output. Valid file output types are **text**, **html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none** or **blacklist** Default is no file output. The various output types are documented below. Note that you can suppress all console output with **output=none**. Command line option: :option:`--file-output`"
+msgid "Output to a file **linkchecker-out.**\\ *TYPE*, or **$HOME/.linkchecker/blacklist** for **blacklist** output. Valid file output types are **text**, **html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none** or **blacklist**. Default is no file output. The various output types are documented below. Note that you can suppress all console output with **output=none**. Command line option: :option:`--file-output`"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:158
