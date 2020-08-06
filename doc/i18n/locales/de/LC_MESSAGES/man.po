@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: linkchecker 3.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-05 19:32+0100\n"
-"PO-Revision-Date: 2020-08-05 19:35+0100\n"
+"PO-Revision-Date: 2020-08-06 19:25+0100\n"
 "Last-Translator: Chris Mayo <aklhfex@gmail.com>\n"
 "Language: de_DE\n"
 "Language-Team: German - Germany <>\n"
@@ -791,24 +791,24 @@ msgstr "Für FTP-Links wird Folgendes geprüft:"
 
 #: ../../src/man/linkchecker.rst:394
 msgid "connect to the specified host"
-msgstr "1) Eine Verbindung zum angegeben Rechner wird aufgebaut"
+msgstr "Eine Verbindung zum angegeben Rechner wird aufgebaut"
 
 #: ../../src/man/linkchecker.rst:395
 msgid ""
 "try to login with the given user and password. The default user is "
 "**anonymous**, the default password is **anonymous@**."
 msgstr ""
-"2) Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der "
+"Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der "
 "Standardbenutzer ist ``anonymous``, das Standardpasswort ist "
 "``anonymous@``."
 
 #: ../../src/man/linkchecker.rst:397
 msgid "try to change to the given directory"
-msgstr "3) Versuche, in das angegebene Verzeichnis zu wechseln"
+msgstr "Versuche, in das angegebene Verzeichnis zu wechseln"
 
 #: ../../src/man/linkchecker.rst:398
 msgid "list the file with the NLST command"
-msgstr "4) Liste die Dateien im Verzeichnis auf mit dem NLST-Befehl"
+msgstr "Liste die Dateien im Verzeichnis auf mit dem NLST-Befehl"
 
 #: ../../src/man/linkchecker.rst:402
 msgid "Telnet links (**telnet:**)"
@@ -889,7 +889,7 @@ msgstr ""
 
 #: ../../src/man/linkchecker.rst:435
 msgid "A URL must be valid."
-msgstr "1. Eine URL muss gültig sein."
+msgstr "Eine URL muss gültig sein."
 
 #: ../../src/man/linkchecker.rst:436
 msgid ""
@@ -898,7 +898,7 @@ msgid ""
 "(for example it does not have a common HTML file extension, and the "
 "content does not look like HTML), it is assumed to be non-parseable."
 msgstr ""
-"2. Der URL-Inhalt muss analysierbar sein. Dies beinhaltet zur Zeit HTML-"
+"Der URL-Inhalt muss analysierbar sein. Dies beinhaltet zur Zeit HTML-"
 "Dateien, Opera Lesezeichen, und Verzeichnisse. Falls ein Dateityp nicht "
 "erkannt wird, (zum Beispiel weil er keine bekannte HTML-Dateierweiterung "
 "besitzt, und der Inhalt nicht nach HTML aussieht), wird der Inhalt als "
@@ -909,7 +909,7 @@ msgid ""
 "The URL content must be retrievable. This is usually the case except for "
 "example mailto: or unknown URL types."
 msgstr ""
-"3. Der URL-Inhalt muss ladbar sein. Dies ist normalerweise der Fall, mit "
+"Der URL-Inhalt muss ladbar sein. Dies ist normalerweise der Fall, mit "
 "Ausnahme von mailto: oder unbekannten URL-Typen."
 
 #: ../../src/man/linkchecker.rst:442
@@ -917,7 +917,7 @@ msgid ""
 "The maximum recursion level must not be exceeded. It is configured with "
 "the :option:`--recursion-level` option and is unlimited per default."
 msgstr ""
-"4. Die maximale Rekursionstiefe darf nicht überschritten werden. Diese "
+"Die maximale Rekursionstiefe darf nicht überschritten werden. Diese "
 "wird mit der Option :option:`--recursion-level` konfiguriert und ist "
 "standardmäßig nicht limitiert."
 
@@ -926,7 +926,7 @@ msgid ""
 "It must not match the ignored URL list. This is controlled with the "
 ":option:`--ignore-url` option."
 msgstr ""
-"5. Die URL darf nicht in der Liste von ignorierten URLs sein. Die "
+"Die URL darf nicht in der Liste von ignorierten URLs sein. Die "
 "ignorierten URLs werden mit der Option :option:`--ignore-url` "
 "konfiguriert."
 
@@ -936,7 +936,7 @@ msgid ""
 "recursively. This is checked by searching for a \"nofollow\" directive in"
 " the HTML header data."
 msgstr ""
-"6. Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in "
+"Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in "
 "der URL rekursiv verfolgt werden können. Dies wird geprüft, indem in den "
 "HTML Kopfdaten nach der \"nofollow\"-Direktive gesucht wird."
 

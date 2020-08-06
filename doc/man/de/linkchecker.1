@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "August 05, 2020" "" "LinkChecker"
+.TH "LINKCHECKER" "1" "August 06, 2020" "" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .
@@ -433,14 +433,13 @@ FTP\-Links (\fBftp:\fP)
 Für FTP\-Links wird Folgendes geprüft:
 .INDENT 7.0
 .IP 1. 3
-connect to the specified host
+Eine Verbindung zum angegeben Rechner wird aufgebaut
 .IP 2. 3
-try to login with the given user and password. The default user
-is \fBanonymous\fP, the default password is \fBanonymous@\fP\&.
+Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der Standardbenutzer ist \fBanonymous\fP, das Standardpasswort ist \fBanonymous@\fP\&.
 .IP 3. 3
-try to change to the given directory
+Versuche, in das angegebene Verzeichnis zu wechseln
 .IP 4. 3
-list the file with the NLST command
+Liste die Dateien im Verzeichnis auf mit dem NLST\-Befehl
 .UNINDENT
 .TP
 Telnet links (\fBtelnet:\fP)
@@ -469,25 +468,17 @@ configuration file.
 Bevor eine URL rekursiv geprüft wird, hat diese mehrere Bedingungen zu erfüllen. Diese werden in folgender Reihenfolge geprüft:
 .INDENT 0.0
 .IP 1. 3
-A URL must be valid.
+Eine URL muss gültig sein.
 .IP 2. 3
-A URL must be parseable. This currently includes HTML files, Opera
-bookmarks files, and directories. If a file type cannot be determined
-(for example it does not have a common HTML file extension, and the
-content does not look like HTML), it is assumed to be non\-parseable.
+Der URL\-Inhalt muss analysierbar sein. Dies beinhaltet zur Zeit HTML\-Dateien, Opera Lesezeichen, und Verzeichnisse. Falls ein Dateityp nicht erkannt wird, (zum Beispiel weil er keine bekannte HTML\-Dateierweiterung besitzt, und der Inhalt nicht nach HTML aussieht), wird der Inhalt als nicht analysierbar angesehen.
 .IP 3. 3
-The URL content must be retrievable. This is usually the case except
-for example mailto: or unknown URL types.
+Der URL\-Inhalt muss ladbar sein. Dies ist normalerweise der Fall, mit Ausnahme von mailto: oder unbekannten URL\-Typen.
 .IP 4. 3
-The maximum recursion level must not be exceeded. It is configured
-with the \fI\%\-\-recursion\-level\fP option and is unlimited per default.
+Die maximale Rekursionstiefe darf nicht überschritten werden. Diese wird mit der Option \fI\%\-\-recursion\-level\fP konfiguriert und ist standardmäßig nicht limitiert.
 .IP 5. 3
-It must not match the ignored URL list. This is controlled with the
-\fI\%\-\-ignore\-url\fP option.
+Die URL darf nicht in der Liste von ignorierten URLs sein. Die ignorierten URLs werden mit der Option \fI\%\-\-ignore\-url\fP konfiguriert.
 .IP 6. 3
-The Robots Exclusion Protocol must allow links in the URL to be
-followed recursively. This is checked by searching for a "nofollow"
-directive in the HTML header data.
+Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in der URL rekursiv verfolgt werden können. Dies wird geprüft, indem in den HTML Kopfdaten nach der "nofollow"\-Direktive gesucht wird.
 .UNINDENT
 .sp
 Beachten Sie, dass die Verzeichnisrekursion alle Dateien in diesem Verzeichnis liest, nicht nur eine Untermenge wie bspw. \fBindex.htm\fP\&.
