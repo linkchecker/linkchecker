@@ -1,0 +1,9 @@
+{% extends "!layout.html" %}
+
+  {% block menu %}
+    {{ super() }}
+    <a href="{{ pathto('genindex') }}">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  {% endblock %}

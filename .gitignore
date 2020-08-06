@@ -41,3 +41,6 @@ Changelog.linkchecker*
 tests/checker/data/https_cert.pem
 tests/checker/data/https_key.pem
 coverage.xml
+doc/html
+doc/src/_build
+doc/src/code/linkcheck

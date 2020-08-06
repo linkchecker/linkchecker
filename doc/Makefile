@@ -1,29 +1,16 @@
-HTMLDIR:=web/media
-MANHTMLFILES:= \
-	$(HTMLDIR)/man1/linkchecker.1.html \
-	$(HTMLDIR)/man5/linkcheckerrc.5.html
-
 MANFILES:=linkchecker.1 linkcheckerrc.5
 LOCALES:=en de
 
 all:
 
+code: clean
+	PYTHONPATH=.. sphinx-autogen src/code/index.rst
+
+html:
+	make -C src html
+
 po4a:
 	po4a --localized-charset=UTF-8 po4a.conf
-
-man:	$(MANHTMLFILES)
-
-$(HTMLDIR)/man1/linkchecker.1.html: en/linkchecker.1
-	mandoc -Thtml $< > $@
-	@sed -i -e \
-	  's:<b>linkcheckerrc</b>(5):<a href="../man5/linkcheckerrc.5.html" class="Xr">linkcheckerrc(5)</a>:g' \
-	  $(HTMLDIR)/man1/linkchecker.1.html
-
-$(HTMLDIR)/man5/linkcheckerrc.5.html: en/linkcheckerrc.5
-	mandoc -Thtml $< > $@
-	@sed -i -e \
-	  's:<b>linkchecker</b>(1):<a href="../man1/linkchecker.1.html" class="Xr">linkchecker(1)</a>:g' \
-	  $(HTMLDIR)/man5/linkcheckerrc.5.html
 
 # check all makefiles for formatting warnings
 check:
@@ -37,7 +24,8 @@ check:
 	done
 
 clean:
-	rm $(MANHTMLFILES)
+	rm -rf src/_build; \
+	rm -rf src/code/linkcheck; \
+	rm -rf html
 
-.PHONY: po4a man check clean
-
+.PHONY: po4a check clean html
