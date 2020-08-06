@@ -40,6 +40,19 @@ html_theme_options = {
 # only use :manpage: within man pages
 manpages_url = '{page}.html'
 
+# -- Options for man output -------------------------------------------------
+
+man_pages = [
+    (
+     'man/linkchecker', 'linkchecker',
+     'command line client to check HTML documents and websites for broken links',
+     ['Bastian Kleineidam <bastian.kleineidam@web.de>'], 1),
+    (
+     'man/linkcheckerrc', 'linkcheckerrc',
+     'configuration file for LinkChecker',
+     ['Bastian Kleineidam <bastian.kleineidam@web.de>'], 5),
+]
+
 # -- Extension configuration -------------------------------------------------
 
 autoclass_content = 'both'

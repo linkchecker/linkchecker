@@ -4,6 +4,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
+LANGUAGE      = en
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -12,7 +13,10 @@ help:
 html:
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../html $(SPHINXOPTS) $(O)
 
-.PHONY: help html Makefile
+man:
+	@$(SPHINXBUILD) -b man "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../man/$(LANGUAGE) $(SPHINXOPTS) $(O)
+
+.PHONY: help html man Makefile
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

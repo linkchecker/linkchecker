@@ -42,8 +42,7 @@ recursive-include doc                   \
     *.txt                               \
     *.yml                               \
     Makefile                            \
-    linkcheckerrc_*                     \
-    po4a.conf
+    linkcheckerrc_*
 recursive-include po                    \
     *.mo                                \
     *.po                                \
