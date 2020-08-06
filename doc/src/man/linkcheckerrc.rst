@@ -472,13 +472,13 @@ daemon must be installed.
 PdfParser
 ^^^^^^^^^
 
-Parse PDF files for URLs to check. Needs the **pdfminer** Python package
+Parse PDF files for URLs to check. Needs the :pypi:`pdfminer` Python package
 installed.
 
 WordParser
 ^^^^^^^^^^
 
-Parse Word files for URLs to check. Needs the **pywin32** Python
+Parse Word files for URLs to check. Needs the :pypi:`pywin32` Python
 extension installed.
 
 WARNINGS
