@@ -1,0 +1,2440 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) 2011 Free Software Foundation, Inc.
+# Bastian Kleineidam <calvin@users.sourceforge.net>, 2005.
+# Chris Mayo <aklhfex@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: linkchecker 3.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-05 19:32+0100\n"
+"PO-Revision-Date: 2020-08-05 19:35+0100\n"
+"Last-Translator: Chris Mayo <aklhfex@gmail.com>\n"
+"Language-Team: German - Germany <>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 3.36.0\n"
+
+# type: TH
+#: ../../src/man/linkchecker.rst:4
+msgid "linkchecker"
+msgstr "linkchecker"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:7
+msgid "SYNOPSIS"
+msgstr "SYNTAX"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:9
+msgid "**linkchecker** [*options*] [*file-or-url*]..."
+msgstr "**linkchecker** [*Optionen*] [*Datei-oder-URL*]..."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:12 ../../src/man/linkcheckerrc.rst:7
+msgid "DESCRIPTION"
+msgstr "BESCHREIBUNG"
+
+# type: TH
+#: ../../src/man/linkchecker.rst:14
+msgid "LinkChecker features"
+msgstr "LinkChecker beinhaltet"
+
+#: ../../src/man/linkchecker.rst:16
+msgid "recursive and multithreaded checking"
+msgstr "rekursives Prüfen und Multithreading"
+
+#: ../../src/man/linkchecker.rst:17
+msgid ""
+"output in colored or normal text, HTML, SQL, CSV, XML or a sitemap graph in "
+"different formats"
+msgstr ""
+"Ausgabe als farbigen oder normalen Text, HTML, SQL, CSV, XML oder einen "
+"Sitemap-Graphen in verschiedenen Formaten"
+
+#: ../../src/man/linkchecker.rst:19
+msgid ""
+"support for HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and local "
+"file links"
+msgstr ""
+"Unterstützung von HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet und "
+"Verknüpfungen auf lokale Dateien"
+
+#: ../../src/man/linkchecker.rst:21
+msgid "restriction of link checking with URL filters"
+msgstr "Einschränkung der Linküberprüfung mit URL-Filter"
+
+#: ../../src/man/linkchecker.rst:22
+msgid "proxy support"
+msgstr "Proxy-Unterstützung"
+
+#: ../../src/man/linkchecker.rst:23
+msgid "username/password authorization for HTTP, FTP and Telnet"
+msgstr "Benutzer/Passwort Authorisierung für HTTP, FTP und Telnet"
+
+#: ../../src/man/linkchecker.rst:24
+msgid "support for robots.txt exclusion protocol"
+msgstr "Unterstützung des robots.txt Protokolls"
+
+#: ../../src/man/linkchecker.rst:25
+msgid "support for Cookies"
+msgstr "Unterstützung für Cookies"
+
+#: ../../src/man/linkchecker.rst:26
+msgid "support for HTML5"
+msgstr "Unterstützung für HTML5"
+
+#: ../../src/man/linkchecker.rst:27
+msgid "HTML and CSS syntax check"
+msgstr "HTML- und CSS-Syntaxprüfung"
+
+#: ../../src/man/linkchecker.rst:28
+msgid "Antivirus check"
+msgstr "Antivirusprüfung"
+
+#: ../../src/man/linkchecker.rst:29
+msgid "a command line and web interface"
+msgstr "ein Kommandozeilenprogramm und web interface"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:32
+msgid "EXAMPLES"
+msgstr "BEISPIELE"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:34
+msgid "The most common use checks the given domain recursively:"
+msgstr "Der häufigste Gebrauchsfall prüft die angegebene Domäne rekursiv:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:40
+msgid ""
+"Beware that this checks the whole site which can have thousands of URLs. Use "
+"the :option:`-r` option to restrict the recursion depth."
+msgstr ""
+"Beachten Sie dass dies die komplette Domäne überprüft, welche aus mehreren "
+"tausend URLs bestehen kann. Benutzen Sie die Option :option:`-r`, um die "
+"Rekursionstiefe zu beschränken."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:43
+msgid ""
+"Don't check URLs with **/secret** in its name. All other links are checked "
+"as usual:"
+msgstr ""
+"Prüfe keine **/secret** URLs. Alle anderen Verknüpfungen werden wie üblich "
+"geprüft:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:50
+msgid "Checking a local HTML file on Unix:"
+msgstr "Überprüfung einer lokalen HTML Datei unter Unix:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:56
+msgid "Checking a local HTML file on Windows:"
+msgstr "Überprüfung einer lokalen HTML Datei unter Windows:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:62
+msgid ""
+"You can skip the **http://** url part if the domain starts with **www.**:"
+msgstr ""
+"Sie können den **http://** URL Anteil weglassen wenn die Domäne mit **www.** "
+"beginnt:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:69
+msgid ""
+"You can skip the **ftp://** url part if the domain starts with **ftp.**:"
+msgstr ""
+"Sie können den **ftp://** URL Anteil weglassen wenn die Domäne mit **ftp.** "
+"beginnt:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:75
+msgid "Generate a sitemap graph and convert it with the graphviz dot utility:"
+msgstr ""
+"Erzeuge einen Sitemap Graphen und konvertiere ihn mit dem graphviz dot "
+"Programm:"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:82
+msgid "OPTIONS"
+msgstr "OPTIONEN"
+
+# type: SS
+#: ../../src/man/linkchecker.rst:85
+msgid "General options"
+msgstr "Allgemeine Optionen"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:89
+msgid ""
+"Use FILENAME as configuration file. By default LinkChecker uses ~/."
+"linkchecker/linkcheckerrc."
+msgstr ""
+"Benutze DATEINAME als Konfigurationsdatei. Standardmäßig benutzt LinkChecker "
+"~/.linkchecker/linkcheckerrc."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:94
+msgid "Help me! Print usage information for this program."
+msgstr "Hilfe! Gebe Gebrauchsanweisung für dieses Programm aus."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:98
+msgid "Read list of white-space separated URLs to check from stdin."
+msgstr ""
+"Lese Liste von URLs zum Prüfen von der Standardeingabe, getrennt durch "
+"Leerzeichen."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:102
+msgid ""
+"Generate no more than the given number of threads. Default number of threads "
+"is 10. To disable threading specify a non-positive number."
+msgstr ""
+"Generiere nicht mehr als die angegebene Anzahl von Threads. Die "
+"Standardanzahl von Threads ist 10. Um Threads zu deaktivieren, geben Sie "
+"eine nicht positive Nummer an."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:107
+msgid "Print version and exit."
+msgstr "Gebe die Version aus und beende das Programm."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:111
+msgid "Print available check plugins and exit."
+msgstr ""
+
+# type: SS
+#: ../../src/man/linkchecker.rst:114
+msgid "Output options"
+msgstr "Ausgabeoptionen"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:118
+msgid ""
+"Print debugging output for the given logger. Available loggers are cmdline, "
+"checking, cache, dns, plugin and all. Specifying all is an alias for "
+"specifying all available loggers. The option can be given multiple times to "
+"debug with more than one logger. For accurate results, threading will be "
+"disabled during debug runs."
+msgstr ""
+"Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind "
+"cmdline, checking, cache, dns, plugin und all. Die Angabe all ist ein "
+"Synonym für alle verfügbaren Logger. Diese Option kann mehrmals angegeben "
+"werden, um mit mehr als einem Logger zu testen. Um akkurate Ergebnisse zu "
+"erzielen, werden Threads deaktiviert."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:127
+msgid ""
+"Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for "
+"blacklist output, or FILENAME if specified. The ENCODING specifies the "
+"output encoding, the default is that of your locale. Valid encodings are "
+"listed at https://docs.python.org/library/codecs.html#standard-encodings. "
+"The FILENAME and ENCODING parts of the none output type will be ignored, "
+"else if the file already exists, it will be overwritten. You can specify "
+"this option more than once. Valid file output TYPEs are text, html, sql, "
+"csv, gml, dot, xml, sitemap, none or blacklist. Default is no file output. "
+"The various output types are documented below. Note that you can suppress "
+"all console output with the option :option:`-o` *none*."
+msgstr ""
+"Ausgabe in eine Datei namens linkchecker-out.TYP, $HOME/.linkchecker/"
+"blacklist bei blacklist Ausgabe, oder DATEINAME falls angegeben. Das "
+"ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen "
+"Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter https://docs."
+"python.org/library/codecs.html#standard-encodings. Der DATEINAME und "
+"ENKODIERUNG Teil wird beim Ausgabetyp none ignoriert, ansonsten wird die "
+"Datei überschrieben falls sie existiert. Sie können diese Option mehr als "
+"einmal verwenden. Gültige Ausgabetypen sind text, html, sql, csv, gml, dot, "
+"xml, sitemap, none oder blacklist. Standard ist keine Dateiausgabe. Die "
+"unterschiedlichen Ausgabetypen sind weiter unten dokumentiert. Beachten Sie, "
+"dass Sie mit der Option :option:`-o` *none* jegliche Ausgaben auf der "
+"Konsole verhindern können."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:143
+msgid "Do not print check status messages."
+msgstr "Gebe keine Statusmeldungen aus."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:147
+msgid "Don't log warnings. Default is to log warnings."
+msgstr "Gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:151
+msgid ""
+"Specify output type as text, html, sql, csv, gml, dot, xml, sitemap, none or "
+"blacklist. Default type is text. The various output types are documented "
+"below. The ENCODING specifies the output encoding, the default is that of "
+"your locale. Valid encodings are listed at https://docs.python.org/library/"
+"codecs.html#standard-encodings."
+msgstr ""
+"Gib Ausgabetyp als text, html, sql, csv, gml, dot, xml, sitemap, none oder "
+"blacklist an. Stadard Typ ist text. Die verschiedenen Ausgabetypen sind "
+"unten dokumentiert. Das ENCODING gibt die Ausgabekodierung an. Der Standard "
+"ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind "
+"aufgelistet unter https://docs.python.org/library/codecs.html#standard-"
+"encodings."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:161
+msgid ""
+"Quiet operation, an alias for :option:`-o` *none*. This is only useful with :"
+"option:`-F`."
+msgstr ""
+"Keine Ausgabe, ein Alias für :option:`-o` *none*. Dies ist nur in Verbindung "
+"mit :option:`-F` nützlich."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:166
+msgid "Log all checked URLs. Default is to log only errors and warnings."
+msgstr ""
+"Gebe alle geprüften URLs aus. Standard ist es, nur fehlerhafte URLs und "
+"Warnungen auszugeben."
+
+#: ../../src/man/linkchecker.rst:170
+msgid ""
+"Define a regular expression which prints a warning if it matches any content "
+"of the checked link. This applies only to valid pages, so we can get their "
+"content. Use this to check for pages that contain some form of error, for "
+"example \"This page has moved\" or \"Oracle Application error\". Note that "
+"multiple values can be combined in the regular expression, for example "
+"\"(This page has moved|Oracle Application error)\". See section `REGULAR "
+"EXPRESSIONS`_ for more info."
+msgstr ""
+"Definieren Sie einen regulären Ausdruck der eine Warnung ausgibt falls er "
+"auf den Inhalt einer geprüften URL zutrifft. Dies gilt nur für gültige "
+"Seiten deren Inhalt wir bekommen können. Benutzen Sie dies, um nach Seiten "
+"zu suchen, welche bestimmte Fehler enthalten, zum Beispiel \\\"Diese Seite "
+"ist umgezogen\\\" oder \\\"Oracle \"Applikationsfehler\\\". Man beachte, "
+"dass mehrere Werte in dem regulären Ausdruck kombiniert werden können, zum "
+"Beispiel \\\"(Diese Seite ist umgezogen|Oracle Applikationsfehler)\\\". "
+"Siehe Abschnitt `REGULAR EXPRESSIONS`_ für weitere Infos."
+
+# type: SS
+#: ../../src/man/linkchecker.rst:180
+msgid "Checking options"
+msgstr "Optionen zum Prüfen"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:184
+msgid ""
+"Read a file with initial cookie data. The cookie data format is explained "
+"below."
+msgstr ""
+"Lese eine Datei mit Cookie-Daten. Das Cookie Datenformat wird weiter unten "
+"erklärt."
+
+#: ../../src/man/linkchecker.rst:189
+msgid "Check external URLs."
+msgstr ""
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:193
+msgid ""
+"URLs matching the given regular expression will be ignored and not checked. "
+"This option can be given multiple times. See section `REGULAR EXPRESSIONS`_ "
+"for more info."
+msgstr ""
+"URLs welche dem angegebenen regulären Ausdruck entsprechen werden ignoriert "
+"und nicht geprüft. Diese Option kann mehrmals angegeben werden. Siehe "
+"Abschnitt `REGULAR EXPRESSIONS`_ für weitere Infos."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:200
+msgid ""
+"Specify an NNTP server for news: links. Default is the environment variable :"
+"envvar:`NNTP_SERVER`. If no host is given, only the syntax of the link is "
+"checked."
+msgstr ""
+"Gibt ein NNTP Rechner für news: Links. Standard ist die Umgebungsvariable :"
+"envvar:`NNTP_SERVER`. Falls kein Rechner angegeben ist, wird lediglich auf "
+"korrekte Syntax des Links geprüft."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:206
+msgid ""
+"Check but do not recurse into URLs matching the given regular expression. "
+"This option can be given multiple times. See section `REGULAR EXPRESSIONS`_ "
+"for more info."
+msgstr ""
+"Prüfe URLs die auf den regulären Ausdruck zutreffen, aber führe keine "
+"Rekursion durch. Diese Option kann mehrmals angegeben werden. Siehe "
+"Abschnitt `REGULAR EXPRESSIONS`_ für weitere Infos."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:213
+msgid ""
+"Read a password from console and use it for HTTP and FTP authorization. For "
+"FTP the default password is anonymous@. For HTTP there is no default "
+"password. See also :option:`-u`."
+msgstr ""
+"Liest ein Passwort von der Kommandozeile und verwende es für HTTP und FTP "
+"Autorisierung. Für FTP ist das Standardpasswort anonymous@. Für HTTP gibt es "
+"kein Standardpasswort. Siehe auch :option:`-u`."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:219
+msgid ""
+"Check recursively all links up to given depth. A negative depth will enable "
+"infinite recursion. Default depth is infinite."
+msgstr ""
+"Prüfe rekursiv alle URLs bis zu der angegebenen Tiefe. Eine negative Tiefe "
+"bewirkt unendliche Rekursion. Standard Tiefe ist unendlich."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:224
+msgid ""
+"Set the timeout for connection attempts in seconds. The default timeout is "
+"60 seconds."
+msgstr ""
+"Setze den Timeout für TCP-Verbindungen in Sekunden. Der Standard Timeout ist "
+"60 Sekunden."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:229
+msgid ""
+"Try the given username for HTTP and FTP authorization. For FTP the default "
+"username is anonymous. For HTTP there is no default username. See also :"
+"option:`-p`."
+msgstr ""
+"Verwende den angegebenen Benutzernamen für HTTP und FTP Autorisierung. Für "
+"FTP ist der Standardname anonymous. Für HTTP gibt es keinen "
+"Standardnamen. Siehe auch :option:`-p`."
+
+#: ../../src/man/linkchecker.rst:235
+msgid ""
+"Specify the User-Agent string to send to the HTTP server, for example "
+"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the current "
+"version of LinkChecker."
+msgstr ""
+"Gibt den User-Agent an, der zu HTTP-Servern geschickt wird, z.B. "
+"\"Mozilla/4.0\". Der Standard ist \"LinkChecker/X.Y\", wobei X.Y die "
+"aktuelle Version von LinkChecker ist."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:240
+msgid "CONFIGURATION FILES"
+msgstr "KONFIGURATIONSDATEIEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:242
+msgid ""
+"Configuration files can specify all options above. They can also specify "
+"some options that cannot be set on the command line. See :manpage:"
+"`linkcheckerrc(5)` for more info."
+msgstr ""
+"Konfigurationsdateien können alle obigen Optionen enthalten. Sie können "
+"zudem Optionen enthalten, welche nicht auf der Kommandozeile gesetzt werden "
+"können. Siehe :manpage:`linkcheckerrc(5)` für mehr Informationen."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:247
+msgid "OUTPUT TYPES"
+msgstr "AUSGABETYPEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:249
+msgid ""
+"Note that by default only errors and warnings are logged. You should use the "
+"option :option:`--verbose` to get the complete URL list, especially when "
+"outputting a sitemap graph format."
+msgstr ""
+"Beachten Sie, dass standardmäßig nur Fehler und Warnungen protokolliert "
+"werden. Sie sollten die :option:`--verbose` Option benutzen, um eine "
+"komplette URL Liste zu erhalten, besonders bei Ausgabe eines Sitemap-Graphen."
+
+#: ../../src/man/linkchecker.rst:253
+msgid "**text**"
+msgstr "**text**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:254
+msgid "Standard text logger, logging URLs in keyword: argument fashion."
+msgstr "Standard Textausgabe in \"Schlüssel: Wert\"-Form."
+
+#: ../../src/man/linkchecker.rst:257
+msgid "**html**"
+msgstr "**html**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:256
+msgid ""
+"Log URLs in keyword: argument fashion, formatted as HTML. Additionally has "
+"links to the referenced pages. Invalid URLs have HTML and CSS syntax check "
+"links appended."
+msgstr ""
+"Gebe URLs in \"Schlüssel: Wert\"-Form als HTML formatiert aus. Besitzt zudem "
+"Verknüpfungen auf die referenzierten Seiten. Ungültige URLs haben "
+"Verknüpfungen zur HTML und CSS Syntaxprüfung angehängt."
+
+#: ../../src/man/linkchecker.rst:259
+msgid "**csv**"
+msgstr "**csv**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:260
+msgid "Log check result in CSV format with one URL per line."
+msgstr "Gebe Prüfresultat in CSV-Format aus mit einer URL pro Zeile."
+
+#: ../../src/man/linkchecker.rst:262
+msgid "**gml**"
+msgstr "**gml**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:262
+msgid "Log parent-child relations between linked URLs as a GML sitemap graph."
+msgstr ""
+"Gebe Vater-Kind Beziehungen zwischen verknüpften URLs als GML Graphen aus."
+
+#: ../../src/man/linkchecker.rst:265
+msgid "**dot**"
+msgstr "**dot**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:265
+msgid "Log parent-child relations between linked URLs as a DOT sitemap graph."
+msgstr ""
+"Gebe Vater-Kind Beziehungen zwischen verknüpften URLs als DOT Graphen aus."
+
+#: ../../src/man/linkchecker.rst:267
+msgid "**gxml**"
+msgstr "**gxml**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:268
+msgid "Log check result as a GraphXML sitemap graph."
+msgstr "Gebe Prüfresultat als GraphXML-Datei aus."
+
+#: ../../src/man/linkchecker.rst:269
+msgid "**xml**"
+msgstr "**xml**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:270
+msgid "Log check result as machine-readable XML."
+msgstr "Gebe Prüfresultat als maschinenlesbare XML-Datei aus."
+
+#: ../../src/man/linkchecker.rst:272
+msgid "**sitemap**"
+msgstr "**sitemap**"
+
+#: ../../src/man/linkchecker.rst:272
+msgid ""
+"Log check result as an XML sitemap whose protocol is documented at https://"
+"www.sitemaps.org/protocol.html."
+msgstr ""
+"Protokolliere Prüfergebnisse als XML Sitemap dessen Format unter https://www."
+"sitemaps.org/protocol.html dokumentiert ist."
+
+#: ../../src/man/linkchecker.rst:275
+msgid "**sql**"
+msgstr "**sql**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:275
+msgid ""
+"Log check result as SQL script with INSERT commands. An example script to "
+"create the initial SQL table is included as create.sql."
+msgstr ""
+"Gebe Prüfresultat als SQL Skript mit INSERT Befehlen aus. Ein "
+"Beispielskript, um die initiale SQL Tabelle zu erstellen ist unter create."
+"sql zu finden."
+
+# type: TP
+#: ../../src/man/linkchecker.rst:279
+msgid "**blacklist**"
+msgstr "**blacklist**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:278
+msgid ""
+"Suitable for cron jobs. Logs the check result into a file **~/.linkchecker/"
+"blacklist** which only contains entries with invalid URLs and the number of "
+"times they have failed."
+msgstr ""
+"Für Cronjobs geeignet. Gibt das Prüfergebnis in eine Datei **~/.linkchecker/"
+"blacklist** aus, welche nur Einträge mit fehlerhaften URLs und die Anzahl "
+"der Fehlversuche enthält."
+
+#: ../../src/man/linkchecker.rst:282
+msgid "**none**"
+msgstr "**none**"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:282
+msgid "Logs nothing. Suitable for debugging or checking the exit code."
+msgstr "Gibt nichts aus. Für Debugging oder Prüfen des Rückgabewerts geeignet."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:285
+msgid "REGULAR EXPRESSIONS"
+msgstr "REGULÄRE AUSDRÜCKE"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:287
+msgid ""
+"LinkChecker accepts Python regular expressions. See https://docs.python.org/"
+"howto/regex.html for an introduction. An addition is that a leading "
+"exclamation mark negates the regular expression."
+msgstr ""
+"LinkChecker akzeptiert Pythons reguläre Ausdrücke. Siehe https://docs.python."
+"org/howto/regex.html für eine Einführung. Eine Ergänzung ist, dass ein "
+"regulärer Ausdruck negiert wird falls er mit einem Ausrufezeichen beginnt."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:293
+msgid "COOKIE FILES"
+msgstr "COOKIE-DATEIEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:295
+msgid ""
+"A cookie file contains standard HTTP header (RFC 2616) data with the "
+"following possible names:"
+msgstr ""
+"Eine Cookie-Datei enthält Standard HTTP-Header (RFC 2616) mit den folgenden "
+"möglichen Namen:"
+
+# type: TP
+#: ../../src/man/linkchecker.rst:298
+msgid "**Host** (required)"
+msgstr "**Host** (erforderlich)"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:299
+msgid "Sets the domain the cookies are valid for."
+msgstr "Setzt die Domäne für die die Cookies gültig sind."
+
+# type: TP
+#: ../../src/man/linkchecker.rst:300
+msgid "**Path** (optional)"
+msgstr "**Path** (optional)"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:301
+msgid "Gives the path the cookies are value for; default path is **/**."
+msgstr "Gibt den Pfad für den die Cookies gültig sind; Standardpfad ist **/**."
+
+# type: TP
+#: ../../src/man/linkchecker.rst:303
+msgid "**Set-cookie** (required)"
+msgstr "**Set-cookie** (erforderlich)"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:303
+msgid "Set cookie name/value. Can be given more than once."
+msgstr "Setzt den Cookie Name/Wert. Kann mehrmals angegeben werden."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:305
+msgid ""
+"Multiple entries are separated by a blank line. The example below will send "
+"two cookies to all URLs starting with **http://example.com/hello/** and one "
+"to all URLs starting with **https://example.org/**:"
+msgstr ""
+"Mehrere Einträge sind durch eine Leerzeile zu trennen. Das untige Beispiel "
+"sendet zwei Cookies zu allen URLs die mit **http://example.org/hello/** "
+"beginnen, und eins zu allen URLs die mit **https://example.org** beginnen:"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:323
+msgid "PROXY SUPPORT"
+msgstr "PROXY UNTERSTÜTZUNG"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:325
+msgid ""
+"To use a proxy on Unix or Windows set the :envvar:`http_proxy`, :envvar:"
+"`https_proxy` or :envvar:`ftp_proxy` environment variables to the proxy URL. "
+"The URL should be of the form **http://**\\ [*user*\\ **:**\\ *pass*\\ "
+"**@**]\\ *host*\\ [**:**\\ *port*]. LinkChecker also detects manual proxy "
+"settings of Internet Explorer under Windows systems, and GNOME or KDE on "
+"Linux systems. On a Mac use the Internet Config to select a proxy. You can "
+"also set a comma-separated domain list in the :envvar:`no_proxy` environment "
+"variables to ignore any proxy settings for these domains."
+msgstr ""
+"Um einen Proxy unter Unix oder Windows zu benutzen, setzen Sie die :envvar:"
+"`http_proxy`, :envvar:`https_proxy` oder :envvar:`ftp_proxy` "
+"Umgebungsvariablen auf die Proxy URL. Die URL sollte die Form **http://**\\ "
+"[*user*\\ **:**\\ *pass*\\ **@**]\\ *host*\\ [**:**\\ *port*] besitzen. "
+"LinkChecker erkennt auch die Proxy-Einstellungen des Internet Explorers auf "
+"einem Windows-System, und GNOME oder KDE auf Linux Systemen. Auf einem Mac "
+"benutzen Sie die Internet Konfiguration. Sie können eine komma-separierte "
+"Liste von Domainnamen in der :envvar:`no_proxy` Umgebungsvariable setzen, um "
+"alle Proxies für diese Domainnamen zu ignorieren."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:335
+msgid "Setting a HTTP proxy on Unix for example looks like this:"
+msgstr "Einen HTTP-Proxy unter Unix anzugeben sieht beispielsweise so aus:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:341
+msgid "Proxy authentication is also supported:"
+msgstr "Proxy-Authentifizierung wird ebenfalls unterstützt:"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:347
+msgid "Setting a proxy on the Windows command prompt:"
+msgstr "Setzen eines Proxies unter der Windows Befehlszeile:"
+
+#: ../../src/man/linkchecker.rst:354
+msgid "PERFORMED CHECKS"
+msgstr "Durchgeführte Prüfungen"
+
+#: ../../src/man/linkchecker.rst:356
+msgid ""
+"All URLs have to pass a preliminary syntax test. Minor quoting mistakes will "
+"issue a warning, all other invalid syntax issues are errors. After the "
+"syntax check passes, the URL is queued for connection checking. All "
+"connection check types are described below."
+msgstr ""
+"Alle URLs müssen einen ersten Syntaxtest bestehen. Kleine Kodierungsfehler "
+"ergeben eine Warnung, jede andere ungültige Syntaxfehler sind Fehler. Nach "
+"dem Bestehen des Syntaxtests wird die URL in die Schlange zum "
+"Verbindungstest gestellt. Alle Verbindungstests sind weiter unten "
+"beschrieben."
+
+#: ../../src/man/linkchecker.rst:367
+msgid "HTTP links (**http:**, **https:**)"
+msgstr "HTTP Verknüpfungen (**http:**, **https:**)"
+
+#: ../../src/man/linkchecker.rst:362
+msgid ""
+"After connecting to the given HTTP server the given path or query is "
+"requested. All redirections are followed, and if user/password is given it "
+"will be used as authorization when necessary. All final HTTP status codes "
+"other than 2xx are errors."
+msgstr ""
+"Nach Verbinden zu dem gegebenen HTTP-Server wird der eingegebene Pfad oder "
+"Query angefordert. Alle Umleitungen werden verfolgt, und falls ein Benutzer/"
+"Passwort angegeben wurde werden diese falls notwendig als Authorisierung "
+"benutzt. Alle finalen HTTP Statuscodes, die nicht dem Muster 2xx "
+"entsprechen, werden als Fehler ausgegeben."
+
+#: ../../src/man/linkchecker.rst:367
+msgid "HTML page contents are checked for recursion."
+msgstr "Der Inhalt von HTML-Seiten wird rekursiv geprüft."
+
+#: ../../src/man/linkchecker.rst:374
+msgid "Local files (**file:**)"
+msgstr "Lokale Dateien (**file:**)"
+
+#: ../../src/man/linkchecker.rst:370
+msgid ""
+"A regular, readable file that can be opened is valid. A readable directory "
+"is also valid. All other files, for example device files, unreadable or non-"
+"existing files are errors."
+msgstr ""
+"Eine reguläre, lesbare Datei die geöffnet werden kann ist gültig. Ein "
+"lesbares Verzeichnis ist ebenfalls gültig. Alle anderen Dateien, zum "
+"Beispiel Gerätedateien, unlesbare oder nicht existente Dateien ergeben einen "
+"Fehler."
+
+#: ../../src/man/linkchecker.rst:374
+msgid "HTML or other parseable file contents are checked for recursion."
+msgstr "HTML- oder andere untersuchbare Dateiinhalte werden rekursiv geprüft."
+
+#: ../../src/man/linkchecker.rst:389
+msgid "Mail links (**mailto:**)"
+msgstr "Mail-Links (**mailto:**)"
+
+#: ../../src/man/linkchecker.rst:377
+msgid ""
+"A mailto: link eventually resolves to a list of email addresses. If one "
+"address fails, the whole list will fail. For each mail address we check the "
+"following things:"
+msgstr ""
+"Ein mailto:-Link ergibt eine Liste von E-Mail-Adressen. Falls eine Adresse "
+"fehlerhaft ist, wird die ganze Liste als fehlerhaft angesehen. Für jede E-"
+"Mail-Adresse werden die folgenden Dinge geprüft:"
+
+#: ../../src/man/linkchecker.rst:381
+msgid "Check the adress syntax, both of the part before and after the @ sign."
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:383
+msgid "Look up the MX DNS records. If we found no MX record, print an error."
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:385
+msgid ""
+"Check if one of the mail hosts accept an SMTP connection. Check hosts with "
+"higher priority first. If no host accepts SMTP, we print a warning."
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:388
+msgid ""
+"Try to verify the address with the VRFY command. If we got an answer, print "
+"the verified address as an info."
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:398
+msgid "FTP links (**ftp:**)"
+msgstr "FTP-Links (**ftp:**)"
+
+#: ../../src/man/linkchecker.rst:392
+msgid "For FTP links we do:"
+msgstr "Für FTP-Links wird Folgendes geprüft:"
+
+#: ../../src/man/linkchecker.rst:394
+msgid "connect to the specified host"
+msgstr "1) Eine Verbindung zum angegeben Rechner wird aufgebaut"
+
+#: ../../src/man/linkchecker.rst:395
+msgid ""
+"try to login with the given user and password. The default user is "
+"**anonymous**, the default password is **anonymous@**."
+msgstr ""
+"2) Versuche, sich mit dem gegebenen Nutzer und Passwort anzumelden. Der "
+"Standardbenutzer ist ``anonymous``, das Standardpasswort ist ``anonymous@``."
+
+#: ../../src/man/linkchecker.rst:397
+msgid "try to change to the given directory"
+msgstr "3) Versuche, in das angegebene Verzeichnis zu wechseln"
+
+#: ../../src/man/linkchecker.rst:398
+msgid "list the file with the NLST command"
+msgstr "4) Liste die Dateien im Verzeichnis auf mit dem NLST-Befehl"
+
+#: ../../src/man/linkchecker.rst:402
+msgid "Telnet links (**telnet:**)"
+msgstr "Telnet links (**telnet:**)"
+
+#: ../../src/man/linkchecker.rst:401
+msgid ""
+"We try to connect and if user/password are given, login to the given telnet "
+"server."
+msgstr ""
+"Versuche, zu dem angegeben Telnetrechner zu verginden und falls Benutzer/"
+"Passwort angegeben sind, wird versucht, sich anzumelden."
+
+#: ../../src/man/linkchecker.rst:406
+msgid "NNTP links (**news:**, **snews:**, **nntp**)"
+msgstr "NNTP links (**news:**, **snews:**, **nntp**)"
+
+#: ../../src/man/linkchecker.rst:405
+msgid ""
+"We try to connect to the given NNTP server. If a news group or article is "
+"specified, try to request it from the server."
+msgstr ""
+"Versuche, zu dem angegebenen NNTP-Rechner eine Verbindung aufzubaucne. Falls "
+"eine Nachrichtengruppe oder ein bestimmter Artikel angegeben ist, wird "
+"versucht, diese Gruppe oder diesen Artikel vom Rechner anzufragen."
+
+#: ../../src/man/linkchecker.rst:415
+msgid "Unsupported links (**javascript:**, etc.)"
+msgstr "Nicht unterstützte Links (**javascript:**, etc.)"
+
+#: ../../src/man/linkchecker.rst:409
+msgid ""
+"An unsupported link will only print a warning. No further checking will be "
+"made."
+msgstr ""
+"Ein nicht unterstützter Link wird nur eine Warnung ausgeben. Weitere "
+"Prüfungen werden nicht durchgeführt."
+
+#: ../../src/man/linkchecker.rst:412
+msgid ""
+"The complete list of recognized, but unsupported links can be found in the "
+"`linkcheck/checker/unknownurl.py <https://github.com/linkchecker/linkchecker/"
+"blob/master/linkcheck/checker/unknownurl.py>`__ source file. The most "
+"prominent of them should be JavaScript links."
+msgstr ""
+"Die komplette Liste von erkannten, aber nicht unterstützten Links ist in der "
+"Quelldatei `linkcheck/checker/unknownurl.py <https://github.com/linkchecker/"
+"linkchecker/blob/master/linkcheck/checker/unknownurl.py>`__. Die "
+"bekanntesten davon dürften JavaScript-Links sein."
+
+#: ../../src/man/linkchecker.rst:418 ../../src/man/linkcheckerrc.rst:400
+msgid "PLUGINS"
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:420
+msgid ""
+"There are two plugin types: connection and content plugins. Connection "
+"plugins are run after a successful connection to the URL host. Content "
+"plugins are run if the URL type has content (mailto: URLs have no content "
+"for example) and if the check is not forbidden (ie. by HTTP robots.txt). Use "
+"the option :option:`--list-plugins` for a list of plugins and their "
+"documentation. All plugins are enabled via the :manpage:`linkcheckerrc(5)` "
+"configuration file."
+msgstr ""
+
+# type: SH
+#: ../../src/man/linkchecker.rst:430
+msgid "RECURSION"
+msgstr "Rekursion"
+
+#: ../../src/man/linkchecker.rst:432
+msgid ""
+"Before descending recursively into a URL, it has to fulfill several "
+"conditions. They are checked in this order:"
+msgstr ""
+"Bevor eine URL rekursiv geprüft wird, hat diese mehrere Bedingungen zu "
+"erfüllen. Diese werden in folgender Reihenfolge geprüft:"
+
+#: ../../src/man/linkchecker.rst:435
+msgid "A URL must be valid."
+msgstr "1. Eine URL muss gültig sein."
+
+#: ../../src/man/linkchecker.rst:436
+msgid ""
+"A URL must be parseable. This currently includes HTML files, Opera bookmarks "
+"files, and directories. If a file type cannot be determined (for example it "
+"does not have a common HTML file extension, and the content does not look "
+"like HTML), it is assumed to be non-parseable."
+msgstr ""
+"2. Der URL-Inhalt muss analysierbar sein. Dies beinhaltet zur Zeit HTML-"
+"Dateien, Opera Lesezeichen, und Verzeichnisse. Falls ein Dateityp nicht "
+"erkannt wird, (zum Beispiel weil er keine bekannte HTML-Dateierweiterung "
+"besitzt, und der Inhalt nicht nach HTML aussieht), wird der Inhalt als nicht "
+"analysierbar angesehen."
+
+#: ../../src/man/linkchecker.rst:440
+msgid ""
+"The URL content must be retrievable. This is usually the case except for "
+"example mailto: or unknown URL types."
+msgstr ""
+"3. Der URL-Inhalt muss ladbar sein. Dies ist normalerweise der Fall, mit "
+"Ausnahme von mailto: oder unbekannten URL-Typen."
+
+#: ../../src/man/linkchecker.rst:442
+msgid ""
+"The maximum recursion level must not be exceeded. It is configured with the :"
+"option:`--recursion-level` option and is unlimited per default."
+msgstr ""
+"4. Die maximale Rekursionstiefe darf nicht überschritten werden. Diese wird "
+"mit der Option :option:`--recursion-level` konfiguriert und ist "
+"standardmäßig nicht limitiert."
+
+#: ../../src/man/linkchecker.rst:444
+msgid ""
+"It must not match the ignored URL list. This is controlled with the :option:"
+"`--ignore-url` option."
+msgstr ""
+"5. Die URL darf nicht in der Liste von ignorierten URLs sein. Die "
+"ignorierten URLs werden mit der Option :option:`--ignore-url` konfiguriert."
+
+#: ../../src/man/linkchecker.rst:446
+msgid ""
+"The Robots Exclusion Protocol must allow links in the URL to be followed "
+"recursively. This is checked by searching for a \"nofollow\" directive in "
+"the HTML header data."
+msgstr ""
+"6. Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in der "
+"URL rekursiv verfolgt werden können. Dies wird geprüft, indem in den HTML "
+"Kopfdaten nach der \"nofollow\"-Direktive gesucht wird."
+
+#: ../../src/man/linkchecker.rst:450
+msgid ""
+"Note that the directory recursion reads all files in that directory, not "
+"just a subset like **index.htm**."
+msgstr ""
+"Beachten Sie, dass die Verzeichnisrekursion alle Dateien in diesem "
+"Verzeichnis liest, nicht nur eine Untermenge wie bspw. **index.htm**."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:454
+msgid "NOTES"
+msgstr "BEMERKUNGEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:456
+msgid ""
+"URLs on the commandline starting with **ftp.** are treated like **ftp://ftp."
+"**, URLs starting with **www.** are treated like **http://www.**. You can "
+"also give local files as arguments. If you have your system configured to "
+"automatically establish a connection to the internet (e.g. with diald), it "
+"will connect when checking links not pointing to your local host. Use the :"
+"option:`--ignore-url` option to prevent this."
+msgstr ""
+"URLs von der Kommandozeile die mit **ftp.** beginnen werden wie **ftp://ftp."
+"** behandelt, URLs die mit **www.** beginnen wie **http://www.**. Sie können "
+"auch lokale Dateien angeben. Falls sich Ihr System automatisch mit dem "
+"Internet verbindet (z.B. mit diald), wird es dies tun wenn Sie Links prüfen, "
+"die nicht auf Ihren lokalen Rechner verweisen Benutzen Sie die Option :"
+"option:`--ignore-url`, um dies zu verhindern."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:464
+msgid "Javascript links are not supported."
+msgstr "Javascript Links werden nicht unterstützt."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:466
+msgid ""
+"If your platform does not support threading, LinkChecker disables it "
+"automatically."
+msgstr ""
+"Wenn Ihr System keine Threads unterstützt, deaktiviert diese LinkChecker "
+"automatisch."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:469
+msgid "You can supply multiple user/password pairs in a configuration file."
+msgstr ""
+"Sie können mehrere Benutzer/Passwort Paare in einer Konfigurationsdatei "
+"angeben."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:471
+msgid ""
+"When checking **news:** links the given NNTP host doesn't need to be the "
+"same as the host of the user browsing your pages."
+msgstr ""
+"Beim Prüfen von **news:** Links muß der angegebene NNTP Rechner nicht "
+"unbedingt derselbe wie der des Benutzers sein."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:475
+msgid "ENVIRONMENT"
+msgstr "UMGEBUNG"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:479
+msgid "specifies default NNTP server"
+msgstr "gibt Standard NNTP Server an"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:483
+msgid "specifies default HTTP proxy server"
+msgstr "gibt Standard HTTP Proxy an"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:487
+msgid "specifies default FTP proxy server"
+msgstr "gibt Standard FTP Proxy an"
+
+#: ../../src/man/linkchecker.rst:491
+msgid "comma-separated list of domains to not contact over a proxy server"
+msgstr ""
+"kommaseparierte Liste von Domains, die nicht über einen Proxy-Server "
+"kontaktiert werden"
+
+#: ../../src/man/linkchecker.rst:495
+msgid "specify output language"
+msgstr "gibt Ausgabesprache an"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:498
+msgid "RETURN VALUE"
+msgstr "RÜCKGABEWERT"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:500
+msgid "The return value is 2 when"
+msgstr "Der Rückgabewert ist 2 falls"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:502
+msgid "a program error occurred."
+msgstr "ein Programmfehler aufgetreten ist."
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:504
+msgid "The return value is 1 when"
+msgstr "Der Rückgabewert ist 1 falls"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:506
+msgid "invalid links were found or"
+msgstr "ungültige Verknüpfungen gefunden wurden oder"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:507
+msgid "link warnings were found and warnings are enabled"
+msgstr "Warnungen gefunden wurden und Warnungen aktiviert sind"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:509
+msgid "Else the return value is zero."
+msgstr "Sonst ist der Rückgabewert Null."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:512
+msgid "LIMITATIONS"
+msgstr "LIMITIERUNGEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:514
+msgid ""
+"LinkChecker consumes memory for each queued URL to check. With thousands of "
+"queued URLs the amount of consumed memory can become quite large. This might "
+"slow down the program or even the whole system."
+msgstr ""
+"LinkChecker benutzt Hauptspeicher für jede zu prüfende URL, die in der "
+"Warteschlange steht. Mit tausenden solcher URLs kann die Menge des benutzten "
+"Hauptspeichers sehr groß werden. Dies könnte das Programm oder sogar das "
+"gesamte System verlangsamen."
+
+# type: SH
+#: ../../src/man/linkchecker.rst:519
+msgid "FILES"
+msgstr "DATEIEN"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:521
+msgid "**~/.linkchecker/linkcheckerrc** - default configuration file"
+msgstr "**~/.linkchecker/linkcheckerrc** - Standardkonfigurationsdatei"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:523
+msgid "**~/.linkchecker/blacklist** - default blacklist logger output filename"
+msgstr ""
+"**~/.linkchecker/blacklist** - Standard Dateiname der blacklist Logger "
+"Ausgabe"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:525
+msgid "**linkchecker-out.**\\ *TYPE* - default logger file output name"
+msgstr "**linkchecker-out.**\\ *TYP* - Standard Dateiname der Logausgabe"
+
+# type: SH
+#: ../../src/man/linkchecker.rst:528 ../../src/man/linkcheckerrc.rst:520
+msgid "SEE ALSO"
+msgstr "SIEHE AUCH"
+
+# type: TH
+#: ../../src/man/linkchecker.rst:530
+msgid ":manpage:`linkcheckerrc(5)`"
+msgstr ":manpage:`linkcheckerrc(5)`"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:532
+msgid ""
+"https://docs.python.org/library/codecs.html#standard-encodings - valid "
+"output encodings"
+msgstr ""
+"https://docs.python.org/library/codecs.html#standard-encodings - gültige "
+"Ausgabe Enkodierungen"
+
+# type: Plain text
+#: ../../src/man/linkchecker.rst:535
+msgid ""
+"https://docs.python.org/howto/regex.html - regular expression documentation"
+msgstr ""
+"https://docs.python.org/howto/regex.html - Dokumentation zu regulären "
+"Ausdrücken"
+
+# type: TH
+#: ../../src/man/linkcheckerrc.rst:4
+msgid "linkcheckerrc"
+msgstr "linkcheckerrc"
+
+#: ../../src/man/linkcheckerrc.rst:9
+msgid ""
+"**linkcheckerrc** is the configuration file for LinkChecker. The file is "
+"written in an INI-style format. The default file location is **~/."
+"linkchecker/linkcheckerrc** on Unix, **%HOMEPATH%\\\\.linkchecker\\"
+"\\linkcheckerrc** on Windows systems."
+msgstr ""
+"**linkcheckerrc** ist die Konfigurationsdatei für LinkChecker. Die Datei ist "
+"in einem INI-Format geschrieben. Die Standarddatei ist **~/.linkchecker/"
+"linkcheckerrc** unter Unix-, **%HOMEPATH%\\\\linkchecker\\\\linkcheckerrc** "
+"unter Windows-Systemen."
+
+# type: SH
+#: ../../src/man/linkcheckerrc.rst:15
+msgid "SETTINGS"
+msgstr "EIGENSCHAFTEN"
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:18
+msgid "checking"
+msgstr "checking"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:22
+msgid "**cookiefile=**\\ *filename*"
+msgstr "**cookiefile=**\\ *Dateiname*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:21
+msgid ""
+"Read a file with initial cookie data. The cookie data format is explained "
+"in :manpage:`linkchecker(1)`. Command line option: :option:`--cookiefile`"
+msgstr ""
+"Lese eine Datei mit Cookie-Daten. Das Cookie Datenformat wird in :manpage:"
+"`linkchecker(1)` erklärt. Kommandozeilenoption: :option:`--cookiefile`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:29
+msgid "**localwebroot=**\\ *STRING*"
+msgstr "**localwebroot=**\\ *STRING*"
+
+#: ../../src/man/linkcheckerrc.rst:25
+msgid ""
+"When checking absolute URLs inside local files, the given root directory is "
+"used as base URL. Note that the given directory must have URL syntax, so it "
+"must use a slash to join directories instead of a backslash. And the given "
+"directory must end with a slash. Command line option: none"
+msgstr ""
+"Beachten Sie dass das angegebene Verzeichnis in URL-Syntax sein muss, d.h. "
+"es muss einen normalen statt einen umgekehrten Schrägstrich zum "
+"Aneinanderfügen von Verzeichnissen benutzen. Und das angegebene Verzeichnis "
+"muss mit einem Schrägstrich enden. Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:34
+msgid "**nntpserver=**\\ *STRING*"
+msgstr "**nntpserver=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:32
+msgid ""
+"Specify an NNTP server for **news:** links. Default is the environment "
+"variable :envvar:`NNTP_SERVER`. If no host is given, only the syntax of the "
+"link is checked. Command line option: :option:`--nntp-server`"
+msgstr ""
+"Gibt ein NNTP Rechner für **news:** Links. Standard ist die "
+"Umgebungsvariable :envvar:`NNTP_SERVER`. Falls kein Rechner angegeben ist, "
+"wird lediglich auf korrekte Syntax des Links geprüft. Kommandozeilenoption: :"
+"option:`--nntp-server`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:38
+msgid "**recursionlevel=**\\ *NUMBER*"
+msgstr "**recursionlevel=**\\ *NUMMER*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:37
+msgid ""
+"Check recursively all links up to given depth. A negative depth will enable "
+"infinite recursion. Default depth is infinite. Command line option: :option:"
+"`--recursion-level`"
+msgstr ""
+"Prüfe rekursiv alle URLs bis zu der angegebenen Tiefe. Eine negative Tiefe "
+"bewirkt unendliche Rekursion. Standard Tiefe ist unendlich. "
+"Kommandozeilenoption: :option:`--recursion-level`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:42
+msgid "**threads=**\\ *NUMBER*"
+msgstr "**threads=**\\ *NUMMER*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:41
+msgid ""
+"Generate no more than the given number of threads. Default number of threads "
+"is 10. To disable threading specify a non-positive number. Command line "
+"option: :option:`--threads`"
+msgstr ""
+"Generiere nicht mehr als die angegebene Anzahl von Threads. Die "
+"Standardanzahl von Threads ist 10. Um Threads zu deaktivieren, geben Sie "
+"eine nicht positive Nummer an. Kommandozeilenoption: :option:`--threads`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:46
+msgid "**timeout=**\\ *NUMBER*"
+msgstr "**timeout=**\\ *NUMMER*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:45
+msgid ""
+"Set the timeout for connection attempts in seconds. The default timeout is "
+"60 seconds. Command line option: :option:`--timeout`"
+msgstr ""
+"Setze den Timeout für TCP-Verbindungen in Sekunden. Der Standard Timeout ist "
+"60 Sekunden. Kommandozeilenoption: :option:`--timeout`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:51
+msgid "**aborttimeout=**\\ *NUMBER*"
+msgstr "**aborttimeout=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:49
+msgid ""
+"Time to wait for checks to finish after the user aborts the first time (with "
+"Ctrl-C or the abort button). The default abort timeout is 300 seconds. "
+"Command line option: :option:`--timeout`"
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:56
+msgid "**useragent=**\\ *STRING*"
+msgstr "**useragent=**\\ *STRING*"
+
+#: ../../src/man/linkcheckerrc.rst:54
+msgid ""
+"Specify the User-Agent string to send to the HTTP server, for example "
+"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the current "
+"version of LinkChecker. Command line option: :option:`--user-agent`"
+msgstr ""
+"Gibt den User-Agent an, der zu HTTP-Servern geschickt wird, z.B. "
+"\"Mozilla/4.0\". Der Standard ist \"LinkChecker/X.Y\", wobei X.Y die "
+"aktuelle Version von LinkChecker ist. Kommandozeilenoption: :option:`--user-"
+"agent`"
+
+#: ../../src/man/linkcheckerrc.rst:62
+msgid "**sslverify=**\\ [**0**\\ \\|\\ **1**\\ \\|\\ *filename*]"
+msgstr "**sslverify=**\\ [**0**\\ \\|\\ **1**\\ \\|\\ *filename*]"
+
+#: ../../src/man/linkcheckerrc.rst:59
+msgid ""
+"If set to zero disables SSL certificate checking. If set to one (the "
+"default) enables SSL certificate checking with the provided CA certificate "
+"file. If a filename is specified, it will be used as the certificate file. "
+"Command line option: none"
+msgstr ""
+"Falls der Wert Null ist werden SSL Zertifikate nicht überprüft. Falls er auf "
+"Eins gesetzt wird (der Standard) werden SSL Zertifikate mit der gelieferten "
+"CA Zertifikatsdatei geprüft. Falls ein Dateiname angegeben ist wird dieser "
+"zur Prüfung verwendet. Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:68
+msgid "**maxrunseconds=**\\ *NUMBER*"
+msgstr "**maxrunseconds=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:65
+msgid ""
+"Stop checking new URLs after the given number of seconds. Same as if the "
+"user stops (by hitting Ctrl-C) after the given number of seconds. The "
+"default is not to stop until all URLs are checked. Command line option: none"
+msgstr ""
+"Hört nach der angegebenen Anzahl von Sekunden auf, neue URLs zu prüfen. Dies "
+"ist dasselbe als wenn der Benutzer nach der gegebenen Anzahl von Sekunden "
+"stoppt (durch Drücken von Strg-C). Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:73
+msgid "**maxnumurls=**\\ *NUMBER*"
+msgstr "**maxnumurls=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:71
+msgid ""
+"Maximum number of URLs to check. New URLs will not be queued after the given "
+"number of URLs is checked. The default is to queue and check all URLs. "
+"Command line option: none"
+msgstr ""
+"Maximale Anzahl von URLs die geprüft werden. Neue URLs werden nicht "
+"angenommen nachdem die angegebene Anzahl von URLs geprüft wurde. "
+"Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:75
+msgid "**maxrequestspersecond=**\\ *NUMBER*"
+msgstr "**maxrequestspersecond=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:76
+msgid "Limit the maximum number of requests per second to one host."
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:78
+msgid "**allowedschemes=**\\ *NAME*\\ [**,**\\ *NAME*...]"
+msgstr "**allowedschemes=**\\ *NAME*\\ [**,**\\ *NAME*...]"
+
+#: ../../src/man/linkcheckerrc.rst:78
+msgid "Allowed URL schemes as comma-separated list."
+msgstr ""
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:81
+msgid "filtering"
+msgstr "filtering"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:84
+msgid "**ignore=**\\ *REGEX* (MULTILINE)"
+msgstr "**ignore=**\\ *REGEX* (MULTILINE)"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:84
+msgid ""
+"Only check syntax of URLs matching the given regular expressions. Command "
+"line option: :option:`--ignore-url`"
+msgstr ""
+"Prüfe lediglich die Syntax von URLs, welche dem angegebenen regulären "
+"Ausdruck entsprechen. Kommandozeilenoption: :option:`--ignore-url`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:88
+msgid "**ignorewarnings=**\\ *NAME*\\ [**,**\\ *NAME*...]"
+msgstr "**ignorewarnings=**\\ *NAME*\\ [**,**\\ *NAME*...]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:87
+msgid ""
+"Ignore the comma-separated list of warnings. See `WARNINGS`_ for the list of "
+"supported warnings. Command line option: none"
+msgstr ""
+"Ignoriere die kommagetrennte Liste von Warnungen. Siehe `WARNINGS`_ für die "
+"Liste von erkannten Warnungen. Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:92
+msgid "**internlinks=**\\ *REGEX*"
+msgstr "**internlinks=**\\ *REGEX*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:91
+msgid ""
+"Regular expression to add more URLs recognized as internal links. Default is "
+"that URLs given on the command line are internal. Command line option: none"
+msgstr ""
+"Regulärer Ausdruck, um mehr URLs als interne Verknüpfungen hinzuzufügen. "
+"Standard ist dass URLs der Kommandozeile als intern gelten. "
+"Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:96
+msgid "**nofollow=**\\ *REGEX* (MULTILINE)"
+msgstr "**nofollow=**\\ *REGEX* (MULTILINE)"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:95
+msgid ""
+"Check but do not recurse into URLs matching the given regular expressions. "
+"Command line option: :option:`--no-follow-url`"
+msgstr ""
+"Prüfe URLs die auf den regulären Ausdruck zutreffen, aber führe keine "
+"Rekursion durch. Kommandozeilenoption: :option:`--no-follow-url`"
+
+#: ../../src/man/linkcheckerrc.rst:100
+msgid "**checkextern=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**checkextern=**\\ [**0**\\ \\|\\ **1**]"
+
+#: ../../src/man/linkcheckerrc.rst:99
+msgid ""
+"Check external links. Default is to check internal links only. Command line "
+"option: :option:`--check-extern`"
+msgstr ""
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:103
+msgid "authentication"
+msgstr "authentication"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:116
+msgid "**entry=**\\ *REGEX* *USER* [*PASS*] (MULTILINE)"
+msgstr "**entry=**\\ *REGEX* *BENUTZER* [*PASSWORT*] (MULTILINE)"
+
+#: ../../src/man/linkcheckerrc.rst:106
+msgid ""
+"Provide individual username/password pairs for different links. In addtion "
+"to a single login page specified with **loginurl** multiple FTP, HTTP (Basic "
+"Authentication) and telnet links are supported. Entries are a triple (URL "
+"regex, username, password) or a tuple (URL regex, username), where the "
+"entries are separated by whitespace. The password is optional and if missing "
+"it has to be entered at the commandline. If the regular expression matches "
+"the checked URL, the given username/password pair is used for "
+"authentication. The command line options :option:`-u` and :option:`-p` match "
+"every link and therefore override the entries given here. The first match "
+"wins. Command line option: :option:`-u`, :option:`-p`"
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:123
+msgid "**loginurl=**\\ *URL*"
+msgstr "**loginurl=**\\ *URL*"
+
+#: ../../src/man/linkcheckerrc.rst:119
+msgid ""
+"The URL of a login page to be visited before link checking. The page is "
+"expected to contain an HTML form to collect credentials and submit them to "
+"the address in its action attribute using an HTTP POST request. The name "
+"attributes of the input elements of the form and the values to be submitted "
+"need to be available (see **entry** for an explanation of username and "
+"password values)."
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:125
+msgid "**loginuserfield=**\\ *STRING*"
+msgstr "**loginuserfield=**\\ *STRING*"
+
+#: ../../src/man/linkcheckerrc.rst:126
+msgid "The name attribute of the username input element. Default: **login**."
+msgstr "Der Name für das Benutzer CGI-Feld. Der Standardname ist **login**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:127
+msgid "**loginpasswordfield=**\\ *STRING*"
+msgstr "**loginpasswordfield=**\\ *STRING*"
+
+#: ../../src/man/linkcheckerrc.rst:128
+msgid ""
+"The name attribute of the password input element. Default: **password**."
+msgstr "Der Name für das Passwort CGI-Feld. Der Standardname ist **password**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:133
+msgid "**loginextrafields=**\\ *NAME*\\ **:**\\ *VALUE* (MULTILINE)"
+msgstr "**loginextrafields=**\\ *NAME*\\ **:**\\ *WERT* (MULTILINE)"
+
+#: ../../src/man/linkcheckerrc.rst:130
+msgid ""
+"Optionally the name attributes of any additional input elements and the "
+"values to populate them with. Note that these are submitted without checking "
+"whether matching input elements exist in the HTML form."
+msgstr ""
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:136
+msgid "output"
+msgstr "output"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:142
+msgid "**debug=**\\ *STRING*\\ [**,**\\ *STRING*...]"
+msgstr "**debug=**\\ *STRING*\\ [**,**\\ *STRING*...]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:139
+msgid ""
+"Print debugging output for the given modules. Available debug modules are "
+"**cmdline**, **checking**, **cache**, **dns**, **thread**, **plugins** and "
+"**all**. Specifying **all** is an alias for specifying all available "
+"loggers. Command line option: :option:`--debug`"
+msgstr ""
+"Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind "
+"**cmdline**, **checking**, **cache**, **dns**, **thread**, **plugins** und "
+"**all**. Die Angabe **all** ist ein Synonym für alle verfügbaren Logger. "
+"Kommandozeilenoption: :option:`--debug`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:150
+msgid "**fileoutput=**\\ *TYPE*\\ [**,**\\ *TYPE*...]"
+msgstr "**fileoutput=**\\ *TYPE*\\ [**,**\\ *TYPE*...]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:145
+msgid ""
+"Output to a files **linkchecker-out.**\\ *TYPE*, **$HOME/.linkchecker/"
+"blacklist** for **blacklist** output. Valid file output types are **text**, "
+"**html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none** or "
+"**blacklist** Default is no file output. The various output types are "
+"documented below. Note that you can suppress all console output with "
+"**output=none**. Command line option: :option:`--file-output`"
+msgstr ""
+"Ausgabe in Datei **linkchecker-out.**\\ *TYP*, **$HOME/.linkchecker/"
+"blacklist** für **blacklist** Ausgabe. Gültige Ausgabearten sind **text**, "
+"**html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none**> oder "
+"**blacklist** Standard ist keine Dateiausgabe. Die verschiedenen "
+"Ausgabearten sind unten dokumentiert. Bemerke, dass man alle "
+"Konsolenausgaben mit **output=none** unterdrücken kann. "
+"Kommandozeilenoption: :option:`--file-output`"
+
+#: ../../src/man/linkcheckerrc.rst:158
+msgid "**log=**\\ *TYPE*\\ [**/**\\ *ENCODING*]"
+msgstr "**log=**\\ *TYPE*\\ [**/**\\ *ENCODING*]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:153
+msgid ""
+"Specify output type as **text**, **html**, **sql**, **csv**, **gml**, "
+"**dot**, **xml**, **none** or **blacklist**. Default type is **text**. The "
+"various output types are documented below. The *ENCODING* specifies the "
+"output encoding, the default is that of your locale. Valid encodings are "
+"listed at https://docs.python.org/library/codecs.html#standard-encodings. "
+"Command line option: :option:`--output`"
+msgstr ""
+"Gib Ausgabetyp als **text**, **html**, **sql**, **csv**, **gml**, **dot**, "
+"**xml**, **none** oder **blacklist** an. Stadard Typ ist **text**. Die "
+"verschiedenen Ausgabetypen sind unten dokumentiert. Das *ENCODING* gibt die "
+"Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. "
+"Gültige Enkodierungen sind aufgelistet unter https://docs.python.org/library/"
+"codecs.html#standard-encodings. Kommandozeilenoption: :option:`--output`"
+
+#: ../../src/man/linkcheckerrc.rst:162
+msgid "**quiet=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**quiet=**\\ [**0**\\ \\|\\ **1**]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:161
+msgid ""
+"If set, operate quiet. An alias for **log=none**. This is only useful with "
+"**fileoutput**. Command line option: :option:`--verbose`"
+msgstr ""
+"Falls gesetzt, erfolgt keine Ausgabe. Ein Alias für **log=none**. Dies ist "
+"nur in Verbindung mit **fileoutput** nützlich. Kommandozeilenoption: :option:"
+"`--verbose`"
+
+#: ../../src/man/linkcheckerrc.rst:165
+msgid "**status=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**status=**\\ [**0**\\ \\|\\ **1**]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:165
+msgid ""
+"Control printing check status messages. Default is 1. Command line option: :"
+"option:`--no-status`"
+msgstr ""
+"Kontrolle der Statusmeldungen. Standard ist 1. Kommandozeilenoption: :option:"
+"`--no-status`"
+
+#: ../../src/man/linkcheckerrc.rst:169
+msgid "**verbose=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**verbose=**\\ [**0**\\ \\|\\ **1**]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:168
+msgid ""
+"If set log all checked URLs once. Default is to log only errors and "
+"warnings. Command line option: :option:`--verbose`"
+msgstr ""
+"Falls gesetzt, gebe alle geprüften URLs einmal aus. Standard ist es, nur "
+"fehlerhafte URLs und Warnungen auszugeben. Kommandozeilenoption: :option:`--"
+"verbose`"
+
+#: ../../src/man/linkcheckerrc.rst:173
+msgid "**warnings=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**warnings=**\\ [**0**\\ \\|\\ **1**]"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:172
+msgid ""
+"If set log warnings. Default is to log warnings. Command line option: :"
+"option:`--no-warnings`"
+msgstr ""
+"Falls gesetzt, gebe keine Warnungen aus. Standard ist die Ausgabe von "
+"Warnungen. Kommandozeilenoption: :option:`--verbose`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:176
+msgid "text"
+msgstr "text"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:180 ../../src/man/linkcheckerrc.rst:224
+#: ../../src/man/linkcheckerrc.rst:234 ../../src/man/linkcheckerrc.rst:244
+#: ../../src/man/linkcheckerrc.rst:258 ../../src/man/linkcheckerrc.rst:272
+#: ../../src/man/linkcheckerrc.rst:296 ../../src/man/linkcheckerrc.rst:304
+#: ../../src/man/linkcheckerrc.rst:314 ../../src/man/linkcheckerrc.rst:324
+msgid "**filename=**\\ *STRING*"
+msgstr "**filename=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:179
+msgid ""
+"Specify output filename for text logging. Default filename is **linkchecker-"
+"out.txt**. Command line option: :option:`--file-output`"
+msgstr ""
+"Gebe Dateiname für Textausgabe an. Standard Dateiname ist **linkchecker-out."
+"txt**. Kommandozeilenoption: :option:`--file-output`"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:184 ../../src/man/linkcheckerrc.rst:226
+#: ../../src/man/linkcheckerrc.rst:236 ../../src/man/linkcheckerrc.rst:246
+#: ../../src/man/linkcheckerrc.rst:260 ../../src/man/linkcheckerrc.rst:274
+#: ../../src/man/linkcheckerrc.rst:306 ../../src/man/linkcheckerrc.rst:316
+#: ../../src/man/linkcheckerrc.rst:326
+msgid "**parts=**\\ *STRING*"
+msgstr "**parts=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:183
+msgid ""
+"Comma-separated list of parts that have to be logged. See `LOGGER PARTS`_ "
+"below. Command line option: none"
+msgstr ""
+"Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe `LOGGER "
+"PARTS`_ weiter unten. Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:188 ../../src/man/linkcheckerrc.rst:229
+#: ../../src/man/linkcheckerrc.rst:239 ../../src/man/linkcheckerrc.rst:248
+#: ../../src/man/linkcheckerrc.rst:262 ../../src/man/linkcheckerrc.rst:276
+#: ../../src/man/linkcheckerrc.rst:299 ../../src/man/linkcheckerrc.rst:309
+#: ../../src/man/linkcheckerrc.rst:319 ../../src/man/linkcheckerrc.rst:328
+msgid "**encoding=**\\ *STRING*"
+msgstr "**encoding=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:187
+msgid ""
+"Valid encodings are listed in https://docs.python.org/library/codecs."
+"html#standard-encodings. Default encoding is **iso-8859-15**."
+msgstr ""
+"Gültige Enkodierungen sind aufgelistet unter https://docs.python.org/library/"
+"codecs.html#standard-encodings. Die Standardenkodierung ist **iso-8859-15**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:196
+msgid "*color\\**"
+msgstr "*color\\**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:191
+msgid ""
+"Color settings for the various log parts, syntax is *color* or *type*\\ **;**"
+"\\ *color*. The *type* can be **bold**, **light**, **blink**, **invert**. "
+"The *color* can be **default**, **black**, **red**, **green**, **yellow**, "
+"**blue**, **purple**, **cyan**, **white**, **Black**, **Red**, **Green**, "
+"**Yellow**, **Blue**, **Purple**, **Cyan** or **White**. Command line "
+"option: none"
+msgstr ""
+"Farbwerte für die verschiedenen Ausgabeteile. Syntax ist *color* oder *type*"
+"\\ **;**\\ *color*. Der *type* kann **bold**, **light**, **blink**> oder "
+"**invert** sein.  Die *color* kann **default**, **black**, **red**, "
+"**green**, **yellow**, **blue**, **purple**, **cyan**, **white**, **Black**, "
+"**Red**, **Green**, **Yellow**, **Blue**, **Purple**, **Cyan** oder "
+"**White** sein. Kommandozeilenoption: none"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:198
+msgid "**colorparent=**\\ *STRING*"
+msgstr "**colorparent=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:199
+msgid "Set parent color. Default is **white**."
+msgstr "Setze Farbe des Vaters. Standard ist **white**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:200
+msgid "**colorurl=**\\ *STRING*"
+msgstr "**colorurl=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:201
+msgid "Set URL color. Default is **default**."
+msgstr "Setze URL Farbe. Standard ist **default**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:202
+msgid "**colorname=**\\ *STRING*"
+msgstr "**colorname=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:203
+msgid "Set name color. Default is **default**."
+msgstr "Setze Namensfarbe. Standard ist **default**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:204
+msgid "**colorreal=**\\ *STRING*"
+msgstr "**colorreal=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:205
+msgid "Set real URL color. Default is **cyan**."
+msgstr "Setze Farbe für tatsächliche URL. Default ist **cyan**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:206
+msgid "**colorbase=**\\ *STRING*"
+msgstr "**colorbase=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:207
+msgid "Set base URL color. Default is **purple**."
+msgstr "Setzt Basisurl Farbe. Standard ist **purple**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:208
+msgid "**colorvalid=**\\ *STRING*"
+msgstr "**colorvalid=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:209
+msgid "Set valid color. Default is **bold;green**."
+msgstr "Setze gültige Farbe. Standard ist **bold;green**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:210
+msgid "**colorinvalid=**\\ *STRING*"
+msgstr "**colorinvalid=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:211
+msgid "Set invalid color. Default is **bold;red**."
+msgstr "Setze ungültige Farbe. Standard ist **bold;red**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:212
+msgid "**colorinfo=**\\ *STRING*"
+msgstr "**colorinfo=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:213
+msgid "Set info color. Default is **default**."
+msgstr "Setzt Informationsfarbe. Standard ist **default**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:214
+msgid "**colorwarning=**\\ *STRING*"
+msgstr "**colorwarning=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:215
+msgid "Set warning color. Default is **bold;yellow**."
+msgstr "Setze Warnfarbe. Standard ist **bold;yellow**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:216
+msgid "**colordltime=**\\ *STRING*"
+msgstr "**colordltime=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:217
+msgid "Set download time color. Default is **default**."
+msgstr "Setze Downloadzeitfarbe. Standard ist **default**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:219
+msgid "**colorreset=**\\ *STRING*"
+msgstr "**colorreset=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:219
+msgid "Set reset color. Default is **default**."
+msgstr "Setze Reset Farbe. Standard ist **default**."
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:222
+msgid "gml"
+msgstr "gml"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:225 ../../src/man/linkcheckerrc.rst:227
+#: ../../src/man/linkcheckerrc.rst:229 ../../src/man/linkcheckerrc.rst:235
+#: ../../src/man/linkcheckerrc.rst:237 ../../src/man/linkcheckerrc.rst:239
+#: ../../src/man/linkcheckerrc.rst:245 ../../src/man/linkcheckerrc.rst:247
+#: ../../src/man/linkcheckerrc.rst:249 ../../src/man/linkcheckerrc.rst:259
+#: ../../src/man/linkcheckerrc.rst:261 ../../src/man/linkcheckerrc.rst:263
+#: ../../src/man/linkcheckerrc.rst:273 ../../src/man/linkcheckerrc.rst:275
+#: ../../src/man/linkcheckerrc.rst:277 ../../src/man/linkcheckerrc.rst:297
+#: ../../src/man/linkcheckerrc.rst:299 ../../src/man/linkcheckerrc.rst:305
+#: ../../src/man/linkcheckerrc.rst:307 ../../src/man/linkcheckerrc.rst:309
+#: ../../src/man/linkcheckerrc.rst:315 ../../src/man/linkcheckerrc.rst:317
+#: ../../src/man/linkcheckerrc.rst:319 ../../src/man/linkcheckerrc.rst:325
+#: ../../src/man/linkcheckerrc.rst:327 ../../src/man/linkcheckerrc.rst:329
+msgid "See :ref:`[text] <man/linkcheckerrc:text>` section above."
+msgstr "Siehe :ref:`[text] <man/linkcheckerrc:text>` Sektion weiter oben."
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:232
+msgid "dot"
+msgstr "dot"
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:242
+msgid "csv"
+msgstr "csv"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:250 ../../src/man/linkcheckerrc.rst:267
+msgid "**separator=**\\ *CHAR*"
+msgstr "**separator=**\\ *CHAR*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:251
+msgid "Set CSV separator. Default is a comma (**,**)."
+msgstr "Das CSV Trennzeichen. Standard ist Komma (**,**)."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:253
+msgid "**quotechar=**\\ *CHAR*"
+msgstr "**quotechar=**\\ *CHAR*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:253
+msgid "Set CSV quote character. Default is a double quote (**\"**)."
+msgstr ""
+"Setze CSV Quotezeichen. Standard ist das doppelte Anführungszeichen (**\"**)."
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:256
+msgid "sql"
+msgstr "sql"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:264
+msgid "**dbname=**\\ *STRING*"
+msgstr "**dbname=**\\ *STRING*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:265
+msgid "Set database name to store into. Default is **linksdb**."
+msgstr "Setze Datenbankname zum Speichern. Standard ist **linksdb**."
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:267
+msgid "Set SQL command separator character. Default is a semicolon (**;**)."
+msgstr "Setze SQL Kommandotrennzeichen. Standard ist ein Strichpunkt (**;**)."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:270
+msgid "html"
+msgstr "html"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:278
+msgid "**colorbackground=**\\ *COLOR*"
+msgstr "**colorbackground=**\\ *COLOR*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:279
+msgid "Set HTML background color. Default is **#fff7e5**."
+msgstr "Setze HTML Hintergrundfarbe. Standard ist **#fff7e5**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:280
+msgid "**colorurl=**"
+msgstr "**colorurl=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:281
+msgid "Set HTML URL color. Default is **#dcd5cf**."
+msgstr "Setze HTML URL Farbe. Standard ist **#dcd5cf**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:282
+msgid "**colorborder=**"
+msgstr "**colorborder=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:283
+msgid "Set HTML border color. Default is **#000000**."
+msgstr "Setze HTML Rahmenfarbe. Standard ist **#000000**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:284
+msgid "**colorlink=**"
+msgstr "**colorlink=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:285
+msgid "Set HTML link color. Default is **#191c83**."
+msgstr "Setze HTML Verknüpfungsfarbe. Standard ist **#191c83**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:286
+msgid "**colorwarning=**"
+msgstr "**colorwarning=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:287
+msgid "Set HTML warning color. Default is **#e0954e**."
+msgstr "Setze HTML Warnfarbe. Standard ist **#e0954e**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:288
+msgid "**colorerror=**"
+msgstr "**colorerror=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:289
+msgid "Set HTML error color. Default is **#db4930**."
+msgstr "Setze HTML Fehlerfarbe. Standard ist **#db4930**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:291
+msgid "**colorok=**"
+msgstr "**colorok=**"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:291
+msgid "Set HTML valid color. Default is **#3ba557**."
+msgstr "Setze HTML Gültigkeitsfarbe. Standard ist **#3ba557**."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:294
+msgid "blacklist"
+msgstr "blacklist"
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:302
+msgid "xml"
+msgstr "xml"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:312
+msgid "gxml"
+msgstr "gxml"
+
+#: ../../src/man/linkcheckerrc.rst:322
+msgid "sitemap"
+msgstr "sitemap"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:331
+msgid "**priority=**\\ *FLOAT*"
+msgstr "**priority=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:331
+msgid ""
+"A number between 0.0 and 1.0 determining the priority. The default priority "
+"for the first URL is 1.0, for all child URLs 0.5."
+msgstr ""
+"Eine Nummer zwischen 0.0 und 1.0, welche die Priorität festlegt. Die "
+"Standardpriorität für die erste URL ist 1.0, für alle Kind-URLs ist sie 0.5."
+
+#: ../../src/man/linkcheckerrc.rst:334
+msgid ""
+"**frequency=**\\ [**always**\\ \\|\\ **hourly**\\ \\|\\ **daily**\\ \\|\\ "
+"**weekly**\\ \\|\\ **monthly**\\ \\|\\ **yearly**\\ \\|\\ **never**]"
+msgstr ""
+"**frequency=**\\ [**always**\\ \\|\\ **hourly**\\ \\|\\ **daily**\\ \\|\\ "
+"**weekly**\\ \\|\\ **monthly**\\ \\|\\ **yearly**\\ \\|\\ **never**]"
+
+#: ../../src/man/linkcheckerrc.rst:334
+msgid "How frequently pages are changing."
+msgstr "Die Häufigkeit mit der Seiten sich ändern."
+
+# type: SH
+#: ../../src/man/linkcheckerrc.rst:337
+msgid "LOGGER PARTS"
+msgstr "AUSGABE PARTS"
+
+#: ../../src/man/linkcheckerrc.rst:339
+msgid "**all**"
+msgstr "**all**"
+
+#: ../../src/man/linkcheckerrc.rst:340
+msgid "for all parts"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:341
+msgid "**id**"
+msgstr "**id**"
+
+#: ../../src/man/linkcheckerrc.rst:342
+msgid "a unique ID for each logentry"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:343
+msgid "**realurl**"
+msgstr "**realurl**"
+
+#: ../../src/man/linkcheckerrc.rst:344
+msgid "the full url link"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:345
+msgid "**result**"
+msgstr "**result**"
+
+#: ../../src/man/linkcheckerrc.rst:346
+msgid "valid or invalid, with messages"
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:347
+msgid "**extern**"
+msgstr "**extern**"
+
+#: ../../src/man/linkcheckerrc.rst:348
+msgid "1 or 0, only in some logger types reported"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:349
+msgid "**base**"
+msgstr "**base**"
+
+#: ../../src/man/linkcheckerrc.rst:350
+msgid "base href=..."
+msgstr "base href=..."
+
+#: ../../src/man/linkcheckerrc.rst:351
+msgid "**name**"
+msgstr "**name**"
+
+#: ../../src/man/linkcheckerrc.rst:352
+msgid "<a href=...>name</a> and <img alt=\"name\">"
+msgstr "<a href=...>name</a> and <img alt=\"name\">"
+
+#: ../../src/man/linkcheckerrc.rst:353
+msgid "**parenturl**"
+msgstr "**parenturl**"
+
+#: ../../src/man/linkcheckerrc.rst:354
+msgid "if any"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:355
+msgid "**info**"
+msgstr "**info**"
+
+#: ../../src/man/linkcheckerrc.rst:356
+msgid "some additional info, e.g. FTP welcome messages"
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:357
+msgid "**warning**"
+msgstr "**warning**"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:358
+msgid "warnings"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:359
+msgid "**dltime**"
+msgstr "**dltime**"
+
+#: ../../src/man/linkcheckerrc.rst:360
+msgid "download time"
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:361
+msgid "**checktime**"
+msgstr "**checktime**"
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:362
+msgid "check time"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:363
+msgid "**url**"
+msgstr "**url**"
+
+#: ../../src/man/linkcheckerrc.rst:364
+msgid "the original url name, can be relative"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:365
+msgid "**intro**"
+msgstr "**intro**"
+
+#: ../../src/man/linkcheckerrc.rst:366
+msgid "the blurb at the beginning, \"starting at ...\""
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:368
+msgid "**outro**"
+msgstr "**outro**"
+
+#: ../../src/man/linkcheckerrc.rst:368
+msgid "the blurb at the end, \"found x errors ...\""
+msgstr ""
+
+# type: SH
+#: ../../src/man/linkcheckerrc.rst:371
+msgid "MULTILINE"
+msgstr "MULTILINE"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:373
+msgid ""
+"Some option values can span multiple lines. Each line has to be indented for "
+"that to work. Lines starting with a hash (**#**) will be ignored, though "
+"they must still be indented."
+msgstr ""
+"Einige Optionen können mehrere Zeilen lang sein. Jede Zeile muss dafür "
+"eingerückt werden. Zeilen die mit einer Raute (**#**) beginnen werden "
+"ignoriert, müssen aber eingerückt sein."
+
+# type: SH
+#: ../../src/man/linkcheckerrc.rst:386
+msgid "EXAMPLE"
+msgstr "BEISPIEL"
+
+#: ../../src/man/linkcheckerrc.rst:402
+msgid ""
+"All plugins have a separate section. If the section appears in the "
+"configuration file the plugin is enabled. Some plugins read extra options in "
+"their section."
+msgstr ""
+
+# type: SS
+#: ../../src/man/linkcheckerrc.rst:407
+msgid "AnchorCheck"
+msgstr "AnchorCheck"
+
+#: ../../src/man/linkcheckerrc.rst:409
+msgid "Checks validity of HTML anchors."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:412
+msgid "LocationInfo"
+msgstr "LocationInfo"
+
+#: ../../src/man/linkcheckerrc.rst:414
+msgid ""
+"Adds the country and if possible city name of the URL host as info. Needs "
+"GeoIP or pygeoip and a local country or city lookup DB installed."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:418
+msgid "RegexCheck"
+msgstr "RegexCheck"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:420
+msgid ""
+"Define a regular expression which prints a warning if it matches any content "
+"of the checked link. This applies only to valid pages, so we can get their "
+"content."
+msgstr ""
+"Definieren Sie einen regulären Ausdruck der eine Warnung ausgibt falls er "
+"auf den Inhalt einer geprüften URL zutrifft. Dies gilt nur für gültige "
+"Seiten deren Inhalt wir bekommen können."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:430
+msgid "**warningregex=**\\ *REGEX*"
+msgstr "**warningregex=**\\ *REGEX*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:425
+#, fuzzy
+msgid ""
+"Use this to check for pages that contain some form of error message, for "
+"example \"This page has moved\" or \"Oracle Application error\". *REGEX* "
+"should be unquoted."
+msgstr ""
+"Benutzen Sie dies, um nach Seiten zu suchen, welche bestimmte Fehler "
+"enthalten, zum Beispiel \"Diese Seite ist umgezogen\" oder \"Oracle "
+"Applikationsfehler\"."
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:429
+msgid ""
+"Note that multiple values can be combined in the regular expression, for "
+"example \"(This page has moved\\|Oracle Application error)\"."
+msgstr ""
+"Man beachte, dass mehrere Werte in dem regulären Ausdruck kombiniert werden "
+"können, zum Beispiel \"(Diese Seite ist umgezogen|Oracle "
+"Applikationsfehler)\"."
+
+#: ../../src/man/linkcheckerrc.rst:433
+msgid "SslCertificateCheck"
+msgstr "SslCertificateCheck"
+
+#: ../../src/man/linkcheckerrc.rst:435
+msgid ""
+"Check SSL certificate expiration date. Only internal https: links will be "
+"checked. A domain will only be checked once to avoid duplicate warnings."
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:440
+msgid "**sslcertwarndays=**\\ *NUMBER*"
+msgstr "**sslcertwarndays=**\\ *NUMMER*"
+
+#: ../../src/man/linkcheckerrc.rst:440
+msgid "Configures the expiration warning time in days."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:443
+msgid "HtmlSyntaxCheck"
+msgstr "HtmlSyntaxCheck"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:445
+msgid ""
+"Check the syntax of HTML pages with the online W3C HTML validator. See "
+"https://validator.w3.org/docs/api.html."
+msgstr ""
+"Prüfe Syntax von HTML URLs mit dem W3C Online Validator. Siehe https://"
+"validator.w3.org/docs/api.html."
+
+#: ../../src/man/linkcheckerrc.rst:449
+msgid "HttpHeaderInfo"
+msgstr "HttpHeaderInfo"
+
+#: ../../src/man/linkcheckerrc.rst:451
+msgid "Print HTTP headers in URL info."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:455
+msgid "**prefixes=**\\ *prefix1*\\ [,*prefix2*]..."
+msgstr "**prefixes=**\\ *prefix1*\\ [,*prefix2*]..."
+
+#: ../../src/man/linkcheckerrc.rst:454
+msgid ""
+"List of comma separated header prefixes. For example to display all HTTP "
+"headers that start with \"X-\"."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:458
+msgid "CssSyntaxCheck"
+msgstr "CssSyntaxCheck"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:460
+msgid ""
+"Check the syntax of HTML pages with the online W3C CSS validator. See "
+"https://jigsaw.w3.org/css-validator/manual.html#expert."
+msgstr ""
+"Prüfe Syntax von HTML URLs mit dem W3C Online Validator. Siehe https://"
+"jigsaw.w3.org/css-validator/manual.html#expert."
+
+#: ../../src/man/linkcheckerrc.rst:464
+msgid "VirusCheck"
+msgstr "VirusCheck"
+
+#: ../../src/man/linkcheckerrc.rst:466
+msgid ""
+"Checks the page content for virus infections with clamav. A local clamav "
+"daemon must be installed."
+msgstr ""
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:470
+msgid "**clamavconf=**\\ *filename*"
+msgstr "**clamavconf=**\\ *Dateiname*"
+
+# type: Plain text
+#: ../../src/man/linkcheckerrc.rst:470
+msgid "Filename of **clamd.conf** config file."
+msgstr "Dateiname von **clamd.conf** Konfigurationsdatei."
+
+#: ../../src/man/linkcheckerrc.rst:473
+msgid "PdfParser"
+msgstr "PdfParser"
+
+#: ../../src/man/linkcheckerrc.rst:475
+msgid ""
+"Parse PDF files for URLs to check. Needs the :pypi:`pdfminer` Python package "
+"installed."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:479
+msgid "WordParser"
+msgstr "WordParser"
+
+#: ../../src/man/linkcheckerrc.rst:481
+msgid ""
+"Parse Word files for URLs to check. Needs the :pypi:`pywin32` Python "
+"extension installed."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:485
+msgid "WARNINGS"
+msgstr "WARNUNGEN"
+
+#: ../../src/man/linkcheckerrc.rst:487
+msgid ""
+"The following warnings are recognized in the 'ignorewarnings' config file "
+"entry:"
+msgstr ""
+"Die folgenden Warnungen werden vom Konfigurationseintrag 'ignorewarnings' "
+"erkannt:"
+
+#: ../../src/man/linkcheckerrc.rst:490
+msgid "**file-missing-slash**"
+msgstr "**file-missing-slash**"
+
+#: ../../src/man/linkcheckerrc.rst:491
+msgid "The file: URL is missing a trailing slash."
+msgstr "Der file: URL fehlt ein abschließender Schrägstrich."
+
+#: ../../src/man/linkcheckerrc.rst:492
+msgid "**file-system-path**"
+msgstr "**file-system-path**"
+
+#: ../../src/man/linkcheckerrc.rst:493
+msgid "The file: path is not the same as the system specific path."
+msgstr "Der file: Pfad ist nicht derselbe wie der Systempfad."
+
+#: ../../src/man/linkcheckerrc.rst:494
+msgid "**ftp-missing-slash**"
+msgstr "**ftp-missing-slash**"
+
+#: ../../src/man/linkcheckerrc.rst:495
+msgid "The ftp: URL is missing a trailing slash."
+msgstr "Der ftp: URL fehlt ein abschließender Schrägstrich."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:496
+msgid "**http-cookie-store-error**"
+msgstr "**http-cookie-store-error**"
+
+#: ../../src/man/linkcheckerrc.rst:497
+msgid "An error occurred while storing a cookie."
+msgstr "Ein Fehler trat auf während des Speicherns eines Cookies."
+
+#: ../../src/man/linkcheckerrc.rst:498
+msgid "**http-empty-content**"
+msgstr "**http-empty-content**"
+
+#: ../../src/man/linkcheckerrc.rst:499
+msgid "The URL had no content."
+msgstr "Die URL besitzt keinen Inhalt."
+
+#: ../../src/man/linkcheckerrc.rst:500
+msgid "**mail-no-mx-host**"
+msgstr "**mail-no-mx-host**"
+
+#: ../../src/man/linkcheckerrc.rst:501
+msgid "The mail MX host could not be found."
+msgstr "Der MX Mail-Rechner konnte nicht gefunden werden."
+
+#: ../../src/man/linkcheckerrc.rst:502
+msgid "**nntp-no-newsgroup**"
+msgstr "**nntp-no-newsgroup**"
+
+#: ../../src/man/linkcheckerrc.rst:503
+msgid "The NNTP newsgroup could not be found."
+msgstr "Die NNTP Nachrichtengruppe konnte nicht gefunden werden."
+
+# type: TP
+#: ../../src/man/linkcheckerrc.rst:504
+msgid "**nntp-no-server**"
+msgstr "**nntp-no-server**"
+
+#: ../../src/man/linkcheckerrc.rst:505
+msgid "No NNTP server was found."
+msgstr "Es wurde kein NNTP Server gefunden."
+
+#: ../../src/man/linkcheckerrc.rst:506
+msgid "**url-content-size-zero**"
+msgstr "**url-content-size-zero**"
+
+#: ../../src/man/linkcheckerrc.rst:507
+msgid "The URL content size is zero."
+msgstr "Der URL Inhaltsgrößenangabe ist Null."
+
+#: ../../src/man/linkcheckerrc.rst:508
+msgid "**url-content-too-large**"
+msgstr "**url-content-too-large**"
+
+#: ../../src/man/linkcheckerrc.rst:509
+msgid "The URL content size is too large."
+msgstr "Der URL Inhalt ist zu groß."
+
+#: ../../src/man/linkcheckerrc.rst:510
+msgid "**url-effective-url**"
+msgstr "**url-effective-url**"
+
+#: ../../src/man/linkcheckerrc.rst:511
+msgid "The effective URL is different from the original."
+msgstr "Die effektive URL unterscheidet sich vom Original."
+
+#: ../../src/man/linkcheckerrc.rst:512
+msgid "**url-error-getting-content**"
+msgstr "**url-error-getting-content**"
+
+#: ../../src/man/linkcheckerrc.rst:513
+msgid "Could not get the content of the URL."
+msgstr "Konnte den Inhalt der URL nicht bekommen."
+
+#: ../../src/man/linkcheckerrc.rst:514
+msgid "**url-obfuscated-ip**"
+msgstr "**url-obfuscated-ip**"
+
+#: ../../src/man/linkcheckerrc.rst:515
+msgid "The IP is obfuscated."
+msgstr "Die IP-Adresse ist verschleiert."
+
+#: ../../src/man/linkcheckerrc.rst:517
+msgid "**url-whitespace**"
+msgstr "**url-whitespace**"
+
+#: ../../src/man/linkcheckerrc.rst:517
+msgid "The URL contains leading or trailing whitespace."
+msgstr "Die URL %(url)s enthält Leerzeichen am Anfang oder Ende."
+
+# type: TH
+#: ../../src/man/linkcheckerrc.rst:522
+msgid ":manpage:`linkchecker(1)`"
+msgstr ":manpage:`linkchecker(1)`"
