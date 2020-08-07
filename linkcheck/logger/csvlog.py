@@ -25,7 +25,7 @@ from . import _Logger
 Columns = (
     "urlname",
     "parentname",
-    "baseref",
+    "base",
     "result",
     "warningstring",
     "infostring",
@@ -103,7 +103,7 @@ class CSVLogger(_Logger):
             row.append(url_data.base_url)
         if self.has_part("parentname"):
             row.append(url_data.parent_url)
-        if self.has_part("baseref"):
+        if self.has_part("base"):
             row.append(url_data.base_ref)
         if self.has_part("result"):
             row.append(url_data.result)
