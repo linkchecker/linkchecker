@@ -199,7 +199,7 @@ class LinkFinder:
         elif attr == 'archive':
             for url in value.split(','):
                 self.found_url(url, name, base, lineno, column)
-        elif attr == 'srcset':
+        elif attr == 'srcset' and not value.startswith('data:'):
             for img_candidate in value.split(','):
                 try:
                     url = img_candidate.split()[0]
