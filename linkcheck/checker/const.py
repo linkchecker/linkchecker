@@ -27,6 +27,7 @@ from dns.exception import DNSException
 # Catch these exception on syntax checks.
 ExcSyntaxList = [
     LinkCheckerError,
+    ValueError,
 ]
 
 # Catch these exceptions on content and connect checks. All other
