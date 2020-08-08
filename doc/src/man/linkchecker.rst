@@ -208,6 +208,10 @@ Checking options
     This option can be given multiple times.
     See section `REGULAR EXPRESSIONS`_ for more info.
 
+.. option:: --no-robots
+
+    Check URLs regardless of any robots.txt files.
+
 .. option:: -p, --password
 
     Read a password from console and use it for HTTP and FTP

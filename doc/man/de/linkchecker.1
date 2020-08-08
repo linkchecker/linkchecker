@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "August 06, 2020" "" "LinkChecker"
+.TH "LINKCHECKER" "1" "August 08, 2020" "" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .
@@ -247,6 +247,11 @@ Gibt ein NNTP Rechner für news: Links. Standard ist die Umgebungsvariable \fI\%
 .TP
 .B \-\-no\-follow\-url=REGEX
 Prüfe URLs die auf den regulären Ausdruck zutreffen, aber führe keine Rekursion durch. Diese Option kann mehrmals angegeben werden. Siehe Abschnitt \fI\%REGULAR EXPRESSIONS\fP für weitere Infos.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-no\-robots
+Check URLs regardless of any robots.txt files.
 .UNINDENT
 .INDENT 0.0
 .TP

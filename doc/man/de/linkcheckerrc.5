@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "August 06, 2020" "" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "August 08, 2020" "" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .
@@ -40,6 +40,11 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 \fBcookiefile=\fP\fIDateiname\fP
 Lese eine Datei mit Cookie\-Daten. Das Cookie Datenformat wird in \fBlinkchecker(1)\fP erklärt. Kommandozeilenoption: \fB\-\-cookiefile\fP
 .TP
+\fBdebugmemory=\fP[\fB0\fP|\fB1\fP]
+Write memory allocation statistics to a file on exit, requires \fI\%meliae\fP\&.
+The default is not to write the file.
+Command line option: none
+.TP
 \fBlocalwebroot=\fP\fISTRING\fP
 Beachten Sie dass das angegebene Verzeichnis in URL\-Syntax sein muss, d.h. es muss einen normalen statt einen umgekehrten Schrägstrich zum Aneinanderfügen von Verzeichnissen benutzen. Und das angegebene Verzeichnis muss mit einem Schrägstrich enden. Kommandozeilenoption: none
 .TP
@@ -70,14 +75,35 @@ Falls der Wert Null ist werden SSL Zertifikate nicht überprüft. Falls er auf E
 \fBmaxrunseconds=\fP\fINUMMER\fP
 Hört nach der angegebenen Anzahl von Sekunden auf, neue URLs zu prüfen. Dies ist dasselbe als wenn der Benutzer nach der gegebenen Anzahl von Sekunden stoppt (durch Drücken von Strg\-C). Kommandozeilenoption: none
 .TP
+\fBmaxfilesizedownload=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will be ignored, without downloading anything
+if accessed over http and an accurate Content\-Length header was returned.
+No more than this amount of a file will be downloaded.
+The default is 5242880 (5 MB).
+Command line option: none
+.TP
+\fBmaxfilesizeparse=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will not be parsed for links.
+The default is 1048576 (1 MB).
+Command line option: none
+.TP
 \fBmaxnumurls=\fP\fINUMMER\fP
 Maximale Anzahl von URLs die geprüft werden. Neue URLs werden nicht angenommen nachdem die angegebene Anzahl von URLs geprüft wurde. Kommandozeilenoption: none
 .TP
 \fBmaxrequestspersecond=\fP\fINUMMER\fP
 Limit the maximum number of requests per second to one host.
+The default is 10.
+Command line option: none
+.TP
+\fBrobotstxt=\fP[\fB0\fP|\fB1\fP]
+When using http, fetch robots.txt, and confirm whether each URL should
+be accessed before checking.
+The default is to use robots.txt files.
+Command line option: \fB\-\-no\-robots\fP
 .TP
 \fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
 Allowed URL schemes as comma\-separated list.
+Command line option: none
 .UNINDENT
 .SS filtering
 .INDENT 0.0

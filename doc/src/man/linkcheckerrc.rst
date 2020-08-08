@@ -21,6 +21,10 @@ checking
     Read a file with initial cookie data. The cookie data format is
     explained in :manpage:`linkchecker(1)`.
     Command line option: :option:`--cookiefile`
+**debugmemory=**\ [**0**\ \|\ **1**]
+    Write memory allocation statistics to a file on exit, requires :pypi:`meliae`.
+    The default is not to write the file.
+    Command line option: none
 **localwebroot=**\ *STRING*
     When checking absolute URLs inside local files, the given root
     directory is used as base URL.
@@ -67,6 +71,16 @@ checking
     seconds.
     The default is not to stop until all URLs are checked.
     Command line option: none
+**maxfilesizedownload=**\ *NUMBER*
+    Files larger than NUMBER bytes will be ignored, without downloading anything
+    if accessed over http and an accurate Content-Length header was returned.
+    No more than this amount of a file will be downloaded.
+    The default is 5242880 (5 MB).
+    Command line option: none
+**maxfilesizeparse=**\ *NUMBER*
+    Files larger than NUMBER bytes will not be parsed for links.
+    The default is 1048576 (1 MB).
+    Command line option: none
 **maxnumurls=**\ *NUMBER*
     Maximum number of URLs to check. New URLs will not be queued after
     the given number of URLs is checked.
@@ -74,8 +88,16 @@ checking
     Command line option: none
 **maxrequestspersecond=**\ *NUMBER*
     Limit the maximum number of requests per second to one host.
+    The default is 10.
+    Command line option: none
+**robotstxt=**\ [**0**\ \|\ **1**]
+    When using http, fetch robots.txt, and confirm whether each URL should
+    be accessed before checking.
+    The default is to use robots.txt files.
+    Command line option: :option:`--no-robots`
 **allowedschemes=**\ *NAME*\ [**,**\ *NAME*...]
     Allowed URL schemes as comma-separated list.
+    Command line option: none
 
 filtering
 ^^^^^^^^^

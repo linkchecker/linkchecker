@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "August 06, 2020" "" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "August 08, 2020" "" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .
@@ -44,6 +44,11 @@ The default file location is \fB~/.linkchecker/linkcheckerrc\fP on Unix,
 Read a file with initial cookie data. The cookie data format is
 explained in \fBlinkchecker(1)\fP\&.
 Command line option: \fB\-\-cookiefile\fP
+.TP
+\fBdebugmemory=\fP[\fB0\fP|\fB1\fP]
+Write memory allocation statistics to a file on exit, requires \fI\%meliae\fP\&.
+The default is not to write the file.
+Command line option: none
 .TP
 \fBlocalwebroot=\fP\fISTRING\fP
 When checking absolute URLs inside local files, the given root
@@ -100,6 +105,18 @@ seconds.
 The default is not to stop until all URLs are checked.
 Command line option: none
 .TP
+\fBmaxfilesizedownload=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will be ignored, without downloading anything
+if accessed over http and an accurate Content\-Length header was returned.
+No more than this amount of a file will be downloaded.
+The default is 5242880 (5 MB).
+Command line option: none
+.TP
+\fBmaxfilesizeparse=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will not be parsed for links.
+The default is 1048576 (1 MB).
+Command line option: none
+.TP
 \fBmaxnumurls=\fP\fINUMBER\fP
 Maximum number of URLs to check. New URLs will not be queued after
 the given number of URLs is checked.
@@ -108,9 +125,18 @@ Command line option: none
 .TP
 \fBmaxrequestspersecond=\fP\fINUMBER\fP
 Limit the maximum number of requests per second to one host.
+The default is 10.
+Command line option: none
+.TP
+\fBrobotstxt=\fP[\fB0\fP|\fB1\fP]
+When using http, fetch robots.txt, and confirm whether each URL should
+be accessed before checking.
+The default is to use robots.txt files.
+Command line option: \fB\-\-no\-robots\fP
 .TP
 \fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
 Allowed URL schemes as comma\-separated list.
+Command line option: none
 .UNINDENT
 .SS filtering
 .INDENT 0.0
