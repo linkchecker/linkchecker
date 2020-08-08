@@ -17,8 +17,8 @@ man:
 check:
 	@for loc in $(LOCALES); do \
 	  for manfile in $(MANFILES); do \
-	    echo "Checking $$loc/$$manfile"; \
-	    LC_ALL=en_US.UTF-8 MANWIDTH=80 mandoc -T lint -W error $$loc/$$manfile; \
+	    echo "Checking man/$$loc/$$manfile"; \
+	    LC_ALL=en_US.UTF-8 MANWIDTH=80 mandoc -T lint -W error man/$$loc/$$manfile; \
 	  done; \
 	done
 
