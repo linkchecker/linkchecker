@@ -2,6 +2,7 @@
 # from the environment for the first two.
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
+SPHINXINTL    ?= sphinx-intl
 SOURCEDIR     = .
 BUILDDIR      = _build
 LANGUAGE      = en
@@ -19,7 +20,10 @@ html:
 man:
 	@$(SPHINXBUILD) -b man "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../man/$(LANGUAGE) $(SPHINXOPTS) $(O)
 
-.PHONY: help gettext html man Makefile
+locale: gettext
+	@$(SPHINXINTL) update -p ../i18n/gettext -l de
+
+.PHONY: help gettext html locale man Makefile
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

@@ -27,6 +27,10 @@ Create man.po file in i18n/locales/:
 
 ``linkchecker/doc/src $ sphinx-intl update -p ../i18n/gettext -l de``
 
+These two steps can be performed with:
+
+``linkchecker/doc $ make locale``
+
 Create man pages:
 
 ``linkchecker/doc $ make man``

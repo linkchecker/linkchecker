@@ -9,6 +9,9 @@ code: clean
 html:
 	make -C src html
 
+locale:
+	make -C src locale
+
 man:
 	make -C src man; \
 	make -C src -e SPHINXOPTS="-D language='de'" LANGUAGE="de" man
@@ -28,4 +31,4 @@ clean:
 	rm -rf html; \
 	rm -rf man
 
-.PHONY: check clean html man
+.PHONY: check clean html locale man
