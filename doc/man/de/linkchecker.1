@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "August 08, 2020" "" "LinkChecker"
+.TH "LINKCHECKER" "1" "August 09, 2020" "" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .
@@ -236,7 +236,9 @@ Check external URLs.
 .INDENT 0.0
 .TP
 .B \-\-ignore\-url=REGEX
-URLs welche dem angegebenen regulären Ausdruck entsprechen werden ignoriert und nicht geprüft. Diese Option kann mehrmals angegeben werden. Siehe Abschnitt \fI\%REGULAR EXPRESSIONS\fP für weitere Infos.
+URLs matching the given regular expression will only be syntax checked.
+This option can be given multiple times.
+See section \fI\%REGULAR EXPRESSIONS\fP for more info.
 .UNINDENT
 .INDENT 0.0
 .TP

@@ -190,8 +190,7 @@ Checking options
 
 .. option:: --ignore-url=REGEX
 
-    URLs matching the given regular expression will be ignored and not
-    checked.
+    URLs matching the given regular expression will only be syntax checked.
     This option can be given multiple times.
     See section `REGULAR EXPRESSIONS`_ for more info.
 
