@@ -2,7 +2,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 """Remove all lines after a given marker line.
 """
-from __future__ import print_function
 import fileinput
 import sys
 
