@@ -392,6 +392,7 @@ ignored_schemes_other = r"""
 |find       # Mozilla specific
 |isbn       # ISBN (int. book numbers)
 |javascript # JavaScript
+|slack      # Slack Technologies client
 """
 
 ignored_schemes = "^(%s%s%s%s)$" % (
@@ -403,4 +404,3 @@ ignored_schemes = "^(%s%s%s%s)$" % (
 ignored_schemes_re = re.compile(ignored_schemes, re.VERBOSE)
 
 is_unknown_scheme = ignored_schemes_re.match
-

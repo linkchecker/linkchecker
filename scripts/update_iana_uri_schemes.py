@@ -15,6 +15,7 @@ iana_uri_schemes_other = {
     "find": "Mozilla specific",
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
+    "slack": "Slack Technologies client",
 }
 
 filter_uri_schemes_permanent = (
@@ -77,7 +78,7 @@ def main(args):
         other=get_regex(iana_uri_schemes_other),
     )
     res = template % args
-    print(res)
+    print(res.rstrip())
     return 0
 
 
