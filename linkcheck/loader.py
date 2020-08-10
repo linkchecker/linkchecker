@@ -10,7 +10,7 @@ import os
 import sys
 import zipfile
 import importlib
-import imp
+
 from .fileutil import is_writable_by_others
 
 
@@ -67,7 +67,10 @@ def get_folder_modules(folder, parentpackage):
         fullname = os.path.join(folder, filename)
         modname = parentpackage + "." + filename[:-3]
         try:
-            yield imp.load_source(modname, fullname)
+            spec = importlib.util.spec_from_file_location(modname, fullname)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            yield module
         except ImportError as msg:
             print("WARN: could not load file %s: %s" % (fullname, msg))
 
