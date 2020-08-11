@@ -45,10 +45,15 @@ manpages_url = '{page}.html'
 man_pages = [
     (
      'man/linkchecker', 'linkchecker',
+     'Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und '
+     'Webseiten auf ungültige Verknüpfungen'
+     if tags.has('de') else
      'command line client to check HTML documents and websites for broken links',
      ['Bastian Kleineidam <bastian.kleineidam@web.de>'], 1),
     (
      'man/linkcheckerrc', 'linkcheckerrc',
+     'Konfigurationsdatei für LinkChecker'
+     if tags.has('de') else
      'configuration file for LinkChecker',
      ['Bastian Kleineidam <bastian.kleineidam@web.de>'], 5),
 ]

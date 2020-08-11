@@ -14,7 +14,7 @@ locale:
 
 man:
 	make -C src man; \
-	make -C src -e SPHINXOPTS="-D language='de'" LANGUAGE="de" man
+	make -C src -e SPHINXOPTS="-D language='de' -t de" LANGUAGE="de" man
 
 # check all makefiles for formatting warnings
 check:
