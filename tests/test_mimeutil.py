@@ -40,3 +40,5 @@ class TestMiMeutil(unittest.TestCase):
         self.mime_test("file.wml", "text/vnd.wap.wml")
         self.mime_test("sitemap.xml", "application/xml+sitemap")
         self.mime_test("sitemapindex.xml", "application/xml+sitemapindex")
+        self.mime_test("no_decl_sitemap.xml", "application/xml+sitemap")
+        self.mime_test("no_decl_sitemapindex.xml", "application/xml+sitemapindex")
