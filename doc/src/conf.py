@@ -25,6 +25,8 @@ locale_dirs = ['../i18n/locales']
 
 templates_path = ['_templates']
 
+today_fmt = '%B %d, %Y'
+
 # -- Options for HTML output -------------------------------------------------
 
 html_favicon = 'images/favicon.ico'
