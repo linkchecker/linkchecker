@@ -63,7 +63,10 @@ def normpath(path):
 # List Python modules in the form (module, name, version attribute)
 Modules = (
     # required modules
+    ("bs4", "Beautiful Soup", "__version__"),
+    ("dns.version", "dnspython", "version"),
     ("requests", "Requests", "__version__"),
+    ("xdg", "PyXDG", "__version__"),
     # optional modules
     ("argcomplete", "Argcomplete", None),
     ("GeoIP", "GeoIP", 'lib_version'),  # on Unix systems
