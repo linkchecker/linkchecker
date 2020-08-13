@@ -21,6 +21,7 @@ import os
 
 from linkcheck.configuration import get_user_data
 from . import _Logger
+from .. import log, LOG_CHECK
 
 
 class BlacklistLogger(_Logger):
@@ -83,6 +84,14 @@ class BlacklistLogger(_Logger):
                 if line.startswith('#') or not line:
                     continue
                 value, key = line.split(None, 1)
+                key = key.strip('"')
+                if not key.startswith('('):
+                    log.critical(
+                        LOG_CHECK,
+                        _("invalid line starting with '%(linestart)s' in %(blacklist)s")
+                        % {"linestart": line[:12], "blacklist": self.filename}
+                    )
+                    raise SystemExit(2)
                 self.blacklist[key] = int(value)
 
     def write_blacklist(self):
