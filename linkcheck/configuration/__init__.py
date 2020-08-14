@@ -204,7 +204,7 @@ class Configuration(dict):
         self["warnings"] = True
         self["fileoutput"] = []
         self['output'] = 'text'
-        self["status"] = False
+        self["status"] = True
         self["status_wait_seconds"] = 5
         self['logger'] = None
         self.loggers = {}

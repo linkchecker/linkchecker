@@ -337,8 +337,8 @@ group.add_argument(
 group.add_argument(
     "--no-status",
     action="store_false",
+    default=None,
     dest="status",
-    default=True,
     help=_("Do not print check status messages."),
 )
 group.add_argument(
@@ -656,7 +656,7 @@ if options.quiet:
     config["logger"] = config.logger_new("none")
 if options.recursionlevel is not None:
     config["recursionlevel"] = options.recursionlevel
-if options.status:
+if options.status is not None:
     config["status"] = options.status
 if options.threads is not None:
     if options.threads < 1:
