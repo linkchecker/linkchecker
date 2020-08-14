@@ -113,7 +113,7 @@ class CssSyntaxCheck(_ContentPlugin):
             if response.headers.get('X-W3C-Validator-Status', 'Invalid') == 'Valid':
                 url_data.add_info("W3C Validator: %s" % _("valid CSS syntax"))
                 return
-            check_w3_errors(url_data, response.text, "W3C HTML")
+            check_w3_errors(url_data, response.text, "W3C CSS")
         except requests.exceptions.RequestException:
             pass  # ignore service failures
         except Exception as msg:
