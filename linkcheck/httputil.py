@@ -51,6 +51,7 @@ def asn1_generaltime_to_seconds(timestr):
     YYYYMMDDhhmmssZ
     YYYYMMDDhhmmss+hhmm
     YYYYMMDDhhmmss-hhmm
+
     @return: a datetime object or None on error
     """
     res = None

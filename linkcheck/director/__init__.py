@@ -27,6 +27,7 @@ from . import aggregator, console
 def check_urls(aggregate):
     """Main check function; checks all configured URLs until interrupted
     with Ctrl-C.
+
     @return: None
     """
     try:

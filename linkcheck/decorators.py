@@ -16,22 +16,22 @@
 """
 Simple decorators (usable in Python >= 2.4).
 
-Example:
+Example::
 
-@synchronized(thread.allocate_lock())
-def f():
-    "Synchronized function"
-    print("i am synchronized:", f, f.__doc__)
+    @synchronized(thread.allocate_lock())
+    def f():
+        "Synchronized function"
+        print("i am synchronized:", f, f.__doc__)
 
-@deprecated
-def g():
-    "this function is deprecated"
-    pass
+    @deprecated
+    def g():
+        "this function is deprecated"
+        pass
 
-@notimplemented
-def h():
-    "todo"
-    pass
+    @notimplemented
+    def h():
+        "todo"
+        pass
 
 """
 import warnings

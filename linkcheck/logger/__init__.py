@@ -446,8 +446,9 @@ class _Logger(abc.ABC):
 
     def format_modified(self, modified, sep=" "):
         """Format modification date in UTC if it's not None.
+
         @param modified: modification date in UTC
-        @ptype modified: datetime or None
+        @type modified: datetime or None
         @return: formatted date or empty string
         @rtype: unicode
         """

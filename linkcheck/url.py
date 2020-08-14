@@ -493,9 +493,9 @@ def splitport(host, port=0):
     the given default port is returned.
 
     @param host: host name
-    @ptype host: string
+    @type host: string
     @param port: the port number (default 0)
-    @ptype port: int
+    @type port: int
 
     @return: tuple of (host, port)
     @rtype: tuple of (string, int)

@@ -36,8 +36,9 @@ def is_valid_ip(ip):
 
 def resolve_host(host):
     """
-    @host: hostname or IP address
     Return list of ip numbers for given host.
+
+    @param host: hostname or IP address
     """
     ips = []
     try:

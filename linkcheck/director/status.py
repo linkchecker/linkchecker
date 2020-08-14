@@ -23,12 +23,13 @@ class Status(task.LoggedCheckedTask):
 
     def __init__(self, aggregator, wait_seconds):
         """Initialize the status logger task.
+
         @param urlqueue: the URL queue
-        @ptype urlqueue: Urlqueue
+        @type urlqueue: Urlqueue
         @param logger: the logger object to inform about status
-        @ptype logger: console.StatusLogger
+        @type logger: console.StatusLogger
         @param wait_seconds: interval in seconds to report status
-        @ptype wait_seconds: int
+        @type wait_seconds: int
         """
         logger = aggregator.config.status_logger
         super().__init__(logger)

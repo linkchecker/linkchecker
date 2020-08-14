@@ -254,8 +254,9 @@ def dump(env, form):
 
 def format_error(why):
     """Format standard error page.
+
     @param why: error message
-    @ptype why: unicode
+    @type why: unicode
     @return: HTML page content
     @rtype: unicode
     """

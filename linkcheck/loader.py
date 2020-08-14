@@ -2,7 +2,8 @@
 """
 Functions to load plugin modules.
 
-Example usage:
+Example usage::
+
     modules = loader.get_package_modules('plugins')
     plugins = loader.get_plugins(modules, PluginClass)
 """
@@ -33,6 +34,7 @@ def get_package_modules(packagename):
     """Find all valid modules in the given package which must be a folder
     in the same directory as this loader.py module. A valid module has
     a .py extension, and is importable.
+
     @return: all loaded valid modules
     @rtype: iterator of module
     """
@@ -75,7 +77,8 @@ def get_folder_modules(folder, parentpackage):
 def get_importable_files(folder):
     """Find all module files in the given folder that end with '.py' and
     don't start with an underscore.
-    @return module names
+
+    @return: module names
     @rtype: iterator of string
     """
     for fname in os.listdir(folder):
@@ -92,10 +95,11 @@ def get_importable_files(folder):
 
 def get_plugins(modules, classes):
     """Find all given (sub-)classes in all modules.
+
     @param modules: the modules to search
-    @ptype modules: iterator of modules
+    @type modules: iterator of modules
     @return: found classes
-    @rytpe: iterator of class objects
+    @rtype: iterator of class objects
     """
     for module in modules:
         for plugin in get_module_plugins(module, classes):
