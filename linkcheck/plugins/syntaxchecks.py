@@ -54,8 +54,9 @@ class HtmlSyntaxCheck(_ContentPlugin):
         self.timer = W3Timer()
 
     def applies_to(self, url_data):
-        """Check for HTML and extern."""
-        return url_data.is_html() and not url_data.extern[0]
+        """Check for HTML, extern and session."""
+        return (url_data.is_html() and not url_data.extern[0]
+                and hasattr(url_data, "session"))
 
     def check(self, url_data):
         """Check HTML syntax of given URL."""
@@ -88,8 +89,9 @@ class CssSyntaxCheck(_ContentPlugin):
         self.timer = W3Timer()
 
     def applies_to(self, url_data):
-        """Check for CSS and extern."""
-        return url_data.is_css() and not url_data.extern[0]
+        """Check for CSS, extern and session."""
+        return (url_data.is_css() and not url_data.extern[0]
+                and hasattr(url_data, "session"))
 
     def check(self, url_data):
         """Check CSS syntax of given URL."""
