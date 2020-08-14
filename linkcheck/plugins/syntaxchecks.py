@@ -127,15 +127,21 @@ def check_w3_errors(url_data, xml, w3type):
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
     for error in dom.getElementsByTagName('m:error'):
-        warnmsg = _(
-            "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
-        )
+        if w3type == "W3C HTML":
+            warnmsg = _(
+                "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
+            )
+        else:
+            warnmsg = _(
+                "%(w3type)s validation error at line %(line)s: %(msg)s"
+            )
         attrs = {
             "w3type": w3type,
             "line": getXmlText(error, "m:line"),
-            "column": getXmlText(error, "m:col"),
             "msg": getXmlText(error, "m:message"),
         }
+        if w3type == "W3C HTML":
+            attrs["column"] = getXmlText(error, "m:col")
         url_data.add_warning(warnmsg % attrs)
 
 
