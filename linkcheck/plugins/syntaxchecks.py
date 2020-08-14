@@ -52,9 +52,13 @@ class HtmlSyntaxCheck(_ContentPlugin):
         """Initialize plugin."""
         super().__init__(config)
         self.timer = W3Timer()
+        log.warn(
+            LOG_PLUGIN, _("HTML syntax check plugin is broken. Fixes welcome.")
+        )
 
     def applies_to(self, url_data):
         """Check for HTML, extern and session."""
+        return False  # XXX Plugin disabled
         return (url_data.is_html() and not url_data.extern[0]
                 and hasattr(url_data, "session"))
 
