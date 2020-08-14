@@ -18,7 +18,6 @@ Functions used by the WSGI script.
 """
 
 import html
-import os
 import threading
 import locale
 import re
@@ -137,7 +136,7 @@ def encode(s):
     return s.encode(HTML_ENCODING, 'ignore')
 
 
-def checklink(form=None, env=os.environ):
+def checklink(form, env):
     """Validates the CGI form and checks the given links."""
     if form is None:
         form = {}
