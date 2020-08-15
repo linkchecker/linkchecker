@@ -199,10 +199,19 @@ class LinkFinder:
         elif attr == 'archive':
             for url in value.split(','):
                 self.found_url(url, name, base, lineno, column)
-        elif attr == 'srcset':
+        elif attr == 'srcset' and not value.startswith('data:'):
             for img_candidate in value.split(','):
-                url = img_candidate.split()[0]
-                self.found_url(url, name, base, lineno, column)
+                try:
+                    url = img_candidate.split()[0]
+                except IndexError:
+                    log.debug(
+                        LOG_CHECK,
+                        _("trailing comma in line: "
+                          "%(line)s srcset attribute: %(value)s")
+                        % {"line": lineno, "value": value}
+                    )
+                else:
+                    self.found_url(url, name, base, lineno, column)
         else:
             self.found_url(value, name, base, lineno, column)
 
