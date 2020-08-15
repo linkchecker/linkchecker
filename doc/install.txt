@@ -55,8 +55,8 @@ First, install the required software.
    ClamAv from https://www.clamav.net/
 
 7. *Optional, for GNOME proxy setting parsing:*
-    PyGObject and GIO.
-    Best installed from your distribution e.g. ``python3-gi``
+   PyGObject and GIO.
+   Best installed from your distribution e.g. ``python3-gi``
 
 8. *Optional, to run the WSGI web interface:*
    Apache from https://httpd.apache.org/

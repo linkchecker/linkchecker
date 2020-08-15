@@ -20,6 +20,8 @@ Installation
 .. code-block:: console
 
    $ pip3 install git+https://github.com/linkchecker/linkchecker.git
+   
+See the :doc:`installation document <install>` for more information.
 
 Basic usage
 ------------
@@ -83,6 +85,8 @@ and test integration.
    :hidden:
 
    faq
+   install
+   upgrading
    man/linkchecker
    man/linkcheckerrc
    code/index
