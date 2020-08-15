@@ -27,7 +27,7 @@ from ..decorators import synchronized
 from ..cache import urlqueue
 from ..htmlutil import loginformsearch
 from ..cookies import from_file
-from . import logger, status, checker, interrupt
+from . import logger, status, checker, interrupter
 
 
 _threads_lock = threading.RLock()
@@ -114,7 +114,7 @@ class Aggregate:
             t.start()
             self.threads.append(t)
         if self.config["maxrunseconds"]:
-            t = interrupt.Interrupt(self.config["maxrunseconds"])
+            t = interrupter.Interrupt(self.config["maxrunseconds"])
             t.start()
             self.threads.append(t)
         num = self.config["threads"]
