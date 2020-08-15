@@ -89,4 +89,6 @@ and test integration.
    upgrading
    man/linkchecker
    man/linkcheckerrc
+   contributing
+   code_of_conduct
    code/index
