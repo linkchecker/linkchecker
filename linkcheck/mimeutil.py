@@ -56,8 +56,9 @@ PARSE_CONTENTS = {
     "text/plain+opera": re.compile(r'^Opera Hotlist'),
     "text/plain+chromium": re.compile(r'^{\s*"checksum":'),
     "text/plain+linkchecker": re.compile(r'^# LinkChecker URL list', re.IGNORECASE),
-    "application/xml+sitemapindex": re.compile(r'(?i)<\?xml[^<]+<sitemapindex\s+'),
-    "application/xml+sitemap": re.compile(r'<\?xml[^<]+<urlset\s+', re.IGNORECASE),
+    "application/xml+sitemapindex": re.compile(r'(<\?xml[^<]+)?<sitemapindex\s+',
+                                               re.IGNORECASE),
+    "application/xml+sitemap": re.compile(r'(<\?xml[^<]+)?<urlset\s+', re.IGNORECASE),
 }
 
 
