@@ -160,11 +160,17 @@
 # Stop checking new URLs after the given number of seconds. Same as if the
 # user hits Ctrl-C after X seconds.
 #maxrunseconds=600
+# Don't download files larger than the given number of bytes
+#maxfilesizedownload=5242880
+# Don't parse files larger than the given number of bytes
+#maxfilesizeparse=1048576
 # Maximum number of URLs to check. New URLs will not be queued after the
 # given number of URLs is checked.
 #maxnumurls=153
 # Maximum number of requests per second to one host.
 #maxrequestspersecond=10
+# Respect the instructions in any robots.txt files
+#robotstxt=1
 # Allowed URL schemes as a comma-separated list.
 #allowedschemes=http,https
 
