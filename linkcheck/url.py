@@ -417,13 +417,6 @@ def url_needs_quoting(url):
     return not _safe_url_chars_ro.match(url)
 
 
-def url_unsplit(parts):
-    """Rejoin URL parts to a string."""
-    if parts[2] == default_ports.get(parts[0]):
-        return "%s://%s%s" % (parts[0], parts[1], parts[3])
-    return "%s://%s:%d%s" % parts
-
-
 def splitport(host, port=0):
     """Split optional port number from host. If host has no port number,
     the given default port is returned.
