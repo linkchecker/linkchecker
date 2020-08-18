@@ -547,16 +547,6 @@ class TestUrl(unittest.TestCase):
         self.assertTrue(is_safe_domain("a-b.example.com"))
         self.assertTrue(is_safe_domain("x1.example.com"))
 
-    def test_duplicate_urls(self):
-        is_dup = linkcheck.url.is_duplicate_content_url
-        self.assertTrue(is_dup("http://example.org", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org/", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/"))
-        self.assertTrue(is_dup("http://example.org/index.html", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/index.html"))
-        self.assertTrue(is_dup("http://example.org/index.htm", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/index.htm"))
-
     def test_splitport(self):
         splitport = linkcheck.url.splitport
         netloc = "hostname"

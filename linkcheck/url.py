@@ -473,31 +473,3 @@ def splitport(host, port=0):
             # For an invalid non-empty port leave the host name as is
             pass
     return host, port
-
-
-def shorten_duplicate_content_url(url):
-    """Remove anchor part and trailing index.html from URL."""
-    if '#' in url:
-        url = url.split('#', 1)[0]
-    if url.endswith('index.html'):
-        return url[:-10]
-    if url.endswith('index.htm'):
-        return url[:-9]
-    return url
-
-
-def is_duplicate_content_url(url1, url2):
-    """Check if both URLs are allowed to point to the same content."""
-    if url1 == url2:
-        return True
-    if url2 in url1:
-        url1 = shorten_duplicate_content_url(url1)
-        if not url2.endswith('/') and url1.endswith('/'):
-            url2 += '/'
-        return url1 == url2
-    if url1 in url2:
-        url2 = shorten_duplicate_content_url(url2)
-        if not url1.endswith('/') and url2.endswith('/'):
-            url1 += '/'
-        return url1 == url2
-    return False
