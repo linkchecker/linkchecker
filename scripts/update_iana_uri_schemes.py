@@ -4,25 +4,18 @@ import csv
 import requests
 
 iana_uri_schemes = "https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml"
-# CSV format: URI Scheme,Template,Description,Reference
-csv_iana_uri_schemes_permanent = (
+# CSV format: URI Scheme,Template,Description,Status,Well-Known URI Support,Reference,Notes
+csv_iana_uri_schemes = (
     "https://www.iana.org/assignments/uri-schemes/uri-schemes-1.csv"
 )
-csv_iana_uri_schemes_provisional = (
-    "https://www.iana.org/assignments/uri-schemes/uri-schemes-2.csv"
-)
-csv_iana_uri_schemes_historical = (
-    "https://www.iana.org/assignments/uri-schemes/uri-schemes-3.csv"
-)
 
-iana_uri_schemes_permanent = {}
-iana_uri_schemes_provisional = {}
-iana_uri_schemes_historical = {}
+iana_uri_schemes_dict = {}
 iana_uri_schemes_other = {
     "clsid": "Microsoft specific",
     "find": "Mozilla specific",
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
+    "slack": "Slack Technologies client",
 }
 
 filter_uri_schemes_permanent = (
@@ -66,28 +59,26 @@ is_unknown_scheme = ignored_schemes_re.match
 
 
 def main(args):
-    parse_csv_file(csv_iana_uri_schemes_permanent, iana_uri_schemes_permanent)
-    parse_csv_file(csv_iana_uri_schemes_provisional, iana_uri_schemes_provisional)
-    parse_csv_file(csv_iana_uri_schemes_historical, iana_uri_schemes_historical)
+    parse_csv_file(csv_iana_uri_schemes, iana_uri_schemes_dict)
     for scheme in iana_uri_schemes_other:
         if (
-            scheme in iana_uri_schemes_permanent
-            or scheme in iana_uri_schemes_provisional
-            or scheme in iana_uri_schemes_historical
+            scheme in iana_uri_schemes_dict["Permanent"]
+            or scheme in iana_uri_schemes_dict["Provisional"]
+            or scheme in iana_uri_schemes_dict["Historical"]
         ):
             raise ValueError(scheme)
     for scheme in filter_uri_schemes_permanent:
-        if scheme in iana_uri_schemes_permanent:
-            del iana_uri_schemes_permanent[scheme]
+        if scheme in iana_uri_schemes_dict["Permanent"]:
+            del iana_uri_schemes_dict["Permanent"][scheme]
     args = dict(
         uri=iana_uri_schemes,
-        permanent=get_regex(iana_uri_schemes_permanent),
-        provisional=get_regex(iana_uri_schemes_provisional),
-        historical=get_regex(iana_uri_schemes_historical),
+        permanent=get_regex(iana_uri_schemes_dict["Permanent"]),
+        provisional=get_regex(iana_uri_schemes_dict["Provisional"]),
+        historical=get_regex(iana_uri_schemes_dict["Historical"]),
         other=get_regex(iana_uri_schemes_other),
     )
     res = template % args
-    print(res)
+    print(res.rstrip())
     return 0
 
 
@@ -102,15 +93,17 @@ def get_regex(schemes):
 def parse_csv_file(url, res):
     """Parse given URL and write res with {scheme -> description}"""
     response = requests.get(url, stream=True)
-    reader = csv.reader(response.iter_lines())
+    reader = csv.reader(response.iter_lines(decode_unicode=True))
     first_row = True
     for row in reader:
         if first_row:
             # skip first row
             first_row = False
         else:
-            scheme, template, description, reference = row
-            res[scheme] = description
+            scheme, template, description, status, urisupport, reference, notes = row
+            if status not in res:
+                res[status] = {}
+            res[status][scheme] = description
 
 
 if __name__ == "__main__":
