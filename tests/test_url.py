@@ -20,7 +20,7 @@ Test url routines.
 from . import need_posix, need_windows
 import unittest
 import os
-import re
+
 import linkcheck.url
 
 # 'ftp://user:pass@ftp.foo.net/foo/bar':
@@ -66,16 +66,6 @@ class TestUrl(unittest.TestCase):
         self.assertEqual(
             linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl
         )
-
-    def test_safe_patterns(self):
-        is_safe_host = linkcheck.url.is_safe_host
-        safe_host_pattern = linkcheck.url.safe_host_pattern
-        self.assertTrue(is_safe_host("example.org"))
-        self.assertTrue(is_safe_host("example.org:80"))
-        self.assertTrue(not is_safe_host("example.org:21"))
-        pat = safe_host_pattern("example.org")
-        ro = re.compile(pat)
-        self.assertTrue(ro.match("http://example.org:80/"))
 
     def test_url_quote(self):
         def url_quote(url):

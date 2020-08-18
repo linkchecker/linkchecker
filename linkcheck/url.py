@@ -81,7 +81,6 @@ safe_url_pattern = r"%s://%s%s(#%s)?" % (
 is_safe_char = re.compile("(?i)^%s$" % _safe_char).match
 is_safe_url = re.compile("(?i)^%s$" % safe_url_pattern).match
 is_safe_domain = re.compile("(?i)^%s$" % _safe_domain_pattern).match
-is_safe_host = re.compile("(?i)^%s$" % _safe_host_pattern).match
 is_safe_path = re.compile("(?i)^%s$" % _safe_path_pattern).match
 is_safe_parameter = re.compile("(?i)^%s$" % _safe_param_pattern).match
 is_safe_query = re.compile("(?i)^%s$" % _safe_query_pattern).match
@@ -112,16 +111,6 @@ def is_numeric_port(portstr):
         if 0 < port < 65536:
             return port
     return False
-
-
-def safe_host_pattern(host):
-    """Return regular expression pattern with given host for URL testing."""
-    return "(?i)%s://%s%s(#%s)?" % (
-        _safe_scheme_pattern,
-        host,
-        _safe_path_pattern,
-        _safe_fragment_pattern,
-    )
 
 
 def parse_qsl(qs, encoding, keep_blank_values=0, strict_parsing=0):
