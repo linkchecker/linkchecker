@@ -505,20 +505,6 @@ class TestUrl(unittest.TestCase):
         url = "ä.."
         self.assertRaises(UnicodeError, idna_encode, url)
 
-    def test_match_host(self):
-        # Test host matching.
-        match_host = linkcheck.url.match_host
-        match_url = linkcheck.url.match_url
-        self.assertTrue(not match_host("", []))
-        self.assertTrue(not match_host("", [".localhost"]))
-        self.assertTrue(not match_host("localhost", []))
-        self.assertTrue(not match_host("localhost", [".localhost"]))
-        self.assertTrue(match_host("a.localhost", [".localhost"]))
-        self.assertTrue(match_host("localhost", ["localhost"]))
-        self.assertTrue(not match_url("", []))
-        self.assertTrue(not match_url("a", []))
-        self.assertTrue(match_url("http://example.org/hulla", ["example.org"]))
-
     def test_splitparam(self):
         # Path parameter split test.
         p = [
@@ -553,14 +539,6 @@ class TestUrl(unittest.TestCase):
         self.assertFalse(is_numeric_port("66000"))
         self.assertFalse(is_numeric_port("-1"))
         self.assertFalse(is_numeric_port("a"))
-
-    def test_split(self):
-        url_split = linkcheck.url.url_split
-        url_unsplit = linkcheck.url.url_unsplit
-        url = "http://example.org/whoops"
-        self.assertEqual(url_unsplit(url_split(url)), url)
-        url = "http://example.org:123/whoops"
-        self.assertEqual(url_unsplit(url_split(url)), url)
 
     def test_safe_domain(self):
         is_safe_domain = linkcheck.url.is_safe_domain

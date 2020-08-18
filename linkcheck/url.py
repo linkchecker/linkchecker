@@ -426,27 +426,6 @@ def document_quote(document):
     return doc
 
 
-def match_url(url, domainlist):
-    """Return True if host part of url matches an entry in given domain list.
-    """
-    if not url:
-        return False
-    return match_host(url_split(url)[1], domainlist)
-
-
-def match_host(host, domainlist):
-    """Return True if host matches an entry in given domain list."""
-    if not host:
-        return False
-    for domain in domainlist:
-        if domain.startswith('.'):
-            if host.endswith(domain):
-                return True
-        elif host == domain:
-            return True
-    return False
-
-
 _nopathquote_chars = "-;/=,~*+()@!"
 if os.name == 'nt':
     _nopathquote_chars += "|"
@@ -465,20 +444,6 @@ def url_needs_quoting(url):
         # since '$' matches immediately before a end-of-line
         return True
     return not _safe_url_chars_ro.match(url)
-
-
-def url_split(url):
-    """Split url in a tuple (scheme, hostname, port, document) where
-    hostname is always lowercased.
-    Precondition: url is syntactically correct URI (eg has no whitespace)
-    """
-    scheme, netloc = urllib.parse.splittype(url)
-    host, document = urllib.parse.splithost(netloc)
-    port = default_ports.get(scheme, 0)
-    if host:
-        host = host.lower()
-        host, port = splitport(host, port=port)
-    return scheme, host, port, document
 
 
 def url_unsplit(parts):
