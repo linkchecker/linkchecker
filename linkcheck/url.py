@@ -224,15 +224,6 @@ def url_fix_host(urlparts, encoding):
     return is_idn
 
 
-def url_fix_common_typos(url):
-    """Fix common typos in given URL like forgotten colon."""
-    if url.startswith("http//"):
-        url = "http://" + url[6:]
-    elif url.startswith("https//"):
-        url = "https://" + url[7:]
-    return url
-
-
 def url_fix_mailto_urlsplit(urlparts):
     """Split query part of mailto url if found."""
     sep = "?"

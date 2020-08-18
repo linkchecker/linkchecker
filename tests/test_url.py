@@ -419,18 +419,6 @@ class TestUrl(unittest.TestCase):
         nurl = "%C3%A4%C3%B6%C3%BC?:"
         self.urlnormtest(url, nurl)
 
-    def test_fixing(self):
-        # Test url fix method.
-        url = "http//www.example.org"
-        nurl = "http://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = "http//www.example.org"
-        nurl = "http://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = "https//www.example.org"
-        nurl = "https://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-
     def test_valid(self):
         # Test url validity functions.
         u = "http://www.example.com"
