@@ -17,7 +17,7 @@
 """
 Test url routines.
 """
-from . import need_network, need_posix, need_windows
+from . import need_posix, need_windows
 import unittest
 import os
 import re
@@ -546,10 +546,6 @@ class TestUrl(unittest.TestCase):
         self.assertFalse(is_safe_domain("a_b.example.com"))
         self.assertTrue(is_safe_domain("a-b.example.com"))
         self.assertTrue(is_safe_domain("x1.example.com"))
-
-    @need_network
-    def test_get_content(self):
-        linkcheck.url.get_content("http://www.debian.org/")
 
     def test_duplicate_urls(self):
         is_dup = linkcheck.url.is_duplicate_content_url

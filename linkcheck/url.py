@@ -21,10 +21,6 @@ import os
 import re
 import urllib.parse
 
-import requests
-
-from . import log, LOG_CHECK
-
 for scheme in ('ldap', 'irc'):
     if scheme not in urllib.parse.uses_netloc:
         urllib.parse.uses_netloc.append(scheme)
@@ -477,50 +473,6 @@ def splitport(host, port=0):
             # For an invalid non-empty port leave the host name as is
             pass
     return host, port
-
-
-def get_content(url, user=None, password=None, proxy=None, data=None, addheaders=None):
-    """Get URL content and info.
-
-    @return: (decoded text content of URL, headers) or
-             (None, errmsg) on error.
-    @rtype: tuple (String, dict) or (None, String)
-    """
-    from . import configuration
-
-    headers = {
-        'User-Agent': configuration.UserAgent,
-    }
-    if addheaders:
-        headers.update(addheaders)
-    method = 'GET'
-    kwargs = dict(headers=headers)
-    if user and password:
-        kwargs['auth'] = (user, password)
-    if data:
-        kwargs['data'] = data
-        method = 'POST'
-    if proxy:
-        kwargs['proxy'] = dict(http=proxy)
-    from .configuration import get_share_file
-
-    try:
-        kwargs["verify"] = get_share_file('cacert.pem')
-    except ValueError:
-        pass
-    try:
-        response = requests.request(method, url, **kwargs)
-        return response.text, response.headers
-    except (
-        requests.exceptions.RequestException,
-        requests.exceptions.BaseHTTPError,
-    ) as msg:
-        log.warn(
-            LOG_CHECK,
-            ("Could not get content of URL %(url)s: %(msg)s.")
-            % {"url": url, "msg": str(msg)},
-        )
-        return None, str(msg)
 
 
 def shorten_duplicate_content_url(url):
