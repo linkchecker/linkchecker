@@ -78,13 +78,8 @@ safe_url_pattern = r"%s://%s%s(#%s)?" % (
     _safe_fragment_pattern,
 )
 
-is_safe_char = re.compile("(?i)^%s$" % _safe_char).match
 is_safe_url = re.compile("(?i)^%s$" % safe_url_pattern).match
 is_safe_domain = re.compile("(?i)^%s$" % _safe_domain_pattern).match
-is_safe_path = re.compile("(?i)^%s$" % _safe_path_pattern).match
-is_safe_parameter = re.compile("(?i)^%s$" % _safe_param_pattern).match
-is_safe_query = re.compile("(?i)^%s$" % _safe_query_pattern).match
-is_safe_fragment = re.compile("(?i)^%s$" % _safe_fragment_pattern).match
 
 
 # snatched form urlparse.py
