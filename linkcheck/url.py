@@ -33,13 +33,6 @@ for scheme in ('ldap', 'irc'):
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 url_encoding = "utf-8"
 
-
-# constants defining url part indexes
-SCHEME = 0
-HOSTNAME = DOMAIN = 1
-PORT = 2
-DOCUMENT = 3
-
 default_ports = {
     'http': 80,
     'https': 443,
