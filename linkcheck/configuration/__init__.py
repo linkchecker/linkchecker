@@ -448,7 +448,18 @@ def get_gnome_proxy(protocol="HTTP"):
     except ImportError:
         return None
     try:
-        settings = Gio.Settings.new("org.gnome.system.proxy.%s" % protocol.lower())
+        schema_id = "org.gnome.system.proxy.%s" % protocol.lower()
+        # If the schema is not installed Gio.Settings.new() causes Trace/breakpoint trap
+        source = Gio.SettingsSchemaSource.get_default()
+        if source is None:
+            log.debug(LOG_CHECK, "No GSettings schemas are installed")
+            return None
+        schema = source.lookup(schema_id, False)
+        if schema is None:
+            log.debug(LOG_CHECK, "%s not installed" % schema_id)
+            return None
+
+        settings = Gio.Settings.new(schema_id)
         if protocol == "HTTP" and not settings.get_boolean("enabled"):
             return None
         host = settings.get_string("host")
