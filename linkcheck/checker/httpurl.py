@@ -305,7 +305,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             if self.url_connection.status_code == 429:
                 self.add_warning(
                     "Rate limited (Retry-After: %s)"
-                    % self.headers.get(_("Retry-After")),
+                    % self.headers.get("Retry-After"),
                     tag=WARN_URL_RATE_LIMITED,
                 )
 
