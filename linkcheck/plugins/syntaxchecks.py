@@ -52,10 +52,15 @@ class HtmlSyntaxCheck(_ContentPlugin):
         """Initialize plugin."""
         super().__init__(config)
         self.timer = W3Timer()
+        log.warn(
+            LOG_PLUGIN, _("HTML syntax check plugin is broken. Fixes welcome.")
+        )
 
     def applies_to(self, url_data):
-        """Check for HTML and extern."""
-        return url_data.is_html() and not url_data.extern[0]
+        """Check for HTML, extern and session."""
+        return False  # XXX Plugin disabled
+        return (url_data.is_html() and not url_data.extern[0]
+                and hasattr(url_data, "session"))
 
     def check(self, url_data):
         """Check HTML syntax of given URL."""
@@ -88,8 +93,9 @@ class CssSyntaxCheck(_ContentPlugin):
         self.timer = W3Timer()
 
     def applies_to(self, url_data):
-        """Check for CSS and extern."""
-        return url_data.is_css() and not url_data.extern[0]
+        """Check for CSS, extern and session."""
+        return (url_data.is_css() and not url_data.extern[0]
+                and hasattr(url_data, "session"))
 
     def check(self, url_data):
         """Check CSS syntax of given URL."""
@@ -107,7 +113,7 @@ class CssSyntaxCheck(_ContentPlugin):
             if response.headers.get('X-W3C-Validator-Status', 'Invalid') == 'Valid':
                 url_data.add_info("W3C Validator: %s" % _("valid CSS syntax"))
                 return
-            check_w3_errors(url_data, response.text, "W3C HTML")
+            check_w3_errors(url_data, response.text, "W3C CSS")
         except requests.exceptions.RequestException:
             pass  # ignore service failures
         except Exception as msg:
@@ -121,15 +127,21 @@ def check_w3_errors(url_data, xml, w3type):
     w3type is either "W3C HTML" or "W3C CSS"."""
     dom = parseString(xml)
     for error in dom.getElementsByTagName('m:error'):
-        warnmsg = _(
-            "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
-        )
+        if w3type == "W3C HTML":
+            warnmsg = _(
+                "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
+            )
+        else:
+            warnmsg = _(
+                "%(w3type)s validation error at line %(line)s: %(msg)s"
+            )
         attrs = {
             "w3type": w3type,
             "line": getXmlText(error, "m:line"),
-            "column": getXmlText(error, "m:col"),
             "msg": getXmlText(error, "m:message"),
         }
+        if w3type == "W3C HTML":
+            attrs["column"] = getXmlText(error, "m:col")
         url_data.add_warning(warnmsg % attrs)
 
 
