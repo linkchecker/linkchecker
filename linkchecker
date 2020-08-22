@@ -28,7 +28,8 @@ import getpass
 
 # installs _() and _n() gettext functions into global namespace
 import linkcheck
-from linkcheck import logconf, LOG_CMDLINE
+logconf = linkcheck.logconf
+LOG_CMDLINE = linkcheck.LOG_CMDLINE
 
 logconf.init_log_config()
 # override argparse gettext method with the one from linkcheck.init_i18n()
