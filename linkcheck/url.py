@@ -193,16 +193,24 @@ def idna_encode(host):
     return host, False
 
 
+def split_netloc(netloc):
+    """Separate userinfo from host in urllib.parse.SplitResult.netloc.
+    Originated as urllib.parse._splituser().
+    """
+    userinfo, delim, hostport = netloc.rpartition('@')
+    return (userinfo if delim else None), hostport
+
+
 def url_fix_host(urlparts, encoding):
     """Unquote and fix hostname. Returns is_idn."""
     if not urlparts[1]:
         urlparts[2] = urllib.parse.unquote(urlparts[2], encoding=encoding)
         return False
-    userpass, netloc = urllib.parse.splituser(urlparts[1])
+    userpass, hostport = split_netloc(urlparts[1])
     if userpass:
         userpass = urllib.parse.unquote(userpass, encoding=encoding)
     netloc, is_idn = idna_encode(
-        urllib.parse.unquote(netloc, encoding=encoding).lower()
+        urllib.parse.unquote(hostport, encoding=encoding).lower()
     )
     # a leading backslash in path causes urlsplit() to add the
     # path components up to the first slash to host
@@ -419,7 +427,10 @@ def url_quote(url, encoding):
 
 def document_quote(document):
     """Quote given document."""
-    doc, query = urllib.parse.splitquery(document)
+    doc, delim, query = document.rpartition('?')
+    if not delim:
+        doc = document
+        query = None
     doc = urllib.parse.quote(doc, safe='/=,')
     if query:
         return "%s?%s" % (doc, query)

@@ -436,27 +436,33 @@ class UrlBase:
                 # restore second / in http[s]:// in wayback path
                 urlparts[2] = url_fix_wayback_query(urlparts[2])
         self.url = urlutil.urlunsplit(urlparts)
-        # split into (modifiable) list
-        self.urlparts = list(urllib.parse.urlsplit(self.url))
-        self.build_url_parts()
+        self.urlparts = self.build_url_parts(self.url)
         # and unsplit again
         self.url = urlutil.urlunsplit(self.urlparts)
 
-    def build_url_parts(self):
-        """Set userinfo, host, port and anchor from self.urlparts.
+    def build_url_parts(self, url):
+        """Set userinfo, host, port and anchor from url and return urlparts.
         Also checks for obfuscated IP addresses.
         """
+        split = urllib.parse.urlsplit(url)
+        urlparts = list(split)
         # check userinfo@host:port syntax
-        self.userinfo, host = urllib.parse.splituser(self.urlparts[1])
-        port = urlutil.default_ports.get(self.scheme, 0)
-        host, port = urlutil.splitport(host, port=port)
+        self.userinfo, host = urlutil.split_netloc(split.netloc)
+        try:
+            port = split.port
+        except ValueError:
+            raise LinkCheckerError(
+                _("URL host %(host)r has invalid port") % {"host": host}
+            )
+        if port is None:
+            port = urlutil.default_ports.get(self.scheme, 0)
         if port is None:
             raise LinkCheckerError(
                 _("URL host %(host)r has invalid port") % {"host": host}
             )
         self.port = port
-        # set host lowercase
-        self.host = host.lower()
+        # urllib.parse.SplitResult.hostname is lowercase
+        self.host = split.hostname
         if self.scheme in scheme_requires_host:
             if not self.host:
                 raise LinkCheckerError(_("URL has empty hostname"))
@@ -466,13 +472,14 @@ class UrlBase:
         else:
             host = "%s:%d" % (self.host, self.port)
         if self.userinfo:
-            self.urlparts[1] = "%s@%s" % (self.userinfo, host)
+            urlparts[1] = "%s@%s" % (self.userinfo, host)
         else:
-            self.urlparts[1] = host
+            urlparts[1] = host
         # safe anchor for later checking
-        self.anchor = self.urlparts[4]
+        self.anchor = split.fragment
         if self.anchor is not None:
             assert isinstance(self.anchor, str), repr(self.anchor)
+        return urlparts
 
     def check_obfuscated_ip(self):
         """Warn if host of this URL is obfuscated IP address."""
@@ -745,7 +752,8 @@ class UrlBase:
         """
         if self.userinfo:
             # URL itself has authentication info
-            return urllib.parse.splitpasswd(self.userinfo)
+            split = urllib.parse.urlsplit(self.url)
+            return (split.username, split.password)
         return self.aggregate.config.get_user_password(self.url)
 
     def add_url(self, url, line=0, column=0, page=0, name="", base=None):
