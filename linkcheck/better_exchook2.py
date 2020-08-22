@@ -123,7 +123,8 @@ def pp_extra_info(obj, depthlimit = 3):
 				pass # don't print len in this case
 			else:
 				s += ["len = " + str(obj.__len__())]
-		except: pass
+		except Exception:
+			pass
 	if depthlimit > 0 and hasattr(obj, "__getitem__"):
 		try:
 			if type(obj) in (bytes,str):
@@ -133,7 +134,8 @@ def pp_extra_info(obj, depthlimit = 3):
 				extra_info = pp_extra_info(subobj, depthlimit - 1)
 				if extra_info != "":
 					s += ["_[0]: {" + extra_info + "}"]
-		except: pass
+		except Exception:
+			pass
 	return ", ".join(s)
 	
 def pretty_print(obj):
@@ -220,8 +222,11 @@ def better_exchook(etype, value, tb, out=sys.stdout):
 
 	import types
 	def _some_str(value):
-		try: return str(value)
-		except: return '<unprintable %s object>' % type(value).__name__
+		try:
+			return str(value)
+		except Exception:
+			return '<unprintable %s object>' % type(value).__name__
+
 	def _format_final_exc_line(etype, value):
 		valuestr = _some_str(value)
 		if value is None or not valuestr:
