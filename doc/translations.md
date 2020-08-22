@@ -16,6 +16,24 @@ is equivalent to:
 Man Page Translations
 ---------------------
 
-po4a is used to generate linkchecker.doc.pot, .po files and translated man pages.
+Sphinx is used to generate .pot and .po (with sphinx-intl) files in i18n/
+and man pages in man/.
 
-``linkchecker/doc $ make po4a``
+Create man.pot file in i18n/gettext/:
+
+``linkchecker/doc $ make -C src gettext``
+
+Create man.po file in i18n/locales/:
+
+``linkchecker/doc/src $ sphinx-intl update -p ../i18n/gettext -l de``
+
+These two steps can be performed with:
+
+``linkchecker/doc $ make locale``
+
+Create man pages:
+
+``linkchecker/doc $ make man``
+
+After updating the source files all steps need to be repeated, if translations
+alone have been changed in the .po file only the last step is needed.

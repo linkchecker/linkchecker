@@ -1,43 +1,34 @@
-HTMLDIR:=web/media
-MANHTMLFILES:= \
-	$(HTMLDIR)/man1/linkchecker.1.html \
-	$(HTMLDIR)/man5/linkcheckerrc.5.html
-
 MANFILES:=linkchecker.1 linkcheckerrc.5
 LOCALES:=en de
 
-all:
+all: html man
 
-po4a:
-	po4a --localized-charset=UTF-8 po4a.conf
+code: clean
+	PYTHONPATH=.. sphinx-autogen src/code/index.rst
 
-man:	$(MANHTMLFILES)
+html:
+	make -C src html
 
-$(HTMLDIR)/man1/linkchecker.1.html: en/linkchecker.1
-	mandoc -Thtml $< > $@
-	@sed -i -e \
-	  's:<b>linkcheckerrc</b>(5):<a href="../man5/linkcheckerrc.5.html" class="Xr">linkcheckerrc(5)</a>:g' \
-	  $(HTMLDIR)/man1/linkchecker.1.html
+locale:
+	make -C src locale
 
-$(HTMLDIR)/man5/linkcheckerrc.5.html: en/linkcheckerrc.5
-	mandoc -Thtml $< > $@
-	@sed -i -e \
-	  's:<b>linkchecker</b>(1):<a href="../man1/linkchecker.1.html" class="Xr">linkchecker(1)</a>:g' \
-	  $(HTMLDIR)/man5/linkcheckerrc.5.html
+man:
+	make -C src man; \
+	make -C src -e SPHINXOPTS="-D language='de' -t de" LANGUAGE="de" man
 
 # check all makefiles for formatting warnings
 check:
-	@t=$(shell tempfile); \
-	for loc in $(LOCALES); do \
+	@for loc in $(LOCALES); do \
 	  for manfile in $(MANFILES); do \
-	    echo "Checking $$loc/$$manfile"; \
-	    LC_ALL=en_US.UTF-8 MANWIDTH=80 man --warnings -E UTF-8 -l $$loc/$$manfile > /dev/null 2>$$t ; \
-	    if [ -s $$t ]; then cat $$t; exit 1; fi; \
+	    echo "Checking man/$$loc/$$manfile"; \
+	    LC_ALL=en_US.UTF-8 MANWIDTH=80 mandoc -T lint -W error man/$$loc/$$manfile; \
 	  done; \
 	done
 
 clean:
-	rm $(MANHTMLFILES)
+	rm -rf src/_build; \
+	rm -rf src/code/linkcheck; \
+	rm -rf html; \
+	rm -rf man
 
-.PHONY: po4a man check clean
-
+.PHONY: check clean html locale man

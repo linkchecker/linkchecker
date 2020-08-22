@@ -1,0 +1,584 @@
+.\" Man page generated from reStructuredText.
+.
+.TH "LINKCHECKERRC" "5" "August 11, 2020" "" "LinkChecker"
+.SH NAME
+linkcheckerrc \- Konfigurationsdatei für LinkChecker
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.SH BESCHREIBUNG
+.sp
+\fBlinkcheckerrc\fP ist die Konfigurationsdatei für LinkChecker. Die Datei ist in einem INI\-Format geschrieben. Die Standarddatei ist \fB~/.linkchecker/linkcheckerrc\fP unter Unix\-, \fB%HOMEPATH%\elinkchecker\elinkcheckerrc\fP unter Windows\-Systemen.
+.SH EIGENSCHAFTEN
+.SS checking
+.INDENT 0.0
+.TP
+\fBcookiefile=\fP\fIDateiname\fP
+Lese eine Datei mit Cookie\-Daten. Das Cookie Datenformat wird in \fBlinkchecker(1)\fP erklärt. Kommandozeilenoption: \fB\-\-cookiefile\fP
+.TP
+\fBdebugmemory=\fP[\fB0\fP|\fB1\fP]
+Write memory allocation statistics to a file on exit, requires \fI\%meliae\fP\&.
+The default is not to write the file.
+Command line option: none
+.TP
+\fBlocalwebroot=\fP\fISTRING\fP
+Beachten Sie dass das angegebene Verzeichnis in URL\-Syntax sein muss, d.h. es muss einen normalen statt einen umgekehrten Schrägstrich zum Aneinanderfügen von Verzeichnissen benutzen. Und das angegebene Verzeichnis muss mit einem Schrägstrich enden. Kommandozeilenoption: none
+.TP
+\fBnntpserver=\fP\fISTRING\fP
+Gibt ein NNTP Rechner für \fBnews:\fP Links. Standard ist die Umgebungsvariable \fBNNTP_SERVER\fP\&. Falls kein Rechner angegeben ist, wird lediglich auf korrekte Syntax des Links geprüft. Kommandozeilenoption: \fB\-\-nntp\-server\fP
+.TP
+\fBrecursionlevel=\fP\fINUMMER\fP
+Prüfe rekursiv alle URLs bis zu der angegebenen Tiefe. Eine negative Tiefe bewirkt unendliche Rekursion. Standard Tiefe ist unendlich. Kommandozeilenoption: \fB\-\-recursion\-level\fP
+.TP
+\fBthreads=\fP\fINUMMER\fP
+Generiere nicht mehr als die angegebene Anzahl von Threads. Die Standardanzahl von Threads ist 10. Um Threads zu deaktivieren, geben Sie eine nicht positive Nummer an. Kommandozeilenoption: \fB\-\-threads\fP
+.TP
+\fBtimeout=\fP\fINUMMER\fP
+Setze den Timeout für TCP\-Verbindungen in Sekunden. Der Standard Timeout ist 60 Sekunden. Kommandozeilenoption: \fB\-\-timeout\fP
+.TP
+\fBaborttimeout=\fP\fINUMMER\fP
+Time to wait for checks to finish after the user aborts the first
+time (with Ctrl\-C or the abort button). The default abort timeout is
+300 seconds.
+Command line option: \fB\-\-timeout\fP
+.TP
+\fBuseragent=\fP\fISTRING\fP
+Gibt den User\-Agent an, der zu HTTP\-Servern geschickt wird, z.B. "Mozilla/4.0". Der Standard ist "LinkChecker/X.Y", wobei X.Y die aktuelle Version von LinkChecker ist. Kommandozeilenoption: \fB\-\-user\-agent\fP
+.TP
+\fBsslverify=\fP[\fB0\fP|\fB1\fP|\fIfilename\fP]
+Falls der Wert Null ist werden SSL Zertifikate nicht überprüft. Falls er auf Eins gesetzt wird (der Standard) werden SSL Zertifikate mit der gelieferten CA Zertifikatsdatei geprüft. Falls ein Dateiname angegeben ist wird dieser zur Prüfung verwendet. Kommandozeilenoption: none
+.TP
+\fBmaxrunseconds=\fP\fINUMMER\fP
+Hört nach der angegebenen Anzahl von Sekunden auf, neue URLs zu prüfen. Dies ist dasselbe als wenn der Benutzer nach der gegebenen Anzahl von Sekunden stoppt (durch Drücken von Strg\-C). Kommandozeilenoption: none
+.TP
+\fBmaxfilesizedownload=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will be ignored, without downloading anything
+if accessed over http and an accurate Content\-Length header was returned.
+No more than this amount of a file will be downloaded.
+The default is 5242880 (5 MB).
+Command line option: none
+.TP
+\fBmaxfilesizeparse=\fP\fINUMBER\fP
+Files larger than NUMBER bytes will not be parsed for links.
+The default is 1048576 (1 MB).
+Command line option: none
+.TP
+\fBmaxnumurls=\fP\fINUMMER\fP
+Maximale Anzahl von URLs die geprüft werden. Neue URLs werden nicht angenommen nachdem die angegebene Anzahl von URLs geprüft wurde. Kommandozeilenoption: none
+.TP
+\fBmaxrequestspersecond=\fP\fINUMMER\fP
+Limit the maximum number of requests per second to one host.
+The default is 10.
+Command line option: none
+.TP
+\fBrobotstxt=\fP[\fB0\fP|\fB1\fP]
+When using http, fetch robots.txt, and confirm whether each URL should
+be accessed before checking.
+The default is to use robots.txt files.
+Command line option: \fB\-\-no\-robots\fP
+.TP
+\fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
+Allowed URL schemes as comma\-separated list.
+Command line option: none
+.UNINDENT
+.SS filtering
+.INDENT 0.0
+.TP
+\fBignore=\fP\fIREGEX\fP (MULTILINE)
+Prüfe lediglich die Syntax von URLs, welche dem angegebenen regulären Ausdruck entsprechen. Kommandozeilenoption: \fB\-\-ignore\-url\fP
+.TP
+\fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
+Ignoriere die kommagetrennte Liste von Warnungen. Siehe \fI\%WARNINGS\fP für die Liste von erkannten Warnungen. Kommandozeilenoption: none
+.TP
+\fBinternlinks=\fP\fIREGEX\fP
+Regulärer Ausdruck, um mehr URLs als interne Verknüpfungen hinzuzufügen. Standard ist dass URLs der Kommandozeile als intern gelten. Kommandozeilenoption: none
+.TP
+\fBnofollow=\fP\fIREGEX\fP (MULTILINE)
+Prüfe URLs die auf den regulären Ausdruck zutreffen, aber führe keine Rekursion durch. Kommandozeilenoption: \fB\-\-no\-follow\-url\fP
+.TP
+\fBcheckextern=\fP[\fB0\fP|\fB1\fP]
+Check external links. Default is to check internal links only.
+Command line option: \fB\-\-check\-extern\fP
+.UNINDENT
+.SS authentication
+.INDENT 0.0
+.TP
+\fBentry=\fP\fIREGEX\fP \fIBENUTZER\fP [\fIPASSWORT\fP] (MULTILINE)
+Provide individual username/password pairs for different links. In
+addtion to a single login page specified with \fBloginurl\fP multiple
+FTP, HTTP (Basic Authentication) and telnet links are supported.
+Entries are a triple (URL regex, username, password) or a tuple (URL
+regex, username), where the entries are separated by whitespace.
+The password is optional and if missing it has to be entered at the
+commandline.
+If the regular expression matches the checked URL, the given
+username/password pair is used for authentication. The command line
+options \fB\-u\fP and \fB\-p\fP match every link and therefore override
+the entries given here. The first match wins.
+Command line option: \fB\-u\fP, \fB\-p\fP
+.TP
+\fBloginurl=\fP\fIURL\fP
+The URL of a login page to be visited before link checking. The page
+is expected to contain an HTML form to collect credentials and
+submit them to the address in its action attribute using an HTTP
+POST request. The name attributes of the input elements of the form
+and the values to be submitted need to be available (see \fBentry\fP
+for an explanation of username and password values).
+.TP
+\fBloginuserfield=\fP\fISTRING\fP
+Der Name für das Benutzer CGI\-Feld. Der Standardname ist \fBlogin\fP\&.
+.TP
+\fBloginpasswordfield=\fP\fISTRING\fP
+Der Name für das Passwort CGI\-Feld. Der Standardname ist \fBpassword\fP\&.
+.TP
+\fBloginextrafields=\fP\fINAME\fP\fB:\fP\fIWERT\fP (MULTILINE)
+Optionally the name attributes of any additional input elements and
+the values to populate them with. Note that these are submitted
+without checking whether matching input elements exist in the HTML
+form.
+.UNINDENT
+.SS output
+.INDENT 0.0
+.TP
+\fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
+Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBthread\fP, \fBplugins\fP und \fBall\fP\&. Die Angabe \fBall\fP ist ein Synonym für alle verfügbaren Logger. Kommandozeilenoption: \fB\-\-debug\fP
+.TP
+\fBfileoutput=\fP\fITYPE\fP[\fB,\fP\fITYPE\fP\&...]
+Ausgabe in Datei \fBlinkchecker\-out.\fP\fITYP\fP, \fB$HOME/.linkchecker/blacklist\fP für \fBblacklist\fP Ausgabe. Gültige Ausgabearten sind \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP> oder \fBblacklist\fP Standard ist keine Dateiausgabe. Die verschiedenen Ausgabearten sind unten dokumentiert. Bemerke, dass man alle Konsolenausgaben mit \fBoutput=none\fP unterdrücken kann. Kommandozeilenoption: \fB\-\-file\-output\fP
+.TP
+\fBlog=\fP\fITYPE\fP[\fB/\fP\fIENCODING\fP]
+Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP oder \fBblacklist\fP an. Stadard Typ ist \fBtext\fP\&. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Kommandozeilenoption: \fB\-\-output\fP
+.TP
+\fBquiet=\fP[\fB0\fP|\fB1\fP]
+Falls gesetzt, erfolgt keine Ausgabe. Ein Alias für \fBlog=none\fP\&. Dies ist nur in Verbindung mit \fBfileoutput\fP nützlich. Kommandozeilenoption: \fB\-\-verbose\fP
+.TP
+\fBstatus=\fP[\fB0\fP|\fB1\fP]
+Kontrolle der Statusmeldungen. Standard ist 1. Kommandozeilenoption: \fB\-\-no\-status\fP
+.TP
+\fBverbose=\fP[\fB0\fP|\fB1\fP]
+Falls gesetzt, gebe alle geprüften URLs einmal aus. Standard ist es, nur fehlerhafte URLs und Warnungen auszugeben. Kommandozeilenoption: \fB\-\-verbose\fP
+.TP
+\fBwarnings=\fP[\fB0\fP|\fB1\fP]
+Falls gesetzt, gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen. Kommandozeilenoption: \fB\-\-verbose\fP
+.UNINDENT
+.SS text
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Gebe Dateiname für Textausgabe an. Standard Dateiname ist \fBlinkchecker\-out.txt\fP\&. Kommandozeilenoption: \fB\-\-file\-output\fP
+.TP
+\fBparts=\fP\fISTRING\fP
+Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe \fI\%LOGGER PARTS\fP weiter unten. Kommandozeilenoption: none
+.TP
+\fBencoding=\fP\fISTRING\fP
+Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Die Standardenkodierung ist \fBiso\-8859\-15\fP\&.
+.TP
+.B \fIcolor*\fP
+Farbwerte für die verschiedenen Ausgabeteile. Syntax ist \fIcolor\fP oder \fItype\fP\fB;\fP\fIcolor\fP\&. Der \fItype\fP kann \fBbold\fP, \fBlight\fP, \fBblink\fP> oder \fBinvert\fP sein.  Die \fIcolor\fP kann \fBdefault\fP, \fBblack\fP, \fBred\fP, \fBgreen\fP, \fByellow\fP, \fBblue\fP, \fBpurple\fP, \fBcyan\fP, \fBwhite\fP, \fBBlack\fP, \fBRed\fP, \fBGreen\fP, \fBYellow\fP, \fBBlue\fP, \fBPurple\fP, \fBCyan\fP oder \fBWhite\fP sein. Kommandozeilenoption: none
+.TP
+\fBcolorparent=\fP\fISTRING\fP
+Setze Farbe des Vaters. Standard ist \fBwhite\fP\&.
+.TP
+\fBcolorurl=\fP\fISTRING\fP
+Setze URL Farbe. Standard ist \fBdefault\fP\&.
+.TP
+\fBcolorname=\fP\fISTRING\fP
+Setze Namensfarbe. Standard ist \fBdefault\fP\&.
+.TP
+\fBcolorreal=\fP\fISTRING\fP
+Setze Farbe für tatsächliche URL. Default ist \fBcyan\fP\&.
+.TP
+\fBcolorbase=\fP\fISTRING\fP
+Setzt Basisurl Farbe. Standard ist \fBpurple\fP\&.
+.TP
+\fBcolorvalid=\fP\fISTRING\fP
+Setze gültige Farbe. Standard ist \fBbold;green\fP\&.
+.TP
+\fBcolorinvalid=\fP\fISTRING\fP
+Setze ungültige Farbe. Standard ist \fBbold;red\fP\&.
+.TP
+\fBcolorinfo=\fP\fISTRING\fP
+Setzt Informationsfarbe. Standard ist \fBdefault\fP\&.
+.TP
+\fBcolorwarning=\fP\fISTRING\fP
+Setze Warnfarbe. Standard ist \fBbold;yellow\fP\&.
+.TP
+\fBcolordltime=\fP\fISTRING\fP
+Setze Downloadzeitfarbe. Standard ist \fBdefault\fP\&.
+.TP
+\fBcolorreset=\fP\fISTRING\fP
+Setze Reset Farbe. Standard ist \fBdefault\fP\&.
+.UNINDENT
+.SS gml
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.UNINDENT
+.SS dot
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.UNINDENT
+.SS csv
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBseparator=\fP\fICHAR\fP
+Das CSV Trennzeichen. Standard ist Komma (\fB,\fP).
+.TP
+\fBquotechar=\fP\fICHAR\fP
+Setze CSV Quotezeichen. Standard ist das doppelte Anführungszeichen (\fB"\fP).
+.UNINDENT
+.SS sql
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBdbname=\fP\fISTRING\fP
+Setze Datenbankname zum Speichern. Standard ist \fBlinksdb\fP\&.
+.TP
+\fBseparator=\fP\fICHAR\fP
+Setze SQL Kommandotrennzeichen. Standard ist ein Strichpunkt (\fB;\fP).
+.UNINDENT
+.SS html
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBcolorbackground=\fP\fICOLOR\fP
+Setze HTML Hintergrundfarbe. Standard ist \fB#fff7e5\fP\&.
+.TP
+\fBcolorurl=\fP
+Setze HTML URL Farbe. Standard ist \fB#dcd5cf\fP\&.
+.TP
+\fBcolorborder=\fP
+Setze HTML Rahmenfarbe. Standard ist \fB#000000\fP\&.
+.TP
+\fBcolorlink=\fP
+Setze HTML Verknüpfungsfarbe. Standard ist \fB#191c83\fP\&.
+.TP
+\fBcolorwarning=\fP
+Setze HTML Warnfarbe. Standard ist \fB#e0954e\fP\&.
+.TP
+\fBcolorerror=\fP
+Setze HTML Fehlerfarbe. Standard ist \fB#db4930\fP\&.
+.TP
+\fBcolorok=\fP
+Setze HTML Gültigkeitsfarbe. Standard ist \fB#3ba557\fP\&.
+.UNINDENT
+.SS blacklist
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.UNINDENT
+.SS xml
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.UNINDENT
+.SS gxml
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.UNINDENT
+.SS sitemap
+.INDENT 0.0
+.TP
+\fBfilename=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBparts=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBencoding=\fP\fISTRING\fP
+Siehe \fI\%[text]\fP Sektion weiter oben.
+.TP
+\fBpriority=\fP\fINUMMER\fP
+Eine Nummer zwischen 0.0 und 1.0, welche die Priorität festlegt. Die Standardpriorität für die erste URL ist 1.0, für alle Kind\-URLs ist sie 0.5.
+.TP
+\fBfrequency=\fP[\fBalways\fP|\fBhourly\fP|\fBdaily\fP|\fBweekly\fP|\fBmonthly\fP|\fByearly\fP|\fBnever\fP]
+Die Häufigkeit mit der Seiten sich ändern.
+.UNINDENT
+.SH AUSGABE PARTS
+.INDENT 0.0
+.TP
+\fBall\fP
+for all parts
+.TP
+\fBid\fP
+a unique ID for each logentry
+.TP
+\fBrealurl\fP
+the full url link
+.TP
+\fBresult\fP
+valid or invalid, with messages
+.TP
+\fBextern\fP
+1 or 0, only in some logger types reported
+.TP
+\fBbase\fP
+base href=...
+.TP
+\fBname\fP
+<a href=...>name</a> and <img alt="name">
+.TP
+\fBparenturl\fP
+if any
+.TP
+\fBinfo\fP
+some additional info, e.g. FTP welcome messages
+.TP
+\fBwarning\fP
+warnings
+.TP
+\fBdltime\fP
+download time
+.TP
+\fBchecktime\fP
+check time
+.TP
+\fBurl\fP
+the original url name, can be relative
+.TP
+\fBintro\fP
+the blurb at the beginning, "starting at ..."
+.TP
+\fBoutro\fP
+the blurb at the end, "found x errors ..."
+.UNINDENT
+.SH MULTILINE
+.sp
+Einige Optionen können mehrere Zeilen lang sein. Jede Zeile muss dafür eingerückt werden. Zeilen die mit einer Raute (\fB#\fP) beginnen werden ignoriert, müssen aber eingerückt sein.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+ignore=
+  lconline
+  bookmark
+  # a comment
+  ^mailto:
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH BEISPIEL
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+[output]
+log=html
+
+[checking]
+threads=5
+
+[filtering]
+ignorewarnings=http\-moved\-permanent
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PLUGINS
+.sp
+All plugins have a separate section. If the section appears in the
+configuration file the plugin is enabled. Some plugins read extra
+options in their section.
+.SS AnchorCheck
+.sp
+Checks validity of HTML anchors.
+.SS LocationInfo
+.sp
+Adds the country and if possible city name of the URL host as info.
+Needs GeoIP or pygeoip and a local country or city lookup DB installed.
+.SS RegexCheck
+.sp
+Definieren Sie einen regulären Ausdruck der eine Warnung ausgibt falls er auf den Inhalt einer geprüften URL zutrifft. Dies gilt nur für gültige Seiten deren Inhalt wir bekommen können.
+.INDENT 0.0
+.TP
+\fBwarningregex=\fP\fIREGEX\fP
+Use this to check for pages that contain some form of error message,
+for example "This page has moved" or "Oracle Application error".
+\fIREGEX\fP should be unquoted.
+.sp
+Man beachte, dass mehrere Werte in dem regulären Ausdruck kombiniert werden können, zum Beispiel "(Diese Seite ist umgezogen|Oracle Applikationsfehler)".
+.UNINDENT
+.SS SslCertificateCheck
+.sp
+Check SSL certificate expiration date. Only internal https: links will
+be checked. A domain will only be checked once to avoid duplicate
+warnings.
+.INDENT 0.0
+.TP
+\fBsslcertwarndays=\fP\fINUMMER\fP
+Configures the expiration warning time in days.
+.UNINDENT
+.SS HtmlSyntaxCheck
+.sp
+Prüfe Syntax von HTML URLs mit dem W3C Online Validator. Siehe \fI\%https://validator.w3.org/docs/api.html\fP\&.
+.SS HttpHeaderInfo
+.sp
+Print HTTP headers in URL info.
+.INDENT 0.0
+.TP
+\fBprefixes=\fP\fIprefix1\fP[,*prefix2*]...
+List of comma separated header prefixes. For example to display all
+HTTP headers that start with "X\-".
+.UNINDENT
+.SS CssSyntaxCheck
+.sp
+Prüfe Syntax von HTML URLs mit dem W3C Online Validator. Siehe \fI\%https://jigsaw.w3.org/css\-validator/manual.html#expert\fP\&.
+.SS VirusCheck
+.sp
+Checks the page content for virus infections with clamav. A local clamav
+daemon must be installed.
+.INDENT 0.0
+.TP
+\fBclamavconf=\fP\fIDateiname\fP
+Dateiname von \fBclamd.conf\fP Konfigurationsdatei.
+.UNINDENT
+.SS PdfParser
+.sp
+Parse PDF files for URLs to check. Needs the \fI\%pdfminer\fP Python package
+installed.
+.SS WordParser
+.sp
+Parse Word files for URLs to check. Needs the \fI\%pywin32\fP Python
+extension installed.
+.SH WARNUNGEN
+.sp
+Die folgenden Warnungen werden vom Konfigurationseintrag \(aqignorewarnings\(aq erkannt:
+.INDENT 0.0
+.TP
+\fBfile\-missing\-slash\fP
+Der file: URL fehlt ein abschließender Schrägstrich.
+.TP
+\fBfile\-system\-path\fP
+Der file: Pfad ist nicht derselbe wie der Systempfad.
+.TP
+\fBftp\-missing\-slash\fP
+Der ftp: URL fehlt ein abschließender Schrägstrich.
+.TP
+\fBhttp\-cookie\-store\-error\fP
+Ein Fehler trat auf während des Speicherns eines Cookies.
+.TP
+\fBhttp\-empty\-content\fP
+Die URL besitzt keinen Inhalt.
+.TP
+\fBmail\-no\-mx\-host\fP
+Der MX Mail\-Rechner konnte nicht gefunden werden.
+.TP
+\fBnntp\-no\-newsgroup\fP
+Die NNTP Nachrichtengruppe konnte nicht gefunden werden.
+.TP
+\fBnntp\-no\-server\fP
+Es wurde kein NNTP Server gefunden.
+.TP
+\fBurl\-content\-size\-zero\fP
+Der URL Inhaltsgrößenangabe ist Null.
+.TP
+\fBurl\-content\-too\-large\fP
+Der URL Inhalt ist zu groß.
+.TP
+\fBurl\-effective\-url\fP
+Die effektive URL unterscheidet sich vom Original.
+.TP
+\fBurl\-error\-getting\-content\fP
+Konnte den Inhalt der URL nicht bekommen.
+.TP
+\fBurl\-obfuscated\-ip\fP
+Die IP\-Adresse ist verschleiert.
+.TP
+\fBurl\-whitespace\fP
+Die URL %(url)s enthält Leerzeichen am Anfang oder Ende.
+.UNINDENT
+.SH SIEHE AUCH
+.sp
+\fBlinkchecker(1)\fP
+.SH AUTHOR
+Bastian Kleineidam <bastian.kleineidam@web.de>
+.SH COPYRIGHT
+2000-2014 Bastian Kleineidam
+.\" Generated by docutils manpage writer.
+.

@@ -1,0 +1,685 @@
+.\" Man page generated from reStructuredText.
+.
+.TH "LINKCHECKER" "1" "August 11, 2020" "" "LinkChecker"
+.SH NAME
+linkchecker \- command line client to check HTML documents and websites for broken links
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.SH SYNOPSIS
+.sp
+\fBlinkchecker\fP [\fIoptions\fP] [\fIfile\-or\-url\fP]...
+.SH DESCRIPTION
+.sp
+LinkChecker features
+.INDENT 0.0
+.IP \(bu 2
+recursive and multithreaded checking
+.IP \(bu 2
+output in colored or normal text, HTML, SQL, CSV, XML or a sitemap
+graph in different formats
+.IP \(bu 2
+support for HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and
+local file links
+.IP \(bu 2
+restriction of link checking with URL filters
+.IP \(bu 2
+proxy support
+.IP \(bu 2
+username/password authorization for HTTP, FTP and Telnet
+.IP \(bu 2
+support for robots.txt exclusion protocol
+.IP \(bu 2
+support for Cookies
+.IP \(bu 2
+support for HTML5
+.IP \(bu 2
+HTML and CSS syntax check
+.IP \(bu 2
+Antivirus check
+.IP \(bu 2
+a command line and web interface
+.UNINDENT
+.SH EXAMPLES
+.sp
+The most common use checks the given domain recursively:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker http://www.example.com/
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Beware that this checks the whole site which can have thousands of
+URLs. Use the \fI\%\-r\fP option to restrict the recursion depth.
+.sp
+Don\(aqt check URLs with \fB/secret\fP in its name. All other links are
+checked as usual:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker \-\-ignore\-url=/secret mysite.example.com
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Checking a local HTML file on Unix:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker ../bla.html
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Checking a local HTML file on Windows:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+C:\e> linkchecker c:empest.html
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+You can skip the \fBhttp://\fP url part if the domain starts with
+\fBwww.\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker www.example.com
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+You can skip the \fBftp://\fP url part if the domain starts with \fBftp.\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker \-r0 ftp.example.com
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Generate a sitemap graph and convert it with the graphviz dot utility:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ linkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH OPTIONS
+.SS General options
+.INDENT 0.0
+.TP
+.B \-f FILENAME, \-\-config=FILENAME
+Use FILENAME as configuration file. By default LinkChecker uses
+~/.linkchecker/linkcheckerrc.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-h, \-\-help
+Help me! Print usage information for this program.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-stdin
+Read list of white\-space separated URLs to check from stdin.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-t NUMBER, \-\-threads=NUMBER
+Generate no more than the given number of threads. Default number of
+threads is 10. To disable threading specify a non\-positive number.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-V, \-\-version
+Print version and exit.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-list\-plugins
+Print available check plugins and exit.
+.UNINDENT
+.SS Output options
+.INDENT 0.0
+.TP
+.B \-D STRING, \-\-debug=STRING
+Print debugging output for the given logger. Available loggers are
+cmdline, checking, cache, dns, plugin and
+all. Specifying all is an alias for specifying all available
+loggers. The option can be given multiple times to debug with more
+than one logger. For accurate results, threading will be disabled
+during debug runs.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
+Output to a file linkchecker\-out.TYPE,
+$HOME/.linkchecker/blacklist for blacklist output, or
+FILENAME if specified. The ENCODING specifies the output
+encoding, the default is that of your locale. Valid encodings are
+listed at
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+The FILENAME and ENCODING parts of the none output type will
+be ignored, else if the file already exists, it will be overwritten.
+You can specify this option more than once. Valid file output TYPEs
+are text, html, sql, csv, gml, dot, xml,
+sitemap, none or blacklist. Default is no file output.
+The various output types are documented below. Note that you can
+suppress all console output with the option \fI\%\-o\fP \fInone\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-no\-status
+Do not print check status messages.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-no\-warnings
+Don\(aqt log warnings. Default is to log warnings.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-o TYPE[/ENCODING], \-\-output=TYPE[/ENCODING]
+Specify output type as text, html, sql, csv,
+gml, dot, xml, sitemap, none or blacklist.
+Default type is text. The various output types are documented
+below.
+The ENCODING specifies the output encoding, the default is that of
+your locale. Valid encodings are listed at
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-q, \-\-quiet
+Quiet operation, an alias for \fI\%\-o\fP \fInone\fP\&. This is only useful with
+\fI\%\-F\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-v, \-\-verbose
+Log all checked URLs. Default is to log only errors and warnings.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-W REGEX, \-\-warning\-regex=REGEX
+Define a regular expression which prints a warning if it matches any
+content of the checked link. This applies only to valid pages, so we
+can get their content.
+Use this to check for pages that contain some form of error, for
+example "This page has moved" or "Oracle Application error".
+Note that multiple values can be combined in the regular expression,
+for example "(This page has moved|Oracle Application error)".
+See section \fI\%REGULAR EXPRESSIONS\fP for more info.
+.UNINDENT
+.SS Checking options
+.INDENT 0.0
+.TP
+.B \-\-cookiefile=FILENAME
+Read a file with initial cookie data. The cookie data format is
+explained below.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-check\-extern
+Check external URLs.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-ignore\-url=REGEX
+URLs matching the given regular expression will only be syntax checked.
+This option can be given multiple times.
+See section \fI\%REGULAR EXPRESSIONS\fP for more info.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-N STRING, \-\-nntp\-server=STRING
+Specify an NNTP server for news: links. Default is the
+environment variable \fI\%NNTP_SERVER\fP\&. If no host is given, only the
+syntax of the link is checked.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-no\-follow\-url=REGEX
+Check but do not recurse into URLs matching the given regular
+expression.
+This option can be given multiple times.
+See section \fI\%REGULAR EXPRESSIONS\fP for more info.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-no\-robots
+Check URLs regardless of any robots.txt files.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-p, \-\-password
+Read a password from console and use it for HTTP and FTP
+authorization. For FTP the default password is anonymous@. For
+HTTP there is no default password. See also \fI\%\-u\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-r NUMBER, \-\-recursion\-level=NUMBER
+Check recursively all links up to given depth. A negative depth will
+enable infinite recursion. Default depth is infinite.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-timeout=NUMBER
+Set the timeout for connection attempts in seconds. The default
+timeout is 60 seconds.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-u STRING, \-\-user=STRING
+Try the given username for HTTP and FTP authorization. For FTP the
+default username is anonymous. For HTTP there is no default
+username. See also \fI\%\-p\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-user\-agent=STRING
+Specify the User\-Agent string to send to the HTTP server, for
+example "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is
+the current version of LinkChecker.
+.UNINDENT
+.SH CONFIGURATION FILES
+.sp
+Configuration files can specify all options above. They can also specify
+some options that cannot be set on the command line. See
+\fBlinkcheckerrc(5)\fP for more info.
+.SH OUTPUT TYPES
+.sp
+Note that by default only errors and warnings are logged. You should use
+the option \fI\%\-\-verbose\fP to get the complete URL list, especially when
+outputting a sitemap graph format.
+.INDENT 0.0
+.TP
+\fBtext\fP
+Standard text logger, logging URLs in keyword: argument fashion.
+.TP
+\fBhtml\fP
+Log URLs in keyword: argument fashion, formatted as HTML.
+Additionally has links to the referenced pages. Invalid URLs have
+HTML and CSS syntax check links appended.
+.TP
+\fBcsv\fP
+Log check result in CSV format with one URL per line.
+.TP
+\fBgml\fP
+Log parent\-child relations between linked URLs as a GML sitemap
+graph.
+.TP
+\fBdot\fP
+Log parent\-child relations between linked URLs as a DOT sitemap
+graph.
+.TP
+\fBgxml\fP
+Log check result as a GraphXML sitemap graph.
+.TP
+\fBxml\fP
+Log check result as machine\-readable XML.
+.TP
+\fBsitemap\fP
+Log check result as an XML sitemap whose protocol is documented at
+\fI\%https://www.sitemaps.org/protocol.html\fP\&.
+.TP
+\fBsql\fP
+Log check result as SQL script with INSERT commands. An example
+script to create the initial SQL table is included as create.sql.
+.TP
+\fBblacklist\fP
+Suitable for cron jobs. Logs the check result into a file
+\fB~/.linkchecker/blacklist\fP which only contains entries with
+invalid URLs and the number of times they have failed.
+.TP
+\fBnone\fP
+Logs nothing. Suitable for debugging or checking the exit code.
+.UNINDENT
+.SH REGULAR EXPRESSIONS
+.sp
+LinkChecker accepts Python regular expressions. See
+\fI\%https://docs.python.org/howto/regex.html\fP for an introduction.
+An addition is that a leading exclamation mark negates the regular
+expression.
+.SH COOKIE FILES
+.sp
+A cookie file contains standard HTTP header (RFC 2616) data with the
+following possible names:
+.INDENT 0.0
+.TP
+\fBHost\fP (required)
+Sets the domain the cookies are valid for.
+.TP
+\fBPath\fP (optional)
+Gives the path the cookies are value for; default path is \fB/\fP\&.
+.TP
+\fBSet\-cookie\fP (required)
+Set cookie name/value. Can be given more than once.
+.UNINDENT
+.sp
+Multiple entries are separated by a blank line. The example below will
+send two cookies to all URLs starting with \fBhttp://example.com/hello/\fP
+and one to all URLs starting with \fBhttps://example.org/\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Host: example.com
+Path: /hello
+Set\-cookie: ID="smee"
+Set\-cookie: spam="egg"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Host: example.org
+Set\-cookie: baggage="elitist"; comment="hologram"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PROXY SUPPORT
+.sp
+To use a proxy on Unix or Windows set the \fI\%http_proxy\fP, \fBhttps_proxy\fP or
+\fI\%ftp_proxy\fP environment variables to the proxy URL. The URL should be of
+the form
+\fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP].
+LinkChecker also detects manual proxy settings of Internet Explorer
+under Windows systems, and GNOME or KDE on Linux systems. On a Mac use
+the Internet Config to select a proxy.
+You can also set a comma\-separated domain list in the \fI\%no_proxy\fP
+environment variables to ignore any proxy settings for these domains.
+.sp
+Setting a HTTP proxy on Unix for example looks like this:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ export http_proxy="http://proxy.example.com:8080"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Proxy authentication is also supported:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ export http_proxy="http://user1:mypass@proxy.example.org:8081"
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Setting a proxy on the Windows command prompt:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+C:\e> set http_proxy=http://proxy.example.com:8080
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PERFORMED CHECKS
+.sp
+All URLs have to pass a preliminary syntax test. Minor quoting mistakes
+will issue a warning, all other invalid syntax issues are errors. After
+the syntax check passes, the URL is queued for connection checking. All
+connection check types are described below.
+.INDENT 0.0
+.TP
+HTTP links (\fBhttp:\fP, \fBhttps:\fP)
+After connecting to the given HTTP server the given path or query is
+requested. All redirections are followed, and if user/password is
+given it will be used as authorization when necessary. All final
+HTTP status codes other than 2xx are errors.
+.sp
+HTML page contents are checked for recursion.
+.TP
+Local files (\fBfile:\fP)
+A regular, readable file that can be opened is valid. A readable
+directory is also valid. All other files, for example device files,
+unreadable or non\-existing files are errors.
+.sp
+HTML or other parseable file contents are checked for recursion.
+.TP
+Mail links (\fBmailto:\fP)
+A mailto: link eventually resolves to a list of email addresses.
+If one address fails, the whole list will fail. For each mail
+address we check the following things:
+.INDENT 7.0
+.IP 1. 3
+Check the address syntax, both the parts before and after the
+@ sign.
+.IP 2. 3
+Look up the MX DNS records. If we found no MX record, print an
+error.
+.IP 3. 3
+Check if one of the mail hosts accept an SMTP connection. Check
+hosts with higher priority first. If no host accepts SMTP, we
+print a warning.
+.IP 4. 3
+Try to verify the address with the VRFY command. If we got an
+answer, print the verified address as an info.
+.UNINDENT
+.TP
+FTP links (\fBftp:\fP)
+For FTP links we do:
+.INDENT 7.0
+.IP 1. 3
+connect to the specified host
+.IP 2. 3
+try to login with the given user and password. The default user
+is \fBanonymous\fP, the default password is \fBanonymous@\fP\&.
+.IP 3. 3
+try to change to the given directory
+.IP 4. 3
+list the file with the NLST command
+.UNINDENT
+.TP
+Telnet links (\fBtelnet:\fP)
+We try to connect and if user/password are given, login to the given
+telnet server.
+.TP
+NNTP links (\fBnews:\fP, \fBsnews:\fP, \fBnntp\fP)
+We try to connect to the given NNTP server. If a news group or
+article is specified, try to request it from the server.
+.TP
+Unsupported links (\fBjavascript:\fP, etc.)
+An unsupported link will only print a warning. No further checking
+will be made.
+.sp
+The complete list of recognized, but unsupported links can be found
+in the
+\fI\%linkcheck/checker/unknownurl.py\fP
+source file. The most prominent of them should be JavaScript links.
+.UNINDENT
+.SH PLUGINS
+.sp
+There are two plugin types: connection and content plugins. Connection
+plugins are run after a successful connection to the URL host. Content
+plugins are run if the URL type has content (mailto: URLs have no
+content for example) and if the check is not forbidden (ie. by HTTP
+robots.txt).
+Use the option \fI\%\-\-list\-plugins\fP for a list of plugins and their
+documentation. All plugins are enabled via the \fBlinkcheckerrc(5)\fP
+configuration file.
+.SH RECURSION
+.sp
+Before descending recursively into a URL, it has to fulfill several
+conditions. They are checked in this order:
+.INDENT 0.0
+.IP 1. 3
+A URL must be valid.
+.IP 2. 3
+A URL must be parseable. This currently includes HTML files, Opera
+bookmarks files, and directories. If a file type cannot be determined
+(for example it does not have a common HTML file extension, and the
+content does not look like HTML), it is assumed to be non\-parseable.
+.IP 3. 3
+The URL content must be retrievable. This is usually the case except
+for example mailto: or unknown URL types.
+.IP 4. 3
+The maximum recursion level must not be exceeded. It is configured
+with the \fI\%\-\-recursion\-level\fP option and is unlimited per default.
+.IP 5. 3
+It must not match the ignored URL list. This is controlled with the
+\fI\%\-\-ignore\-url\fP option.
+.IP 6. 3
+The Robots Exclusion Protocol must allow links in the URL to be
+followed recursively. This is checked by searching for a "nofollow"
+directive in the HTML header data.
+.UNINDENT
+.sp
+Note that the directory recursion reads all files in that directory, not
+just a subset like \fBindex.htm\fP\&.
+.SH NOTES
+.sp
+URLs on the commandline starting with \fBftp.\fP are treated like
+\fBftp://ftp.\fP, URLs starting with \fBwww.\fP are treated like
+\fBhttp://www.\fP\&. You can also give local files as arguments.
+If you have your system configured to automatically establish a
+connection to the internet (e.g. with diald), it will connect when
+checking links not pointing to your local host. Use the \fI\%\-\-ignore\-url\fP
+option to prevent this.
+.sp
+Javascript links are not supported.
+.sp
+If your platform does not support threading, LinkChecker disables it
+automatically.
+.sp
+You can supply multiple user/password pairs in a configuration file.
+.sp
+When checking \fBnews:\fP links the given NNTP host doesn\(aqt need to be the
+same as the host of the user browsing your pages.
+.SH ENVIRONMENT
+.INDENT 0.0
+.TP
+.B NNTP_SERVER
+specifies default NNTP server
+.UNINDENT
+.INDENT 0.0
+.TP
+.B http_proxy
+specifies default HTTP proxy server
+.UNINDENT
+.INDENT 0.0
+.TP
+.B ftp_proxy
+specifies default FTP proxy server
+.UNINDENT
+.INDENT 0.0
+.TP
+.B no_proxy
+comma\-separated list of domains to not contact over a proxy server
+.UNINDENT
+.INDENT 0.0
+.TP
+.B LC_MESSAGES, LANG, LANGUAGE
+specify output language
+.UNINDENT
+.SH RETURN VALUE
+.sp
+The return value is 2 when
+.INDENT 0.0
+.IP \(bu 2
+a program error occurred.
+.UNINDENT
+.sp
+The return value is 1 when
+.INDENT 0.0
+.IP \(bu 2
+invalid links were found or
+.IP \(bu 2
+link warnings were found and warnings are enabled
+.UNINDENT
+.sp
+Else the return value is zero.
+.SH LIMITATIONS
+.sp
+LinkChecker consumes memory for each queued URL to check. With thousands
+of queued URLs the amount of consumed memory can become quite large.
+This might slow down the program or even the whole system.
+.SH FILES
+.sp
+\fB~/.linkchecker/linkcheckerrc\fP \- default configuration file
+.sp
+\fB~/.linkchecker/blacklist\fP \- default blacklist logger output filename
+.sp
+\fBlinkchecker\-out.\fP\fITYPE\fP \- default logger file output name
+.SH SEE ALSO
+.sp
+\fBlinkcheckerrc(5)\fP
+.sp
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP \- valid
+output encodings
+.sp
+\fI\%https://docs.python.org/howto/regex.html\fP \- regular expression
+documentation
+.SH AUTHOR
+Bastian Kleineidam <bastian.kleineidam@web.de>
+.SH COPYRIGHT
+2000-2014 Bastian Kleineidam
+.\" Generated by docutils manpage writer.
+.

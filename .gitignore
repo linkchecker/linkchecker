@@ -28,7 +28,7 @@ Changelog.linkchecker*
 /doc/html/*.qhc
 /doc/html/*.qch
 /.achievements
-/doc/*.mo
+/doc/i18n/locales/*/LC_MESSAGES/*.mo
 /LinkChecker-*-portable.zip
 /LinkChecker-*.exe
 /LinkChecker.egg-info
@@ -41,3 +41,6 @@ Changelog.linkchecker*
 tests/checker/data/https_cert.pem
 tests/checker/data/https_key.pem
 coverage.xml
+doc/html
+doc/src/_build
+doc/src/code/linkcheck

@@ -37,14 +37,12 @@ recursive-include doc                   \
     *.po                                \
     *.pot                               \
     *.py                                \
+    *.rst                               \
     *.sh                                \
     *.txt                               \
-    *.yaml                              \
     *.yml                               \
     Makefile                            \
-    linkcheckerrc_*                     \
-    po4a.conf                           \
-    wokconfig
+    linkcheckerrc_*
 recursive-include po                    \
     *.mo                                \
     *.po                                \
