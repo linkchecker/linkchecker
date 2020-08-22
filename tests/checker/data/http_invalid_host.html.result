@@ -1,0 +1,12 @@
+url http://localhost:%(port)d/%(datadir)s/http_invalid_host.html
+cache key http://localhost:%(port)d/%(datadir)s/http_invalid_host.html
+real url http://localhost:%(port)d/%(datadir)s/http_invalid_host.html
+valid
+
+url http://localhost]
+cache key None
+real url 
+name urllib.parse.urlsplit ValueError
+info The URL is outside of the domain filter, checked only syntax.
+error
+
