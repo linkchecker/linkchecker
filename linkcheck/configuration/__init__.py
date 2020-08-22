@@ -470,7 +470,6 @@ def get_gnome_proxy(protocol="HTTP"):
             return "%s:%d" % (host, port)
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting %s proxy from GNOME: %s", (protocol, msg))
-        pass
     return None
 
 
@@ -481,7 +480,6 @@ def get_kde_http_proxy():
         return data.get("http_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting HTTP proxy from KDE: %s", msg)
-        pass
 
 
 def get_kde_ftp_proxy():
@@ -491,7 +489,6 @@ def get_kde_ftp_proxy():
         return data.get("ftp_proxy")
     except Exception as msg:
         log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
-        pass
 
 
 # The following KDE functions are largely ported and ajusted from
