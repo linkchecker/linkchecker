@@ -4,9 +4,13 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
+from datetime import date
+import linkcheck.configuration
+
 project = 'LinkChecker'
-copyright = '2000-2014 Bastian Kleineidam'
-# version = '10'
+copyright = linkcheck.configuration.Copyright.split("Copyright (C) ")[1]
+version = str(date.today())
+release = version
 
 # -- General configuration ---------------------------------------------------
 

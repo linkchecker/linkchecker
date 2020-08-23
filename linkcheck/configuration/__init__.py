@@ -35,13 +35,13 @@ AppName = configdata.name
 App = AppName + " " + Version
 Author = configdata.author
 HtmlAuthor = Author.replace(' ', '&nbsp;')
-Copyright = "Copyright (C) 2000-2014 " + Author
-HtmlCopyright = "Copyright &copy; 2000-2014 " + HtmlAuthor
+Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 " + Author
+HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2020 "
+                 + HtmlAuthor)
 AppInfo = App + "              " + Copyright
 HtmlAppInfo = App + ", " + HtmlCopyright
 Url = configdata.url
 SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
-Email = configdata.author_email
 UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = (
     AppName
