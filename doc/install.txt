@@ -7,9 +7,6 @@ Setup with pip
 ------------------
 If pip_ is available, this command should install LinkChecker on
 the local system:
-``pip3 install LinkChecker``
-
-You can also use pip to install the latest from git:
 ``pip3 install git+https://github.com/linkchecker/linkchecker.git``
 
 .. _pip: https://pypi.org/project/pip/
