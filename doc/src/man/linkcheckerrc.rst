@@ -102,7 +102,7 @@ checking
 filtering
 ^^^^^^^^^
 
-**ignore=**\ *REGEX* (MULTILINE)
+**ignore=**\ *REGEX* (`MULTILINE`_)
     Only check syntax of URLs matching the given regular expressions.
     Command line option: :option:`--ignore-url`
 **ignorewarnings=**\ *NAME*\ [**,**\ *NAME*...]
@@ -113,7 +113,7 @@ filtering
     Regular expression to add more URLs recognized as internal links.
     Default is that URLs given on the command line are internal.
     Command line option: none
-**nofollow=**\ *REGEX* (MULTILINE)
+**nofollow=**\ *REGEX* (`MULTILINE`_)
     Check but do not recurse into URLs matching the given regular
     expressions.
     Command line option: :option:`--no-follow-url`
@@ -124,7 +124,7 @@ filtering
 authentication
 ^^^^^^^^^^^^^^
 
-**entry=**\ *REGEX* *USER* [*PASS*] (MULTILINE)
+**entry=**\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)
     Provide individual username/password pairs for different links. In
     addtion to a single login page specified with **loginurl** multiple
     FTP, HTTP (Basic Authentication) and telnet links are supported.
@@ -148,7 +148,7 @@ authentication
     The name attribute of the username input element. Default: **login**.
 **loginpasswordfield=**\ *STRING*
     The name attribute of the password input element. Default: **password**.
-**loginextrafields=**\ *NAME*\ **:**\ *VALUE* (MULTILINE)
+**loginextrafields=**\ *NAME*\ **:**\ *VALUE* (`MULTILINE`_)
     Optionally the name attributes of any additional input elements and
     the values to populate them with. Note that these are submitted
     without checking whether matching input elements exist in the HTML
