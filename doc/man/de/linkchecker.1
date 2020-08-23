@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "August 11, 2020" "" "LinkChecker"
+.TH "LINKCHECKER" "1" "August 22, 2020" "" "LinkChecker"
 .SH NAME
 linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .
@@ -190,7 +190,7 @@ Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind cmdl
 .INDENT 0.0
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
-Ausgabe in eine Datei namens linkchecker\-out.TYP, $HOME/.linkchecker/blacklist bei blacklist Ausgabe, oder DATEINAME falls angegeben. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Der DATEINAME und ENKODIERUNG Teil wird beim Ausgabetyp none ignoriert, ansonsten wird die Datei überschrieben falls sie existiert. Sie können diese Option mehr als einmal verwenden. Gültige Ausgabetypen sind text, html, sql, csv, gml, dot, xml, sitemap, none oder blacklist. Standard ist keine Dateiausgabe. Die unterschiedlichen Ausgabetypen sind weiter unten dokumentiert. Beachten Sie, dass Sie mit der Option \fI\%\-o\fP \fInone\fP jegliche Ausgaben auf der Konsole verhindern können.
+Ausgabe in eine Datei namens linkchecker\-out.TYP, $HOME/.linkchecker/failures bei failures Ausgabe, oder DATEINAME falls angegeben. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Der DATEINAME und ENKODIERUNG Teil wird beim Ausgabetyp none ignoriert, ansonsten wird die Datei überschrieben falls sie existiert. Sie können diese Option mehr als einmal verwenden. Gültige Ausgabetypen sind text, html, sql, csv, gml, dot, xml, sitemap, none oder failures. Standard ist keine Dateiausgabe. Die unterschiedlichen Ausgabetypen sind weiter unten dokumentiert. Beachten Sie, dass Sie mit der Option \fI\%\-o\fP \fInone\fP jegliche Ausgaben auf der Konsole verhindern können.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -205,7 +205,7 @@ Gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen.
 .INDENT 0.0
 .TP
 .B \-o TYPE[/ENCODING], \-\-output=TYPE[/ENCODING]
-Gib Ausgabetyp als text, html, sql, csv, gml, dot, xml, sitemap, none oder blacklist an. Stadard Typ ist text. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+Gib Ausgabetyp als text, html, sql, csv, gml, dot, xml, sitemap, none oder failures an. Stadard Typ ist text. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -315,8 +315,8 @@ Protokolliere Prüfergebnisse als XML Sitemap dessen Format unter \fI\%https://w
 \fBsql\fP
 Gebe Prüfresultat als SQL Skript mit INSERT Befehlen aus. Ein Beispielskript, um die initiale SQL Tabelle zu erstellen ist unter create.sql zu finden.
 .TP
-\fBblacklist\fP
-Für Cronjobs geeignet. Gibt das Prüfergebnis in eine Datei \fB~/.linkchecker/blacklist\fP aus, welche nur Einträge mit fehlerhaften URLs und die Anzahl der Fehlversuche enthält.
+\fBfailures\fP
+Für Cronjobs geeignet. Gibt das Prüfergebnis in eine Datei \fB~/.linkchecker/failures\fP aus, welche nur Einträge mit fehlerhaften URLs und die Anzahl der Fehlversuche enthält.
 .TP
 \fBnone\fP
 Gibt nichts aus. Für Debugging oder Prüfen des Rückgabewerts geeignet.
@@ -550,7 +550,7 @@ LinkChecker benutzt Hauptspeicher für jede zu prüfende URL, die in der Wartesc
 .sp
 \fB~/.linkchecker/linkcheckerrc\fP \- Standardkonfigurationsdatei
 .sp
-\fB~/.linkchecker/blacklist\fP \- Standard Dateiname der blacklist Logger Ausgabe
+\fB~/.linkchecker/failures\fP \- Standard Dateiname der failures Logger Ausgabe
 .sp
 \fBlinkchecker\-out.\fP\fITYP\fP \- Standard Dateiname der Logausgabe
 .SH SIEHE AUCH

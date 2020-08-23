@@ -103,9 +103,9 @@
 #colorok=#3ba557
 #parts=all
 
-# blacklist logger
-[blacklist]
-#filename=~/.linkchecker/blacklist
+# failures logger
+[failures]
+#filename=~/.linkchecker/failures
 
 # custom xml logger
 [xml]

@@ -165,15 +165,15 @@ output
     Command line option: :option:`--debug`
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
     Output to a file **linkchecker-out.**\ *TYPE*, or
-    **$HOME/.linkchecker/blacklist** for **blacklist** output.
+    **$HOME/.linkchecker/failures** for **failures** output.
     Valid file output types are **text**, **html**, **sql**, **csv**,
-    **gml**, **dot**, **xml**, **none** or **blacklist**. Default is no
+    **gml**, **dot**, **xml**, **none** or **failures**. Default is no
     file output. The various output types are documented below. Note
     that you can suppress all console output with **output=none**.
     Command line option: :option:`--file-output`
 **log=**\ *TYPE*\ [**/**\ *ENCODING*]
     Specify output type as **text**, **html**, **sql**, **csv**,
-    **gml**, **dot**, **xml**, **none** or **blacklist**. Default type
+    **gml**, **dot**, **xml**, **none** or **failures**. Default type
     is **text**. The various output types are documented below.
     The *ENCODING* specifies the output encoding, the default is that of
     your locale. Valid encodings are listed at
@@ -312,7 +312,7 @@ html
 **colorok=**
     Set HTML valid color. Default is **#3ba557**.
 
-blacklist
+failures
 ^^^^^^^^^
 
 **filename=**\ *STRING*

@@ -10,6 +10,9 @@ for building.
 The loginuserfield and loginpasswordfield entries in the authentication section
 of linkcheckerrc are now matched to a login form case-sensitively.
 
+The "blacklist" logger has been renamed to "failures". "blacklist" is
+recognised as an alias for "failures" but will be removed in future.
+
 Migrating from 8.x to 9.0
 -------------------------
 The Python requests package is now required.

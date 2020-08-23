@@ -14,7 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-A blacklist logger.
+A failures logger.
 """
 
 import os
@@ -24,27 +24,35 @@ from . import _Logger
 from .. import log, LOG_CHECK
 
 
-class BlacklistLogger(_Logger):
+class FailuresLogger(_Logger):
     """
-    Updates a blacklist of wrong links. If a link on the blacklist
-    is working (again), it is removed from the list. So after n days
-    we have only links on the list which failed for n days.
+    Updates a list of failed links. If a link already on the list
+    is found to be working, it is removed. After n days
+    we only have links on the list which failed within those n days.
     """
 
-    LoggerName = "blacklist"
+    LoggerName = "failures"
 
     LoggerArgs = {
-        "filename": os.path.join(get_user_data(), "blacklist"),
+        "filename": os.path.join(get_user_data(), "failures"),
     }
 
     def __init__(self, **kwargs):
-        """Intialize with old blacklist data (if found, else not)."""
+        """Intialize with old failures data (if found)."""
+        blacklist = os.path.join(get_user_data(), "blacklist")
+        if os.path.isfile(blacklist):
+            self.LoggerArgs["filename"] = blacklist
+            log.warn(
+                LOG_CHECK,
+                _("%(blacklist)s file is deprecated please rename to failures")
+                % {"blacklist": blacklist}
+            )
         args = self.get_args(kwargs)
         super().__init__(**args)
         self.init_fileoutput(args)
-        self.blacklist = {}
+        self.failures = {}
         if self.filename is not None and os.path.exists(self.filename):
-            self.read_blacklist()
+            self.read_failures()
 
     def comment(self, s, **args):
         """
@@ -54,28 +62,28 @@ class BlacklistLogger(_Logger):
 
     def log_url(self, url_data):
         """
-        Put invalid url in blacklist, delete valid url from blacklist.
+        Add invalid url to failures, delete valid url from failures.
         """
         key = (url_data.parent_url, url_data.cache_url)
         key = repr(key)
-        if key in self.blacklist:
+        if key in self.failures:
             if url_data.valid:
-                del self.blacklist[key]
+                del self.failures[key]
             else:
-                self.blacklist[key] += 1
+                self.failures[key] += 1
         else:
             if not url_data.valid:
-                self.blacklist[key] = 1
+                self.failures[key] = 1
 
     def end_output(self, **kwargs):
         """
-        Write blacklist file.
+        Write failures file.
         """
-        self.write_blacklist()
+        self.write_failures()
 
-    def read_blacklist(self):
+    def read_failures(self):
         """
-        Read a previously stored blacklist from file fd.
+        Read a previously stored failures from file fd.
         """
         with open(self.filename, 'r', encoding=self.output_encoding,
                   errors=self.codec_errors) as fd:
@@ -88,18 +96,18 @@ class BlacklistLogger(_Logger):
                 if not key.startswith('('):
                     log.critical(
                         LOG_CHECK,
-                        _("invalid line starting with '%(linestart)s' in %(blacklist)s")
-                        % {"linestart": line[:12], "blacklist": self.filename}
+                        _("invalid line starting with '%(linestart)s' in %(failures)s")
+                        % {"linestart": line[:12], "failures": self.filename}
                     )
                     raise SystemExit(2)
-                self.blacklist[key] = int(value)
+                self.failures[key] = int(value)
 
-    def write_blacklist(self):
+    def write_failures(self):
         """
-        Write the blacklist.
+        Write the failures file.
         """
         oldmask = os.umask(0o077)
-        for key, value in self.blacklist.items():
+        for key, value in self.failures.items():
             self.write("%d %s%s" % (value, repr(key), os.linesep))
         self.close_fileoutput()
         # restore umask

@@ -108,6 +108,14 @@ class LCConfigParser(RawConfigParser):
         section = "output"
         from ..logger import LoggerClasses
 
+        if self.has_section("blacklist"):
+            log.warn(
+                     LOG_CHECK,
+                     _("The blacklist section in linkcheckerrc is deprecated, "
+                       "please rename to failures")
+            )
+            for opt in self.options("blacklist"):
+                self.config["failures"][opt] = self.get("blacklist", opt)
         for c in LoggerClasses:
             key = c.LoggerName
             if self.has_section(key):
@@ -138,13 +146,13 @@ class LCConfigParser(RawConfigParser):
             loggers = self.get(section, "fileoutput").split(",")
             # strip names from whitespace
             loggers = (x.strip().lower() for x in loggers)
-            # no file output for the blacklist and none Logger
+            # no file output for the failures and none Logger
             from ..logger import LoggerNames
 
             loggers = (
                 x
                 for x in loggers
-                if x in LoggerNames and x not in ("blacklist", "none")
+                if x in LoggerNames and x not in ("failures", "none")
             )
             for val in loggers:
                 output = self.config.logger_new(val, fileoutput=1)
