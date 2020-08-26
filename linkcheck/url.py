@@ -21,10 +21,6 @@ import os
 import re
 import urllib.parse
 
-import requests
-
-from . import log, LOG_CHECK
-
 for scheme in ('ldap', 'irc'):
     if scheme not in urllib.parse.uses_netloc:
         urllib.parse.uses_netloc.append(scheme)
@@ -36,13 +32,6 @@ for scheme in ('ldap', 'irc'):
 # else they use the page encoding for followed link. See als
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 url_encoding = "utf-8"
-
-
-# constants defining url part indexes
-SCHEME = 0
-HOSTNAME = DOMAIN = 1
-PORT = 2
-DOCUMENT = 3
 
 default_ports = {
     'http': 80,
@@ -82,14 +71,8 @@ safe_url_pattern = r"%s://%s%s(#%s)?" % (
     _safe_fragment_pattern,
 )
 
-is_safe_char = re.compile("(?i)^%s$" % _safe_char).match
 is_safe_url = re.compile("(?i)^%s$" % safe_url_pattern).match
 is_safe_domain = re.compile("(?i)^%s$" % _safe_domain_pattern).match
-is_safe_host = re.compile("(?i)^%s$" % _safe_host_pattern).match
-is_safe_path = re.compile("(?i)^%s$" % _safe_path_pattern).match
-is_safe_parameter = re.compile("(?i)^%s$" % _safe_param_pattern).match
-is_safe_query = re.compile("(?i)^%s$" % _safe_query_pattern).match
-is_safe_fragment = re.compile("(?i)^%s$" % _safe_fragment_pattern).match
 
 
 # snatched form urlparse.py
@@ -116,16 +99,6 @@ def is_numeric_port(portstr):
         if 0 < port < 65536:
             return port
     return False
-
-
-def safe_host_pattern(host):
-    """Return regular expression pattern with given host for URL testing."""
-    return "(?i)%s://%s%s(#%s)?" % (
-        _safe_scheme_pattern,
-        host,
-        _safe_path_pattern,
-        _safe_fragment_pattern,
-    )
 
 
 def parse_qsl(qs, encoding, keep_blank_values=0, strict_parsing=0):
@@ -242,15 +215,6 @@ def url_fix_host(urlparts, encoding):
         netloc = host
     urlparts[1] = userpass + netloc
     return is_idn
-
-
-def url_fix_common_typos(url):
-    """Fix common typos in given URL like forgotten colon."""
-    if url.startswith("http//"):
-        url = "http://" + url[6:]
-    elif url.startswith("https//"):
-        url = "https://" + url[7:]
-    return url
 
 
 def url_fix_mailto_urlsplit(urlparts):
@@ -426,27 +390,6 @@ def document_quote(document):
     return doc
 
 
-def match_url(url, domainlist):
-    """Return True if host part of url matches an entry in given domain list.
-    """
-    if not url:
-        return False
-    return match_host(url_split(url)[1], domainlist)
-
-
-def match_host(host, domainlist):
-    """Return True if host matches an entry in given domain list."""
-    if not host:
-        return False
-    for domain in domainlist:
-        if domain.startswith('.'):
-            if host.endswith(domain):
-                return True
-        elif host == domain:
-            return True
-    return False
-
-
 _nopathquote_chars = "-;/=,~*+()@!"
 if os.name == 'nt':
     _nopathquote_chars += "|"
@@ -465,27 +408,6 @@ def url_needs_quoting(url):
         # since '$' matches immediately before a end-of-line
         return True
     return not _safe_url_chars_ro.match(url)
-
-
-def url_split(url):
-    """Split url in a tuple (scheme, hostname, port, document) where
-    hostname is always lowercased.
-    Precondition: url is syntactically correct URI (eg has no whitespace)
-    """
-    scheme, netloc = urllib.parse.splittype(url)
-    host, document = urllib.parse.splithost(netloc)
-    port = default_ports.get(scheme, 0)
-    if host:
-        host = host.lower()
-        host, port = splitport(host, port=port)
-    return scheme, host, port, document
-
-
-def url_unsplit(parts):
-    """Rejoin URL parts to a string."""
-    if parts[2] == default_ports.get(parts[0]):
-        return "%s://%s%s" % (parts[0], parts[1], parts[3])
-    return "%s://%s:%d%s" % parts
 
 
 def splitport(host, port=0):
@@ -512,75 +434,3 @@ def splitport(host, port=0):
             # For an invalid non-empty port leave the host name as is
             pass
     return host, port
-
-
-def get_content(url, user=None, password=None, proxy=None, data=None, addheaders=None):
-    """Get URL content and info.
-
-    @return: (decoded text content of URL, headers) or
-             (None, errmsg) on error.
-    @rtype: tuple (String, dict) or (None, String)
-    """
-    from . import configuration
-
-    headers = {
-        'User-Agent': configuration.UserAgent,
-    }
-    if addheaders:
-        headers.update(addheaders)
-    method = 'GET'
-    kwargs = dict(headers=headers)
-    if user and password:
-        kwargs['auth'] = (user, password)
-    if data:
-        kwargs['data'] = data
-        method = 'POST'
-    if proxy:
-        kwargs['proxy'] = dict(http=proxy)
-    from .configuration import get_share_file
-
-    try:
-        kwargs["verify"] = get_share_file('cacert.pem')
-    except ValueError:
-        pass
-    try:
-        response = requests.request(method, url, **kwargs)
-        return response.text, response.headers
-    except (
-        requests.exceptions.RequestException,
-        requests.exceptions.BaseHTTPError,
-    ) as msg:
-        log.warn(
-            LOG_CHECK,
-            ("Could not get content of URL %(url)s: %(msg)s.")
-            % {"url": url, "msg": str(msg)},
-        )
-        return None, str(msg)
-
-
-def shorten_duplicate_content_url(url):
-    """Remove anchor part and trailing index.html from URL."""
-    if '#' in url:
-        url = url.split('#', 1)[0]
-    if url.endswith('index.html'):
-        return url[:-10]
-    if url.endswith('index.htm'):
-        return url[:-9]
-    return url
-
-
-def is_duplicate_content_url(url1, url2):
-    """Check if both URLs are allowed to point to the same content."""
-    if url1 == url2:
-        return True
-    if url2 in url1:
-        url1 = shorten_duplicate_content_url(url1)
-        if not url2.endswith('/') and url1.endswith('/'):
-            url2 += '/'
-        return url1 == url2
-    if url1 in url2:
-        url2 = shorten_duplicate_content_url(url2)
-        if not url1.endswith('/') and url2.endswith('/'):
-            url1 += '/'
-        return url1 == url2
-    return False

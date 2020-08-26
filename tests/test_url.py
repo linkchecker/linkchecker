@@ -17,10 +17,10 @@
 """
 Test url routines.
 """
-from . import need_network, need_posix, need_windows
+from . import need_posix, need_windows
 import unittest
 import os
-import re
+
 import linkcheck.url
 
 # 'ftp://user:pass@ftp.foo.net/foo/bar':
@@ -66,16 +66,6 @@ class TestUrl(unittest.TestCase):
         self.assertEqual(
             linkcheck.url.url_quote(url_norm(url), encoding="iso-8859-1"), nurl
         )
-
-    def test_safe_patterns(self):
-        is_safe_host = linkcheck.url.is_safe_host
-        safe_host_pattern = linkcheck.url.safe_host_pattern
-        self.assertTrue(is_safe_host("example.org"))
-        self.assertTrue(is_safe_host("example.org:80"))
-        self.assertTrue(not is_safe_host("example.org:21"))
-        pat = safe_host_pattern("example.org")
-        ro = re.compile(pat)
-        self.assertTrue(ro.match("http://example.org:80/"))
 
     def test_url_quote(self):
         def url_quote(url):
@@ -429,18 +419,6 @@ class TestUrl(unittest.TestCase):
         nurl = "%C3%A4%C3%B6%C3%BC?:"
         self.urlnormtest(url, nurl)
 
-    def test_fixing(self):
-        # Test url fix method.
-        url = "http//www.example.org"
-        nurl = "http://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = "http//www.example.org"
-        nurl = "http://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-        url = "https//www.example.org"
-        nurl = "https://www.example.org"
-        self.assertEqual(linkcheck.url.url_fix_common_typos(url), nurl)
-
     def test_valid(self):
         # Test url validity functions.
         u = "http://www.example.com"
@@ -505,20 +483,6 @@ class TestUrl(unittest.TestCase):
         url = "ä.."
         self.assertRaises(UnicodeError, idna_encode, url)
 
-    def test_match_host(self):
-        # Test host matching.
-        match_host = linkcheck.url.match_host
-        match_url = linkcheck.url.match_url
-        self.assertTrue(not match_host("", []))
-        self.assertTrue(not match_host("", [".localhost"]))
-        self.assertTrue(not match_host("localhost", []))
-        self.assertTrue(not match_host("localhost", [".localhost"]))
-        self.assertTrue(match_host("a.localhost", [".localhost"]))
-        self.assertTrue(match_host("localhost", ["localhost"]))
-        self.assertTrue(not match_url("", []))
-        self.assertTrue(not match_url("a", []))
-        self.assertTrue(match_url("http://example.org/hulla", ["example.org"]))
-
     def test_splitparam(self):
         # Path parameter split test.
         p = [
@@ -554,34 +518,12 @@ class TestUrl(unittest.TestCase):
         self.assertFalse(is_numeric_port("-1"))
         self.assertFalse(is_numeric_port("a"))
 
-    def test_split(self):
-        url_split = linkcheck.url.url_split
-        url_unsplit = linkcheck.url.url_unsplit
-        url = "http://example.org/whoops"
-        self.assertEqual(url_unsplit(url_split(url)), url)
-        url = "http://example.org:123/whoops"
-        self.assertEqual(url_unsplit(url_split(url)), url)
-
     def test_safe_domain(self):
         is_safe_domain = linkcheck.url.is_safe_domain
         self.assertFalse(is_safe_domain("a..example.com"))
         self.assertFalse(is_safe_domain("a_b.example.com"))
         self.assertTrue(is_safe_domain("a-b.example.com"))
         self.assertTrue(is_safe_domain("x1.example.com"))
-
-    @need_network
-    def test_get_content(self):
-        linkcheck.url.get_content("http://www.debian.org/")
-
-    def test_duplicate_urls(self):
-        is_dup = linkcheck.url.is_duplicate_content_url
-        self.assertTrue(is_dup("http://example.org", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org/", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/"))
-        self.assertTrue(is_dup("http://example.org/index.html", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/index.html"))
-        self.assertTrue(is_dup("http://example.org/index.htm", "http://example.org"))
-        self.assertTrue(is_dup("http://example.org", "http://example.org/index.htm"))
 
     def test_splitport(self):
         splitport = linkcheck.url.splitport
