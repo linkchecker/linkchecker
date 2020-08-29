@@ -1,0 +1,26 @@
+name: Test LinkChecker on Windows
+
+on:
+    pull_request:
+      types: [opened, reopened, ready_for_review, synchronize]
+    push:
+      branches: ["master"]
+
+jobs:
+  run:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+        python: [3.7]
+        toxenv: [py]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Tox
+        run: pip install tox
+
+      - name: Run Tox
+        run: tox -e ${{ matrix.toxenv }}
