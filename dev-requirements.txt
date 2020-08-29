@@ -6,5 +6,3 @@ pyftpdlib
 pyopenssl
 pytest
 pytest-xdist
-# for building on osx:
-py2app

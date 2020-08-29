@@ -45,7 +45,7 @@ from distutils import util, log
 from distutils.core import Distribution
 
 # the application version
-AppVersion = "10.0.0.dev0"
+AppVersion = "10.0.0.dev1"
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
@@ -302,8 +302,8 @@ class MyClean(clean):
 # scripts
 scripts = ["linkchecker"]
 
-myname = "Bastian Kleineidam"
-myemail = "bastian.kleineidam@web.de"
+myname = "LinkChecker Authors"
+myemail = ""
 
 data_files = [
     ("share/linkchecker", ["config/linkcheckerrc"]),

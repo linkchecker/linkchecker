@@ -36,8 +36,6 @@ Python 3.5 or later is needed.
 
 The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
 
-Windows builds are seriously lagging behind the Linux releases, see `#53 <https://github.com/linkchecker/linkchecker/issues/53>`_ for details. For now, the only two options are to install from source or use `Docker for Windows <https://www.docker.com/docker-windows>`_.
-
 Usage
 ------
 Execute ``linkchecker https://www.example.com``.
@@ -45,6 +43,8 @@ For other options see ``linkchecker --help``.
 
 Docker usage
 -------------
+
+*The Docker images are out-of-date, pip installation is the only currently recommended method.*
 
 If you do not want to install any additional libraries/dependencies you can use the Docker image.
 

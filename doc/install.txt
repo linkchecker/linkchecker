@@ -7,12 +7,9 @@ Setup with pip
 ------------------
 If pip_ is available, this command should install LinkChecker on
 the local system:
+``pip3 install git+https://github.com/linkchecker/linkchecker.git``
 
 .. _pip: https://pypi.org/project/pip/
-
-``pip3 install LinkChecker``
-
-You can also use pip to install the latest from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``.
 
 Setup for Windows
 -----------------
@@ -29,7 +26,9 @@ https://pip.pypa.io/en/stable/installing/
 Setup for GNU/Linux
 -------------------
 On all major Linux distributions (Debian, Mandriva, Redhat, Suse, Ubuntu),
-the ``linkchecker`` package is available for install.
+the ``linkchecker`` package is available for installation. pip_ will be
+available, often as a package e.g. ``python3-pip``, to install the latest
+LinkChecker.
 
 Manual setup for Unix systems
 -----------------------------
@@ -93,7 +92,7 @@ Now install the application.
       documentation.
       
       .. _Modifying Python's search path:
-         http://docs.python.org/inst/search-path.html#SECTION000410000000000000000
+         https://docs.python.org/3/install/#inst-search-path
 
 
 After installation
