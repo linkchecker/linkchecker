@@ -16,7 +16,8 @@
 """
 Test proxy handling.
 """
-from test.support import EnvironmentVarGuard
+
+from unittest.mock import patch
 
 from . import httpserver
 
@@ -25,10 +26,11 @@ class TestProxy(httpserver.HttpServerTest):
     """Test no_proxy env var handling."""
 
     def test_noproxy(self):
-        # set env vars
-        with EnvironmentVarGuard() as env:
-            env.set("http_proxy", "http://example.org:8877")
-            env.set("no_proxy", "localhost:%d" % self.port)
+        with patch.dict("os.environ",
+                        {
+                            "http_proxy": "http://example.org:8877",
+                            "no_proxy": "localhost:%d" % self.port,
+                        }):
             self.noproxy_test()
 
     def noproxy_test(self):
