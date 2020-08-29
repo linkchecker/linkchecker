@@ -335,7 +335,7 @@ if os.name == "posix":
             "share/linkchecker/examples",
             [
                 "config/linkchecker-completion",
-                "doc/examples/check_blacklist.sh",
+                "doc/examples/check_failures.sh",
                 "doc/examples/check_for_x_errors.sh",
                 "doc/examples/check_urls.sh",
             ],

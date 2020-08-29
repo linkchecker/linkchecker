@@ -81,5 +81,5 @@ graphviz_output_format = 'svg'
 # -- Mock --------------------------------------------------------------------
 
 import linkcheck.logger
-linkcheck.logger.blacklist.BlacklistLogger.LoggerArgs = {
-    'filename': '~/.linkchecker/blacklist'}
+linkcheck.logger.failures.FailuresLogger.LoggerArgs = {
+    'filename': '~/.linkchecker/failures'}

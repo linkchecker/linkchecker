@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "August 11, 2020" "" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "August 22, 2020" "" "LinkChecker"
 .SH NAME
 linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .
@@ -168,10 +168,10 @@ form.
 Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBthread\fP, \fBplugins\fP und \fBall\fP\&. Die Angabe \fBall\fP ist ein Synonym für alle verfügbaren Logger. Kommandozeilenoption: \fB\-\-debug\fP
 .TP
 \fBfileoutput=\fP\fITYPE\fP[\fB,\fP\fITYPE\fP\&...]
-Ausgabe in Datei \fBlinkchecker\-out.\fP\fITYP\fP, \fB$HOME/.linkchecker/blacklist\fP für \fBblacklist\fP Ausgabe. Gültige Ausgabearten sind \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP> oder \fBblacklist\fP Standard ist keine Dateiausgabe. Die verschiedenen Ausgabearten sind unten dokumentiert. Bemerke, dass man alle Konsolenausgaben mit \fBoutput=none\fP unterdrücken kann. Kommandozeilenoption: \fB\-\-file\-output\fP
+Ausgabe in Datei \fBlinkchecker\-out.\fP\fITYP\fP, \fB$HOME/.linkchecker/failures\fP für \fBfailures\fP Ausgabe. Gültige Ausgabearten sind \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP> oder \fBfailures\fP Standard ist keine Dateiausgabe. Die verschiedenen Ausgabearten sind unten dokumentiert. Bemerke, dass man alle Konsolenausgaben mit \fBoutput=none\fP unterdrücken kann. Kommandozeilenoption: \fB\-\-file\-output\fP
 .TP
 \fBlog=\fP\fITYPE\fP[\fB/\fP\fIENCODING\fP]
-Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP oder \fBblacklist\fP an. Stadard Typ ist \fBtext\fP\&. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Kommandozeilenoption: \fB\-\-output\fP
+Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP oder \fBfailures\fP an. Stadard Typ ist \fBtext\fP\&. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Kommandozeilenoption: \fB\-\-output\fP
 .TP
 \fBquiet=\fP[\fB0\fP|\fB1\fP]
 Falls gesetzt, erfolgt keine Ausgabe. Ein Alias für \fBlog=none\fP\&. Dies ist nur in Verbindung mit \fBfileoutput\fP nützlich. Kommandozeilenoption: \fB\-\-verbose\fP
@@ -326,7 +326,7 @@ Setze HTML Fehlerfarbe. Standard ist \fB#db4930\fP\&.
 \fBcolorok=\fP
 Setze HTML Gültigkeitsfarbe. Standard ist \fB#3ba557\fP\&.
 .UNINDENT
-.SS blacklist
+.SS failures
 .INDENT 0.0
 .TP
 \fBfilename=\fP\fISTRING\fP

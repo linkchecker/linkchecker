@@ -125,7 +125,7 @@ Output options
 .. option:: -F TYPE[/ENCODING][/FILENAME], --file-output=TYPE[/ENCODING][/FILENAME]
 
     Output to a file linkchecker-out.TYPE,
-    $HOME/.linkchecker/blacklist for blacklist output, or
+    $HOME/.linkchecker/failures for failures output, or
     FILENAME if specified. The ENCODING specifies the output
     encoding, the default is that of your locale. Valid encodings are
     listed at
@@ -134,7 +134,7 @@ Output options
     be ignored, else if the file already exists, it will be overwritten.
     You can specify this option more than once. Valid file output TYPEs
     are text, html, sql, csv, gml, dot, xml,
-    sitemap, none or blacklist. Default is no file output.
+    sitemap, none or failures. Default is no file output.
     The various output types are documented below. Note that you can
     suppress all console output with the option :option:`-o` *none*.
 
@@ -149,7 +149,7 @@ Output options
 .. option:: -o TYPE[/ENCODING], --output=TYPE[/ENCODING]
 
     Specify output type as text, html, sql, csv,
-    gml, dot, xml, sitemap, none or blacklist.
+    gml, dot, xml, sitemap, none or failures.
     Default type is text. The various output types are documented
     below.
     The ENCODING specifies the output encoding, the default is that of
@@ -277,9 +277,9 @@ outputting a sitemap graph format.
 **sql**
     Log check result as SQL script with INSERT commands. An example
     script to create the initial SQL table is included as create.sql.
-**blacklist**
+**failures**
     Suitable for cron jobs. Logs the check result into a file
-    **~/.linkchecker/blacklist** which only contains entries with
+    **~/.linkchecker/failures** which only contains entries with
     invalid URLs and the number of times they have failed.
 **none**
     Logs nothing. Suitable for debugging or checking the exit code.
@@ -523,7 +523,7 @@ FILES
 
 **~/.linkchecker/linkcheckerrc** - default configuration file
 
-**~/.linkchecker/blacklist** - default blacklist logger output filename
+**~/.linkchecker/failures** - default failures logger output filename
 
 **linkchecker-out.**\ *TYPE* - default logger file output name
 

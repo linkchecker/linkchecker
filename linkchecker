@@ -200,9 +200,9 @@ gxml    Log check result as a GraphXML sitemap graph.
 xml     Log check result as machine-readable XML.
 sql     Log check result as SQL script with INSERT commands. An example
         script to create the initial SQL table is included as create.sql.
-blacklist
+failures
         Suitable for cron jobs. Logs the check result into a file
-        ~/.linkchecker/blacklist which only contains entries with invalid
+        ~/.linkchecker/failures which only contains entries with invalid
         URLs and the number of times they have failed.
 none    Logs nothing. Suitable for debugging or checking the exit code.
 """
@@ -319,8 +319,8 @@ group.add_argument(
     dest="fileoutput",
     metavar="TYPE[/ENCODING[/FILENAME]]",
     help=_(
-        "Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/blacklist for\n"
-        "'blacklist' output, or FILENAME if specified.\n"
+        "Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
+        "'failures' output, or FILENAME if specified.\n"
         "The ENCODING specifies the output encoding, the default is that of your\n"
         "locale.\n"
         "Valid encodings are listed at "
@@ -579,6 +579,13 @@ if options.output:
     else:
         logtype, encoding = options.output, i18n.default_encoding
     logtype = logtype.lower()
+    if logtype == "blacklist":
+        log.warn(
+            LOG_CMDLINE,
+            _("blacklist is deprecated for option %(option)s, "
+              "using failures instead") % {"option": "'-o, --output'"}
+        )
+        logtype = "failures"
     if logtype not in linkcheck.logger.LoggerNames:
         print_usage(
             _("Unknown logger type %(type)r in %(output)r for option %(option)s")
@@ -616,6 +623,13 @@ if options.fileoutput:
                         ns["filename"] = suffix
                 else:
                     ns["filename"] = suffix
+        if ftype == "blacklist":
+            log.warn(
+                LOG_CMDLINE,
+                _("blacklist logger is deprecated for option %(option)s, "
+                  "using failures instead") % {"option": "'-F, --file-output'"}
+            )
+            ftype = "failures"
         if ftype not in linkcheck.logger.LoggerNames:
             print_usage(
                 _("Unknown logger type %(type)r in %(output)r for option %(option)s")

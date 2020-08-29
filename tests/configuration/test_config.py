@@ -145,9 +145,9 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config["html"]["colorwarning"], "#ff0000")
         self.assertEqual(config["html"]["colorerror"], "#ff0000")
         self.assertEqual(config["html"]["colorok"], "#ff0000")
-        # blacklist logger section
-        self.assertEqual(config["blacklist"]["filename"], "blacklist")
-        self.assertEqual(config["blacklist"]["encoding"], "utf-8")
+        # failures logger section
+        self.assertEqual(config["failures"]["filename"], "failures")
+        self.assertEqual(config["failures"]["encoding"], "utf-8")
         # xml logger section
         self.assertEqual(config["xml"]["filename"], "imadoofus.xml")
         self.assertEqual(config["xml"]["parts"], ["realurl"])
@@ -166,3 +166,12 @@ class TestConfig(unittest.TestCase):
         config = linkcheck.configuration.Configuration()
         files = [get_file("config2.ini")]
         self.assertRaises(linkcheck.LinkCheckerError, config.read, files)
+
+    def test_confparse_deprecated(self):
+        config = linkcheck.configuration.Configuration()
+        files = [get_file("config3.ini")]
+        config.read(files)
+        config.sanitize()
+        # blacklist logger section
+        self.assertEqual(config["failures"]["filename"], "blacklist")
+        self.assertEqual(config["failures"]["encoding"], "utf-8")

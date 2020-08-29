@@ -12,7 +12,7 @@ help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 gettext:
-	@$(SPHINXBUILD) -b gettext "$(SOURCEDIR)" -d "$(BUILDDIR)/i18n/doctrees" ../i18n/gettext $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -b gettext "$(SOURCEDIR)" -d "$(BUILDDIR)/i18n/doctrees" ../i18n/gettext $(SPHINXOPTS) $(O) man/*
 
 html:
 	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" -d "$(BUILDDIR)/doctrees" ../html $(SPHINXOPTS) $(O)

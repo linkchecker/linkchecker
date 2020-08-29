@@ -169,7 +169,7 @@ def add_fileoutput_config(config):
     else:
         return
     for ftype in linkcheck.logger.LoggerNames:
-        if ftype in ("test", "blacklist"):
+        if ftype in ("test", "failures"):
             continue
         logger = config.logger_new(ftype, fileoutput=1, filename=devnull)
         config["fileoutput"].append(logger)

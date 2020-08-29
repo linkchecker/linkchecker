@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "August 11, 2020" "" "LinkChecker"
+.TH "LINKCHECKER" "1" "August 22, 2020" "" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .
@@ -203,7 +203,7 @@ during debug runs.
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
 Output to a file linkchecker\-out.TYPE,
-$HOME/.linkchecker/blacklist for blacklist output, or
+$HOME/.linkchecker/failures for failures output, or
 FILENAME if specified. The ENCODING specifies the output
 encoding, the default is that of your locale. Valid encodings are
 listed at
@@ -212,7 +212,7 @@ The FILENAME and ENCODING parts of the none output type will
 be ignored, else if the file already exists, it will be overwritten.
 You can specify this option more than once. Valid file output TYPEs
 are text, html, sql, csv, gml, dot, xml,
-sitemap, none or blacklist. Default is no file output.
+sitemap, none or failures. Default is no file output.
 The various output types are documented below. Note that you can
 suppress all console output with the option \fI\%\-o\fP \fInone\fP\&.
 .UNINDENT
@@ -230,7 +230,7 @@ Don\(aqt log warnings. Default is to log warnings.
 .TP
 .B \-o TYPE[/ENCODING], \-\-output=TYPE[/ENCODING]
 Specify output type as text, html, sql, csv,
-gml, dot, xml, sitemap, none or blacklist.
+gml, dot, xml, sitemap, none or failures.
 Default type is text. The various output types are documented
 below.
 The ENCODING specifies the output encoding, the default is that of
@@ -377,9 +377,9 @@ Log check result as an XML sitemap whose protocol is documented at
 Log check result as SQL script with INSERT commands. An example
 script to create the initial SQL table is included as create.sql.
 .TP
-\fBblacklist\fP
+\fBfailures\fP
 Suitable for cron jobs. Logs the check result into a file
-\fB~/.linkchecker/blacklist\fP which only contains entries with
+\fB~/.linkchecker/failures\fP which only contains entries with
 invalid URLs and the number of times they have failed.
 .TP
 \fBnone\fP
@@ -665,7 +665,7 @@ This might slow down the program or even the whole system.
 .sp
 \fB~/.linkchecker/linkcheckerrc\fP \- default configuration file
 .sp
-\fB~/.linkchecker/blacklist\fP \- default blacklist logger output filename
+\fB~/.linkchecker/failures\fP \- default failures logger output filename
 .sp
 \fBlinkchecker\-out.\fP\fITYPE\fP \- default logger file output name
 .SH SEE ALSO
