@@ -17,8 +17,6 @@
 Handle http links.
 """
 
-import urllib.parse
-
 import requests
 
 # The validity of SSL certs is ignored to be able
@@ -273,8 +271,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             # Reset extern and recalculate
             self.extern = None
             self.set_extern(newurl)
-            self.urlparts = list(urllib.parse.urlsplit(newurl))
-            self.build_url_parts()
+            self.urlparts = self.build_url_parts(newurl)
             self.url_connection = response
             self.headers = response.headers
             self.url = urlutil.urlunsplit(self.urlparts)
