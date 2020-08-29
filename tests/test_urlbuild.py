@@ -22,6 +22,7 @@ import linkcheck.configuration
 import linkcheck.director
 import linkcheck.checker.urlbase
 from linkcheck.checker import get_url_from
+from . import has_windows
 
 
 def get_test_aggregate():
@@ -60,7 +61,11 @@ class TestUrlBuild(unittest.TestCase):
         aggregate = get_test_aggregate()
         o = get_url_from(base_url, recursion_level, aggregate, parent_url=parent_url)
         o.build_url()
-        self.assertEqual(o.url, parent_url)
+        if has_windows():
+            expected_url = "file:////a/b.html"
+        else:
+            expected_url = parent_url
+        self.assertEqual(o.url, expected_url)
 
     def test_http_build2(self):
         parent_url = "http://example.org/test?a=b&c=d"

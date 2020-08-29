@@ -1,0 +1,33 @@
+url file://%(curdir)s/%(datadir)s/all_parts_linenos_windows.html
+cache key file://%(curdir)s/%(datadir)s/all_parts_linenos_windows.html
+real url file://%(curdir)s/%(datadir)s/all_parts_linenos_windows.html
+name %(datadir)s/all_parts_linenos_windows.html
+valid
+line None
+col None
+size 192
+parent_url 
+page 0
+
+content_type text/html
+url base2.html
+cache key file://%(curdir)s/%(datadir)s/base2.html
+real url file://%(curdir)s/%(datadir)s/base2.html
+valid
+line 4
+col 1
+size 67
+parent_url file://%(curdir)s/%(datadir)s/all_parts_linenos_windows.html
+page 0
+content_type text/html
+
+url file.html
+cache key file://%(curdir)s/%(datadir)s/file.html
+real url file://%(curdir)s/%(datadir)s/file.html
+valid
+line 6
+col 1
+size 118
+parent_url file://%(curdir)s/%(datadir)s/all_parts_linenos_windows.html
+page 0
+content_type text/html

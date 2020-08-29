@@ -21,6 +21,7 @@ import pytest
 
 from . import LinkCheckTest
 from . import TestLogger
+from .. import has_windows
 
 bs_has_linenos = BeautifulSoup("<a>", "html.parser").a.sourceline is not None
 
@@ -59,4 +60,7 @@ class TestAllParts(LinkCheckTest):
         not bs_has_linenos, reason="Beautiful Soup does not support line numbers"
     )
     def test_all_parts_linenos(self):
-        self.file_test("all_parts_linenos.html")
+        if has_windows():
+            self.file_test("all_parts_linenos_windows.html")
+        else:
+            self.file_test("all_parts_linenos.html")
