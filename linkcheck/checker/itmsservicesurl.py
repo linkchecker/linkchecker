@@ -33,7 +33,6 @@ class ItmsServicesUrl(urlbase.UrlBase):
     def local_check(self):
         """Disable content checks."""
         log.debug(LOG_CHECK, "Checking %s", self)
-        pass
 
     def check_content(self):
         """Allow recursion to check the url CGI param."""

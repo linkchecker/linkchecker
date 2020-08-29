@@ -88,7 +88,6 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
                 # note that the info may change every time a user logs in,
                 # so don't add it to the url_data info.
                 log.debug(LOG_CHECK, "FTP info %s", info)
-                pass
             else:
                 raise LinkCheckerError(_("Got no answer from FTP server"))
         except EOFError as msg:
@@ -103,7 +102,6 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             features = self.url_connection.sendcmd("FEAT")
         except ftplib.error_perm as msg:
             log.debug(LOG_CHECK, "Ignoring error when getting FTP features: %s" % msg)
-            pass
         else:
             log.debug(LOG_CHECK, "FTP features %s", features)
             if " UTF-8" in features.splitlines():

@@ -363,7 +363,6 @@ class MailtoUrl(urlbase.UrlBase):
         log.debug(LOG_CHECK, "found %d MX mailhosts:", len(answers))
         for preference, host in mxdata:
             log.debug(LOG_CHECK, "MX host %r, preference %d", host, preference)
-            pass
         self.set_result(_("Valid mail address syntax"))
 
     def set_cache_url(self):

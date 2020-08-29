@@ -197,7 +197,6 @@ class RobotFileParser:
                             self.url,
                             linenumber,
                         )
-                        pass
                     else:
                         entry.rulelines.append(RuleLine(line[1], False))
                         state = 2
@@ -209,7 +208,6 @@ class RobotFileParser:
                             self.url,
                             linenumber,
                         )
-                        pass
                     else:
                         entry.rulelines.append(RuleLine(line[1], True))
                         state = 2
@@ -221,7 +219,6 @@ class RobotFileParser:
                             self.url,
                             linenumber,
                         )
-                        pass
                     else:
                         try:
                             entry.crawldelay = max(0, int(line[1]))
@@ -234,7 +231,6 @@ class RobotFileParser:
                                 linenumber,
                                 line[1],
                             )
-                            pass
                 elif line[0] == "sitemap":
                     # Note that sitemap URLs must be absolute according to
                     # http://www.sitemaps.org/protocol.html#submit_robots
@@ -248,7 +244,6 @@ class RobotFileParser:
                         linenumber,
                         line[0],
                     )
-                    pass
             else:
                 log.debug(
                     LOG_CHECK,
@@ -257,7 +252,6 @@ class RobotFileParser:
                     linenumber,
                     line,
                 )
-                pass
         if state in (1, 2):
             self.entries.append(entry)
         self.modified()
