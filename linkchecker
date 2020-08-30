@@ -28,6 +28,7 @@ import getpass
 
 # installs _() and _n() gettext functions into global namespace
 import linkcheck
+log = linkcheck.log
 logconf = linkcheck.logconf
 LOG_CMDLINE = linkcheck.LOG_CMDLINE
 
@@ -42,13 +43,13 @@ from linkcheck.cmdline import (
     LCArgumentParser,
     print_plugins,
 )
-from linkcheck import log, i18n, strformat
 import linkcheck.checker
 import linkcheck.configuration
 import linkcheck.fileutil
 import linkcheck.logger
 import linkcheck.ansicolor
 from linkcheck.director import console, check_urls, get_aggregate
+from linkcheck.strformat import stripurl
 
 # optional modules
 has_argcomplete = linkcheck.fileutil.has_module("argcomplete")
@@ -578,7 +579,7 @@ if options.output:
     if "/" in options.output:
         logtype, encoding = options.output.split("/", 1)
     else:
-        logtype, encoding = options.output, i18n.default_encoding
+        logtype, encoding = options.output, linkcheck.i18n.default_encoding
     logtype = logtype.lower()
     if logtype == "blacklist":
         log.warn(
@@ -734,7 +735,7 @@ if options.stdin:
         aggregate_url(aggregate, url)
 elif options.url:
     for url in options.url:
-        aggregate_url(aggregate, strformat.stripurl(url))
+        aggregate_url(aggregate, stripurl(url))
 else:
     log.warn(LOG_CMDLINE, _("no files or URLs given"))
 # set up profiling
