@@ -38,7 +38,6 @@ HtmlAuthor = Author.replace(' ', '&nbsp;')
 Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 " + Author
 HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2020 "
                  + HtmlAuthor)
-AppInfo = App + "              " + Copyright
 HtmlAppInfo = App + ", " + HtmlCopyright
 Url = configdata.url
 SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
@@ -46,9 +45,8 @@ UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = (
     AppName
     + """ comes with ABSOLUTELY NO WARRANTY!
-This is free software, and you are welcome to redistribute it
-under certain conditions. Look at the file `LICENSE' within this
-distribution."""
+This is free software, and you are welcome to redistribute it under
+certain conditions. Look at the file `LICENSE' within this distribution."""
 )
 Portable = configdata.portable
 

@@ -93,7 +93,8 @@ class TextLogger(_Logger):
 
     def write_intro(self):
         """Log introduction text."""
-        self.writeln(configuration.AppInfo)
+        self.writeln(configuration.App)
+        self.writeln(configuration.Copyright)
         self.writeln(configuration.Freeware)
         self.writeln(
             _("Get the newest version at %(url)s") % {'url': configuration.Url}
