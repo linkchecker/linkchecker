@@ -1,0 +1,36 @@
+linkcheck.log
+=============
+
+.. automodule:: linkcheck.log
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      critical
+      debug
+      error
+      exception
+      info
+      is_debug
+      shutdown
+      warn
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

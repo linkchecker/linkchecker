@@ -1,0 +1,35 @@
+linkcheck.configuration.confparse
+=================================
+
+.. automodule:: linkcheck.configuration.confparse
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      read_multiline
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      LCConfigParser
+   
+   
+
+   
+   
+   
+
+
+

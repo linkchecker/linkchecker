@@ -1,0 +1,36 @@
+linkcheck.lock
+==============
+
+.. automodule:: linkcheck.lock
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_lock
+      get_semaphore
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DebugLock
+   
+   
+
+   
+   
+   
+
+
+

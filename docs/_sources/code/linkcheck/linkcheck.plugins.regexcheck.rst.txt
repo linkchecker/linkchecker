@@ -1,0 +1,29 @@
+linkcheck.plugins.regexcheck
+============================
+
+.. automodule:: linkcheck.plugins.regexcheck
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RegexCheck
+   
+   
+
+   
+   
+   
+
+
+

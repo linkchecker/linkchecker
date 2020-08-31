@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheck.strformat &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkcheckerrc.html">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code/linkcheck/linkcheck.html">linkcheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.html">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../linkcheck.html">linkcheck</a> &raquo;</li>
+        
+      <li>linkcheck.strformat</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for linkcheck.strformat</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2000-2014 Bastian Kleineidam</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+<span class="c1">#</span>
+<span class="c1"># Some functions have been taken and adjusted from the quodlibet</span>
+<span class="c1"># source. Quodlibet is (C) 2004-2005 Joe Wreschnig, Michael Urman</span>
+<span class="c1"># and licensed under the GNU General Public License version 2.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Various string utility functions. Note that these functions are not</span>
+<span class="sd">necessarily optimised for large strings, so use with care.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">locale</span>
+<span class="kn">import</span> <span class="nn">pydoc</span>
+
+<span class="c1"># some handy time constants</span>
+<span class="n">SECONDS_PER_MINUTE</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">SECONDS_PER_HOUR</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">SECONDS_PER_MINUTE</span>
+<span class="n">SECONDS_PER_DAY</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="n">SECONDS_PER_HOUR</span>
+
+
+<div class="viewcode-block" id="ascii_safe"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.ascii_safe">[docs]</a><span class="k">def</span> <span class="nf">ascii_safe</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get ASCII string without raising encoding errors. Unknown</span>
+<span class="sd">    characters of the given encoding will be ignored.</span>
+
+<span class="sd">    @param s: the string to be encoded</span>
+<span class="sd">    @type s: string or None</span>
+<span class="sd">    @return: version of s containing only ASCII characters, or None if s was None</span>
+<span class="sd">    @rtype: string or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="unquote"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.unquote">[docs]</a><span class="k">def</span> <span class="nf">unquote</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">matching</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove leading and ending single and double quotes.</span>
+<span class="sd">    The quotes need to match if matching is True. Only one quote from each</span>
+<span class="sd">    end will be stripped.</span>
+
+<span class="sd">    @return: if s evaluates to False, return s as is, else return</span>
+<span class="sd">        string with stripped quotes</span>
+<span class="sd">    @rtype: unquoted string, or s unchanged if it is evaluting to False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">if</span> <span class="n">matching</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+
+<span class="n">_para_mac</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:</span><span class="si">%(sep)s</span><span class="s2">)(?:(?:</span><span class="si">%(sep)s</span><span class="s2">)\s*)+&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="n">_para_posix</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:</span><span class="si">%(sep)s</span><span class="s2">)(?:(?:</span><span class="si">%(sep)s</span><span class="s2">)\s*)+&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="n">_para_win</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?:</span><span class="si">%(sep)s</span><span class="s2">)(?:(?:</span><span class="si">%(sep)s</span><span class="s2">)\s*)+&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;sep&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="n">_para_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_para_mac</span><span class="p">,</span> <span class="n">_para_posix</span><span class="p">,</span> <span class="n">_para_win</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="get_paragraphs"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.get_paragraphs">[docs]</a><span class="k">def</span> <span class="nf">get_paragraphs</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A new paragraph is considered to start at a line which follows</span>
+<span class="sd">    one or more blank lines (lines containing nothing or just spaces).</span>
+<span class="sd">    The first line of the text also starts a paragraph.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">_para_ro</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="wrap"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.wrap">[docs]</a><span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Adjust lines of text to be not longer than width. The text will be</span>
+<span class="sd">    returned unmodified if width &lt;= 0.</span>
+<span class="sd">    See textwrap.wrap() for a list of supported kwargs.</span>
+<span class="sd">    Returns text with lines no longer than given width.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">text</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">get_paragraphs</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">para</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="indent"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.indent">[docs]</a><span class="k">def</span> <span class="nf">indent</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">indent_string</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Indent each line of text with the given indent string.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">indent_string</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="paginate"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.paginate">[docs]</a><span class="k">def</span> <span class="nf">paginate</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print text in pages of lines.&quot;&quot;&quot;</span>
+    <span class="n">pydoc</span><span class="o">.</span><span class="n">pager</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="strsize"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strsize">[docs]</a><span class="k">def</span> <span class="nf">strsize</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">grouping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return human representation of bytes b. A negative number of bytes</span>
+<span class="sd">    raises a value error.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid negative byte number&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">B&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">grouping</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">KB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span> <span class="o">//</span> <span class="mi">1024</span><span class="p">),</span> <span class="n">grouping</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">KB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">),</span> <span class="n">grouping</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">MB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)),</span> <span class="n">grouping</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">MB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)),</span> <span class="n">grouping</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">GB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)),</span> <span class="n">grouping</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">GB&quot;</span> <span class="o">%</span> <span class="n">locale</span><span class="o">.</span><span class="n">format_string</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)),</span> <span class="n">grouping</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="strtime"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strtime">[docs]</a><span class="k">def</span> <span class="nf">strtime</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return ISO 8601 formatted time.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">+</span> <span class="n">strtimezone</span><span class="p">()</span></div>
+
+
+<span class="c1"># from quodlibet</span>
+<div class="viewcode-block" id="strduration_long"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strduration_long">[docs]</a><span class="k">def</span> <span class="nf">strduration_long</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">do_translate</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Turn a time value in seconds into x hours, x minutes, etc.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">do_translate</span><span class="p">:</span>
+        <span class="c1"># use global translator functions</span>
+        <span class="k">global</span> <span class="n">_</span><span class="p">,</span> <span class="n">_n</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># do not translate</span>
+        <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span>
+        <span class="k">def</span> <span class="nf">_n</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(prefix)s%(duration).02f</span><span class="s2"> seconds&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span>
+            <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="n">prefix</span><span class="p">,</span>
+            <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="c1"># translation dummies</span>
+    <span class="n">_n</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> second&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> seconds&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">_n</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> minute&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> minutes&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">_n</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> hour&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> hours&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">_n</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> day&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> days&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">_n</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> year&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> years&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">cutoffs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> second&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> seconds&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> minute&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> minutes&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> hour&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> hours&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> day&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> days&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> year&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> years&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">time_str</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">single</span><span class="p">,</span> <span class="n">plural</span> <span class="ow">in</span> <span class="n">cutoffs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">divisor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">duration</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">duration</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">duration</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">divisor</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unit</span><span class="p">:</span>
+            <span class="n">time_str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_n</span><span class="p">(</span><span class="n">single</span><span class="p">,</span> <span class="n">plural</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span> <span class="o">%</span> <span class="n">unit</span><span class="p">)</span>
+    <span class="n">time_str</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_str</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">time_str</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">time_str</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="strtimezone"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strtimezone">[docs]</a><span class="k">def</span> <span class="nf">strtimezone</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return timezone info, %z on some platforms, but not supported on all.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">daylight</span><span class="p">:</span>
+        <span class="n">zone</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">altzone</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">zone</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">timezone</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%+04d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="n">zone</span> <span class="o">//</span> <span class="n">SECONDS_PER_HOUR</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="stripurl"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.stripurl">[docs]</a><span class="k">def</span> <span class="nf">stripurl</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove any lines from string after the first line.</span>
+<span class="sd">    Also remove whitespace at start and end from given string.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="limit"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.limit">[docs]</a><span class="k">def</span> <span class="nf">limit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">72</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;If the length of the string exceeds the given limit, it will be cut</span>
+<span class="sd">    off and three dots will be appended.</span>
+
+<span class="sd">    @param s: the string to limit</span>
+<span class="sd">    @type s: string</span>
+<span class="sd">    @param length: maximum length</span>
+<span class="sd">    @type length: non-negative integer</span>
+<span class="sd">    @return: limited string, at most length+3 characters long</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;length limit must be a non-negative integer&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">length</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">...&quot;</span> <span class="o">%</span> <span class="n">s</span><span class="p">[:</span><span class="n">length</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="strline"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strline">[docs]</a><span class="k">def</span> <span class="nf">strline</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Display string representation on one line.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">strip_control_chars</span><span class="p">(</span><span class="s2">&quot;`</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="format_feature_warning"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.format_feature_warning">[docs]</a><span class="k">def</span> <span class="nf">format_feature_warning</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Format warning that a module could not be imported and that it should</span>
+<span class="sd">    be installed for a certain URL.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">_</span><span class="p">(</span>
+            <span class="s2">&quot;Could not import </span><span class="si">%(module)s</span><span class="s2"> for </span><span class="si">%(feature)s</span><span class="s2">.&quot;</span>
+            <span class="s2">&quot; Install </span><span class="si">%(module)s</span><span class="s2"> from </span><span class="si">%(url)s</span><span class="s2"> to use this feature.&quot;</span>
+        <span class="p">)</span>
+        <span class="o">%</span> <span class="n">kwargs</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="strip_control_chars"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.strformat.html#linkcheck.strformat.strip_control_chars">[docs]</a><span class="k">def</span> <span class="nf">strip_control_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove console control characters from text.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\x01-\x1F\x7F]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

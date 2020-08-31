@@ -1,0 +1,40 @@
+linkcheck.ansicolor
+===================
+
+.. automodule:: linkcheck.ansicolor
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      esc_ansicolor
+      get_columns
+      get_win_color
+      has_colors
+      write_color
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ColoredStreamHandler
+      Colorizer
+   
+   
+
+   
+   
+   
+
+
+

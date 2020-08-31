@@ -1,0 +1,29 @@
+linkcheck.cache.results
+=======================
+
+.. automodule:: linkcheck.cache.results
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ResultCache
+   
+   
+
+   
+   
+   
+
+
+

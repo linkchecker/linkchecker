@@ -1,0 +1,33 @@
+linkcheck.bookmarks.safari
+==========================
+
+.. automodule:: linkcheck.bookmarks.safari
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_plist_data_from_string
+      has_children
+      is_leaf
+      parse_bookmark_data
+      parse_plist
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,30 @@
+linkcheck.logger.xmllog
+=======================
+
+.. automodule:: linkcheck.logger.xmllog
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      xmlquote
+      xmlquoteattr
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

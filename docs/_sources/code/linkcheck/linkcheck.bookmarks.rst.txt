@@ -1,0 +1,34 @@
+linkcheck.bookmarks
+===================
+
+.. automodule:: linkcheck.bookmarks
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   linkcheck.bookmarks.chromium
+   linkcheck.bookmarks.firefox
+   linkcheck.bookmarks.opera
+   linkcheck.bookmarks.safari
+

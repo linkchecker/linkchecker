@@ -1,0 +1,29 @@
+linkcheck.checker.dnsurl
+========================
+
+.. automodule:: linkcheck.checker.dnsurl
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DnsUrl
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,1112 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheck.configuration &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkcheckerrc.html">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code/linkcheck/linkcheck.html">linkcheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.html">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../linkcheck.html">linkcheck</a> &raquo;</li>
+        
+      <li>linkcheck.configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for linkcheck.configuration</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2000-2014 Bastian Kleineidam</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Store metadata and options.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">_LinkChecker_configdata</span> <span class="k">as</span> <span class="nn">configdata</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">get_install_data</span><span class="p">,</span> <span class="n">fileutil</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">confparse</span>
+<span class="kn">from</span> <span class="nn">xdg.BaseDirectory</span> <span class="kn">import</span> <span class="n">xdg_config_home</span><span class="p">,</span> <span class="n">xdg_data_home</span>
+
+<span class="n">Version</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">version</span>
+<span class="n">ReleaseDate</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">release_date</span>
+<span class="n">AppName</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">name</span>
+<span class="n">App</span> <span class="o">=</span> <span class="n">AppName</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">Version</span>
+<span class="n">Author</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">author</span>
+<span class="n">HtmlAuthor</span> <span class="o">=</span> <span class="n">Author</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">)</span>
+<span class="n">Copyright</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 &quot;</span> <span class="o">+</span> <span class="n">Author</span>
+<span class="n">HtmlCopyright</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Copyright &amp;copy; 2000-2016 Bastian&amp;nbsp;Kleineidam, 2010-2020 &quot;</span>
+                 <span class="o">+</span> <span class="n">HtmlAuthor</span><span class="p">)</span>
+<span class="n">AppInfo</span> <span class="o">=</span> <span class="n">App</span> <span class="o">+</span> <span class="s2">&quot;              &quot;</span> <span class="o">+</span> <span class="n">Copyright</span>
+<span class="n">HtmlAppInfo</span> <span class="o">=</span> <span class="n">App</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">HtmlCopyright</span>
+<span class="n">Url</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">url</span>
+<span class="n">SupportUrl</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/linkchecker/linkchecker/issues&quot;</span>
+<span class="n">UserAgent</span> <span class="o">=</span> <span class="s2">&quot;Mozilla/5.0 (compatible; </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">; +</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">AppName</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">Url</span><span class="p">)</span>
+<span class="n">Freeware</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">AppName</span>
+    <span class="o">+</span> <span class="s2">&quot;&quot;&quot; comes with ABSOLUTELY NO WARRANTY!</span>
+<span class="s2">This is free software, and you are welcome to redistribute it</span>
+<span class="s2">under certain conditions. Look at the file `LICENSE&#39; within this</span>
+<span class="s2">distribution.&quot;&quot;&quot;</span>
+<span class="p">)</span>
+<span class="n">Portable</span> <span class="o">=</span> <span class="n">configdata</span><span class="o">.</span><span class="n">portable</span>
+
+
+<div class="viewcode-block" id="normpath"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.normpath">[docs]</a><span class="k">def</span> <span class="nf">normpath</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Norm given system path with all available norm or expand functions</span>
+<span class="sd">    in os.path.&quot;&quot;&quot;</span>
+    <span class="n">expanded</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">expanded</span><span class="p">))</span></div>
+
+
+<span class="c1"># List Python modules in the form (module, name, version attribute)</span>
+<span class="n">Modules</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># required modules</span>
+    <span class="p">(</span><span class="s2">&quot;bs4&quot;</span><span class="p">,</span> <span class="s2">&quot;Beautiful Soup&quot;</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;dns.version&quot;</span><span class="p">,</span> <span class="s2">&quot;dnspython&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;requests&quot;</span><span class="p">,</span> <span class="s2">&quot;Requests&quot;</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;xdg&quot;</span><span class="p">,</span> <span class="s2">&quot;PyXDG&quot;</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">),</span>
+    <span class="c1"># optional modules</span>
+    <span class="p">(</span><span class="s2">&quot;argcomplete&quot;</span><span class="p">,</span> <span class="s2">&quot;Argcomplete&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;GeoIP&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoIP&quot;</span><span class="p">,</span> <span class="s1">&#39;lib_version&#39;</span><span class="p">),</span>  <span class="c1"># on Unix systems</span>
+    <span class="p">(</span><span class="s2">&quot;pygeoip&quot;</span><span class="p">,</span> <span class="s2">&quot;GeoIP&quot;</span><span class="p">,</span> <span class="s1">&#39;lib_version&#39;</span><span class="p">),</span>  <span class="c1"># on Windows systems</span>
+    <span class="p">(</span><span class="s2">&quot;sqlite3&quot;</span><span class="p">,</span> <span class="s2">&quot;Pysqlite&quot;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;sqlite3&quot;</span><span class="p">,</span> <span class="s2">&quot;Sqlite&quot;</span><span class="p">,</span> <span class="s1">&#39;sqlite_version&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;gi&quot;</span><span class="p">,</span> <span class="s2">&quot;PyGObject&quot;</span><span class="p">,</span> <span class="s1">&#39;__version__&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;meliae&quot;</span><span class="p">,</span> <span class="s2">&quot;Meliae&quot;</span><span class="p">,</span> <span class="s1">&#39;__version__&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_modules_info"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_modules_info">[docs]</a><span class="k">def</span> <span class="nf">get_modules_info</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return unicode string with detected module info.&quot;&quot;&quot;</span>
+    <span class="n">module_infos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version_attr</span><span class="p">)</span> <span class="ow">in</span> <span class="n">Modules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fileutil</span><span class="o">.</span><span class="n">has_module</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">version_attr</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">version_attr</span><span class="p">):</span>
+            <span class="n">attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">version_attr</span><span class="p">)</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">attr</span><span class="p">()</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span> <span class="k">else</span> <span class="n">attr</span>
+            <span class="n">module_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># ignore attribute errors in case library developers</span>
+            <span class="c1"># change the version information attribute</span>
+            <span class="n">module_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;Modules: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_infos</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="get_share_dir"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_share_dir">[docs]</a><span class="k">def</span> <span class="nf">get_share_dir</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return absolute path of LinkChecker example configuration.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_install_data</span><span class="p">(),</span> <span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="s2">&quot;linkchecker&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_share_file"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_share_file">[docs]</a><span class="k">def</span> <span class="nf">get_share_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">devel_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a filename in the share directory.</span>
+
+<span class="sd">    @param devel_dir: directory to search when developing</span>
+<span class="sd">    @type devel_dir: string</span>
+<span class="sd">    @param filename: filename to search for</span>
+<span class="sd">    @type filename: string</span>
+<span class="sd">    @return: the found filename or None</span>
+<span class="sd">    @rtype: string</span>
+<span class="sd">    @raises: ValueError if not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_share_dir</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">devel_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># when developing</span>
+        <span class="n">paths</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">devel_dir</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fullpath</span>
+    <span class="c1"># not found</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> not found in </span><span class="si">%s</span><span class="s2">; check your installation&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_system_cert_file"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_system_cert_file">[docs]</a><span class="k">def</span> <span class="nf">get_system_cert_file</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Try to find a system-wide SSL certificate file.</span>
+<span class="sd">    @return: the filename to the cert file</span>
+<span class="sd">    @raises: ValueError when no system cert file could be found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;/etc/ssl/certs/ca-certificates.crt&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">filename</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;no system certificate file found&quot;</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_certifi_file"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_certifi_file">[docs]</a><span class="k">def</span> <span class="nf">get_certifi_file</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the SSL certifications installed by the certifi package.</span>
+
+<span class="sd">    @return: the filename to the cert file</span>
+<span class="sd">    @rtype: string</span>
+<span class="sd">    @raises: ImportError when certifi is not installed or ValueError when</span>
+<span class="sd">             the file is not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">certifi</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">certifi</span><span class="o">.</span><span class="n">where</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">filename</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> not found; check your certifi installation&quot;</span> <span class="o">%</span> <span class="n">filename</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<span class="c1"># dynamic options</span>
+<div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Storage for configuration options. Options can both be given from</span>
+<span class="sd">    the command line as well as from configuration files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the default options.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># checking options</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;allowedschemes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;cookiefile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;robotstxt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;debugmemory&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;localwebroot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxfilesizeparse&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxfilesizedownload&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxnumurls&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxrunseconds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxrequestspersecond&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;maxhttpredirects&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;nntpserver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NNTP_SERVER&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">getproxies</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;threads&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;aborttimeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;recursionlevel&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;useragent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UserAgent</span>
+        <span class="c1"># authentication</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;authentication&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginurl&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginuserfield&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;login&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginpasswordfield&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;password&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginextrafields&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># filtering</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;externlinks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;ignorewarnings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;internlinks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;checkextern&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># plugins</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;pluginfolders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_plugin_folders</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;enabledplugins&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># output</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;trace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;quiet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;warnings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;fileoutput&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;status_wait_seconds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;logger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loggers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="kn">from</span> <span class="nn">..logger</span> <span class="kn">import</span> <span class="n">LoggerClasses</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">LoggerClasses</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">LoggerName</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loggers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+
+<div class="viewcode-block" id="Configuration.set_status_logger"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.set_status_logger">[docs]</a>    <span class="k">def</span> <span class="nf">set_status_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status_logger</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the status logger.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status_logger</span> <span class="o">=</span> <span class="n">status_logger</span></div>
+
+<div class="viewcode-block" id="Configuration.logger_new"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.logger_new">[docs]</a>    <span class="k">def</span> <span class="nf">logger_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loggername</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate new logger and return it.&quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">loggername</span><span class="p">]</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loggers</span><span class="p">[</span><span class="n">loggername</span><span class="p">](</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.logger_add"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.logger_add">[docs]</a>    <span class="k">def</span> <span class="nf">logger_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loggerclass</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a new logger type to the known loggers.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loggers</span><span class="p">[</span><span class="n">loggerclass</span><span class="o">.</span><span class="n">LoggerName</span><span class="p">]</span> <span class="o">=</span> <span class="n">loggerclass</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">loggerclass</span><span class="o">.</span><span class="n">LoggerName</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="Configuration.read"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read settings from given config files.</span>
+
+<span class="sd">        @raises: LinkCheckerError on syntax errors in the config file(s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">files</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cfiles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cfiles</span> <span class="o">=</span> <span class="n">files</span><span class="p">[:]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cfiles</span><span class="p">:</span>
+            <span class="n">userconf</span> <span class="o">=</span> <span class="n">get_user_config</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">userconf</span><span class="p">):</span>
+                <span class="n">cfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">userconf</span><span class="p">)</span>
+        <span class="c1"># filter invalid files</span>
+        <span class="n">filtered_cfiles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cfile</span> <span class="ow">in</span> <span class="n">cfiles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">cfile</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Configuration file </span><span class="si">%r</span><span class="s2"> does not exist.&quot;</span><span class="p">),</span> <span class="n">cfile</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">fileutil</span><span class="o">.</span><span class="n">is_readable</span><span class="p">(</span><span class="n">cfile</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Configuration file </span><span class="si">%r</span><span class="s2"> is not readable.&quot;</span><span class="p">),</span> <span class="n">cfile</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">filtered_cfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cfile</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;reading configuration from </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">filtered_cfiles</span><span class="p">)</span>
+        <span class="n">confparse</span><span class="o">.</span><span class="n">LCConfigParser</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filtered_cfiles</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.add_auth"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.add_auth">[docs]</a>    <span class="k">def</span> <span class="nf">add_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add given authentication data.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">pattern</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;missing user or URL pattern in authentication data.&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;authentication&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.get_user_password"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.get_user_password">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get tuple (user, password) from configured authentication</span>
+<span class="sd">        that matches the given URL.</span>
+<span class="sd">        Both user and password can be None if not specified, or no</span>
+<span class="sd">        authentication matches the given URL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">auth</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;authentication&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;pattern&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Configuration.get_connectionlimits"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.get_connectionlimits">[docs]</a>    <span class="k">def</span> <span class="nf">get_connectionlimits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get dict with limit per connection type.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;maxconnections</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span> <span class="s1">&#39;ftp&#39;</span><span class="p">)}</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Make sure the configuration is consistent.&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;logger&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_logger</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;loginurl&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_loginurl</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_proxies</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_plugins</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_ssl</span><span class="p">()</span>
+        <span class="c1"># set default socket timeout</span>
+        <span class="n">socket</span><span class="o">.</span><span class="n">setdefaulttimeout</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;timeout&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize_logger"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize_logger">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make logger configuration consistent.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;activating text logger output.&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;text&#39;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;logger&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger_new</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize_loginurl"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize_loginurl">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize_loginurl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make login configuration consistent.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginurl&quot;</span><span class="p">]</span>
+        <span class="n">disable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user_password</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="n">LOG_CHECK</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;no user/password authentication data found for login URL.&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">disable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">&quot;http:&quot;</span><span class="p">,</span> <span class="s2">&quot;https:&quot;</span><span class="p">)):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;login URL is not a HTTP URL.&quot;</span><span class="p">))</span>
+            <span class="n">disable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">urlparts</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;login URL is incomplete.&quot;</span><span class="p">))</span>
+            <span class="n">disable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">disable</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;disabling login URL </span><span class="si">%(url)s</span><span class="s2">.&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">})</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;loginurl&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize_proxies"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize_proxies">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize_proxies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Try to read additional proxy settings which urllib does not</span>
+<span class="sd">        support.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;posix&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="s2">&quot;http&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">]:</span>
+            <span class="n">http_proxy</span> <span class="o">=</span> <span class="n">get_gnome_proxy</span><span class="p">()</span> <span class="ow">or</span> <span class="n">get_kde_http_proxy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">http_proxy</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">][</span><span class="s2">&quot;http&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">http_proxy</span>
+        <span class="k">if</span> <span class="s2">&quot;ftp&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">]:</span>
+            <span class="n">ftp_proxy</span> <span class="o">=</span> <span class="n">get_gnome_proxy</span><span class="p">(</span><span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;FTP&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_kde_ftp_proxy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">ftp_proxy</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">][</span><span class="s2">&quot;ftp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ftp_proxy</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize_plugins"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize_plugins">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ensure each plugin is configurable.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;enabledplugins&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">plugin</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">[</span><span class="n">plugin</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="Configuration.sanitize_ssl"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.Configuration.sanitize_ssl">[docs]</a>    <span class="k">def</span> <span class="nf">sanitize_ssl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use local installed certificate file if available.</span>
+<span class="sd">        Tries to get system, then certifi, then the own</span>
+<span class="sd">        installed certificate file.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_system_cert_file</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_certifi_file</span><span class="p">()</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">ImportError</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_share_file</span><span class="p">(</span><span class="s1">&#39;cacert.pem&#39;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="get_user_data"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_user_data">[docs]</a><span class="k">def</span> <span class="nf">get_user_data</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the user data folder.</span>
+<span class="sd">    Returns &quot;~/.linkchecker/&quot; if this folder exists, \</span>
+<span class="sd">    &quot;$XDG_DATA_HOME/linkchecker&quot; if it does not.</span>
+<span class="sd">    @rtype string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">homedotdir</span> <span class="o">=</span> <span class="n">normpath</span><span class="p">(</span><span class="s2">&quot;~/.linkchecker/&quot;</span><span class="p">)</span>
+    <span class="n">userdata</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">homedotdir</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">homedotdir</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xdg_data_home</span><span class="p">,</span> <span class="s2">&quot;linkchecker&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">userdata</span></div>
+
+
+<div class="viewcode-block" id="get_plugin_folders"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_plugin_folders">[docs]</a><span class="k">def</span> <span class="nf">get_plugin_folders</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get linkchecker plugin folders. Default is</span>
+<span class="sd">    &quot;$XDG_DATA_HOME/linkchecker/plugins/&quot;. &quot;~/.linkchecker/plugins/&quot; is also</span>
+<span class="sd">    supported for backwards compatibility, and is used if both directories</span>
+<span class="sd">    exist.&quot;&quot;&quot;</span>
+    <span class="n">folders</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">defaultfolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_user_data</span><span class="p">(),</span> <span class="s2">&quot;plugins&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">defaultfolder</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Portable</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">make_userdir</span><span class="p">(</span><span class="n">defaultfolder</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">errmsg</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;could not create plugin directory </span><span class="si">%(dirname)r</span><span class="s2">: </span><span class="si">%(errmsg)r</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">defaultfolder</span><span class="p">,</span> <span class="n">errmsg</span><span class="o">=</span><span class="n">errmsg</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">msg</span> <span class="o">%</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">defaultfolder</span><span class="p">):</span>
+        <span class="n">folders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaultfolder</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">folders</span></div>
+
+
+<div class="viewcode-block" id="make_userdir"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.make_userdir">[docs]</a><span class="k">def</span> <span class="nf">make_userdir</span><span class="p">(</span><span class="n">child</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a child directory.&quot;&quot;&quot;</span>
+    <span class="n">userdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">userdir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+            <span class="c1"># Windows forbids filenames with leading dot unless</span>
+            <span class="c1"># a trailing dot is added.</span>
+            <span class="n">userdir</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">userdir</span><span class="p">,</span> <span class="mo">0o700</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_user_config"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_user_config">[docs]</a><span class="k">def</span> <span class="nf">get_user_config</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the user configuration filename.</span>
+<span class="sd">    If the user configuration file does not exist, copy it from the initial</span>
+<span class="sd">    configuration file, but only if this is not a portable installation.</span>
+<span class="sd">    Returns path to user config file (which might not exist due to copy</span>
+<span class="sd">    failures or on portable systems).</span>
+<span class="sd">    @return configuration filename</span>
+<span class="sd">    @rtype string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># initial config (with all options explained)</span>
+    <span class="n">initialconf</span> <span class="o">=</span> <span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_share_dir</span><span class="p">(),</span> <span class="s2">&quot;linkcheckerrc&quot;</span><span class="p">))</span>
+    <span class="c1"># per user config settings</span>
+    <span class="n">homedotfile</span> <span class="o">=</span> <span class="n">normpath</span><span class="p">(</span><span class="s2">&quot;~/.linkchecker/linkcheckerrc&quot;</span><span class="p">)</span>
+    <span class="n">userconf</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">homedotfile</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">homedotfile</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xdg_config_home</span><span class="p">,</span> <span class="s2">&quot;linkchecker&quot;</span><span class="p">,</span> <span class="s2">&quot;linkcheckerrc&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">initialconf</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">userconf</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Portable</span><span class="p">:</span>
+        <span class="c1"># copy the initial configuration to the user configuration</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">make_userdir</span><span class="p">(</span><span class="n">userconf</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">initialconf</span><span class="p">,</span> <span class="n">userconf</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">errmsg</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span>
+                <span class="s2">&quot;could not copy initial configuration file </span><span class="si">%(src)r</span><span class="s2">&quot;</span>
+                <span class="s2">&quot; to </span><span class="si">%(dst)r</span><span class="s2">: </span><span class="si">%(errmsg)r</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">initialconf</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">userconf</span><span class="p">,</span> <span class="n">errmsg</span><span class="o">=</span><span class="n">errmsg</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="n">msg</span> <span class="o">%</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">userconf</span></div>
+
+
+<div class="viewcode-block" id="get_gnome_proxy"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_gnome_proxy">[docs]</a><span class="k">def</span> <span class="nf">get_gnome_proxy</span><span class="p">(</span><span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;HTTP&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return host:port for a GNOME proxy if found, else None.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">gi</span>
+        <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gio&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">schema_id</span> <span class="o">=</span> <span class="s2">&quot;org.gnome.system.proxy.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">protocol</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="c1"># If the schema is not installed Gio.Settings.new() causes Trace/breakpoint trap</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsSchemaSource</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;No GSettings schemas are installed&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">schema_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">schema</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> not installed&quot;</span> <span class="o">%</span> <span class="n">schema_id</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">settings</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">schema_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">protocol</span> <span class="o">==</span> <span class="s2">&quot;HTTP&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">settings</span><span class="o">.</span><span class="n">get_boolean</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="s2">&quot;host&quot;</span><span class="p">)</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get_int</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">host</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">port</span><span class="p">:</span>
+                <span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;error getting </span><span class="si">%s</span><span class="s2"> proxy from GNOME: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_kde_http_proxy"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_kde_http_proxy">[docs]</a><span class="k">def</span> <span class="nf">get_kde_http_proxy</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return host:port for KDE HTTP proxy if found, else None.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_kioslaverc</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http_proxy&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;error getting HTTP proxy from KDE: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_kde_ftp_proxy"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_kde_ftp_proxy">[docs]</a><span class="k">def</span> <span class="nf">get_kde_ftp_proxy</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return host:port for KDE HTTP proxy if found, else None.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read_kioslaverc</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ftp_proxy&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;error getting FTP proxy from KDE: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span></div>
+
+
+<span class="c1"># The following KDE functions are largely ported and ajusted from</span>
+<span class="c1"># Google Chromium:</span>
+<span class="c1"># http://src.chromium.org/viewvc/chrome/trunk/src/net/proxy/proxy_config_service_linux.cc?revision=HEAD&amp;view=markup</span>
+<span class="c1"># Copyright (c) 2010 The Chromium Authors. All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are</span>
+<span class="c1"># met:</span>
+<span class="c1">#</span>
+<span class="c1">#    * Redistributions of source code must retain the above copyright</span>
+<span class="c1"># notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#    * Redistributions in binary form must reproduce the above</span>
+<span class="c1"># copyright notice, this list of conditions and the following disclaimer</span>
+<span class="c1"># in the documentation and/or other materials provided with the</span>
+<span class="c1"># distribution.</span>
+<span class="c1">#    * Neither the name of Google Inc. nor the names of its</span>
+<span class="c1"># contributors may be used to endorse or promote products derived from</span>
+<span class="c1"># this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+<span class="c1"># A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
+<span class="c1"># OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
+<span class="c1"># SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
+<span class="c1"># LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<span class="c1"># DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
+<span class="c1"># THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c1"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+
+<div class="viewcode-block" id="get_kde_config_dir"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.get_kde_config_dir">[docs]</a><span class="k">def</span> <span class="nf">get_kde_config_dir</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return KDE configuration directory or None if not found.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KDEHOME&quot;</span><span class="p">):</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KDEHOME&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HOME&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">home</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;KDEHOME and HOME not set&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">kde_config_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.config&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">kde_config_dir</span><span class="p">):</span>
+        <span class="n">kde_config_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">home</span><span class="p">,</span> <span class="s2">&quot;.kde4&quot;</span><span class="p">,</span> <span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">kde_config_dir</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not exist&quot;</span> <span class="o">%</span> <span class="n">kde_config_dir</span><span class="p">)</span>
+            <span class="k">return</span>
+    <span class="k">return</span> <span class="n">kde_config_dir</span></div>
+
+
+<span class="n">loc_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[.*\]$&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="read_kioslaverc"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.read_kioslaverc">[docs]</a><span class="nd">@lru_cache</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">read_kioslaverc</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Read kioslaverc into data dictionary.&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">kde_config_dir</span> <span class="o">=</span> <span class="n">get_kde_config_dir</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kde_config_dir</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="n">in_proxy_settings</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kde_config_dir</span><span class="p">,</span> <span class="s2">&quot;kioslaverc&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not exist&quot;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="c1"># First read all lines into dictionary since they can occur</span>
+        <span class="c1"># in any order.</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">):</span>
+                <span class="n">in_proxy_settings</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;[Proxy Settings]&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">in_proxy_settings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="c1"># trim optional localization</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">loc_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">add_kde_setting</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">resolve_kde_settings</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="add_kde_proxy"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.add_kde_proxy">[docs]</a><span class="k">def</span> <span class="nf">add_kde_proxy</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a proxy value to data dictionary after sanity checks.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="ow">or</span> <span class="n">value</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;//:&quot;</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="add_kde_setting"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.add_kde_setting">[docs]</a><span class="k">def</span> <span class="nf">add_kde_setting</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a KDE proxy setting value to data dictionary.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ProxyType&quot;</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">int_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">int_value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;manual&quot;</span>
+        <span class="k">elif</span> <span class="n">int_value</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c1"># PAC URL</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;pac&quot;</span>
+        <span class="k">elif</span> <span class="n">int_value</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># WPAD.</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;wpad&quot;</span>
+        <span class="k">elif</span> <span class="n">int_value</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c1"># Indirect manual via environment variables.</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;indirect&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mode</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;Proxy Config Script&quot;</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;autoconfig_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;httpProxy&quot;</span><span class="p">:</span>
+        <span class="n">add_kde_proxy</span><span class="p">(</span><span class="s2">&quot;http_proxy&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;httpsProxy&quot;</span><span class="p">:</span>
+        <span class="n">add_kde_proxy</span><span class="p">(</span><span class="s2">&quot;https_proxy&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ftpProxy&quot;</span><span class="p">:</span>
+        <span class="n">add_kde_proxy</span><span class="p">(</span><span class="s2">&quot;ftp_proxy&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;ReversedException&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;reversed_bypass&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;NoProxyFor&quot;</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ignore_hosts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">split_hosts</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;AuthMode&quot;</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+        <span class="c1"># XXX todo</span>
+
+
+<div class="viewcode-block" id="split_hosts"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.split_hosts">[docs]</a><span class="k">def</span> <span class="nf">split_hosts</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split comma-separated host list.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">host</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">host</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="resolve_indirect"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.resolve_indirect">[docs]</a><span class="k">def</span> <span class="nf">resolve_indirect</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">splithosts</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Replace name of environment variable with its value.&quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">env_value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">env_value</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">splithosts</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">split_hosts</span><span class="p">(</span><span class="n">env_value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">env_value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="resolve_kde_settings"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.configuration.html#linkcheck.configuration.resolve_kde_settings">[docs]</a><span class="k">def</span> <span class="nf">resolve_kde_settings</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write final proxy configuration values in data dictionary.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;mode&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;indirect&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;http_proxy&quot;</span><span class="p">,</span> <span class="s2">&quot;https_proxy&quot;</span><span class="p">,</span> <span class="s2">&quot;ftp_proxy&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">resolve_indirect</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;ignore_hosts&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">resolve_indirect</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;ignore_hosts&quot;</span><span class="p">,</span> <span class="n">splithosts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;manual&quot;</span><span class="p">:</span>
+        <span class="c1"># unsupported config</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;http_proxy&quot;</span><span class="p">,</span> <span class="s2">&quot;https_proxy&quot;</span><span class="p">,</span> <span class="s2">&quot;ftp_proxy&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

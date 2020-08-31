@@ -1,0 +1,30 @@
+linkcheck.director.task
+=======================
+
+.. automodule:: linkcheck.director.task
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CheckedTask
+      LoggedCheckedTask
+   
+   
+
+   
+   
+   
+
+
+

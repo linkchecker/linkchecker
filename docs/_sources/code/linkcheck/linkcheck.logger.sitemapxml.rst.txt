@@ -1,0 +1,29 @@
+linkcheck.logger.sitemapxml
+===========================
+
+.. automodule:: linkcheck.logger.sitemapxml
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SitemapXmlLogger
+   
+   
+
+   
+   
+   
+
+
+

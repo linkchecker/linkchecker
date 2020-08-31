@@ -1,0 +1,35 @@
+linkcheck.htmlutil.loginformsearch
+==================================
+
+.. automodule:: linkcheck.htmlutil.loginformsearch
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      search_form
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Form
+   
+   
+
+   
+   
+   
+
+
+

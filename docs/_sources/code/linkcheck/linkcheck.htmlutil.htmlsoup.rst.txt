@@ -1,0 +1,29 @@
+linkcheck.htmlutil.htmlsoup
+===========================
+
+.. automodule:: linkcheck.htmlutil.htmlsoup
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      make_soup
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

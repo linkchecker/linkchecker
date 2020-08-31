@@ -1,0 +1,43 @@
+linkcheck.strformat
+===================
+
+.. automodule:: linkcheck.strformat
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      ascii_safe
+      format_feature_warning
+      get_paragraphs
+      indent
+      limit
+      paginate
+      strduration_long
+      strip_control_chars
+      stripurl
+      strline
+      strsize
+      strtime
+      strtimezone
+      unquote
+      wrap
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

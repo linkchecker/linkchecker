@@ -1,0 +1,36 @@
+linkcheck.parser.sitemap
+========================
+
+.. automodule:: linkcheck.parser.sitemap
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_sitemap
+      parse_sitemapindex
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      XmlTagUrlParser
+   
+   
+
+   
+   
+   
+
+
+

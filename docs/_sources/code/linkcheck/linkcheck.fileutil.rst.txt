@@ -1,0 +1,37 @@
+linkcheck.fileutil
+==================
+
+.. automodule:: linkcheck.fileutil
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_mtime
+      get_size
+      get_temp_file
+      has_module
+      is_accessable_by_others
+      is_readable
+      is_tty
+      is_writable_by_others
+      path_safe
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

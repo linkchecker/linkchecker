@@ -1,0 +1,38 @@
+linkcheck.plugins.syntaxchecks
+==============================
+
+.. automodule:: linkcheck.plugins.syntaxchecks
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      check_w3_errors
+      getXmlText
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CssSyntaxCheck
+      HtmlSyntaxCheck
+      W3Timer
+   
+   
+
+   
+   
+   
+
+
+

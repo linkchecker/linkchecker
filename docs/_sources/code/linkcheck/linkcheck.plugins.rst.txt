@@ -1,0 +1,54 @@
+linkcheck.plugins
+=================
+
+.. automodule:: linkcheck.plugins
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_plugin_classes
+      get_plugin_modules
+      run_plugins
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      PluginManager
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   linkcheck.plugins.anchorcheck
+   linkcheck.plugins.httpheaderinfo
+   linkcheck.plugins.locationinfo
+   linkcheck.plugins.markdowncheck
+   linkcheck.plugins.parsepdf
+   linkcheck.plugins.parseword
+   linkcheck.plugins.regexcheck
+   linkcheck.plugins.sslcertcheck
+   linkcheck.plugins.syntaxchecks
+   linkcheck.plugins.viruscheck
+

@@ -1,0 +1,46 @@
+linkcheck.plugins.viruscheck
+============================
+
+.. automodule:: linkcheck.plugins.viruscheck
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      canonical_clamav_conf
+      get_clamav_conf
+      get_sockinfo
+      scan
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ClamavConfig
+      ClamdScanner
+      VirusCheck
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      ClamavError
+   
+   
+
+
+

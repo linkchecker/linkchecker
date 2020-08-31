@@ -1,0 +1,834 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheck.checker.httpurl &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../../../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../man/linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../man/linkcheckerrc.html">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/index.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../code/linkcheck/linkcheck.html">linkcheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.configuration.html">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../code/linkcheck/linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../code/linkcheck/linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../../../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../linkcheck.html">linkcheck</a> &raquo;</li>
+        
+          <li><a href="../checker.html">linkcheck.checker</a> &raquo;</li>
+        
+      <li>linkcheck.checker.httpurl</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for linkcheck.checker.httpurl</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2000-2014 Bastian Kleineidam</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Handle http links.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># The validity of SSL certs is ignored to be able</span>
+<span class="c1"># the check the URL and recurse into it.</span>
+<span class="c1"># The warning about invalid SSL certs is given to the</span>
+<span class="c1"># user instead.</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span>
+    <span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InsecureRequestWarning</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">log</span><span class="p">,</span>
+    <span class="n">LOG_CHECK</span><span class="p">,</span>
+    <span class="n">mimeutil</span><span class="p">,</span>
+    <span class="n">url</span> <span class="k">as</span> <span class="n">urlutil</span><span class="p">,</span>
+    <span class="n">LinkCheckerError</span><span class="p">,</span>
+    <span class="n">httputil</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">internpaturl</span><span class="p">,</span> <span class="n">proxysupport</span>
+
+<span class="c1"># import warnings</span>
+<span class="kn">from</span> <span class="nn">.const</span> <span class="kn">import</span> <span class="n">WARN_HTTP_EMPTY_CONTENT</span><span class="p">,</span> <span class="n">WARN_URL_RATE_LIMITED</span>
+<span class="kn">from</span> <span class="nn">requests.sessions</span> <span class="kn">import</span> <span class="n">REDIRECT_STATI</span>
+
+<span class="c1"># assumed HTTP header encoding</span>
+<span class="n">HEADER_ENCODING</span> <span class="o">=</span> <span class="s2">&quot;iso-8859-1&quot;</span>
+<span class="n">HTTP_SCHEMAS</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">,</span> <span class="s1">&#39;https://&#39;</span><span class="p">)</span>
+
+<span class="c1"># match for robots meta element content attribute</span>
+<span class="n">nofollow_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\bnofollow\b&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="HttpUrl"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl">[docs]</a><span class="k">class</span> <span class="nc">HttpUrl</span><span class="p">(</span><span class="n">internpaturl</span><span class="o">.</span><span class="n">InternPatternUrl</span><span class="p">,</span> <span class="n">proxysupport</span><span class="o">.</span><span class="n">ProxySupport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Url link with http scheme.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HttpUrl.reset"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize HTTP specific variables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="c1"># initialize check data</span>
+        <span class="c1"># server headers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cipher</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="HttpUrl.allows_robots"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.allows_robots">[docs]</a>    <span class="k">def</span> <span class="nf">allows_robots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch and parse the robots.txt of given url. Checks if LinkChecker</span>
+<span class="sd">        can get the requested resource content.</span>
+
+<span class="sd">        @param url: the url to be requested</span>
+<span class="sd">        @type url: string</span>
+<span class="sd">        @return: True if access is granted, otherwise False</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span>
+            <span class="s1">&#39;robotstxt&#39;</span>
+        <span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">robots_txt</span><span class="o">.</span><span class="n">allows_url</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.content_allows_robots"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.content_allows_robots">[docs]</a>    <span class="k">def</span> <span class="nf">content_allows_robots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return False if the content of this URL forbids robots to</span>
+<span class="sd">        search for recursive links.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_html</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="n">soup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_soup</span><span class="p">()</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;robots&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">nofollow_re</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="HttpUrl.add_size_info"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.add_size_info">[docs]</a>    <span class="k">def</span> <span class="nf">add_size_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get size of URL content from HTTP header.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+            <span class="ow">and</span> <span class="s2">&quot;Content-Length&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+            <span class="ow">and</span> <span class="s2">&quot;Transfer-Encoding&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+        <span class="p">):</span>
+            <span class="c1"># Note that content-encoding causes size differences since</span>
+            <span class="c1"># the content data is always decoded.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">OverflowError</span><span class="p">):</span>
+                <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="HttpUrl.check_connection"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.check_connection">[docs]</a>    <span class="k">def</span> <span class="nf">check_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check a URL with HTTP protocol.</span>
+<span class="sd">        Here is an excerpt from RFC 1945 with common response codes:</span>
+<span class="sd">        The first digit of the Status-Code defines the class of response. The</span>
+<span class="sd">        last two digits do not have any categorization role. There are 5</span>
+<span class="sd">        values for the first digit:</span>
+
+<span class="sd">          - 1xx: Informational - Not used, but reserved for future use</span>
+<span class="sd">          - 2xx: Success - The action was successfully received,</span>
+<span class="sd">            understood, and accepted</span>
+<span class="sd">          - 3xx: Redirection - Further action must be taken in order to</span>
+<span class="sd">            complete the request</span>
+<span class="sd">          - 4xx: Client Error - The request contains bad syntax or cannot</span>
+<span class="sd">            be fulfilled</span>
+<span class="sd">          - 5xx: Server Error - The server failed to fulfill an apparently</span>
+<span class="sd">            valid request</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">get_request_session</span><span class="p">()</span>
+        <span class="c1"># set the proxy, so a 407 status after this is an error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_proxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;proxy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construct_auth</span><span class="p">()</span>
+        <span class="c1"># check robots.txt</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_robots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_info</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Access denied by robots.txt, checked only syntax.&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;syntax OK&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">do_check_content</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span>
+        <span class="c1"># check the http connection</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_request</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_response_info</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">follow_redirections</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_response</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_simple_recursion</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parse_header_links</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HttpUrl.build_request"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build a prepared request object.&quot;&quot;&quot;</span>
+        <span class="n">clientheaders</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_url</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_url</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">HTTP_SCHEMAS</span><span class="p">):</span>
+            <span class="n">clientheaders</span><span class="p">[</span><span class="s2">&quot;Referer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_url</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">clientheaders</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;auth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Prepare request with </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">prepare_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.send_request"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.send_request">[docs]</a>    <span class="k">def</span> <span class="nf">send_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send request and store response in self.url_connection.&quot;&quot;&quot;</span>
+        <span class="c1"># throttle the number of requests to each host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">wait_for_host</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_request_kwargs</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;allow_redirects&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_send_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send GET request.&quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Send request </span><span class="si">%s</span><span class="s2"> with </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Request headers </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">headers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">encoding</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Response encoding </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_ssl_info</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_add_response_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set info from established HTTP(S) connection.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_content_type</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_size_info</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_ssl_sock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get raw SSL socket.&quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span> <span class="bp">self</span>
+        <span class="n">raw_connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">_connection</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">raw_connection</span><span class="p">:</span>
+            <span class="c1"># this happens with newer requests versions:</span>
+            <span class="c1"># https://github.com/linkchecker/linkchecker/issues/76</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">raw_connection</span><span class="o">.</span><span class="n">sock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># sometimes the socket is not yet connected</span>
+            <span class="c1"># see https://github.com/kennethreitz/requests/issues/1966</span>
+            <span class="n">raw_connection</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">raw_connection</span><span class="o">.</span><span class="n">sock</span>
+
+    <span class="k">def</span> <span class="nf">_add_ssl_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add SSL cipher info.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;https&#39;</span><span class="p">:</span>
+            <span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ssl_sock</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">sock</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;cannot extract SSL certificate from connection&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s1">&#39;cipher&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">getpeercert</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># using pyopenssl</span>
+                <span class="n">cert</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">get_peer_certificate</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="n">httputil</span><span class="o">.</span><span class="n">x509_to_dict</span><span class="p">(</span><span class="n">cert</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Got SSL certificate </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ssl_cert</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="HttpUrl.construct_auth"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.construct_auth">[docs]</a>    <span class="k">def</span> <span class="nf">construct_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct HTTP Basic authentication credentials if there</span>
+<span class="sd">        is user/password information available. Does not overwrite if</span>
+<span class="sd">        credentials have already been constructed.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">_user</span><span class="p">,</span> <span class="n">_password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user_password</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">_user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="n">_user</span><span class="p">,</span> <span class="n">_password</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.set_content_type"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.set_content_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return content MIME type or empty string.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">httputil</span><span class="o">.</span><span class="n">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.is_redirect"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.is_redirect">[docs]</a>    <span class="k">def</span> <span class="nf">is_redirect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if current response is a redirect.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s1">&#39;location&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="n">REDIRECT_STATI</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.get_request_kwargs"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.get_request_kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">get_request_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct keyword parameters for Session.request() and</span>
+<span class="sd">        Session.resolve_redirects().&quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;timeout&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;proxies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">proxytype</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;https&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;verify&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;sslverify&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;verify&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">kwargs</span></div>
+
+<div class="viewcode-block" id="HttpUrl.get_redirects"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.get_redirects">[docs]</a>    <span class="k">def</span> <span class="nf">get_redirects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return iterator of redirects for given request.&quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_request_kwargs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">resolve_redirects</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.follow_redirections"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.follow_redirections">[docs]</a>    <span class="k">def</span> <span class="nf">follow_redirections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Follow all redirections of http response.&quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;follow all redirections&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_redirect</span><span class="p">():</span>
+            <span class="c1"># run connection plugins for old connection</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">plugin_manager</span><span class="o">.</span><span class="n">run_connection_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_redirects</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+            <span class="n">newurl</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">url</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;Redirected to </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">newurl</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newurl</span><span class="p">)</span>
+            <span class="c1"># XXX on redirect errors this is not printed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_info</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Redirected to `</span><span class="si">%(url)s</span><span class="s2">&#39;.&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">newurl</span><span class="p">})</span>
+            <span class="c1"># Reset extern and recalculate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">extern</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_extern</span><span class="p">(</span><span class="n">newurl</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_url_parts</span><span class="p">(</span><span class="n">newurl</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span> <span class="o">=</span> <span class="n">response</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">urlutil</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_ssl_info</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_response_info</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_redirect</span><span class="p">():</span>
+                <span class="c1"># run connection plugins for old connection</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">plugin_manager</span><span class="o">.</span><span class="n">run_connection_plugins</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.check_response"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.check_response">[docs]</a>    <span class="k">def</span> <span class="nf">check_response</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check final result and log it.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">400</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">429</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">reason</span><span class="p">),</span>
+                <span class="n">valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">204</span><span class="p">:</span>
+                <span class="c1"># no content</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_warning</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">WARN_HTTP_EMPTY_CONTENT</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">429</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Rate limited (Retry-After: </span><span class="si">%s</span><span class="s2">)&quot;</span>
+                    <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Retry-After&quot;</span><span class="p">),</span>
+                    <span class="n">tag</span><span class="o">=</span><span class="n">WARN_URL_RATE_LIMITED</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="si">%r</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span>
+                    <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="HttpUrl.get_content"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.get_content">[docs]</a>    <span class="k">def</span> <span class="nf">get_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_content</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.read_content"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.read_content">[docs]</a>    <span class="k">def</span> <span class="nf">read_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return data and data size for this URL.</span>
+<span class="sd">        Can be overridden in subclasses.&quot;&quot;&quot;</span>
+        <span class="n">maxbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;maxfilesizedownload&quot;</span><span class="p">]</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ReadChunkBytes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">buf</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">maxbytes</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">LinkCheckerError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;File size too large&quot;</span><span class="p">))</span>
+            <span class="n">buf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HttpUrl.parse_header_links"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.parse_header_links">[docs]</a>    <span class="k">def</span> <span class="nf">parse_header_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse URLs in HTTP headers Link:.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">linktype</span><span class="p">,</span> <span class="n">linkinfo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_connection</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">linkinfo</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Link: header </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">linktype</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Refresh&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">..htmlutil.linkparse</span> <span class="kn">import</span> <span class="n">refresh_re</span>
+
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Refresh&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">mo</span> <span class="o">=</span> <span class="n">refresh_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mo</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Refresh: header&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Content-Location&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Content-Location: header&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpUrl.is_parseable"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.is_parseable">[docs]</a>    <span class="k">def</span> <span class="nf">is_parseable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if content is parseable for recursion.</span>
+
+<span class="sd">        @return: True if content is parseable</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># some content types must be validated with the page content</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;application/xml&quot;</span><span class="p">,</span> <span class="s2">&quot;text/xml&quot;</span><span class="p">):</span>
+            <span class="n">rtype</span> <span class="o">=</span> <span class="n">mimeutil</span><span class="o">.</span><span class="n">guess_mimetype_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_content</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rtype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># XXX side effect</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">rtype</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ContentMimetypes</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="n">LOG_CHECK</span><span class="p">,</span>
+                <span class="s2">&quot;URL with content type </span><span class="si">%r</span><span class="s2"> is not parseable&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="HttpUrl.get_robots_txt_url"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.httpurl.html#linkcheck.checker.httpurl.HttpUrl.get_robots_txt_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_robots_txt_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the according robots.txt URL for this URL.</span>
+
+<span class="sd">        @return: robots.txt URL</span>
+<span class="sd">        @rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">://</span><span class="si">%s</span><span class="s2">/robots.txt&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

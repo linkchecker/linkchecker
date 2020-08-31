@@ -1,0 +1,1010 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheckerrc &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contribution Guide" href="../contributing.html" />
+    <link rel="prev" title="linkchecker" href="linkchecker.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../code/index.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../code/linkcheck/linkcheck.html">linkcheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.configuration.html">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../code/linkcheck/linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../code/linkcheck/linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>linkcheckerrc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/src/linkcheckerrc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linkcheckerrc">
+<h1>linkcheckerrc<a class="headerlink" href="#linkcheckerrc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><strong>linkcheckerrc</strong> is the configuration file for LinkChecker. The file is
+written in an INI-style format.
+The default file location is <strong>~/.linkchecker/linkcheckerrc</strong> on Unix,
+<strong>%HOMEPATH%\.linkchecker\linkcheckerrc</strong> on Windows systems.</p>
+</div>
+<div class="section" id="settings">
+<h2>SETTINGS<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="checking">
+<h3>checking<a class="headerlink" href="#checking" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>cookiefile=</strong><em>filename</em></dt><dd><p>Read a file with initial cookie data. The cookie data format is
+explained in <em class="manpage"><a class="manpage reference external" href="linkchecker.html">linkchecker(1)</a></em>.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-cookiefile"><code class="xref std std-option docutils literal notranslate"><span class="pre">--cookiefile</span></code></a></p>
+</dd>
+<dt><strong>debugmemory=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>Write memory allocation statistics to a file on exit, requires <a class="reference external" href="https://pypi.org/project/meliae/">meliae</a>.
+The default is not to write the file.
+Command line option: none</p>
+</dd>
+<dt><strong>localwebroot=</strong><em>STRING</em></dt><dd><p>When checking absolute URLs inside local files, the given root
+directory is used as base URL.
+Note that the given directory must have URL syntax, so it must use a
+slash to join directories instead of a backslash. And the given
+directory must end with a slash.
+Command line option: none</p>
+</dd>
+<dt><strong>nntpserver=</strong><em>STRING</em></dt><dd><p>Specify an NNTP server for <strong>news:</strong> links. Default is the
+environment variable <span class="target" id="index-0"></span><a class="reference internal" href="linkchecker.html#envvar-NNTP_SERVER"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">NNTP_SERVER</span></code></a>. If no host is given, only the
+syntax of the link is checked.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-N"><code class="xref std std-option docutils literal notranslate"><span class="pre">--nntp-server</span></code></a></p>
+</dd>
+<dt><strong>recursionlevel=</strong><em>NUMBER</em></dt><dd><p>Check recursively all links up to given depth. A negative depth will
+enable infinite recursion. Default depth is infinite.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-r"><code class="xref std std-option docutils literal notranslate"><span class="pre">--recursion-level</span></code></a></p>
+</dd>
+<dt><strong>threads=</strong><em>NUMBER</em></dt><dd><p>Generate no more than the given number of threads. Default number of
+threads is 10. To disable threading specify a non-positive number.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-t"><code class="xref std std-option docutils literal notranslate"><span class="pre">--threads</span></code></a></p>
+</dd>
+<dt><strong>timeout=</strong><em>NUMBER</em></dt><dd><p>Set the timeout for connection attempts in seconds. The default
+timeout is 60 seconds.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-timeout"><code class="xref std std-option docutils literal notranslate"><span class="pre">--timeout</span></code></a></p>
+</dd>
+<dt><strong>aborttimeout=</strong><em>NUMBER</em></dt><dd><p>Time to wait for checks to finish after the user aborts the first
+time (with Ctrl-C or the abort button). The default abort timeout is
+300 seconds.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-timeout"><code class="xref std std-option docutils literal notranslate"><span class="pre">--timeout</span></code></a></p>
+</dd>
+<dt><strong>useragent=</strong><em>STRING</em></dt><dd><p>Specify the User-Agent string to send to the HTTP server, for
+example “Mozilla/4.0”. The default is “LinkChecker/X.Y” where X.Y is
+the current version of LinkChecker.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-user-agent"><code class="xref std std-option docutils literal notranslate"><span class="pre">--user-agent</span></code></a></p>
+</dd>
+<dt><strong>sslverify=</strong>[<strong>0</strong>|<strong>1</strong>|<em>filename</em>]</dt><dd><p>If set to zero disables SSL certificate checking. If set to one (the
+default) enables SSL certificate checking with the provided CA
+certificate file. If a filename is specified, it will be used as the
+certificate file.
+Command line option: none</p>
+</dd>
+<dt><strong>maxrunseconds=</strong><em>NUMBER</em></dt><dd><p>Stop checking new URLs after the given number of seconds. Same as if
+the user stops (by hitting Ctrl-C) after the given number of
+seconds.
+The default is not to stop until all URLs are checked.
+Command line option: none</p>
+</dd>
+<dt><strong>maxfilesizedownload=</strong><em>NUMBER</em></dt><dd><p>Files larger than NUMBER bytes will be ignored, without downloading anything
+if accessed over http and an accurate Content-Length header was returned.
+No more than this amount of a file will be downloaded.
+The default is 5242880 (5 MB).
+Command line option: none</p>
+</dd>
+<dt><strong>maxfilesizeparse=</strong><em>NUMBER</em></dt><dd><p>Files larger than NUMBER bytes will not be parsed for links.
+The default is 1048576 (1 MB).
+Command line option: none</p>
+</dd>
+<dt><strong>maxnumurls=</strong><em>NUMBER</em></dt><dd><p>Maximum number of URLs to check. New URLs will not be queued after
+the given number of URLs is checked.
+The default is to queue and check all URLs.
+Command line option: none</p>
+</dd>
+<dt><strong>maxrequestspersecond=</strong><em>NUMBER</em></dt><dd><p>Limit the maximum number of requests per second to one host.
+The default is 10.
+Command line option: none</p>
+</dd>
+<dt><strong>robotstxt=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>When using http, fetch robots.txt, and confirm whether each URL should
+be accessed before checking.
+The default is to use robots.txt files.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-no-robots"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-robots</span></code></a></p>
+</dd>
+<dt><strong>allowedschemes=</strong><em>NAME</em>[<strong>,</strong><em>NAME</em>…]</dt><dd><p>Allowed URL schemes as comma-separated list.
+Command line option: none</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="filtering">
+<h3>filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>ignore=</strong><em>REGEX</em> (<a class="reference internal" href="#multiline">MULTILINE</a>)</dt><dd><p>Only check syntax of URLs matching the given regular expressions.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-ignore-url"><code class="xref std std-option docutils literal notranslate"><span class="pre">--ignore-url</span></code></a></p>
+</dd>
+<dt><strong>ignorewarnings=</strong><em>NAME</em>[<strong>,</strong><em>NAME</em>…]</dt><dd><p>Ignore the comma-separated list of warnings. See <a class="reference internal" href="#warnings">WARNINGS</a> for
+the list of supported warnings.
+Command line option: none</p>
+</dd>
+<dt><strong>internlinks=</strong><em>REGEX</em></dt><dd><p>Regular expression to add more URLs recognized as internal links.
+Default is that URLs given on the command line are internal.
+Command line option: none</p>
+</dd>
+<dt><strong>nofollow=</strong><em>REGEX</em> (<a class="reference internal" href="#multiline">MULTILINE</a>)</dt><dd><p>Check but do not recurse into URLs matching the given regular
+expressions.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-no-follow-url"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-follow-url</span></code></a></p>
+</dd>
+<dt><strong>checkextern=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>Check external links. Default is to check internal links only.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-check-extern"><code class="xref std std-option docutils literal notranslate"><span class="pre">--check-extern</span></code></a></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="authentication">
+<h3>authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>entry=</strong><em>REGEX</em> <em>USER</em> [<em>PASS</em>] (<a class="reference internal" href="#multiline">MULTILINE</a>)</dt><dd><p>Provide individual username/password pairs for different links. In
+addtion to a single login page specified with <strong>loginurl</strong> multiple
+FTP, HTTP (Basic Authentication) and telnet links are supported.
+Entries are a triple (URL regex, username, password) or a tuple (URL
+regex, username), where the entries are separated by whitespace.
+The password is optional and if missing it has to be entered at the
+commandline.
+If the regular expression matches the checked URL, the given
+username/password pair is used for authentication. The command line
+options <a class="reference internal" href="linkchecker.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> and <a class="reference internal" href="linkchecker.html#cmdoption-p"><code class="xref std std-option docutils literal notranslate"><span class="pre">-p</span></code></a> match every link and therefore override
+the entries given here. The first match wins.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a>, <a class="reference internal" href="linkchecker.html#cmdoption-p"><code class="xref std std-option docutils literal notranslate"><span class="pre">-p</span></code></a></p>
+</dd>
+<dt><strong>loginurl=</strong><em>URL</em></dt><dd><p>The URL of a login page to be visited before link checking. The page
+is expected to contain an HTML form to collect credentials and
+submit them to the address in its action attribute using an HTTP
+POST request. The name attributes of the input elements of the form
+and the values to be submitted need to be available (see <strong>entry</strong>
+for an explanation of username and password values).</p>
+</dd>
+<dt><strong>loginuserfield=</strong><em>STRING</em></dt><dd><p>The name attribute of the username input element. Default: <strong>login</strong>.</p>
+</dd>
+<dt><strong>loginpasswordfield=</strong><em>STRING</em></dt><dd><p>The name attribute of the password input element. Default: <strong>password</strong>.</p>
+</dd>
+<dt><strong>loginextrafields=</strong><em>NAME</em><strong>:</strong><em>VALUE</em> (<a class="reference internal" href="#multiline">MULTILINE</a>)</dt><dd><p>Optionally the name attributes of any additional input elements and
+the values to populate them with. Note that these are submitted
+without checking whether matching input elements exist in the HTML
+form.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="output">
+<h3>output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>debug=</strong><em>STRING</em>[<strong>,</strong><em>STRING</em>…]</dt><dd><p>Print debugging output for the given modules. Available debug
+modules are <strong>cmdline</strong>, <strong>checking</strong>, <strong>cache</strong>, <strong>dns</strong>,
+<strong>thread</strong>, <strong>plugins</strong> and <strong>all</strong>. Specifying <strong>all</strong> is an alias
+for specifying all available loggers.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-D"><code class="xref std std-option docutils literal notranslate"><span class="pre">--debug</span></code></a></p>
+</dd>
+<dt><strong>fileoutput=</strong><em>TYPE</em>[<strong>,</strong><em>TYPE</em>…]</dt><dd><p>Output to a file <strong>linkchecker-out.</strong><em>TYPE</em>, or
+<strong>$HOME/.linkchecker/failures</strong> for <strong>failures</strong> output.
+Valid file output types are <strong>text</strong>, <strong>html</strong>, <strong>sql</strong>, <strong>csv</strong>,
+<strong>gml</strong>, <strong>dot</strong>, <strong>xml</strong>, <strong>none</strong> or <strong>failures</strong>. Default is no
+file output. The various output types are documented below. Note
+that you can suppress all console output with <strong>output=none</strong>.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-F"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file-output</span></code></a></p>
+</dd>
+<dt><strong>log=</strong><em>TYPE</em>[<strong>/</strong><em>ENCODING</em>]</dt><dd><p>Specify output type as <strong>text</strong>, <strong>html</strong>, <strong>sql</strong>, <strong>csv</strong>,
+<strong>gml</strong>, <strong>dot</strong>, <strong>xml</strong>, <strong>none</strong> or <strong>failures</strong>. Default type
+is <strong>text</strong>. The various output types are documented below.
+The <em>ENCODING</em> specifies the output encoding, the default is that of
+your locale. Valid encodings are listed at
+<a class="reference external" href="https://docs.python.org/library/codecs.html#standard-encodings">https://docs.python.org/library/codecs.html#standard-encodings</a>.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">--output</span></code></a></p>
+</dd>
+<dt><strong>quiet=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>If set, operate quiet. An alias for <strong>log=none</strong>. This is only
+useful with <strong>fileoutput</strong>.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">--verbose</span></code></a></p>
+</dd>
+<dt><strong>status=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>Control printing check status messages. Default is 1.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-no-status"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-status</span></code></a></p>
+</dd>
+<dt><strong>verbose=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>If set log all checked URLs once. Default is to log only errors and
+warnings.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">--verbose</span></code></a></p>
+</dd>
+<dt><strong>warnings=</strong>[<strong>0</strong>|<strong>1</strong>]</dt><dd><p>If set log warnings. Default is to log warnings.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-no-warnings"><code class="xref std std-option docutils literal notranslate"><span class="pre">--no-warnings</span></code></a></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="text">
+<h3>text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>Specify output filename for text logging. Default filename is
+<strong>linkchecker-out.txt</strong>.
+Command line option: <a class="reference internal" href="linkchecker.html#cmdoption-F"><code class="xref std std-option docutils literal notranslate"><span class="pre">--file-output</span></code></a></p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>Comma-separated list of parts that have to be logged. See <a class="reference internal" href="#logger-parts">LOGGER PARTS</a>
+below.
+Command line option: none</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>Valid encodings are listed in
+<a class="reference external" href="https://docs.python.org/library/codecs.html#standard-encodings">https://docs.python.org/library/codecs.html#standard-encodings</a>.
+Default encoding is <strong>iso-8859-15</strong>.</p>
+</dd>
+<dt><em>color*</em></dt><dd><p>Color settings for the various log parts, syntax is <em>color</em> or
+<em>type</em><strong>;</strong><em>color</em>. The <em>type</em> can be <strong>bold</strong>, <strong>light</strong>,
+<strong>blink</strong>, <strong>invert</strong>. The <em>color</em> can be <strong>default</strong>, <strong>black</strong>,
+<strong>red</strong>, <strong>green</strong>, <strong>yellow</strong>, <strong>blue</strong>, <strong>purple</strong>, <strong>cyan</strong>,
+<strong>white</strong>, <strong>Black</strong>, <strong>Red</strong>, <strong>Green</strong>, <strong>Yellow</strong>, <strong>Blue</strong>,
+<strong>Purple</strong>, <strong>Cyan</strong> or <strong>White</strong>.
+Command line option: none</p>
+</dd>
+<dt><strong>colorparent=</strong><em>STRING</em></dt><dd><p>Set parent color. Default is <strong>white</strong>.</p>
+</dd>
+<dt><strong>colorurl=</strong><em>STRING</em></dt><dd><p>Set URL color. Default is <strong>default</strong>.</p>
+</dd>
+<dt><strong>colorname=</strong><em>STRING</em></dt><dd><p>Set name color. Default is <strong>default</strong>.</p>
+</dd>
+<dt><strong>colorreal=</strong><em>STRING</em></dt><dd><p>Set real URL color. Default is <strong>cyan</strong>.</p>
+</dd>
+<dt><strong>colorbase=</strong><em>STRING</em></dt><dd><p>Set base URL color. Default is <strong>purple</strong>.</p>
+</dd>
+<dt><strong>colorvalid=</strong><em>STRING</em></dt><dd><p>Set valid color. Default is <strong>bold;green</strong>.</p>
+</dd>
+<dt><strong>colorinvalid=</strong><em>STRING</em></dt><dd><p>Set invalid color. Default is <strong>bold;red</strong>.</p>
+</dd>
+<dt><strong>colorinfo=</strong><em>STRING</em></dt><dd><p>Set info color. Default is <strong>default</strong>.</p>
+</dd>
+<dt><strong>colorwarning=</strong><em>STRING</em></dt><dd><p>Set warning color. Default is <strong>bold;yellow</strong>.</p>
+</dd>
+<dt><strong>colordltime=</strong><em>STRING</em></dt><dd><p>Set download time color. Default is <strong>default</strong>.</p>
+</dd>
+<dt><strong>colorreset=</strong><em>STRING</em></dt><dd><p>Set reset color. Default is <strong>default</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="gml">
+<h3>gml<a class="headerlink" href="#gml" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="dot">
+<h3>dot<a class="headerlink" href="#dot" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="csv">
+<h3>csv<a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>separator=</strong><em>CHAR</em></dt><dd><p>Set CSV separator. Default is a comma (<strong>,</strong>).</p>
+</dd>
+<dt><strong>quotechar=</strong><em>CHAR</em></dt><dd><p>Set CSV quote character. Default is a double quote (<strong>“</strong>).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sql">
+<h3>sql<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>dbname=</strong><em>STRING</em></dt><dd><p>Set database name to store into. Default is <strong>linksdb</strong>.</p>
+</dd>
+<dt><strong>separator=</strong><em>CHAR</em></dt><dd><p>Set SQL command separator character. Default is a semicolon (<strong>;</strong>).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="html">
+<h3>html<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>colorbackground=</strong><em>COLOR</em></dt><dd><p>Set HTML background color. Default is <strong>#fff7e5</strong>.</p>
+</dd>
+<dt><strong>colorurl=</strong></dt><dd><p>Set HTML URL color. Default is <strong>#dcd5cf</strong>.</p>
+</dd>
+<dt><strong>colorborder=</strong></dt><dd><p>Set HTML border color. Default is <strong>#000000</strong>.</p>
+</dd>
+<dt><strong>colorlink=</strong></dt><dd><p>Set HTML link color. Default is <strong>#191c83</strong>.</p>
+</dd>
+<dt><strong>colorwarning=</strong></dt><dd><p>Set HTML warning color. Default is <strong>#e0954e</strong>.</p>
+</dd>
+<dt><strong>colorerror=</strong></dt><dd><p>Set HTML error color. Default is <strong>#db4930</strong>.</p>
+</dd>
+<dt><strong>colorok=</strong></dt><dd><p>Set HTML valid color. Default is <strong>#3ba557</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="failures">
+<h3>failures<a class="headerlink" href="#failures" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="xml">
+<h3>xml<a class="headerlink" href="#xml" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="gxml">
+<h3>gxml<a class="headerlink" href="#gxml" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sitemap">
+<h3>sitemap<a class="headerlink" href="#sitemap" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><strong>filename=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>parts=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>encoding=</strong><em>STRING</em></dt><dd><p>See <a class="reference internal" href="#text"><span class="std std-ref">[text]</span></a> section above.</p>
+</dd>
+<dt><strong>priority=</strong><em>FLOAT</em></dt><dd><p>A number between 0.0 and 1.0 determining the priority. The default
+priority for the first URL is 1.0, for all child URLs 0.5.</p>
+</dd>
+<dt><strong>frequency=</strong>[<strong>always</strong>|<strong>hourly</strong>|<strong>daily</strong>|<strong>weekly</strong>|<strong>monthly</strong>|<strong>yearly</strong>|<strong>never</strong>]</dt><dd><p>How frequently pages are changing.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="logger-parts">
+<h2>LOGGER PARTS<a class="headerlink" href="#logger-parts" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><strong>all</strong></dt><dd><p>for all parts</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>a unique ID for each logentry</p>
+</dd>
+<dt><strong>realurl</strong></dt><dd><p>the full url link</p>
+</dd>
+<dt><strong>result</strong></dt><dd><p>valid or invalid, with messages</p>
+</dd>
+<dt><strong>extern</strong></dt><dd><p>1 or 0, only in some logger types reported</p>
+</dd>
+<dt><strong>base</strong></dt><dd><p>base href=…</p>
+</dd>
+<dt><strong>name</strong></dt><dd><p>&lt;a href=…&gt;name&lt;/a&gt; and &lt;img alt=”name”&gt;</p>
+</dd>
+<dt><strong>parenturl</strong></dt><dd><p>if any</p>
+</dd>
+<dt><strong>info</strong></dt><dd><p>some additional info, e.g. FTP welcome messages</p>
+</dd>
+<dt><strong>warning</strong></dt><dd><p>warnings</p>
+</dd>
+<dt><strong>dltime</strong></dt><dd><p>download time</p>
+</dd>
+<dt><strong>checktime</strong></dt><dd><p>check time</p>
+</dd>
+<dt><strong>url</strong></dt><dd><p>the original url name, can be relative</p>
+</dd>
+<dt><strong>intro</strong></dt><dd><p>the blurb at the beginning, “starting at …”</p>
+</dd>
+<dt><strong>outro</strong></dt><dd><p>the blurb at the end, “found x errors …”</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="multiline">
+<h2>MULTILINE<a class="headerlink" href="#multiline" title="Permalink to this headline">¶</a></h2>
+<p>Some option values can span multiple lines. Each line has to be indented
+for that to work. Lines starting with a hash (<strong>#</strong>) will be ignored,
+though they must still be indented.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ignore</span><span class="o">=</span>
+  <span class="n">lconline</span>
+  <span class="n">bookmark</span>
+  <span class="c1"># a comment</span>
+  <span class="o">^</span><span class="n">mailto</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>EXAMPLE<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">output</span><span class="p">]</span>
+<span class="n">log</span><span class="o">=</span><span class="n">html</span>
+
+<span class="p">[</span><span class="n">checking</span><span class="p">]</span>
+<span class="n">threads</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="p">[</span><span class="n">filtering</span><span class="p">]</span>
+<span class="n">ignorewarnings</span><span class="o">=</span><span class="n">http</span><span class="o">-</span><span class="n">moved</span><span class="o">-</span><span class="n">permanent</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plugins">
+<h2>PLUGINS<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h2>
+<p>All plugins have a separate section. If the section appears in the
+configuration file the plugin is enabled. Some plugins read extra
+options in their section.</p>
+<div class="section" id="anchorcheck">
+<h3>AnchorCheck<a class="headerlink" href="#anchorcheck" title="Permalink to this headline">¶</a></h3>
+<p>Checks validity of HTML anchors.</p>
+</div>
+<div class="section" id="locationinfo">
+<h3>LocationInfo<a class="headerlink" href="#locationinfo" title="Permalink to this headline">¶</a></h3>
+<p>Adds the country and if possible city name of the URL host as info.
+Needs GeoIP or pygeoip and a local country or city lookup DB installed.</p>
+</div>
+<div class="section" id="regexcheck">
+<h3>RegexCheck<a class="headerlink" href="#regexcheck" title="Permalink to this headline">¶</a></h3>
+<p>Define a regular expression which prints a warning if it matches any
+content of the checked link. This applies only to valid pages, so we can
+get their content.</p>
+<dl>
+<dt><strong>warningregex=</strong><em>REGEX</em></dt><dd><p>Use this to check for pages that contain some form of error message,
+for example “This page has moved” or “Oracle Application error”.
+<em>REGEX</em> should be unquoted.</p>
+<p>Note that multiple values can be combined in the regular expression,
+for example “(This page has moved|Oracle Application error)”.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sslcertificatecheck">
+<h3>SslCertificateCheck<a class="headerlink" href="#sslcertificatecheck" title="Permalink to this headline">¶</a></h3>
+<p>Check SSL certificate expiration date. Only internal https: links will
+be checked. A domain will only be checked once to avoid duplicate
+warnings.</p>
+<dl class="simple">
+<dt><strong>sslcertwarndays=</strong><em>NUMBER</em></dt><dd><p>Configures the expiration warning time in days.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="htmlsyntaxcheck">
+<h3>HtmlSyntaxCheck<a class="headerlink" href="#htmlsyntaxcheck" title="Permalink to this headline">¶</a></h3>
+<p>Check the syntax of HTML pages with the online W3C HTML validator. See
+<a class="reference external" href="https://validator.w3.org/docs/api.html">https://validator.w3.org/docs/api.html</a>.</p>
+</div>
+<div class="section" id="httpheaderinfo">
+<h3>HttpHeaderInfo<a class="headerlink" href="#httpheaderinfo" title="Permalink to this headline">¶</a></h3>
+<p>Print HTTP headers in URL info.</p>
+<dl class="simple">
+<dt><strong>prefixes=</strong><em>prefix1</em>[,*prefix2*]…</dt><dd><p>List of comma separated header prefixes. For example to display all
+HTTP headers that start with “X-“.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="csssyntaxcheck">
+<h3>CssSyntaxCheck<a class="headerlink" href="#csssyntaxcheck" title="Permalink to this headline">¶</a></h3>
+<p>Check the syntax of HTML pages with the online W3C CSS validator. See
+<a class="reference external" href="https://jigsaw.w3.org/css-validator/manual.html#expert">https://jigsaw.w3.org/css-validator/manual.html#expert</a>.</p>
+</div>
+<div class="section" id="viruscheck">
+<h3>VirusCheck<a class="headerlink" href="#viruscheck" title="Permalink to this headline">¶</a></h3>
+<p>Checks the page content for virus infections with clamav. A local clamav
+daemon must be installed.</p>
+<dl class="simple">
+<dt><strong>clamavconf=</strong><em>filename</em></dt><dd><p>Filename of <strong>clamd.conf</strong> config file.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="pdfparser">
+<h3>PdfParser<a class="headerlink" href="#pdfparser" title="Permalink to this headline">¶</a></h3>
+<p>Parse PDF files for URLs to check. Needs the <a class="reference external" href="https://pypi.org/project/pdfminer/">pdfminer</a> Python package
+installed.</p>
+</div>
+<div class="section" id="wordparser">
+<h3>WordParser<a class="headerlink" href="#wordparser" title="Permalink to this headline">¶</a></h3>
+<p>Parse Word files for URLs to check. Needs the <a class="reference external" href="https://pypi.org/project/pywin32/">pywin32</a> Python
+extension installed.</p>
+</div>
+</div>
+<div class="section" id="warnings">
+<h2>WARNINGS<a class="headerlink" href="#warnings" title="Permalink to this headline">¶</a></h2>
+<p>The following warnings are recognized in the ‘ignorewarnings’ config
+file entry:</p>
+<dl class="simple">
+<dt><strong>file-missing-slash</strong></dt><dd><p>The file: URL is missing a trailing slash.</p>
+</dd>
+<dt><strong>file-system-path</strong></dt><dd><p>The file: path is not the same as the system specific path.</p>
+</dd>
+<dt><strong>ftp-missing-slash</strong></dt><dd><p>The ftp: URL is missing a trailing slash.</p>
+</dd>
+<dt><strong>http-cookie-store-error</strong></dt><dd><p>An error occurred while storing a cookie.</p>
+</dd>
+<dt><strong>http-empty-content</strong></dt><dd><p>The URL had no content.</p>
+</dd>
+<dt><strong>mail-no-mx-host</strong></dt><dd><p>The mail MX host could not be found.</p>
+</dd>
+<dt><strong>nntp-no-newsgroup</strong></dt><dd><p>The NNTP newsgroup could not be found.</p>
+</dd>
+<dt><strong>nntp-no-server</strong></dt><dd><p>No NNTP server was found.</p>
+</dd>
+<dt><strong>url-content-size-zero</strong></dt><dd><p>The URL content size is zero.</p>
+</dd>
+<dt><strong>url-content-too-large</strong></dt><dd><p>The URL content size is too large.</p>
+</dd>
+<dt><strong>url-effective-url</strong></dt><dd><p>The effective URL is different from the original.</p>
+</dd>
+<dt><strong>url-error-getting-content</strong></dt><dd><p>Could not get the content of the URL.</p>
+</dd>
+<dt><strong>url-obfuscated-ip</strong></dt><dd><p>The IP is obfuscated.</p>
+</dd>
+<dt><strong>url-whitespace</strong></dt><dd><p>The URL contains leading or trailing whitespace.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage"><a class="manpage reference external" href="linkchecker.html">linkchecker(1)</a></em></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../contributing.html" class="btn btn-neutral float-right" title="Contribution Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linkchecker.html" class="btn btn-neutral float-left" title="linkchecker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

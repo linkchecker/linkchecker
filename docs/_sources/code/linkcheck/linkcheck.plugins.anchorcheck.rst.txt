@@ -1,0 +1,29 @@
+linkcheck.plugins.anchorcheck
+=============================
+
+.. automodule:: linkcheck.plugins.anchorcheck
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AnchorCheck
+   
+   
+
+   
+   
+   
+
+
+

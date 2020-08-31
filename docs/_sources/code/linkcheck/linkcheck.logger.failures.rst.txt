@@ -1,0 +1,29 @@
+linkcheck.logger.failures
+=========================
+
+.. automodule:: linkcheck.logger.failures
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FailuresLogger
+   
+   
+
+   
+   
+   
+
+
+

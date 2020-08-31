@@ -1,0 +1,44 @@
+linkcheck.url
+=============
+
+.. automodule:: linkcheck.url
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      collapse_segments
+      document_quote
+      idna_encode
+      is_numeric_port
+      parse_qsl
+      split_netloc
+      splitparams
+      splitport
+      url_fix_host
+      url_fix_mailto_urlsplit
+      url_fix_wayback_query
+      url_needs_quoting
+      url_norm
+      url_parse_query
+      url_quote
+      urlunsplit
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

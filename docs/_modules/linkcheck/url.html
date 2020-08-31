@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheck.url &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkcheckerrc.html">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code/linkcheck/linkcheck.html">linkcheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.html">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../code/linkcheck/linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../code/linkcheck/linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../linkcheck.html">linkcheck</a> &raquo;</li>
+        
+      <li>linkcheck.url</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for linkcheck.url</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2000-2014 Bastian Kleineidam</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software; you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 2 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License along</span>
+<span class="c1"># with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions for parsing and matching URL strings.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+
+<span class="k">for</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ldap&#39;</span><span class="p">,</span> <span class="s1">&#39;irc&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">uses_netloc</span><span class="p">:</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">uses_netloc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
+
+<span class="c1"># The character set to encode non-ASCII characters in a URL. See also</span>
+<span class="c1"># http://tools.ietf.org/html/rfc2396#section-2.1</span>
+<span class="c1"># Note that the encoding is not really specified, but most browsers</span>
+<span class="c1"># encode in UTF-8 when no encoding is specified by the HTTP headers,</span>
+<span class="c1"># else they use the page encoding for followed link. See als</span>
+<span class="c1"># http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs</span>
+<span class="n">url_encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>
+
+<span class="n">default_ports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s1">&#39;https&#39;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+    <span class="s1">&#39;nntps&#39;</span><span class="p">:</span> <span class="mi">563</span><span class="p">,</span>
+    <span class="s1">&#39;ftp&#39;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># adapted from David Wheelers &quot;Secure Programming for Linux and Unix HOWTO&quot;</span>
+<span class="c1"># http://www.dwheeler.com/secure-programs/Secure-Programs-HOWTO/\</span>
+<span class="c1"># filter-html.html#VALIDATING-URIS</span>
+<span class="n">_basic</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;_path&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;\-\_\.\!\~\*\&#39;\(\),&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_hex_safe&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;2-9a-f&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_hex_full&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;0-9a-f&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_part&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;([a-z0-9][-a-z0-9]{0,61}|[a-z])&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">_safe_char</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;([a-z0-9</span><span class="si">%(_path)s</span><span class="s2">\+]|&quot;</span>
+    <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%%</span><span class="s2">[</span><span class="si">%(_hex_safe)s</span><span class="s2">][</span><span class="si">%(_hex_full)s</span><span class="s2">]))&quot;</span> <span class="o">%</span> <span class="n">_basic</span>
+<span class="p">)</span>
+<span class="n">_safe_scheme_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(https?|ftp)&quot;</span>
+<span class="n">_safe_domain_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%(_part)s</span><span class="s2">(\.</span><span class="si">%(_part)s</span><span class="s2">)*\.?)&quot;</span> <span class="o">%</span> <span class="n">_basic</span>
+<span class="n">_safe_host_pattern</span> <span class="o">=</span> <span class="n">_safe_domain_pattern</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;(:(80|8080|8000|443))?&quot;</span> <span class="o">%</span> <span class="n">_basic</span>
+<span class="n">_safe_path_pattern</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;((/([a-z0-9</span><span class="si">%(_path)s</span><span class="s2">]|&quot;</span>
+    <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%%</span><span class="s2">[</span><span class="si">%(_hex_safe)s</span><span class="s2">][</span><span class="si">%(_hex_full)s</span><span class="s2">]))+)*/?)&quot;</span> <span class="o">%</span> <span class="n">_basic</span>
+<span class="p">)</span>
+<span class="n">_safe_fragment_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">*&quot;</span> <span class="o">%</span> <span class="n">_safe_char</span>
+<span class="n">_safe_cgi</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">+(=(</span><span class="si">%s</span><span class="s2">|/)+)?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_safe_char</span><span class="p">,</span> <span class="n">_safe_char</span><span class="p">)</span>
+<span class="n">_safe_query_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">(&amp;</span><span class="si">%s</span><span class="s2">)*)?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_safe_cgi</span><span class="p">,</span> <span class="n">_safe_cgi</span><span class="p">)</span>
+<span class="n">_safe_param_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">(;</span><span class="si">%s</span><span class="s2">)*)?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_safe_cgi</span><span class="p">,</span> <span class="n">_safe_cgi</span><span class="p">)</span>
+<span class="n">safe_url_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">://</span><span class="si">%s%s</span><span class="s2">(#</span><span class="si">%s</span><span class="s2">)?&quot;</span> <span class="o">%</span> <span class="p">(</span>
+    <span class="n">_safe_scheme_pattern</span><span class="p">,</span>
+    <span class="n">_safe_host_pattern</span><span class="p">,</span>
+    <span class="n">_safe_path_pattern</span><span class="p">,</span>
+    <span class="n">_safe_fragment_pattern</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">is_safe_url</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?i)^</span><span class="si">%s</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">safe_url_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">match</span>
+<span class="n">is_safe_domain</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?i)^</span><span class="si">%s</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">_safe_domain_pattern</span><span class="p">)</span><span class="o">.</span><span class="n">match</span>
+
+
+<span class="c1"># snatched form urlparse.py</span>
+<div class="viewcode-block" id="splitparams"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.splitparams">[docs]</a><span class="k">def</span> <span class="nf">splitparams</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split off parameter part from path.</span>
+<span class="sd">    Returns tuple (path-without-param, param)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="is_numeric_port"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.is_numeric_port">[docs]</a><span class="k">def</span> <span class="nf">is_numeric_port</span><span class="p">(</span><span class="n">portstr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;return: integer port (== True) iff portstr is a valid port number,</span>
+<span class="sd">           False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">portstr</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">portstr</span><span class="p">)</span>
+        <span class="c1"># 65536 == 2**16</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">port</span> <span class="o">&lt;</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">port</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="parse_qsl"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.parse_qsl">[docs]</a><span class="k">def</span> <span class="nf">parse_qsl</span><span class="p">(</span><span class="n">qs</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">keep_blank_values</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse a query given as a string argument.</span>
+
+<span class="sd">    @param qs: URL-encoded query string to be parsed</span>
+<span class="sd">    @type qs: string</span>
+<span class="sd">    @param keep_blank_values: flag indicating whether blank values in</span>
+<span class="sd">        URL encoded queries should be treated as blank strings.  A</span>
+<span class="sd">        true value indicates that blanks should be retained as blank</span>
+<span class="sd">        strings.  The default false value indicates that blank values</span>
+<span class="sd">        are to be ignored and treated as if they were  not included.</span>
+<span class="sd">    @type keep_blank_values: bool</span>
+<span class="sd">    @param strict_parsing: flag indicating what to do with parsing errors. If</span>
+<span class="sd">        false (the default), errors are silently ignored. If true,</span>
+<span class="sd">        errors raise a ValueError exception.</span>
+<span class="sd">    @type strict_parsing: bool</span>
+<span class="sd">    @returns: list of triples (key, value, separator) where key and value</span>
+<span class="sd">      are the splitted CGI parameter and separator the used separator</span>
+<span class="sd">      for this CGI parameter which is either a semicolon or an ampersand</span>
+<span class="sd">    @rtype: list of triples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">name_value_amp</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name_value</span> <span class="ow">in</span> <span class="n">name_value_amp</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;;&#39;</span> <span class="ow">in</span> <span class="n">name_value</span><span class="p">:</span>
+            <span class="n">pairs</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">name_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">))</span>
+            <span class="n">pairs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&amp;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">name_value</span><span class="p">,</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">])</span>
+    <span class="n">pairs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name_value</span><span class="p">,</span> <span class="n">sep</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+        <span class="n">nv</span> <span class="o">=</span> <span class="n">name_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">strict_parsing</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;bad query field: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name_value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># None value indicates missing equal sign</span>
+                <span class="n">nv</span> <span class="o">=</span> <span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">keep_blank_values</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">r</span></div>
+
+
+<div class="viewcode-block" id="idna_encode"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.idna_encode">[docs]</a><span class="k">def</span> <span class="nf">idna_encode</span><span class="p">(</span><span class="n">host</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Encode hostname as internationalized domain name (IDN) according</span>
+<span class="sd">    to RFC 3490.</span>
+<span class="sd">    @raise: UnicodeError if hostname is not properly IDN encoded.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">host</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">host</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">host</span><span class="p">,</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">UnicodeError</span><span class="p">:</span>
+            <span class="n">uhost</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;idna&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">uhost</span><span class="p">,</span> <span class="n">uhost</span> <span class="o">!=</span> <span class="n">host</span>
+    <span class="k">return</span> <span class="n">host</span><span class="p">,</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="split_netloc"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.split_netloc">[docs]</a><span class="k">def</span> <span class="nf">split_netloc</span><span class="p">(</span><span class="n">netloc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Separate userinfo from host in urllib.parse.SplitResult.netloc.</span>
+<span class="sd">    Originated as urllib.parse._splituser().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">userinfo</span><span class="p">,</span> <span class="n">delim</span><span class="p">,</span> <span class="n">hostport</span> <span class="o">=</span> <span class="n">netloc</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">userinfo</span> <span class="k">if</span> <span class="n">delim</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span> <span class="n">hostport</span></div>
+
+
+<div class="viewcode-block" id="url_fix_host"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_fix_host">[docs]</a><span class="k">def</span> <span class="nf">url_fix_host</span><span class="p">(</span><span class="n">urlparts</span><span class="p">,</span> <span class="n">encoding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Unquote and fix hostname. Returns is_idn.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">userpass</span><span class="p">,</span> <span class="n">hostport</span> <span class="o">=</span> <span class="n">split_netloc</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">userpass</span><span class="p">:</span>
+        <span class="n">userpass</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">userpass</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+    <span class="n">netloc</span><span class="p">,</span> <span class="n">is_idn</span> <span class="o">=</span> <span class="n">idna_encode</span><span class="p">(</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">hostport</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="c1"># a leading backslash in path causes urlsplit() to add the</span>
+    <span class="c1"># path components up to the first slash to host</span>
+    <span class="c1"># try to find this case...</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">netloc</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># ...and fix it by prepending the misplaced components to the path</span>
+        <span class="n">comps</span> <span class="o">=</span> <span class="n">netloc</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>  <span class="c1"># note: still has leading backslash</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+            <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">comps</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">comps</span><span class="p">,</span>
+                <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="n">netloc</span> <span class="o">=</span> <span class="n">netloc</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># a leading ? in path causes urlsplit() to add the query to the</span>
+        <span class="c1"># host name</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">netloc</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">netloc</span><span class="p">,</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">netloc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># path</span>
+        <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">userpass</span><span class="p">:</span>
+        <span class="c1"># append AT for easy concatenation</span>
+        <span class="n">userpass</span> <span class="o">+=</span> <span class="s2">&quot;@&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">userpass</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">default_ports</span><span class="p">:</span>
+        <span class="n">dport</span> <span class="o">=</span> <span class="n">default_ports</span><span class="p">[</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">splitport</span><span class="p">(</span><span class="n">netloc</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">dport</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">host</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+            <span class="n">host</span> <span class="o">=</span> <span class="n">host</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="o">!=</span> <span class="n">dport</span><span class="p">:</span>
+            <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="n">netloc</span> <span class="o">=</span> <span class="n">host</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">userpass</span> <span class="o">+</span> <span class="n">netloc</span>
+    <span class="k">return</span> <span class="n">is_idn</span></div>
+
+
+<div class="viewcode-block" id="url_fix_mailto_urlsplit"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_fix_mailto_urlsplit">[docs]</a><span class="k">def</span> <span class="nf">url_fix_mailto_urlsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split query part of mailto url if found.&quot;&quot;&quot;</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span>
+    <span class="k">if</span> <span class="n">sep</span> <span class="ow">in</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<span class="c1"># wayback urls include in the path http[s]://. By default the</span>
+<span class="c1"># tidying mechanism in linkchecker encodes the : and deletes the second slash</span>
+<span class="c1"># This function reverses these corrections. This function expects only the</span>
+<span class="c1"># path section of the URL as input.</span>
+<span class="n">wayback_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(https?)(\%3A/|:/)&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="url_fix_wayback_query"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_fix_wayback_query">[docs]</a><span class="k">def</span> <span class="nf">url_fix_wayback_query</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">wayback_regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\1://&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="url_parse_query"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_parse_query">[docs]</a><span class="k">def</span> <span class="nf">url_parse_query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">encoding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse and re-join the given CGI query.&quot;&quot;&quot;</span>
+    <span class="c1"># if ? is in the query, split it off, seen at msdn.microsoft.com</span>
+    <span class="n">append</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">while</span> <span class="s1">&#39;?&#39;</span> <span class="ow">in</span> <span class="n">query</span><span class="p">:</span>
+        <span class="n">query</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">append</span> <span class="o">=</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">url_parse_query</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="o">+</span> <span class="n">append</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">sep</span> <span class="ow">in</span> <span class="n">parse_qsl</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">keep_blank_values</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/-:,;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/-:,;&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># some sites do not work when the equal sign is missing</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="n">append</span></div>
+
+
+<div class="viewcode-block" id="urlunsplit"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.urlunsplit">[docs]</a><span class="k">def</span> <span class="nf">urlunsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Same as urllib.parse.urlunsplit but with extra UNC path handling</span>
+<span class="sd">    for Windows OS.&quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span> <span class="ow">and</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;file&#39;</span> <span class="ow">and</span> <span class="s1">&#39;|&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="c1"># UNC paths must have 4 slashes: &#39;file:////server/path&#39;</span>
+        <span class="c1"># Depending on the path in urlparts[2], urllib.parse.urlunsplit()</span>
+        <span class="c1"># left only two or three slashes. This is fixed below</span>
+        <span class="n">repl</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span> <span class="k">if</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;//&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;file:/&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;file:&#39;</span><span class="p">,</span> <span class="n">repl</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="url_norm"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_norm">[docs]</a><span class="k">def</span> <span class="nf">url_norm</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">encoding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalize the given URL which must be quoted. Supports unicode</span>
+<span class="sd">    hostnames (IDNA encoding) according to RFC 3490.</span>
+
+<span class="sd">    @return: (normed url, idna flag)</span>
+<span class="sd">    @rtype: tuple of length two</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">urlparts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="c1"># scheme</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="c1"># mailto: urlsplit is broken</span>
+    <span class="k">if</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;mailto&#39;</span><span class="p">:</span>
+        <span class="n">url_fix_mailto_urlsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">)</span>
+    <span class="c1"># host (with path or query side effects)</span>
+    <span class="n">is_idn</span> <span class="o">=</span> <span class="n">url_fix_host</span><span class="p">(</span><span class="n">urlparts</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+    <span class="c1"># query</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">url_parse_query</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">uses_relative</span><span class="p">:</span>
+        <span class="c1"># URL has a hierarchical path we should norm</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="c1"># Empty path is allowed if both query and fragment are also empty.</span>
+            <span class="c1"># Note that in relative links, urlparts[0] might be empty.</span>
+            <span class="c1"># In this case, do not make any assumptions.</span>
+            <span class="k">if</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">or</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">]):</span>
+                <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># fix redundant path parts</span>
+            <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">collapse_segments</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="c1"># anchor</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+    <span class="c1"># quote parts again</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># scheme</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;@:&#39;</span><span class="p">)</span>  <span class="c1"># host</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="n">_nopathquote_chars</span><span class="p">)</span>  <span class="c1"># path</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;feed&quot;</span><span class="p">):</span>
+        <span class="c1"># unencode colon in http[s]:// in wayback path</span>
+        <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">url_fix_wayback_query</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="s2">&quot;!$&amp;&#39;()*+,-./;=?@_~&quot;</span><span class="p">)</span>  <span class="c1"># anchor</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">urlunsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+        <span class="c1"># re-append trailing empty fragment</span>
+        <span class="n">res</span> <span class="o">+=</span> <span class="s1">&#39;#&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">is_idn</span><span class="p">)</span></div>
+
+
+<span class="n">_slashes_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/+&quot;</span><span class="p">)</span>
+<span class="n">_thisdir_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\./&quot;</span><span class="p">)</span>
+<span class="n">_samedir_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/\./|/\.$&quot;</span><span class="p">)</span>
+<span class="n">_parentdir_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^/(\.\./)+|/(?!\.\./)[^/]+/\.\.(/|$)&quot;</span><span class="p">)</span>
+<span class="n">_relparentdir_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(?!\.\./)[^/]+/\.\.(/|$)&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="collapse_segments"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.collapse_segments">[docs]</a><span class="k">def</span> <span class="nf">collapse_segments</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove all redundant segments from the given URL path.</span>
+<span class="sd">    Precondition: path is an unquoted url path&quot;&quot;&quot;</span>
+    <span class="c1"># replace backslashes</span>
+    <span class="c1"># note: this is _against_ the specification (which would require</span>
+    <span class="c1"># backslashes to be left alone, and finally quoted with &#39;%5C&#39;)</span>
+    <span class="c1"># But replacing has several positive effects:</span>
+    <span class="c1"># - Prevents path attacks on Windows systems (using \.. parent refs)</span>
+    <span class="c1"># - Fixes bad URLs where users used backslashes instead of slashes.</span>
+    <span class="c1">#   This is a far more probable case than users having an intentional</span>
+    <span class="c1">#   backslash in the path name.</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="c1"># shrink multiple slashes to one slash</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">_slashes_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="c1"># collapse redundant path segments</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">_thisdir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">_samedir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="c1"># collapse parent path segments</span>
+    <span class="c1"># note: here we exploit the fact that the replacements happen</span>
+    <span class="c1"># to be from left to right (see also _parentdir_ro above)</span>
+    <span class="n">newpath</span> <span class="o">=</span> <span class="n">_parentdir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">newpath</span> <span class="o">!=</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">newpath</span>
+        <span class="n">newpath</span> <span class="o">=</span> <span class="n">_parentdir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="c1"># collapse parent path segments of relative paths</span>
+    <span class="c1"># (ie. without leading slash)</span>
+    <span class="n">newpath</span> <span class="o">=</span> <span class="n">_relparentdir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">newpath</span> <span class="o">!=</span> <span class="n">path</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">newpath</span>
+        <span class="n">newpath</span> <span class="o">=</span> <span class="n">_relparentdir_ro</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+<span class="n">url_is_absolute</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[-\.a-z]+:&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span><span class="o">.</span><span class="n">match</span>
+
+
+<div class="viewcode-block" id="url_quote"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_quote">[docs]</a><span class="k">def</span> <span class="nf">url_quote</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">encoding</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Quote given URL.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">url_is_absolute</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">document_quote</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">urlparts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># scheme</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>  <span class="c1"># host</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/=,&#39;</span><span class="p">)</span>  <span class="c1"># path</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;&amp;=,&#39;</span><span class="p">)</span>  <span class="c1"># query</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">sep</span> <span class="ow">in</span> <span class="n">parse_qsl</span><span class="p">(</span>
+        <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">keep_blank_values</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>  <span class="c1"># query</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/-:,;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/-:,;&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">sep</span><span class="p">))</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">urlparts</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>  <span class="c1"># anchor</span>
+    <span class="k">return</span> <span class="n">urlunsplit</span><span class="p">(</span><span class="n">urlparts</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="document_quote"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.document_quote">[docs]</a><span class="k">def</span> <span class="nf">document_quote</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Quote given document.&quot;&quot;&quot;</span>
+    <span class="n">doc</span><span class="p">,</span> <span class="n">delim</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">delim</span><span class="p">:</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">document</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;/=,&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">query</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">?</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">doc</span></div>
+
+
+<span class="n">_nopathquote_chars</span> <span class="o">=</span> <span class="s2">&quot;-;/=,~*+()@!&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span>
+    <span class="n">_nopathquote_chars</span> <span class="o">+=</span> <span class="s2">&quot;|&quot;</span>
+<span class="n">_safe_url_chars</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_nopathquote_chars</span> <span class="o">+</span> <span class="s2">&quot;_:.&amp;#%?[]!&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;a-zA-Z0-9&quot;</span>
+<span class="n">_safe_url_chars_ro</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[</span><span class="si">%s</span><span class="s2">]*$&quot;</span> <span class="o">%</span> <span class="n">_safe_url_chars</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="url_needs_quoting"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.url_needs_quoting">[docs]</a><span class="k">def</span> <span class="nf">url_needs_quoting</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if url needs percent quoting. Note that the method does</span>
+<span class="sd">    only check basic character sets, and not any other syntax.</span>
+<span class="sd">    The URL might still be syntactically incorrect even when</span>
+<span class="sd">    it is properly quoted.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">url</span><span class="p">:</span>
+        <span class="c1"># handle trailing whitespace as a special case</span>
+        <span class="c1"># since &#39;$&#39; matches immediately before a end-of-line</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">_safe_url_chars_ro</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="splitport"><a class="viewcode-back" href="../../code/linkcheck/linkcheck.url.html#linkcheck.url.splitport">[docs]</a><span class="k">def</span> <span class="nf">splitport</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split optional port number from host. If host has no port number,</span>
+<span class="sd">    the given default port is returned.</span>
+
+<span class="sd">    @param host: host name</span>
+<span class="sd">    @type host: string</span>
+<span class="sd">    @param port: the port number (default 0)</span>
+<span class="sd">    @type port: int</span>
+
+<span class="sd">    @return: tuple of (host, port)</span>
+<span class="sd">    @rtype: tuple of (string, int)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">host</span><span class="p">:</span>
+        <span class="n">shost</span><span class="p">,</span> <span class="n">sport</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">iport</span> <span class="o">=</span> <span class="n">is_numeric_port</span><span class="p">(</span><span class="n">sport</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iport</span><span class="p">:</span>
+            <span class="n">host</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">shost</span><span class="p">,</span> <span class="n">iport</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">sport</span><span class="p">:</span>
+            <span class="c1"># empty port, ie. the host was &quot;hostname:&quot;</span>
+            <span class="n">host</span> <span class="o">=</span> <span class="n">shost</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># For an invalid non-empty port leave the host name as is</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
