@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-slim
 
 # needed to allow linkchecker create plugin directory and initial configuration file in "home" dir
 ENV HOME /tmp
