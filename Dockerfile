@@ -4,8 +4,7 @@ FROM python:3-slim
 ENV HOME /tmp
 
 RUN set -x \
-    && pip install --no-cache-dir https://github.com/linkchecker/linkchecker/archive/master.zip \
-    && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/locale /usr/share/man
+    && pip install --no-cache-dir https://github.com/linkchecker/linkchecker/archive/master.zip
 
 # /mnt enables linkchecker to access to access files on local machine if needed
 VOLUME /mnt
