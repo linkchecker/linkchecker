@@ -1,4 +1,4 @@
 @echo off
-:: example using linkchecker on windows, logging to html
-set PYDIR=c:\python26
-%PYDIR%\python.exe %PYDIR%\scripts\linkchecker -Fhtml http://www.example.com
+:: Do replace the for loop with setting SCRIPTSDIR to the literal path
+for /f "delims=" %%i in ('python -c "import site; print(site.getusersitepackages().replace('site-packages', 'Scripts'))"') do set SCRIPTSDIR=%%i
+python %SCRIPTSDIR%\linkchecker %*

@@ -54,7 +54,7 @@ def prepare_urlpath_for_nt(path):
 
 def get_nt_filename(path):
     """Return case sensitive filename for NT path."""
-    unc, rest = os.path.splitunc(path)
+    unc, rest = os.path.splitdrive(path)
     head, tail = os.path.split(rest)
     if not tail:
         return path
