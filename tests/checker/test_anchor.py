@@ -17,6 +17,7 @@
 Test html anchor parsing and checking.
 """
 from . import LinkCheckTest
+from .httpserver import HttpServerTest
 
 
 class TestAnchor(LinkCheckTest):
@@ -38,3 +39,13 @@ class TestAnchor(LinkCheckTest):
             "valid",
         ]
         self.direct(urlanchor, resultlines, confargs=confargs)
+
+
+class TestHttpAnchor(HttpServerTest):
+    """
+    Test checking of HTML pages containing links to anchors served over http.
+    """
+
+    def test_anchor_html(self):
+        confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
+        self.file_test("http_anchor.html", confargs=confargs)
