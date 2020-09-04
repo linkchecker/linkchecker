@@ -28,7 +28,6 @@ check:
 clean:
 	rm -rf src/_build; \
 	rm -rf src/code/linkcheck; \
-	rm -rf html; \
-	rm -rf man
+	rm -rf html
 
 .PHONY: check clean html locale man

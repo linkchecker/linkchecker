@@ -1,3 +1,4 @@
+dist: bionic
 language: python
 python:
   - "3.5"
@@ -15,6 +16,25 @@ jobs:
     - name: check-manifest
       env: TOXENV=check-manifest
       before_script:
+      after_success:
+    - name: sphinx
+      python: "3.6"
+      addons:
+        apt:
+          packages:
+            - graphviz
+            - mandoc
+      install:
+        - pip install -r requirements.txt
+        - pip install Sphinx sphinx-epytext sphinx-intl sphinx-rtd-theme
+      before_script:
+        - python3.6 setup.py build
+      script:
+        - make -C doc code
+        - make -C doc html
+        - make -C doc locale
+        - make -C doc man
+        - make -C doc check
       after_success:
 # command to install dependencies
 addons:
