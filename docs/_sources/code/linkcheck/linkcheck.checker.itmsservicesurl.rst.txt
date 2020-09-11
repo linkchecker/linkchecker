@@ -1,0 +1,29 @@
+linkcheck.checker.itmsservicesurl
+=================================
+
+.. automodule:: linkcheck.checker.itmsservicesurl
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ItmsServicesUrl
+   
+   
+
+   
+   
+   
+
+
+

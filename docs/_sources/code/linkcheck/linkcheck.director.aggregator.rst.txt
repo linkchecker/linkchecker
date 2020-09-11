@@ -1,0 +1,35 @@
+linkcheck.director.aggregator
+=============================
+
+.. automodule:: linkcheck.director.aggregator
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      new_request_session
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Aggregate
+   
+   
+
+   
+   
+   
+
+
+

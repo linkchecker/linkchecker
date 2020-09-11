@@ -1,0 +1,37 @@
+linkcheck.plugins.locationinfo
+==============================
+
+.. automodule:: linkcheck.plugins.locationinfo
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_geoip_dat
+      get_geoip_record
+      get_location
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      LocationInfo
+   
+   
+
+   
+   
+   
+
+
+

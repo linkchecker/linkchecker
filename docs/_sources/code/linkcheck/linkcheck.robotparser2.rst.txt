@@ -1,0 +1,31 @@
+linkcheck.robotparser2
+======================
+
+.. automodule:: linkcheck.robotparser2
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Entry
+      RobotFileParser
+      RuleLine
+   
+   
+
+   
+   
+   
+
+
+

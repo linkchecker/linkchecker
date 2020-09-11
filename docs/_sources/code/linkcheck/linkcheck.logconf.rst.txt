@@ -1,0 +1,34 @@
+linkcheck.logconf
+=================
+
+.. automodule:: linkcheck.logconf
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_loghandler
+      init_log_config
+      remove_loghandler
+      reset_loglevel
+      set_debug
+      set_loglevel
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

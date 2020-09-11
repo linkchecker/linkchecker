@@ -1,0 +1,35 @@
+linkcheck.plugins.parsepdf
+==========================
+
+.. automodule:: linkcheck.plugins.parsepdf
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      search_url
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      PdfParser
+   
+   
+
+   
+   
+   
+
+
+

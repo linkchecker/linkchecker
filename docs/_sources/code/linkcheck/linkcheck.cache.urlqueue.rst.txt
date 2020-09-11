@@ -1,0 +1,36 @@
+linkcheck.cache.urlqueue
+========================
+
+.. automodule:: linkcheck.cache.urlqueue
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      UrlQueue
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      Empty
+      Timeout
+   
+   
+
+
+

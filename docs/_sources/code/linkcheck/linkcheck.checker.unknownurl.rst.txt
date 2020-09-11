@@ -1,0 +1,29 @@
+linkcheck.checker.unknownurl
+============================
+
+.. automodule:: linkcheck.checker.unknownurl
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      UnknownUrl
+   
+   
+
+   
+   
+   
+
+
+

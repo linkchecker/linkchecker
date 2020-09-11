@@ -1,0 +1,35 @@
+linkcheck.checker.telneturl
+===========================
+
+.. automodule:: linkcheck.checker.telneturl
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      encode
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      TelnetUrl
+   
+   
+
+   
+   
+   
+
+
+

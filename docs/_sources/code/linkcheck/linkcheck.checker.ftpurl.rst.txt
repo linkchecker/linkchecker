@@ -1,0 +1,29 @@
+linkcheck.checker.ftpurl
+========================
+
+.. automodule:: linkcheck.checker.ftpurl
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FtpUrl
+   
+   
+
+   
+   
+   
+
+
+

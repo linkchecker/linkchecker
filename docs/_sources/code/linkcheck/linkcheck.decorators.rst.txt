@@ -1,0 +1,42 @@
+linkcheck.decorators
+====================
+
+.. automodule:: linkcheck.decorators
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      deprecated
+      notimplemented
+      signal_handler
+      synchronize
+      synchronized
+      timed
+      timeit
+      update_func_meta
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      curried
+   
+   
+
+   
+   
+   
+
+
+

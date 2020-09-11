@@ -1,0 +1,37 @@
+linkcheck.checker.urlbase
+=========================
+
+.. automodule:: linkcheck.checker.urlbase
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      url_norm
+      urljoin
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CompactUrlData
+      UrlBase
+   
+   
+
+   
+   
+   
+
+
+

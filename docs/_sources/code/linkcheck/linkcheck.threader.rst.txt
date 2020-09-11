@@ -1,0 +1,29 @@
+linkcheck.threader
+==================
+
+.. automodule:: linkcheck.threader
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      StoppableThread
+   
+   
+
+   
+   
+   
+
+
+

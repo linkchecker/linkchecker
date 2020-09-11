@@ -1,0 +1,43 @@
+linkcheck.plugins.parseword
+===========================
+
+.. automodule:: linkcheck.plugins.parseword
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      close_word_app
+      close_wordfile
+      constants
+      get_line_number
+      get_temp_filename
+      get_word_app
+      has_word
+      init_win32com
+      open_wordfile
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      WordParser
+   
+   
+
+   
+   
+   
+
+
+

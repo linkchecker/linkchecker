@@ -1,0 +1,32 @@
+linkcheck.mimeutil
+==================
+
+.. automodule:: linkcheck.mimeutil
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_mimetype
+      guess_mimetype
+      guess_mimetype_read
+      init_mimedb
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

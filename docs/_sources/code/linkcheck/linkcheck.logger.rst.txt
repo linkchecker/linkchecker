@@ -1,0 +1,49 @@
+linkcheck.logger
+================
+
+.. automodule:: linkcheck.logger
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      LogStatistics
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   linkcheck.logger.csvlog
+   linkcheck.logger.customxml
+   linkcheck.logger.dot
+   linkcheck.logger.failures
+   linkcheck.logger.gml
+   linkcheck.logger.graph
+   linkcheck.logger.gxml
+   linkcheck.logger.html
+   linkcheck.logger.none
+   linkcheck.logger.sitemapxml
+   linkcheck.logger.sql
+   linkcheck.logger.text
+   linkcheck.logger.xmllog
+

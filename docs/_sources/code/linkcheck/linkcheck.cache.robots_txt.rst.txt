@@ -1,0 +1,29 @@
+linkcheck.cache.robots\_txt
+===========================
+
+.. automodule:: linkcheck.cache.robots_txt
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RobotsTxt
+   
+   
+
+   
+   
+   
+
+
+

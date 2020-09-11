@@ -1,0 +1,822 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>linkcheck.configuration &mdash; LinkChecker 2020-08-30 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="linkcheck.configuration.confparse" href="linkcheck.configuration.confparse.html" />
+    <link rel="prev" title="linkcheck.cmdline" href="linkcheck.cmdline.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> LinkChecker
+          
+
+          
+            
+            <img src="../../_static/logo128x128.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2020-08-30
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-with-pip">Setup with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-windows">Setup for Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-macos">Setup for macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#setup-for-gnu-linux">Setup for GNU/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#manual-setup-for-unix-systems">Manual setup for Unix systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#after-installation">After installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#wsgi-web-interface">WSGI web interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../upgrading.html">Upgrading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-9-x-to-10-0">Migrating from 9.x to 10.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-x-to-9-0">Migrating from 8.x to 9.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-4-to-8-5">Migrating from 8.4 to 8.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-8-0-to-8-1">Migrating from 8.0 to 8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-9-to-8-0">Migrating from 7.9 to 8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-6-to-7-7">Migrating from 7.6 to 7.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-3-to-7-4">Migrating from 7.3 to 7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-7-0-to-7-1">Migrating from 7.0 to 7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-x-to-7-0">Migrating from 6.x to 7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-6-to-6-7">Migrating from 6.6 to 6.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-6-4-to-6-5">Migrating from 6.4 to 6.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-5-to-6-0">Migrating from 5.5 to 6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-2-to-5-3">Migrating from 5.2 to 5.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-1-to-5-2">Migrating from 5.1 to 5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-5-0-to-5-1">Migrating from 5.0 to 5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-x-to-5-0">Migrating from 4.x to 5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-4-to-4-5">Migrating from 4.4 to 4.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-2-to-4-3">Migrating from 4.2 to 4.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-4-1-to-4-2">Migrating from 4.1 to 4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-x-to-4-0">Migrating from 3.x to 4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-3-0-to-3-1">Migrating from 3.0 to 3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-x-to-3-0">Migrating from 2.x to 3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-2-2-to-2-3">Migrating from 2.2 to 2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-x-to-2-0">Migrating from 1.x to 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../upgrading.html#migrating-from-1-12-x-to-1-13-0">Migrating from 1.12.x to 1.13.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkchecker.html">linkchecker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#synopsis">SYNOPSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#examples">EXAMPLES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#options">OPTIONS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#output-options">Output options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkchecker.html#checking-options">Checking options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#configuration-files">CONFIGURATION FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#output-types">OUTPUT TYPES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#regular-expressions">REGULAR EXPRESSIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#cookie-files">COOKIE FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#proxy-support">PROXY SUPPORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#performed-checks">PERFORMED CHECKS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#plugins">PLUGINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#recursion">RECURSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#notes">NOTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#environment">ENVIRONMENT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#return-value">RETURN VALUE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#limitations">LIMITATIONS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#files">FILES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkchecker.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../man/linkcheckerrc.html">linkcheckerrc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#description">DESCRIPTION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#settings">SETTINGS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#checking">checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#filtering">filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#authentication">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#output">output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#text">text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gml">gml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#dot">dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csv">csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sql">sql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#html">html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#failures">failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#xml">xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#gxml">gxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sitemap">sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#logger-parts">LOGGER PARTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#multiline">MULTILINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#example">EXAMPLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#plugins">PLUGINS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#anchorcheck">AnchorCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#locationinfo">LocationInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#regexcheck">RegexCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#sslcertificatecheck">SslCertificateCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#htmlsyntaxcheck">HtmlSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#httpheaderinfo">HttpHeaderInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#csssyntaxcheck">CssSyntaxCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../man/linkcheckerrc.html#see-also">SEE ALSO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#positive-feedback">Positive feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#issues-and-bug-reports">Issues and bug reports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#issue-triage">Issue triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#security-issues">Security issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#patches">Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#patch-triage">Patch triage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#membership">Membership</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../code_of_conduct.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-standards">Our Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#enforcement">Enforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#contacts">Contacts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#attribution">Attribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../code_of_conduct.html#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Code</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="linkcheck.html">linkcheck</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.ansicolor.html">linkcheck.ansicolor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.better_exchook2.html">linkcheck.better_exchook2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.bookmarks.html">linkcheck.bookmarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.bookmarks.chromium.html">linkcheck.bookmarks.chromium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.bookmarks.firefox.html">linkcheck.bookmarks.firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.bookmarks.opera.html">linkcheck.bookmarks.opera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.bookmarks.safari.html">linkcheck.bookmarks.safari</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.cache.html">linkcheck.cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.cache.results.html">linkcheck.cache.results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.cache.robots_txt.html">linkcheck.cache.robots_txt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.cache.urlqueue.html">linkcheck.cache.urlqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.checker.html">linkcheck.checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.const.html">linkcheck.checker.const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.dnsurl.html">linkcheck.checker.dnsurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.fileurl.html">linkcheck.checker.fileurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.ftpurl.html">linkcheck.checker.ftpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.httpurl.html">linkcheck.checker.httpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.ignoreurl.html">linkcheck.checker.ignoreurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.internpaturl.html">linkcheck.checker.internpaturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.itmsservicesurl.html">linkcheck.checker.itmsservicesurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.mailtourl.html">linkcheck.checker.mailtourl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.nntpurl.html">linkcheck.checker.nntpurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.proxysupport.html">linkcheck.checker.proxysupport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.telneturl.html">linkcheck.checker.telneturl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.unknownurl.html">linkcheck.checker.unknownurl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.checker.urlbase.html">linkcheck.checker.urlbase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.cmdline.html">linkcheck.cmdline</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">linkcheck.configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.configuration.confparse.html">linkcheck.configuration.confparse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.containers.html">linkcheck.containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.cookies.html">linkcheck.cookies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.decorators.html">linkcheck.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.director.html">linkcheck.director</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.aggregator.html">linkcheck.director.aggregator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.checker.html">linkcheck.director.checker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.console.html">linkcheck.director.console</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.interrupter.html">linkcheck.director.interrupter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.logger.html">linkcheck.director.logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.status.html">linkcheck.director.status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.director.task.html">linkcheck.director.task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.dummy.html">linkcheck.dummy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.fileutil.html">linkcheck.fileutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.ftpparse.html">linkcheck.ftpparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.htmlutil.html">linkcheck.htmlutil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.htmlutil.htmlsoup.html">linkcheck.htmlutil.htmlsoup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.htmlutil.linkparse.html">linkcheck.htmlutil.linkparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.htmlutil.loginformsearch.html">linkcheck.htmlutil.loginformsearch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.httputil.html">linkcheck.httputil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.i18n.html">linkcheck.i18n</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.lc_cgi.html">linkcheck.lc_cgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.loader.html">linkcheck.loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.lock.html">linkcheck.lock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.log.html">linkcheck.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.logconf.html">linkcheck.logconf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.logger.html">linkcheck.logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.csvlog.html">linkcheck.logger.csvlog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.customxml.html">linkcheck.logger.customxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.dot.html">linkcheck.logger.dot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.failures.html">linkcheck.logger.failures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.gml.html">linkcheck.logger.gml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.graph.html">linkcheck.logger.graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.gxml.html">linkcheck.logger.gxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.html.html">linkcheck.logger.html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.none.html">linkcheck.logger.none</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.sitemapxml.html">linkcheck.logger.sitemapxml</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.sql.html">linkcheck.logger.sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.text.html">linkcheck.logger.text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.logger.xmllog.html">linkcheck.logger.xmllog</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.memoryutil.html">linkcheck.memoryutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.mimeutil.html">linkcheck.mimeutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.network.html">linkcheck.network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.network.iputil.html">linkcheck.network.iputil</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.parser.html">linkcheck.parser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.parser.sitemap.html">linkcheck.parser.sitemap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.plugins.html">linkcheck.plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.anchorcheck.html">linkcheck.plugins.anchorcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.httpheaderinfo.html">linkcheck.plugins.httpheaderinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.locationinfo.html">linkcheck.plugins.locationinfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.markdowncheck.html">linkcheck.plugins.markdowncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.parsepdf.html">linkcheck.plugins.parsepdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.parseword.html">linkcheck.plugins.parseword</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.regexcheck.html">linkcheck.plugins.regexcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.sslcertcheck.html">linkcheck.plugins.sslcertcheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.syntaxchecks.html">linkcheck.plugins.syntaxchecks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linkcheck.plugins.viruscheck.html">linkcheck.plugins.viruscheck</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.robotparser2.html">linkcheck.robotparser2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.socketutil.html">linkcheck.socketutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.strformat.html">linkcheck.strformat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.threader.html">linkcheck.threader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.trace.html">linkcheck.trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linkcheck.url.html">linkcheck.url</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+    <a href="../../genindex.html">Index</a>
+    <hr>
+    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
+    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LinkChecker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Code</a> &raquo;</li>
+        
+          <li><a href="linkcheck.html">linkcheck</a> &raquo;</li>
+        
+      <li>linkcheck.configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code/linkcheck/linkcheck.configuration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-linkcheck.configuration">
+<span id="linkcheck-configuration"></span><h1>linkcheck.configuration<a class="headerlink" href="#module-linkcheck.configuration" title="Permalink to this headline">¶</a></h1>
+<p>Store metadata and options.</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.add_kde_proxy" title="linkcheck.configuration.add_kde_proxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_kde_proxy</span></code></a>(key, value, data)</p></td>
+<td><p>Add a proxy value to data dictionary after sanity checks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.add_kde_setting" title="linkcheck.configuration.add_kde_setting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_kde_setting</span></code></a>(key, value, data)</p></td>
+<td><p>Add a KDE proxy setting value to data dictionary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_certifi_file" title="linkcheck.configuration.get_certifi_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_certifi_file</span></code></a>()</p></td>
+<td><p>Get the SSL certifications installed by the certifi package.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_gnome_proxy" title="linkcheck.configuration.get_gnome_proxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gnome_proxy</span></code></a>([protocol])</p></td>
+<td><p>Return host:port for a GNOME proxy if found, else None.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_kde_config_dir" title="linkcheck.configuration.get_kde_config_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kde_config_dir</span></code></a>()</p></td>
+<td><p>Return KDE configuration directory or None if not found.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_kde_ftp_proxy" title="linkcheck.configuration.get_kde_ftp_proxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kde_ftp_proxy</span></code></a>()</p></td>
+<td><p>Return host:port for KDE HTTP proxy if found, else None.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_kde_http_proxy" title="linkcheck.configuration.get_kde_http_proxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_kde_http_proxy</span></code></a>()</p></td>
+<td><p>Return host:port for KDE HTTP proxy if found, else None.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_modules_info" title="linkcheck.configuration.get_modules_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_modules_info</span></code></a>()</p></td>
+<td><p>Return unicode string with detected module info.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_plugin_folders" title="linkcheck.configuration.get_plugin_folders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_plugin_folders</span></code></a>()</p></td>
+<td><p>Get linkchecker plugin folders.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_share_dir" title="linkcheck.configuration.get_share_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_share_dir</span></code></a>()</p></td>
+<td><p>Return absolute path of LinkChecker example configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_share_file" title="linkcheck.configuration.get_share_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_share_file</span></code></a>(filename[, devel_dir])</p></td>
+<td><p>Return a filename in the share directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_system_cert_file" title="linkcheck.configuration.get_system_cert_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_system_cert_file</span></code></a>()</p></td>
+<td><p>Try to find a system-wide SSL certificate file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.get_user_config" title="linkcheck.configuration.get_user_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_config</span></code></a>()</p></td>
+<td><p>Get the user configuration filename.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.get_user_data" title="linkcheck.configuration.get_user_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_data</span></code></a>()</p></td>
+<td><p>Get the user data folder.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.make_userdir" title="linkcheck.configuration.make_userdir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_userdir</span></code></a>(child)</p></td>
+<td><p>Create a child directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.normpath" title="linkcheck.configuration.normpath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normpath</span></code></a>(path)</p></td>
+<td><p>Norm given system path with all available norm or expand functions in os.path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.read_kioslaverc" title="linkcheck.configuration.read_kioslaverc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_kioslaverc</span></code></a>()</p></td>
+<td><p>Read kioslaverc into data dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.resolve_indirect" title="linkcheck.configuration.resolve_indirect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve_indirect</span></code></a>(data, key[, splithosts])</p></td>
+<td><p>Replace name of environment variable with its value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.resolve_kde_settings" title="linkcheck.configuration.resolve_kde_settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolve_kde_settings</span></code></a>(data)</p></td>
+<td><p>Write final proxy configuration values in data dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#linkcheck.configuration.split_hosts" title="linkcheck.configuration.split_hosts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_hosts</span></code></a>(value)</p></td>
+<td><p>Split comma-separated host list.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#linkcheck.configuration.Configuration" title="linkcheck.configuration.Configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Configuration</span></code></a>()</p></td>
+<td><p>Storage for configuration options.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="linkcheck.configuration.Configuration">
+<em class="property">class </em><code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">Configuration</code><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Storage for configuration options. Options can both be given from
+the command line as well as from configuration files.</p>
+<p>Initialize the default options.</p>
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.add_auth">
+<code class="sig-name descname">add_auth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pattern</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.add_auth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.add_auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add given authentication data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.get_connectionlimits">
+<code class="sig-name descname">get_connectionlimits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.get_connectionlimits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.get_connectionlimits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get dict with limit per connection type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.get_user_password">
+<code class="sig-name descname">get_user_password</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.get_user_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.get_user_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get tuple (user, password) from configured authentication
+that matches the given URL.
+Both user and password can be None if not specified, or no
+authentication matches the given URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.logger_add">
+<code class="sig-name descname">logger_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loggerclass</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.logger_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.logger_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new logger type to the known loggers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.logger_new">
+<code class="sig-name descname">logger_new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loggername</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.logger_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.logger_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiate new logger and return it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">files</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read settings from given config files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>LinkCheckerError on syntax errors in the config file(s)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize">
+<code class="sig-name descname">sanitize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure the configuration is consistent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize_logger">
+<code class="sig-name descname">sanitize_logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make logger configuration consistent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize_loginurl">
+<code class="sig-name descname">sanitize_loginurl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize_loginurl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize_loginurl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make login configuration consistent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize_plugins">
+<code class="sig-name descname">sanitize_plugins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize_plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure each plugin is configurable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize_proxies">
+<code class="sig-name descname">sanitize_proxies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize_proxies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize_proxies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to read additional proxy settings which urllib does not
+support.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.sanitize_ssl">
+<code class="sig-name descname">sanitize_ssl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.sanitize_ssl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.sanitize_ssl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use local installed certificate file if available.
+Tries to get system, then certifi, then the own
+installed certificate file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="linkcheck.configuration.Configuration.set_status_logger">
+<code class="sig-name descname">set_status_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">status_logger</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#Configuration.set_status_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.Configuration.set_status_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the status logger.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.add_kde_proxy">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">add_kde_proxy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#add_kde_proxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.add_kde_proxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a proxy value to data dictionary after sanity checks.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.add_kde_setting">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">add_kde_setting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#add_kde_setting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.add_kde_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a KDE proxy setting value to data dictionary.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_certifi_file">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_certifi_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_certifi_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_certifi_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SSL certifications installed by the certifi package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the filename to the cert file</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>ImportError when certifi is not installed or ValueError when
+the file is not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_gnome_proxy">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_gnome_proxy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span><span class="o">=</span><span class="default_value">'HTTP'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_gnome_proxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_gnome_proxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return host:port for a GNOME proxy if found, else None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_kde_config_dir">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_kde_config_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_kde_config_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_kde_config_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return KDE configuration directory or None if not found.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_kde_ftp_proxy">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_kde_ftp_proxy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_kde_ftp_proxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_kde_ftp_proxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return host:port for KDE HTTP proxy if found, else None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_kde_http_proxy">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_kde_http_proxy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_kde_http_proxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_kde_http_proxy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return host:port for KDE HTTP proxy if found, else None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_modules_info">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_modules_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_modules_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_modules_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unicode string with detected module info.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_plugin_folders">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_plugin_folders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_plugin_folders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_plugin_folders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get linkchecker plugin folders. Default is
+“$XDG_DATA_HOME/linkchecker/plugins/”. “~/.linkchecker/plugins/” is also
+supported for backwards compatibility, and is used if both directories
+exist.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_share_dir">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_share_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_share_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_share_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return absolute path of LinkChecker example configuration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_share_file">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_share_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">devel_dir</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_share_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_share_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a filename in the share directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devel_dir</strong> (<em>string</em>) – directory to search when developing</p></li>
+<li><p><strong>filename</strong> (<em>string</em>) – filename to search for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the found filename or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_system_cert_file">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_system_cert_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_system_cert_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_system_cert_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to find a system-wide SSL certificate file.
+:return: the filename to the cert file
+:raises: ValueError when no system cert file could be found</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_user_config">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_user_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_user_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_user_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user configuration filename.
+If the user configuration file does not exist, copy it from the initial
+configuration file, but only if this is not a portable installation.
+Returns path to user config file (which might not exist due to copy
+failures or on portable systems).
+:return configuration filename
+:rtype string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.get_user_data">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">get_user_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#get_user_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.get_user_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user data folder.
+Returns “~/.linkchecker/” if this folder exists,     “$XDG_DATA_HOME/linkchecker” if it does not.
+:rtype string</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.make_userdir">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">make_userdir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">child</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#make_userdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.make_userdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a child directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.normpath">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">normpath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#normpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.normpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Norm given system path with all available norm or expand functions
+in os.path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.read_kioslaverc">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">read_kioslaverc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#read_kioslaverc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.read_kioslaverc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read kioslaverc into data dictionary.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.resolve_indirect">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">resolve_indirect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">splithosts</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#resolve_indirect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.resolve_indirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace name of environment variable with its value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.resolve_kde_settings">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">resolve_kde_settings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#resolve_kde_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.resolve_kde_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write final proxy configuration values in data dictionary.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="linkcheck.configuration.split_hosts">
+<code class="sig-prename descclassname">linkcheck.configuration.</code><code class="sig-name descname">split_hosts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/linkcheck/configuration.html#split_hosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linkcheck.configuration.split_hosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split comma-separated host list.</p>
+</dd></dl>
+
+<p class="rubric">Modules</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="linkcheck.configuration.confparse.html#module-linkcheck.configuration.confparse" title="linkcheck.configuration.confparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linkcheck.configuration.confparse</span></code></a></p></td>
+<td><p>Parse configuration files</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="linkcheck.configuration.confparse.html" class="btn btn-neutral float-right" title="linkcheck.configuration.confparse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linkcheck.cmdline.html" class="btn btn-neutral float-left" title="linkcheck.cmdline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

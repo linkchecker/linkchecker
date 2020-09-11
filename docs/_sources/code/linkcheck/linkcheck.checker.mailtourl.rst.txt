@@ -1,0 +1,38 @@
+linkcheck.checker.mailtourl
+===========================
+
+.. automodule:: linkcheck.checker.mailtourl
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      getaddresses
+      is_literal
+      is_missing_quote
+      is_quoted
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      MailtoUrl
+   
+   
+
+   
+   
+   
+
+
+

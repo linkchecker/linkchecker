@@ -1,0 +1,29 @@
+linkcheck.logger.none
+=====================
+
+.. automodule:: linkcheck.logger.none
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NoneLogger
+   
+   
+
+   
+   
+   
+
+
+

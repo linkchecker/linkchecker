@@ -1,0 +1,36 @@
+linkcheck.logger.sql
+====================
+
+.. automodule:: linkcheck.logger.sql
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      intify
+      sqlify
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SQLLogger
+   
+   
+
+   
+   
+   
+
+
+

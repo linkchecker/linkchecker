@@ -1,0 +1,35 @@
+linkcheck.dummy
+===============
+
+.. automodule:: linkcheck.dummy
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      dummy
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Dummy
+   
+   
+
+   
+   
+   
+
+
+

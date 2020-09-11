@@ -1,0 +1,37 @@
+linkcheck.better\_exchook2
+==========================
+
+.. automodule:: linkcheck.better_exchook2
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      better_exchook
+      fallback_findfile
+      grep_full_py_identifiers
+      install
+      output
+      output_limit
+      parse_py_statement
+      pp_extra_info
+      pretty_print
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

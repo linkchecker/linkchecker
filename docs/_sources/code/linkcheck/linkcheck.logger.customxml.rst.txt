@@ -1,0 +1,29 @@
+linkcheck.logger.customxml
+==========================
+
+.. automodule:: linkcheck.logger.customxml
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CustomXMLLogger
+   
+   
+
+   
+   
+   
+
+
+
