@@ -378,7 +378,7 @@ setup(
     python_requires=">= 3.6",
     install_requires=[
         "requests >= 2.4",
-        "dnspython",
+        "dnspython >= 2.0",
         "beautifulsoup4",
         "pyxdg",
     ],
