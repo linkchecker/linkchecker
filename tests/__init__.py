@@ -173,6 +173,9 @@ need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 @lru_cache(1)
 def has_biplist():
     """Test if biplist is available."""
+    if sys.version_info >= (3, 9):
+        return False
+
     try:
         import biplist
 
