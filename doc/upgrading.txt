@@ -2,7 +2,7 @@ Upgrading
 =========
 Migrating from 9.x to 10.0
 --------------------------
-Python 3.5 or newer is required.
+Python 3.6 or newer is required.
 
 The Python Beautiful Soup package is now required. A C compiler is not needed
 for building.

@@ -32,7 +32,7 @@ See `doc/install.txt`_ in the source code archive for general information. Excep
 
 .. _doc/install.txt: doc/install.txt
 
-Python 3.5 or later is needed.
+Python 3.6 or later is needed.
 
 The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
 
