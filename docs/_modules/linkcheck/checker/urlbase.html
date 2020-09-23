@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>linkcheck.checker.urlbase &mdash; LinkChecker 2020-08-30 documentation</title>
+  <title>linkcheck.checker.urlbase &mdash; LinkChecker 2020-09-23 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                2020-08-30
+                2020-09-23
               </div>
             
           
@@ -188,6 +188,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#viruscheck">VirusCheck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#pdfparser">PdfParser</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#wordparser">WordParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../man/linkcheckerrc.html#markdowncheck">MarkdownCheck</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../man/linkcheckerrc.html#warnings">WARNINGS</a></li>
@@ -773,11 +774,13 @@
 
 <div class="viewcode-block" id="UrlBase.set_cache_url"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.urlbase.html#linkcheck.checker.urlbase.UrlBase.set_cache_url">[docs]</a>    <span class="k">def</span> <span class="nf">set_cache_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the URL to be used for caching.&quot;&quot;&quot;</span>
-        <span class="c1"># remove anchor from cached target url since we assume</span>
-        <span class="c1"># URLs with different anchors to have the same content</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span> <span class="o">=</span> <span class="n">urlutil</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="s2">&quot;AnchorCheck&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggregate</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;enabledplugins&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># remove anchor from cached target url since we assume</span>
+            <span class="c1"># URLs with different anchors to have the same content</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span> <span class="o">=</span> <span class="n">urlutil</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">urlparts</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">])</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">LOG_CHECK</span><span class="p">,</span> <span class="s2">&quot;cache_url &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_url</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="UrlBase.check_syntax"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.checker.urlbase.html#linkcheck.checker.urlbase.UrlBase.check_syntax">[docs]</a>    <span class="k">def</span> <span class="nf">check_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
