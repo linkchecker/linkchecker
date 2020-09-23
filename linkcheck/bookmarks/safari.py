@@ -14,6 +14,8 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+import sys
+
 import plistlib
 
 try:
@@ -21,6 +23,11 @@ try:
 
     has_biplist = True
 except ImportError:
+    has_biplist = False
+
+if sys.version_info >= (3, 9):
+    # Although the biplist module imports on Python 3.9 it is not compatible:
+    # https://bitbucket.org/wooster/biplist/issues/12
     has_biplist = False
 
 

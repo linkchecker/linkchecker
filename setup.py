@@ -27,8 +27,8 @@ Change it very carefully.
 """
 import sys
 
-if sys.version_info < (3, 5, 0, "final", 0):
-    raise SystemExit("This program requires Python 3.5 or later.")
+if sys.version_info < (3, 6, 0, "final", 0):
+    raise SystemExit("This program requires Python 3.6 or later.")
 import os
 import re
 import stat
@@ -368,17 +368,17 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
-    python_requires=">= 3.5",
+    python_requires=">= 3.6",
     install_requires=[
         "requests >= 2.4",
-        "dnspython",
+        "dnspython >= 2.0",
         "beautifulsoup4",
         "pyxdg",
     ],

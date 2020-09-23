@@ -319,7 +319,7 @@ class MailtoUrl(urlbase.UrlBase):
         username, domain = mail.rsplit('@', 1)
         log.debug(LOG_CHECK, "looking up MX mailhost %r", domain)
         try:
-            answers = resolver.query(domain, 'MX')
+            answers = resolver.resolve(domain, 'MX', search=True)
         except DNSException:
             answers = []
         if len(answers) == 0:

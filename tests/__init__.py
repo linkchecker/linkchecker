@@ -22,6 +22,7 @@ import pytest
 from contextlib import contextmanager
 from functools import lru_cache, wraps
 from linkcheck import LinkCheckerInterrupt
+from linkcheck.bookmarks.safari import has_biplist as bookmarks_has_biplist
 
 
 basedir = os.path.dirname(__file__)
@@ -173,12 +174,7 @@ need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 @lru_cache(1)
 def has_biplist():
     """Test if biplist is available."""
-    try:
-        import biplist
-
-        return True
-    except ImportError:
-        return False
+    return bookmarks_has_biplist
 
 
 need_biplist = _need_func(has_biplist, "biplist")

@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2014 Bastian Kleineidam
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker \n"
+"Project-Id-Version: LinkChecker 2020-09-14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-22 16:37+0100\n"
+"POT-Creation-Date: 2020-09-14 19:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../src/index.rst:10
-msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.5 or later."
+msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.6 or later."
 msgstr ""
 
 #: ../../src/index.rst:15
