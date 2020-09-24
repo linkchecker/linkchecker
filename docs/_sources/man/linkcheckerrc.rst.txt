@@ -503,6 +503,14 @@ WordParser
 Parse Word files for URLs to check. Needs the :pypi:`pywin32` Python
 extension installed.
 
+MarkdownCheck
+^^^^^^^^^^^^^
+
+Parse Markdown files for URLs to check.
+
+**filename_re=**\ *REGEX*
+    Regular expression matching the names of Markdown files.
+
 WARNINGS
 --------
 
