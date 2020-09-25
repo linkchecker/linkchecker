@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2014 Bastian Kleineidam
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker \n"
+"Project-Id-Version: LinkChecker 2020-09-25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-22 16:37+0100\n"
+"POT-Creation-Date: 2020-09-25 19:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -659,7 +659,7 @@ msgid "**linkchecker-out.**\\ *TYPE* - default logger file output name"
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:531
-#: ../../src/man/linkcheckerrc.rst:542
+#: ../../src/man/linkcheckerrc.rst:550
 msgid "SEE ALSO"
 msgstr ""
 
@@ -832,7 +832,7 @@ msgid "filtering"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:106
-msgid "**ignore=**\\ *REGEX* (MULTILINE)"
+msgid "**ignore=**\\ *REGEX* (`MULTILINE`_)"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:106
@@ -856,7 +856,7 @@ msgid "Regular expression to add more URLs recognized as internal links. Default
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:118
-msgid "**nofollow=**\\ *REGEX* (MULTILINE)"
+msgid "**nofollow=**\\ *REGEX* (`MULTILINE`_)"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:117
@@ -876,7 +876,7 @@ msgid "authentication"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:138
-msgid "**entry=**\\ *REGEX* *USER* [*PASS*] (MULTILINE)"
+msgid "**entry=**\\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:128
@@ -908,7 +908,7 @@ msgid "The name attribute of the password input element. Default: **password**."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:155
-msgid "**loginextrafields=**\\ *NAME*\\ **:**\\ *VALUE* (MULTILINE)"
+msgid "**loginextrafields=**\\ *NAME*\\ **:**\\ *VALUE* (`MULTILINE`_)"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:152
@@ -1548,125 +1548,141 @@ msgid "Parse Word files for URLs to check. Needs the :pypi:`pywin32` Python exte
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:507
-msgid "WARNINGS"
+msgid "MarkdownCheck"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:509
-msgid "The following warnings are recognized in the 'ignorewarnings' config file entry:"
+msgid "Parse Markdown files for URLs to check."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:512
-msgid "**file-missing-slash**"
+msgid "**filename_re=**\\ *REGEX*"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:513
-msgid "The file: URL is missing a trailing slash."
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:514
-msgid "**file-system-path**"
+#: ../../src/man/linkcheckerrc.rst:512
+msgid "Regular expression matching the names of Markdown files."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:515
-msgid "The file: path is not the same as the system specific path."
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:516
-msgid "**ftp-missing-slash**"
+msgid "WARNINGS"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:517
-msgid "The ftp: URL is missing a trailing slash."
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:518
-msgid "**http-cookie-store-error**"
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:519
-msgid "An error occurred while storing a cookie."
+msgid "The following warnings are recognized in the 'ignorewarnings' config file entry:"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:520
-msgid "**http-empty-content**"
+msgid "**file-missing-slash**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:521
-msgid "The URL had no content."
+msgid "The file: URL is missing a trailing slash."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:522
-msgid "**mail-no-mx-host**"
+msgid "**file-system-path**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:523
-msgid "The mail MX host could not be found."
+msgid "The file: path is not the same as the system specific path."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:524
-msgid "**nntp-no-newsgroup**"
+msgid "**ftp-missing-slash**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:525
-msgid "The NNTP newsgroup could not be found."
+msgid "The ftp: URL is missing a trailing slash."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:526
-msgid "**nntp-no-server**"
+msgid "**http-cookie-store-error**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:527
-msgid "No NNTP server was found."
+msgid "An error occurred while storing a cookie."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:528
-msgid "**url-content-size-zero**"
+msgid "**http-empty-content**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:529
-msgid "The URL content size is zero."
+msgid "The URL had no content."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:530
-msgid "**url-content-too-large**"
+msgid "**mail-no-mx-host**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:531
-msgid "The URL content size is too large."
+msgid "The mail MX host could not be found."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:532
-msgid "**url-effective-url**"
+msgid "**nntp-no-newsgroup**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:533
-msgid "The effective URL is different from the original."
+msgid "The NNTP newsgroup could not be found."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:534
-msgid "**url-error-getting-content**"
+msgid "**nntp-no-server**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:535
-msgid "Could not get the content of the URL."
+msgid "No NNTP server was found."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:536
-msgid "**url-obfuscated-ip**"
+msgid "**url-content-size-zero**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:537
-msgid "The IP is obfuscated."
+msgid "The URL content size is zero."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:538
+msgid "**url-content-too-large**"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:539
-msgid "**url-whitespace**"
+msgid "The URL content size is too large."
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:539
-msgid "The URL contains leading or trailing whitespace."
+#: ../../src/man/linkcheckerrc.rst:540
+msgid "**url-effective-url**"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:541
+msgid "The effective URL is different from the original."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:542
+msgid "**url-error-getting-content**"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:543
+msgid "Could not get the content of the URL."
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:544
+msgid "**url-obfuscated-ip**"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:545
+msgid "The IP is obfuscated."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:547
+msgid "**url-whitespace**"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:547
+msgid "The URL contains leading or trailing whitespace."
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:552
 msgid ":manpage:`linkchecker(1)`"
 msgstr ""
