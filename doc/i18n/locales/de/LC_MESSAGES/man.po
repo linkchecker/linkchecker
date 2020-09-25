@@ -1402,7 +1402,7 @@ msgstr "filtering"
 
 #: ../../src/man/linkcheckerrc.rst:106
 msgid "**ignore=**\\ *REGEX* (`MULTILINE`_)"
-msgstr ""
+msgstr "**ignore=**\\ *REGEX* (`MULTILINE`_)"
 
 # type: Plain text
 #: ../../src/man/linkcheckerrc.rst:106
@@ -1445,7 +1445,7 @@ msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:118
 msgid "**nofollow=**\\ *REGEX* (`MULTILINE`_)"
-msgstr ""
+msgstr "**nofollow=**\\ *REGEX* (`MULTILINE`_)"
 
 # type: Plain text
 #: ../../src/man/linkcheckerrc.rst:117
@@ -1473,7 +1473,7 @@ msgstr "authentication"
 
 #: ../../src/man/linkcheckerrc.rst:138
 msgid "**entry=**\\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)"
-msgstr ""
+msgstr "**entry=**\\ *REGEX* *BENUTZER* [*PASSWORT*] (`MULTILINE`_)"
 
 #: ../../src/man/linkcheckerrc.rst:128
 msgid ""
@@ -1525,9 +1525,8 @@ msgstr "Der Name für das Passwort CGI-Feld. Der Standardname ist **password**."
 
 # type: TP
 #: ../../src/man/linkcheckerrc.rst:155
-#, fuzzy
 msgid "**loginextrafields=**\\ *NAME*\\ **:**\\ *VALUE* (`MULTILINE`_)"
-msgstr "**loginextrafields=**\\ *NAME*\\ **:**\\ *WERT* (MULTILINE)"
+msgstr "**loginextrafields=**\\ *NAME*\\ **:**\\ *WERT* (`MULTILINE`_)"
 
 #: ../../src/man/linkcheckerrc.rst:152
 msgid ""
@@ -2374,9 +2373,8 @@ msgstr ""
 
 # type: TP
 #: ../../src/man/linkcheckerrc.rst:512
-#, fuzzy
 msgid "**filename_re=**\\ *REGEX*"
-msgstr "**filename=**\\ *STRING*"
+msgstr "**filename_re=**\\ *REGEX*"
 
 #: ../../src/man/linkcheckerrc.rst:512
 msgid "Regular expression matching the names of Markdown files."
