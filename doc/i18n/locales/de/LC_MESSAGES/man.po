@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: linkchecker 3.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-22 16:37+0100\n"
-"PO-Revision-Date: 2020-08-22 17:27+0100\n"
+"PO-Revision-Date: 2020-09-25 19:04+0100\n"
 "Last-Translator: Chris Mayo <aklhfex@gmail.com>\n"
 "Language: de_DE\n"
 "Language-Team: German - Germany <>\n"
@@ -338,15 +338,11 @@ msgstr ""
 
 # type: Plain text
 #: ../../src/man/linkchecker.rst:193
-#, fuzzy
 msgid ""
 "URLs matching the given regular expression will only be syntax checked. This "
 "option can be given multiple times. See section `REGULAR EXPRESSIONS`_ for "
 "more info."
 msgstr ""
-"URLs matching the given regular expression will only be syntax checked. This "
-"option can be given multiple times. See section `REGULAR EXPRESSIONS`_ for "
-"more info."
 
 # type: Plain text
 #: ../../src/man/linkchecker.rst:199
@@ -1170,9 +1166,8 @@ msgstr ""
 "`linkchecker(1)` erklärt. Kommandozeilenoption: :option:`--cookiefile`"
 
 #: ../../src/man/linkcheckerrc.rst:26
-#, fuzzy
 msgid "**debugmemory=**\\ [**0**\\ \\|\\ **1**]"
-msgstr "**quiet=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**debugmemory=**\\ [**0**\\ \\|\\ **1**]"
 
 #: ../../src/man/linkcheckerrc.rst:25
 msgid ""
@@ -1368,9 +1363,8 @@ msgid ""
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:96
-#, fuzzy
 msgid "**robotstxt=**\\ [**0**\\ \\|\\ **1**]"
-msgstr "**verbose=**\\ [**0**\\ \\|\\ **1**]"
+msgstr "**robotstxt=**\\ [**0**\\ \\|\\ **1**]"
 
 #: ../../src/man/linkcheckerrc.rst:94
 msgid ""
@@ -1990,7 +1984,7 @@ msgstr "Setze HTML Gültigkeitsfarbe. Standard ist **#3ba557**."
 
 #: ../../src/man/linkcheckerrc.rst:316
 msgid "failures"
-msgstr ""
+msgstr "failures"
 
 # type: SS
 #: ../../src/man/linkcheckerrc.rst:324
