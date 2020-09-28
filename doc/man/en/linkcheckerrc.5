@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "September 14, 2020" "2020-09-14" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "September 25, 2020" "2020-09-25" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .
@@ -141,7 +141,7 @@ Command line option: none
 .SS filtering
 .INDENT 0.0
 .TP
-\fBignore=\fP\fIREGEX\fP (MULTILINE)
+\fBignore=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Only check syntax of URLs matching the given regular expressions.
 Command line option: \fB\-\-ignore\-url\fP
 .TP
@@ -155,7 +155,7 @@ Regular expression to add more URLs recognized as internal links.
 Default is that URLs given on the command line are internal.
 Command line option: none
 .TP
-\fBnofollow=\fP\fIREGEX\fP (MULTILINE)
+\fBnofollow=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Check but do not recurse into URLs matching the given regular
 expressions.
 Command line option: \fB\-\-no\-follow\-url\fP
@@ -167,7 +167,7 @@ Command line option: \fB\-\-check\-extern\fP
 .SS authentication
 .INDENT 0.0
 .TP
-\fBentry=\fP\fIREGEX\fP \fIUSER\fP [\fIPASS\fP] (MULTILINE)
+\fBentry=\fP\fIREGEX\fP \fIUSER\fP [\fIPASS\fP] (\fI\%MULTILINE\fP)
 Provide individual username/password pairs for different links. In
 addtion to a single login page specified with \fBloginurl\fP multiple
 FTP, HTTP (Basic Authentication) and telnet links are supported.
@@ -195,7 +195,7 @@ The name attribute of the username input element. Default: \fBlogin\fP\&.
 \fBloginpasswordfield=\fP\fISTRING\fP
 The name attribute of the password input element. Default: \fBpassword\fP\&.
 .TP
-\fBloginextrafields=\fP\fINAME\fP\fB:\fP\fIVALUE\fP (MULTILINE)
+\fBloginextrafields=\fP\fINAME\fP\fB:\fP\fIVALUE\fP (\fI\%MULTILINE\fP)
 Optionally the name attributes of any additional input elements and
 the values to populate them with. Note that these are submitted
 without checking whether matching input elements exist in the HTML
