@@ -1,9 +1,9 @@
-LinkChecker
+broklink checker
 ============
 
 |Build Status|_ |License|_
 
-.. |Build Status| image:: https://travis-ci.com/linkchecker/linkchecker.svg?branch=master
+.. |Build Status| image:: https://travis-ci.com/broklinkchecker/broklinkchecker.svg?branch=master
 .. _Build Status: https://travis-ci.com/linkchecker/linkchecker
 .. |License| image:: https://img.shields.io/badge/license-GPL2-d49a6a.svg
 .. _License: https://opensource.org/licenses/GPL-2.0
@@ -34,11 +34,11 @@ See `doc/install.txt`_ in the source code archive for general information. Excep
 
 Python 3.6 or later is needed.
 
-The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
+The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/broklinkchecker/broklinkchecker/issues/359>`_.
 
 Usage
 ------
-Execute ``linkchecker https://www.example.com``.
+Execute ``broklinkchecker https://www.example.com``.
 For other options see ``linkchecker --help``.
 
 Docker usage
@@ -50,8 +50,8 @@ If you do not want to install any additional libraries/dependencies you can use 
 
 Example for external web site check::
 
-  docker run --rm -it -u $(id -u):$(id -g) linkchecker/linkchecker --verbose https://www.example.com
+  docker run --rm -it -u $(id -u):$(id -g) broklinkchecker/broklinkchecker--verbose https://www.example.com
 
 Local HTML file check::
 
-  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt linkchecker/linkchecker --verbose index.html
+  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt broklinkchecker/broklinkchecker --verbose index.html
