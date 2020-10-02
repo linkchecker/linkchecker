@@ -1,9 +1,37 @@
 10.0 "" (released xx.xx.xxxx)
 
+Features:
+- Uses Python 3
+- C extension modules have been replaced, now uses Beautiful Soup
+- Documentation converted to reStructuredText and generated with Sphinx
+
 Changes:
 - cmdline: Remove options replaced by plugins and made ineffective in 9.0
-- configuration: Update proxy settings support for GNOME 3.
+- configuration: Update proxy settings support for GNOME 3 and KDE 5
+- configuration: login entries must now match the case of form element names
 - logging: blacklist has been renamed to failures
+- checking: Handle HTTP status code 429: Too Many Requests with
+  a new warning: WARN_URL_RATE_LIMITED, instead of an error
+- checking: Use timeout when fetching login forms and robots.txt
+- checking: login forms with only one field are supported
+- checking: slack and whatsapp added to the list of ignored schemes
+- tests: Test coverage has been increased
+- dnspython and miniboa are no longer included
+- Custom MANIFEST check replaced with check-manifest
+- Code now passes flake8 checks
+
+Fixes:
+- configuration: status=0 is no longer ignored
+- logging: Fix CSV logger not recognising base part setting
+- logging: Fix CSV output containing increasing number of null byte characters.
+- checking: Fix treating data: URIs in srcset values as links
+- checking: Fix critical exception if srcset value ends with a comma
+- checking: Fix critical exception when parsing a URL with a ]
+- plugins: The AnchorCheck plugin is working again
+- plugins: The W3C validation API has changed, CssSyntaxCheck has been updated,
+  HtmlSyntaxCheck plugin is disabled
+- doc: Multiple man page and other documentation updates
+
 
 9.4 "just passing by" (released 12.4.2018)
 
