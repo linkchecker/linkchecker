@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>linkcheck.bookmarks.safari &mdash; LinkChecker 2020-09-23 documentation</title>
+  <title>linkcheck.bookmarks.safari &mdash; LinkChecker 2020-10-02 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                2020-09-23
+                2020-10-02
               </div>
             
           
@@ -423,6 +423,8 @@
 <span class="c1"># with this program; if not, write to the Free Software Foundation, Inc.,</span>
 <span class="c1"># 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
 
+<span class="kn">import</span> <span class="nn">sys</span>
+
 <span class="kn">import</span> <span class="nn">plistlib</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -430,6 +432,11 @@
 
     <span class="n">has_biplist</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">has_biplist</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+    <span class="c1"># Although the biplist module imports on Python 3.9 it is not compatible:</span>
+    <span class="c1"># https://bitbucket.org/wooster/biplist/issues/12</span>
     <span class="n">has_biplist</span> <span class="o">=</span> <span class="kc">False</span>
 
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>linkcheck.logger.text &mdash; LinkChecker 2020-09-23 documentation</title>
+  <title>linkcheck.logger.text &mdash; LinkChecker 2020-10-02 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                2020-09-23
+                2020-10-02
               </div>
             
           
@@ -504,7 +504,8 @@
 
 <div class="viewcode-block" id="TextLogger.write_intro"><a class="viewcode-back" href="../../../code/linkcheck/linkcheck.logger.text.html#linkcheck.logger.text.TextLogger.write_intro">[docs]</a>    <span class="k">def</span> <span class="nf">write_intro</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Log introduction text.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">writeln</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">AppInfo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeln</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">App</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeln</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">Copyright</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">writeln</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">Freeware</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">writeln</span><span class="p">(</span>
             <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Get the newest version at </span><span class="si">%(url)s</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">configuration</span><span class="o">.</span><span class="n">Url</span><span class="p">}</span>
