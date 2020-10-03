@@ -53,7 +53,7 @@ checking
     Time to wait for checks to finish after the user aborts the first
     time (with Ctrl-C or the abort button). The default abort timeout is
     300 seconds.
-    Command line option: :option:`--timeout`
+    Command line option: none
 **useragent=**\ *STRING*
     Specify the User-Agent string to send to the HTTP server, for
     example "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is
