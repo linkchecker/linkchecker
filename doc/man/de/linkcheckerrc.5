@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "September 14, 2020" "2020-09-14" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "Oktober 02, 2020" "2020-10-02" "LinkChecker"
 .SH NAME
 linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .
@@ -64,7 +64,7 @@ Setze den Timeout für TCP\-Verbindungen in Sekunden. Der Standard Timeout ist 6
 Time to wait for checks to finish after the user aborts the first
 time (with Ctrl\-C or the abort button). The default abort timeout is
 300 seconds.
-Command line option: \fB\-\-timeout\fP
+Command line option: none
 .TP
 \fBuseragent=\fP\fISTRING\fP
 Gibt den User\-Agent an, der zu HTTP\-Servern geschickt wird, z.B. "Mozilla/4.0". Der Standard ist "LinkChecker/X.Y", wobei X.Y die aktuelle Version von LinkChecker ist. Kommandozeilenoption: \fB\-\-user\-agent\fP
@@ -108,7 +108,7 @@ Command line option: none
 .SS filtering
 .INDENT 0.0
 .TP
-\fBignore=\fP\fIREGEX\fP (MULTILINE)
+\fBignore=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Prüfe lediglich die Syntax von URLs, welche dem angegebenen regulären Ausdruck entsprechen. Kommandozeilenoption: \fB\-\-ignore\-url\fP
 .TP
 \fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
@@ -117,7 +117,7 @@ Ignoriere die kommagetrennte Liste von Warnungen. Siehe \fI\%WARNINGS\fP für di
 \fBinternlinks=\fP\fIREGEX\fP
 Regulärer Ausdruck, um mehr URLs als interne Verknüpfungen hinzuzufügen. Standard ist dass URLs der Kommandozeile als intern gelten. Kommandozeilenoption: none
 .TP
-\fBnofollow=\fP\fIREGEX\fP (MULTILINE)
+\fBnofollow=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Prüfe URLs die auf den regulären Ausdruck zutreffen, aber führe keine Rekursion durch. Kommandozeilenoption: \fB\-\-no\-follow\-url\fP
 .TP
 \fBcheckextern=\fP[\fB0\fP|\fB1\fP]
