@@ -16,6 +16,7 @@ Changes:
 - checking: login forms with only one field are supported
 - checking: slack and whatsapp added to the list of ignored schemes
 - tests: Test coverage has been increased
+- biplist is no longer used because plistlib now supports binary files
 - dnspython and miniboa are no longer included
 - Custom MANIFEST check replaced with check-manifest
 - Code now passes flake8 checks
