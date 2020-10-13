@@ -53,7 +53,10 @@ The Web Site is hosted by GitHub Pages from the docs/ directory of the gh-pages 
 
 /docs is a fixed GitHub pages location and contains ``.nojekyll``.
 
-To create a topic branch with updated documentation suitable for a PR:
+When updates to LinkChecker are pushed, the web site is built and published
+automatically by a GitHub action ``.github/workflows/publish-pages.yml``.
+
+For information, a manual process to build and publish the web site would look like:
 
     git checkout master
 
