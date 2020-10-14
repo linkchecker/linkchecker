@@ -55,18 +55,3 @@ The Web Site is hosted by GitHub Pages from the docs/ directory of the gh-pages 
 
 When updates to LinkChecker are pushed, the web site is built and published
 automatically by a GitHub action ``.github/workflows/publish-pages.yml``.
-
-For information, a manual process to build and publish the web site would look like:
-
-    git checkout master
-
-    ./setup.py build  # for copyright, author and version info
-    make -C doc code
-    make -C doc html
-
-    git checkout -b <branch> gh-pages
-
-    rm -rf docs/*
-    cp -a doc/html/* docs/
-
-    git commit -a -m "Update documentation"
