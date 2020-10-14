@@ -1,4 +1,4 @@
-:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/install.rst
+:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/index.rst
 
 .. title:: LinkChecker
 
