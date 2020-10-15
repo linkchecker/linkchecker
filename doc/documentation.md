@@ -14,6 +14,13 @@ sphinx_epytext
 
 sphinx_rtd_theme
 
+Configuration
+-------------
+
+Before building either man pages or HTML, generate ``_LinkChecker_configdata.py``
+containing copyright, author and version with:
+
+``linkchecker $ ./setup.py build``
 
 Man Pages
 ---------
