@@ -1,0 +1,38 @@
+name: Publish LinkChecker Documentation on GitHub Pages
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  run:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ubuntu packages
+        run: sudo apt install graphviz
+
+      # Ensure sphinx-autogen is installed in PATH
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Install Python packages
+        run: >
+            pip install dnspython beautifulsoup4 pyxdg requests \
+                        sphinx sphinx_epytext sphinx_rtd_theme
+
+      - name: Build
+        run: |
+            python3 setup.py build
+            make -C doc code
+            make -C doc html
+
+      - name: Publish
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/html
+          commit_message: ${{ github.event.head_commit.message }}

@@ -14,6 +14,13 @@ sphinx_epytext
 
 sphinx_rtd_theme
 
+Configuration
+-------------
+
+Before building either man pages or HTML, generate ``_LinkChecker_configdata.py``
+containing copyright, author and version with:
+
+``linkchecker $ ./setup.py build``
 
 Man Pages
 ---------
@@ -53,17 +60,5 @@ The Web Site is hosted by GitHub Pages from the docs/ directory of the gh-pages 
 
 /docs is a fixed GitHub pages location and contains ``.nojekyll``.
 
-To create a topic branch with updated documentation suitable for a PR:
-
-    git checkout master
-
-    ./setup.py build  # for copyright, author and version info
-    make -C doc code
-    make -C doc html
-
-    git checkout -b <branch> gh-pages
-
-    rm -rf docs/*
-    cp -a doc/html/* docs/
-
-    git commit -a -m "Update documentation"
+When updates to LinkChecker are pushed, the web site is built and published
+automatically by a GitHub action ``.github/workflows/publish-pages.yml``.
