@@ -14,21 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import sys
-
 import plistlib
-
-try:
-    import biplist
-
-    has_biplist = True
-except ImportError:
-    has_biplist = False
-
-if sys.version_info >= (3, 9):
-    # Although the biplist module imports on Python 3.9 it is not compatible:
-    # https://bitbucket.org/wooster/biplist/issues/12
-    has_biplist = False
 
 
 def parse_bookmark_data(data):
@@ -39,15 +25,11 @@ def parse_bookmark_data(data):
 
 
 def get_plist_data_from_string(data):
-    """Parse plist data for a string. Tries biplist, falling back to
-    plistlib."""
-    if has_biplist:
-        return biplist.readPlistFromString(data)
-    # fall back to normal plistlist
+    """Parse plist data for a string."""
     try:
         return plistlib.loads(data)
     except Exception:
-        # not parseable (eg. not well-formed, or binary)
+        # not parseable (eg. not well-formed)
         return {}
 
 
