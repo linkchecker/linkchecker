@@ -123,6 +123,9 @@ class RobotFileParser:
             # no network or other failure
             self.allow_all = True
             log.debug(LOG_CHECK, "%r allow all (request error)", self.url)
+        except LookupError:
+            self.allow_all = True
+            log.debug(LOG_CHECK, "%r allow all (lookup error)", self.url)
 
     def _add_entry(self, entry):
         """Add a parsed entry to entry list.
