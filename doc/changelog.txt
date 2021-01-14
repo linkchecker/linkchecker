@@ -1,4 +1,4 @@
-10.0 "" (released xx.xx.xxxx)
+10.0 (released 15.1.2021)
 
 Features:
 - Uses Python 3
