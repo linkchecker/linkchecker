@@ -34,7 +34,7 @@ See `doc/install.txt`_ in the source code archive for general information. Excep
 
 Python 3.6 or later is needed.
 
-The version in the pip repository is old. Instead, you can use pip to install the latest release from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``. See `#359 <https://github.com/linkchecker/linkchecker/issues/359>`_.
+The version in the pip repository may be old. Instead, you can use pip to install the latest code from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``.
 
 Usage
 ------

@@ -56,9 +56,10 @@ The files are saved in doc/html.
 Publishing the Web Site
 -----------------------
 
-The Web Site is hosted by GitHub Pages from the docs/ directory of the gh-pages branch.
+The Web Site is hosted by GitHub Pages from the gh-pages branch.
 
-/docs is a fixed GitHub pages location and contains ``.nojekyll``.
+A ``.nojekyll`` file is present to ensure folders beginning with an underscore
+are published.
 
 When updates to LinkChecker are pushed, the web site is built and published
 automatically by a GitHub action ``.github/workflows/publish-pages.yml``.

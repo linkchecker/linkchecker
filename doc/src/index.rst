@@ -37,6 +37,9 @@ This check will validate recursively all pages starting with
 pointing outside of *www.example.org* will be checked but not recursed
 into.
 
+Find out more from the manual pages :doc:`man/linkchecker` and
+:doc:`man/linkcheckerrc`.
+
 Features
 ---------
 
@@ -54,8 +57,6 @@ Features
 - :ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks. Currently available are
   HTML and CSS syntax checks, Antivirus checks, and more.
 - Different interfaces: command line and web interface
-- ... and a lot more check options documented in the
-  :doc:`man/linkchecker` manual page.
 
 Screenshots
 ------------
