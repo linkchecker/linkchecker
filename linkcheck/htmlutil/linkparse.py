@@ -65,6 +65,10 @@ LinkTags = {
 # HTML anchor tags
 AnchorTags = {
     'a': ['name'],
+    'h1': ['id'],
+    'h2': ['id'],
+    'h3': ['id'],
+    'h4': ['id'],
     None: ['id'],
 }
 
