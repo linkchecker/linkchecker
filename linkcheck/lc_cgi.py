@@ -181,6 +181,7 @@ def get_configuration(form, out):
     config = configuration.Configuration()
     config["recursionlevel"] = int(formvalue(form, "level"))
     config["logger"] = config.logger_new('html', fd=out, encoding=HTML_ENCODING)
+    config["status"] = False
     config["threads"] = 2
     if "anchors" in form:
         config["enabledplugins"].append("AnchorCheck")
