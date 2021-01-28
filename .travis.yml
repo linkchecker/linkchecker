@@ -7,8 +7,6 @@ python:
   - "3.9"
 jobs:
   include:
-    - python: "3.6"
-      env: TOXENV=oldbs4
     - name: flake8
       env: TOXENV=flake8
       before_script:
