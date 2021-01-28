@@ -354,6 +354,7 @@ setup(
     url="https://linkchecker.github.io/linkchecker/",
     license="GPL",
     long_description=get_long_description(),
+    long_description_content_type="text/x-rst",
     distclass=MyDistribution,
     cmdclass={
         "install_lib": MyInstallLib,
