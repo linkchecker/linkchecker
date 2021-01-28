@@ -1,3 +1,11 @@
+10.0.1 (released 29.1.2021)
+
+Changes:
+- Minimum supported version of Beautiful Soup is 4.8.1
+
+Fixes:
+- wsgi: Fix failure due to status logging being enabled
+
 10.0 (released 15.1.2021)
 
 Features:
