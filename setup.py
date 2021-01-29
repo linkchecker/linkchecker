@@ -45,7 +45,7 @@ from distutils import util, log
 from distutils.core import Distribution
 
 # the application version
-AppVersion = "10.0.0"
+AppVersion = "10.0.1"
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
@@ -354,6 +354,7 @@ setup(
     url="https://linkchecker.github.io/linkchecker/",
     license="GPL",
     long_description=get_long_description(),
+    long_description_content_type="text/x-rst",
     distclass=MyDistribution,
     cmdclass={
         "install_lib": MyInstallLib,
