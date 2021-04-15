@@ -157,10 +157,10 @@ class LinkFinder:
                 base = self.base_ref
             # note: value can be None
             value = attrs.get(attr)
-            if tag == 'link' and attrs.get('rel') == 'dns-prefetch':
+            if tag == 'link' and ('dns-prefetch' in attrs.get('rel') or 'preconnect' in attrs.get('rel')):
                 if ':' in value:
                     value = value.split(':', 1)[1]
-                value = 'dns:' + value.rstrip('/')
+                value = 'dns:' + value.strip('/')
             # parse tag for URLs
             self.parse_tag(tag, attr, value, name, base, lineno, column)
         log.debug(LOG_CHECK, "LinkFinder finished tag %s", tag)
