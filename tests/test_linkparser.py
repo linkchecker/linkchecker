@@ -60,6 +60,22 @@ class TestLinkparser(unittest.TestCase):
         url = " alink "
         self._test_one_link(content % url, url)
 
+    def test_rel_parsing(self):
+        # Test <link rel> parsing.
+        content = '<link rel="%s" href="%s">'
+        rel = "dns-prefetch"
+        url = "https://alink"
+        expected = "dns:alink"
+        self._test_one_link(content % (rel, url), expected)
+        url = "//alink/"
+        self._test_one_link(content % (rel, url), expected)
+        rel = "preconnect"
+        url = "https://alink"
+        self._test_one_link(content % (rel, url), expected)
+        rel = "dns-prefetch preconnect"
+        url = "https://alink"
+        self._test_one_link(content % (rel, url), expected)
+
     def test_img_srcset_parsing(self):
         content = '<img srcset="%s 1x">'
         url = "imagesmall.jpg"
