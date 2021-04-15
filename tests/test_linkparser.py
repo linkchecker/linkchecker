@@ -65,7 +65,7 @@ class TestLinkparser(unittest.TestCase):
         content = '<link rel="%s" href="%s">'
         rel = "dns-prefetch"
         url = "https://alink"
-        expected = "dns:alink"
+        expected = "dns://alink"
         self._test_one_link(content % (rel, url), expected)
         url = "//alink/"
         self._test_one_link(content % (rel, url), expected)
