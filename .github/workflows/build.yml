@@ -1,0 +1,148 @@
+# NB: this name is used in the status badge, where we want to see "build: passing"
+name: build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:     # allow manual triggering from GitHub UI
+  schedule:
+    - cron: "0 5 * * 6"  # 5:00 UTC every Saturday
+
+jobs:
+  build:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
+
+    steps:
+      - name: Install OS dependencies
+        run: |
+          sudo apt install -y clamav-daemon geoip-database libgeoip-dev
+
+      - name: Download the ClamAV signature database
+        run: |
+          sudo service clamav-freshclam stop
+          sudo freshclam
+          sudo service clamav-daemon restart
+          sudo service clamav-daemon status
+
+      - name: Git clone
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - name: Pip cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('tox.ini', 'setup.py') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install -U pip
+          python -m pip install -U setuptools wheel
+          python -m pip install -U tox coveralls
+
+      - name: Wait for ClamAV to be ready
+        run: |
+          while ! test -S /var/run/clamav/clamd.ctl; do printf "."; sleep 1; done
+
+      - name: Run tests
+        run: python -m tox -e py
+
+      - name: Report to coveralls
+        run: coveralls
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docs:
+    # there's some overlap with publish-pages.yml, but this one runs on pull
+    # requests, doesn't publish, and runs more doc checks
+    name: docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v2
+
+      - name: Install Ubuntu packages
+        run: |
+          sudo apt install -y graphviz mandoc
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Pip cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-docs-${{ hashFiles('tox.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-docs-
+            ${{ runner.os }}-pip-
+
+      - name: Install Python packages
+        run: |
+          pip install -r requirements.txt Sphinx sphinx-epytext sphinx-intl sphinx-rtd-theme
+
+      - name: Build
+        run: |
+          python3 setup.py build
+          make -C doc code
+          make -C doc html
+          make -C doc locale
+          make -C doc man
+          make -C doc check
+
+  lint:
+    name: ${{ matrix.toxenv }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        toxenv:
+          - flake8
+          - check-manifest
+          - check-python-versions
+
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Pip cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.toxenv }}-${{ hashFiles('tox.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.toxenv }}-
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          python -m pip install -U setuptools wheel
+          python -m pip install -U tox
+
+      - name: Run ${{ matrix.toxenv }}
+        run: python -m tox -e ${{ matrix.toxenv }}
