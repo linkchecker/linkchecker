@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Install OS dependencies
         run: |
-          sudo apt install -y clamav-daemon geoip-database libgeoip-dev
+          sudo apt install -y clamav-daemon geoip-database libgeoip-dev gettext
 
       - name: Download the ClamAV signature database
         run: |

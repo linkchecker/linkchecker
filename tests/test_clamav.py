@@ -59,6 +59,9 @@ class TestClamav(unittest.TestCase):
             [
               "stream: Clamav.Test.File-6(aa15bcf478d165efd2065190eb473bcb:544) FOUND\n"
             ],
+            [
+              "stream: Clamav.Test.File-6(2d1206194bd704385e37000be6113f73:781) FOUND\n"
+            ],
         )
         self.assertIn(infected, acceptable_responses)
         self.assertFalse(errors)
