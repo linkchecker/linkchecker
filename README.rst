@@ -3,8 +3,8 @@ LinkChecker
 
 |Build Status|_ |License|_
 
-.. |Build Status| image:: https://travis-ci.com/linkchecker/linkchecker.svg?branch=master
-.. _Build Status: https://travis-ci.com/linkchecker/linkchecker
+.. |Build Status| image:: https://github.com/linkchecker/linkchecker/actions/workflows/build.yml/badge.svg?branch=master
+.. _Build Status: https://github.com/linkchecker/linkchecker/actions/workflows/build.yml
 .. |License| image:: https://img.shields.io/badge/license-GPL2-d49a6a.svg
 .. _License: https://opensource.org/licenses/GPL-2.0
 
