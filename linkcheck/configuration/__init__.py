@@ -184,6 +184,7 @@ class Configuration(dict):
         self["aborttimeout"] = 300
         self["recursionlevel"] = -1
         self["useragent"] = UserAgent
+        self["resultcachesize"] = 100000
         # authentication
         self["authentication"] = []
         self["loginurl"] = None
