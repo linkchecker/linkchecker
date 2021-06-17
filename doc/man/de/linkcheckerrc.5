@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "Januar 28, 2021" "2021-01-28" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "Juni 17, 2021" "2021-06-17" "LinkChecker"
 .SH NAME
 linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .
@@ -101,15 +101,14 @@ be accessed before checking.
 The default is to use robots.txt files.
 Command line option: \fB\-\-no\-robots\fP
 .TP
-\fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
+\fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...**
 Allowed URL schemes as comma\-separated list.
 Command line option: none
 .TP
-\fresultcachesize=\fP\fINUMBER\fP
-Setzt die Größe des Caches für abgefragte URLs.
-Standard sind 100 000 URLs.
-Kommandozeilenoption: keine
-
+\fBresultcachesize=\fP\fINUMBER\fP
+Set the result cache size.
+The default is 100 000 URLs.
+Command line option: none
 .UNINDENT
 .SS filtering
 .INDENT 0.0
