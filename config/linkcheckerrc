@@ -173,6 +173,8 @@
 #robotstxt=1
 # Allowed URL schemes as a comma-separated list.
 #allowedschemes=http,https
+# Size of the result cache. Checking more urls might increase memory usage during runtime
+#resultcachesize=100000
 
 ##################### filtering options ##########################
 [filtering]
