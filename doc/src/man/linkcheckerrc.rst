@@ -95,7 +95,7 @@ checking
     be accessed before checking.
     The default is to use robots.txt files.
     Command line option: :option:`--no-robots`
-**allowedschemes=**\ *NAME*\ [**,**\ *NAME*...**
+**allowedschemes=**\ *NAME*\ [**,**\ *NAME*...]
     Allowed URL schemes as comma-separated list.
     Command line option: none
 **resultcachesize=**\ *NUMBER*
