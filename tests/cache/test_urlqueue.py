@@ -17,6 +17,7 @@
 import unittest
 from collections import namedtuple
 
+import linkcheck.configuration
 from linkcheck.cache.results import ResultCache
 from linkcheck.cache.urlqueue import Empty, NUM_PUTS_CLEANUP, UrlQueue
 
@@ -26,7 +27,8 @@ Aggregate = namedtuple("Aggregate", "result_cache")
 
 class TestUrlQueue(unittest.TestCase):
     def setUp(self):
-        self.result_cache = ResultCache()
+        config = linkcheck.configuration.Configuration()
+        self.result_cache = ResultCache(config["resultcachesize"])
         self.urlqueue = UrlQueue()
         self.urldata1 = UrlData(
             url="Foo",

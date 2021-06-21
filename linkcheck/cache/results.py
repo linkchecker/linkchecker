@@ -32,11 +32,11 @@ class ResultCache:
     format: {cache key (string) -> result (UrlData.towire())}
     """
 
-    def __init__(self, max_size=100000):
+    def __init__(self, result_cache_size):
         """Initialize result cache."""
         # mapping {URL -> cached result}
         self.cache = {}
-        self.max_size = max_size
+        self.max_size = result_cache_size
 
     @synchronized(cache_lock)
     def get_result(self, key):

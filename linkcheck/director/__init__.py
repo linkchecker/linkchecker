@@ -134,7 +134,7 @@ def get_aggregate(config):
     _urlqueue = urlqueue.UrlQueue(max_allowed_urls=config["maxnumurls"])
     _robots_txt = robots_txt.RobotsTxt(config["useragent"])
     plugin_manager = plugins.PluginManager(config)
-    result_cache = results.ResultCache()
+    result_cache = results.ResultCache(config["resultcachesize"])
     return aggregator.Aggregate(
         config, _urlqueue, _robots_txt, plugin_manager, result_cache
     )

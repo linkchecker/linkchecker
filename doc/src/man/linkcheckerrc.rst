@@ -98,6 +98,10 @@ checking
 **allowedschemes=**\ *NAME*\ [**,**\ *NAME*...]
     Allowed URL schemes as comma-separated list.
     Command line option: none
+**resultcachesize=**\ *NUMBER*
+    Set the result cache size.
+    The default is 100 000 URLs.
+    Command line option: none
 
 filtering
 ^^^^^^^^^
