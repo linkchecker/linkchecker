@@ -76,6 +76,14 @@ class TestLinkparser(unittest.TestCase):
         url = "https://alink"
         self._test_one_link(content % (rel, url), expected)
 
+    def test_link_without_rel_parsing(self):
+        # <link> tags without rel attr should not raise TypeError.
+        content = '<link href="%s">'
+        url = "https://alink"
+        expected = "https://alink"
+        # Dummy test, we just have to make sure no error was raised.
+        self._test_one_link(content % url, expected)
+
     def test_img_srcset_parsing(self):
         content = '<img srcset="%s 1x">'
         url = "imagesmall.jpg"
