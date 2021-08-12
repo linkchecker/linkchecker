@@ -44,8 +44,8 @@ def get_files(dirname):
 
 def prepare_urlpath_for_nt(path):
     """
-    URLs like 'file://server/path/' result in a path named '/server/path'.
-    However urllib.url2pathname expects '////server/path'.
+    URLs like *file://server/path/* result in a path named */server/path*.
+    However urllib.url2pathname expects *////server/path*.
     """
     if '|' not in path:
         return "////" + path.lstrip("/")
@@ -124,7 +124,7 @@ class FileUrl(urlbase.UrlBase):
 
     def build_base_url(self):
         """The URL is normed according to the platform:
-         - the base URL is made an absolute file:// URL
+         - the base URL is made an absolute *file://* URL
          - under Windows platform the drive specifier is normed
         """
         if self.base_url is None:
@@ -241,7 +241,7 @@ class FileUrl(urlbase.UrlBase):
 
     def get_os_filename(self):
         """
-        Construct os specific file path out of the file:// URL.
+        Construct os specific file path out of the *file://* URL.
 
         @return: file name
         @rtype: string
