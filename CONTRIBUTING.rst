@@ -97,7 +97,7 @@ As an exception to this rule, this specific document cannot be changed
 without the consensus of all administrators of the project.
 
    Note: Those guidelines were inspired by the `Collective Code
-   Construct Contract <https://rfc.zeromq.org/spec:42/C4/>`__. The
+   Construction Contract <https://rfc.zeromq.org/spec/42/>`__. The
    document was found to be a little too complex and hard to read and
    wasn’t adopted in its entirety. See this
    `discussion <https://github.com/zeromq/rfc/issues?utf8=%E2%9C%93&q=author%3Aanarcat%20>`__
