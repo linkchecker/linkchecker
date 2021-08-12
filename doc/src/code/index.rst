@@ -1,4 +1,4 @@
-:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/code/install.rst
+:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/install.rst
 
 Code
 ====
