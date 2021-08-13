@@ -195,5 +195,8 @@ class TestParser(unittest.TestCase):
         self.encoding_test(html, "ascii")
 
     def encoding_test(self, html, expected):
+        # If chardet is installed Beautiful Soup uses it for encoding detection.
+        # Results for html without a valid charset may differ
+        # based on chardet availability.
         soup = htmlsoup.make_soup(html)
         self.assertEqual(soup.original_encoding, expected)
