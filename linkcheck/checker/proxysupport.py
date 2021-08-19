@@ -27,8 +27,8 @@ class ProxySupport:
 
     def set_proxy(self, proxy):
         """Parse given proxy information and store parsed values.
-        Note that only http:// proxies are supported, both for ftp://
-        and http:// URLs.
+        Note that only *http://* proxies are supported, both for *ftp://*
+        and *http://* URLs.
         """
         self.proxy = proxy
         self.proxytype = "http"

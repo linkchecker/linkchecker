@@ -328,11 +328,11 @@ class UrlBase:
         return self.ContentMimetypes.get(mime) == ctype
 
     def is_http(self):
-        """Return True for http:// or https:// URLs."""
+        """Return True for *http://* or *https://* URLs."""
         return self.scheme in ("http", "https")
 
     def is_file(self):
-        """Return True for file:// URLs."""
+        """Return True for *file://* URLs."""
         return self.scheme == "file"
 
     def is_directory(self):
@@ -340,7 +340,7 @@ class UrlBase:
         return False
 
     def is_local(self):
-        """Return True for local (ie. file://) URLs."""
+        """Return True for local (ie. *file://*) URLs."""
         return self.is_file()
 
     def add_warning(self, s, tag=None):

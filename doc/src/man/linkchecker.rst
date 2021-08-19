@@ -1,4 +1,4 @@
-:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/linkchecker.rst
+:github_url: https://github.com/linkchecker/linkchecker/blob/master/doc/src/man/linkchecker.rst
 
 linkchecker
 ===========

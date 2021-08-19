@@ -31,7 +31,7 @@ def guess_url(url):
 
     @param url: the URL to check
     @type url: unicode
-    @return: url with http:// or ftp:// prepended if it's detected as
+    @return: url with *http://* or *ftp://* prepended if it's detected as
         a http respective ftp URL.
     @rtype: unicode
     """
