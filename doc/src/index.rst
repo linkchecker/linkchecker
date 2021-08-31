@@ -75,12 +75,12 @@ Screenshots
 Test suite status
 ------------------
 Linkchecker has extensive unit tests to ensure code quality.
-`Travis CI <https://travis-ci.com/>`_ is used for continuous build
+`GitHub Actions <https://docs.github.com/en/actions/>`_ is used for continuous build
 and test integration.
 
-.. image:: https://travis-ci.com/linkchecker/linkchecker.png
+.. image:: https://github.com/linkchecker/linkchecker/actions/workflows/build.yml/badge.svg?branch=master
    :alt: Build Status
-   :target: https://travis-ci.com/linkchecker/linkchecker
+   :target: https://github.com/linkchecker/linkchecker/actions/workflows/build.yml
 
 .. toctree::
    :hidden:

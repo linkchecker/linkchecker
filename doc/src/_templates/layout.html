@@ -2,8 +2,10 @@
 
   {% block menu %}
     {{ super() }}
-    <a href="{{ pathto('genindex') }}">Index</a>
-    <hr>
-    <a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a>
-    <a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a>
+  <ul>
+    <li><a href="{{ pathto('genindex') }}">Index</a></li>
+    <li><hr></li>
+    <li><a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a></li>
+    <li><a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a></li>
+  </ul>
   {% endblock %}
