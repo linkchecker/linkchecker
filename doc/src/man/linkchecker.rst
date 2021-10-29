@@ -161,6 +161,10 @@ Output options
     Quiet operation, an alias for :option:`-o` *none*. This is only useful with
     :option:`-F`.
 
+.. option:: --no-intro
+
+    Don't show the intro message.
+
 .. option:: -v, --verbose
 
     Log all checked URLs. Default is to log only errors and warnings.

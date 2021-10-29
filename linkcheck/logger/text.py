@@ -93,18 +93,21 @@ class TextLogger(_Logger):
 
     def write_intro(self):
         """Log introduction text."""
-        self.writeln(configuration.App)
-        self.writeln(configuration.Copyright)
-        self.writeln(configuration.Freeware)
-        self.writeln(
-            _("Get the newest version at %(url)s") % {'url': configuration.Url}
-        )
-        self.writeln(
-            _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}
-        )
-        self.check_date()
-        self.writeln()
-        self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
+        if not configuration.noIntro:
+            self.writeln(configuration.App)
+            self.writeln(configuration.Copyright)
+            self.writeln(configuration.Freeware)
+            self.writeln(
+                _("Get the newest version at %(url)s") % {'url': configuration.Url}
+            )
+            self.writeln(
+                _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}
+            )
+            self.check_date()
+            self.writeln()
+            self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
+        else:
+            self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
 
     def log_url(self, url_data):
         """Write url checking info."""

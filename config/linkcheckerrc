@@ -16,6 +16,8 @@
 #warnings=0
 # turn on/off --quiet
 #quiet=1
+#disable intro message --no-intro
+#no-intro=1
 # additional file output
 #fileoutput = text, html, gml, sql
 

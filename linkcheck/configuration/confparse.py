@@ -17,6 +17,7 @@
 
 from configparser import RawConfigParser
 import os
+import linkcheck.configuration
 
 from .. import (
     LinkCheckerError,
@@ -134,6 +135,9 @@ class LCConfigParser(RawConfigParser):
             if self.getboolean(section, "quiet"):
                 self.config['output'] = 'none'
                 self.config['quiet'] = True
+        if self.has_option(section, "no-intro"):
+            if self.getboolean(section, "no-intro"):
+                linkcheck.configuration.noIntro = True
         if self.has_option(section, "debug"):
             val = self.get(section, "debug")
             parts = [f.strip().lower() for f in val.split(',')]

@@ -60,6 +60,8 @@ _profile = "linkchecker.prof"
 _username = None
 _password = None
 
+linkcheck.configuration.initialize()
+
 # usage texts
 Notes = _(
     """NOTES
@@ -375,6 +377,12 @@ group.add_argument(
         "This is only useful with -F."
     ),
 )
+group.add_argument(
+    "--no-intro",
+    action="store_true",
+    dest="no_intro",
+    help=_("Don't show the intro message."),
+)
 group.add_argument("--trace", action="store_true", dest="trace", help=argparse.SUPPRESS)
 group.add_argument(
     "-v",
@@ -669,6 +677,8 @@ if options.profile:
     do_profile = options.profile
 if options.quiet:
     config["logger"] = config.logger_new("none")
+if options.no_intro:
+    linkcheck.configuration.noIntro = True
 if options.recursionlevel is not None:
     config["recursionlevel"] = options.recursionlevel
 if options.status is not None:
