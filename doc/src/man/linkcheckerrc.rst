@@ -186,10 +186,7 @@ output
 **quiet=**\ [**0**\ \|\ **1**]
     If set, operate quiet. An alias for **log=none**. This is only
     useful with **fileoutput**.
-    Command line option: :option:`--verbose`
-**no-intro=**\ [**0**\ \|\ **1**]
-    If set, don't show the intro message.
-    Command line option: :option:`--no-intro`        
+    Command line option: :option:`--verbose`       
 **status=**\ [**0**\ \|\ **1**]
     Control printing check status messages. Default is 1.
     Command line option: :option:`--no-status`

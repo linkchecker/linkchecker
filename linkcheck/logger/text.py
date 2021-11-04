@@ -106,8 +106,6 @@ class TextLogger(_Logger):
             self.check_date()
             self.writeln()
             self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
-        else:
-            self.writeln(_("Start checking at %s") % strformat.strtime(self.starttime))
 
     def log_url(self, url_data):
         """Write url checking info."""
