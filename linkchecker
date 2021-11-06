@@ -60,8 +60,6 @@ _profile = "linkchecker.prof"
 _username = None
 _password = None
 
-linkcheck.configuration.initialize()
-
 # usage texts
 Notes = _(
     """NOTES
@@ -678,7 +676,10 @@ if options.profile:
 if options.quiet:
     config["logger"] = config.logger_new("none")
 if options.no_intro:
-    linkcheck.configuration.noIntro = True
+    if not config["text"] or config["text"]["parts"][0] == "all":
+        config["text"]["parts"] = ["realurl", "result", "extern", "base", "name", "parenturl", "info", "warning", "dltime", "checktime", "url", "outro", "stats"]
+    else:
+        config["text"]["parts"].remove("intro")       
 if options.recursionlevel is not None:
     config["recursionlevel"] = options.recursionlevel
 if options.status is not None:

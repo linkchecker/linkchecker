@@ -661,7 +661,3 @@ def resolve_kde_settings(data):
         for key in ("http_proxy", "https_proxy", "ftp_proxy"):
             if key in data:
                 del data[key]
-
-def initialize():
-    global noIntro
-    noIntro = False
