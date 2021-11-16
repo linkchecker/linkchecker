@@ -168,7 +168,7 @@ class Aggregate:
                 log.info(LOG_CHECK, name[12:])
         args = dict(
             num=len(
-                [x for x in self.threads if x.getName().startswith("CheckThread-")]
+                [x for x in self.threads if x.name.startswith("CheckThread-")]
             ),
             timeout=strformat.strduration_long(self.config["aborttimeout"]),
         )
@@ -185,9 +185,8 @@ class Aggregate:
     def get_check_threads(self):
         """Return iterator of checker threads."""
         for t in self.threads:
-            name = t.getName()
-            if name.startswith("CheckThread-"):
-                yield name
+            if t.name.startswith("CheckThread-"):
+                yield t.name
 
     def cancel(self):
         """Empty the URL queue."""

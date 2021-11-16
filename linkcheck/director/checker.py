@@ -84,7 +84,7 @@ class Checker(task.LoggedCheckedTask):
         """Store URL queue and logger."""
         super().__init__(logger)
         self.urlqueue = urlqueue
-        self.origname = self.getName()
+        self.origname = self.name
         self.add_request_session = add_request_session
 
     def run_checked(self):
