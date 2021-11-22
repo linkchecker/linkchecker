@@ -200,10 +200,11 @@ def start_server(handler, https=False):
     handler.protocol_version = "HTTP/1.0"
     httpd = StoppableHttpServer(server_address, handler)
     if https:
-        httpd.socket = ssl.wrap_socket(
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain(
+            get_file("https_cert.pem"), keyfile=get_file("https_key.pem"))
+        httpd.socket = context.wrap_socket(
             httpd.socket,
-            keyfile=get_file("https_key.pem"),
-            certfile=get_file("https_cert.pem"),
             server_side=True,
         )
     port = httpd.server_port
