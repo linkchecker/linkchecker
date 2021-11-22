@@ -16,6 +16,8 @@
 """
 Test https.
 """
+from unittest.mock import patch
+
 from OpenSSL import crypto
 
 from .httpserver import HttpsServerTest, CookieRedirectHttpRequestHandler
@@ -39,6 +41,8 @@ class TestHttps(HttpsServerTest):
         key.generate_key(crypto.TYPE_RSA, 2048)
         cert = crypto.X509()
         cert.get_subject().CN = "localhost"
+        cert.add_extensions(
+            [crypto.X509Extension(b"subjectAltName", False, b"DNS:localhost")])
         cert.set_serial_number(1000)
         cert.gmtime_adj_notBefore(0)
         cert.set_notAfter(b"21190102030405Z")
@@ -59,7 +63,9 @@ class TestHttps(HttpsServerTest):
             "valid",
         ]
         confargs = dict(sslverify=False)
-        self.direct(url, resultlines, recursionlevel=0, confargs=confargs)
+        with patch.dict("os.environ",
+                        {"REQUESTS_CA_BUNDLE": get_file("https_cert.pem")}):
+            self.direct(url, resultlines, recursionlevel=0, confargs=confargs)
 
     def test_x509_to_dict(self):
         with open(get_file("https_cert.pem"), "rb") as f:
