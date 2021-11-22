@@ -185,7 +185,7 @@ class UrlQueue:
             if self.unfinished_tasks <= 0:
                 if self.unfinished_tasks < 0:
                     raise ValueError('task_done() called too many times')
-                self.all_tasks_done.notifyAll()
+                self.all_tasks_done.notify_all()
 
     def join(self, timeout=None):
         """Blocks until all items in the Queue have been gotten and processed.
@@ -218,7 +218,7 @@ class UrlQueue:
             if unfinished <= 0:
                 if unfinished < 0:
                     raise ValueError('shutdown is in error')
-                self.all_tasks_done.notifyAll()
+                self.all_tasks_done.notify_all()
             self.unfinished_tasks = unfinished
             self.shutdown = True
 

@@ -77,7 +77,7 @@ def _trace_line(frame, event, arg):
     line = linecache.getline(filename, lineno)
     currentThread = threading.currentThread()
     tid = currentThread.ident
-    tname = currentThread.getName()
+    tname = currentThread.name
     args = (tid, tname, time.time(), line.rstrip(), name, lineno)
     print("THREAD(%d) %r %.2f %s # %s:%d" % args)
 
