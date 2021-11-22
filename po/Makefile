@@ -24,6 +24,7 @@ template: $(TEMPLATE)
 $(TEMPLATE): $(POSOURCES)
 	$(XGETTEXT) -w 80 --default-domain=$(PACKAGE) --language=Python \
 	  --copyright-holder="Bastian Kleineidam <$(MYMAIL)>" \
+	  --package-name=LinkChecker \
 	  --msgid-bugs-address=$(MYMAIL) -o $(TEMPLATE) \
 	  --keyword=_n:1,2 $(POSOURCES)
 
