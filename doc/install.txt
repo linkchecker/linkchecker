@@ -21,7 +21,7 @@ Setup for macOS
 ------------------
 Python from Homebrew includes pip_. Otherwise ``get-pip.py`` can be used to
 install pip_ (untested):
-https://pip.pypa.io/en/stable/installing/
+https://pip.pypa.io/en/stable/installation/
 
 Setup for GNU/Linux
 -------------------
