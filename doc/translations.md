@@ -7,15 +7,20 @@ Translations for the man pages are stored in doc/.
 Application Translations
 ------------------------
 
-``linkchecker $ make locale``
+Makefiles using GNU gettext utilities are provided to manage .po and .pot files.
 
-is equivalent to:
+If the strings in the application change, update the .pot and .po files:
 
-``linkchecker/po $ make``
+``linkchecker/po $ rm linkchecker.pot; make``
+
+Do make a commit at this point.
 
 Translation progress and validity can be monitored with:
 
 ``linkchecker/po $ make check``
+
+.mo files are not stored in the repository and are created on building,
+using polib.
 
 Man Page Translations
 ---------------------

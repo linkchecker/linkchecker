@@ -3,20 +3,13 @@ MSGFMT := msgfmt
 MSGMERGE := msgmerge
 POSOURCES = $(shell find ../linkcheck -name \*.py) \
 	../linkchecker $(shell python3 -c 'import argparse; print(argparse.__file__)')
-LDIR = ../share/locale
 PACKAGE = linkchecker
 TEMPLATE = $(PACKAGE).pot
 MYMAIL := bastian.kleineidam@web.de
 BUGSURL = https://github.com/linkchecker/linkchecker
-LFILE = LC_MESSAGES/$(PACKAGE).mo
-# defined language (add new languages here)
-LANGUAGES = de fr es
-MOFILES = $(wildcard *.mo)
+POFILES = $(wildcard *.po)
 
-all:	$(MOFILES)
-
-%.mo:	%.po
-	$(MSGFMT) -c --statistics -o $@ $<
+all:	$(POFILES)
 
 %.po:	$(TEMPLATE)
 	$(MSGMERGE) -U --suffix=.bak $@ $<
@@ -35,7 +28,6 @@ check:
 	done
 
 clean:
-	@for f in $(LANGUAGES); do rm -f $(LDIR)/$$f/$(LFILE); done
-	rm -f *.mo *.bak
+	rm -f *.bak
 
 .PHONY: check clean

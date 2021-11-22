@@ -1,3 +1,11 @@
+10.x (released x)
+
+Changes:
+- Binary translation catalogs are no longer included with the source. The polib
+  package must be installed before installation from source to compile
+  translations.
+
+
 10.0.1 (released 29.1.2021)
 
 Changes:

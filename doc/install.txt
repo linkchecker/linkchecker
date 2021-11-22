@@ -3,10 +3,20 @@ Installation
 If you are upgrading from older versions of LinkChecker you should
 also read the upgrading documentation stored in upgrading.txt.
 
+When installing from source, for application translations to be installed
+polib_ needs to be installed before LinkChecker. After LinkChecker installation
+polib_ can be removed.
+
+.. _polib: https://pypi.org/project/polib/
+
 Setup with pip
 ------------------
-If pip_ is available, this command should install LinkChecker on
-the local system:
+pip_ can be used to install LinkChecker on the local system.
+
+If you want application translations, first:
+``pip3 install polib``
+
+Then this command will install LinkChecker from the latest source:
 ``pip3 install git+https://github.com/linkchecker/linkchecker.git``
 
 .. _pip: https://pypi.org/project/pip/
@@ -44,20 +54,23 @@ First, install the required software.
 
 3. Python Beautiful Soup package from https://pypi.org/project/beautifulsoup4/
 
-4. *Optional, for bash-completion:*
+4. *Optional, installation time only, for translations:*
+   polib Python module from https://pypi.org/project/polib/
+
+5. *Optional, for bash-completion:*
    argcomplete Python module from https://pypi.org/project/argcomplete/
 
-5. *Optional, for displaying country codes:*
+6. *Optional, for displaying country codes:*
    GeoIP from https://pypi.org/project/GeoIP/
 
-6. *Optional, used for Virus checking:*
+7. *Optional, used for Virus checking:*
    ClamAv from https://www.clamav.net/
 
-7. *Optional, for GNOME proxy setting parsing:*
+8. *Optional, for GNOME proxy setting parsing:*
    PyGObject and GIO.
    Best installed from your distribution e.g. ``python3-gi``
 
-8. *Optional, to run the WSGI web interface:*
+9. *Optional, to run the WSGI web interface:*
    Apache from https://httpd.apache.org/
    mod_wsgi from https://pypi.org/project/mod-wsgi/
 
