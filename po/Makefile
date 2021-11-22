@@ -7,6 +7,7 @@ LDIR = ../share/locale
 PACKAGE = linkchecker
 TEMPLATE = $(PACKAGE).pot
 MYMAIL := bastian.kleineidam@web.de
+BUGSURL = https://github.com/linkchecker/linkchecker
 LFILE = LC_MESSAGES/$(PACKAGE).mo
 # defined language (add new languages here)
 LANGUAGES = de fr es
@@ -25,7 +26,7 @@ $(TEMPLATE): $(POSOURCES)
 	$(XGETTEXT) -w 80 --default-domain=$(PACKAGE) --language=Python \
 	  --copyright-holder="Bastian Kleineidam <$(MYMAIL)>" \
 	  --package-name=LinkChecker \
-	  --msgid-bugs-address=$(MYMAIL) -o $(TEMPLATE) \
+	  --msgid-bugs-address=$(BUGSURL) -o $(TEMPLATE) \
 	  --keyword=_n:1,2 $(POSOURCES)
 
 check:
