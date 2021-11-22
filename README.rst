@@ -28,13 +28,16 @@ Features
 Installation
 -------------
 
-See `doc/install.txt`_ in the source code archive for general information. Except the given information there, please take note of the following:
+Python 3.6 or later is needed. Using pip to install LinkChecker:
+
+``pip3 install linkchecker``
+
+The version in the pip repository may be old, to find out how to get the latest
+code, plus platform-specific information and other advice see `doc/install.txt`_
+in the source code archive.
 
 .. _doc/install.txt: doc/install.txt
 
-Python 3.6 or later is needed.
-
-The version in the pip repository may be old. Instead, you can use pip to install the latest code from git: ``pip3 install git+https://github.com/linkchecker/linkchecker.git``.
 
 Usage
 ------

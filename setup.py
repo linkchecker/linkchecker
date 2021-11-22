@@ -32,17 +32,26 @@ if sys.version_info < (3, 6, 0, "final", 0):
 import os
 import re
 import stat
-import glob
+from pathlib import Path
 
 # import Distutils stuff
 from setuptools import find_packages, setup
 from distutils.command.install_lib import install_lib
+from distutils.command.build import build
 from distutils.command.clean import clean
 from distutils.command.install_data import install_data
 from distutils.dir_util import remove_tree
 from distutils.file_util import write_file
 from distutils import util, log
 from distutils.core import Distribution
+
+try:
+    import polib
+except ImportError:
+    print("polib package not found. Translations not compiled.")
+    COMPILE_TRANSLATIONS = False
+else:
+    COMPILE_TRANSLATIONS = True
 
 # the application version
 AppVersion = "10.0.1"
@@ -95,6 +104,18 @@ def get_release_date():
 def get_portable():
     """Return portable flag as string."""
     return os.environ.get("LINKCHECKER_PORTABLE", "0")
+
+
+class MyBuild(build):
+    """Custom build with translation compilation"""
+
+    def run(self):
+        if COMPILE_TRANSLATIONS:
+            for (src, bld_path, dst) in list_translation_files():
+                pofile = polib.pofile(src)
+                bld_path.parent.mkdir(exist_ok=True, parents=True)
+                pofile.save_as_mofile(str(bld_path))
+        super().run()
 
 
 class MyInstallLib(install_lib):
@@ -161,37 +182,12 @@ class MyInstallData(install_data):
     """Fix file permissions."""
 
     def run(self):
-        """Adjust permissions on POSIX systems."""
-        self.install_translations()
+        """Handle translation files and adjust permissions on POSIX systems."""
+        if COMPILE_TRANSLATIONS:
+            for (src, bld_path, dst) in list_translation_files():
+                self.data_files.append((dst, [str(bld_path)]))
         super().run()
         self.fix_permissions()
-
-    def install_translations(self):
-        """Install compiled gettext catalogs."""
-        # A hack to fix https://github.com/linkchecker/linkchecker/issues/102
-        i18n_files = []
-        data_files = []
-        for dir, files in self.data_files:
-            if "LC_MESSAGES" in dir:
-                i18n_files.append((dir, files))
-            else:
-                data_files.append((dir, files))
-        self.data_files = data_files
-        # We do almost the same thing that install_data.run() does, except
-        # we can assume everything in self.data_files is a (dir, files) tuple,
-        # and all files lists are non-empty.  And for i18n files, instead of
-        # specifying the directory we instead specify the destination filename.
-        for dest, files in i18n_files:
-            dest = util.convert_path(dest)
-            if not os.path.isabs(dest):
-                dest = os.path.join(self.install_dir, dest)
-            elif self.root:
-                dest = util.change_root(self.root, dest)
-            self.mkpath(os.path.dirname(dest))
-            for data in files:
-                data = util.convert_path(data)
-                (out, _) = self.copy_file(data, dest)
-                self.outfiles.append(out)
 
     def fix_permissions(self):
         """Set correct read permissions on POSIX systems. Might also
@@ -272,16 +268,15 @@ class MyDistribution(Distribution):
         )
 
 
-def list_message_files(package, suffix=".mo"):
-    """Return list of all found message files and their installation paths."""
-    for fname in glob.glob("po/*" + suffix):
-        # basename (without extension) is a locale name
-        localename = os.path.splitext(os.path.basename(fname))[0]
-        domainname = "%s.mo" % package.lower()
-        yield (
-            fname,
-            os.path.join("share", "locale", localename, "LC_MESSAGES", domainname),
-        )
+def list_translation_files():
+    """Return list of translation files and their build and installation paths."""
+    for po in Path("po").glob("*.po"):
+        mo = Path(
+            "share", "locale", po.stem, "LC_MESSAGES", AppName.lower()
+            ).with_suffix(".mo")
+        build_mo = Path("build", mo)
+        build_mo.parent.mkdir(exist_ok=True, parents=True)
+        yield (str(po), build_mo, str(mo.parent))
 
 
 class MyClean(clean):
@@ -322,9 +317,6 @@ data_files = [
     ),
 ]
 
-for (src, dst) in list_message_files(AppName):
-    data_files.append((dst, [src]))
-
 if os.name == "posix":
     data_files.append(("share/man/man1", ["doc/man/en/linkchecker.1"]))
     data_files.append(("share/man/man5", ["doc/man/en/linkcheckerrc.5"]))
@@ -357,6 +349,7 @@ setup(
     long_description_content_type="text/x-rst",
     distclass=MyDistribution,
     cmdclass={
+        "build": MyBuild,
         "install_lib": MyInstallLib,
         "install_data": MyInstallData,
         "clean": MyClean,

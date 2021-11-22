@@ -3,7 +3,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: $Id$\n"
+"Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: bastian.kleineidam@web.de\n"
 "POT-Creation-Date: 2020-06-19 16:25+0100\n"
 "PO-Revision-Date: 2020-06-19 16:42+0100\n"

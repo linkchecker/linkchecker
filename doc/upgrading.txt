@@ -1,5 +1,10 @@
 Upgrading
 =========
+Migrating from 10.0 to 10.x
+---------------------------
+If installing from source and application translations are needed the Python
+polib package is required to be installed before LinkChecker is installed.
+
 Migrating from 9.x to 10.0
 --------------------------
 Python 3.6 or newer is required.

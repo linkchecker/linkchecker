@@ -19,9 +19,11 @@ Installation
 
 .. code-block:: console
 
-   $ pip3 install git+https://github.com/linkchecker/linkchecker.git
-   
-See the :doc:`installation document <install>` for more information.
+   $ pip3 install linkchecker
+
+The version in the pip repository may be old, to find out how to get the latest
+code, plus platform-specific information and other advice see the
+:doc:`installation document <install>`.
 
 Basic usage
 ------------

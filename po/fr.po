@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: fr\n"
+"Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: bastian.kleineidam@web.de\n"
 "POT-Creation-Date: 2020-06-19 16:25+0100\n"
 "PO-Revision-Date: 2011-02-16 15:27+0100\n"

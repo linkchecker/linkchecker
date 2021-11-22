@@ -3,19 +3,13 @@ MSGFMT := msgfmt
 MSGMERGE := msgmerge
 POSOURCES = $(shell find ../linkcheck -name \*.py) \
 	../linkchecker $(shell python3 -c 'import argparse; print(argparse.__file__)')
-LDIR = ../share/locale
 PACKAGE = linkchecker
 TEMPLATE = $(PACKAGE).pot
 MYMAIL := bastian.kleineidam@web.de
-LFILE = LC_MESSAGES/$(PACKAGE).mo
-# defined language (add new languages here)
-LANGUAGES = de fr es
-MOFILES = $(wildcard *.mo)
+BUGSURL = https://github.com/linkchecker/linkchecker
+POFILES = $(wildcard *.po)
 
-all:	$(MOFILES)
-
-%.mo:	%.po
-	$(MSGFMT) -c --statistics -o $@ $<
+all:	$(POFILES)
 
 %.po:	$(TEMPLATE)
 	$(MSGMERGE) -U --suffix=.bak $@ $<
@@ -24,11 +18,16 @@ template: $(TEMPLATE)
 $(TEMPLATE): $(POSOURCES)
 	$(XGETTEXT) -w 80 --default-domain=$(PACKAGE) --language=Python \
 	  --copyright-holder="Bastian Kleineidam <$(MYMAIL)>" \
-	  --msgid-bugs-address=$(MYMAIL) -o $(TEMPLATE) \
+	  --package-name=LinkChecker \
+	  --msgid-bugs-address=$(BUGSURL) -o $(TEMPLATE) \
 	  --keyword=_n:1,2 $(POSOURCES)
 
-clean:
-	@for f in $(LANGUAGES); do rm -f $(LDIR)/$$f/$(LFILE); done
-	rm -f *.mo *.bak
+check:
+	@for po in $(POFILES); do \
+		$(MSGFMT) -cv --statistics -o - $$po >/dev/null; \
+	done
 
-.PHONY: clean
+clean:
+	rm -f *.bak
+
+.PHONY: check clean

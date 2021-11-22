@@ -44,7 +44,6 @@ recursive-include doc                   \
     Makefile                            \
     linkcheckerrc_*
 recursive-include po                    \
-    *.mo                                \
     *.po                                \
     *.pot                               \
     Makefile
