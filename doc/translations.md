@@ -13,6 +13,10 @@ is equivalent to:
 
 ``linkchecker/po $ make``
 
+Translation progress and validity can be monitored with:
+
+``linkchecker/po $ make check``
+
 Man Page Translations
 ---------------------
 

@@ -148,3 +148,17 @@ jobs:
 
       - name: Run ${{ matrix.toxenv }}
         run: python -m tox -e ${{ matrix.toxenv }}
+
+  translations:
+    name: Check Translations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v2
+
+      - name: Install dependency
+        run: sudo apt install -y gettext
+
+      - name: Compile translations
+        run: for po in po/*.po; do msgfmt -cv --statistics -o - ${po} >/dev/null; done

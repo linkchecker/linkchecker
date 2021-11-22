@@ -27,8 +27,13 @@ $(TEMPLATE): $(POSOURCES)
 	  --msgid-bugs-address=$(MYMAIL) -o $(TEMPLATE) \
 	  --keyword=_n:1,2 $(POSOURCES)
 
+check:
+	@for po in $(POFILES); do \
+		$(MSGFMT) -cv --statistics -o - $$po >/dev/null; \
+	done
+
 clean:
 	@for f in $(LANGUAGES); do rm -f $(LDIR)/$$f/$(LFILE); done
 	rm -f *.mo *.bak
 
-.PHONY: clean
+.PHONY: check clean
