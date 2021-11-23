@@ -1,11 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Bastian Kleineidam <bastian.kleineidam@web.de>
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Dutch translation for LinkChecker.
+# This file is distributed under the same license as the LinkChecker package.
+# Gideon van Melle, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: bastian.kleineidam@web.de\n"
 "POT-Creation-Date: 2020-06-19 16:25+0100\n"
 "PO-Revision-Date: 2021-01-08 15:12+0100\n"
