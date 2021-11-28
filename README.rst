@@ -51,8 +51,8 @@ If you do not want to install any additional libraries/dependencies you can use 
 
 Example for external web site check::
 
-  docker run --rm -it -u $(id -u):$(id -g) ghcr.io/linkchecker/linkchecker:master --verbose https://www.example.com
+  docker run --rm -it -u $(id -u):$(id -g) ghcr.io/linkchecker/linkchecker:latest --verbose https://www.example.com
 
 Local HTML file check::
 
-  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt ghcr.io/linkchecker/linkchecker:master --verbose index.html
+  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt ghcr.io/linkchecker/linkchecker:latest --verbose index.html
