@@ -56,3 +56,8 @@ Example for external web site check::
 Local HTML file check::
 
   docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt ghcr.io/linkchecker/linkchecker:latest --verbose index.html
+
+In addition to the rolling latest image, uniquely tagged images can also be found
+on the `packages`_ page.
+
+.. _packages: https://github.com/linkchecker/linkchecker/pkgs/container/linkchecker
