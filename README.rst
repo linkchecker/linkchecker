@@ -23,7 +23,7 @@ Features
 - Cookie support
 - HTML5 support
 - a command line and web interface
-- various check plugins available, eg. HTML syntax and antivirus checks.
+- various check plugins available
 
 Installation
 -------------

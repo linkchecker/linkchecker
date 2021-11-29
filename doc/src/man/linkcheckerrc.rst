@@ -434,6 +434,10 @@ AnchorCheck
 
 Checks validity of HTML anchors.
 
+.. note::
+
+    The AnchorCheck plugin is currently broken and is disabled.
+
 LocationInfo
 ^^^^^^^^^^^^
 
@@ -470,6 +474,10 @@ HtmlSyntaxCheck
 
 Check the syntax of HTML pages with the online W3C HTML validator. See
 https://validator.w3.org/docs/api.html.
+
+.. note::
+
+    The HtmlSyntaxCheck plugin is currently broken and is disabled.
 
 HttpHeaderInfo
 ^^^^^^^^^^^^^^

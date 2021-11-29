@@ -24,7 +24,6 @@ LinkChecker features
 -  support for robots.txt exclusion protocol
 -  support for Cookies
 -  support for HTML5
--  HTML and CSS syntax check
 -  Antivirus check
 -  a command line and web interface
 
