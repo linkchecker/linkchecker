@@ -231,7 +231,7 @@ text
 **encoding=**\ *STRING*
     Valid encodings are listed in
     https://docs.python.org/library/codecs.html#standard-encodings.
-    Default encoding is **iso-8859-15**.
+    Default encoding is the system default locale encoding.
 *color\**
     Color settings for the various log parts, syntax is *color* or
     *type*\ **;**\ *color*. The *type* can be **bold**, **light**,
