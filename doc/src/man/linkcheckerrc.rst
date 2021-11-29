@@ -274,7 +274,7 @@ csv
 **encoding=**\ *STRING*
     See :ref:`[text] <man/linkcheckerrc:text>` section above.
 **separator=**\ *CHAR*
-    Set CSV separator. Default is a comma (**,**).
+    Set CSV separator. Default is a semicolon (**;**).
 **quotechar=**\ *CHAR*
     Set CSV quote character. Default is a double quote (**"**).
 
