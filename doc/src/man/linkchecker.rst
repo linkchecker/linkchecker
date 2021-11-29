@@ -162,17 +162,6 @@ Output options
 .. option:: -v, --verbose
 
     Log all checked URLs. Default is to log only errors and warnings.
-    
-.. option:: -W REGEX, --warning-regex=REGEX 
-
-    Define a regular expression which prints a warning if it matches any
-    content of the checked link. This applies only to valid pages, so we
-    can get their content.
-    Use this to check for pages that contain some form of error, for
-    example "This page has moved" or "Oracle Application error".
-    Note that multiple values can be combined in the regular expression,
-    for example "(This page has moved|Oracle Application error)".
-    See section `REGULAR EXPRESSIONS`_ for more info.
 
 Checking options
 ^^^^^^^^^^^^^^^^
