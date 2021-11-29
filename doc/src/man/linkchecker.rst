@@ -112,19 +112,13 @@ General options
 Output options
 ^^^^^^^^^^^^^^
 
-.. option:: -D STRING, --debug=STRING
-
-    Print debugging output for the given logger. Available loggers are
-    cmdline, checking, cache, dns, plugin and
-    all. Specifying all is an alias for specifying all available
-    loggers. The option can be given multiple times to debug with more
-    than one logger. For accurate results, threading will be disabled
-    during debug runs.
+URL checking results
+""""""""""""""""""""
 
 .. option:: -F TYPE[/ENCODING][/FILENAME], --file-output=TYPE[/ENCODING][/FILENAME]
 
     Output to a file linkchecker-out.TYPE,
-    $HOME/.linkchecker/failures for failures output, or
+    $HOME/.linkchecker/failures for the failures output type, or
     FILENAME if specified. The ENCODING specifies the output
     encoding, the default is that of your locale. Valid encodings are
     listed at
@@ -137,43 +131,50 @@ Output options
     The various output types are documented below. Note that you can
     suppress all console output with the option :option:`-o` *none*.
 
-.. option:: --no-status
-
-    Do not print check status messages.
-
 .. option:: --no-warnings
 
     Don't log warnings. Default is to log warnings.
 
 .. option:: -o TYPE[/ENCODING], --output=TYPE[/ENCODING]
 
-    Specify output type as text, html, sql, csv,
+    Specify the console output type as text, html, sql, csv,
     gml, dot, xml, sitemap, none or failures.
-    Default type is text. The various output types are documented
-    below.
+    Default type is text. The various output types are documented below.
     The ENCODING specifies the output encoding, the default is that of
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
 
-.. option:: -q, --quiet
-
-    Quiet operation, an alias for :option:`-o` *none*. This is only useful with
-    :option:`-F`.
-
-.. option:: -v, --verbose
+.. option:: -v, --verbose   
 
     Log all checked URLs. Default is to log only errors and warnings.
-    
-.. option:: -W REGEX, --warning-regex=REGEX 
 
-    Define a regular expression which prints a warning if it matches any
-    content of the checked link. This applies only to valid pages, so we
-    can get their content.
-    Use this to check for pages that contain some form of error, for
-    example "This page has moved" or "Oracle Application error".
-    Note that multiple values can be combined in the regular expression,
-    for example "(This page has moved|Oracle Application error)".
-    See section `REGULAR EXPRESSIONS`_ for more info.
+Progress updates
+""""""""""""""""
+
+.. option:: --no-status
+
+    Do not print URL check status messages.
+
+Application
+"""""""""""
+
+.. option:: -D STRING, --debug=STRING
+
+    Print debugging output for the given logger. Available loggers are
+    cmdline, checking, cache, dns, plugin and
+    all. Specifying all is an alias for specifying all available
+    loggers. The option can be given multiple times to debug with more
+    than one logger. For accurate results, threading will be disabled
+    during debug runs.
+
+Quiet
+"""""
+
+.. option:: -q, --quiet
+
+    Quiet operation, an alias for :option:`-o` *none* that also hides
+    application information messages.
+    This is only useful with :option:`-F`, else no results will be output.
 
 Checking options
 ^^^^^^^^^^^^^^^^

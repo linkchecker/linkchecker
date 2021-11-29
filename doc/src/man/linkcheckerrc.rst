@@ -161,35 +161,25 @@ authentication
 output
 ^^^^^^
 
-**debug=**\ *STRING*\ [**,**\ *STRING*...]
-    Print debugging output for the given modules. Available debug
-    modules are **cmdline**, **checking**, **cache**, **dns**,
-    **thread**, **plugins** and **all**. Specifying **all** is an alias
-    for specifying all available loggers.
-    Command line option: :option:`--debug`
+URL checking results
+""""""""""""""""""""
+
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
     Output to a file **linkchecker-out.**\ *TYPE*, or
-    **$HOME/.linkchecker/failures** for **failures** output.
+    **$HOME/.linkchecker/failures** for the **failures** output type.
     Valid file output types are **text**, **html**, **sql**, **csv**,
     **gml**, **dot**, **xml**, **none** or **failures**. Default is no
     file output. The various output types are documented below. Note
     that you can suppress all console output with **output=none**.
     Command line option: :option:`--file-output`
 **log=**\ *TYPE*\ [**/**\ *ENCODING*]
-    Specify output type as **text**, **html**, **sql**, **csv**,
+    Specify the console output type as **text**, **html**, **sql**, **csv**,
     **gml**, **dot**, **xml**, **none** or **failures**. Default type
     is **text**. The various output types are documented below.
     The *ENCODING* specifies the output encoding, the default is that of
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
-**quiet=**\ [**0**\ \|\ **1**]
-    If set, operate quiet. An alias for **log=none**. This is only
-    useful with **fileoutput**.
-    Command line option: :option:`--verbose`
-**status=**\ [**0**\ \|\ **1**]
-    Control printing check status messages. Default is 1.
-    Command line option: :option:`--no-status`
 **verbose=**\ [**0**\ \|\ **1**]
     If set log all checked URLs once. Default is to log only errors and
     warnings.
@@ -197,6 +187,35 @@ output
 **warnings=**\ [**0**\ \|\ **1**]
     If set log warnings. Default is to log warnings.
     Command line option: :option:`--no-warnings`
+
+Progress updates
+""""""""""""""""
+
+**status=**\ [**0**\ \|\ **1**]
+    Control printing URL checker status messages. Default is 1.
+    Command line option: :option:`--no-status`
+
+Application
+"""""""""""
+
+**debug=**\ *STRING*\ [**,**\ *STRING*...]
+    Print debugging output for the given modules. Available debug
+    modules are **cmdline**, **checking**, **cache**, **dns**,
+    **thread**, **plugins** and **all**. Specifying **all** is an alias
+    for specifying all available loggers.
+    Command line option: :option:`--debug`
+
+Quiet
+"""""
+
+**quiet=**\ [**0**\ \|\ **1**]
+    If set, operate quiet. An alias for **log=none** that also hides
+    application information messages.
+    This is only useful with **fileoutput**, else no results will be output.
+    Command line option: :option:`--quiet`
+
+OUTPUT TYPES
+------------
 
 text
 ^^^^
@@ -212,7 +231,7 @@ text
 **encoding=**\ *STRING*
     Valid encodings are listed in
     https://docs.python.org/library/codecs.html#standard-encodings.
-    Default encoding is **iso-8859-15**.
+    Default encoding is the system default locale encoding.
 *color\**
     Color settings for the various log parts, syntax is *color* or
     *type*\ **;**\ *color*. The *type* can be **bold**, **light**,
@@ -274,7 +293,7 @@ csv
 **encoding=**\ *STRING*
     See :ref:`[text] <man/linkcheckerrc:text>` section above.
 **separator=**\ *CHAR*
-    Set CSV separator. Default is a comma (**,**).
+    Set CSV separator. Default is a semicolon (**;**).
 **quotechar=**\ *CHAR*
     Set CSV quote character. Default is a double quote (**"**).
 

@@ -79,7 +79,7 @@
 # CSV logger
 [csv]
 #filename=linkchecker-out.csv
-#separator=,
+#separator=;
 #quotechar="
 #parts=all
 
