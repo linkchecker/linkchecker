@@ -56,8 +56,7 @@ Features
 - honors robots.txt exclusion protocol
 - Cookie support
 - HTML5 support
-- :ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks. Currently available are
-  HTML and CSS syntax checks, Antivirus checks, and more.
+- :ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks
 - Different interfaces: command line and web interface
 
 Screenshots
