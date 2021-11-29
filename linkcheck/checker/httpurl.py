@@ -177,7 +177,14 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         log.debug(LOG_CHECK, "Request headers %s", request.headers)
         self.url_connection = self.session.send(request, **kwargs)
         self.headers = self.url_connection.headers
-        self.encoding = self.url_connection.encoding
+        log.debug(LOG_CHECK, "Response headers %s", self.headers)
+        if self.url_connection.encoding == "ISO-8859-1":
+            # Can't trust ISO-8859-1 because it is Requests' fallback for text
+            # content-types. We fall back to it in UrlBase.get_content() if
+            # Beautiful Soup doesn't return an encoding.
+            self.encoding = None
+        else:
+            self.encoding = self.url_connection.encoding
         log.debug(LOG_CHECK, "Response encoding %s", self.encoding)
         self._add_ssl_info()
 
