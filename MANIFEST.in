@@ -79,3 +79,5 @@ recursive-include windows               \
     *.cer                               \
     *.pfx                               \
     *.pvk
+
+prune .github/

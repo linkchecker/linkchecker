@@ -53,8 +53,6 @@ except ImportError:
 else:
     COMPILE_TRANSLATIONS = True
 
-# the application version
-AppVersion = "10.0.1"
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
@@ -336,7 +334,10 @@ if os.name == "posix":
 
 setup(
     name=AppName,
-    version=AppVersion,
+    use_scm_version={
+        "local_scheme": "node-and-timestamp",
+        "version_scheme": "post-release",
+    },
     description=Description,
     keywords="link,url,site,checking,crawling,verification,validation",
     author=myname,
@@ -371,6 +372,7 @@ setup(
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
     python_requires=">= 3.6",
+    setup_requires=["setuptools_scm"],
     install_requires=[
         "requests >= 2.4",
         "dnspython >= 2.0",

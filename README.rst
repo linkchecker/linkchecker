@@ -47,14 +47,17 @@ For other options see ``linkchecker --help``.
 Docker usage
 -------------
 
-*The Docker images are out-of-date, pip installation is the only currently recommended method.*
-
 If you do not want to install any additional libraries/dependencies you can use the Docker image.
 
 Example for external web site check::
 
-  docker run --rm -it -u $(id -u):$(id -g) linkchecker/linkchecker --verbose https://www.example.com
+  docker run --rm -it -u $(id -u):$(id -g) ghcr.io/linkchecker/linkchecker:latest --verbose https://www.example.com
 
 Local HTML file check::
 
-  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt linkchecker/linkchecker --verbose index.html
+  docker run --rm -it -u $(id -u):$(id -g) -v "$PWD":/mnt ghcr.io/linkchecker/linkchecker:latest --verbose index.html
+
+In addition to the rolling latest image, uniquely tagged images can also be found
+on the `packages`_ page.
+
+.. _packages: https://github.com/linkchecker/linkchecker/pkgs/container/linkchecker

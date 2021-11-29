@@ -59,7 +59,7 @@ Release process
 1. check whether updated translations need committing
    (`make locale; make -C doc locale; make -C doc man`)
 
-2. bump AppVersion in `setup.py`, edit `changelog.txt`, and if applicable the
+2. edit `changelog.txt`, and if applicable the
    copyright date in `linkcheck/configuration/__init__.py`
 
 3. confirm tests have passed
@@ -74,6 +74,4 @@ Release process
 
 8. check distribution files (`twine check dist/*`) and upload to PyPI (`twine upload dist/*`)
 
-9. create release (vX.Y.Z) on GitHub (GitHub creates the .tar.gz and .zip archives)
-
-10. increment AppVersion to vX.Y.Z+1.dev0
+9. create release (vX.Y.Z) on GitHub (warn users about GitHub archives)

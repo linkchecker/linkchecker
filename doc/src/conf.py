@@ -4,12 +4,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-from datetime import date
 import linkcheck.configuration
 
 project = 'LinkChecker'
 copyright = linkcheck.configuration.Copyright.split("Copyright (C) ")[1]
-version = str(date.today())
+version = linkcheck.configuration.Version
 release = version
 
 # -- General configuration ---------------------------------------------------
