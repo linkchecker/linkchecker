@@ -169,14 +169,14 @@ output
     Command line option: :option:`--debug`
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
     Output to a file **linkchecker-out.**\ *TYPE*, or
-    **$HOME/.linkchecker/failures** for **failures** output.
+    **$HOME/.linkchecker/failures** for the **failures** output type.
     Valid file output types are **text**, **html**, **sql**, **csv**,
     **gml**, **dot**, **xml**, **none** or **failures**. Default is no
     file output. The various output types are documented below. Note
     that you can suppress all console output with **output=none**.
     Command line option: :option:`--file-output`
 **log=**\ *TYPE*\ [**/**\ *ENCODING*]
-    Specify output type as **text**, **html**, **sql**, **csv**,
+    Specify the console output type as **text**, **html**, **sql**, **csv**,
     **gml**, **dot**, **xml**, **none** or **failures**. Default type
     is **text**. The various output types are documented below.
     The *ENCODING* specifies the output encoding, the default is that of
@@ -185,8 +185,8 @@ output
     Command line option: :option:`--output`
 **quiet=**\ [**0**\ \|\ **1**]
     If set, operate quiet. An alias for **log=none**. This is only
-    useful with **fileoutput**.
-    Command line option: :option:`--verbose`
+    useful with **fileoutput**, else no results will be output.
+    Command line option: :option:`--quiet`
 **status=**\ [**0**\ \|\ **1**]
     Control printing check status messages. Default is 1.
     Command line option: :option:`--no-status`

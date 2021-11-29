@@ -124,7 +124,7 @@ Output options
 .. option:: -F TYPE[/ENCODING][/FILENAME], --file-output=TYPE[/ENCODING][/FILENAME]
 
     Output to a file linkchecker-out.TYPE,
-    $HOME/.linkchecker/failures for failures output, or
+    $HOME/.linkchecker/failures for the failures output type, or
     FILENAME if specified. The ENCODING specifies the output
     encoding, the default is that of your locale. Valid encodings are
     listed at
@@ -147,10 +147,9 @@ Output options
 
 .. option:: -o TYPE[/ENCODING], --output=TYPE[/ENCODING]
 
-    Specify output type as text, html, sql, csv,
+    Specify the console output type as text, html, sql, csv,
     gml, dot, xml, sitemap, none or failures.
-    Default type is text. The various output types are documented
-    below.
+    Default type is text. The various output types are documented below.
     The ENCODING specifies the output encoding, the default is that of
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
@@ -158,7 +157,7 @@ Output options
 .. option:: -q, --quiet
 
     Quiet operation, an alias for :option:`-o` *none*. This is only useful with
-    :option:`-F`.
+    :option:`-F`, else no results will be output.
 
 .. option:: -v, --verbose
 
