@@ -184,8 +184,9 @@ output
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
 **quiet=**\ [**0**\ \|\ **1**]
-    If set, operate quiet. An alias for **log=none**. This is only
-    useful with **fileoutput**, else no results will be output.
+    If set, operate quiet. An alias for **log=none** that also hides
+    application information messages.
+    This is only useful with **fileoutput**, else no results will be output.
     Command line option: :option:`--quiet`
 **status=**\ [**0**\ \|\ **1**]
     Control printing check status messages. Default is 1.

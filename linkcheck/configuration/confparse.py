@@ -134,6 +134,7 @@ class LCConfigParser(RawConfigParser):
             if self.getboolean(section, "quiet"):
                 self.config['output'] = 'none'
                 self.config['quiet'] = True
+                logconf.reset_loglevel()  # if debug will be overwritten next
         if self.has_option(section, "debug"):
             val = self.get(section, "debug")
             parts = [f.strip().lower() for f in val.split(',')]

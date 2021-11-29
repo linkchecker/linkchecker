@@ -529,6 +529,8 @@ if options.debug:
         if _name not in allowed_debugs:
             print_usage(_("Invalid debug level %(level)r") % {"level": _name})
     logconf.set_debug(options.debug)
+elif options.quiet:
+    logconf.reset_loglevel()
 log.debug(
     LOG_CMDLINE,
     _("Python %(version)s on %(platform)s")

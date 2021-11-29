@@ -156,8 +156,9 @@ Output options
 
 .. option:: -q, --quiet
 
-    Quiet operation, an alias for :option:`-o` *none*. This is only useful with
-    :option:`-F`, else no results will be output.
+    Quiet operation, an alias for :option:`-o` *none* that also hides
+    application information messages.
+    This is only useful with :option:`-F`, else no results will be output.
 
 .. option:: -v, --verbose
 
