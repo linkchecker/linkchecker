@@ -161,12 +161,9 @@ authentication
 output
 ^^^^^^
 
-**debug=**\ *STRING*\ [**,**\ *STRING*...]
-    Print debugging output for the given modules. Available debug
-    modules are **cmdline**, **checking**, **cache**, **dns**,
-    **thread**, **plugins** and **all**. Specifying **all** is an alias
-    for specifying all available loggers.
-    Command line option: :option:`--debug`
+URL checking results
+""""""""""""""""""""
+
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
     Output to a file **linkchecker-out.**\ *TYPE*, or
     **$HOME/.linkchecker/failures** for the **failures** output type.
@@ -183,14 +180,6 @@ output
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
-**quiet=**\ [**0**\ \|\ **1**]
-    If set, operate quiet. An alias for **log=none** that also hides
-    application information messages.
-    This is only useful with **fileoutput**, else no results will be output.
-    Command line option: :option:`--quiet`
-**status=**\ [**0**\ \|\ **1**]
-    Control printing check status messages. Default is 1.
-    Command line option: :option:`--no-status`
 **verbose=**\ [**0**\ \|\ **1**]
     If set log all checked URLs once. Default is to log only errors and
     warnings.
@@ -198,6 +187,35 @@ output
 **warnings=**\ [**0**\ \|\ **1**]
     If set log warnings. Default is to log warnings.
     Command line option: :option:`--no-warnings`
+
+Progress updates
+""""""""""""""""
+
+**status=**\ [**0**\ \|\ **1**]
+    Control printing URL checker status messages. Default is 1.
+    Command line option: :option:`--no-status`
+
+Application
+"""""""""""
+
+**debug=**\ *STRING*\ [**,**\ *STRING*...]
+    Print debugging output for the given modules. Available debug
+    modules are **cmdline**, **checking**, **cache**, **dns**,
+    **thread**, **plugins** and **all**. Specifying **all** is an alias
+    for specifying all available loggers.
+    Command line option: :option:`--debug`
+
+Quiet
+"""""
+
+**quiet=**\ [**0**\ \|\ **1**]
+    If set, operate quiet. An alias for **log=none** that also hides
+    application information messages.
+    This is only useful with **fileoutput**, else no results will be output.
+    Command line option: :option:`--quiet`
+
+OUTPUT TYPES
+------------
 
 text
 ^^^^

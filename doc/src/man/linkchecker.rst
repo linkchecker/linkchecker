@@ -112,14 +112,8 @@ General options
 Output options
 ^^^^^^^^^^^^^^
 
-.. option:: -D STRING, --debug=STRING
-
-    Print debugging output for the given logger. Available loggers are
-    cmdline, checking, cache, dns, plugin and
-    all. Specifying all is an alias for specifying all available
-    loggers. The option can be given multiple times to debug with more
-    than one logger. For accurate results, threading will be disabled
-    during debug runs.
+URL checking results
+""""""""""""""""""""
 
 .. option:: -F TYPE[/ENCODING][/FILENAME], --file-output=TYPE[/ENCODING][/FILENAME]
 
@@ -137,10 +131,6 @@ Output options
     The various output types are documented below. Note that you can
     suppress all console output with the option :option:`-o` *none*.
 
-.. option:: --no-status
-
-    Do not print check status messages.
-
 .. option:: --no-warnings
 
     Don't log warnings. Default is to log warnings.
@@ -154,15 +144,37 @@ Output options
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
 
+.. option:: -v, --verbose   
+
+    Log all checked URLs. Default is to log only errors and warnings.
+
+Progress updates
+""""""""""""""""
+
+.. option:: --no-status
+
+    Do not print URL check status messages.
+
+Application
+"""""""""""
+
+.. option:: -D STRING, --debug=STRING
+
+    Print debugging output for the given logger. Available loggers are
+    cmdline, checking, cache, dns, plugin and
+    all. Specifying all is an alias for specifying all available
+    loggers. The option can be given multiple times to debug with more
+    than one logger. For accurate results, threading will be disabled
+    during debug runs.
+
+Quiet
+"""""
+
 .. option:: -q, --quiet
 
     Quiet operation, an alias for :option:`-o` *none* that also hides
     application information messages.
     This is only useful with :option:`-F`, else no results will be output.
-
-.. option:: -v, --verbose
-
-    Log all checked URLs. Default is to log only errors and warnings.
 
 Checking options
 ^^^^^^^^^^^^^^^^
