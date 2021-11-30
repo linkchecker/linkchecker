@@ -9,6 +9,7 @@ include Makefile
 include install-rpm.sh
 include .project
 include .pydevproject
+include .yamllint
 
 recursive-include cgi-bin               \
     *.css                               \

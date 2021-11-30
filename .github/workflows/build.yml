@@ -123,6 +123,7 @@ jobs:
           - flake8
           - check-manifest
           - check-python-versions
+          - yamllint
 
     steps:
       - name: Git clone
