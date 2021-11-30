@@ -8,7 +8,7 @@ import linkcheck.configuration
 
 project = 'LinkChecker'
 copyright = linkcheck.configuration.Copyright.split("Copyright (C) ")[1]
-version = linkcheck.configuration.Version
+version = linkcheck.configuration.Version.replace("0.0.post1+g", "")
 release = version
 
 # -- General configuration ---------------------------------------------------
