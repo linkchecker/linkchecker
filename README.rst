@@ -42,12 +42,18 @@ in the source code archive.
 Usage
 ------
 Execute ``linkchecker https://www.example.com``.
-For other options see ``linkchecker --help``.
+For other options see ``linkchecker --help``, and for more information the
+manual pages `linkchecker(1)`_ and `linkcheckerrc(5)`_.
+
+.. _linkchecker(1): https://linkchecker.github.io/linkchecker/man/linkchecker.html
+
+.. _linkcheckerrc(5): https://linkchecker.github.io/linkchecker/man/linkcheckerrc.html
 
 Docker usage
 -------------
 
-If you do not want to install any additional libraries/dependencies you can use the Docker image.
+If you do not want to install any additional libraries/dependencies you can use
+the Docker image which is published on GitHub Packages.
 
 Example for external web site check::
 
