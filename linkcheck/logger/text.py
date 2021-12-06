@@ -97,7 +97,7 @@ class TextLogger(_Logger):
         self.writeln(configuration.Copyright)
         self.writeln(configuration.Freeware)
         self.writeln(
-            _("Get the newest version at %(url)s") % {'url': configuration.Url}
+            _("Read the documentation at %(url)s") % {'url': configuration.Url}
         )
         self.writeln(
             _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}

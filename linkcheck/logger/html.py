@@ -398,7 +398,7 @@ class HtmlLogger(_Logger):
             '</blockquote><br/><hr><small>' + configuration.HtmlAppInfo + "<br/>"
         )
         self.writeln(
-            _("Get the newest version at %s")
+            _("Read the documentation at %s")
             % (
                 '<a href="'
                 + configuration.Url
