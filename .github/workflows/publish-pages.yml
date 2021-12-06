@@ -8,9 +8,15 @@ jobs:
   run:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v2
+        # Needed for setuptools_scm to extract LinkChecker version from tag
+        # https://github.com/actions/checkout/issues/249
+        with:
+          fetch-depth: 0
 
       - name: Install Ubuntu packages
         run: sudo apt install graphviz
@@ -31,7 +37,7 @@ jobs:
             make -C doc html
 
       - name: Publish
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./doc/html
