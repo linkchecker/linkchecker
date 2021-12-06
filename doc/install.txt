@@ -7,7 +7,24 @@ When installing from source, for application translations to be installed
 polib_ needs to be installed before LinkChecker. After LinkChecker installation
 polib_ can be removed.
 
+There are several steps to resolve problems with detecting the character
+encoding of checked HTML pages:
+first ensure the web server, if used, is not returning an incorrect charset in
+the Content-Type header; second, if possible add a meta element to the HTML
+page with the correct charset; finally, install cchardet_ - Beautiful Soup has
+its own encoding detector but will use in order of preference cchardet_ or
+chardet_. You might find that one of the other three detectors works better for
+your pages. There may already be a system copy of e.g. chardet installed;
+installing LinkChecker in a Python venv_ gives control over which packages are
+used.
+
+.. _chardet: https://pypi.org/project/chardet/
+
+.. _cchardet: https://pypi.org/project/cchardet/
+
 .. _polib: https://pypi.org/project/polib/
+
+.. _venv: https://docs.python.org/3/library/venv.html#creating-virtual-environments
 
 Setup with pip
 ------------------
