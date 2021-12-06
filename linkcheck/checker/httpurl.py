@@ -46,8 +46,6 @@ from . import internpaturl, proxysupport
 from .const import WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED
 from requests.sessions import REDIRECT_STATI
 
-# assumed HTTP header encoding
-HEADER_ENCODING = "iso-8859-1"
 HTTP_SCHEMAS = ('http://', 'https://')
 
 # match for robots meta element content attribute
