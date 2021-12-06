@@ -74,4 +74,4 @@ Release process
 
 8. check distribution files (`twine check dist/*`) and upload to PyPI (`twine upload dist/*`)
 
-9. create release (vX.Y.Z) on GitHub (warn users about GitHub archives)
+9. create release (vX.Y.Z) on GitHub

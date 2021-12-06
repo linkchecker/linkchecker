@@ -7,6 +7,10 @@ When installing from source, for application translations to be installed
 polib_ needs to be installed before LinkChecker. After LinkChecker installation
 polib_ can be removed.
 
+Installing from the GitHub release assets requires setuptools-scm-git-archive_.
+
+pip-run_ may be useful for both of these cases.
+
 There are several steps to resolve problems with detecting the character
 encoding of checked HTML pages:
 first ensure the web server, if used, is not returning an incorrect charset in
@@ -20,9 +24,13 @@ used.
 
 .. _chardet: https://pypi.org/project/chardet/
 
+.. _pip-run: https://pypi.org/project/pip-run/
+
 .. _cchardet: https://pypi.org/project/cchardet/
 
 .. _polib: https://pypi.org/project/polib/
+
+.. _setuptools-scm-git-archive: https://pypi.org/project/setuptools-scm-git-archive/
 
 .. _venv: https://docs.python.org/3/library/venv.html#creating-virtual-environments
 
