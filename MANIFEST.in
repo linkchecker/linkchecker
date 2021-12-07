@@ -82,4 +82,4 @@ recursive-include windows               \
     *.pfx                               \
     *.pvk
 
-prune .github/
+prune .github
