@@ -157,7 +157,8 @@ class LinkFinder:
                 base = self.base_ref
             # note: value can be None
             value = attrs.get(attr)
-            if tag == 'link' and attrs.get('rel') == 'dns-prefetch':
+            rel = attrs.get('rel', '').lower()
+            if tag == 'link' and ('dns-prefetch' in rel or 'preconnect' in rel):
                 if ':' in value:
                     value = value.split(':', 1)[1]
                 value = 'dns:' + value.rstrip('/')
