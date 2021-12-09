@@ -1,0 +1,58 @@
+name: Create a branch with updated man pages and application translations
+
+on: workflow_dispatch
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: linkchecker/linkchecker
+          ref: master
+          # Needed for setuptools_scm to extract LinkChecker version from tag
+          # https://github.com/actions/checkout/issues/249
+          fetch-depth: 0
+
+      - name: Install Ubuntu packages
+        run: sudo apt install gettext git
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Install Python packages
+        run: >
+            pip3 install dnspython beautifulsoup4 pyxdg requests \
+                         sphinx sphinx_epytext sphinx_rtd_theme sphinx-intl \
+                         setuptools_scm
+
+      - name: Prepare git environment
+        run: |
+            git config user.email "linkchecker@linkchecker.github.io"
+            git config user.name "LinkChecker"
+            git checkout -b man-updates
+            git remote add local ${{ github.server_url }}/${{ github.repository }}
+
+      - name: Create application version number
+        run: >
+            python3 setup.py build
+
+      - name: Build man pages
+        run: |
+            make -C doc locale
+            git commit -a -m "Update doc locale"
+            make -C doc man
+            git commit -a -m "Update man pages"
+
+      - name: Build application translations catalogs
+        run: |
+            make -C po
+            # It's OK if no changes were made
+            git commit -a -m "Update application translation catalogs" || true
+
+      - name: Push changes
+        run: >
+            git push --set-upstream local man-updates
