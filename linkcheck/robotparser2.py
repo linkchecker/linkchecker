@@ -92,8 +92,9 @@ class RobotFileParser:
         try:
             response = self.session.get(self.url, **kwargs)
             response.raise_for_status()
+            log.debug(LOG_CHECK, "Robots response headers: %s", response.headers)
             content_type = response.headers.get('content-type')
-            self.encoding = response.encoding
+            self.encoding = response.encoding = "utf-8"
             if content_type and content_type.lower().startswith('text/plain'):
                 self.parse(response.iter_lines(decode_unicode=True))
             else:
