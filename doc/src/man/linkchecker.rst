@@ -330,7 +330,7 @@ To use a proxy on Unix or Windows set the :envvar:`http_proxy` or
 of the form
 **http://**\ [*user*\ **:**\ *pass*\ **@**]\ *host*\ [**:**\ *port*].
 LinkChecker also detects manual proxy settings of Internet Explorer
-under Windows systems, and GNOME or KDE on Linux systems. On a Mac use
+under Windows systems. On a Mac use
 the Internet Config to select a proxy.
 You can also set a comma-separated domain list in the :envvar:`no_proxy`
 environment variables to ignore any proxy settings for these domains.

@@ -38,8 +38,6 @@ _downloadedbytes_lock = threading.RLock()
 def new_request_session(config, cookies):
     """Create a new request session."""
     session = requests.Session()
-    if config["proxy"]:
-        session.proxies.update(config["proxy"])
     if cookies:
         session.cookies = cookies
     session.max_redirects = config["maxhttpredirects"]
