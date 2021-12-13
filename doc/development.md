@@ -66,12 +66,12 @@ Release process
 
 4. submit a pull request
 
-5. create a new git clone
+5. create release (vX.Y.Z) on GitHub
 
-6. check Python polib package is installed
+6. create a new git clone
 
-7. build Python distribution files (`setup.py sdist bdist_wheel`)
+7. check Python polib package is installed
 
-8. check distribution files (`twine check dist/*`) and upload to PyPI (`twine upload dist/*`)
+8. build Python distribution files (`setup.py sdist bdist_wheel`)
 
-9. create release (vX.Y.Z) on GitHub (warn users about GitHub archives)
+9. check distribution files (`twine check dist/*`) and upload to PyPI (`twine upload dist/*`)
