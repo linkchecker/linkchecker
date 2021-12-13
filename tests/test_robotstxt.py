@@ -31,7 +31,7 @@ class TestRobotsTxt(unittest.TestCase):
         """
         Initialize self.rp as a robots.txt parser.
         """
-        self.rp = linkcheck.robotparser2.RobotFileParser()
+        self.rp = linkcheck.robotparser2.RobotFileParser(session=None)
 
     def test_robotstxt(self):
         lines = [

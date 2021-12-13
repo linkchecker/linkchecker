@@ -38,6 +38,8 @@ _downloadedbytes_lock = threading.RLock()
 def new_request_session(config, cookies):
     """Create a new request session."""
     session = requests.Session()
+    if config["proxy"]:
+        session.proxies.update(config["proxy"])
     if cookies:
         session.cookies = cookies
     session.max_redirects = config["maxhttpredirects"]
@@ -83,7 +85,7 @@ class Aggregate:
         session = new_request_session(self.config, self.cookies)
         log.debug(LOG_CHECK, "Getting login form %s", url)
         kwargs = dict(timeout=self.config["timeout"])
-        # XXX: proxy?  sslverify?  can we reuse HttpUrl.get_request_kwargs()
+        # XXX: sslverify?  can we reuse HttpUrl.get_request_kwargs()
         # somehow?
         response = session.get(url, **kwargs)
         response.raise_for_status()
