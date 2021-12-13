@@ -10,6 +10,7 @@ include install-rpm.sh
 include .project
 include .pydevproject
 include .yamllint
+include _release_date
 
 recursive-include cgi-bin               \
     *.css                               \
@@ -81,4 +82,4 @@ recursive-include windows               \
     *.pfx                               \
     *.pvk
 
-prune .github/
+prune .github

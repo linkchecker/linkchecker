@@ -30,8 +30,8 @@ import sys
 if sys.version_info < (3, 6, 0, "final", 0):
     raise SystemExit("This program requires Python 3.6 or later.")
 import os
-import re
 import stat
+import subprocess
 from pathlib import Path
 
 # import Distutils stuff
@@ -40,6 +40,7 @@ from distutils.command.install_lib import install_lib
 from distutils.command.build import build
 from distutils.command.clean import clean
 from distutils.command.install_data import install_data
+from setuptools.command.sdist import sdist
 from distutils.dir_util import remove_tree
 from distutils.file_util import write_file
 from distutils import util, log
@@ -56,6 +57,8 @@ else:
 # the application name
 AppName = "LinkChecker"
 Description = "check links in web documents or full websites"
+
+RELEASE_DATE_FILE = "_release_date"
 
 
 def get_long_description():
@@ -83,25 +86,31 @@ def cnormpath(path):
     return path
 
 
-release_ro = re.compile(r"\(released (.+)\)")
-
-
-def get_release_date():
-    """Parse and return relase date as string from doc/changelog.txt."""
-    fname = os.path.join("doc", "changelog.txt")
+def get_release_date(for_sdist=False):
+    """Return release date as a string from the most recent commit."""
     release_date = "unknown"
-    with open(fname) as fd:
-        # the release date is on the first line
-        line = fd.readline()
-        mo = release_ro.search(line)
-        if mo:
-            release_date = mo.groups(1)
+    # need git >= 2.25.0 for %cs
+    cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cI"],
+                        stdout=subprocess.PIPE, universal_newlines=True)
+    if cp.stdout:
+        release_date = cp.stdout.split("T")[0]
+    elif not for_sdist:
+        try:
+            release_date = Path(RELEASE_DATE_FILE).read_text()
+        except FileNotFoundError:
+            pass
     return release_date
 
 
 def get_portable():
     """Return portable flag as string."""
     return os.environ.get("LINKCHECKER_PORTABLE", "0")
+
+
+class MySdist(sdist):
+    def run(self):
+        Path(RELEASE_DATE_FILE).write_text(get_release_date(for_sdist=True))
+        super().run()
 
 
 class MyBuild(build):
@@ -350,6 +359,7 @@ setup(
     long_description_content_type="text/x-rst",
     distclass=MyDistribution,
     cmdclass={
+        "sdist": MySdist,
         "build": MyBuild,
         "install_lib": MyInstallLib,
         "install_data": MyInstallData,
