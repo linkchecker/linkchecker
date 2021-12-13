@@ -19,7 +19,7 @@ Mixin class for URLs that can be fetched over a proxy.
 import urllib.parse
 import urllib.request
 import os
-from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil, httputil
+from .. import LinkCheckerError, log, LOG_CHECK, url as urlutil
 
 
 class ProxySupport:
@@ -32,7 +32,6 @@ class ProxySupport:
         """
         self.proxy = proxy
         self.proxytype = "http"
-        self.proxyauth = None
         if not self.proxy:
             return
         proxyurl = urllib.parse.urlparse(self.proxy)
@@ -54,11 +53,6 @@ class ProxySupport:
         self.add_info(_("Using proxy `%(proxy)s'.") % dict(proxy=self.proxy))
         self.proxyhost = proxyurl.hostname
         self.proxyport = proxyurl.port
-        if proxyurl.username is not None:
-            username = proxyurl.username
-            password = proxyurl.password if proxy.password is not None else ""
-            auth = "%s:%s" % (username, password)
-            self.proxyauth = "Basic " + httputil.encode_base64(auth)
 
     def ignore_proxy_host(self):
         """Check if self.host is in the $no_proxy ignore list."""
