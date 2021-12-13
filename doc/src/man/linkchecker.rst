@@ -325,15 +325,17 @@ and one to all URLs starting with **https://example.org/**:
 PROXY SUPPORT
 -------------
 
-To use a proxy on Unix or Windows set the :envvar:`http_proxy`, :envvar:`https_proxy` or
-:envvar:`ftp_proxy` environment variables to the proxy URL. The URL should be of
-the form
+To use a proxy on Unix or Windows set the :envvar:`http_proxy` or
+:envvar:`https_proxy` environment variables to the proxy URL. The URL should be
+of the form
 **http://**\ [*user*\ **:**\ *pass*\ **@**]\ *host*\ [**:**\ *port*].
 LinkChecker also detects manual proxy settings of Internet Explorer
-under Windows systems, and GNOME or KDE on Linux systems. On a Mac use
+under Windows systems. On a Mac use
 the Internet Config to select a proxy.
 You can also set a comma-separated domain list in the :envvar:`no_proxy`
-environment variables to ignore any proxy settings for these domains.
+environment variable to ignore any proxy settings for these domains.
+The :envvar:`curl_ca_bundle` environment variable can be used to identify an
+alternative certificate bundle to be used with an HTTPS proxy.
 
 Setting a HTTP proxy on Unix for example looks like this:
 

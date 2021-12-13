@@ -21,11 +21,11 @@ import ftplib
 from io import StringIO
 
 from .. import log, LOG_CHECK, LinkCheckerError, mimeutil
-from . import proxysupport, httpurl, internpaturl, get_index_html
+from . import internpaturl, get_index_html
 from .const import WARN_FTP_MISSING_SLASH
 
 
-class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
+class FtpUrl(internpaturl.InternPatternUrl):
     """
     Url link with ftp scheme.
     """
@@ -43,25 +43,8 @@ class FtpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
 
     def check_connection(self):
         """
-        In case of proxy, delegate to HttpUrl. Else check in this
-        order: login, changing directory, list the file.
+        Check in this order: login, changing directory, list the file.
         """
-        # proxy support (we support only http)
-        self.set_proxy(self.aggregate.config["proxy"].get(self.scheme))
-        if self.proxy:
-            # using a (HTTP) proxy
-            http = httpurl.HttpUrl(
-                self.base_url,
-                self.recursion_level,
-                self.aggregate,
-                parent_url=self.parent_url,
-                base_ref=self.base_ref,
-                line=self.line,
-                column=self.column,
-                name=self.name,
-            )
-            http.build_url()
-            return http.check()
         self.login()
         self.negotiate_encoding()
         self.filename = self.cwd()

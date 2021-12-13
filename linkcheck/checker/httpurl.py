@@ -40,7 +40,7 @@ from .. import (
     LinkCheckerError,
     httputil,
 )
-from . import internpaturl, proxysupport
+from . import internpaturl
 
 # import warnings
 from .const import WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED
@@ -52,7 +52,7 @@ HTTP_SCHEMAS = ('http://', 'https://')
 nofollow_re = re.compile(r"\bnofollow\b", re.IGNORECASE)
 
 
-class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
+class HttpUrl(internpaturl.InternPatternUrl):
     """
     Url link with http scheme.
     """
@@ -131,8 +131,6 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             valid request
         """
         self.session = self.aggregate.get_request_session()
-        # set the proxy, so a 407 status after this is an error
-        self.set_proxy(self.aggregate.config["proxy"].get(self.scheme))
         self.construct_auth()
         # check robots.txt
         if not self.allows_robots(self.url):
@@ -254,8 +252,6 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Construct keyword parameters for Session.request() and
         Session.resolve_redirects()."""
         kwargs = dict(stream=True, timeout=self.aggregate.config["timeout"])
-        if self.proxy:
-            kwargs["proxies"] = {self.proxytype: self.proxy}
         if self.scheme == "https" and self.aggregate.config["sslverify"]:
             kwargs['verify'] = self.aggregate.config["sslverify"]
         else:

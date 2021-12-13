@@ -13,13 +13,7 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-import base64
 from datetime import datetime
-
-
-def encode_base64(s):
-    """Encode given string in base64, excluding trailing newlines."""
-    return base64.b64encode(s)
 
 
 def x509_to_dict(x509):

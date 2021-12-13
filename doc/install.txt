@@ -91,11 +91,7 @@ First, install the required software.
 7. *Optional, used for Virus checking:*
    ClamAv from https://www.clamav.net/
 
-8. *Optional, for GNOME proxy setting parsing:*
-   PyGObject and GIO.
-   Best installed from your distribution e.g. ``python3-gi``
-
-9. *Optional, to run the WSGI web interface:*
+8. *Optional, to run the WSGI web interface:*
    Apache from https://httpd.apache.org/
    mod_wsgi from https://pypi.org/project/mod-wsgi/
 

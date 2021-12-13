@@ -83,7 +83,7 @@ class Aggregate:
         session = new_request_session(self.config, self.cookies)
         log.debug(LOG_CHECK, "Getting login form %s", url)
         kwargs = dict(timeout=self.config["timeout"])
-        # XXX: proxy?  sslverify?  can we reuse HttpUrl.get_request_kwargs()
+        # XXX: sslverify?  can we reuse HttpUrl.get_request_kwargs()
         # somehow?
         response = session.get(url, **kwargs)
         response.raise_for_status()

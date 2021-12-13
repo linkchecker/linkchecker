@@ -115,7 +115,6 @@ class TestLogger(linkcheck.logger._Logger):
                 if (
                     "Last modified" not in info
                     and "is located in" not in info
-                    and "Using proxy" not in info
                 ):
                     self.result.append("info %s" % info)
         if self.has_part("warning"):

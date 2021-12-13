@@ -17,11 +17,9 @@
 Store metadata and options.
 """
 
-from functools import lru_cache
 import os
 import re
 import urllib.parse
-import urllib.request
 import shutil
 import socket
 import _LinkChecker_configdata as configdata
@@ -71,7 +69,6 @@ Modules = (
     ("pygeoip", "GeoIP", 'lib_version'),  # on Windows systems
     ("sqlite3", "Pysqlite", 'version'),
     ("sqlite3", "Sqlite", 'sqlite_version'),
-    ("gi", "PyGObject", '__version__'),
     ("meliae", "Meliae", '__version__'),
 )
 
@@ -177,7 +174,6 @@ class Configuration(dict):
         self["maxrequestspersecond"] = 10
         self["maxhttpredirects"] = 10
         self["nntpserver"] = os.environ.get("NNTP_SERVER", None)
-        self["proxy"] = urllib.request.getproxies()
         self["sslverify"] = True
         self["threads"] = 10
         self["timeout"] = 60
@@ -290,7 +286,6 @@ class Configuration(dict):
             self.sanitize_logger()
         if self['loginurl']:
             self.sanitize_loginurl()
-        self.sanitize_proxies()
         self.sanitize_plugins()
         self.sanitize_ssl()
         # set default socket timeout
@@ -323,20 +318,6 @@ class Configuration(dict):
         if disable:
             log.warn(LOG_CHECK, _("disabling login URL %(url)s.") % {"url": url})
             self["loginurl"] = None
-
-    def sanitize_proxies(self):
-        """Try to read additional proxy settings which urllib does not
-        support."""
-        if os.name != 'posix':
-            return
-        if "http" not in self["proxy"]:
-            http_proxy = get_gnome_proxy() or get_kde_http_proxy()
-            if http_proxy:
-                self["proxy"]["http"] = http_proxy
-        if "ftp" not in self["proxy"]:
-            ftp_proxy = get_gnome_proxy(protocol="FTP") or get_kde_ftp_proxy()
-            if ftp_proxy:
-                self["proxy"]["ftp"] = ftp_proxy
 
     def sanitize_plugins(self):
         """Ensure each plugin is configurable."""
@@ -439,224 +420,6 @@ def get_user_config():
     return userconf
 
 
-def get_gnome_proxy(protocol="HTTP"):
-    """Return host:port for a GNOME proxy if found, else None."""
-    try:
-        import gi
-        gi.require_version('Gio', '2.0')
-        from gi.repository import Gio
-    except ImportError:
-        return None
-    try:
-        schema_id = "org.gnome.system.proxy.%s" % protocol.lower()
-        # If the schema is not installed Gio.Settings.new() causes Trace/breakpoint trap
-        source = Gio.SettingsSchemaSource.get_default()
-        if source is None:
-            log.debug(LOG_CHECK, "No GSettings schemas are installed")
-            return None
-        schema = source.lookup(schema_id, False)
-        if schema is None:
-            log.debug(LOG_CHECK, "%s not installed" % schema_id)
-            return None
-
-        settings = Gio.Settings.new(schema_id)
-        if protocol == "HTTP" and not settings.get_boolean("enabled"):
-            return None
-        host = settings.get_string("host")
-        port = settings.get_int("port")
-        if host:
-            if not port:
-                port = 8080
-            return "%s:%d" % (host, port)
-    except Exception as msg:
-        log.debug(LOG_CHECK, "error getting %s proxy from GNOME: %s", (protocol, msg))
-    return None
-
-
-def get_kde_http_proxy():
-    """Return host:port for KDE HTTP proxy if found, else None."""
-    try:
-        data = read_kioslaverc()
-        return data.get("http_proxy")
-    except Exception as msg:
-        log.debug(LOG_CHECK, "error getting HTTP proxy from KDE: %s", msg)
-
-
-def get_kde_ftp_proxy():
-    """Return host:port for KDE HTTP proxy if found, else None."""
-    try:
-        data = read_kioslaverc()
-        return data.get("ftp_proxy")
-    except Exception as msg:
-        log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
-
-
-# The following KDE functions are largely ported and ajusted from
-# Google Chromium:
-# http://src.chromium.org/viewvc/chrome/trunk/src/net/proxy/proxy_config_service_linux.cc?revision=HEAD&view=markup
-# Copyright (c) 2010 The Chromium Authors. All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#
-#    * Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#    * Redistributions in binary form must reproduce the above
-# copyright notice, this list of conditions and the following disclaimer
-# in the documentation and/or other materials provided with the
-# distribution.
-#    * Neither the name of Google Inc. nor the names of its
-# contributors may be used to endorse or promote products derived from
-# this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
-def get_kde_config_dir():
-    """Return KDE configuration directory or None if not found."""
-    if os.environ.get("KDEHOME"):
-        home = os.environ.get("KDEHOME")
-    else:
-        home = os.environ.get("HOME")
-    if not home:
-        log.debug(LOG_CHECK, "KDEHOME and HOME not set")
-        return
-    kde_config_dir = os.path.join(home, ".config")
-    if not os.path.exists(kde_config_dir):
-        kde_config_dir = os.path.join(home, ".kde4", "share", "config")
-        if not os.path.exists(kde_config_dir):
-            log.debug(LOG_CHECK, "%s does not exist" % kde_config_dir)
-            return
-    return kde_config_dir
-
-
-loc_ro = re.compile(r"\[.*\]$")
-
-
-@lru_cache(1)
-def read_kioslaverc():
-    """Read kioslaverc into data dictionary."""
-    data = {}
-    kde_config_dir = get_kde_config_dir()
-    if not kde_config_dir:
-        return data
-    in_proxy_settings = False
-    filename = os.path.join(kde_config_dir, "kioslaverc")
-    if not os.path.exists(filename):
-        log.debug(LOG_CHECK, "%s does not exist" % filename)
-        return data
-    with open(filename) as fd:
-        # First read all lines into dictionary since they can occur
-        # in any order.
-        for line in fd:
-            line = line.rstrip()
-            if line.startswith('['):
-                in_proxy_settings = line.startswith("[Proxy Settings]")
-            elif in_proxy_settings:
-                if '=' not in line:
-                    continue
-                key, value = line.split('=', 1)
-                key = key.strip()
-                value = value.strip()
-                if not key:
-                    continue
-                # trim optional localization
-                key = loc_ro.sub("", key).strip()
-                if not key:
-                    continue
-                add_kde_setting(key, value, data)
-    resolve_kde_settings(data)
-    return data
-
-
-def add_kde_proxy(key, value, data):
-    """Add a proxy value to data dictionary after sanity checks."""
-    if not value or value[:3] == "//:":
-        return
-    data[key] = value
-
-
-def add_kde_setting(key, value, data):
-    """Add a KDE proxy setting value to data dictionary."""
-    if key == "ProxyType":
-        mode = None
-        int_value = int(value)
-        if int_value == 1:
-            mode = "manual"
-        elif int_value == 2:
-            # PAC URL
-            mode = "pac"
-        elif int_value == 3:
-            # WPAD.
-            mode = "wpad"
-        elif int_value == 4:
-            # Indirect manual via environment variables.
-            mode = "indirect"
-        data["mode"] = mode
-    elif key == "Proxy Config Script":
-        data["autoconfig_url"] = value
-    elif key == "httpProxy":
-        add_kde_proxy("http_proxy", value, data)
-    elif key == "httpsProxy":
-        add_kde_proxy("https_proxy", value, data)
-    elif key == "ftpProxy":
-        add_kde_proxy("ftp_proxy", value, data)
-    elif key == "ReversedException":
-        if value == "true":
-            value = True
-        elif value == "false":
-            value = False
-        else:
-            value = int(value) != 0
-        data["reversed_bypass"] = value
-    elif key == "NoProxyFor":
-        data["ignore_hosts"] = split_hosts(value)
-    elif key == "AuthMode":
-        mode = int(value)
-        # XXX todo
-
-
 def split_hosts(value):
     """Split comma-separated host list."""
     return [host for host in value.split(", ") if host]
-
-
-def resolve_indirect(data, key, splithosts=False):
-    """Replace name of environment variable with its value."""
-    value = data[key]
-    env_value = os.environ.get(value)
-    if env_value:
-        if splithosts:
-            data[key] = split_hosts(env_value)
-        else:
-            data[key] = env_value
-    else:
-        del data[key]
-
-
-def resolve_kde_settings(data):
-    """Write final proxy configuration values in data dictionary."""
-    if "mode" not in data:
-        return
-    if data["mode"] == "indirect":
-        for key in ("http_proxy", "https_proxy", "ftp_proxy"):
-            if key in data:
-                resolve_indirect(data, key)
-        if "ignore_hosts" in data:
-            resolve_indirect(data, "ignore_hosts", splithosts=True)
-    elif data["mode"] != "manual":
-        # unsupported config
-        for key in ("http_proxy", "https_proxy", "ftp_proxy"):
-            if key in data:
-                del data[key]
