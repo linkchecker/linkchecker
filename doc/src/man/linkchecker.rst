@@ -333,7 +333,7 @@ LinkChecker also detects manual proxy settings of Internet Explorer
 under Windows systems. On a Mac use
 the Internet Config to select a proxy.
 You can also set a comma-separated domain list in the :envvar:`no_proxy`
-environment variables to ignore any proxy settings for these domains.
+environment variable to ignore any proxy settings for these domains.
 The :envvar:`curl_ca_bundle` environment variable can be used to identify an
 alternative certificate bundle to be used with an HTTPS proxy.
 
