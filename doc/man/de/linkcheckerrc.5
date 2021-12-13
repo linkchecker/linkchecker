@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "Juni 20, 2021" "2021-06-20" "LinkChecker"
-.SH NAME
-linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "LINKCHECKERRC" "5" "Dezember 13, 2021" "10.0.1.post91+g7f175c13" "LinkChecker"
+.SH NAME
+linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .SH BESCHREIBUNG
 .sp
 \fBlinkcheckerrc\fP ist die Konfigurationsdatei für LinkChecker. Die Datei ist in einem INI\-Format geschrieben. Die Standarddatei ist \fB~/.linkchecker/linkcheckerrc\fP unter Unix\-, \fB%HOMEPATH%\elinkchecker\elinkcheckerrc\fP unter Windows\-Systemen.
@@ -167,22 +167,26 @@ without checking whether matching input elements exist in the HTML
 form.
 .UNINDENT
 .SS output
+.SS URL checking results
 .INDENT 0.0
 .TP
-\fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
-Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBthread\fP, \fBplugins\fP und \fBall\fP\&. Die Angabe \fBall\fP ist ein Synonym für alle verfügbaren Logger. Kommandozeilenoption: \fB\-\-debug\fP
-.TP
 \fBfileoutput=\fP\fITYPE\fP[\fB,\fP\fITYPE\fP\&...]
-Ausgabe in Datei \fBlinkchecker\-out.\fP\fITYP\fP, \fB$HOME/.linkchecker/failures\fP für \fBfailures\fP Ausgabe. Gültige Ausgabearten sind \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP> oder \fBfailures\fP Standard ist keine Dateiausgabe. Die verschiedenen Ausgabearten sind unten dokumentiert. Bemerke, dass man alle Konsolenausgaben mit \fBoutput=none\fP unterdrücken kann. Kommandozeilenoption: \fB\-\-file\-output\fP
+Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP, or
+\fB$HOME/.linkchecker/failures\fP for the \fBfailures\fP output type.
+Valid file output types are \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
+\fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP or \fBfailures\fP\&. Default is no
+file output. The various output types are documented below. Note
+that you can suppress all console output with \fBoutput=none\fP\&.
+Command line option: \fB\-\-file\-output\fP
 .TP
 \fBlog=\fP\fITYPE\fP[\fB/\fP\fIENCODING\fP]
-Gib Ausgabetyp als \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP, \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP oder \fBfailures\fP an. Stadard Typ ist \fBtext\fP\&. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das \fIENCODING\fP gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Kommandozeilenoption: \fB\-\-output\fP
-.TP
-\fBquiet=\fP[\fB0\fP|\fB1\fP]
-Falls gesetzt, erfolgt keine Ausgabe. Ein Alias für \fBlog=none\fP\&. Dies ist nur in Verbindung mit \fBfileoutput\fP nützlich. Kommandozeilenoption: \fB\-\-verbose\fP
-.TP
-\fBstatus=\fP[\fB0\fP|\fB1\fP]
-Kontrolle der Statusmeldungen. Standard ist 1. Kommandozeilenoption: \fB\-\-no\-status\fP
+Specify the console output type as \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
+\fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP or \fBfailures\fP\&. Default type
+is \fBtext\fP\&. The various output types are documented below.
+The \fIENCODING\fP specifies the output encoding, the default is that of
+your locale. Valid encodings are listed at
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+Command line option: \fB\-\-output\fP
 .TP
 \fBverbose=\fP[\fB0\fP|\fB1\fP]
 Falls gesetzt, gebe alle geprüften URLs einmal aus. Standard ist es, nur fehlerhafte URLs und Warnungen auszugeben. Kommandozeilenoption: \fB\-\-verbose\fP
@@ -190,6 +194,29 @@ Falls gesetzt, gebe alle geprüften URLs einmal aus. Standard ist es, nur fehler
 \fBwarnings=\fP[\fB0\fP|\fB1\fP]
 Falls gesetzt, gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen. Kommandozeilenoption: \fB\-\-verbose\fP
 .UNINDENT
+.SS Progress updates
+.INDENT 0.0
+.TP
+\fBstatus=\fP[\fB0\fP|\fB1\fP]
+Control printing URL checker status messages. Default is 1.
+Command line option: \fB\-\-no\-status\fP
+.UNINDENT
+.SS Application
+.INDENT 0.0
+.TP
+\fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
+Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP, \fBthread\fP, \fBplugins\fP und \fBall\fP\&. Die Angabe \fBall\fP ist ein Synonym für alle verfügbaren Logger. Kommandozeilenoption: \fB\-\-debug\fP
+.UNINDENT
+.SS Quiet
+.INDENT 0.0
+.TP
+\fBquiet=\fP[\fB0\fP|\fB1\fP]
+If set, operate quiet. An alias for \fBlog=none\fP that also hides
+application information messages.
+This is only useful with \fBfileoutput\fP, else no results will be output.
+Command line option: \fB\-\-quiet\fP
+.UNINDENT
+.SH AUSGABETYPEN
 .SS text
 .INDENT 0.0
 .TP
@@ -200,7 +227,9 @@ Gebe Dateiname für Textausgabe an. Standard Dateiname ist \fBlinkchecker\-out.t
 Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe \fI\%LOGGER PARTS\fP weiter unten. Kommandozeilenoption: none
 .TP
 \fBencoding=\fP\fISTRING\fP
-Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Die Standardenkodierung ist \fBiso\-8859\-15\fP\&.
+Valid encodings are listed in
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+Default encoding is the system default locale encoding.
 .TP
 .B \fIcolor*\fP
 Farbwerte für die verschiedenen Ausgabeteile. Syntax ist \fIcolor\fP oder \fItype\fP\fB;\fP\fIcolor\fP\&. Der \fItype\fP kann \fBbold\fP, \fBlight\fP, \fBblink\fP> oder \fBinvert\fP sein.  Die \fIcolor\fP kann \fBdefault\fP, \fBblack\fP, \fBred\fP, \fBgreen\fP, \fByellow\fP, \fBblue\fP, \fBpurple\fP, \fBcyan\fP, \fBwhite\fP, \fBBlack\fP, \fBRed\fP, \fBGreen\fP, \fBYellow\fP, \fBBlue\fP, \fBPurple\fP, \fBCyan\fP oder \fBWhite\fP sein. Kommandozeilenoption: none
@@ -275,7 +304,7 @@ Siehe \fI\%[text]\fP Sektion weiter oben.
 Siehe \fI\%[text]\fP Sektion weiter oben.
 .TP
 \fBseparator=\fP\fICHAR\fP
-Das CSV Trennzeichen. Standard ist Komma (\fB,\fP).
+Set CSV separator. Default is a semicolon (\fB;\fP).
 .TP
 \fBquotechar=\fP\fICHAR\fP
 Setze CSV Quotezeichen. Standard ist das doppelte Anführungszeichen (\fB"\fP).
@@ -473,6 +502,13 @@ options in their section.
 .SS AnchorCheck
 .sp
 Checks validity of HTML anchors.
+.sp
+\fBBEMERKUNG:\fP
+.INDENT 0.0
+.INDENT 3.5
+The AnchorCheck plugin is currently broken and is disabled.
+.UNINDENT
+.UNINDENT
 .SS LocationInfo
 .sp
 Adds the country and if possible city name of the URL host as info.
@@ -502,6 +538,13 @@ Configures the expiration warning time in days.
 .SS HtmlSyntaxCheck
 .sp
 Prüfe Syntax von HTML URLs mit dem W3C Online Validator. Siehe \fI\%https://validator.w3.org/docs/api.html\fP\&.
+.sp
+\fBBEMERKUNG:\fP
+.INDENT 0.0
+.INDENT 3.5
+The HtmlSyntaxCheck plugin is currently broken and is disabled.
+.UNINDENT
+.UNINDENT
 .SS HttpHeaderInfo
 .sp
 Print HTTP headers in URL info.

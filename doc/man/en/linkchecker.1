@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "June 20, 2021" "2021-06-20" "LinkChecker"
-.SH NAME
-linkchecker \- command line client to check HTML documents and websites for broken links
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "LINKCHECKER" "1" "December 13, 2021" "10.0.1.post91+g7f175c13" "LinkChecker"
+.SH NAME
+linkchecker \- command line client to check HTML documents and websites for broken links
 .SH SYNOPSIS
 .sp
 \fBlinkchecker\fP [\fIoptions\fP] [\fIfile\-or\-url\fP]...
@@ -57,8 +57,6 @@ support for robots.txt exclusion protocol
 support for Cookies
 .IP \(bu 2
 support for HTML5
-.IP \(bu 2
-HTML and CSS syntax check
 .IP \(bu 2
 Antivirus check
 .IP \(bu 2
@@ -189,21 +187,12 @@ Print version and exit.
 Print available check plugins and exit.
 .UNINDENT
 .SS Output options
-.INDENT 0.0
-.TP
-.B \-D STRING, \-\-debug=STRING
-Print debugging output for the given logger. Available loggers are
-cmdline, checking, cache, dns, plugin and
-all. Specifying all is an alias for specifying all available
-loggers. The option can be given multiple times to debug with more
-than one logger. For accurate results, threading will be disabled
-during debug runs.
-.UNINDENT
+.SS URL checking results
 .INDENT 0.0
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
 Output to a file linkchecker\-out.TYPE,
-$HOME/.linkchecker/failures for failures output, or
+$HOME/.linkchecker/failures for the failures output type, or
 FILENAME if specified. The ENCODING specifies the output
 encoding, the default is that of your locale. Valid encodings are
 listed at
@@ -218,47 +207,48 @@ suppress all console output with the option \fI\%\-o\fP \fInone\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
-.B \-\-no\-status
-Do not print check status messages.
-.UNINDENT
-.INDENT 0.0
-.TP
 .B \-\-no\-warnings
 Don\(aqt log warnings. Default is to log warnings.
 .UNINDENT
 .INDENT 0.0
 .TP
 .B \-o TYPE[/ENCODING], \-\-output=TYPE[/ENCODING]
-Specify output type as text, html, sql, csv,
+Specify the console output type as text, html, sql, csv,
 gml, dot, xml, sitemap, none or failures.
-Default type is text. The various output types are documented
-below.
+Default type is text. The various output types are documented below.
 The ENCODING specifies the output encoding, the default is that of
 your locale. Valid encodings are listed at
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
-.B \-q, \-\-quiet
-Quiet operation, an alias for \fI\%\-o\fP \fInone\fP\&. This is only useful with
-\fI\%\-F\fP\&.
-.UNINDENT
-.INDENT 0.0
-.TP
 .B \-v, \-\-verbose
 Log all checked URLs. Default is to log only errors and warnings.
 .UNINDENT
+.SS Progress updates
 .INDENT 0.0
 .TP
-.B \-W REGEX, \-\-warning\-regex=REGEX
-Define a regular expression which prints a warning if it matches any
-content of the checked link. This applies only to valid pages, so we
-can get their content.
-Use this to check for pages that contain some form of error, for
-example "This page has moved" or "Oracle Application error".
-Note that multiple values can be combined in the regular expression,
-for example "(This page has moved|Oracle Application error)".
-See section \fI\%REGULAR EXPRESSIONS\fP for more info.
+.B \-\-no\-status
+Do not print URL check status messages.
+.UNINDENT
+.SS Application
+.INDENT 0.0
+.TP
+.B \-D STRING, \-\-debug=STRING
+Print debugging output for the given logger. Available loggers are
+cmdline, checking, cache, dns, plugin and
+all. Specifying all is an alias for specifying all available
+loggers. The option can be given multiple times to debug with more
+than one logger. For accurate results, threading will be disabled
+during debug runs.
+.UNINDENT
+.SS Quiet
+.INDENT 0.0
+.TP
+.B \-q, \-\-quiet
+Quiet operation, an alias for \fI\%\-o\fP \fInone\fP that also hides
+application information messages.
+This is only useful with \fI\%\-F\fP, else no results will be output.
 .UNINDENT
 .SS Checking options
 .INDENT 0.0
@@ -436,15 +426,17 @@ Set\-cookie: baggage="elitist"; comment="hologram"
 .UNINDENT
 .SH PROXY SUPPORT
 .sp
-To use a proxy on Unix or Windows set the \fI\%http_proxy\fP, \fBhttps_proxy\fP or
-\fI\%ftp_proxy\fP environment variables to the proxy URL. The URL should be of
-the form
+To use a proxy on Unix or Windows set the \fI\%http_proxy\fP or
+\fBhttps_proxy\fP environment variables to the proxy URL. The URL should be
+of the form
 \fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP].
 LinkChecker also detects manual proxy settings of Internet Explorer
-under Windows systems, and GNOME or KDE on Linux systems. On a Mac use
+under Windows systems. On a Mac use
 the Internet Config to select a proxy.
 You can also set a comma\-separated domain list in the \fI\%no_proxy\fP
-environment variables to ignore any proxy settings for these domains.
+environment variable to ignore any proxy settings for these domains.
+The \fBcurl_ca_bundle\fP environment variable can be used to identify an
+alternative certificate bundle to be used with an HTTPS proxy.
 .sp
 Setting a HTTP proxy on Unix for example looks like this:
 .INDENT 0.0

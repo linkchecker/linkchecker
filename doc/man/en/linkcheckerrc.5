@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKERRC" "5" "June 20, 2021" "2021-06-20" "LinkChecker"
-.SH NAME
-linkcheckerrc \- configuration file for LinkChecker
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "LINKCHECKERRC" "5" "December 13, 2021" "10.0.1.post91+g7f175c13" "LinkChecker"
+.SH NAME
+linkcheckerrc \- configuration file for LinkChecker
 .SH DESCRIPTION
 .sp
 \fBlinkcheckerrc\fP is the configuration file for LinkChecker. The file is
@@ -207,18 +207,12 @@ without checking whether matching input elements exist in the HTML
 form.
 .UNINDENT
 .SS output
+.SS URL checking results
 .INDENT 0.0
-.TP
-\fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
-Print debugging output for the given modules. Available debug
-modules are \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP,
-\fBthread\fP, \fBplugins\fP and \fBall\fP\&. Specifying \fBall\fP is an alias
-for specifying all available loggers.
-Command line option: \fB\-\-debug\fP
 .TP
 \fBfileoutput=\fP\fITYPE\fP[\fB,\fP\fITYPE\fP\&...]
 Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP, or
-\fB$HOME/.linkchecker/failures\fP for \fBfailures\fP output.
+\fB$HOME/.linkchecker/failures\fP for the \fBfailures\fP output type.
 Valid file output types are \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
 \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP or \fBfailures\fP\&. Default is no
 file output. The various output types are documented below. Note
@@ -226,22 +220,13 @@ that you can suppress all console output with \fBoutput=none\fP\&.
 Command line option: \fB\-\-file\-output\fP
 .TP
 \fBlog=\fP\fITYPE\fP[\fB/\fP\fIENCODING\fP]
-Specify output type as \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
+Specify the console output type as \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
 \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP or \fBfailures\fP\&. Default type
 is \fBtext\fP\&. The various output types are documented below.
 The \fIENCODING\fP specifies the output encoding, the default is that of
 your locale. Valid encodings are listed at
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 Command line option: \fB\-\-output\fP
-.TP
-\fBquiet=\fP[\fB0\fP|\fB1\fP]
-If set, operate quiet. An alias for \fBlog=none\fP\&. This is only
-useful with \fBfileoutput\fP\&.
-Command line option: \fB\-\-verbose\fP
-.TP
-\fBstatus=\fP[\fB0\fP|\fB1\fP]
-Control printing check status messages. Default is 1.
-Command line option: \fB\-\-no\-status\fP
 .TP
 \fBverbose=\fP[\fB0\fP|\fB1\fP]
 If set log all checked URLs once. Default is to log only errors and
@@ -252,6 +237,33 @@ Command line option: \fB\-\-verbose\fP
 If set log warnings. Default is to log warnings.
 Command line option: \fB\-\-no\-warnings\fP
 .UNINDENT
+.SS Progress updates
+.INDENT 0.0
+.TP
+\fBstatus=\fP[\fB0\fP|\fB1\fP]
+Control printing URL checker status messages. Default is 1.
+Command line option: \fB\-\-no\-status\fP
+.UNINDENT
+.SS Application
+.INDENT 0.0
+.TP
+\fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
+Print debugging output for the given modules. Available debug
+modules are \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP,
+\fBthread\fP, \fBplugins\fP and \fBall\fP\&. Specifying \fBall\fP is an alias
+for specifying all available loggers.
+Command line option: \fB\-\-debug\fP
+.UNINDENT
+.SS Quiet
+.INDENT 0.0
+.TP
+\fBquiet=\fP[\fB0\fP|\fB1\fP]
+If set, operate quiet. An alias for \fBlog=none\fP that also hides
+application information messages.
+This is only useful with \fBfileoutput\fP, else no results will be output.
+Command line option: \fB\-\-quiet\fP
+.UNINDENT
+.SH OUTPUT TYPES
 .SS text
 .INDENT 0.0
 .TP
@@ -268,7 +280,7 @@ Command line option: none
 \fBencoding=\fP\fISTRING\fP
 Valid encodings are listed in
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
-Default encoding is \fBiso\-8859\-15\fP\&.
+Default encoding is the system default locale encoding.
 .TP
 .B \fIcolor*\fP
 Color settings for the various log parts, syntax is \fIcolor\fP or
@@ -349,7 +361,7 @@ See \fI\%[text]\fP section above.
 See \fI\%[text]\fP section above.
 .TP
 \fBseparator=\fP\fICHAR\fP
-Set CSV separator. Default is a comma (\fB,\fP).
+Set CSV separator. Default is a semicolon (\fB;\fP).
 .TP
 \fBquotechar=\fP\fICHAR\fP
 Set CSV quote character. Default is a double quote (\fB"\fP).
@@ -550,6 +562,13 @@ options in their section.
 .SS AnchorCheck
 .sp
 Checks validity of HTML anchors.
+.sp
+\fBNOTE:\fP
+.INDENT 0.0
+.INDENT 3.5
+The AnchorCheck plugin is currently broken and is disabled.
+.UNINDENT
+.UNINDENT
 .SS LocationInfo
 .sp
 Adds the country and if possible city name of the URL host as info.
@@ -583,6 +602,13 @@ Configures the expiration warning time in days.
 .sp
 Check the syntax of HTML pages with the online W3C HTML validator. See
 \fI\%https://validator.w3.org/docs/api.html\fP\&.
+.sp
+\fBNOTE:\fP
+.INDENT 0.0
+.INDENT 3.5
+The HtmlSyntaxCheck plugin is currently broken and is disabled.
+.UNINDENT
+.UNINDENT
 .SS HttpHeaderInfo
 .sp
 Print HTTP headers in URL info.

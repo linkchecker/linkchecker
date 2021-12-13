@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "LINKCHECKER" "1" "Juni 20, 2021" "2021-06-20" "LinkChecker"
-.SH NAME
-linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "LINKCHECKER" "1" "Dezember 13, 2021" "10.0.1.post91+g7f175c13" "LinkChecker"
+.SH NAME
+linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .SH SYNTAX
 .sp
 \fBlinkchecker\fP [\fIOptionen\fP] [\fIDatei\-oder\-URL\fP]...
@@ -55,8 +55,6 @@ Unterstützung des robots.txt Protokolls
 Unterstützung für Cookies
 .IP \(bu 2
 Unterstützung für HTML5
-.IP \(bu 2
-HTML\- und CSS\-Syntaxprüfung
 .IP \(bu 2
 Antivirusprüfung
 .IP \(bu 2
@@ -182,20 +180,23 @@ Gebe die Version aus und beende das Programm.
 Print available check plugins and exit.
 .UNINDENT
 .SS Ausgabeoptionen
-.INDENT 0.0
-.TP
-.B \-D STRING, \-\-debug=STRING
-Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind cmdline, checking, cache, dns, plugin und all. Die Angabe all ist ein Synonym für alle verfügbaren Logger. Diese Option kann mehrmals angegeben werden, um mit mehr als einem Logger zu testen. Um akkurate Ergebnisse zu erzielen, werden Threads deaktiviert.
-.UNINDENT
+.SS URL checking results
 .INDENT 0.0
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
-Ausgabe in eine Datei namens linkchecker\-out.TYP, $HOME/.linkchecker/failures bei failures Ausgabe, oder DATEINAME falls angegeben. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&. Der DATEINAME und ENKODIERUNG Teil wird beim Ausgabetyp none ignoriert, ansonsten wird die Datei überschrieben falls sie existiert. Sie können diese Option mehr als einmal verwenden. Gültige Ausgabetypen sind text, html, sql, csv, gml, dot, xml, sitemap, none oder failures. Standard ist keine Dateiausgabe. Die unterschiedlichen Ausgabetypen sind weiter unten dokumentiert. Beachten Sie, dass Sie mit der Option \fI\%\-o\fP \fInone\fP jegliche Ausgaben auf der Konsole verhindern können.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-\-no\-status
-Gebe keine Statusmeldungen aus.
+Output to a file linkchecker\-out.TYPE,
+$HOME/.linkchecker/failures for the failures output type, or
+FILENAME if specified. The ENCODING specifies the output
+encoding, the default is that of your locale. Valid encodings are
+listed at
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
+The FILENAME and ENCODING parts of the none output type will
+be ignored, else if the file already exists, it will be overwritten.
+You can specify this option more than once. Valid file output TYPEs
+are text, html, sql, csv, gml, dot, xml,
+sitemap, none or failures. Default is no file output.
+The various output types are documented below. Note that you can
+suppress all console output with the option \fI\%\-o\fP \fInone\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -205,22 +206,37 @@ Gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen.
 .INDENT 0.0
 .TP
 .B \-o TYPE[/ENCODING], \-\-output=TYPE[/ENCODING]
-Gib Ausgabetyp als text, html, sql, csv, gml, dot, xml, sitemap, none oder failures an. Stadard Typ ist text. Die verschiedenen Ausgabetypen sind unten dokumentiert. Das ENCODING gibt die Ausgabekodierung an. Der Standard ist das der lokalen Spracheinstellung. Gültige Enkodierungen sind aufgelistet unter \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-q, \-\-quiet
-Keine Ausgabe, ein Alias für \fI\%\-o\fP \fInone\fP\&. Dies ist nur in Verbindung mit \fI\%\-F\fP nützlich.
+Specify the console output type as text, html, sql, csv,
+gml, dot, xml, sitemap, none or failures.
+Default type is text. The various output types are documented below.
+The ENCODING specifies the output encoding, the default is that of
+your locale. Valid encodings are listed at
+\fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
 .B \-v, \-\-verbose
 Gebe alle geprüften URLs aus. Standard ist es, nur fehlerhafte URLs und Warnungen auszugeben.
 .UNINDENT
+.SS Progress updates
 .INDENT 0.0
 .TP
-.B \-W REGEX, \-\-warning\-regex=REGEX
-Definieren Sie einen regulären Ausdruck der eine Warnung ausgibt falls er auf den Inhalt einer geprüften URL zutrifft. Dies gilt nur für gültige Seiten deren Inhalt wir bekommen können. Benutzen Sie dies, um nach Seiten zu suchen, welche bestimmte Fehler enthalten, zum Beispiel "Diese Seite ist umgezogen" oder "Oracle "Applikationsfehler". Man beachte, dass mehrere Werte in dem regulären Ausdruck kombiniert werden können, zum Beispiel "(Diese Seite ist umgezogen|Oracle Applikationsfehler)". Siehe Abschnitt \fI\%REGULAR EXPRESSIONS\fP für weitere Infos.
+.B \-\-no\-status
+Do not print URL check status messages.
+.UNINDENT
+.SS Application
+.INDENT 0.0
+.TP
+.B \-D STRING, \-\-debug=STRING
+Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind cmdline, checking, cache, dns, plugin und all. Die Angabe all ist ein Synonym für alle verfügbaren Logger. Diese Option kann mehrmals angegeben werden, um mit mehr als einem Logger zu testen. Um akkurate Ergebnisse zu erzielen, werden Threads deaktiviert.
+.UNINDENT
+.SS Quiet
+.INDENT 0.0
+.TP
+.B \-q, \-\-quiet
+Quiet operation, an alias for \fI\%\-o\fP \fInone\fP that also hides
+application information messages.
+This is only useful with \fI\%\-F\fP, else no results will be output.
 .UNINDENT
 .SS Optionen zum Prüfen
 .INDENT 0.0
@@ -366,7 +382,17 @@ Set\-cookie: baggage="elitist"; comment="hologram"
 .UNINDENT
 .SH PROXY UNTERSTÜTZUNG
 .sp
-Um einen Proxy unter Unix oder Windows zu benutzen, setzen Sie die \fI\%http_proxy\fP, \fBhttps_proxy\fP oder \fI\%ftp_proxy\fP Umgebungsvariablen auf die Proxy URL. Die URL sollte die Form \fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP] besitzen. LinkChecker erkennt auch die Proxy\-Einstellungen des Internet Explorers auf einem Windows\-System, und GNOME oder KDE auf Linux Systemen. Auf einem Mac benutzen Sie die Internet Konfiguration. Sie können eine komma\-separierte Liste von Domainnamen in der \fI\%no_proxy\fP Umgebungsvariable setzen, um alle Proxies für diese Domainnamen zu ignorieren.
+To use a proxy on Unix or Windows set the \fI\%http_proxy\fP or
+\fBhttps_proxy\fP environment variables to the proxy URL. The URL should be
+of the form
+\fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP].
+LinkChecker also detects manual proxy settings of Internet Explorer
+under Windows systems. On a Mac use
+the Internet Config to select a proxy.
+You can also set a comma\-separated domain list in the \fI\%no_proxy\fP
+environment variable to ignore any proxy settings for these domains.
+The \fBcurl_ca_bundle\fP environment variable can be used to identify an
+alternative certificate bundle to be used with an HTTPS proxy.
 .sp
 Einen HTTP\-Proxy unter Unix anzugeben sieht beispielsweise so aus:
 .INDENT 0.0
