@@ -51,7 +51,6 @@ according to the URL scheme.
    "1" -> "13" [arrowhead="empty", arrowtail="none"];
    "2" -> "13" [arrowhead="empty", arrowtail="none"];
    "3" -> "6" [arrowhead="empty", arrowtail="none"];
-   "3" -> "10" [arrowhead="empty", arrowtail="none"];
    "4" -> "6" [arrowhead="empty", arrowtail="none"];
    "4" -> "10" [arrowhead="empty", arrowtail="none"];
    "5" -> "12" [arrowhead="empty", arrowtail="none"];

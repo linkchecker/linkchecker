@@ -105,7 +105,7 @@ def print_env_info(key, out=stderr):
 
 def print_proxy_info(out=stderr):
     """Print proxy info."""
-    for key in ("http_proxy", "ftp_proxy", "no_proxy"):
+    for key in ("http_proxy", "no_proxy"):
         print_env_info(key, out=out)
 
 

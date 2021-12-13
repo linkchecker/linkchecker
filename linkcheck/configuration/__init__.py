@@ -333,10 +333,6 @@ class Configuration(dict):
             http_proxy = get_gnome_proxy() or get_kde_http_proxy()
             if http_proxy:
                 self["proxy"]["http"] = http_proxy
-        if "ftp" not in self["proxy"]:
-            ftp_proxy = get_gnome_proxy(protocol="FTP") or get_kde_ftp_proxy()
-            if ftp_proxy:
-                self["proxy"]["ftp"] = ftp_proxy
 
     def sanitize_plugins(self):
         """Ensure each plugin is configurable."""
@@ -482,15 +478,6 @@ def get_kde_http_proxy():
         log.debug(LOG_CHECK, "error getting HTTP proxy from KDE: %s", msg)
 
 
-def get_kde_ftp_proxy():
-    """Return host:port for KDE HTTP proxy if found, else None."""
-    try:
-        data = read_kioslaverc()
-        return data.get("ftp_proxy")
-    except Exception as msg:
-        log.debug(LOG_CHECK, "error getting FTP proxy from KDE: %s", msg)
-
-
 # The following KDE functions are largely ported and ajusted from
 # Google Chromium:
 # http://src.chromium.org/viewvc/chrome/trunk/src/net/proxy/proxy_config_service_linux.cc?revision=HEAD&view=markup
@@ -610,8 +597,6 @@ def add_kde_setting(key, value, data):
         add_kde_proxy("http_proxy", value, data)
     elif key == "httpsProxy":
         add_kde_proxy("https_proxy", value, data)
-    elif key == "ftpProxy":
-        add_kde_proxy("ftp_proxy", value, data)
     elif key == "ReversedException":
         if value == "true":
             value = True
@@ -650,13 +635,13 @@ def resolve_kde_settings(data):
     if "mode" not in data:
         return
     if data["mode"] == "indirect":
-        for key in ("http_proxy", "https_proxy", "ftp_proxy"):
+        for key in ("http_proxy", "https_proxy"):
             if key in data:
                 resolve_indirect(data, key)
         if "ignore_hosts" in data:
             resolve_indirect(data, "ignore_hosts", splithosts=True)
     elif data["mode"] != "manual":
         # unsupported config
-        for key in ("http_proxy", "https_proxy", "ftp_proxy"):
+        for key in ("http_proxy", "https_proxy"):
             if key in data:
                 del data[key]
