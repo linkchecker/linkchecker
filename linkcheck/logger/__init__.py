@@ -382,7 +382,7 @@ class _Logger(abc.ABC):
             % {"app": configuration.AppName, "time": strformat.strtime(self.starttime)}
         )
         self.comment(
-            _("Get the newest version at %(url)s") % {'url': configuration.Url}
+            _("Read the documentation at %(url)s") % {'url': configuration.Url}
         )
         self.comment(
             _("Write comments and bugs to %(url)s") % {'url': configuration.SupportUrl}
