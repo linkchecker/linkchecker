@@ -1,0 +1,46 @@
+name: Create distribution files for a new release
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+        # Needed for setuptools_scm to extract LinkChecker version from tag
+        # https://github.com/actions/checkout/issues/249
+        with:
+          fetch-depth: 0
+
+      - name: Install Ubuntu packages
+        run: sudo apt install git
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Install Python packages
+        run: >
+            pip3 install polib setuptools_scm twine wheel
+
+      - name: Set SOURCE_DATE_EPOCH
+        run: >
+            echo "SOURCE_DATE_EPOCH=$(git log -n 1 ${{ github.sha }} --format=%ct)" >> $GITHUB_ENV
+
+      - name: Create distribution files
+        run: >
+            python3 setup.py sdist bdist_wheel
+
+      - name: Check distribution files
+        run: >
+            twine check dist/*
+
+      - name: Add distribution files to release
+        run: >
+            gh release upload ${{ github.ref_name }} dist/*
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
