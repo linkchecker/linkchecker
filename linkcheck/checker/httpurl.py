@@ -46,8 +46,6 @@ from . import internpaturl, proxysupport
 from .const import WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED
 from requests.sessions import REDIRECT_STATI
 
-# assumed HTTP header encoding
-HEADER_ENCODING = "iso-8859-1"
 HTTP_SCHEMAS = ('http://', 'https://')
 
 # match for robots meta element content attribute
@@ -178,13 +176,7 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         self.url_connection = self.session.send(request, **kwargs)
         self.headers = self.url_connection.headers
         log.debug(LOG_CHECK, "Response headers %s", self.headers)
-        if self.url_connection.encoding == "ISO-8859-1":
-            # Can't trust ISO-8859-1 because it is Requests' fallback for text
-            # content-types. We fall back to it in UrlBase.get_content() if
-            # Beautiful Soup doesn't return an encoding.
-            self.encoding = None
-        else:
-            self.encoding = self.url_connection.encoding
+        self.set_encoding(self.url_connection.encoding)
         log.debug(LOG_CHECK, "Response encoding %s", self.encoding)
         self._add_ssl_info()
 
@@ -238,6 +230,19 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
         """Return content MIME type or empty string."""
         self.content_type = httputil.get_content_type(self.headers)
 
+    def set_encoding(self, encoding):
+        """Set content encoding"""
+        if encoding == "ISO-8859-1":
+            # Although RFC 2616 (HTTP/1.1) says that text data in a non-ISO-8859-1
+            # (or subset) character set must be labelled with a charset,
+            # that is not always the case and then the default ISO-8859-1 is
+            # set by Requests.
+            # We fall back to it in UrlBase.get_content() if Beautiful Soup
+            # doesn't return an encoding.
+            self.encoding = None
+        else:
+            self.encoding = encoding
+
     def is_redirect(self):
         """Check if current response is a redirect."""
         return (
@@ -288,6 +293,10 @@ class HttpUrl(internpaturl.InternPatternUrl, proxysupport.ProxySupport):
             if self.is_redirect():
                 # run connection plugins for old connection
                 self.aggregate.plugin_manager.run_connection_plugins(self)
+        if response:
+            log.debug(LOG_CHECK, "Redirected response headers %s", response.headers)
+            self.set_encoding(response.encoding)
+            log.debug(LOG_CHECK, "Redirected response encoding %s", self.encoding)
 
     def check_response(self):
         """Check final result and log it."""
