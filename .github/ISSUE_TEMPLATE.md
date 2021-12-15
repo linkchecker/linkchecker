@@ -11,6 +11,9 @@
  2. 
  3. 
 
+<!-- Reporting a minimal example that reproduces the problem in the text of
+the issue can increase the chance of a solution significantly. -->
+
 ## Actual result
 
 ## Expected result
@@ -23,7 +26,6 @@
  * Linkchecker version: <!-- linkchecker --version -->
  * Python version: <!-- python --version -->
  * Install method: <!-- distribution package, PyPI, from source tarball, from git, etc -->
- * Site URL: <!-- e.g. https://example.com/... -->
 
 ## Configuration file
 
@@ -31,8 +33,8 @@
 
 ## Logs
 
-<!-- Include full log of the linkchecker run, with --verbose -->
-<!-- Also include the exact commandline used -->
+<!-- The exact command line used -->
+<!-- Rerun with -Dall and include all relevant lines -->
 <!-- If a Traceback happened include it in full as well -->
 
 ## Other notes
