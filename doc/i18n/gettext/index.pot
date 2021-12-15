@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2020 LinkChecker Authors
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2021 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 2020-09-25\n"
+"Project-Id-Version: LinkChecker 10.0.1.post91+g7f175c13\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-25 19:12+0100\n"
+"POT-Creation-Date: 2021-12-14 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,89 +37,93 @@ msgid "Installation"
 msgstr ""
 
 #: ../../src/index.rst:24
-msgid "See the :doc:`installation document <install>` for more information."
+msgid "The version in the pip repository may be old, to find out how to get the latest code, plus platform-specific information and other advice see the :doc:`installation document <install>`."
 msgstr ""
 
-#: ../../src/index.rst:27
+#: ../../src/index.rst:29
 msgid "Basic usage"
 msgstr ""
 
-#: ../../src/index.rst:28
+#: ../../src/index.rst:30
 msgid "To check a URL like *http://www.example.org/myhomepage/* it is enough to execute:"
 msgstr ""
 
-#: ../../src/index.rst:35
+#: ../../src/index.rst:37
 msgid "This check will validate recursively all pages starting with *http://www.example.org/myhomepage/*. Additionally, all external links pointing outside of *www.example.org* will be checked but not recursed into."
 msgstr ""
 
-#: ../../src/index.rst:41
-msgid "Features"
-msgstr ""
-
-#: ../../src/index.rst:43
-msgid "recursive and multithreaded checking and site crawling"
-msgstr ""
-
-#: ../../src/index.rst:44
-msgid "output in colored or normal text, HTML, SQL, CSV, XML or a sitemap graph in different formats"
+#: ../../src/index.rst:42
+msgid "Find out more from the manual pages :doc:`man/linkchecker` and :doc:`man/linkcheckerrc`."
 msgstr ""
 
 #: ../../src/index.rst:46
-msgid "HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and local file links support"
+msgid "Features"
 msgstr ""
 
 #: ../../src/index.rst:48
-msgid "restriction of link checking with regular expression filters for URLs"
+msgid "recursive and multithreaded checking and site crawling"
 msgstr ""
 
 #: ../../src/index.rst:49
-msgid "proxy support"
-msgstr ""
-
-#: ../../src/index.rst:50
-msgid "username/password authorization for HTTP and FTP and Telnet"
+msgid "output in colored or normal text, HTML, SQL, CSV, XML or a sitemap graph in different formats"
 msgstr ""
 
 #: ../../src/index.rst:51
-msgid "honors robots.txt exclusion protocol"
-msgstr ""
-
-#: ../../src/index.rst:52
-msgid "Cookie support"
+msgid "HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and local file links support"
 msgstr ""
 
 #: ../../src/index.rst:53
-msgid "HTML5 support"
+msgid "restriction of link checking with regular expression filters for URLs"
 msgstr ""
 
 #: ../../src/index.rst:54
-msgid ":ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks. Currently available are HTML and CSS syntax checks, Antivirus checks, and more."
+msgid "proxy support"
+msgstr ""
+
+#: ../../src/index.rst:55
+msgid "username/password authorization for HTTP and FTP and Telnet"
 msgstr ""
 
 #: ../../src/index.rst:56
-msgid "Different interfaces: command line and web interface"
+msgid "honors robots.txt exclusion protocol"
 msgstr ""
 
 #: ../../src/index.rst:57
-msgid "... and a lot more check options documented in the :doc:`man/linkchecker` manual page."
+msgid "Cookie support"
 msgstr ""
 
-#: ../../src/index.rst:61
+#: ../../src/index.rst:58
+msgid "HTML5 support"
+msgstr ""
+
+#: ../../src/index.rst:59
+msgid ":ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks"
+msgstr ""
+
+#: ../../src/index.rst:60
+msgid "Different interfaces: command line and web interface"
+msgstr ""
+
+#: ../../src/index.rst:63
 msgid "Screenshots"
 msgstr ""
 
-#: ../../src/index.rst:71
+#: ../../src/index.rst:73
 msgid "Commandline interface"
 msgstr ""
 
-#: ../../src/index.rst:72
+#: ../../src/index.rst:74
 msgid "WSGI web interface"
 msgstr ""
 
-#: ../../src/index.rst:75
+#: ../../src/index.rst:77
 msgid "Test suite status"
 msgstr ""
 
-#: ../../src/index.rst:76
-msgid "Linkchecker has extensive unit tests to ensure code quality. `Travis CI <https://travis-ci.com/>`_ is used for continuous build and test integration."
+#: ../../src/index.rst:78
+msgid "Linkchecker has extensive unit tests to ensure code quality. `GitHub Actions <https://docs.github.com/en/actions/>`_ is used for continuous build and test integration."
+msgstr ""
+
+#: ../../src/index.rst:None
+msgid "Build Status"
 msgstr ""
