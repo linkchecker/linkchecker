@@ -20,8 +20,6 @@ import os
 import sys
 import zipfile
 
-import pytest
-
 from tests import need_network, need_word, need_pdflib
 from . import LinkCheckTest, get_file
 
@@ -87,7 +85,6 @@ class TestFile(LinkCheckTest):
     def test_urllist(self):
         self.file_test("urllist.txt")
 
-    @pytest.mark.xfail
     def test_directory_listing(self):
         # unpack non-unicode filename which cannot be stored
         # in the SF subversion repository
