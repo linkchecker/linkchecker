@@ -89,10 +89,14 @@ def cnormpath(path):
 def get_release_date(for_sdist=False):
     """Return release date as a string from the most recent commit."""
     release_date = "unknown"
-    # need git >= 2.25.0 for %cs
-    cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cI"],
-                        stdout=subprocess.PIPE, universal_newlines=True)
-    if cp.stdout:
+    cp = None
+    try:
+        # need git >= 2.25.0 for %cs
+        cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cI"],
+                            stdout=subprocess.PIPE, universal_newlines=True)
+    except FileNotFoundError:
+        pass
+    if cp and cp.stdout:
         release_date = cp.stdout.split("T")[0]
     elif not for_sdist:
         try:
