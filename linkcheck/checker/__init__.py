@@ -35,6 +35,8 @@ def guess_url(url):
         a http respective ftp URL.
     @rtype: unicode
     """
+    if url.lower().endswith(".html") and "/" not in url:
+        return url
     if url.lower().startswith("www."):
         # syntactic sugar
         return "http://%s" % url
