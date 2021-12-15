@@ -193,7 +193,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
             return None
         if raw_connection.sock is None:
             # sometimes the socket is not yet connected
-            # see https://github.com/kennethreitz/requests/issues/1966
+            # see https://github.com/psf/requests/issues/1966
             raw_connection.connect()
         return raw_connection.sock
 
