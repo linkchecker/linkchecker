@@ -43,7 +43,7 @@ jobs:
       - name: Build man pages
         run: |
             make -C doc locale
-            git commit -a -m "Update doc locale"
+            git commit -a -m "Update doc translation catalogs"
             make -C doc man
             git commit -a -m "Update man pages"
 
