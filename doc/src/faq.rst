@@ -38,7 +38,7 @@ check your web pages by adding the following to your robots.txt file::
 **Q: How can I tell LinkChecker which proxy to use?**
 
 A: LinkChecker works automatically with proxies. In a Unix or Windows
-environment, set the http_proxy, https_proxy, ftp_proxy environment
+environment, set the http_proxy or https_proxy environment
 variables to a URL that identifies the proxy server before starting
 LinkChecker. For example:
 
