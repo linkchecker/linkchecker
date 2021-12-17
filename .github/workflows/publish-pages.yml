@@ -28,7 +28,7 @@ jobs:
       - name: Install Python packages
         run: >
             pip install dnspython beautifulsoup4 pyxdg requests \
-                        sphinx sphinx_epytext sphinx_rtd_theme
+                        sphinx sphinx_epytext sphinx_rtd_theme sphinx-sitemap
 
       - name: Build
         run: |
