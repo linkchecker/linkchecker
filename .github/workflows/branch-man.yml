@@ -43,15 +43,15 @@ jobs:
       - name: Build man pages
         run: |
             make -C doc locale
-            git commit -a -m "Update doc locale"
+            git commit -a -m "Update doc translation catalogs"
             make -C doc man
             git commit -a -m "Update man pages"
 
       - name: Build application translations catalogs
         run: |
+            rm -f po/linkchecker.pot
             make -C po
-            # It's OK if no changes were made
-            git commit -a -m "Update application translation catalogs" || true
+            git commit -a -m "Update application translation catalogs"
 
       - name: Push changes
         run: >
