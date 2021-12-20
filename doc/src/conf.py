@@ -22,6 +22,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx_epytext',
     'sphinx_rtd_theme',
+    'sphinx_sitemap',
 ]
 
 locale_dirs = ['../i18n/locales']
@@ -80,6 +81,13 @@ autosectionlabel_prefix_document = True
 extlinks = {'pypi': ('https://pypi.org/project/%s/', '')}
 
 graphviz_output_format = 'svg'
+
+# sitemap
+html_baseurl = 'https://linkchecker.github.io/linkchecker/'
+
+sitemap_locales = [None]
+
+sitemap_url_scheme = "{link}"
 
 # -- Mock --------------------------------------------------------------------
 

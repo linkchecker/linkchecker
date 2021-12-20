@@ -26,8 +26,8 @@ jobs:
       - name: Install Python packages
         run: >
             pip3 install dnspython beautifulsoup4 pyxdg requests \
-                         sphinx sphinx_epytext sphinx_rtd_theme sphinx-intl \
-                         setuptools_scm
+                         sphinx sphinx_epytext sphinx_rtd_theme sphinx-sitemap \
+                         sphinx-intl setuptools_scm
 
       - name: Prepare git environment
         run: |
