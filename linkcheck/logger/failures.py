@@ -19,9 +19,9 @@ A failures logger.
 
 import os
 
-from linkcheck.configuration import get_user_data
 from . import _Logger
 from .. import log, LOG_CHECK
+from ..configuration import get_user_data
 
 
 class FailuresLogger(_Logger):
