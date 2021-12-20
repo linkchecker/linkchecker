@@ -487,9 +487,13 @@ ENVIRONMENT
 
    specifies default HTTP proxy server
 
-.. envvar:: ftp_proxy
+.. envvar:: https_proxy
 
-   specifies default FTP proxy server
+   specifies default HTTPS proxy server
+
+.. envvar:: curl_ca_bundle
+
+   an alternative certificate bundle to be used with an HTTPS proxy
 
 .. envvar:: no_proxy
 
