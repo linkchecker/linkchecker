@@ -20,12 +20,15 @@ Configure linkchecker using command-line options and configuration.
 import codecs
 import getpass
 
-from .cmdline import print_version, print_usage, print_plugins
-from .director import console
+from .. import fileutil
+from .. import i18n
+from .. import logger
 
-from . import LOG_CMDLINE
-from . import log
-import linkcheck
+from .. import LOG_CMDLINE
+from .. import get_link_pat, log
+
+from ..cmdline import print_version, print_usage, print_plugins
+from ..director import console
 
 
 def has_encoding(encoding):
@@ -52,10 +55,10 @@ def setup_config(config, options):
     if not options.warnings:
         config["warnings"] = options.warnings
     if options.externstrict:
-        pats = [linkcheck.get_link_pat(arg, strict=True) for arg in options.externstrict]
+        pats = [get_link_pat(arg, strict=True) for arg in options.externstrict]
         config["externlinks"].extend(pats)
     if options.extern:
-        pats = [linkcheck.get_link_pat(arg) for arg in options.extern]
+        pats = [get_link_pat(arg) for arg in options.extern]
         config["externlinks"].extend(pats)
     if options.norobotstxt is not None:
         config["robotstxt"] = options.norobotstxt
@@ -71,7 +74,7 @@ def setup_config(config, options):
         if "/" in options.output:
             logtype, encoding = options.output.split("/", 1)
         else:
-            logtype, encoding = options.output, linkcheck.i18n.default_encoding
+            logtype, encoding = options.output, i18n.default_encoding
         logtype = logtype.lower()
         if logtype == "blacklist":
             log.warn(
@@ -80,10 +83,12 @@ def setup_config(config, options):
                   "using failures instead") % {"option": "'-o, --output'"}
             )
             logtype = "failures"
-        if logtype not in linkcheck.logger.LoggerNames:
+        if logtype not in logger.LoggerNames:
             print_usage(
                 _("Unknown logger type %(type)r in %(output)r for option %(option)s")
-                % {"type": logtype, "output": options.output, "option": "'-o, --output'"}
+                % {"type": logtype,
+                   "output": options.output,
+                   "option": "'-o, --output'"}
             )
         if logtype != "none" and not has_encoding(encoding):
             print_usage(
@@ -124,26 +129,29 @@ def setup_config(config, options):
                       "using failures instead") % {"option": "'-F, --file-output'"}
                 )
                 ftype = "failures"
-            if ftype not in linkcheck.logger.LoggerNames:
+            if ftype not in logger.LoggerNames:
                 print_usage(
-                    _("Unknown logger type %(type)r in %(output)r for option %(option)s")
+                    _("Unknown logger type %(type)r in %(output)r"
+                      " for option %(option)s")
                     % {
                         "type": ftype,
                         "output": options.fileoutput,
                         "option": "'-F, --file-output'",
                     }
                 )
-            if ftype != "none" and "encoding" in ns and not has_encoding(ns["encoding"]):
+            if ftype != "none" and "encoding" in ns \
+                    and not has_encoding(ns["encoding"]):
                 print_usage(
-                    _("Unknown encoding %(encoding)r in %(output)r for option %(option)s")
+                    _("Unknown encoding %(encoding)r in %(output)r"
+                      " for option %(option)s")
                     % {
                         "encoding": ns["encoding"],
                         "output": options.fileoutput,
                         "option": "'-F, --file-output'",
                     }
                 )
-            logger = config.logger_new(ftype, **ns)
-            config["fileoutput"].append(logger)
+            new_logger = config.logger_new(ftype, **ns)
+            config["fileoutput"].append(new_logger)
     if options.nntpserver:
         config["nntpserver"] = options.nntpserver
     if options.username:
@@ -199,7 +207,7 @@ def setup_config(config, options):
     if options.useragent is not None:
         config["useragent"] = options.useragent
     if options.cookiefile is not None:
-        if linkcheck.fileutil.is_readable(options.cookiefile):
+        if fileutil.is_readable(options.cookiefile):
             config["cookiefile"] = options.cookiefile
         else:
             msg = _("Could not read cookie file %s") % options.cookiefile

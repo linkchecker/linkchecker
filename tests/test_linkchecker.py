@@ -14,12 +14,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import unittest
 import sys
-from . import linkchecker_cmd, run_checked
+from . import run_checked
 
 
-def run_with_options(options, cmd=linkchecker_cmd):
+def run_with_options(options):
     """Run a command with given options."""
-    run_checked([sys.executable, cmd] + options)
+    run_checked([sys.executable, "-m", "linkcheck"] + options)
 
 
 class TestLinkchecker(unittest.TestCase):

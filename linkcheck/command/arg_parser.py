@@ -19,11 +19,9 @@ Create command line arguments.
 
 import argparse
 
-from .cmdline import (
-    LCArgumentParser,
-)
+from .. import checker, logconf, logger
 
-from . import checker, logconf, logger
+from ..cmdline import LCArgumentParser
 
 # usage texts
 Notes = _(
