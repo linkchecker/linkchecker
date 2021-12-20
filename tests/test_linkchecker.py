@@ -27,7 +27,16 @@ class TestLinkchecker(unittest.TestCase):
 
     def test_linkchecker(self):
         # test some single options
-        for option in ("-V", "--version", "-h", "--help", "--list-plugins", "-Dall"):
+        for option in (
+                "-V",
+                "--version",
+                "-h",
+                "--help",
+                "--list-plugins",
+                "-Dall",
+                "-ocsv",
+                "-Fhtml",
+                ):
             run_with_options([option])
         # unknown option
         self.assertRaises(OSError, run_with_options, ["--imadoofus"])
