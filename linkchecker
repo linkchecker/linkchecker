@@ -46,7 +46,6 @@ import linkcheck.checker
 import linkcheck.configuration
 import linkcheck.fileutil
 import linkcheck.logger
-import linkcheck.ansicolor
 from linkcheck.director import console, check_urls, get_aggregate
 from linkcheck.strformat import stripurl
 
