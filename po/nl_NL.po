@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: https://github.com/linkchecker/linkchecker\n"
-"POT-Creation-Date: 2021-12-14 19:27+0000\n"
+"POT-Creation-Date: 2021-12-21 19:41+0000\n"
 "PO-Revision-Date: 2021-01-08 15:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,39 +17,677 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: ../linkcheck/__init__.py:119
-msgid "CRITICAL"
-msgstr "KRITIEK"
+#: ../linkcheck/command/setup_config.py:50
+msgid "Running with python -O disables debugging."
+msgstr "Uitvoeren met python -O schakelt foutopsporing uit."
 
-#: ../linkcheck/__init__.py:120
-msgid "ERROR"
-msgstr "FOUT"
+#: ../linkcheck/command/setup_config.py:82
+#, python-format
+msgid "blacklist is deprecated for option %(option)s, using failures instead"
+msgstr ""
 
-#: ../linkcheck/__init__.py:121
-msgid "WARN"
-msgstr "WAARSCHUWEN"
+#: ../linkcheck/command/setup_config.py:88
+#: ../linkcheck/command/setup_config.py:134
+#, python-format
+msgid "Unknown logger type %(type)r in %(output)r for option %(option)s"
+msgstr "Onbekend loggertype %(type)r in %(output)r voor optie %(option)s"
 
-#: ../linkcheck/__init__.py:122
-msgid "WARNING"
-msgstr "WAARSCHUWING"
+#: ../linkcheck/command/setup_config.py:95
+#: ../linkcheck/command/setup_config.py:145
+#, python-format
+msgid "Unknown encoding %(encoding)r in %(output)r for option %(option)s"
+msgstr "Onbekende codering %(encoding)r in %(output)r voor optie %(option)s"
 
-#: ../linkcheck/__init__.py:123
-msgid "INFO"
-msgstr "INFO"
+#: ../linkcheck/command/setup_config.py:128
+#, python-format
+msgid ""
+"blacklist logger is deprecated for option %(option)s, using failures instead"
+msgstr ""
 
-#: ../linkcheck/__init__.py:124
-msgid "DEBUG"
-msgstr "FOUTOPSPORING"
+#: ../linkcheck/command/setup_config.py:162
+#, python-format
+msgid "Enter LinkChecker HTTP/FTP password for user %(user)s:"
+msgstr ""
+"Voer het HTTP/FTP-wachtwoord van LinkChecker in voor gebruikers %(user)s:"
 
-#: ../linkcheck/__init__.py:125
-msgid "NOTSET"
-msgstr "NOT SET"
+#: ../linkcheck/command/setup_config.py:166
+msgid "Enter LinkChecker HTTP/FTP password:"
+msgstr "Voer het HTTP/FTP-wachtwoord van LinkChecker in:"
 
-#: ../linkcheck/__init__.py:140
+#: ../linkcheck/command/setup_config.py:184
+#, python-format
+msgid "Illegal argument %(arg)r for option %(option)s"
+msgstr "Illegaal argument %(arg)r voor optie %(option)s"
+
+#: ../linkcheck/command/setup_config.py:203
+#, python-format
+msgid "Enter LinkChecker password for user %(user)s at %(strpattern)s:"
+msgstr ""
+"Voer het wachtwoord van LinkChecker in voor gebruikers %(user)s bij "
+"%(strpattern)s:"
+
+#: ../linkcheck/command/setup_config.py:213
+#, python-format
+msgid "Could not read cookie file %s"
+msgstr "Kan cookie-bestand %s  niet lezen"
+
+#: ../linkcheck/command/linkchecker.py:50
 msgid "Running as root user; dropping privileges by changing user to nobody."
 msgstr ""
 "Wordt uitgevoerd als hoofdgebruiker; privileges worden verwijderd door de "
 "gebruiker in niemand te veranderen."
+
+#: ../linkcheck/command/linkchecker.py:124
+#, python-format
+msgid "Invalid debug level %(level)r"
+msgstr "Ongeldig debugniveau %(level)r"
+
+#: ../linkcheck/command/linkchecker.py:130 ../linkcheck/director/console.py:145
+#, python-format
+msgid "Python %(version)s on %(platform)s"
+msgstr "Python %(version)s op %(platform)s"
+
+#: ../linkcheck/command/linkchecker.py:142
+#, python-format
+msgid "Unreadable config file: %r"
+msgstr "Onleesbaar config-bestand: %r"
+
+#: ../linkcheck/command/linkchecker.py:173
+msgid "no files or URLs given"
+msgstr "geen bestanden of URL's gegeven"
+
+#: ../linkcheck/command/linkchecker.py:181
+#, python-format
+msgid ""
+"Overwrite profiling file %(file)r?\n"
+"Press Ctrl-C to cancel, RETURN to continue."
+msgstr ""
+"Overschrijven profilering bestand %(file)r?\n"
+"Druk op Ctrl-C om te annuleren, RETURN om door te gaan."
+
+#: ../linkcheck/command/linkchecker.py:189
+msgid "Canceled."
+msgstr "Geannuleerd."
+
+#: ../linkcheck/command/linkchecker.py:196
+msgid ""
+"The `yappi' Python module is not installed, therefore the --profile option "
+"is disabled."
+msgstr ""
+"De 'yappi' Python module is niet geïnstalleerd, daarom is de --profiel optie "
+"uitgeschakeld."
+
+#: ../linkcheck/command/linkchecker.py:215
+msgid "Dumping memory statistics..."
+msgstr "Dumping geheugen statistieken ..."
+
+#: ../linkcheck/command/linkchecker.py:217
+#, python-format
+msgid "The memory dump has been written to `%(filename)s'."
+msgstr "De geheugendump is geschreven naar '%(filename)s'."
+
+#: ../linkcheck/command/arg_parser.py:28
+msgid ""
+"NOTES\n"
+" o URLs on the command line starting with \"ftp.\" are treated like\n"
+"   \"ftp://ftp.\", URLs starting with \"www.\" are treated like \"http://www."
+"\".\n"
+"   You can also give local files as arguments.\n"
+" o If you have your system configured to automatically establish a\n"
+"   connection to the internet (e.g. with diald), it will connect when\n"
+"   checking links not pointing to your local system.\n"
+"   See the --ignore-url option on how to prevent this.\n"
+" o Javascript links are currently ignored.\n"
+" o If your platform does not support threading, LinkChecker disables it\n"
+"   automatically.\n"
+" o You can supply multiple user/password pairs in a configuration file.\n"
+" o When checking 'news:' links the given NNTP host doesn't need to be the\n"
+"   same as the host of the user browsing your pages.\n"
+msgstr ""
+"Notities\n"
+" o URL's op de opdrachtregel die beginnen met \"ftp\" worden behandeld als\n"
+"   \"ftp://ftp\", URL's die beginnen met \"www.\" worden behandeld als "
+"\"http://www\".\n"
+"   U lokale bestanden ook als argumenten opgeven.\n"
+" o Als u uw systeem hebt geconfigureerd om automatisch te\n"
+"   verbinden met internet (bijvoorbeeld met diald), zal er verbinding\n"
+"   worden gemaakt wanneer externe links worden gecontroleerd.\n"
+"   Zie de optie --ignore-url over hoe dit te voorkomen.\n"
+" o Javascript-koppelingen worden momenteel genegeerd.\n"
+" o Als uw platform geen ondersteuning biedt voor threading, \n"
+"   schakelt LinkChecker het automatisch uit.\n"
+" o U kunt meerdere gebruikers-/wachtwoordparen in een configuratiebestand "
+"aanleveren.\n"
+" o Bij het controleren van 'news:' links hoeft de opgegeven NNTP-host niet\n"
+"   hetzelfde te zijn als de host van de gebruiker die door uw pagina's "
+"bladert.\n"
+
+#: ../linkcheck/command/arg_parser.py:46
+#, fuzzy
+msgid ""
+"PROXY SUPPORT\n"
+"To use a proxy on Unix or Windows set $http_proxy or $https_proxy\n"
+"to the proxy URL. The URL should be of the form\n"
+"\"http://[<user>:<pass>@]<host>[:<port>]\".\n"
+"LinkChecker also detects manual proxy settings of Internet Explorer under\n"
+"Windows systems. On a Mac use the Internet Config to select a proxy.\n"
+"\n"
+"LinkChecker honors the $no_proxy environment variable. It can be a list\n"
+"of domain names for which no proxy will be used.\n"
+"\n"
+"Setting a HTTP proxy on Unix for example looks like this:\n"
+"\n"
+"  export http_proxy=\"http://proxy.example.com:8080\"\n"
+"\n"
+"Proxy authentication is also supported:\n"
+"\n"
+"  export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
+"\n"
+"Setting a proxy on the Windows command prompt:\n"
+"\n"
+"  set http_proxy=http://proxy.example.com:8080\n"
+"\n"
+msgstr ""
+"PROXY-ONDERSTEUNING\n"
+"Een proxy gebruiken op Unix- of Windows-set $http_proxy, $https_proxy of "
+"$ftp_proxy\n"
+"naar de proxy-URL. De URL moet van het formulier zijn\n"
+"\"http://[ :<user><pass>@]<host>[:<port>]\".\n"
+"LinkChecker detecteert ook handmatige proxy-instellingen van Internet "
+"Explorer onder\n"
+"Windows-systemen, en gconf of KDE op Linux-systemen.\n"
+"Gebruik op een Mac de Internet Config om een proxy te selecteren.\n"
+"\n"
+"LinkChecker honoreert de variabele $no_proxy-omgeving. Het kan een lijst "
+"zijn\n"
+"van domeinnamen waarvoor geen proxy zal worden gebruikt.\n"
+"\n"
+"Het instellen van een HTTP-proxy op Unix ziet er bijvoorbeeld als volgt "
+"uit:\n"
+"\n"
+"export http_proxy=\"http://proxy.example.com:8080\"\n"
+"\n"
+"Proxyverificatie wordt ook ondersteund:\n"
+"\n"
+"export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
+"\n"
+"Een proxy instellen op de opdrachtprompt van Windows:\n"
+"\n"
+"stel http_proxy=http://proxy.example.com:8080 in\n"
+"\n"
+
+#: ../linkcheck/command/arg_parser.py:72
+#, fuzzy
+msgid ""
+"REGULAR EXPRESSIONS\n"
+"Only Python regular expressions are accepted by LinkChecker.\n"
+"See https://docs.python.org/howto/regex.html for an introduction in\n"
+"regular expressions.\n"
+"\n"
+"The only addition is that a leading exclamation mark negates\n"
+"the regular expression.\n"
+msgstr ""
+"REGULIERE EXPRESSIES\n"
+"Alleen gewone Python-expressies worden geaccepteerd door LinkChecker.\n"
+"Zie http://www.amk.ca/python/howto/regex/ voor een introductie in\n"
+"reguliere expressies.\n"
+"\n"
+"De enige toevoeging is dat een uitroepteken vooraan\n"
+"de reguliere expressie ontkent.\n"
+
+#: ../linkcheck/command/arg_parser.py:83
+msgid ""
+"COOKIE FILES\n"
+"A cookie file contains standard RFC 805 header data with the following\n"
+"possible names:\n"
+"Scheme (optional)\n"
+" Sets the scheme the cookies are valid for; default scheme is 'http'.\n"
+"Host (required)\n"
+" Sets the domain the cookies are valid for.\n"
+"Path (optional)\n"
+" Gives the path the cookies are value for; default path is '/'.\n"
+"Set-cookie (optional)\n"
+" Set cookie name/value. Can be given more than once.\n"
+"\n"
+"Multiple entries are separated by a blank line.\n"
+"\n"
+"The example below will send two cookies to all URLs starting with\n"
+"'http://example.org/hello/' and one to all URLs starting\n"
+"with 'https://example.com/':\n"
+"\n"
+"Host: example.org\n"
+"Path: /hello\n"
+"Set-cookie: ID=\"smee\"\n"
+"Set-cookie: spam=\"egg\"\n"
+"\n"
+"Scheme: https\n"
+"Host: example.com\n"
+"Set-cookie: baggage=\"elitist\"; comment=\"hologram\"\n"
+msgstr ""
+"COOKIEBESTANDEN\n"
+"Een cookiebestand bevat standaard RFC 805-headergegevens met de volgende\n"
+"mogelijke namen:\n"
+"Regeling (optioneel)\n"
+" Hiermee stelt u het schema in waarvoor de cookies geldig zijn; "
+"standaardregeling is 'http'.\n"
+"Host (vereist)\n"
+" Hiermee stelt u het domein in waarvoor de cookies geldig zijn.\n"
+"Pad (optioneel)\n"
+" Geeft het pad de cookies zijn waarde voor; standaardpad is '/'.\n"
+"Set-cookie (optioneel)\n"
+" Stel cookienaam/waarde in. Kan meer dan eens gegeven worden.\n"
+"\n"
+"Meerdere vermeldingen worden gescheiden door een lege regel.\n"
+"\n"
+"In het onderstaande voorbeeld worden twee cookies naar alle URL's verzonden "
+"die beginnen met\n"
+"'http://example.org/hello/' en één voor alle URL's die beginnen\n"
+"met \"https://example.com/\":\n"
+"\n"
+"Gastheer: example.org\n"
+"Pad: /hallo\n"
+"Set-cookie: ID=\"smee\"\n"
+"Set-cookie: spam=\"egg\"\n"
+"\n"
+"Schema: https\n"
+"Gastheer: example.com\n"
+"Set-cookie: baggage=\"elitair\"; comment=\"hologram\"\n"
+
+#: ../linkcheck/command/arg_parser.py:113
+msgid ""
+"RETURN VALUE\n"
+"The return value is non-zero when\n"
+" o invalid links were found or\n"
+" o warnings were found warnings are enabled\n"
+" o a program error occurred\n"
+msgstr ""
+"RETOURWAARDE\n"
+"De retourwaarde is niet-nul wanneer\n"
+" o ongeldige links zijn gevonden of\n"
+" o waarschuwingen zijn gevonden waarschuwingen zijn ingeschakeld\n"
+" o er is een programmafout opgetreden\n"
+
+#: ../linkcheck/command/arg_parser.py:122
+msgid ""
+"EXAMPLES\n"
+"The most common use checks the given domain recursively, plus any\n"
+"single URL pointing outside of the domain:\n"
+"  linkchecker http://www.example.org/\n"
+"Beware that this checks the whole site which can have several hundred\n"
+"thousands URLs. Use the -r option to restrict the recursion depth.\n"
+"\n"
+"Don't connect to mailto: hosts, only check their URL syntax. All other\n"
+"links are checked as usual:\n"
+"  linkchecker --ignore-url=^mailto: www.example.org\n"
+"\n"
+"Checking local HTML files on Unix:\n"
+"  linkchecker ../bla.html subdir/blubber.html\n"
+"\n"
+"Checking a local HTML file on Windows:\n"
+"  linkchecker c:\\temp\\test.html\n"
+"\n"
+"You can skip the \"http://\" url part if the domain starts with \"www.\":\n"
+"  linkchecker www.example.de\n"
+"\n"
+"You can skip the \"ftp://\" url part if the domain starts with \"ftp.\":\n"
+"  linkchecker -r0 ftp.example.org\n"
+msgstr ""
+"VOORBEELDEN\n"
+"Het meest voorkomende gebruik controleert het gegeven domein recursief, "
+"plus\n"
+"enkele URL die buiten het domein wijzen:\n"
+"  linkchecker http://www.example.org/\n"
+"Pas op dat dit de hele sitecontroleert  die enkele honderden kan hebben\n"
+"duizenden URL's. Gebruik de optie -r om de recursiediepte te beperken.\n"
+"\n"
+"Maak geen verbinding met mailto: hosts, controleer alleen hun URL-syntaxis. "
+"Alle andere\n"
+"links worden gecontroleerd zoals gewoonlijk:\n"
+"  linkchecker --ignore-url=^mailto: www.example.org\n"
+"\n"
+"Lokale HTML-bestanden op Unix controleren:\n"
+"  Linkchecker.. /bla.html subdir/blubber.html\n"
+"\n"
+"Een lokaal HTML-bestand controleren in Windows:\n"
+"  linkchecker c:\\temp\\test.html\n"
+"\n"
+"U het url-gedeelte 'http://' overslaan als het domein begint met 'www':\n"
+"  linkchecker www.example.de\n"
+"\n"
+"U het url-gedeelte 'ftp://' overslaan als het domein begint met ftp:\n"
+"  linkchecker -r0 ftp.example.org\n"
+
+#: ../linkcheck/command/arg_parser.py:148
+#, fuzzy
+msgid ""
+"OUTPUT TYPES\n"
+"Note that by default only errors and warnings are logged.\n"
+"You should use the --verbose option to see valid URLs,\n"
+"and when outputting a sitemap graph format.\n"
+"\n"
+"text    Standard text output, logging URLs in keyword: argument fashion.\n"
+"html    Log URLs in keyword: argument fashion, formatted as HTML.\n"
+"        Additionally has links to the referenced pages. Invalid URLs have\n"
+"        HTML and CSS syntax check links appended.\n"
+"csv     Log check result in CSV format with one URL per line.\n"
+"gml     Log parent-child relations between linked URLs as a GML sitemap\n"
+"        graph.\n"
+"dot     Log parent-child relations between linked URLs as a DOT sitemap\n"
+"        graph.\n"
+"gxml    Log check result as a GraphXML sitemap graph.\n"
+"xml     Log check result as machine-readable XML.\n"
+"sql     Log check result as SQL script with INSERT commands. An example\n"
+"        script to create the initial SQL table is included as create.sql.\n"
+"failures\n"
+"        Suitable for cron jobs. Logs the check result into a file\n"
+"        ~/.linkchecker/failures which only contains entries with invalid\n"
+"        URLs and the number of times they have failed.\n"
+"none    Logs nothing. Suitable for debugging or checking the exit code.\n"
+msgstr ""
+"UITVOERTYPEN\n"
+"Houd er rekening mee dat standaard alleen fouten en waarschuwingen worden "
+"geregistreerd.\n"
+"U moet de optie --verbose gebruiken om geldige URL's te zien,\n"
+"en bij het uitvoeren van een sitemapgrafiek.\n"
+"\n"
+"tekst Standaard tekstuitvoer, LOGboekregistratie URL's in trefwoord: "
+"argument mode.\n"
+"html URL's registreren in trefwoord: argumentmode, opgemaakt als HTML.\n"
+"        Daarnaast heeft links naar de pagina's waarnaar verwezen wordt. "
+"Ongeldige URL's hebben\n"
+"        Html- en CSS-syntaxis controleren koppelingen die zijn toegevoegd.\n"
+"csv Log check resultaat in CSV formaat met een URL per lijn.\n"
+"gml Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
+"een GML-sitemap\n"
+"        Grafiek.\n"
+"punt Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
+"DOT-sitemap\n"
+"        Grafiek.\n"
+"gxml Log check resultaat als een GraphXML sitemap grafiek.\n"
+"xml Log check resultaat als machine-readable XML.\n"
+"sql Log check resultaat als SQL script met INSERT commando's. Een voorbeeld\n"
+"        script om de eerste SQL-tabel te maken, is opgenomen als maken.sql.\n"
+"Blacklist\n"
+"        Geschikt voor cron banen. Logt het controleresultaat in op een "
+"bestand\n"
+"        ~/.linkchecker/zwarte lijst die alleen vermeldingen bevat met "
+"ongeldig\n"
+"        URL's en het aantal keren dat ze zijn mislukt.\n"
+"none Logs niets. Geschikt voor het debuggen of controleren van de exit "
+"code.\n"
+
+#: ../linkcheck/command/arg_parser.py:176
+msgid ""
+"IGNORE WARNINGS\n"
+"The following warnings are recognized in the 'ignorewarnings' config\n"
+"file entry:\n"
+msgstr ""
+"WAARSCHUWINGEN NEGEREN\n"
+"De volgende waarschuwingen worden herkend in de 'ignorewarnings' config\n"
+"bestandsinvoer:\n"
+
+#: ../linkcheck/command/arg_parser.py:212
+msgid "General options"
+msgstr "Algemene opties"
+
+#: ../linkcheck/command/arg_parser.py:219
+#, python-format
+msgid ""
+"Use FILENAME as configuration file. Per default LinkChecker uses\n"
+"~/.linkchecker/linkcheckerrc (under Windows\n"
+"%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
+msgstr ""
+"Gebruik BESTANDSNAAM als configuratiebestand. Per standaard gebruik van "
+"LinkChecker\n"
+"~/.linkchecker/linkcheckerrc (onder Windows\n"
+"%% HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
+
+#: ../linkcheck/command/arg_parser.py:230
+msgid ""
+"Generate no more than the given number of threads. Default number\n"
+"of threads is 10. To disable threading specify a non-positive number."
+msgstr ""
+"Genereer niet meer dan het opgegeven aantal threads. Standaardnummer\n"
+"van draden is 10. Als u threading wilt uitschakelen, geeft u een niet-"
+"positief getal op."
+
+#: ../linkcheck/command/arg_parser.py:235
+msgid "Print version and exit."
+msgstr "Versie afdrukken en afsluiten."
+
+#: ../linkcheck/command/arg_parser.py:241
+msgid "Print available check plugins and exit."
+msgstr "Print beschikbare controle plugins en afsluiten."
+
+#: ../linkcheck/command/arg_parser.py:246
+msgid "Read list of white-space separated URLs to check from stdin."
+msgstr ""
+"Lees de lijst met gescheiden URL's met witte ruimte om te controleren vanaf "
+"stdin."
+
+#: ../linkcheck/command/arg_parser.py:250
+msgid "Output options"
+msgstr "Uitvoeropties"
+
+#: ../linkcheck/command/arg_parser.py:257
+#, python-format
+msgid ""
+"Print debugging output for the given logger.\n"
+"Available loggers are %(lognamelist)s.\n"
+"Specifying 'all' is an alias for specifying all available loggers.\n"
+"The option can be given multiple times to debug with more\n"
+"than one logger.\n"
+"\n"
+"For accurate results, threading will be disabled during debug runs."
+msgstr ""
+"Druk debugging output voor de gegeven logger.\n"
+"Beschikbare loggers zijn %(lognamelist)s.\n"
+"Het opgeven van 'alles' is een alias voor het opgeven van alle beschikbare "
+"loggers.\n"
+"De optie kan meerdere keren worden gegeven om te debuggen met meer\n"
+"dan één logger.\n"
+"\n"
+"Voor nauwkeurige resultaten wordt threading uitgeschakeld tijdens "
+"foutopsporingsruns."
+
+#: ../linkcheck/command/arg_parser.py:274
+#, fuzzy, python-format
+msgid ""
+"Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
+"'failures' output, or FILENAME if specified.\n"
+"The ENCODING specifies the output encoding, the default is that of your\n"
+"locale.\n"
+"Valid encodings are listed at https://docs.python.org/library/codecs."
+"html#standard-encodings.\n"
+"The FILENAME and ENCODING parts of the 'none' output type will be ignored,\n"
+"else if the file already exists, it will be overwritten.\n"
+"You can specify this option more than once. Valid file output types\n"
+"are %(loggertypes)s. You can specify this option multiple times to output\n"
+"to more than one file. Default is no file output. Note that you can\n"
+"suppress all console output with the option '-o none'."
+msgstr ""
+"Uitvoer naar een bestandskoppelingcontrole. TYPE, $HOME/.linkchecker/zwarte "
+"lijst voor\n"
+"'blacklist'-uitvoer of BESTANDSNAAM indien opgegeven.\n"
+"De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
+"uw\n"
+"Locale.\n"
+"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
+"encodings.html.\n"
+"De bestandsnamen en ENCODing-onderdelen van het uitvoertype 'geen' worden "
+"genegeerd,\n"
+"anders als het bestand al bestaat, zal het worden overschreven.\n"
+"U deze optie meerdere tijd opgeven. Geldige bestandsuitvoertypen\n"
+"%(loggertypes)s. U deze optie meerdere keren opgeven om uit te geven\n"
+"meer dan één bestand. Standaard is geen bestandsuitvoer. Houd er rekening "
+"mee dat u\n"
+"alle console-uitvoer te onderdrukken met de optie '-o none'."
+
+#: ../linkcheck/command/arg_parser.py:294
+msgid "Do not print check status messages."
+msgstr "Druk de statusberichten van de controle niet af."
+
+#: ../linkcheck/command/arg_parser.py:300
+msgid "Don't log warnings. Default is to log warnings."
+msgstr ""
+"Log geen waarschuwingen in. Standaard is het registreren van waarschuwingen."
+
+#: ../linkcheck/command/arg_parser.py:308
+#, fuzzy, python-format
+msgid ""
+"Specify output as %(loggertypes)s. Default output type is text.\n"
+"The ENCODING specifies the output encoding, the default is that of your\n"
+"locale.\n"
+"Valid encodings are listed at https://docs.python.org/library/codecs."
+"html#standard-encodings."
+msgstr ""
+"Geef uitvoer op als %(loggertypes)s. Standaarduitvoertype is tekst.\n"
+"De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
+"uw\n"
+"Locale.\n"
+"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
+"encodings.html."
+
+#: ../linkcheck/command/arg_parser.py:325
+msgid ""
+"Quiet operation, an alias for '-o none'.\n"
+"This is only useful with -F."
+msgstr ""
+"Stille werking, een alias voor '-o none'.\n"
+"Dit is alleen nuttig met -F."
+
+#: ../linkcheck/command/arg_parser.py:336
+msgid "Log all URLs. Default is to log only errors and warnings."
+msgstr ""
+"Log alle URL's in. Standaard is het registreren van alleen fouten en "
+"waarschuwingen."
+
+#: ../linkcheck/command/arg_parser.py:340
+msgid "Checking options"
+msgstr "Opties controleren"
+
+#: ../linkcheck/command/arg_parser.py:346
+msgid ""
+"Read a file with initial cookie data. The cookie data format is\n"
+"explained below."
+msgstr ""
+"Lees een bestand met de eerste cookiegegevens. Het cookiegegevensformaat is\n"
+"hieronder uitgelegd."
+
+#: ../linkcheck/command/arg_parser.py:356
+msgid "Disable robots.txt checks"
+msgstr "Robots uitschakelen.txt controles"
+
+#: ../linkcheck/command/arg_parser.py:362
+msgid "Check external URLs."
+msgstr "Externe URL's controleren."
+
+#: ../linkcheck/command/arg_parser.py:370
+#, fuzzy
+msgid ""
+"Only check syntax of URLs matching the given regular expression.\n"
+"This option can be given multiple times."
+msgstr ""
+"Controleer alleen de syntaxis van URL's die overeenkomen met de gegeven "
+"reguliere expressie.\n"
+" Deze optie kan meerdere keren worden gegeven."
+
+#: ../linkcheck/command/arg_parser.py:380
+msgid ""
+"Check but do not recurse into URLs matching the given regular\n"
+"expression. This option can be given multiple times."
+msgstr ""
+"Controleren, maar niet opnieuw in URL's die overeenkomen met de gegeven "
+"reguliere\n"
+"Expressie. Deze optie kan meerdere keren worden gegeven."
+
+#: ../linkcheck/command/arg_parser.py:390
+msgid ""
+"Specify an NNTP server for 'news:...' links. Default is the\n"
+"environment variable NNTP_SERVER. If no host is given,\n"
+"only the syntax of the link is checked."
+msgstr ""
+"Geef een NNTP-server op voor 'nieuws:...' Verwijzigingen. Standaard is de\n"
+"omgevingsvariabele NNTP_SERVER. Als er geen host wordt gegeven,\n"
+"alleen de syntaxis van de koppeling wordt gecontroleerd."
+
+#: ../linkcheck/command/arg_parser.py:402
+msgid ""
+"Read a password from console and use it for HTTP and FTP authorization.\n"
+"For FTP the default password is 'anonymous@'. For HTTP there is\n"
+"no default password. See also -u."
+msgstr ""
+"Lees een wachtwoord van de console en gebruik het voor HTTP- en FTP-"
+"autorisatie.\n"
+"Voor FTP is het standaardwachtwoord 'anonymous@'. Voor HTTP is er\n"
+"geen standaardwachtwoord. Zie ook -u."
+
+#: ../linkcheck/command/arg_parser.py:414
+msgid ""
+"Check recursively all links up to given depth. A negative depth\n"
+"will enable infinite recursion. Default depth is infinite."
+msgstr ""
+"Controleer recursief alle verbindingen tot bepaalde diepte. Een negatieve "
+"diepte\n"
+"zal oneindige recursie mogelijk maken. Standaarddiepte is oneindig."
+
+#: ../linkcheck/command/arg_parser.py:424
+#, fuzzy
+msgid "Set the timeout for connection attempts in seconds."
+msgstr ""
+"Stel de time-out voor verbindingspogingen in seconden in. De standaard\n"
+"time-out is %d seconden."
+
+#: ../linkcheck/command/arg_parser.py:433
+msgid ""
+"Try the given username for HTTP and FTP authorization.\n"
+"For FTP the default username is 'anonymous'. For HTTP there is\n"
+"no default username. See also -p."
+msgstr ""
+"Probeer de opgegeven gebruikersnaam voor HTTP- en FTP-autorisatie.\n"
+"Voor FTP is de standaard gebruikersnaam 'anoniem'. Voor HTTP is er\n"
+"geen standaard gebruikersnaam. Zie ook -p."
+
+#: ../linkcheck/command/arg_parser.py:443
+msgid ""
+"Specify the User-Agent string to send to the HTTP server, for example\n"
+"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the "
+"current\n"
+"version of LinkChecker."
+msgstr ""
+"Geef bijvoorbeeld de User-Agent tekenreeks op die naar de HTTP-server moet "
+"worden verzonden\n"
+"\"Mozilla/4.0\". De standaardinstelling is \"LinkChecker/X.Y\" waarbij X.Y "
+"de huidige\n"
+"versie van LinkChecker."
+
+#: ../linkcheck/__init__.py:117
+msgid "CRITICAL"
+msgstr "KRITIEK"
+
+#: ../linkcheck/__init__.py:118
+msgid "ERROR"
+msgstr "FOUT"
+
+#: ../linkcheck/__init__.py:119
+msgid "WARN"
+msgstr "WAARSCHUWEN"
+
+#: ../linkcheck/__init__.py:120
+msgid "WARNING"
+msgstr "WAARSCHUWING"
+
+#: ../linkcheck/__init__.py:121
+msgid "INFO"
+msgstr "INFO"
+
+#: ../linkcheck/__init__.py:122
+msgid "DEBUG"
+msgstr "FOUTOPSPORING"
+
+#: ../linkcheck/__init__.py:123
+msgid "NOTSET"
+msgstr "NOT SET"
 
 #: ../linkcheck/strformat.py:164
 #, python-format
@@ -635,11 +1273,6 @@ msgstr "Systeeminformatie:"
 msgid "Released on:"
 msgstr "Uitgebracht op:"
 
-#: ../linkcheck/director/console.py:145 ../linkchecker:536
-#, python-format
-msgid "Python %(version)s on %(platform)s"
-msgstr "Python %(version)s op %(platform)s"
-
 #: ../linkcheck/director/console.py:153
 msgid "Local time:"
 msgstr "Lokale tijd:"
@@ -1160,641 +1793,6 @@ msgstr "Voer '%(program)s -h' uit voor hulp"
 #, python-format
 msgid "trailing comma in line: %(line)s srcset attribute: %(value)s"
 msgstr ""
-
-#: ../linkchecker:65
-msgid ""
-"NOTES\n"
-" o URLs on the command line starting with \"ftp.\" are treated like\n"
-"   \"ftp://ftp.\", URLs starting with \"www.\" are treated like \"http://www."
-"\".\n"
-"   You can also give local files as arguments.\n"
-" o If you have your system configured to automatically establish a\n"
-"   connection to the internet (e.g. with diald), it will connect when\n"
-"   checking links not pointing to your local system.\n"
-"   See the --ignore-url option on how to prevent this.\n"
-" o Javascript links are currently ignored.\n"
-" o If your platform does not support threading, LinkChecker disables it\n"
-"   automatically.\n"
-" o You can supply multiple user/password pairs in a configuration file.\n"
-" o When checking 'news:' links the given NNTP host doesn't need to be the\n"
-"   same as the host of the user browsing your pages.\n"
-msgstr ""
-"Notities\n"
-" o URL's op de opdrachtregel die beginnen met \"ftp\" worden behandeld als\n"
-"   \"ftp://ftp\", URL's die beginnen met \"www.\" worden behandeld als "
-"\"http://www\".\n"
-"   U lokale bestanden ook als argumenten opgeven.\n"
-" o Als u uw systeem hebt geconfigureerd om automatisch te\n"
-"   verbinden met internet (bijvoorbeeld met diald), zal er verbinding\n"
-"   worden gemaakt wanneer externe links worden gecontroleerd.\n"
-"   Zie de optie --ignore-url over hoe dit te voorkomen.\n"
-" o Javascript-koppelingen worden momenteel genegeerd.\n"
-" o Als uw platform geen ondersteuning biedt voor threading, \n"
-"   schakelt LinkChecker het automatisch uit.\n"
-" o U kunt meerdere gebruikers-/wachtwoordparen in een configuratiebestand "
-"aanleveren.\n"
-" o Bij het controleren van 'news:' links hoeft de opgegeven NNTP-host niet\n"
-"   hetzelfde te zijn als de host van de gebruiker die door uw pagina's "
-"bladert.\n"
-
-#: ../linkchecker:83
-#, fuzzy
-msgid ""
-"PROXY SUPPORT\n"
-"To use a proxy on Unix or Windows set $http_proxy, $https_proxy or "
-"$ftp_proxy\n"
-"to the proxy URL. The URL should be of the form\n"
-"\"http://[<user>:<pass>@]<host>[:<port>]\".\n"
-"LinkChecker also detects manual proxy settings of Internet Explorer under\n"
-"Windows systems, and GNOME or KDE on Linux systems.\n"
-"On a Mac use the Internet Config to select a proxy.\n"
-"\n"
-"LinkChecker honors the $no_proxy environment variable. It can be a list\n"
-"of domain names for which no proxy will be used.\n"
-"\n"
-"Setting a HTTP proxy on Unix for example looks like this:\n"
-"\n"
-"  export http_proxy=\"http://proxy.example.com:8080\"\n"
-"\n"
-"Proxy authentication is also supported:\n"
-"\n"
-"  export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
-"\n"
-"Setting a proxy on the Windows command prompt:\n"
-"\n"
-"  set http_proxy=http://proxy.example.com:8080\n"
-"\n"
-msgstr ""
-"PROXY-ONDERSTEUNING\n"
-"Een proxy gebruiken op Unix- of Windows-set $http_proxy, $https_proxy of "
-"$ftp_proxy\n"
-"naar de proxy-URL. De URL moet van het formulier zijn\n"
-"\"http://[ :<user><pass>@]<host>[:<port>]\".\n"
-"LinkChecker detecteert ook handmatige proxy-instellingen van Internet "
-"Explorer onder\n"
-"Windows-systemen, en gconf of KDE op Linux-systemen.\n"
-"Gebruik op een Mac de Internet Config om een proxy te selecteren.\n"
-"\n"
-"LinkChecker honoreert de variabele $no_proxy-omgeving. Het kan een lijst "
-"zijn\n"
-"van domeinnamen waarvoor geen proxy zal worden gebruikt.\n"
-"\n"
-"Het instellen van een HTTP-proxy op Unix ziet er bijvoorbeeld als volgt "
-"uit:\n"
-"\n"
-"export http_proxy=\"http://proxy.example.com:8080\"\n"
-"\n"
-"Proxyverificatie wordt ook ondersteund:\n"
-"\n"
-"export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
-"\n"
-"Een proxy instellen op de opdrachtprompt van Windows:\n"
-"\n"
-"stel http_proxy=http://proxy.example.com:8080 in\n"
-"\n"
-
-#: ../linkchecker:110
-#, fuzzy
-msgid ""
-"REGULAR EXPRESSIONS\n"
-"Only Python regular expressions are accepted by LinkChecker.\n"
-"See https://docs.python.org/howto/regex.html for an introduction in\n"
-"regular expressions.\n"
-"\n"
-"The only addition is that a leading exclamation mark negates\n"
-"the regular expression.\n"
-msgstr ""
-"REGULIERE EXPRESSIES\n"
-"Alleen gewone Python-expressies worden geaccepteerd door LinkChecker.\n"
-"Zie http://www.amk.ca/python/howto/regex/ voor een introductie in\n"
-"reguliere expressies.\n"
-"\n"
-"De enige toevoeging is dat een uitroepteken vooraan\n"
-"de reguliere expressie ontkent.\n"
-
-#: ../linkchecker:121
-msgid ""
-"COOKIE FILES\n"
-"A cookie file contains standard RFC 805 header data with the following\n"
-"possible names:\n"
-"Scheme (optional)\n"
-" Sets the scheme the cookies are valid for; default scheme is 'http'.\n"
-"Host (required)\n"
-" Sets the domain the cookies are valid for.\n"
-"Path (optional)\n"
-" Gives the path the cookies are value for; default path is '/'.\n"
-"Set-cookie (optional)\n"
-" Set cookie name/value. Can be given more than once.\n"
-"\n"
-"Multiple entries are separated by a blank line.\n"
-"\n"
-"The example below will send two cookies to all URLs starting with\n"
-"'http://example.org/hello/' and one to all URLs starting\n"
-"with 'https://example.com/':\n"
-"\n"
-"Host: example.org\n"
-"Path: /hello\n"
-"Set-cookie: ID=\"smee\"\n"
-"Set-cookie: spam=\"egg\"\n"
-"\n"
-"Scheme: https\n"
-"Host: example.com\n"
-"Set-cookie: baggage=\"elitist\"; comment=\"hologram\"\n"
-msgstr ""
-"COOKIEBESTANDEN\n"
-"Een cookiebestand bevat standaard RFC 805-headergegevens met de volgende\n"
-"mogelijke namen:\n"
-"Regeling (optioneel)\n"
-" Hiermee stelt u het schema in waarvoor de cookies geldig zijn; "
-"standaardregeling is 'http'.\n"
-"Host (vereist)\n"
-" Hiermee stelt u het domein in waarvoor de cookies geldig zijn.\n"
-"Pad (optioneel)\n"
-" Geeft het pad de cookies zijn waarde voor; standaardpad is '/'.\n"
-"Set-cookie (optioneel)\n"
-" Stel cookienaam/waarde in. Kan meer dan eens gegeven worden.\n"
-"\n"
-"Meerdere vermeldingen worden gescheiden door een lege regel.\n"
-"\n"
-"In het onderstaande voorbeeld worden twee cookies naar alle URL's verzonden "
-"die beginnen met\n"
-"'http://example.org/hello/' en één voor alle URL's die beginnen\n"
-"met \"https://example.com/\":\n"
-"\n"
-"Gastheer: example.org\n"
-"Pad: /hallo\n"
-"Set-cookie: ID=\"smee\"\n"
-"Set-cookie: spam=\"egg\"\n"
-"\n"
-"Schema: https\n"
-"Gastheer: example.com\n"
-"Set-cookie: baggage=\"elitair\"; comment=\"hologram\"\n"
-
-#: ../linkchecker:151
-msgid ""
-"RETURN VALUE\n"
-"The return value is non-zero when\n"
-" o invalid links were found or\n"
-" o warnings were found warnings are enabled\n"
-" o a program error occurred\n"
-msgstr ""
-"RETOURWAARDE\n"
-"De retourwaarde is niet-nul wanneer\n"
-" o ongeldige links zijn gevonden of\n"
-" o waarschuwingen zijn gevonden waarschuwingen zijn ingeschakeld\n"
-" o er is een programmafout opgetreden\n"
-
-#: ../linkchecker:160
-msgid ""
-"EXAMPLES\n"
-"The most common use checks the given domain recursively, plus any\n"
-"single URL pointing outside of the domain:\n"
-"  linkchecker http://www.example.org/\n"
-"Beware that this checks the whole site which can have several hundred\n"
-"thousands URLs. Use the -r option to restrict the recursion depth.\n"
-"\n"
-"Don't connect to mailto: hosts, only check their URL syntax. All other\n"
-"links are checked as usual:\n"
-"  linkchecker --ignore-url=^mailto: www.example.org\n"
-"\n"
-"Checking local HTML files on Unix:\n"
-"  linkchecker ../bla.html subdir/blubber.html\n"
-"\n"
-"Checking a local HTML file on Windows:\n"
-"  linkchecker c:\\temp\\test.html\n"
-"\n"
-"You can skip the \"http://\" url part if the domain starts with \"www.\":\n"
-"  linkchecker www.example.de\n"
-"\n"
-"You can skip the \"ftp://\" url part if the domain starts with \"ftp.\":\n"
-"  linkchecker -r0 ftp.example.org\n"
-msgstr ""
-"VOORBEELDEN\n"
-"Het meest voorkomende gebruik controleert het gegeven domein recursief, "
-"plus\n"
-"enkele URL die buiten het domein wijzen:\n"
-"  linkchecker http://www.example.org/\n"
-"Pas op dat dit de hele sitecontroleert  die enkele honderden kan hebben\n"
-"duizenden URL's. Gebruik de optie -r om de recursiediepte te beperken.\n"
-"\n"
-"Maak geen verbinding met mailto: hosts, controleer alleen hun URL-syntaxis. "
-"Alle andere\n"
-"links worden gecontroleerd zoals gewoonlijk:\n"
-"  linkchecker --ignore-url=^mailto: www.example.org\n"
-"\n"
-"Lokale HTML-bestanden op Unix controleren:\n"
-"  Linkchecker.. /bla.html subdir/blubber.html\n"
-"\n"
-"Een lokaal HTML-bestand controleren in Windows:\n"
-"  linkchecker c:\\temp\\test.html\n"
-"\n"
-"U het url-gedeelte 'http://' overslaan als het domein begint met 'www':\n"
-"  linkchecker www.example.de\n"
-"\n"
-"U het url-gedeelte 'ftp://' overslaan als het domein begint met ftp:\n"
-"  linkchecker -r0 ftp.example.org\n"
-
-#: ../linkchecker:186
-#, fuzzy
-msgid ""
-"OUTPUT TYPES\n"
-"Note that by default only errors and warnings are logged.\n"
-"You should use the --verbose option to see valid URLs,\n"
-"and when outputting a sitemap graph format.\n"
-"\n"
-"text    Standard text output, logging URLs in keyword: argument fashion.\n"
-"html    Log URLs in keyword: argument fashion, formatted as HTML.\n"
-"        Additionally has links to the referenced pages. Invalid URLs have\n"
-"        HTML and CSS syntax check links appended.\n"
-"csv     Log check result in CSV format with one URL per line.\n"
-"gml     Log parent-child relations between linked URLs as a GML sitemap\n"
-"        graph.\n"
-"dot     Log parent-child relations between linked URLs as a DOT sitemap\n"
-"        graph.\n"
-"gxml    Log check result as a GraphXML sitemap graph.\n"
-"xml     Log check result as machine-readable XML.\n"
-"sql     Log check result as SQL script with INSERT commands. An example\n"
-"        script to create the initial SQL table is included as create.sql.\n"
-"failures\n"
-"        Suitable for cron jobs. Logs the check result into a file\n"
-"        ~/.linkchecker/failures which only contains entries with invalid\n"
-"        URLs and the number of times they have failed.\n"
-"none    Logs nothing. Suitable for debugging or checking the exit code.\n"
-msgstr ""
-"UITVOERTYPEN\n"
-"Houd er rekening mee dat standaard alleen fouten en waarschuwingen worden "
-"geregistreerd.\n"
-"U moet de optie --verbose gebruiken om geldige URL's te zien,\n"
-"en bij het uitvoeren van een sitemapgrafiek.\n"
-"\n"
-"tekst Standaard tekstuitvoer, LOGboekregistratie URL's in trefwoord: "
-"argument mode.\n"
-"html URL's registreren in trefwoord: argumentmode, opgemaakt als HTML.\n"
-"        Daarnaast heeft links naar de pagina's waarnaar verwezen wordt. "
-"Ongeldige URL's hebben\n"
-"        Html- en CSS-syntaxis controleren koppelingen die zijn toegevoegd.\n"
-"csv Log check resultaat in CSV formaat met een URL per lijn.\n"
-"gml Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
-"een GML-sitemap\n"
-"        Grafiek.\n"
-"punt Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
-"DOT-sitemap\n"
-"        Grafiek.\n"
-"gxml Log check resultaat als een GraphXML sitemap grafiek.\n"
-"xml Log check resultaat als machine-readable XML.\n"
-"sql Log check resultaat als SQL script met INSERT commando's. Een voorbeeld\n"
-"        script om de eerste SQL-tabel te maken, is opgenomen als maken.sql.\n"
-"Blacklist\n"
-"        Geschikt voor cron banen. Logt het controleresultaat in op een "
-"bestand\n"
-"        ~/.linkchecker/zwarte lijst die alleen vermeldingen bevat met "
-"ongeldig\n"
-"        URL's en het aantal keren dat ze zijn mislukt.\n"
-"none Logs niets. Geschikt voor het debuggen of controleren van de exit "
-"code.\n"
-
-#: ../linkchecker:214
-msgid ""
-"IGNORE WARNINGS\n"
-"The following warnings are recognized in the 'ignorewarnings' config\n"
-"file entry:\n"
-msgstr ""
-"WAARSCHUWINGEN NEGEREN\n"
-"De volgende waarschuwingen worden herkend in de 'ignorewarnings' config\n"
-"bestandsinvoer:\n"
-
-#: ../linkchecker:261
-msgid "General options"
-msgstr "Algemene opties"
-
-#: ../linkchecker:268
-#, python-format
-msgid ""
-"Use FILENAME as configuration file. Per default LinkChecker uses\n"
-"~/.linkchecker/linkcheckerrc (under Windows\n"
-"%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
-msgstr ""
-"Gebruik BESTANDSNAAM als configuratiebestand. Per standaard gebruik van "
-"LinkChecker\n"
-"~/.linkchecker/linkcheckerrc (onder Windows\n"
-"%% HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
-
-#: ../linkchecker:279
-msgid ""
-"Generate no more than the given number of threads. Default number\n"
-"of threads is 10. To disable threading specify a non-positive number."
-msgstr ""
-"Genereer niet meer dan het opgegeven aantal threads. Standaardnummer\n"
-"van draden is 10. Als u threading wilt uitschakelen, geeft u een niet-"
-"positief getal op."
-
-#: ../linkchecker:284
-msgid "Print version and exit."
-msgstr "Versie afdrukken en afsluiten."
-
-#: ../linkchecker:290
-msgid "Print available check plugins and exit."
-msgstr "Print beschikbare controle plugins en afsluiten."
-
-#: ../linkchecker:295
-msgid "Read list of white-space separated URLs to check from stdin."
-msgstr ""
-"Lees de lijst met gescheiden URL's met witte ruimte om te controleren vanaf "
-"stdin."
-
-#: ../linkchecker:299
-msgid "Output options"
-msgstr "Uitvoeropties"
-
-#: ../linkchecker:306
-#, python-format
-msgid ""
-"Print debugging output for the given logger.\n"
-"Available loggers are %(lognamelist)s.\n"
-"Specifying 'all' is an alias for specifying all available loggers.\n"
-"The option can be given multiple times to debug with more\n"
-"than one logger.\n"
-"\n"
-"For accurate results, threading will be disabled during debug runs."
-msgstr ""
-"Druk debugging output voor de gegeven logger.\n"
-"Beschikbare loggers zijn %(lognamelist)s.\n"
-"Het opgeven van 'alles' is een alias voor het opgeven van alle beschikbare "
-"loggers.\n"
-"De optie kan meerdere keren worden gegeven om te debuggen met meer\n"
-"dan één logger.\n"
-"\n"
-"Voor nauwkeurige resultaten wordt threading uitgeschakeld tijdens "
-"foutopsporingsruns."
-
-#: ../linkchecker:323
-#, fuzzy, python-format
-msgid ""
-"Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
-"'failures' output, or FILENAME if specified.\n"
-"The ENCODING specifies the output encoding, the default is that of your\n"
-"locale.\n"
-"Valid encodings are listed at https://docs.python.org/library/codecs."
-"html#standard-encodings.\n"
-"The FILENAME and ENCODING parts of the 'none' output type will be ignored,\n"
-"else if the file already exists, it will be overwritten.\n"
-"You can specify this option more than once. Valid file output types\n"
-"are %(loggertypes)s. You can specify this option multiple times to output\n"
-"to more than one file. Default is no file output. Note that you can\n"
-"suppress all console output with the option '-o none'."
-msgstr ""
-"Uitvoer naar een bestandskoppelingcontrole. TYPE, $HOME/.linkchecker/zwarte "
-"lijst voor\n"
-"'blacklist'-uitvoer of BESTANDSNAAM indien opgegeven.\n"
-"De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
-"uw\n"
-"Locale.\n"
-"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
-"encodings.html.\n"
-"De bestandsnamen en ENCODing-onderdelen van het uitvoertype 'geen' worden "
-"genegeerd,\n"
-"anders als het bestand al bestaat, zal het worden overschreven.\n"
-"U deze optie meerdere tijd opgeven. Geldige bestandsuitvoertypen\n"
-"%(loggertypes)s. U deze optie meerdere keren opgeven om uit te geven\n"
-"meer dan één bestand. Standaard is geen bestandsuitvoer. Houd er rekening "
-"mee dat u\n"
-"alle console-uitvoer te onderdrukken met de optie '-o none'."
-
-#: ../linkchecker:343
-msgid "Do not print check status messages."
-msgstr "Druk de statusberichten van de controle niet af."
-
-#: ../linkchecker:349
-msgid "Don't log warnings. Default is to log warnings."
-msgstr ""
-"Log geen waarschuwingen in. Standaard is het registreren van waarschuwingen."
-
-#: ../linkchecker:357
-#, fuzzy, python-format
-msgid ""
-"Specify output as %(loggertypes)s. Default output type is text.\n"
-"The ENCODING specifies the output encoding, the default is that of your\n"
-"locale.\n"
-"Valid encodings are listed at https://docs.python.org/library/codecs."
-"html#standard-encodings."
-msgstr ""
-"Geef uitvoer op als %(loggertypes)s. Standaarduitvoertype is tekst.\n"
-"De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
-"uw\n"
-"Locale.\n"
-"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
-"encodings.html."
-
-#: ../linkchecker:374
-msgid ""
-"Quiet operation, an alias for '-o none'.\n"
-"This is only useful with -F."
-msgstr ""
-"Stille werking, een alias voor '-o none'.\n"
-"Dit is alleen nuttig met -F."
-
-#: ../linkchecker:384
-msgid "Log all URLs. Default is to log only errors and warnings."
-msgstr ""
-"Log alle URL's in. Standaard is het registreren van alleen fouten en "
-"waarschuwingen."
-
-#: ../linkchecker:388
-msgid "Checking options"
-msgstr "Opties controleren"
-
-#: ../linkchecker:394
-msgid ""
-"Read a file with initial cookie data. The cookie data format is\n"
-"explained below."
-msgstr ""
-"Lees een bestand met de eerste cookiegegevens. Het cookiegegevensformaat is\n"
-"hieronder uitgelegd."
-
-#: ../linkchecker:404
-msgid "Disable robots.txt checks"
-msgstr "Robots uitschakelen.txt controles"
-
-#: ../linkchecker:410
-msgid "Check external URLs."
-msgstr "Externe URL's controleren."
-
-#: ../linkchecker:418
-#, fuzzy
-msgid ""
-"Only check syntax of URLs matching the given regular expression.\n"
-"This option can be given multiple times."
-msgstr ""
-"Controleer alleen de syntaxis van URL's die overeenkomen met de gegeven "
-"reguliere expressie.\n"
-" Deze optie kan meerdere keren worden gegeven."
-
-#: ../linkchecker:428
-msgid ""
-"Check but do not recurse into URLs matching the given regular\n"
-"expression. This option can be given multiple times."
-msgstr ""
-"Controleren, maar niet opnieuw in URL's die overeenkomen met de gegeven "
-"reguliere\n"
-"Expressie. Deze optie kan meerdere keren worden gegeven."
-
-#: ../linkchecker:438
-msgid ""
-"Specify an NNTP server for 'news:...' links. Default is the\n"
-"environment variable NNTP_SERVER. If no host is given,\n"
-"only the syntax of the link is checked."
-msgstr ""
-"Geef een NNTP-server op voor 'nieuws:...' Verwijzigingen. Standaard is de\n"
-"omgevingsvariabele NNTP_SERVER. Als er geen host wordt gegeven,\n"
-"alleen de syntaxis van de koppeling wordt gecontroleerd."
-
-#: ../linkchecker:450
-msgid ""
-"Read a password from console and use it for HTTP and FTP authorization.\n"
-"For FTP the default password is 'anonymous@'. For HTTP there is\n"
-"no default password. See also -u."
-msgstr ""
-"Lees een wachtwoord van de console en gebruik het voor HTTP- en FTP-"
-"autorisatie.\n"
-"Voor FTP is het standaardwachtwoord 'anonymous@'. Voor HTTP is er\n"
-"geen standaardwachtwoord. Zie ook -u."
-
-#: ../linkchecker:462
-msgid ""
-"Check recursively all links up to given depth. A negative depth\n"
-"will enable infinite recursion. Default depth is infinite."
-msgstr ""
-"Controleer recursief alle verbindingen tot bepaalde diepte. Een negatieve "
-"diepte\n"
-"zal oneindige recursie mogelijk maken. Standaarddiepte is oneindig."
-
-#: ../linkchecker:472
-#, python-format
-msgid ""
-"Set the timeout for connection attempts in seconds. The default\n"
-"timeout is %d seconds."
-msgstr ""
-"Stel de time-out voor verbindingspogingen in seconden in. De standaard\n"
-"time-out is %d seconden."
-
-#: ../linkchecker:483
-msgid ""
-"Try the given username for HTTP and FTP authorization.\n"
-"For FTP the default username is 'anonymous'. For HTTP there is\n"
-"no default username. See also -p."
-msgstr ""
-"Probeer de opgegeven gebruikersnaam voor HTTP- en FTP-autorisatie.\n"
-"Voor FTP is de standaard gebruikersnaam 'anoniem'. Voor HTTP is er\n"
-"geen standaard gebruikersnaam. Zie ook -p."
-
-#: ../linkchecker:493
-msgid ""
-"Specify the User-Agent string to send to the HTTP server, for example\n"
-"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the "
-"current\n"
-"version of LinkChecker."
-msgstr ""
-"Geef bijvoorbeeld de User-Agent tekenreeks op die naar de HTTP-server moet "
-"worden verzonden\n"
-"\"Mozilla/4.0\". De standaardinstelling is \"LinkChecker/X.Y\" waarbij X.Y "
-"de huidige\n"
-"versie van LinkChecker."
-
-#: ../linkchecker:530
-#, python-format
-msgid "Invalid debug level %(level)r"
-msgstr "Ongeldig debugniveau %(level)r"
-
-#: ../linkchecker:547
-#, python-format
-msgid "Unreadable config file: %r"
-msgstr "Onleesbaar config-bestand: %r"
-
-#: ../linkchecker:555
-msgid "Running with python -O disables debugging."
-msgstr "Uitvoeren met python -O schakelt foutopsporing uit."
-
-#: ../linkchecker:588
-#, python-format
-msgid "blacklist is deprecated for option %(option)s, using failures instead"
-msgstr ""
-
-#: ../linkchecker:594 ../linkchecker:638
-#, python-format
-msgid "Unknown logger type %(type)r in %(output)r for option %(option)s"
-msgstr "Onbekend loggertype %(type)r in %(output)r voor optie %(option)s"
-
-#: ../linkchecker:599 ../linkchecker:647
-#, python-format
-msgid "Unknown encoding %(encoding)r in %(output)r for option %(option)s"
-msgstr "Onbekende codering %(encoding)r in %(output)r voor optie %(option)s"
-
-#: ../linkchecker:632
-#, python-format
-msgid ""
-"blacklist logger is deprecated for option %(option)s, using failures instead"
-msgstr ""
-
-#: ../linkchecker:663
-#, python-format
-msgid "Enter LinkChecker HTTP/FTP password for user %(user)s:"
-msgstr ""
-"Voer het HTTP/FTP-wachtwoord van LinkChecker in voor gebruikers %(user)s:"
-
-#: ../linkchecker:667
-msgid "Enter LinkChecker HTTP/FTP password:"
-msgstr "Voer het HTTP/FTP-wachtwoord van LinkChecker in:"
-
-#: ../linkchecker:687
-#, python-format
-msgid "Illegal argument %(arg)r for option %(option)s"
-msgstr "Illegaal argument %(arg)r voor optie %(option)s"
-
-#: ../linkchecker:706
-#, python-format
-msgid "Enter LinkChecker password for user %(user)s at %(strpattern)s:"
-msgstr ""
-"Voer het wachtwoord van LinkChecker in voor gebruikers %(user)s bij "
-"%(strpattern)s:"
-
-#: ../linkchecker:716
-#, python-format
-msgid "Could not read cookie file %s"
-msgstr "Kan cookie-bestand %s  niet lezen"
-
-#: ../linkchecker:741
-msgid "no files or URLs given"
-msgstr "geen bestanden of URL's gegeven"
-
-#: ../linkchecker:748
-#, python-format
-msgid ""
-"Overwrite profiling file %(file)r?\n"
-"Press Ctrl-C to cancel, RETURN to continue."
-msgstr ""
-"Overschrijven profilering bestand %(file)r?\n"
-"Druk op Ctrl-C om te annuleren, RETURN om door te gaan."
-
-#: ../linkchecker:756
-msgid "Canceled."
-msgstr "Geannuleerd."
-
-#: ../linkchecker:762
-msgid ""
-"The `yappi' Python module is not installed, therefore the --profile option "
-"is disabled."
-msgstr ""
-"De 'yappi' Python module is niet geïnstalleerd, daarom is de --profiel optie "
-"uitgeschakeld."
-
-#: ../linkchecker:782
-msgid "Dumping memory statistics..."
-msgstr "Dumping geheugen statistieken ..."
-
-#: ../linkchecker:784
-#, python-format
-msgid "The memory dump has been written to `%(filename)s'."
-msgstr "De geheugendump is geschreven naar '%(filename)s'."
 
 #: /opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/argparse.py:296
 msgid "usage: "

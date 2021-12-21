@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: https://github.com/linkchecker/linkchecker\n"
-"POT-Creation-Date: 2021-12-14 19:27+0000\n"
+"POT-Creation-Date: 2021-12-21 19:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,36 +18,446 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../linkcheck/__init__.py:119
+#: ../linkcheck/command/setup_config.py:50
+msgid "Running with python -O disables debugging."
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:82
+#, python-format
+msgid "blacklist is deprecated for option %(option)s, using failures instead"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:88
+#: ../linkcheck/command/setup_config.py:134
+#, python-format
+msgid "Unknown logger type %(type)r in %(output)r for option %(option)s"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:95
+#: ../linkcheck/command/setup_config.py:145
+#, python-format
+msgid "Unknown encoding %(encoding)r in %(output)r for option %(option)s"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:128
+#, python-format
+msgid ""
+"blacklist logger is deprecated for option %(option)s, using failures instead"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:162
+#, python-format
+msgid "Enter LinkChecker HTTP/FTP password for user %(user)s:"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:166
+msgid "Enter LinkChecker HTTP/FTP password:"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:184
+#, python-format
+msgid "Illegal argument %(arg)r for option %(option)s"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:203
+#, python-format
+msgid "Enter LinkChecker password for user %(user)s at %(strpattern)s:"
+msgstr ""
+
+#: ../linkcheck/command/setup_config.py:213
+#, python-format
+msgid "Could not read cookie file %s"
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:50
+msgid "Running as root user; dropping privileges by changing user to nobody."
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:124
+#, python-format
+msgid "Invalid debug level %(level)r"
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:130 ../linkcheck/director/console.py:145
+#, python-format
+msgid "Python %(version)s on %(platform)s"
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:142
+#, python-format
+msgid "Unreadable config file: %r"
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:173
+msgid "no files or URLs given"
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:181
+#, python-format
+msgid ""
+"Overwrite profiling file %(file)r?\n"
+"Press Ctrl-C to cancel, RETURN to continue."
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:189
+msgid "Canceled."
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:196
+msgid ""
+"The `yappi' Python module is not installed, therefore the --profile option is "
+"disabled."
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:215
+msgid "Dumping memory statistics..."
+msgstr ""
+
+#: ../linkcheck/command/linkchecker.py:217
+#, python-format
+msgid "The memory dump has been written to `%(filename)s'."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:28
+msgid ""
+"NOTES\n"
+" o URLs on the command line starting with \"ftp.\" are treated like\n"
+"   \"ftp://ftp.\", URLs starting with \"www.\" are treated like \"http://www."
+"\".\n"
+"   You can also give local files as arguments.\n"
+" o If you have your system configured to automatically establish a\n"
+"   connection to the internet (e.g. with diald), it will connect when\n"
+"   checking links not pointing to your local system.\n"
+"   See the --ignore-url option on how to prevent this.\n"
+" o Javascript links are currently ignored.\n"
+" o If your platform does not support threading, LinkChecker disables it\n"
+"   automatically.\n"
+" o You can supply multiple user/password pairs in a configuration file.\n"
+" o When checking 'news:' links the given NNTP host doesn't need to be the\n"
+"   same as the host of the user browsing your pages.\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:46
+msgid ""
+"PROXY SUPPORT\n"
+"To use a proxy on Unix or Windows set $http_proxy or $https_proxy\n"
+"to the proxy URL. The URL should be of the form\n"
+"\"http://[<user>:<pass>@]<host>[:<port>]\".\n"
+"LinkChecker also detects manual proxy settings of Internet Explorer under\n"
+"Windows systems. On a Mac use the Internet Config to select a proxy.\n"
+"\n"
+"LinkChecker honors the $no_proxy environment variable. It can be a list\n"
+"of domain names for which no proxy will be used.\n"
+"\n"
+"Setting a HTTP proxy on Unix for example looks like this:\n"
+"\n"
+"  export http_proxy=\"http://proxy.example.com:8080\"\n"
+"\n"
+"Proxy authentication is also supported:\n"
+"\n"
+"  export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
+"\n"
+"Setting a proxy on the Windows command prompt:\n"
+"\n"
+"  set http_proxy=http://proxy.example.com:8080\n"
+"\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:72
+msgid ""
+"REGULAR EXPRESSIONS\n"
+"Only Python regular expressions are accepted by LinkChecker.\n"
+"See https://docs.python.org/howto/regex.html for an introduction in\n"
+"regular expressions.\n"
+"\n"
+"The only addition is that a leading exclamation mark negates\n"
+"the regular expression.\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:83
+msgid ""
+"COOKIE FILES\n"
+"A cookie file contains standard RFC 805 header data with the following\n"
+"possible names:\n"
+"Scheme (optional)\n"
+" Sets the scheme the cookies are valid for; default scheme is 'http'.\n"
+"Host (required)\n"
+" Sets the domain the cookies are valid for.\n"
+"Path (optional)\n"
+" Gives the path the cookies are value for; default path is '/'.\n"
+"Set-cookie (optional)\n"
+" Set cookie name/value. Can be given more than once.\n"
+"\n"
+"Multiple entries are separated by a blank line.\n"
+"\n"
+"The example below will send two cookies to all URLs starting with\n"
+"'http://example.org/hello/' and one to all URLs starting\n"
+"with 'https://example.com/':\n"
+"\n"
+"Host: example.org\n"
+"Path: /hello\n"
+"Set-cookie: ID=\"smee\"\n"
+"Set-cookie: spam=\"egg\"\n"
+"\n"
+"Scheme: https\n"
+"Host: example.com\n"
+"Set-cookie: baggage=\"elitist\"; comment=\"hologram\"\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:113
+msgid ""
+"RETURN VALUE\n"
+"The return value is non-zero when\n"
+" o invalid links were found or\n"
+" o warnings were found warnings are enabled\n"
+" o a program error occurred\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:122
+msgid ""
+"EXAMPLES\n"
+"The most common use checks the given domain recursively, plus any\n"
+"single URL pointing outside of the domain:\n"
+"  linkchecker http://www.example.org/\n"
+"Beware that this checks the whole site which can have several hundred\n"
+"thousands URLs. Use the -r option to restrict the recursion depth.\n"
+"\n"
+"Don't connect to mailto: hosts, only check their URL syntax. All other\n"
+"links are checked as usual:\n"
+"  linkchecker --ignore-url=^mailto: www.example.org\n"
+"\n"
+"Checking local HTML files on Unix:\n"
+"  linkchecker ../bla.html subdir/blubber.html\n"
+"\n"
+"Checking a local HTML file on Windows:\n"
+"  linkchecker c:\\temp\\test.html\n"
+"\n"
+"You can skip the \"http://\" url part if the domain starts with \"www.\":\n"
+"  linkchecker www.example.de\n"
+"\n"
+"You can skip the \"ftp://\" url part if the domain starts with \"ftp.\":\n"
+"  linkchecker -r0 ftp.example.org\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:148
+msgid ""
+"OUTPUT TYPES\n"
+"Note that by default only errors and warnings are logged.\n"
+"You should use the --verbose option to see valid URLs,\n"
+"and when outputting a sitemap graph format.\n"
+"\n"
+"text    Standard text output, logging URLs in keyword: argument fashion.\n"
+"html    Log URLs in keyword: argument fashion, formatted as HTML.\n"
+"        Additionally has links to the referenced pages. Invalid URLs have\n"
+"        HTML and CSS syntax check links appended.\n"
+"csv     Log check result in CSV format with one URL per line.\n"
+"gml     Log parent-child relations between linked URLs as a GML sitemap\n"
+"        graph.\n"
+"dot     Log parent-child relations between linked URLs as a DOT sitemap\n"
+"        graph.\n"
+"gxml    Log check result as a GraphXML sitemap graph.\n"
+"xml     Log check result as machine-readable XML.\n"
+"sql     Log check result as SQL script with INSERT commands. An example\n"
+"        script to create the initial SQL table is included as create.sql.\n"
+"failures\n"
+"        Suitable for cron jobs. Logs the check result into a file\n"
+"        ~/.linkchecker/failures which only contains entries with invalid\n"
+"        URLs and the number of times they have failed.\n"
+"none    Logs nothing. Suitable for debugging or checking the exit code.\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:176
+msgid ""
+"IGNORE WARNINGS\n"
+"The following warnings are recognized in the 'ignorewarnings' config\n"
+"file entry:\n"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:212
+msgid "General options"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:219
+#, python-format
+msgid ""
+"Use FILENAME as configuration file. Per default LinkChecker uses\n"
+"~/.linkchecker/linkcheckerrc (under Windows\n"
+"%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:230
+msgid ""
+"Generate no more than the given number of threads. Default number\n"
+"of threads is 10. To disable threading specify a non-positive number."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:235
+msgid "Print version and exit."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:241
+msgid "Print available check plugins and exit."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:246
+msgid "Read list of white-space separated URLs to check from stdin."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:250
+msgid "Output options"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:257
+#, python-format
+msgid ""
+"Print debugging output for the given logger.\n"
+"Available loggers are %(lognamelist)s.\n"
+"Specifying 'all' is an alias for specifying all available loggers.\n"
+"The option can be given multiple times to debug with more\n"
+"than one logger.\n"
+"\n"
+"For accurate results, threading will be disabled during debug runs."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:274
+#, python-format
+msgid ""
+"Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
+"'failures' output, or FILENAME if specified.\n"
+"The ENCODING specifies the output encoding, the default is that of your\n"
+"locale.\n"
+"Valid encodings are listed at https://docs.python.org/library/codecs."
+"html#standard-encodings.\n"
+"The FILENAME and ENCODING parts of the 'none' output type will be ignored,\n"
+"else if the file already exists, it will be overwritten.\n"
+"You can specify this option more than once. Valid file output types\n"
+"are %(loggertypes)s. You can specify this option multiple times to output\n"
+"to more than one file. Default is no file output. Note that you can\n"
+"suppress all console output with the option '-o none'."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:294
+msgid "Do not print check status messages."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:300
+msgid "Don't log warnings. Default is to log warnings."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:308
+#, python-format
+msgid ""
+"Specify output as %(loggertypes)s. Default output type is text.\n"
+"The ENCODING specifies the output encoding, the default is that of your\n"
+"locale.\n"
+"Valid encodings are listed at https://docs.python.org/library/codecs."
+"html#standard-encodings."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:325
+msgid ""
+"Quiet operation, an alias for '-o none'.\n"
+"This is only useful with -F."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:336
+msgid "Log all URLs. Default is to log only errors and warnings."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:340
+msgid "Checking options"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:346
+msgid ""
+"Read a file with initial cookie data. The cookie data format is\n"
+"explained below."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:356
+msgid "Disable robots.txt checks"
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:362
+msgid "Check external URLs."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:370
+msgid ""
+"Only check syntax of URLs matching the given regular expression.\n"
+"This option can be given multiple times."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:380
+msgid ""
+"Check but do not recurse into URLs matching the given regular\n"
+"expression. This option can be given multiple times."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:390
+msgid ""
+"Specify an NNTP server for 'news:...' links. Default is the\n"
+"environment variable NNTP_SERVER. If no host is given,\n"
+"only the syntax of the link is checked."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:402
+msgid ""
+"Read a password from console and use it for HTTP and FTP authorization.\n"
+"For FTP the default password is 'anonymous@'. For HTTP there is\n"
+"no default password. See also -u."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:414
+msgid ""
+"Check recursively all links up to given depth. A negative depth\n"
+"will enable infinite recursion. Default depth is infinite."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:424
+msgid "Set the timeout for connection attempts in seconds."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:433
+msgid ""
+"Try the given username for HTTP and FTP authorization.\n"
+"For FTP the default username is 'anonymous'. For HTTP there is\n"
+"no default username. See also -p."
+msgstr ""
+
+#: ../linkcheck/command/arg_parser.py:443
+msgid ""
+"Specify the User-Agent string to send to the HTTP server, for example\n"
+"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the current\n"
+"version of LinkChecker."
+msgstr ""
+
+#: ../linkcheck/__init__.py:117
 msgid "CRITICAL"
 msgstr ""
 
-#: ../linkcheck/__init__.py:120
+#: ../linkcheck/__init__.py:118
 msgid "ERROR"
 msgstr ""
 
-#: ../linkcheck/__init__.py:121
+#: ../linkcheck/__init__.py:119
 msgid "WARN"
 msgstr ""
 
-#: ../linkcheck/__init__.py:122
+#: ../linkcheck/__init__.py:120
 msgid "WARNING"
 msgstr ""
 
-#: ../linkcheck/__init__.py:123
+#: ../linkcheck/__init__.py:121
 msgid "INFO"
 msgstr ""
 
-#: ../linkcheck/__init__.py:124
+#: ../linkcheck/__init__.py:122
 msgid "DEBUG"
 msgstr ""
 
-#: ../linkcheck/__init__.py:125
+#: ../linkcheck/__init__.py:123
 msgid "NOTSET"
-msgstr ""
-
-#: ../linkcheck/__init__.py:140
-msgid "Running as root user; dropping privileges by changing user to nobody."
 msgstr ""
 
 #: ../linkcheck/strformat.py:164
@@ -582,11 +992,6 @@ msgstr ""
 msgid "Released on:"
 msgstr ""
 
-#: ../linkcheck/director/console.py:145 ../linkchecker:536
-#, python-format
-msgid "Python %(version)s on %(platform)s"
-msgstr ""
-
 #: ../linkcheck/director/console.py:153
 msgid "Local time:"
 msgstr ""
@@ -1089,414 +1494,6 @@ msgstr ""
 #: ../linkcheck/htmlutil/linkparse.py:210
 #, python-format
 msgid "trailing comma in line: %(line)s srcset attribute: %(value)s"
-msgstr ""
-
-#: ../linkchecker:65
-msgid ""
-"NOTES\n"
-" o URLs on the command line starting with \"ftp.\" are treated like\n"
-"   \"ftp://ftp.\", URLs starting with \"www.\" are treated like \"http://www."
-"\".\n"
-"   You can also give local files as arguments.\n"
-" o If you have your system configured to automatically establish a\n"
-"   connection to the internet (e.g. with diald), it will connect when\n"
-"   checking links not pointing to your local system.\n"
-"   See the --ignore-url option on how to prevent this.\n"
-" o Javascript links are currently ignored.\n"
-" o If your platform does not support threading, LinkChecker disables it\n"
-"   automatically.\n"
-" o You can supply multiple user/password pairs in a configuration file.\n"
-" o When checking 'news:' links the given NNTP host doesn't need to be the\n"
-"   same as the host of the user browsing your pages.\n"
-msgstr ""
-
-#: ../linkchecker:83
-msgid ""
-"PROXY SUPPORT\n"
-"To use a proxy on Unix or Windows set $http_proxy, $https_proxy or "
-"$ftp_proxy\n"
-"to the proxy URL. The URL should be of the form\n"
-"\"http://[<user>:<pass>@]<host>[:<port>]\".\n"
-"LinkChecker also detects manual proxy settings of Internet Explorer under\n"
-"Windows systems, and GNOME or KDE on Linux systems.\n"
-"On a Mac use the Internet Config to select a proxy.\n"
-"\n"
-"LinkChecker honors the $no_proxy environment variable. It can be a list\n"
-"of domain names for which no proxy will be used.\n"
-"\n"
-"Setting a HTTP proxy on Unix for example looks like this:\n"
-"\n"
-"  export http_proxy=\"http://proxy.example.com:8080\"\n"
-"\n"
-"Proxy authentication is also supported:\n"
-"\n"
-"  export http_proxy=\"http://user1:mypass@proxy.example.org:8081\"\n"
-"\n"
-"Setting a proxy on the Windows command prompt:\n"
-"\n"
-"  set http_proxy=http://proxy.example.com:8080\n"
-"\n"
-msgstr ""
-
-#: ../linkchecker:110
-msgid ""
-"REGULAR EXPRESSIONS\n"
-"Only Python regular expressions are accepted by LinkChecker.\n"
-"See https://docs.python.org/howto/regex.html for an introduction in\n"
-"regular expressions.\n"
-"\n"
-"The only addition is that a leading exclamation mark negates\n"
-"the regular expression.\n"
-msgstr ""
-
-#: ../linkchecker:121
-msgid ""
-"COOKIE FILES\n"
-"A cookie file contains standard RFC 805 header data with the following\n"
-"possible names:\n"
-"Scheme (optional)\n"
-" Sets the scheme the cookies are valid for; default scheme is 'http'.\n"
-"Host (required)\n"
-" Sets the domain the cookies are valid for.\n"
-"Path (optional)\n"
-" Gives the path the cookies are value for; default path is '/'.\n"
-"Set-cookie (optional)\n"
-" Set cookie name/value. Can be given more than once.\n"
-"\n"
-"Multiple entries are separated by a blank line.\n"
-"\n"
-"The example below will send two cookies to all URLs starting with\n"
-"'http://example.org/hello/' and one to all URLs starting\n"
-"with 'https://example.com/':\n"
-"\n"
-"Host: example.org\n"
-"Path: /hello\n"
-"Set-cookie: ID=\"smee\"\n"
-"Set-cookie: spam=\"egg\"\n"
-"\n"
-"Scheme: https\n"
-"Host: example.com\n"
-"Set-cookie: baggage=\"elitist\"; comment=\"hologram\"\n"
-msgstr ""
-
-#: ../linkchecker:151
-msgid ""
-"RETURN VALUE\n"
-"The return value is non-zero when\n"
-" o invalid links were found or\n"
-" o warnings were found warnings are enabled\n"
-" o a program error occurred\n"
-msgstr ""
-
-#: ../linkchecker:160
-msgid ""
-"EXAMPLES\n"
-"The most common use checks the given domain recursively, plus any\n"
-"single URL pointing outside of the domain:\n"
-"  linkchecker http://www.example.org/\n"
-"Beware that this checks the whole site which can have several hundred\n"
-"thousands URLs. Use the -r option to restrict the recursion depth.\n"
-"\n"
-"Don't connect to mailto: hosts, only check their URL syntax. All other\n"
-"links are checked as usual:\n"
-"  linkchecker --ignore-url=^mailto: www.example.org\n"
-"\n"
-"Checking local HTML files on Unix:\n"
-"  linkchecker ../bla.html subdir/blubber.html\n"
-"\n"
-"Checking a local HTML file on Windows:\n"
-"  linkchecker c:\\temp\\test.html\n"
-"\n"
-"You can skip the \"http://\" url part if the domain starts with \"www.\":\n"
-"  linkchecker www.example.de\n"
-"\n"
-"You can skip the \"ftp://\" url part if the domain starts with \"ftp.\":\n"
-"  linkchecker -r0 ftp.example.org\n"
-msgstr ""
-
-#: ../linkchecker:186
-msgid ""
-"OUTPUT TYPES\n"
-"Note that by default only errors and warnings are logged.\n"
-"You should use the --verbose option to see valid URLs,\n"
-"and when outputting a sitemap graph format.\n"
-"\n"
-"text    Standard text output, logging URLs in keyword: argument fashion.\n"
-"html    Log URLs in keyword: argument fashion, formatted as HTML.\n"
-"        Additionally has links to the referenced pages. Invalid URLs have\n"
-"        HTML and CSS syntax check links appended.\n"
-"csv     Log check result in CSV format with one URL per line.\n"
-"gml     Log parent-child relations between linked URLs as a GML sitemap\n"
-"        graph.\n"
-"dot     Log parent-child relations between linked URLs as a DOT sitemap\n"
-"        graph.\n"
-"gxml    Log check result as a GraphXML sitemap graph.\n"
-"xml     Log check result as machine-readable XML.\n"
-"sql     Log check result as SQL script with INSERT commands. An example\n"
-"        script to create the initial SQL table is included as create.sql.\n"
-"failures\n"
-"        Suitable for cron jobs. Logs the check result into a file\n"
-"        ~/.linkchecker/failures which only contains entries with invalid\n"
-"        URLs and the number of times they have failed.\n"
-"none    Logs nothing. Suitable for debugging or checking the exit code.\n"
-msgstr ""
-
-#: ../linkchecker:214
-msgid ""
-"IGNORE WARNINGS\n"
-"The following warnings are recognized in the 'ignorewarnings' config\n"
-"file entry:\n"
-msgstr ""
-
-#: ../linkchecker:261
-msgid "General options"
-msgstr ""
-
-#: ../linkchecker:268
-#, python-format
-msgid ""
-"Use FILENAME as configuration file. Per default LinkChecker uses\n"
-"~/.linkchecker/linkcheckerrc (under Windows\n"
-"%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
-msgstr ""
-
-#: ../linkchecker:279
-msgid ""
-"Generate no more than the given number of threads. Default number\n"
-"of threads is 10. To disable threading specify a non-positive number."
-msgstr ""
-
-#: ../linkchecker:284
-msgid "Print version and exit."
-msgstr ""
-
-#: ../linkchecker:290
-msgid "Print available check plugins and exit."
-msgstr ""
-
-#: ../linkchecker:295
-msgid "Read list of white-space separated URLs to check from stdin."
-msgstr ""
-
-#: ../linkchecker:299
-msgid "Output options"
-msgstr ""
-
-#: ../linkchecker:306
-#, python-format
-msgid ""
-"Print debugging output for the given logger.\n"
-"Available loggers are %(lognamelist)s.\n"
-"Specifying 'all' is an alias for specifying all available loggers.\n"
-"The option can be given multiple times to debug with more\n"
-"than one logger.\n"
-"\n"
-"For accurate results, threading will be disabled during debug runs."
-msgstr ""
-
-#: ../linkchecker:323
-#, python-format
-msgid ""
-"Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
-"'failures' output, or FILENAME if specified.\n"
-"The ENCODING specifies the output encoding, the default is that of your\n"
-"locale.\n"
-"Valid encodings are listed at https://docs.python.org/library/codecs."
-"html#standard-encodings.\n"
-"The FILENAME and ENCODING parts of the 'none' output type will be ignored,\n"
-"else if the file already exists, it will be overwritten.\n"
-"You can specify this option more than once. Valid file output types\n"
-"are %(loggertypes)s. You can specify this option multiple times to output\n"
-"to more than one file. Default is no file output. Note that you can\n"
-"suppress all console output with the option '-o none'."
-msgstr ""
-
-#: ../linkchecker:343
-msgid "Do not print check status messages."
-msgstr ""
-
-#: ../linkchecker:349
-msgid "Don't log warnings. Default is to log warnings."
-msgstr ""
-
-#: ../linkchecker:357
-#, python-format
-msgid ""
-"Specify output as %(loggertypes)s. Default output type is text.\n"
-"The ENCODING specifies the output encoding, the default is that of your\n"
-"locale.\n"
-"Valid encodings are listed at https://docs.python.org/library/codecs."
-"html#standard-encodings."
-msgstr ""
-
-#: ../linkchecker:374
-msgid ""
-"Quiet operation, an alias for '-o none'.\n"
-"This is only useful with -F."
-msgstr ""
-
-#: ../linkchecker:384
-msgid "Log all URLs. Default is to log only errors and warnings."
-msgstr ""
-
-#: ../linkchecker:388
-msgid "Checking options"
-msgstr ""
-
-#: ../linkchecker:394
-msgid ""
-"Read a file with initial cookie data. The cookie data format is\n"
-"explained below."
-msgstr ""
-
-#: ../linkchecker:404
-msgid "Disable robots.txt checks"
-msgstr ""
-
-#: ../linkchecker:410
-msgid "Check external URLs."
-msgstr ""
-
-#: ../linkchecker:418
-msgid ""
-"Only check syntax of URLs matching the given regular expression.\n"
-"This option can be given multiple times."
-msgstr ""
-
-#: ../linkchecker:428
-msgid ""
-"Check but do not recurse into URLs matching the given regular\n"
-"expression. This option can be given multiple times."
-msgstr ""
-
-#: ../linkchecker:438
-msgid ""
-"Specify an NNTP server for 'news:...' links. Default is the\n"
-"environment variable NNTP_SERVER. If no host is given,\n"
-"only the syntax of the link is checked."
-msgstr ""
-
-#: ../linkchecker:450
-msgid ""
-"Read a password from console and use it for HTTP and FTP authorization.\n"
-"For FTP the default password is 'anonymous@'. For HTTP there is\n"
-"no default password. See also -u."
-msgstr ""
-
-#: ../linkchecker:462
-msgid ""
-"Check recursively all links up to given depth. A negative depth\n"
-"will enable infinite recursion. Default depth is infinite."
-msgstr ""
-
-#: ../linkchecker:472
-#, python-format
-msgid ""
-"Set the timeout for connection attempts in seconds. The default\n"
-"timeout is %d seconds."
-msgstr ""
-
-#: ../linkchecker:483
-msgid ""
-"Try the given username for HTTP and FTP authorization.\n"
-"For FTP the default username is 'anonymous'. For HTTP there is\n"
-"no default username. See also -p."
-msgstr ""
-
-#: ../linkchecker:493
-msgid ""
-"Specify the User-Agent string to send to the HTTP server, for example\n"
-"\"Mozilla/4.0\". The default is \"LinkChecker/X.Y\" where X.Y is the current\n"
-"version of LinkChecker."
-msgstr ""
-
-#: ../linkchecker:530
-#, python-format
-msgid "Invalid debug level %(level)r"
-msgstr ""
-
-#: ../linkchecker:547
-#, python-format
-msgid "Unreadable config file: %r"
-msgstr ""
-
-#: ../linkchecker:555
-msgid "Running with python -O disables debugging."
-msgstr ""
-
-#: ../linkchecker:588
-#, python-format
-msgid "blacklist is deprecated for option %(option)s, using failures instead"
-msgstr ""
-
-#: ../linkchecker:594 ../linkchecker:638
-#, python-format
-msgid "Unknown logger type %(type)r in %(output)r for option %(option)s"
-msgstr ""
-
-#: ../linkchecker:599 ../linkchecker:647
-#, python-format
-msgid "Unknown encoding %(encoding)r in %(output)r for option %(option)s"
-msgstr ""
-
-#: ../linkchecker:632
-#, python-format
-msgid ""
-"blacklist logger is deprecated for option %(option)s, using failures instead"
-msgstr ""
-
-#: ../linkchecker:663
-#, python-format
-msgid "Enter LinkChecker HTTP/FTP password for user %(user)s:"
-msgstr ""
-
-#: ../linkchecker:667
-msgid "Enter LinkChecker HTTP/FTP password:"
-msgstr ""
-
-#: ../linkchecker:687
-#, python-format
-msgid "Illegal argument %(arg)r for option %(option)s"
-msgstr ""
-
-#: ../linkchecker:706
-#, python-format
-msgid "Enter LinkChecker password for user %(user)s at %(strpattern)s:"
-msgstr ""
-
-#: ../linkchecker:716
-#, python-format
-msgid "Could not read cookie file %s"
-msgstr ""
-
-#: ../linkchecker:741
-msgid "no files or URLs given"
-msgstr ""
-
-#: ../linkchecker:748
-#, python-format
-msgid ""
-"Overwrite profiling file %(file)r?\n"
-"Press Ctrl-C to cancel, RETURN to continue."
-msgstr ""
-
-#: ../linkchecker:756
-msgid "Canceled."
-msgstr ""
-
-#: ../linkchecker:762
-msgid ""
-"The `yappi' Python module is not installed, therefore the --profile option is "
-"disabled."
-msgstr ""
-
-#: ../linkchecker:782
-msgid "Dumping memory statistics..."
-msgstr ""
-
-#: ../linkchecker:784
-#, python-format
-msgid "The memory dump has been written to `%(filename)s'."
 msgstr ""
 
 #: /opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/argparse.py:296
