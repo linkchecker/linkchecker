@@ -2,7 +2,7 @@ XGETTEXT := xgettext
 MSGFMT := msgfmt
 MSGMERGE := msgmerge
 POSOURCES = $(shell find ../linkcheck -name \*.py) \
-	../linkchecker $(shell python3 -c 'import argparse; print(argparse.__file__)')
+	$(shell python3 -c 'import argparse; print(argparse.__file__)')
 PACKAGE = linkchecker
 TEMPLATE = $(PACKAGE).pot
 MYMAIL := bastian.kleineidam@web.de
