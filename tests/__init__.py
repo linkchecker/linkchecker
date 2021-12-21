@@ -24,10 +24,6 @@ from functools import lru_cache, wraps
 from linkcheck import LinkCheckerInterrupt
 
 
-basedir = os.path.dirname(__file__)
-linkchecker_cmd = os.path.join(os.path.dirname(basedir), "linkchecker")
-
-
 def run(cmd, verbosity=0, **kwargs):
     """Run command without error checking.
     @return: command return code"""

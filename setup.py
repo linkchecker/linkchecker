@@ -217,11 +217,6 @@ class MyInstallData(install_data):
 class MyDistribution(Distribution):
     """Custom distribution class generating config file."""
 
-    def __init__(self, attrs):
-        """Set console and windows scripts."""
-        super().__init__(attrs)
-        self.console = ["linkchecker"]
-
     def run_commands(self):
         """Generate config file and run commands."""
         cwd = os.getcwd()
@@ -306,8 +301,6 @@ class MyClean(clean):
 
 
 # scripts
-scripts = ["linkchecker"]
-
 myname = "LinkChecker Authors"
 myemail = ""
 
@@ -370,7 +363,11 @@ setup(
         "clean": MyClean,
     },
     packages=find_packages(include=["linkcheck", "linkcheck.*"]),
-    scripts=scripts,
+    entry_points={
+        "console_scripts": [
+            "linkchecker = linkcheck.command.linkchecker:linkchecker"
+        ]
+    },
     data_files=data_files,
     classifiers=[
         "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
@@ -388,6 +385,7 @@ setup(
     python_requires=">= 3.6",
     setup_requires=["setuptools_scm"],
     install_requires=[
+        "importlib_metadata;python_version<'3.8'",
         "requests >= 2.4",
         "dnspython >= 2.0",
         "beautifulsoup4 >= 4.8.1",

@@ -30,8 +30,6 @@ if sys.version_info < (3, 6, 0, 'final', 0):
 
 import os
 import re
-import signal
-import traceback
 
 from . import i18n, log
 from .logconf import (
@@ -127,40 +125,3 @@ def init_i18n(loc=None):
 
 # initialize i18n, puts _() and _n() function into global namespace
 init_i18n()
-
-
-def drop_privileges():
-    """Make sure to drop root privileges on POSIX systems."""
-    if os.name != 'posix':
-        return
-    if os.geteuid() == 0:
-        log.warn(
-            LOG_CHECK,
-            _(
-                "Running as root user; "
-                "dropping privileges by changing user to nobody."
-            ),
-        )
-        import pwd
-
-        os.seteuid(pwd.getpwnam('nobody')[3])
-
-
-if hasattr(signal, "SIGUSR1"):
-    # install SIGUSR1 handler
-    from .decorators import signal_handler
-
-    @signal_handler(signal.SIGUSR1)
-    def print_threadstacks(sig, frame):
-        """Print stack traces of all running threads."""
-        log.warn(LOG_THREAD, "*** STACKTRACE START ***")
-        for threadId, stack in sys._current_frames().items():
-            log.warn(LOG_THREAD, "# ThreadID: %s" % threadId)
-            for filename, lineno, name, line in traceback.extract_stack(stack):
-                log.warn(
-                    LOG_THREAD, 'File: "%s", line %d, in %s' % (filename, lineno, name)
-                )
-                line = line.strip()
-                if line:
-                    log.warn(LOG_THREAD, "  %s" % line)
-        log.warn(LOG_THREAD, "*** STACKTRACE END ***")
