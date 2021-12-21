@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.0.1.post91+g7f175c13\n"
+"Project-Id-Version: LinkChecker 10.0.1.post124+ga12fcf04\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-14 19:27+0000\n"
+"POT-Creation-Date: 2021-12-21 19:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -608,83 +608,87 @@ msgid "specifies default HTTP proxy server"
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:492
-msgid "specifies default FTP proxy server"
+msgid "specifies default HTTPS proxy server"
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:496
-msgid "comma-separated list of domains to not contact over a proxy server"
+msgid "an alternative certificate bundle to be used with an HTTPS proxy"
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:500
+msgid "comma-separated list of domains to not contact over a proxy server"
+msgstr ""
+
+#: ../../src/man/linkchecker.rst:504
 msgid "specify output language"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:503
+#: ../../src/man/linkchecker.rst:507
 msgid "RETURN VALUE"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:505
+#: ../../src/man/linkchecker.rst:509
 msgid "The return value is 2 when"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:507
+#: ../../src/man/linkchecker.rst:511
 msgid "a program error occurred."
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:509
+#: ../../src/man/linkchecker.rst:513
 msgid "The return value is 1 when"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:511
+#: ../../src/man/linkchecker.rst:515
 msgid "invalid links were found or"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:512
+#: ../../src/man/linkchecker.rst:516
 msgid "link warnings were found and warnings are enabled"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:514
+#: ../../src/man/linkchecker.rst:518
 msgid "Else the return value is zero."
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:517
+#: ../../src/man/linkchecker.rst:521
 msgid "LIMITATIONS"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:519
+#: ../../src/man/linkchecker.rst:523
 msgid "LinkChecker consumes memory for each queued URL to check. With thousands of queued URLs the amount of consumed memory can become quite large. This might slow down the program or even the whole system."
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:524
+#: ../../src/man/linkchecker.rst:528
 msgid "FILES"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:526
+#: ../../src/man/linkchecker.rst:530
 msgid "**~/.linkchecker/linkcheckerrc** - default configuration file"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:528
+#: ../../src/man/linkchecker.rst:532
 msgid "**~/.linkchecker/failures** - default failures logger output filename"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:530
+#: ../../src/man/linkchecker.rst:534
 msgid "**linkchecker-out.**\\ *TYPE* - default logger file output name"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:533
+#: ../../src/man/linkchecker.rst:537
 #: ../../src/man/linkcheckerrc.rst:581
 msgid "SEE ALSO"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:535
+#: ../../src/man/linkchecker.rst:539
 msgid ":manpage:`linkcheckerrc(5)`"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:537
+#: ../../src/man/linkchecker.rst:541
 msgid "https://docs.python.org/library/codecs.html#standard-encodings - valid output encodings"
 msgstr ""
 
-#: ../../src/man/linkchecker.rst:540
+#: ../../src/man/linkchecker.rst:544
 msgid "https://docs.python.org/howto/regex.html - regular expression documentation"
 msgstr ""
 
