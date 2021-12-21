@@ -48,8 +48,7 @@ To use a proxy on Unix or Windows set $http_proxy or $https_proxy
 to the proxy URL. The URL should be of the form
 "http://[<user>:<pass>@]<host>[:<port>]".
 LinkChecker also detects manual proxy settings of Internet Explorer under
-Windows systems, and GNOME or KDE on Linux systems.
-On a Mac use the Internet Config to select a proxy.
+Windows systems. On a Mac use the Internet Config to select a proxy.
 
 LinkChecker honors the $no_proxy environment variable. It can be a list
 of domain names for which no proxy will be used.
