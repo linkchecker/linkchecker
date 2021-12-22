@@ -1,9 +1,26 @@
-10.x (released x)
+10.1.0 (released 22.12.2021)
+
+Features:
+- resultcachesize setting to specify the maximum size of the result cache
+- quiet/-q also sets the application logging level to warning
+- preconnect link types are checked using DNS
+- Dutch (nl_NL) application translation
 
 Changes:
-- Binary translation catalogs are no longer included with the source. The polib
-  package must be installed before installation from source to compile
-  translations.
+- The application version is derived from git tags using setuptools_scm
+- The AnchorCheck plugin is disabled
+- Binary translation catalogs are not included with the source; if present,
+  polib is used by setup.py to compile translations
+- The ftp_proxy environment variable is not supported. GNOME and KDE proxy
+  settings are not read
+- If Requests returns a character encoding of ISO-8859-1, Beautiful Soup is
+  used to determine the encoding of a page; robots.txt are assumed to be UTF-8
+- The linkchecker command is generated using an entry point
+- GitHub Actions has replaced Travis
+
+Fixes:
+- An HTTP server can be used as an HTTPS proxy
+- Multiple man page and other documentation updates
 
 
 10.0.1 (released 29.1.2021)

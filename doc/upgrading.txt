@@ -1,9 +1,12 @@
 Upgrading
 =========
-Migrating from 10.0 to 10.x
+Migrating from 10.0 to 10.1
 ---------------------------
 If installing from source and application translations are needed the Python
 polib package is required to be installed before LinkChecker is installed.
+
+The linkchecker command is now generated using an entry point: for Python 3.6
+and 3.7 importlib_metadata is added to the run-time requirements.
 
 The environment variable ftp_proxy is no longer supported. GNOME and KDE proxy
 settings are not read; KDE proxy users especially may need to set
