@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKER" "1" "Dezember 14, 2021" "10.0.1.post91+g7f175c13" "LinkChecker"
+.TH "LINKCHECKER" "1" "Dezember 21, 2021" "10.0.1.post124+ga12fcf04" "LinkChecker"
 .SH NAME
 linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .SH SYNTAX
@@ -383,7 +383,7 @@ Set\-cookie: baggage="elitist"; comment="hologram"
 .SH PROXY UNTERSTÜTZUNG
 .sp
 To use a proxy on Unix or Windows set the \fI\%http_proxy\fP or
-\fBhttps_proxy\fP environment variables to the proxy URL. The URL should be
+\fI\%https_proxy\fP environment variables to the proxy URL. The URL should be
 of the form
 \fBhttp://\fP[\fIuser\fP\fB:\fP\fIpass\fP\fB@\fP]\fIhost\fP[\fB:\fP\fIport\fP].
 LinkChecker also detects manual proxy settings of Internet Explorer
@@ -391,7 +391,7 @@ under Windows systems. On a Mac use
 the Internet Config to select a proxy.
 You can also set a comma\-separated domain list in the \fI\%no_proxy\fP
 environment variable to ignore any proxy settings for these domains.
-The \fBcurl_ca_bundle\fP environment variable can be used to identify an
+The \fI\%curl_ca_bundle\fP environment variable can be used to identify an
 alternative certificate bundle to be used with an HTTPS proxy.
 .sp
 Einen HTTP\-Proxy unter Unix anzugeben sieht beispielsweise so aus:
@@ -539,8 +539,13 @@ gibt Standard HTTP Proxy an
 .UNINDENT
 .INDENT 0.0
 .TP
-.B ftp_proxy
-gibt Standard FTP Proxy an
+.B https_proxy
+specifies default HTTPS proxy server
+.UNINDENT
+.INDENT 0.0
+.TP
+.B curl_ca_bundle
+an alternative certificate bundle to be used with an HTTPS proxy
 .UNINDENT
 .INDENT 0.0
 .TP
