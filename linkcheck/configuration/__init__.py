@@ -94,30 +94,6 @@ def get_share_dir():
     return os.path.join(get_install_data(), "share", "linkchecker")
 
 
-def get_share_file(filename, devel_dir=None):
-    """Return a filename in the share directory.
-
-    @param devel_dir: directory to search when developing
-    @type devel_dir: string
-    @param filename: filename to search for
-    @type filename: string
-    @return: the found filename or None
-    @rtype: string
-    @raises: ValueError if not found
-    """
-    paths = [get_share_dir()]
-    if devel_dir is not None:
-        # when developing
-        paths.insert(0, devel_dir)
-    for path in paths:
-        fullpath = os.path.join(path, filename)
-        if os.path.isfile(fullpath):
-            return fullpath
-    # not found
-    msg = "%s not found in %s; check your installation" % (filename, paths)
-    raise ValueError(msg)
-
-
 def get_system_cert_file():
     """Try to find a system-wide SSL certificate file.
     @return: the filename to the cert file
@@ -335,10 +311,7 @@ class Configuration(dict):
                 try:
                     self["sslverify"] = get_certifi_file()
                 except (ValueError, ImportError):
-                    try:
-                        self["sslverify"] = get_share_file('cacert.pem')
-                    except ValueError:
-                        pass
+                    pass
 
 
 def get_user_data():
