@@ -93,11 +93,14 @@ class MyBuild(build):
 
     def run(self):
         if COMPILE_TRANSLATIONS:
-            for (src, bld_path) in list_translation_files():
-                bld_path = Path(self.build_lib, bld_path)
-                pofile = polib.pofile(src)
-                bld_path.parent.mkdir(exist_ok=True, parents=True)
-                pofile.save_as_mofile(str(bld_path))
+            for po in Path("po").glob("*.po"):
+                mo = Path(
+                          self.build_lib, "linkcheck", "data", "locale",
+                          po.stem, "LC_MESSAGES", AppName.lower()
+                         ).with_suffix(".mo")
+                pofile = polib.pofile(str(po))
+                mo.parent.mkdir(exist_ok=True, parents=True)
+                pofile.save_as_mofile(str(mo))
         super().run()
 
 
@@ -132,17 +135,6 @@ class MyInstallData(install_data):
                     mode |= 0o11
                 mode |= 0o44
                 os.chmod(path, mode)
-
-
-def list_translation_files():
-    """Return list of translation files and their build paths."""
-    for po in Path("po").glob("*.po"):
-        mo = Path(
-            "locale", po.stem, "LC_MESSAGES", AppName.lower()
-            ).with_suffix(".mo")
-        build_mo = Path("linkcheck", "data", mo)
-        build_mo.parent.mkdir(exist_ok=True, parents=True)
-        yield (str(po), build_mo)
 
 
 # scripts
