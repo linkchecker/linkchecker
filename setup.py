@@ -219,7 +219,6 @@ class MyDistribution(Distribution):
         cwd = os.getcwd()
         data = []
         data.append("install_data = %r" % cwd)
-        data.append("install_scripts = %r" % cwd)
         self.create_conf_file(data)
         super().run_commands()
 
