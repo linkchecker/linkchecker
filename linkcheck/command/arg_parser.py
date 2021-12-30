@@ -19,7 +19,7 @@ Create command line arguments.
 
 import argparse
 
-from .. import checker, logconf, logger
+from .. import checker, logconf, logger, COMMAND_NAME
 
 from ..cmdline import LCArgumentParser
 
@@ -205,7 +205,9 @@ class ArgParser(LCArgumentParser):
 
     def __init__(self):
         super().__init__(
-            epilog=Epilog, formatter_class=argparse.RawDescriptionHelpFormatter
+            epilog=Epilog,
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            prog=COMMAND_NAME,
         )
 
         # ================== general options =====================
