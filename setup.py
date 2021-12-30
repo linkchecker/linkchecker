@@ -27,8 +27,8 @@ Change it very carefully.
 """
 import sys
 
-if sys.version_info < (3, 6, 0, "final", 0):
-    raise SystemExit("This program requires Python 3.6 or later.")
+if sys.version_info < (3, 7, 0, "final", 0):
+    raise SystemExit("This program requires Python 3.7 or later.")
 import os
 import stat
 import subprocess
@@ -363,7 +363,6 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -371,7 +370,7 @@ setup(
     ],
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
-    python_requires=">= 3.6",
+    python_requires=">= 3.7",
     setup_requires=["setuptools_scm"],
     install_requires=[
         "importlib_metadata;python_version<'3.8'",
