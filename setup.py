@@ -18,12 +18,9 @@
 Setup file for the distuils module.
 
 It includes the following features:
-- creation and installation of configuration files with installation data
+- records the release date
 - automatic generation of .mo locale files
 - automatic permission setting on POSIX systems for installed files
-
-Because of all the features, this script is nasty and big.
-Change it very carefully.
 """
 import sys
 
@@ -36,14 +33,10 @@ from pathlib import Path
 
 # import Distutils stuff
 from setuptools import find_packages, setup
-from distutils.command.install_lib import install_lib
 from distutils.command.build import build
 from distutils.command.install_data import install_data
 from setuptools.command.egg_info import egg_info
 from setuptools.command.sdist import sdist
-from distutils.file_util import write_file
-from distutils import util
-from distutils.core import Distribution
 
 try:
     import polib
@@ -67,22 +60,6 @@ def get_long_description():
             return f.read()
     except Exception:
         return Description
-
-
-def normpath(path):
-    """Norm a path name to platform specific notation."""
-    return os.path.normpath(path)
-
-
-def cnormpath(path):
-    """Norm a path name to platform specific notation and make it absolute."""
-    path = normpath(path)
-    if os.name == "nt":
-        # replace slashes with backslashes
-        path = path.replace("/", "\\")
-    if not os.path.isabs(path):
-        path = normpath(os.path.join(sys.prefix, path))
-    return path
 
 
 def get_release_date(for_sdist=False):
@@ -135,63 +112,6 @@ class MyEggInfo(egg_info):
         )
 
 
-class MyInstallLib(install_lib):
-    """Custom library installation."""
-
-    def install(self):
-        """Install the generated config file."""
-        outs = super().install()
-        infile = self.create_conf_file()
-        outfile = os.path.join(self.install_dir, os.path.basename(infile))
-        self.copy_file(infile, outfile)
-        outs.append(outfile)
-        return outs
-
-    def create_conf_file(self):
-        """Create configuration file."""
-        cmd_obj = self.distribution.get_command_obj("install")
-        cmd_obj.ensure_finalized()
-        # we have to write a configuration file because we need the
-        # <install_data> directory
-        # all paths are made absolute by cnormpath()
-        data = []
-        for d in ["purelib", "platlib", "lib", "headers", "scripts", "data"]:
-            attr = "install_%s" % d
-            if cmd_obj.root:
-                # cut off root path prefix
-                cutoff = len(cmd_obj.root)
-                # don't strip the path separator
-                if cmd_obj.root.endswith(os.sep):
-                    cutoff -= 1
-                val = getattr(cmd_obj, attr)[cutoff:]
-            else:
-                val = getattr(cmd_obj, attr)
-            if attr == "install_lib":
-                if cmd_obj.root:
-                    _drive, tail = os.path.splitdrive(val)
-                    if tail.startswith(os.sep):
-                        tail = tail[1:]
-                    self.install_lib = os.path.join(cmd_obj.root, tail)
-                else:
-                    self.install_lib = val
-            data.append("%s = %r" % (attr, cnormpath(val)))
-        self.distribution.create_conf_file(data, directory=self.install_lib)
-        return self.get_conf_output()
-
-    def get_conf_output(self):
-        """Get name of configuration file."""
-        return self.distribution.get_conf_filename(self.install_lib)
-
-    def get_outputs(self):
-        """Add the generated config file to the list of outputs."""
-        outs = super().get_outputs()
-        conf_output = self.get_conf_output()
-        outs.append(conf_output)
-        if self.compile:
-            outs.extend(self._bytecode_filenames([conf_output]))
-        return outs
-
-
 class MyInstallData(install_data):
     """Fix file permissions."""
 
@@ -212,37 +132,6 @@ class MyInstallData(install_data):
                     mode |= 0o11
                 mode |= 0o44
                 os.chmod(path, mode)
-
-
-class MyDistribution(Distribution):
-    """Custom distribution class generating config file."""
-
-    def run_commands(self):
-        """Generate config file and run commands."""
-        data = []
-        self.create_conf_file(data)
-        super().run_commands()
-
-    def get_conf_filename(self, directory):
-        """Get name for config file."""
-        return os.path.join(directory, "_%s_configdata.py" % self.get_name())
-
-    def create_conf_file(self, data, directory=None):
-        """Create local config file from given data (list of lines) in
-        the directory (or current directory if not given)."""
-        data.insert(0, "# this file is automatically created by setup.py")
-        data.insert(0, "# -*- coding: iso-8859-1 -*-")
-        if directory is None:
-            directory = os.getcwd()
-        filename = self.get_conf_filename(directory)
-        # write the config file
-        util.execute(
-            write_file,
-            (filename, data),
-            "creating %s" % filename,
-            self.verbose >= 1,
-            self.dry_run,
-        )
 
 
 def list_translation_files():
@@ -309,12 +198,10 @@ setup(
     license="GPL",
     long_description=get_long_description(),
     long_description_content_type="text/x-rst",
-    distclass=MyDistribution,
     cmdclass={
         "sdist": MySdist,
         "build": MyBuild,
         "egg_info": MyEggInfo,
-        "install_lib": MyInstallLib,
         "install_data": MyInstallData,
     },
     packages=find_packages(include=["linkcheck", "linkcheck.*"]),
