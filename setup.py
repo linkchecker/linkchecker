@@ -106,11 +106,6 @@ def get_release_date(for_sdist=False):
     return release_date
 
 
-def get_portable():
-    """Return portable flag as string."""
-    return os.environ.get("LINKCHECKER_PORTABLE", "0")
-
-
 class MySdist(sdist):
     def run(self):
         Path(RELEASE_DATE_FILE).write_text(get_release_date(for_sdist=True))
@@ -258,7 +253,6 @@ class MyDistribution(Distribution):
             cmd = "%s = %r" % (name, val)
             data.append(cmd)
         data.append('release_date = "%s"' % get_release_date())
-        data.append("portable = %s" % get_portable())
         # write the config file
         util.execute(
             write_file,

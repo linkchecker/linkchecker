@@ -46,7 +46,6 @@ Freeware = (
 This is free software, and you are welcome to redistribute it under
 certain conditions. Look at the file `LICENSE' within this distribution."""
 )
-Portable = configdata.portable
 
 
 def normpath(path):
@@ -364,7 +363,7 @@ def get_plugin_folders():
     exist."""
     folders = []
     defaultfolder = os.path.join(get_user_data(), "plugins")
-    if not os.path.exists(defaultfolder) and not Portable:
+    if not os.path.exists(defaultfolder):
         try:
             make_userdir(defaultfolder)
         except Exception as errmsg:
@@ -390,9 +389,9 @@ def make_userdir(child):
 def get_user_config():
     """Get the user configuration filename.
     If the user configuration file does not exist, copy it from the initial
-    configuration file, but only if this is not a portable installation.
+    configuration file.
     Returns path to user config file (which might not exist due to copy
-    failures or on portable systems).
+    failures).
     @return configuration filename
     @rtype string
     """
@@ -405,7 +404,7 @@ def get_user_config():
         if os.path.isfile(homedotfile)
         else os.path.join(xdg_config_home, "linkchecker", "linkcheckerrc")
     )
-    if os.path.isfile(initialconf) and not os.path.exists(userconf) and not Portable:
+    if os.path.isfile(initialconf) and not os.path.exists(userconf):
         # copy the initial configuration to the user configuration
         try:
             make_userdir(userconf)
