@@ -39,6 +39,7 @@ from setuptools import find_packages, setup
 from distutils.command.install_lib import install_lib
 from distutils.command.build import build
 from distutils.command.install_data import install_data
+from setuptools.command.egg_info import egg_info
 from setuptools.command.sdist import sdist
 from distutils.file_util import write_file
 from distutils import util
@@ -121,6 +122,17 @@ class MyBuild(build):
                 bld_path.parent.mkdir(exist_ok=True, parents=True)
                 pofile.save_as_mofile(str(bld_path))
         super().run()
+
+
+class MyEggInfo(egg_info):
+    def run(self):
+        """Add release date to metadata."""
+        super().run()
+        self.write_file(
+            "release date",
+            os.path.join(self.egg_info, "RELEASE_DATE"),
+            get_release_date()
+        )
 
 
 class MyInstallLib(install_lib):
@@ -223,8 +235,6 @@ class MyDistribution(Distribution):
         if directory is None:
             directory = os.getcwd()
         filename = self.get_conf_filename(directory)
-        # add metadata
-        data.append('release_date = "%s"' % get_release_date())
         # write the config file
         util.execute(
             write_file,
@@ -303,6 +313,7 @@ setup(
     cmdclass={
         "sdist": MySdist,
         "build": MyBuild,
+        "egg_info": MyEggInfo,
         "install_lib": MyInstallLib,
         "install_data": MyInstallData,
     },
