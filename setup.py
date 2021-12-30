@@ -160,10 +160,7 @@ class MyInstallLib(install_lib):
                 val = getattr(cmd_obj, attr)[cutoff:]
             else:
                 val = getattr(cmd_obj, attr)
-            if attr == "install_data":
-                cdir = os.path.join(val, "share", "linkchecker")
-                data.append("config_dir = %r" % cnormpath(cdir))
-            elif attr == "install_lib":
+            if attr == "install_lib":
                 if cmd_obj.root:
                     _drive, tail = os.path.splitdrive(val)
                     if tail.startswith(os.sep):
@@ -221,7 +218,6 @@ class MyDistribution(Distribution):
         """Generate config file and run commands."""
         cwd = os.getcwd()
         data = []
-        data.append("config_dir = %r" % os.path.join(cwd, "config"))
         data.append("install_data = %r" % cwd)
         data.append("install_scripts = %r" % cwd)
         self.create_conf_file(data)
