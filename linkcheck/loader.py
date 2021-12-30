@@ -9,6 +9,7 @@ Example usage::
 """
 import os
 import importlib
+import pkgutil
 
 from .fileutil import is_writable_by_others
 
@@ -22,7 +23,7 @@ def check_writable_by_others(filename):
     return is_writable_by_others(filename)
 
 
-def get_package_modules(packagename):
+def get_package_modules(packagename, packagepath):
     """Find all valid modules in the given package which must be a folder
     in the same directory as this loader.py module. A valid module has
     a .py extension, and is importable.
@@ -30,14 +31,13 @@ def get_package_modules(packagename):
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    dirname = os.path.join(os.path.dirname(__file__), packagename)
-    modnames = [x[:-3] for x in get_importable_files(dirname)]
-    for modname in modnames:
-        try:
-            name = "..%s.%s" % (packagename, modname)
-            yield importlib.import_module(name, __name__)
-        except ImportError as msg:
-            print("WARN: could not load module %s: %s" % (modname, msg))
+    for mod in pkgutil.iter_modules(packagepath):
+        if not mod.ispkg:
+            try:
+                name = "..%s.%s" % (packagename, mod.name)
+                yield importlib.import_module(name, __name__)
+            except ImportError as msg:
+                print("WARN: could not load module %s: %s" % (mod.name, msg))
 
 
 def get_folder_modules(folder, parentpackage):

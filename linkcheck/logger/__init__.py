@@ -461,7 +461,7 @@ def _get_loggers():
     """Return list of Logger classes."""
     from .. import loader
 
-    modules = loader.get_package_modules('logger')
+    modules = loader.get_package_modules('logger', __path__)
     return list(loader.get_plugins(modules, [_Logger]))
 
 
