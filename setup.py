@@ -38,12 +38,10 @@ from pathlib import Path
 from setuptools import find_packages, setup
 from distutils.command.install_lib import install_lib
 from distutils.command.build import build
-from distutils.command.clean import clean
 from distutils.command.install_data import install_data
 from setuptools.command.sdist import sdist
-from distutils.dir_util import remove_tree
 from distutils.file_util import write_file
-from distutils import util, log
+from distutils import util
 from distutils.core import Distribution
 
 try:
@@ -117,7 +115,8 @@ class MyBuild(build):
 
     def run(self):
         if COMPILE_TRANSLATIONS:
-            for (src, bld_path, dst) in list_translation_files():
+            for (src, bld_path) in list_translation_files():
+                bld_path = Path(self.build_lib, bld_path)
                 pofile = polib.pofile(src)
                 bld_path.parent.mkdir(exist_ok=True, parents=True)
                 pofile.save_as_mofile(str(bld_path))
@@ -185,10 +184,7 @@ class MyInstallData(install_data):
     """Fix file permissions."""
 
     def run(self):
-        """Handle translation files and adjust permissions on POSIX systems."""
-        if COMPILE_TRANSLATIONS:
-            for (src, bld_path, dst) in list_translation_files():
-                self.data_files.append((dst, [str(bld_path)]))
+        """Adjust permissions on POSIX systems."""
         super().run()
         self.fix_permissions()
 
@@ -211,9 +207,7 @@ class MyDistribution(Distribution):
 
     def run_commands(self):
         """Generate config file and run commands."""
-        cwd = os.getcwd()
         data = []
-        data.append("install_data = %r" % cwd)
         self.create_conf_file(data)
         super().run_commands()
 
@@ -242,29 +236,14 @@ class MyDistribution(Distribution):
 
 
 def list_translation_files():
-    """Return list of translation files and their build and installation paths."""
+    """Return list of translation files and their build paths."""
     for po in Path("po").glob("*.po"):
         mo = Path(
-            "share", "locale", po.stem, "LC_MESSAGES", AppName.lower()
+            "locale", po.stem, "LC_MESSAGES", AppName.lower()
             ).with_suffix(".mo")
-        build_mo = Path("build", mo)
+        build_mo = Path("linkcheck", "data", mo)
         build_mo.parent.mkdir(exist_ok=True, parents=True)
-        yield (str(po), build_mo, str(mo.parent))
-
-
-class MyClean(clean):
-    """Custom clean command."""
-
-    def run(self):
-        """Remove share directory on clean."""
-        if self.all:
-            # remove share directory
-            directory = os.path.join("build", "share")
-            if os.path.exists(directory):
-                remove_tree(directory, dry_run=self.dry_run)
-            else:
-                log.warn("'%s' does not exist -- can't clean it", directory)
-        clean.run(self)
+        yield (str(po), build_mo)
 
 
 # scripts
@@ -326,7 +305,6 @@ setup(
         "build": MyBuild,
         "install_lib": MyInstallLib,
         "install_data": MyInstallData,
-        "clean": MyClean,
     },
     packages=find_packages(include=["linkcheck", "linkcheck.*"]),
     entry_points={

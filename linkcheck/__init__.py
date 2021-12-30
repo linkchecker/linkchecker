@@ -40,7 +40,6 @@ from .logconf import (
     LOG_THREAD,
     LOG_PLUGIN,
 )
-import _LinkChecker_configdata as configdata
 
 COMMAND_NAME = "linkchecker"
 PACKAGE_NAME = __package__
@@ -49,11 +48,6 @@ PACKAGE_NAME = __package__
 def module_path():
     """Return absolute directory of system executable."""
     return os.path.dirname(os.path.abspath(sys.executable))
-
-
-def get_install_data():
-    """Return absolute path of LinkChecker data installation directory."""
-    return configdata.install_data
 
 
 class LinkCheckerError(Exception):
