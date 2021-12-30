@@ -141,7 +141,7 @@ class MyInstallLib(install_lib):
         cmd_obj = self.distribution.get_command_obj("install")
         cmd_obj.ensure_finalized()
         # we have to write a configuration file because we need the
-        # <install_data> directory (and other stuff like author, url, ...)
+        # <install_data> directory
         # all paths are made absolute by cnormpath()
         data = []
         for d in ["purelib", "platlib", "lib", "headers", "scripts", "data"]:
@@ -230,28 +230,6 @@ class MyDistribution(Distribution):
             directory = os.getcwd()
         filename = self.get_conf_filename(directory)
         # add metadata
-        metanames = (
-            "name",
-            "version",
-            "author",
-            "author_email",
-            "maintainer",
-            "maintainer_email",
-            "url",
-            "license",
-            "description",
-            "long_description",
-            "keywords",
-            "platforms",
-            "fullname",
-            "contact",
-            "contact_email",
-        )
-        for name in metanames:
-            method = "get_" + name
-            val = getattr(self.metadata, method)()
-            cmd = "%s = %r" % (name, val)
-            data.append(cmd)
         data.append('release_date = "%s"' % get_release_date())
         # write the config file
         util.execute(

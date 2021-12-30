@@ -42,6 +42,7 @@ from .logconf import (
 )
 import _LinkChecker_configdata as configdata
 
+COMMAND_NAME = "linkchecker"
 PACKAGE_NAME = __package__
 
 
@@ -107,8 +108,9 @@ def init_i18n(loc=None):
     if 'LOCPATH' in os.environ:
         locdir = os.environ['LOCPATH']
     else:
-        locdir = os.path.join(get_install_data(), 'share', 'locale')
-    i18n.init(configdata.name.lower(), locdir, loc=loc)
+        # Need Python 3.9 for importlib.resources.files
+        locdir = os.path.join(__path__[0], 'data', 'locale')
+    i18n.init(COMMAND_NAME, locdir, loc=loc)
     # install translated log level names
     import logging
 

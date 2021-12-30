@@ -23,22 +23,30 @@ import re
 import urllib.parse
 import shutil
 import socket
+
+try:
+    from importlib.metadata import metadata
+except ImportError:
+    # Python 3.7
+    from importlib_metadata import metadata
+
 import _LinkChecker_configdata as configdata
-from .. import log, LOG_CHECK, PACKAGE_NAME, fileutil
+from .. import log, LOG_CHECK, COMMAND_NAME, PACKAGE_NAME, fileutil
 from . import confparse
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
-Version = configdata.version
+linkchecker_metadata = metadata(COMMAND_NAME)
+Version = linkchecker_metadata["Version"]
 ReleaseDate = configdata.release_date
-AppName = configdata.name
+AppName = linkchecker_metadata["Name"]
 App = AppName + " " + Version
-Author = configdata.author
+Author = linkchecker_metadata["Author"]
 HtmlAuthor = Author.replace(' ', '&nbsp;')
 Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 " + Author
 HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2022 "
                  + HtmlAuthor)
 HtmlAppInfo = App + ", " + HtmlCopyright
-Url = configdata.url
+Url = linkchecker_metadata["Home-page"]
 SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
 UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = (
