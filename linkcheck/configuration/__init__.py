@@ -33,8 +33,8 @@ AppName = configdata.name
 App = AppName + " " + Version
 Author = configdata.author
 HtmlAuthor = Author.replace(' ', '&nbsp;')
-Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2021 " + Author
-HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2021 "
+Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 " + Author
+HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2022 "
                  + HtmlAuthor)
 HtmlAppInfo = App + ", " + HtmlCopyright
 Url = configdata.url
