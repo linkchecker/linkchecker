@@ -11,6 +11,7 @@ include .project
 include .pydevproject
 include .yamllint
 include _release_date
+include linkcheck/data/linkcheckerrc
 
 recursive-include cgi-bin               \
     *.css                               \
@@ -23,8 +24,7 @@ recursive-include cgi-bin               \
 recursive-include config                \
     *.sql                               \
     linkchecker-completion              \
-    linkchecker.apache2.conf            \
-    linkcheckerrc
+    linkchecker.apache2.conf
 recursive-include doc                   \
     *.1                                 \
     *.5                                 \

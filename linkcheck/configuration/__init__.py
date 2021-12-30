@@ -17,13 +17,14 @@
 Store metadata and options.
 """
 
+import importlib.resources
 import os
 import re
 import urllib.parse
 import shutil
 import socket
 import _LinkChecker_configdata as configdata
-from .. import log, LOG_CHECK, get_install_data, fileutil
+from .. import log, LOG_CHECK, PACKAGE_NAME, fileutil
 from . import confparse
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
@@ -87,11 +88,6 @@ def get_modules_info():
             # change the version information attribute
             module_infos.append(name)
     return "Modules: %s" % (", ".join(module_infos))
-
-
-def get_share_dir():
-    """Return absolute path of LinkChecker example configuration."""
-    return os.path.join(get_install_data(), "share", "linkchecker")
 
 
 def get_system_cert_file():
@@ -368,8 +364,6 @@ def get_user_config():
     @return configuration filename
     @rtype string
     """
-    # initial config (with all options explained)
-    initialconf = normpath(os.path.join(get_share_dir(), "linkcheckerrc"))
     # per user config settings
     homedotfile = normpath("~/.linkchecker/linkcheckerrc")
     userconf = (
@@ -377,18 +371,21 @@ def get_user_config():
         if os.path.isfile(homedotfile)
         else os.path.join(xdg_config_home, "linkchecker", "linkcheckerrc")
     )
-    if os.path.isfile(initialconf) and not os.path.exists(userconf):
-        # copy the initial configuration to the user configuration
-        try:
-            make_userdir(userconf)
-            shutil.copy(initialconf, userconf)
-        except Exception as errmsg:
-            msg = _(
-                "could not copy initial configuration file %(src)r"
-                " to %(dst)r: %(errmsg)r"
-            )
-            args = dict(src=initialconf, dst=userconf, errmsg=errmsg)
-            log.warn(LOG_CHECK, msg % args)
+    if not os.path.exists(userconf):
+        # initial config (with all options explained)
+        with importlib.resources.path(
+                f"{PACKAGE_NAME}.data", "linkcheckerrc") as initialconf:
+            # copy the initial configuration to the user configuration
+            try:
+                make_userdir(userconf)
+                shutil.copy(initialconf, userconf)
+            except Exception as errmsg:
+                msg = _(
+                    "could not copy initial configuration file %(src)r"
+                    " to %(dst)r: %(errmsg)r"
+                )
+                args = dict(src=initialconf, dst=userconf, errmsg=errmsg)
+                log.warn(LOG_CHECK, msg % args)
     return userconf
 
 

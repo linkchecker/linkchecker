@@ -294,7 +294,6 @@ myname = "LinkChecker Authors"
 myemail = ""
 
 data_files = [
-    ("share/linkchecker", ["config/linkcheckerrc"]),
     (
         "share/linkchecker/examples",
         [
@@ -358,6 +357,7 @@ setup(
         ]
     },
     data_files=data_files,
+    include_package_data=True,
     classifiers=[
         "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
         "Development Status :: 5 - Production/Stable",

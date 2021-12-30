@@ -42,6 +42,8 @@ from .logconf import (
 )
 import _LinkChecker_configdata as configdata
 
+PACKAGE_NAME = __package__
+
 
 def module_path():
     """Return absolute directory of system executable."""
