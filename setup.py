@@ -41,7 +41,6 @@ from setuptools.command.sdist import sdist
 try:
     import polib
 except ImportError:
-    print("polib package not found. Translations not compiled.")
     COMPILE_TRANSLATIONS = False
 else:
     COMPILE_TRANSLATIONS = True
@@ -101,6 +100,10 @@ class MyBuild(build):
                 pofile = polib.pofile(str(po))
                 mo.parent.mkdir(exist_ok=True, parents=True)
                 pofile.save_as_mofile(str(mo))
+        else:
+            print(
+                "warning: polib package not found: translations not compiled",
+                file=sys.stderr)
         super().run()
 
 
