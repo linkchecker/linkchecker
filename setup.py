@@ -93,7 +93,7 @@ def get_release_date(for_sdist=False):
     try:
         # need git >= 2.25.0 for %cs
         cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cI"],
-                            stdout=subprocess.PIPE, universal_newlines=True)
+                            capture_output=True, text=True)
     except FileNotFoundError:
         pass
     if cp and cp.stdout:
