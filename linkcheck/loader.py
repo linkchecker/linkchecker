@@ -8,17 +8,9 @@ Example usage::
     plugins = loader.get_plugins(modules, PluginClass)
 """
 import os
-import sys
-import zipfile
 import importlib
 
 from .fileutil import is_writable_by_others
-
-
-def is_frozen():
-    """Return True if running inside a py2exe- or py2app-generated
-    executable."""
-    return hasattr(sys, "frozen")
 
 
 def check_writable_by_others(filename):
@@ -38,20 +30,8 @@ def get_package_modules(packagename):
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    if is_frozen():
-        # find modules in library.zip filename
-        zipname = os.path.dirname(os.path.dirname(__file__))
-        parentmodule = os.path.basename(os.path.dirname(__file__))
-        with zipfile.ZipFile(zipname, 'r') as f:
-            prefix = "%s/%s/" % (parentmodule, packagename)
-            modnames = [
-                os.path.splitext(n[len(prefix):])[0]
-                for n in f.namelist()
-                if n.startswith(prefix) and "__init__" not in n
-            ]
-    else:
-        dirname = os.path.join(os.path.dirname(__file__), packagename)
-        modnames = [x[:-3] for x in get_importable_files(dirname)]
+    dirname = os.path.join(os.path.dirname(__file__), packagename)
+    modnames = [x[:-3] for x in get_importable_files(dirname)]
     for modname in modnames:
         try:
             name = "..%s.%s" % (packagename, modname)

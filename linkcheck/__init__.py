@@ -50,10 +50,6 @@ def module_path():
 
 def get_install_data():
     """Return absolute path of LinkChecker data installation directory."""
-    from .loader import is_frozen
-
-    if is_frozen():
-        return module_path()
     return configdata.install_data
 
 
