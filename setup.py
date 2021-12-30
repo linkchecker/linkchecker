@@ -55,8 +55,7 @@ RELEASE_DATE_FILE = "_release_date"
 def get_long_description():
     """Try to read long description from README.rst."""
     try:
-        with open("README.rst") as f:
-            return f.read()
+        return Path("README.rst").read_text()
     except Exception:
         return Description
 
