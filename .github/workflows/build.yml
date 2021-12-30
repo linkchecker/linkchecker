@@ -14,24 +14,31 @@ on:
 
 jobs:
   build:
-    name: Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    name: Python ${{ matrix.python-version }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: [ubuntu-latest]
         python-version:
           - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
           - "3.10"
+        include:
+          - os: windows-latest
+            python-version: "3.10"
+            toxenv: py
 
     steps:
       - name: Install OS dependencies
+        if: ${{ runner.os == 'Linux' }}
         run: |
           sudo apt install -y clamav-daemon geoip-database libgeoip-dev gettext
 
       - name: Download the ClamAV signature database
+        if: ${{ runner.os == 'Linux' }}
         run: |
           sudo service clamav-freshclam stop
           sudo freshclam
@@ -62,6 +69,7 @@ jobs:
           python -m pip install -U tox coveralls
 
       - name: Wait for ClamAV to be ready
+        if: ${{ runner.os == 'Linux' }}
         run: |
           while ! test -S /var/run/clamav/clamd.ctl; do printf "."; sleep 1; done
 

@@ -19,6 +19,7 @@ Test http checking.
 
 from tests import need_network
 from .httpserver import HttpServerTest, CookieRedirectHttpRequestHandler
+from .. import has_windows
 
 
 class TestHttp(HttpServerTest):
@@ -40,7 +41,10 @@ class TestHttp(HttpServerTest):
     def test_html(self):
         confargs = dict(recursionlevel=1)
         self.file_test("http_empty.html", confargs=confargs)
-        self.file_test("http_file.html", confargs=confargs)
+        if has_windows():
+            self.file_test("http_file_windows.html", confargs=confargs)
+        else:
+            self.file_test("http_file.html", confargs=confargs)
         self.file_test("http_utf8.html", confargs=confargs)
         self.file_test("http.xhtml", confargs=confargs)
         self.file_test("http_invalid_host.html", confargs=confargs)

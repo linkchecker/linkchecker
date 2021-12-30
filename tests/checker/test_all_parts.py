@@ -18,6 +18,7 @@ Test http checking.
 """
 from . import LinkCheckTest
 from . import TestLogger
+from .. import has_windows
 
 
 class AllPartsLogger(TestLogger):
@@ -47,4 +48,7 @@ class TestAllParts(LinkCheckTest):
     logger = AllPartsLogger
 
     def test_all_parts_linenos(self):
-        self.file_test("all_parts_linenos.html")
+        if has_windows():
+            self.file_test("all_parts_linenos_windows.html")
+        else:
+            self.file_test("all_parts_linenos.html")
