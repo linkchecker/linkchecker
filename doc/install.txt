@@ -69,7 +69,7 @@ Manual setup for Unix systems
 -----------------------------
 First, install the required software.
 
-1. Python >= 3.6 from https://www.python.org/
+1. Python >= 3.7 from https://www.python.org/
 
    Be sure to also have installed the included distutils module.
    On most distributions, the distutils module is included in

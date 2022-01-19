@@ -18,17 +18,14 @@
 Setup file for the distuils module.
 
 It includes the following features:
-- creation and installation of configuration files with installation data
+- records the release date
 - automatic generation of .mo locale files
 - automatic permission setting on POSIX systems for installed files
-
-Because of all the features, this script is nasty and big.
-Change it very carefully.
 """
 import sys
 
-if sys.version_info < (3, 6, 0, "final", 0):
-    raise SystemExit("This program requires Python 3.6 or later.")
+if sys.version_info < (3, 7, 0, "final", 0):
+    raise SystemExit("This program requires Python 3.7 or later.")
 import os
 import stat
 import subprocess
@@ -36,26 +33,24 @@ from pathlib import Path
 
 # import Distutils stuff
 from setuptools import find_packages, setup
-from distutils.command.install_lib import install_lib
 from distutils.command.build import build
-from distutils.command.clean import clean
 from distutils.command.install_data import install_data
+from setuptools.command.egg_info import egg_info
 from setuptools.command.sdist import sdist
-from distutils.dir_util import remove_tree
-from distutils.file_util import write_file
-from distutils import util, log
-from distutils.core import Distribution
 
 try:
     import polib
 except ImportError:
-    print("polib package not found. Translations not compiled.")
     COMPILE_TRANSLATIONS = False
 else:
     COMPILE_TRANSLATIONS = True
 
 # the application name
 AppName = "LinkChecker"
+if "PYOXIDIZER" in os.environ:
+    # Name with capitals not supported by PyOxidizer 0.18.0
+    # https://github.com/indygreg/PyOxidizer/issues/488
+    AppName = AppName.lower()
 Description = "check links in web documents or full websites"
 
 RELEASE_DATE_FILE = "_release_date"
@@ -64,26 +59,9 @@ RELEASE_DATE_FILE = "_release_date"
 def get_long_description():
     """Try to read long description from README.rst."""
     try:
-        with open("README.rst") as f:
-            return f.read()
+        return Path("README.rst").read_text()
     except Exception:
         return Description
-
-
-def normpath(path):
-    """Norm a path name to platform specific notation."""
-    return os.path.normpath(path)
-
-
-def cnormpath(path):
-    """Norm a path name to platform specific notation and make it absolute."""
-    path = normpath(path)
-    if os.name == "nt":
-        # replace slashes with backslashes
-        path = path.replace("/", "\\")
-    if not os.path.isabs(path):
-        path = normpath(os.path.join(sys.prefix, path))
-    return path
 
 
 def get_release_date(for_sdist=False):
@@ -93,7 +71,7 @@ def get_release_date(for_sdist=False):
     try:
         # need git >= 2.25.0 for %cs
         cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cI"],
-                            stdout=subprocess.PIPE, universal_newlines=True)
+                            capture_output=True, text=True)
     except FileNotFoundError:
         pass
     if cp and cp.stdout:
@@ -104,11 +82,6 @@ def get_release_date(for_sdist=False):
         except FileNotFoundError:
             pass
     return release_date
-
-
-def get_portable():
-    """Return portable flag as string."""
-    return os.environ.get("LINKCHECKER_PORTABLE", "0")
 
 
 class MySdist(sdist):
@@ -122,81 +95,37 @@ class MyBuild(build):
 
     def run(self):
         if COMPILE_TRANSLATIONS:
-            for (src, bld_path, dst) in list_translation_files():
-                pofile = polib.pofile(src)
-                bld_path.parent.mkdir(exist_ok=True, parents=True)
-                pofile.save_as_mofile(str(bld_path))
+            for po in Path("po").glob("*.po"):
+                mo = Path(
+                          self.build_lib, "linkcheck", "data", "locale",
+                          po.stem, "LC_MESSAGES", AppName.lower()
+                         ).with_suffix(".mo")
+                pofile = polib.pofile(str(po))
+                mo.parent.mkdir(exist_ok=True, parents=True)
+                pofile.save_as_mofile(str(mo))
+        else:
+            print(
+                "warning: polib package not found: translations not compiled",
+                file=sys.stderr)
         super().run()
 
 
-class MyInstallLib(install_lib):
-    """Custom library installation."""
-
-    def install(self):
-        """Install the generated config file."""
-        outs = super().install()
-        infile = self.create_conf_file()
-        outfile = os.path.join(self.install_dir, os.path.basename(infile))
-        self.copy_file(infile, outfile)
-        outs.append(outfile)
-        return outs
-
-    def create_conf_file(self):
-        """Create configuration file."""
-        cmd_obj = self.distribution.get_command_obj("install")
-        cmd_obj.ensure_finalized()
-        # we have to write a configuration file because we need the
-        # <install_data> directory (and other stuff like author, url, ...)
-        # all paths are made absolute by cnormpath()
-        data = []
-        for d in ["purelib", "platlib", "lib", "headers", "scripts", "data"]:
-            attr = "install_%s" % d
-            if cmd_obj.root:
-                # cut off root path prefix
-                cutoff = len(cmd_obj.root)
-                # don't strip the path separator
-                if cmd_obj.root.endswith(os.sep):
-                    cutoff -= 1
-                val = getattr(cmd_obj, attr)[cutoff:]
-            else:
-                val = getattr(cmd_obj, attr)
-            if attr == "install_data":
-                cdir = os.path.join(val, "share", "linkchecker")
-                data.append("config_dir = %r" % cnormpath(cdir))
-            elif attr == "install_lib":
-                if cmd_obj.root:
-                    _drive, tail = os.path.splitdrive(val)
-                    if tail.startswith(os.sep):
-                        tail = tail[1:]
-                    self.install_lib = os.path.join(cmd_obj.root, tail)
-                else:
-                    self.install_lib = val
-            data.append("%s = %r" % (attr, cnormpath(val)))
-        self.distribution.create_conf_file(data, directory=self.install_lib)
-        return self.get_conf_output()
-
-    def get_conf_output(self):
-        """Get name of configuration file."""
-        return self.distribution.get_conf_filename(self.install_lib)
-
-    def get_outputs(self):
-        """Add the generated config file to the list of outputs."""
-        outs = super().get_outputs()
-        conf_output = self.get_conf_output()
-        outs.append(conf_output)
-        if self.compile:
-            outs.extend(self._bytecode_filenames([conf_output]))
-        return outs
+class MyEggInfo(egg_info):
+    def run(self):
+        """Add release date to metadata."""
+        super().run()
+        self.write_file(
+            "release date",
+            os.path.join(self.egg_info, "RELEASE_DATE"),
+            get_release_date()
+        )
 
 
 class MyInstallData(install_data):
     """Fix file permissions."""
 
     def run(self):
-        """Handle translation files and adjust permissions on POSIX systems."""
-        if COMPILE_TRANSLATIONS:
-            for (src, bld_path, dst) in list_translation_files():
-                self.data_files.append((dst, [str(bld_path)]))
+        """Adjust permissions on POSIX systems."""
         super().run()
         self.fix_permissions()
 
@@ -214,98 +143,11 @@ class MyInstallData(install_data):
                 os.chmod(path, mode)
 
 
-class MyDistribution(Distribution):
-    """Custom distribution class generating config file."""
-
-    def run_commands(self):
-        """Generate config file and run commands."""
-        cwd = os.getcwd()
-        data = []
-        data.append("config_dir = %r" % os.path.join(cwd, "config"))
-        data.append("install_data = %r" % cwd)
-        data.append("install_scripts = %r" % cwd)
-        self.create_conf_file(data)
-        super().run_commands()
-
-    def get_conf_filename(self, directory):
-        """Get name for config file."""
-        return os.path.join(directory, "_%s_configdata.py" % self.get_name())
-
-    def create_conf_file(self, data, directory=None):
-        """Create local config file from given data (list of lines) in
-        the directory (or current directory if not given)."""
-        data.insert(0, "# this file is automatically created by setup.py")
-        data.insert(0, "# -*- coding: iso-8859-1 -*-")
-        if directory is None:
-            directory = os.getcwd()
-        filename = self.get_conf_filename(directory)
-        # add metadata
-        metanames = (
-            "name",
-            "version",
-            "author",
-            "author_email",
-            "maintainer",
-            "maintainer_email",
-            "url",
-            "license",
-            "description",
-            "long_description",
-            "keywords",
-            "platforms",
-            "fullname",
-            "contact",
-            "contact_email",
-        )
-        for name in metanames:
-            method = "get_" + name
-            val = getattr(self.metadata, method)()
-            cmd = "%s = %r" % (name, val)
-            data.append(cmd)
-        data.append('release_date = "%s"' % get_release_date())
-        data.append("portable = %s" % get_portable())
-        # write the config file
-        util.execute(
-            write_file,
-            (filename, data),
-            "creating %s" % filename,
-            self.verbose >= 1,
-            self.dry_run,
-        )
-
-
-def list_translation_files():
-    """Return list of translation files and their build and installation paths."""
-    for po in Path("po").glob("*.po"):
-        mo = Path(
-            "share", "locale", po.stem, "LC_MESSAGES", AppName.lower()
-            ).with_suffix(".mo")
-        build_mo = Path("build", mo)
-        build_mo.parent.mkdir(exist_ok=True, parents=True)
-        yield (str(po), build_mo, str(mo.parent))
-
-
-class MyClean(clean):
-    """Custom clean command."""
-
-    def run(self):
-        """Remove share directory on clean."""
-        if self.all:
-            # remove share directory
-            directory = os.path.join("build", "share")
-            if os.path.exists(directory):
-                remove_tree(directory, dry_run=self.dry_run)
-            else:
-                log.warn("'%s' does not exist -- can't clean it", directory)
-        clean.run(self)
-
-
 # scripts
 myname = "LinkChecker Authors"
 myemail = ""
 
 data_files = [
-    ("share/linkchecker", ["config/linkcheckerrc"]),
     (
         "share/linkchecker/examples",
         [
@@ -354,13 +196,11 @@ setup(
     license="GPL",
     long_description=get_long_description(),
     long_description_content_type="text/x-rst",
-    distclass=MyDistribution,
     cmdclass={
         "sdist": MySdist,
         "build": MyBuild,
-        "install_lib": MyInstallLib,
+        "egg_info": MyEggInfo,
         "install_data": MyInstallData,
-        "clean": MyClean,
     },
     packages=find_packages(include=["linkcheck", "linkcheck.*"]),
     entry_points={
@@ -369,12 +209,12 @@ setup(
         ]
     },
     data_files=data_files,
+    include_package_data=True,
     classifiers=[
         "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -382,7 +222,7 @@ setup(
     ],
     options={},
     # Requirements, usable with setuptools or the new Python packaging module.
-    python_requires=">= 3.6",
+    python_requires=">= 3.7",
     setup_requires=["setuptools_scm"],
     install_requires=[
         "importlib_metadata;python_version<'3.8'",

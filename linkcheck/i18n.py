@@ -122,30 +122,6 @@ def get_lang(lang):
     return default_language
 
 
-def get_headers_lang(headers):
-    """Return preferred supported language in given HTTP headers."""
-    if 'Accept-Language' not in headers:
-        return default_language
-    languages = headers['Accept-Language'].split(",")
-    # sort with preference values
-    pref_languages = []
-    for lang in languages:
-        pref = 1.0
-        if ";" in lang:
-            lang, _pref = lang.split(';', 1)
-            try:
-                pref = float(_pref)
-            except ValueError:
-                pass
-        pref_languages.append((pref, lang))
-    pref_languages.sort()
-    # search for lang
-    for lang in (x[1] for x in pref_languages):
-        if lang in supported_languages:
-            return lang
-    return default_language
-
-
 def get_locale():
     """Search the default platform locale and norm it.
     @returns (locale, encoding)
@@ -178,26 +154,6 @@ def norm_locale(loc):
     if pos >= 0:
         loc = loc[:pos]
     return loc
-
-
-lang_names = {
-    'en': 'English',
-    'de': 'Deutsch',
-}
-lang_transis = {
-    'de': {'en': 'German'},
-    'en': {'de': 'Englisch'},
-}
-
-
-def lang_name(lang):
-    """Return full name of given language."""
-    return lang_names[lang]
-
-
-def lang_trans(lang, curlang):
-    """Return translated full name of given language."""
-    return lang_transis[lang][curlang]
 
 
 def get_encoded_writer(out=sys.stdout, encoding=None, errors='replace'):

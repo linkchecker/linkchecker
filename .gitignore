@@ -31,7 +31,6 @@ Changelog.linkchecker*
 /doc/html/*.qch
 /.achievements
 /doc/i18n/locales/*/LC_MESSAGES/*.mo
-/LinkChecker-*-portable.zip
 /LinkChecker-*.exe
 /LinkChecker.egg-info
 /todo

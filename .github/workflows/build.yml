@@ -20,7 +20,6 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
@@ -107,7 +106,7 @@ jobs:
 
       - name: Build
         run: |
-          python3 setup.py build
+          python3 setup.py build egg_info
           make -C doc code
           make -C doc html
           make -C doc locale
