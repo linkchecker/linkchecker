@@ -33,7 +33,7 @@ def get_pofiles():
     if pofiles is None:
         pofiles = []
         pofiles.extend(glob.glob("po/*.po"))
-        pofiles.extend(glob.glob("doc/*.po"))
+        pofiles.extend(glob.glob("doc/i18n/locales/**/*.po", recursive=True))
     if not pofiles:
         raise Exception("No .po files found")
     return pofiles
