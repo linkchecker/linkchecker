@@ -75,7 +75,7 @@ Generate a sitemap graph and convert it with the graphviz dot utility:
 
 .. code-block:: console
 
-   $ linkchecker -odot -v www.example.com | dot -Tps > sitemap.ps
+   $ linkchecker -odot -v www.example.com | dot -Tps -o sitemap.ps
 
 OPTIONS
 -------
