@@ -19,7 +19,7 @@ Test gettext .po files.
 """
 
 import unittest
-import os
+import subprocess
 import glob
 from tests import need_msgfmt, need_posix
 
@@ -33,7 +33,7 @@ def get_pofiles():
     if pofiles is None:
         pofiles = []
         pofiles.extend(glob.glob("po/*.po"))
-        pofiles.extend(glob.glob("doc/*.po"))
+        pofiles.extend(glob.glob("doc/i18n/locales/**/*.po", recursive=True))
     if not pofiles:
         raise Exception("No .po files found")
     return pofiles
@@ -47,8 +47,10 @@ class TestPo(unittest.TestCase):
     def test_pos(self):
         """Test .po files syntax."""
         for f in get_pofiles():
-            ret = os.system("msgfmt -c -o - %s > /dev/null" % f)
-            self.assertEqual(ret, 0, msg="PO-file syntax error in %r" % f)
+            cp = subprocess.run(["msgfmt", "-c", "-o", "-", f], capture_output=True)
+            self.assertEqual(
+                cp.returncode, 0,
+                msg=f"PO-file syntax error in {f!r}: {str(cp.stderr, 'utf-8')}")
 
 
 class TestGTranslator(unittest.TestCase):
