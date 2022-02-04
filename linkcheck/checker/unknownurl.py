@@ -48,6 +48,13 @@ class UnknownUrl(urlbase.UrlBase):
         return False
 
 
+ignored_schemes_custom = r"""
+|discord         # Discord
+|steam           # Steam
+|telegram        # Telegram
+|whatsapp        # WhatsApp
+"""
+
 # do not edit anything below since these entries are generated from
 # scripts/update_iana_uri_schemes.sh
 # DO NOT REMOVE
@@ -396,6 +403,7 @@ ignored_schemes_other = r"""
 """
 
 ignored_schemes = "^(%s%s%s%s)$" % (
+    ignored_schemes_custom,
     ignored_schemes_permanent,
     ignored_schemes_provisional,
     ignored_schemes_historical,
