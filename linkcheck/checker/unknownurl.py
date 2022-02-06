@@ -412,6 +412,8 @@ ignored_schemes_other = r"""
 |isbn       # ISBN (int. book numbers)
 |javascript # JavaScript
 |slack      # Slack Technologies client
+|tg         # Telegram
+|whatsapp   # WhatsApp
 """
 
 ignored_schemes = "^(%s%s%s%s)$" % (

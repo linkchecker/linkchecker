@@ -16,6 +16,8 @@ iana_uri_schemes_other = {
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
     "slack": "Slack Technologies client",
+    "tg": "Telegram",
+    "whatsapp": "WhatsApp",
 }
 
 filter_uri_schemes_permanent = (
