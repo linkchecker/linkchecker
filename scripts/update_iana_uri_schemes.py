@@ -101,6 +101,7 @@ def parse_csv_file(url, res):
             first_row = False
         else:
             scheme, template, description, status, urisupport, reference, notes = row
+            scheme = scheme.replace(" (OBSOLETE)", "")  # remove the HTTP historic experiments flag
             if status not in res:
                 res[status] = {}
             res[status][scheme] = description
