@@ -72,6 +72,7 @@ ignored_schemes_permanent = r"""
 |dav        # dav
 |dict       # dictionary service protocol
 |dns        # Domain Name System
+|dtn        # DTNRG research and development
 |example    # example
 |geo        # Geographic Locations
 |go         # go
@@ -82,6 +83,7 @@ ignored_schemes_permanent = r"""
 |im         # Instant Messaging
 |imap       # internet message access protocol
 |info       # Information Assets with Identifiers in Public Namespaces. [RFC4452] (section 3) defines an "info" registry of public namespaces, which is maintained by NISO and can be accessed from [http://info-uri.info/].
+|ipn        # ipn
 |ipp        # Internet Printing Protocol
 |ipps       # Internet Printing Protocol over HTTPS
 |iris       # Internet Registry Information Service
@@ -156,6 +158,7 @@ ignored_schemes_provisional = r"""
 |android    # android
 |appdata    # appdata
 |apt        # apt
+|ar         # ar
 |ark        # ark
 |attachment # attachment
 |aw         # aw
@@ -175,7 +178,7 @@ ignored_schemes_provisional = r"""
 |chrome\-extension # chrome-extension
 |com\-eventbrite\-attendee # com-eventbrite-attendee
 |content    # content
-|conti      # conti
+|content\-type # content-type
 |cvs        # cvs
 |dab        # dab
 |dat        # dat
@@ -190,15 +193,18 @@ ignored_schemes_provisional = r"""
 |drm        # drm
 |drop       # drop
 |dtmi       # dtmi
-|dtn        # DTNRG research and development
 |dvb        # dvb
+|dvx        # dvx
 |dweb       # dweb
 |ed2k       # ed2k
 |elsi       # elsi
+|embedded   # embedded
+|ens        # ens
 |ethereum   # ethereum
 |facetime   # facetime
 |feed       # feed
 |feedready  # feedready
+|fido       # fido
 |finger     # finger
 |first\-run\-pen\-experience # first-run-pen-experience
 |fish       # fish
@@ -219,7 +225,6 @@ ignored_schemes_provisional = r"""
 |icon       # icon
 |iotdisco   # iotdisco
 |ipfs       # ipfs
-|ipn        # ipn
 |ipns       # ipns
 |irc        # irc
 |irc6       # irc6
@@ -260,6 +265,7 @@ ignored_schemes_provisional = r"""
 |ms\-inputapp # ms-inputapp
 |ms\-lockscreencomponent\-config # ms-lockscreencomponent-config
 |ms\-media\-stream\-id # ms-media-stream-id
+|ms\-meetnow # ms-meetnow
 |ms\-mixedrealitycapture # ms-mixedrealitycapture
 |ms\-mobileplans # ms-mobileplans
 |ms\-officeapp # ms-officeapp
@@ -295,6 +301,7 @@ ignored_schemes_provisional = r"""
 |ms\-settings\-wifi # ms-settings-wifi
 |ms\-settings\-workplace # ms-settings-workplace
 |ms\-spd    # ms-spd
+|ms\-stickers # ms-stickers
 |ms\-sttoverlay # ms-sttoverlay
 |ms\-transit\-to # ms-transit-to
 |ms\-useractivityset # ms-useractivityset
@@ -306,9 +313,11 @@ ignored_schemes_provisional = r"""
 |ms\-word   # ms-word
 |msnim      # msnim
 |mss        # mss
+|mt         # Matter protocol
 |mumble     # mumble
 |mvn        # mvn
 |notes      # notes
+|num        # Namespace Utility Modules
 |ocf        # ocf
 |oid        # oid
 |onenote    # onenote
@@ -335,12 +344,17 @@ ignored_schemes_provisional = r"""
 |rsync      # rsync
 |rtmfp      # rtmfp
 |rtmp       # rtmp
+|sarif      # sarif
 |secondlife # query
+|secret\-token # secret-token
 |sftp       # query
 |sgn        # sgn
+|shc        # shc
 |simpleledger # simpleledger
+|simplex    # simplex
 |skype      # skype
 |smb        # smb
+|smp        # smp
 |smtp       # smtp
 |soldat     # soldat
 |spiffe     # spiffe
@@ -351,21 +365,26 @@ ignored_schemes_provisional = r"""
 |submit     # submit
 |svn        # svn
 |swh        # swh
+|swid       # swid
+|swidpath   # swidpath
 |teamspeak  # teamspeak
 |teliaeid   # teliaeid
 |things     # things
 |tool       # tool
 |udp        # udp
 |unreal     # unreal
-|upt        # upt
 |ut2004     # ut2004
+|uuid\-in\-package # uuid-in-package
 |v\-event   # v-event
 |ventrilo   # ventrilo
+|ves        # ves
 |view\-source # view-source
 |vscode     # vscode
 |vscode\-insiders # vscode-insiders
 |vsls       # vsls
+|wcr        # wcr
 |webcal     # webcal
+|wifi       # wifi
 |wtai       # wtai
 |wyciwyg    # wyciwyg
 |xfire      # xfire
