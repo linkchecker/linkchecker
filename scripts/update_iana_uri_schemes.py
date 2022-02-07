@@ -16,6 +16,8 @@ iana_uri_schemes_other = {
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
     "slack": "Slack Technologies client",
+    "tg": "Telegram",
+    "whatsapp": "WhatsApp",
 }
 
 filter_uri_schemes_permanent = (
@@ -101,6 +103,7 @@ def parse_csv_file(url, res):
             first_row = False
         else:
             scheme, template, description, status, urisupport, reference, notes = row
+            scheme = scheme.replace(" (OBSOLETE)", "")  # remove the HTTP historic experiments flag
             if status not in res:
                 res[status] = {}
             res[status][scheme] = description
