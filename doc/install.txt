@@ -75,7 +75,7 @@ First, install the required software.
    On most distributions, the distutils module is included in
    an extra ``python-dev`` package.
 
-2. Python requests package from https://pypi.org/project/requests/
+2. Python Requests package from https://pypi.org/project/requests/
 
 3. Python Beautiful Soup package from https://pypi.org/project/beautifulsoup4/
 
