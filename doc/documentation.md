@@ -19,7 +19,7 @@ sphinx_sitemap
 Configuration
 -------------
 
-Before building either man pages or HTML, generate ``_LinkChecker_configdata.py``
+Before building either man pages or HTML, generate ``PKG-INFO``
 containing copyright, author and version with:
 
 ``linkchecker $ ./setup.py build``
