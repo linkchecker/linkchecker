@@ -59,8 +59,8 @@ Release process
 1. check whether updated translations need committing
    (`make locale; make -C doc locale; make -C doc man`)
 
-2. edit `changelog.txt`, and if applicable the
-   copyright date in `linkcheck/configuration/__init__.py`
+2. edit `changelog.txt` and `upgrading.txt`, and if applicable the
+   copyright dates in `linkcheck/configuration/__init__.py`
 
 3. confirm tests have passed
 
