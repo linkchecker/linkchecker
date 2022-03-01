@@ -36,7 +36,7 @@ The version in the pip repository may be old, to find out how to get the latest
 code, plus platform-specific information and other advice see `doc/install.txt`_
 in the source code archive.
 
-.. _doc/install.txt: doc/install.txt
+.. _doc/install.txt: https://linkchecker.github.io/linkchecker/install.html
 
 
 Usage
