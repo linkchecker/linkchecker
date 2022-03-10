@@ -289,6 +289,12 @@ class ArgParser(LCArgumentParser):
             % {"loggertypes": logger.LoggerKeys},
         )
         group.add_argument(
+            "--log-redirects",
+            action="store_true",
+            dest="log_redirects",
+            help=_("Log warnings about redirected links.  By default redirects are ignored."),
+        )
+        group.add_argument(
             "--no-status",
             action="store_false",
             default=None,

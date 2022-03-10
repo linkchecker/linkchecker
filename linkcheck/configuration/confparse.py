@@ -125,6 +125,7 @@ class LCConfigParser(RawConfigParser):
                     val = self.get(key, 'parts')
                     parts = [f.strip().lower() for f in val.split(',')]
                     self.config[key]['parts'] = parts
+        self.read_boolean_option(section, "log_redirects")
         self.read_boolean_option(section, "warnings")
         if self.has_option(section, "verbose"):
             if self.getboolean(section, "verbose"):

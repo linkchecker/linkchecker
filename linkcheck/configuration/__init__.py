@@ -188,6 +188,7 @@ class Configuration(dict):
         self["status"] = True
         self["status_wait_seconds"] = 5
         self['logger'] = None
+        self['log_redirects'] = False
         self.status_logger = None
         self.loggers = {}
         from ..logger import LoggerClasses

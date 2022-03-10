@@ -275,7 +275,10 @@ class HttpUrl(internpaturl.InternPatternUrl):
             log.debug(LOG_CHECK, "Redirected to %r", newurl)
             self.aliases.append(newurl)
             # XXX on redirect errors this is not printed
-            self.add_info(_("Redirected to `%(url)s'.") % {'url': newurl})
+            if (self.aggregate.config['log_redirects']):
+                self.add_warning(_("Redirected to `%(url)s'.") % {'url': newurl})
+            else:
+                self.add_info(_("Redirected to `%(url)s'.") % {'url': newurl})
             # Reset extern and recalculate
             self.extern = None
             self.set_extern(newurl)

@@ -60,6 +60,8 @@ def setup_config(config, options):
     if options.extern:
         pats = [get_link_pat(arg) for arg in options.extern]
         config["externlinks"].extend(pats)
+    if options.log_redirects:
+        config["log_redirects"] = True
     if options.norobotstxt is not None:
         config["robotstxt"] = options.norobotstxt
     if options.checkextern:
