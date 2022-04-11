@@ -15,14 +15,18 @@ There are several steps to resolve problems with detecting the character
 encoding of checked HTML pages:
 first ensure the web server, if used, is not returning an incorrect charset in
 the Content-Type header; second, if possible add a meta element to the HTML
-page with the correct charset; finally, install cchardet_ - Beautiful Soup has
-its own encoding detector but will use in order of preference cchardet_ or
-chardet_. You might find that one of the other three detectors works better for
-your pages. There may already be a system copy of e.g. chardet installed;
+page with the correct charset; finally, check chardet_ is not installed,
+Requests >= 2.26 will install charset-normalizer_, Beautiful Soup has
+its own encoding detector but will use in order of preference cchardet_,
+chardet_ or charset-normalizer_ (Beautiful Soup >= 4.11). You might find that
+one of the other three detectors works better for your pages.
+There may already be a system copy of e.g. chardet installed;
 installing LinkChecker in a Python venv_ gives control over which packages are
 used.
 
 .. _chardet: https://pypi.org/project/chardet/
+
+.. _charset-normalizer: https://pypi.org/project/charset-normalizer/
 
 .. _pip-run: https://pypi.org/project/pip-run/
 
