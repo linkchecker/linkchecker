@@ -47,10 +47,6 @@ else:
 
 # the application name
 AppName = "LinkChecker"
-if "PYOXIDIZER" in os.environ:
-    # Name with capitals not supported by PyOxidizer 0.18.0
-    # https://github.com/indygreg/PyOxidizer/issues/488
-    AppName = AppName.lower()
 Description = "check links in web documents or full websites"
 
 RELEASE_DATE_FILE = "_release_date"
