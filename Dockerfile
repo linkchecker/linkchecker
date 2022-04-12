@@ -1,5 +1,5 @@
-# Use the maximum version for which dependency wheels are available
-FROM python:3.9-slim
+# Use the maximum Python version tested
+FROM python:3.10-slim
 
 # linkchecker creates ~/.linkchecker/ (700) containing linkcheckerrc et al
 ENV HOME /tmp
