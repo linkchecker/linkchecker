@@ -196,8 +196,8 @@ class TestParser(unittest.TestCase):
 
     def encoding_test(self, html, expected):
         # For encoding detection Beautiful Soup uses if available in order
-        # of preference cchardet then chardet.
+        # of preference cchardet then chardet then charset-normalizer.
         # Results for html without a valid charset may differ
-        # based on cchardet/chardet availability.
+        # based on cchardet/chardet/charset-normalizer availability.
         soup = htmlsoup.make_soup(html)
         self.assertEqual(soup.original_encoding, expected)

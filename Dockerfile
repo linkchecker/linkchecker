@@ -1,5 +1,5 @@
-# Use the maximum version for which dependency wheels are available
-FROM python:3.9-slim
+# Use the maximum Python version tested
+FROM python:3.10-slim
 
 # linkchecker creates ~/.linkchecker/ (700) containing linkcheckerrc et al
 ENV HOME /tmp
@@ -11,7 +11,7 @@ WORKDIR /mnt
 
 # Dependencies change on their own schedule so install them separately
 RUN pip install --no-cache-dir \
-    beautifulsoup4 dnspython pyxdg requests cchardet polib
+    beautifulsoup4 dnspython pyxdg requests polib
 
 RUN set -x \
     && apt-get update -qq \
