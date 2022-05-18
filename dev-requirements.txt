@@ -1,7 +1,7 @@
 # for testing:
 miniboa
 parameterized
-pdfminer
+pdfminer.six
 pyftpdlib
 pyopenssl
 pytest

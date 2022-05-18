@@ -525,7 +525,7 @@ daemon must be installed.
 PdfParser
 ^^^^^^^^^
 
-Parse PDF files for URLs to check. Needs the :pypi:`pdfminer` Python package
+Parse PDF files for URLs to check. Needs the :pypi:`pdfminer.six` Python package
 installed.
 
 WordParser
