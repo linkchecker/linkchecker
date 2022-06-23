@@ -115,7 +115,7 @@ class WordParser(_ParserPlugin):
     """Word parsing plugin."""
 
     def __init__(self, config):
-        """Check for pdfminer."""
+        """Check for Word."""
         init_win32com()
         if not has_word():
             log.warn(LOG_PLUGIN, "Microsoft Word not found for WordParser plugin")
