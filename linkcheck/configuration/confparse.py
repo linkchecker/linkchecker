@@ -16,6 +16,7 @@
 """Parse configuration files"""
 
 from configparser import RawConfigParser
+from re import compile as re_compile
 import os
 
 from .. import (
@@ -158,6 +159,14 @@ class LCConfigParser(RawConfigParser):
             for val in loggers:
                 output = self.config.logger_new(val, fileoutput=1)
                 self.config['fileoutput'].append(output)
+        if self.has_option(section, "ignoreerrors"):
+            for line in read_multiline(self.get(section, "ignoreerrors")):
+                parts = line.split(maxsplit=1)
+                if len(parts) == 1:
+                    parts.append('')
+                self.config["ignoreerrors"].append(tuple(
+                    re_compile(part) for part in parts
+                ))
 
     def read_checking_config(self):
         """Read configuration options in section "checking"."""

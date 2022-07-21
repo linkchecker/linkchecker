@@ -216,6 +216,7 @@ class UrlBase:
                 % {"url": base_url},
                 tag=WARN_URL_WHITESPACE,
             )
+        self.ignore_errors = self.aggregate.config['ignoreerrors']
 
     def reset(self):
         """
@@ -270,6 +271,8 @@ class UrlBase:
         self.content_type = ""
         # URLs seen through redirections
         self.aliases = []
+        # error messages (regular expressions) to ignore
+        self.ignore_errors = []
 
     def set_result(self, msg, valid=True, overwrite=False):
         """
@@ -289,6 +292,16 @@ class UrlBase:
             log.warn(LOG_CHECK, "Empty result for %s", self)
         self.result = msg
         self.valid = valid
+
+        if not self.valid:
+            for url_regex, msg_regex in self.ignore_errors:
+                if not url_regex.search(self.url):
+                    continue
+                if not msg_regex.search(self.result):
+                    continue
+                self.valid = True
+                self.result = f"Ignored: {self.result}"
+
         # free content data
         self.data = None
 

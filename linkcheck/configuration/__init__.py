@@ -165,6 +165,7 @@ class Configuration(dict):
         self["loginextrafields"] = {}
         # filtering
         self["externlinks"] = []
+        self["ignoreerrors"] = []
         self["ignorewarnings"] = []
         self["internlinks"] = []
         self["checkextern"] = False

@@ -19,6 +19,7 @@ Test config parsing.
 
 import unittest
 import os
+from re import Pattern
 import linkcheck.configuration
 
 
@@ -66,6 +67,17 @@ class TestConfig(unittest.TestCase):
                 self.assertTrue(key in patterns)
         for key in ("url-unicode-domain",):
             self.assertTrue(key in config["ignorewarnings"])
+        self.assertEqual(len(config["ignoreerrors"]), 2)
+        for parts in config["ignoreerrors"]:
+            self.assertEqual(len(parts), 2)
+            for part in parts:
+                self.assertTrue(isinstance(part, Pattern))
+        self.assertTrue(config["ignoreerrors"][0][1].search(
+            "404 Not Found"
+        ))
+        self.assertTrue(config["ignoreerrors"][1][0].search(
+            "mailto:foo"
+        ))
         self.assertTrue(config["checkextern"])
         # authentication section
         patterns = [x["pattern"].pattern for x in config["authentication"]]
