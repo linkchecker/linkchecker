@@ -78,7 +78,7 @@ autodoc_member_order = 'groupwise'
 
 autosectionlabel_prefix_document = True
 
-extlinks = {'pypi': ('https://pypi.org/project/%s/', '')}
+extlinks = {'pypi': ('https://pypi.org/project/%s/', '%s')}
 
 graphviz_output_format = 'svg'
 
