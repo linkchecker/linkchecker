@@ -3,6 +3,8 @@ name: Publish LinkChecker Documentation on GitHub Pages
 on:
   push:
     branches: ["master"]
+  release:
+    types: [released]
 
 jobs:
   run:
