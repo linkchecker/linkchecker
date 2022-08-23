@@ -56,8 +56,10 @@ Execute ``windows\dist.bat`` to build a binary installer.
 Release process
 ---------------
 
-1. check whether updated translations need committing
+1. check whether updated man pages and translations need committing
    (`make locale; make -C doc locale; make -C doc man`)
+   if so create a pull request using the GitHub workflow:
+   "Create a branch with updated man pages and application translations"
 
 2. edit `changelog.txt` and `upgrading.txt`, and if applicable the
    copyright dates in `linkcheck/configuration/__init__.py`
