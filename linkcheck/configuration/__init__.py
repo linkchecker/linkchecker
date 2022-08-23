@@ -33,7 +33,6 @@ except ImportError:
 
 from .. import log, LOG_CHECK, COMMAND_NAME, PACKAGE_NAME, fileutil
 from . import confparse
-from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 linkchecker_distribution = distribution(COMMAND_NAME)
 Version = linkchecker_distribution.metadata["Version"]
@@ -74,7 +73,6 @@ Modules = (
     ("bs4", "Beautiful Soup", "__version__"),
     ("dns.version", "dnspython", "version"),
     ("requests", "Requests", "__version__"),
-    ("xdg", "PyXDG", "__version__"),
     # optional modules
     ("argcomplete", "Argcomplete", None),
     ("GeoIP", "GeoIP", 'lib_version'),  # on Unix systems
@@ -332,7 +330,10 @@ def get_user_data():
     userdata = (
         homedotdir
         if os.path.isdir(homedotdir)
-        else os.path.join(xdg_data_home, "linkchecker")
+        else os.path.join(
+            os.environ.get("XDG_DATA_HOME") or os.path.expanduser(
+                os.path.join("~", ".local", "share")),
+            "linkchecker")
     )
     return userdata
 
@@ -381,7 +382,10 @@ def get_user_config():
     userconf = (
         homedotfile
         if os.path.isfile(homedotfile)
-        else os.path.join(xdg_config_home, "linkchecker", "linkcheckerrc")
+        else os.path.join(
+            os.environ.get("XDG_CONFIG_HOME") or os.path.expanduser(
+                os.path.join("~", ".config")),
+            "linkchecker", "linkcheckerrc")
     )
     if not os.path.exists(userconf):
         # initial config (with all options explained)

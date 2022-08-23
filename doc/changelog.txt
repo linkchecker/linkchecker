@@ -1,3 +1,9 @@
+10.x
+
+Changes:
+- PyXDG is no longer used
+
+
 10.1.0 (released 22.12.2021)
 
 Features:

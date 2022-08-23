@@ -10,8 +10,7 @@ VOLUME /mnt
 WORKDIR /mnt
 
 # Dependencies change on their own schedule so install them separately
-RUN pip install --no-cache-dir \
-    beautifulsoup4 dnspython pyxdg requests polib
+RUN pip install --no-cache-dir beautifulsoup4 dnspython requests polib
 
 RUN set -x \
     && apt-get update -qq \
