@@ -17,7 +17,7 @@
 #
 # This script is intended to be run daily from cron. It complains when
 # URLs fail for at least a number of script runs.
-LOGFILE="$HOME/.linkchecker/failures"
+LOGFILE="$XDG_DATA_HOME/linkchecker/failures"
 linkchecker -Ffailures "$@"
 # this awk script complains if urls fail for at least two script runs
 [ -r $LOGFILE ] && awk '/^[[:digit:]]+/ {if ($1 > 1) printf "URL %s failed for %d days.", $2, $1; }' $LOGFILE

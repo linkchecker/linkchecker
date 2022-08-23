@@ -93,4 +93,4 @@ sitemap_url_scheme = "{link}"
 
 import linkcheck.logger
 linkcheck.logger.failures.FailuresLogger.LoggerArgs = {
-    'filename': '~/.linkchecker/failures'}
+    'filename': '$XDG_DATA_HOME/linkchecker/failures'}

@@ -86,7 +86,7 @@ General options
 .. option:: -f FILENAME, --config=FILENAME
 
     Use FILENAME as configuration file. By default LinkChecker uses
-    ~/.linkchecker/linkcheckerrc.
+    $XDG_CONFIG_HOME/linkchecker/linkcheckerrc.
 
 .. option:: -h, --help
 
@@ -118,7 +118,7 @@ URL checking results
 .. option:: -F TYPE[/ENCODING][/FILENAME], --file-output=TYPE[/ENCODING][/FILENAME]
 
     Output to a file linkchecker-out.TYPE,
-    $HOME/.linkchecker/failures for the failures output type, or
+    $XDG_DATA_HOME/linkchecker/failures for the failures output type, or
     FILENAME if specified. The ENCODING specifies the output
     encoding, the default is that of your locale. Valid encodings are
     listed at
@@ -279,7 +279,7 @@ outputting a sitemap graph format.
     script to create the initial SQL table is included as create.sql.
 **failures**
     Suitable for cron jobs. Logs the check result into a file
-    **~/.linkchecker/failures** which only contains entries with
+    **$XDG_DATA_HOME/linkchecker/failures** which only contains entries with
     invalid URLs and the number of times they have failed.
 **none**
     Logs nothing. Suitable for debugging or checking the exit code.
@@ -527,9 +527,9 @@ This might slow down the program or even the whole system.
 FILES
 -----
 
-**~/.linkchecker/linkcheckerrc** - default configuration file
+**$XDG_CONFIG_HOME/linkchecker/linkcheckerrc** - default configuration file
 
-**~/.linkchecker/failures** - default failures logger output filename
+**$XDG_DATA_HOME/linkchecker/failures** - default failures logger output filename
 
 **linkchecker-out.**\ *TYPE* - default logger file output name
 
