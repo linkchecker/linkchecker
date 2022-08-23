@@ -574,6 +574,8 @@ file entry:
     Could not get the content of the URL.
 **url-obfuscated-ip**
     The IP is obfuscated.
+**url-rate-limited**
+    Too many HTTP requests.
 **url-whitespace**
     The URL contains leading or trailing whitespace.
 
