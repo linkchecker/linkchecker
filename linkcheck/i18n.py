@@ -17,7 +17,7 @@
 Application internationalization support.
 """
 
-# i18n suppport
+# i18n support
 import os
 import locale
 import gettext
