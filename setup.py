@@ -225,7 +225,6 @@ setup(
         "requests >= 2.4",
         "dnspython >= 2.0",
         "beautifulsoup4 >= 4.8.1",
-        "pyxdg",
     ],
     # Commented out since they are untested and not officially supported.
     # See also doc/install.txt for more detailed dependency documentation.
