@@ -324,8 +324,9 @@ class Configuration(dict):
 
 def get_user_data():
     """Get the user data folder.
-    Returns "~/.linkchecker/" if this folder exists, \
-    "$XDG_DATA_HOME/linkchecker" if it does not.
+    Returns "~/.linkchecker/" if this folder exists,
+    "$XDG_DATA_HOME/linkchecker" if $XDG_DATA_HOME is set,
+    else "~/.local/share/linkchecker".
     @rtype string
     """
     homedotdir = normpath("~/.linkchecker/")
@@ -339,9 +340,10 @@ def get_user_data():
 
 def get_plugin_folders():
     """Get linkchecker plugin folders. Default is
-    "$XDG_DATA_HOME/linkchecker/plugins/". "~/.linkchecker/plugins/" is also
-    supported for backwards compatibility, and is used if both directories
-    exist."""
+    "$XDG_DATA_HOME/linkchecker/plugins/" if $XDG_DATA_HOME is set, else
+    "~/.local/share/linkchecker/plugins/".
+    "~/.linkchecker/plugins/" is also
+    supported for backwards compatibility, and is used if it exists."""
     folders = []
     defaultfolder = os.path.join(get_user_data(), "plugins")
     if not os.path.exists(defaultfolder):

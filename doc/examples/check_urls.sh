@@ -25,7 +25,7 @@
 #    10 4 * * * $HOME/bin/check_urls.sh --cron http://mysite.com/
 #
 # To only get a mail when errors are encountered, you have to disable
-# the intro and outro output in a config file $HOME/.linkchecker/cron:
+# the intro and outro output in a config file $XDG_CONFIG_HOME/linkchecker/cron:
 #
 #    [text]
 #    parts=realurl,result,extern,base,name,parenturl,info,warning,url
@@ -39,7 +39,7 @@ else
     echo "linkchecker binary not found"
     exit 1
 fi
-LCOPTS="-f$HOME/.linkchecker/cron"
+LCOPTS="-f$XDG_CONFIG_HOME/linkchecker/cron"
 if [ "$1" = "--cron" ]; then
     shift
     LCOPTS="$LCOPTS --no-status"

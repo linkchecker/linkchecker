@@ -78,7 +78,7 @@ autodoc_member_order = 'groupwise'
 
 autosectionlabel_prefix_document = True
 
-extlinks = {'pypi': ('https://pypi.org/project/%s/', '')}
+extlinks = {'pypi': ('https://pypi.org/project/%s/', '%s')}
 
 graphviz_output_format = 'svg'
 
@@ -93,4 +93,4 @@ sitemap_url_scheme = "{link}"
 
 import linkcheck.logger
 linkcheck.logger.failures.FailuresLogger.LoggerArgs = {
-    'filename': '~/.linkchecker/failures'}
+    'filename': '$XDG_DATA_HOME/linkchecker/failures'}

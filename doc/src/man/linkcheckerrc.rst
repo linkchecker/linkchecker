@@ -8,8 +8,9 @@ DESCRIPTION
 
 **linkcheckerrc** is the configuration file for LinkChecker. The file is
 written in an INI-style format.
-The default file location is **~/.linkchecker/linkcheckerrc** on Unix,
-**%HOMEPATH%\\.linkchecker\\linkcheckerrc** on Windows systems.
+The default file location is **$XDG_CONFIG_HOME/linkchecker/linkcheckerrc**
+or else **~/.config/linkchecker/linkcheckerrc** on Unix,
+**%HOMEPATH%\\.config\\linkchecker\\linkcheckerrc** on Windows systems.
 
 SETTINGS
 --------
@@ -166,7 +167,7 @@ URL checking results
 
 **fileoutput=**\ *TYPE*\ [**,**\ *TYPE*...]
     Output to a file **linkchecker-out.**\ *TYPE*, or
-    **$HOME/.linkchecker/failures** for the **failures** output type.
+    **$XDG_DATA_HOME/linkchecker/failures** for the **failures** output type.
     Valid file output types are **text**, **html**, **sql**, **csv**,
     **gml**, **dot**, **xml**, **none** or **failures**. Default is no
     file output. The various output types are documented below. Note

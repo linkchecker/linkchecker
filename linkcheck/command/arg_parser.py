@@ -165,8 +165,8 @@ sql     Log check result as SQL script with INSERT commands. An example
         script to create the initial SQL table is included as create.sql.
 failures
         Suitable for cron jobs. Logs the check result into a file
-        ~/.linkchecker/failures which only contains entries with invalid
-        URLs and the number of times they have failed.
+        $XDG_DATA_HOME/linkchecker/failures which only contains entries with
+        invalid URLs and the number of times they have failed.
 none    Logs nothing. Suitable for debugging or checking the exit code.
 """
 )
@@ -219,8 +219,8 @@ class ArgParser(LCArgumentParser):
             metavar="FILENAME",
             help=_(
                 "Use FILENAME as configuration file. Per default LinkChecker uses\n"
-                "~/.linkchecker/linkcheckerrc (under Windows\n"
-                "%%HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
+                "$XDG_CONFIG_HOME/linkchecker/linkcheckerrc (under Windows\n"
+                "%%HOMEPATH%%\\.config\\linkchecker\\linkcheckerrc)."
             ),
         )
         group.add_argument(
@@ -273,7 +273,7 @@ class ArgParser(LCArgumentParser):
             dest="fileoutput",
             metavar="TYPE[/ENCODING[/FILENAME]]",
             help=_(
-                "Output to a file linkchecker-out.TYPE, $HOME/.linkchecker/failures for\n"
+                "Output to a file linkchecker-out.TYPE, $XDG_DATA_HOME/linkchecker/failures for\n"
                 "'failures' output, or FILENAME if specified.\n"
                 "The ENCODING specifies the output encoding, the default is that of your\n"
                 "locale.\n"
