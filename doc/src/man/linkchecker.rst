@@ -92,10 +92,6 @@ General options
 
     Help me! Print usage information for this program.
     
-.. option:: --stdin
-
-    Read list of white-space separated URLs to check from stdin.
-    
 .. option:: -t NUMBER, --threads=NUMBER
 
     Generate no more than the given number of threads. Default number of
@@ -238,6 +234,19 @@ Checking options
     Specify the User-Agent string to send to the HTTP server, for
     example "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is
     the current version of LinkChecker.
+
+Input options
+^^^^^^^^^^^^^
+
+.. option:: --stdin
+
+    Read from stdin a list of white-space separated URLs to check.
+
+.. option:: FILE-OR-URL
+
+    The location to start checking with.
+    A file can be a simple list of URLs, one per line, if the first line is
+    "# LinkChecker URL list".
 
 CONFIGURATION FILES
 -------------------
