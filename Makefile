@@ -44,7 +44,7 @@ endif
 # Pytest options:
 # - use multiple processes
 # - write test results in file
-PYTESTOPTS:=-n 4 --resultlog=testresults.txt
+PYTESTOPTS:=-n 4 --log-file testresults.txt
 
 
 all:

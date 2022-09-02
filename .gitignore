@@ -45,3 +45,4 @@ coverage.xml
 doc/html
 doc/src/_build
 doc/src/code/linkcheck
+/.eggs/

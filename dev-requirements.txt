@@ -1,4 +1,5 @@
 # for testing:
+cchardet
 miniboa
 parameterized
 pdfminer.six

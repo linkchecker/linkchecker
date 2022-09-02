@@ -15,4 +15,4 @@
 :: 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 @echo off
 set PYDIR=C:\Python27
-%PYDIR%\python.exe -m pytest --resultlog=testresults.txt tests
+%PYDIR%\python.exe -m pytest --log-file testresults.txt tests
