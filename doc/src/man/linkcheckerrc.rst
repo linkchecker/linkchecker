@@ -131,7 +131,7 @@ authentication
 
 **entry=**\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)
     Provide individual username/password pairs for different links. In
-    addtion to a single login page specified with **loginurl** multiple
+    addition to a single login page specified with **loginurl** multiple
     FTP, HTTP (Basic Authentication) and telnet links are supported.
     Entries are a triple (URL regex, username, password) or a tuple (URL
     regex, username), where the entries are separated by whitespace.
