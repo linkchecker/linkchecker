@@ -93,6 +93,7 @@ class UrlBase:
         # should not send this content type. They send text/html instead.
         "application/x-httpd-php": "html",
         "text/css": "css",
+        "application/vnd.adobe.flash.movie": "swf",
         "application/x-shockwave-flash": "swf",
         "application/msword": "word",
         "text/plain+linkchecker": "text",
