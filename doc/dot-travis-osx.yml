@@ -1,6 +1,6 @@
 language:
-- objective-c
-- python
+  - objective-c
+  - python
 python:
   - "2.7"
 # whitelist of git branches to build

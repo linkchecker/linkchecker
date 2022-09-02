@@ -25,26 +25,26 @@ jobs:
 
       - name: Install Python packages
         run: >
-            pip3 install polib setuptools_scm twine wheel
+          pip3 install polib setuptools_scm twine wheel
 
       - name: Set SOURCE_DATE_EPOCH
         run: >
-            echo "SOURCE_DATE_EPOCH=$(git log -n 1 ${{ github.sha }} --format=%ct)" >> $GITHUB_ENV
+          echo "SOURCE_DATE_EPOCH=$(git log -n 1 ${{ github.sha }} --format=%ct)" >> $GITHUB_ENV
 
       - name: Create distribution files
         run: >
-            python3 setup.py sdist bdist_wheel
+          python3 setup.py sdist bdist_wheel
 
       - name: Check distribution files
         run: >
-            twine check dist/*
+          twine check dist/*
 
       - name: Calculate checksums for distribution files
         run: >
-            sha256sum dist/*
+          sha256sum dist/*
 
       - name: Add distribution files to release
         run: >
-            gh release upload ${{ github.ref_name }} dist/*
+          gh release upload ${{ github.ref_name }} dist/*
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

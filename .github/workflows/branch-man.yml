@@ -25,34 +25,34 @@ jobs:
 
       - name: Install Python packages
         run: >
-            pip3 install dnspython beautifulsoup4 requests \
-                         sphinx sphinx_epytext sphinx_rtd_theme sphinx-sitemap \
-                         sphinx-intl setuptools_scm
+          pip3 install dnspython beautifulsoup4 requests \
+                       sphinx sphinx_epytext sphinx_rtd_theme sphinx-sitemap \
+                       sphinx-intl setuptools_scm
 
       - name: Prepare git environment
         run: |
-            git config user.email "linkchecker@linkchecker.github.io"
-            git config user.name "LinkChecker"
-            git checkout -b man-updates
-            git remote add local ${{ github.server_url }}/${{ github.repository }}
+          git config user.email "linkchecker@linkchecker.github.io"
+          git config user.name "LinkChecker"
+          git checkout -b man-updates
+          git remote add local ${{ github.server_url }}/${{ github.repository }}
 
       - name: Create application version number
         run: >
-            python3 setup.py build
+          python3 setup.py build
 
       - name: Build man pages
         run: |
-            make -C doc locale
-            git commit -a -m "Update doc translation catalogs"
-            make -C doc man
-            git commit -a -m "Update man pages"
+          make -C doc locale
+          git commit -a -m "Update doc translation catalogs"
+          make -C doc man
+          git commit -a -m "Update man pages"
 
       - name: Build application translations catalogs
         run: |
-            rm -f po/linkchecker.pot
-            make -C po
-            git commit -a -m "Update application translation catalogs"
+          rm -f po/linkchecker.pot
+          make -C po
+          git commit -a -m "Update application translation catalogs"
 
       - name: Push changes
         run: >
-            git push --set-upstream local man-updates
+          git push --set-upstream local man-updates

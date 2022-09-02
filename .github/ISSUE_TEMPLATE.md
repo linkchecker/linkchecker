@@ -7,9 +7,9 @@
 
 ## Steps to reproduce
 
- 1. 
- 2. 
- 3. 
+1.
+2.
+3.
 
 <!-- Reporting a minimal example that reproduces the problem in the text of
 the issue can increase the chance of a solution significantly. -->
@@ -22,10 +22,10 @@ the issue can increase the chance of a solution significantly. -->
 
 <!-- replace the comments with the output of the commands -->
 
- * Operating system: <!-- uname -a or lsb_release -a: Debian GNU/Linux 9.1 (stretch), Windows 7, Ubuntu Xenial, etc -->
- * Linkchecker version: <!-- linkchecker --version -->
- * Python version: <!-- python --version -->
- * Install method: <!-- distribution package, PyPI, from source tarball, from git, etc -->
+- Operating system: <!-- uname -a or lsb_release -a: Debian GNU/Linux 9.1 (stretch), Windows 7, Ubuntu Xenial, etc -->
+- Linkchecker version: <!-- linkchecker --version -->
+- Python version: <!-- python --version -->
+- Install method: <!-- distribution package, PyPI, from source tarball, from git, etc -->
 
 ## Configuration file
 

@@ -1,5 +1,4 @@
-LinkChecker Documentation
-=========================
+# LinkChecker Documentation
 
 LinkChecker is documented with man pages and HTML that is used for the project web site.
 Both are generated using Sphinx, with Makefiles provided to simplify the process.
@@ -16,22 +15,20 @@ sphinx_rtd_theme
 
 sphinx_sitemap
 
-Configuration
--------------
+## Configuration
 
-Before building either man pages or HTML, generate ``PKG-INFO``
+Before building either man pages or HTML, generate `PKG-INFO`
 containing copyright, author and version with:
 
-``linkchecker $ ./setup.py build``
+`linkchecker $ ./setup.py build`
 
-Man Pages
----------
+## Man Pages
 
 Source files are in doc/src/man.
 
 The pages can be built with:
 
-``linkchecker/doc $ make man``
+`linkchecker/doc $ make man`
 
 The files are saved in doc/man.
 
@@ -39,29 +36,25 @@ See translations.md for information about creating localised man pages.
 
 Published man pages are included in the LinkChecker repository.
 
+## HTML
 
-HTML
-----
-
-``doc/src/code/index.rst`` gives an overview of the LinkChecker code, optionally a navigable
+`doc/src/code/index.rst` gives an overview of the LinkChecker code, optionally a navigable
 copy of the LinkChecker source can be created with:
 
-``linkchecker/doc $ make code``
+`linkchecker/doc $ make code`
 
 Build the HTML files with:
 
-``linkchecker/doc $ make html``
+`linkchecker/doc $ make html`
 
 The files are saved in doc/html.
 
-
-Publishing the Web Site
------------------------
+## Publishing the Web Site
 
 The Web Site is hosted by GitHub Pages from the gh-pages branch.
 
-A ``.nojekyll`` file is present to ensure folders beginning with an underscore
+A `.nojekyll` file is present to ensure folders beginning with an underscore
 are published.
 
 When updates to LinkChecker are pushed, the web site is built and published
-automatically by a GitHub action ``.github/workflows/publish-pages.yml``.
+automatically by a GitHub action `.github/workflows/publish-pages.yml`.

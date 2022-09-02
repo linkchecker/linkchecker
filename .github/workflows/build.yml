@@ -8,9 +8,9 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:     # allow manual triggering from GitHub UI
+  workflow_dispatch: # allow manual triggering from GitHub UI
   schedule:
-    - cron: "0 5 * * 6"  # 5:00 UTC every Saturday
+    - cron: "0 5 * * 6" # 5:00 UTC every Saturday
 
 jobs:
   build:

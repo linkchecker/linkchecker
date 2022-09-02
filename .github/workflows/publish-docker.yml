@@ -4,8 +4,8 @@ name: Create and publish a Docker image
 
 on:
   push:
-    branches: ['master']
-    tags: 'v*'
+    branches: ["master"]
+    tags: "v*"
   workflow_dispatch:
 
 env:

@@ -1,11 +1,17 @@
-{% extends "!layout.html" %}
-
-  {% block menu %}
-    {{ super() }}
-  <ul>
-    <li><a href="{{ pathto('genindex') }}">Index</a></li>
-    <li><hr></li>
-    <li><a href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt">Change Log</a></li>
-    <li><a href="https://github.com/linkchecker/linkchecker/issues/">Issue Tracker</a></li>
-  </ul>
-  {% endblock %}
+{% extends "!layout.html" %} {% block menu %} {{ super() }}
+<ul>
+  <li><a href="{{ pathto('genindex') }}">Index</a></li>
+  <li><hr /></li>
+  <li>
+    <a
+      href="https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt"
+      >Change Log</a
+    >
+  </li>
+  <li>
+    <a href="https://github.com/linkchecker/linkchecker/issues/"
+      >Issue Tracker</a
+    >
+  </li>
+</ul>
+{% endblock %}
