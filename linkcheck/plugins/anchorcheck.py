@@ -29,13 +29,9 @@ class AnchorCheck(_ContentPlugin):
     def __init__(self, config):
         """Initialize plugin."""
         super().__init__(config)
-        log.warn(
-            LOG_PLUGIN, _("Anchor check plugin is broken. Fixes welcome.")
-        )
 
     def applies_to(self, url_data):
         """Check for HTML anchor existence."""
-        return False  # XXX Plugin disabled
         return url_data.is_html() and url_data.anchor
 
     def check(self, url_data):
