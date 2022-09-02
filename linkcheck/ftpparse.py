@@ -74,7 +74,7 @@ def ftpparse(line):
     # Also produced by Microsoft's FTP servers for Windows:
     # "----------   1 owner    group         1803128 Jul 10 10:18 ls-lR.Z"
     # "d---------   1 owner    group               0 May  9 19:45 Softlib"
-    # Also WFTPD for MSDOS:
+    # Also WFTPD for MS-DOS:
     # "-rwxrwxrwx   1 noone    nogroup      322 Aug 19  1996 message.ftp"
     # Also NetWare:
     # "d [R----F--] supervisor            512       Jan 16 18:53    login"
@@ -132,7 +132,7 @@ def ftpparse(line):
         info["name"] = name
         return info
 
-    # MSDOS format
+    # MS-DOS format
     # 04-27-00  09:09PM       <DIR>          licensed
     # 07-18-00  10:16AM       <DIR>          pub
     # 04-14-00  03:47PM                  589 readme.htm

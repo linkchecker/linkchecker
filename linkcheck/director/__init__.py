@@ -68,7 +68,7 @@ def check_urls(aggregate):
         console.internal_error()
         aggregate.logger.log_internal_error()
         abort(aggregate)
-    # Not catched exceptions at this point are SystemExit and GeneratorExit,
+    # Not caught exceptions at this point are SystemExit and GeneratorExit,
     # and both should be handled by the calling layer.
 
 

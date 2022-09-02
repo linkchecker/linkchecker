@@ -224,7 +224,7 @@ class UrlBase:
         # This the real url we use when checking so it also referred to
         # as 'real url'
         self.url = None
-        # a splitted version of url for convenience
+        # a split version of url for convenience
         self.urlparts = None
         # the scheme, host, port and anchor part of url
         self.scheme = self.host = self.port = self.anchor = None
@@ -690,7 +690,7 @@ class UrlBase:
         pass
 
     def can_get_content(self):
-        """Indicate wether url get_content() can be called."""
+        """Indicate whether url get_content() can be called."""
         return self.size <= self.aggregate.config["maxfilesizedownload"]
 
     def download_content(self):
@@ -956,6 +956,6 @@ class CompactUrlData:
     __slots__ = urlDataAttr
 
     def __init__(self, wired_url_data):
-        '''Set all attributes according to the dictionnary wired_url_data'''
+        '''Set all attributes according to the dictionary wired_url_data'''
         for attr in urlDataAttr:
             setattr(self, attr, wired_url_data[attr])

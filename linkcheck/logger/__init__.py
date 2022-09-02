@@ -304,7 +304,7 @@ class _Logger(abc.ABC):
             self.start_fileoutput()
         if self.fd is None:
             # Happens when aborting threads times out
-            log.warn(LOG_CHECK, "writing to unitialized or closed file")
+            log.warn(LOG_CHECK, "writing to uninitialized or closed file")
         else:
             try:
                 self.fd.write(s, **args)
