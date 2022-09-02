@@ -385,7 +385,7 @@ class Entry:
         - our agent applies to this entry
         - filename is URL decoded
 
-        Check if given filename is allowed to acces this entry.
+        Check if given filename is allowed to access this entry.
 
         @return: True if allowed, else False
         @rtype: bool

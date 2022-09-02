@@ -116,7 +116,7 @@ def get_url_from(
     else:
         scheme = None
         if not (url or name):
-            # use filename as base url, with slash as path seperator
+            # use filename as base url, with slash as path separator
             name = base_url.replace("\\", "/")
     allowed_schemes = aggregate.config["allowedschemes"]
     # ignore local PHP files with execution directives

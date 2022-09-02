@@ -57,7 +57,7 @@ patterns = (
         "d---------   1 owner    group               0 May  9 19:45 Softlib",
         dict(name="Softlib", tryretr=False, trycwd=True),
     ),
-    # Also WFTPD for MSDOS:
+    # Also WFTPD for MS-DOS:
     (
         "-rwxrwxrwx   1 noone    nogroup      322 Aug 19  1996 message.ftp",
         dict(name="message.ftp", tryretr=True, trycwd=False),
@@ -94,7 +94,7 @@ patterns = (
         "CII-MANUAL.TEX;1  213/216  29-JAN-1996 03:33:12  [ANONYMOU,ANONYMOUS]   (RWED,RWED,,)",
         dict(name="CII-MANUAL.TEX", tryretr=True, trycwd=False),
     ),
-    # MSDOS format
+    # MS-DOS format
     (
         "04-27-00  09:09PM       <DIR>          licensed",
         dict(name="licensed", tryretr=False, trycwd=True),

@@ -94,7 +94,7 @@ def is_readable(filename):
 
 
 def is_accessable_by_others(filename):
-    """Check if file is group or world accessable."""
+    """Check if file is group or world accessible."""
     mode = os.stat(filename)[stat.ST_MODE]
     return mode & (stat.S_IRWXG | stat.S_IRWXO)
 

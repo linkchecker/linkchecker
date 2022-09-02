@@ -34,7 +34,7 @@ class TestClamav(unittest.TestCase):
 
     @need_clamav
     def testInfected(self):
-        # from the clamav test direcotry: the clamav test file as html data
+        # from the clamav test directory: the clamav test file as html data
         data = (
             b'<a href="data:application/octet-stream;base64,'
             b"TVpQAAIAAAAEAA8A//8AALgAAAAhAAAAQAAaAAAAAAAAAAAAAAAAAAAAAAAAAA"

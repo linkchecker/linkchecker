@@ -38,7 +38,7 @@ class FailuresLogger(_Logger):
     }
 
     def __init__(self, **kwargs):
-        """Intialize with old failures data (if found)."""
+        """Initialize with old failures data (if found)."""
         blacklist = os.path.join(get_user_data(), "blacklist")
         if os.path.isfile(blacklist):
             self.LoggerArgs["filename"] = blacklist
