@@ -44,6 +44,7 @@ from .const import (
     WARN_URL_OBFUSCATED_IP,
     WARN_URL_CONTENT_SIZE_ZERO,
     WARN_URL_CONTENT_SIZE_TOO_LARGE,
+    WARN_URL_CONTENT_TYPE_UNPARSEABLE,
     WARN_URL_WHITESPACE,
     URL_MAX_LENGTH,
     WARN_URL_TOO_LONG,
@@ -305,6 +306,24 @@ class UrlBase:
                 if title:
                     self.title = title
         return self.title
+
+    def is_content_type_parseable(self):
+        """
+        Return True iff the content type of this url is parseable.
+        """
+        if self.content_type in self.ContentMimetypes:
+            return True
+        log.debug(
+            LOG_CHECK,
+            "URL with content type %r is not parseable",
+            self.content_type,
+        )
+        if self.recursion_level == 0:
+            self.add_warning(
+                _("The URL with content type %r is not parseable.") % self.content_type,
+                tag=WARN_URL_CONTENT_TYPE_UNPARSEABLE,
+            )
+        return False
 
     def is_parseable(self):
         """

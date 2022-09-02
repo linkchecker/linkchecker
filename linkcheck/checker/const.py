@@ -85,6 +85,7 @@ WARN_URL_EFFECTIVE_URL = "url-effective-url"
 WARN_URL_ERROR_GETTING_CONTENT = "url-error-getting-content"
 WARN_URL_CONTENT_SIZE_TOO_LARGE = "url-content-too-large"
 WARN_URL_CONTENT_SIZE_ZERO = "url-content-size-zero"
+WARN_URL_CONTENT_TYPE_UNPARSEABLE = "url-content-type-unparseable"
 WARN_URL_OBFUSCATED_IP = "url-obfuscated-ip"
 WARN_URL_RATE_LIMITED = "url-rate-limited"
 WARN_URL_TOO_LONG = "url-too-long"
@@ -106,6 +107,7 @@ Warnings = {
     WARN_URL_ERROR_GETTING_CONTENT: _("Could not get the content of the URL."),
     WARN_URL_CONTENT_SIZE_TOO_LARGE: _("The URL content size is too large."),
     WARN_URL_CONTENT_SIZE_ZERO: _("The URL content size is zero."),
+    WARN_URL_CONTENT_TYPE_UNPARSEABLE: _("The URL content type is not parseable."),
     WARN_URL_RATE_LIMITED: _(
         "The URL request was rate limited so need reduce number of requests."
     ),

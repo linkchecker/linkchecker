@@ -154,12 +154,7 @@ class FtpUrl(internpaturl.InternPatternUrl):
         """See if URL target is parseable for recursion."""
         if self.is_directory():
             return True
-        if self.content_type in self.ContentMimetypes:
-            return True
-        log.debug(
-            LOG_CHECK, "URL with content type %r is not parseable.", self.content_type
-        )
-        return False
+        return self.is_content_type_parseable()
 
     def is_directory(self):
         """See if URL target is a directory."""

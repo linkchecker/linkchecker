@@ -569,6 +569,8 @@ file entry:
     The URL content size is zero.
 **url-content-too-large**
     The URL content size is too large.
+**url-content-type-unparseable**
+    The URL content type is not parseable.
 **url-effective-url**
     The effective URL is different from the original.
 **url-error-getting-content**
