@@ -29,13 +29,9 @@ class AnchorCheck(_ContentPlugin):
     def __init__(self, config):
         """Initialize plugin."""
         super().__init__(config)
-        log.warn(
-            LOG_PLUGIN, _("Anchor check plugin is broken. Fixes welcome.")
-        )
 
     def applies_to(self, url_data):
         """Check for HTML anchor existence."""
-        return False  # XXX Plugin disabled
         return url_data.is_html() and url_data.anchor
 
     def check(self, url_data):
@@ -54,17 +50,19 @@ class AnchorCheck(_ContentPlugin):
         """If URL is valid, parseable and has an anchor, check it.
         A warning is logged and True is returned if the anchor is not found.
         """
-        log.debug(LOG_PLUGIN, "checking anchor %r in %s", url_data.anchor, self.anchors)
-        if any(x for x in self.anchors if urllib.parse.quote(x[0]) == url_data.anchor):
+        # default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed to be ASCII anyway, and utf-8 probably covers whatever else is in there
+        decoded_anchor = urllib.parse.unquote(url_data.anchor)
+        log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s", url_data.anchor, decoded_anchor, self.anchors)
+        if any(x for x in self.anchors if x[0] == decoded_anchor):
             return
         if self.anchors:
             anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"
-        args = {"name": url_data.anchor, "anchors": anchors}
+        args = {"name": url_data.anchor, "decoded": decoded_anchor, "anchors": anchors}
         msg = "%s %s" % (
-            _("Anchor `%(name)s' not found.") % args,
+            _("Anchor `%(name)s' (decoded: `%(decoded)s') not found.") % args,
             _("Available anchors: %(anchors)s.") % args,
         )
         url_data.add_warning(msg)

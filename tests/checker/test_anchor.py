@@ -27,21 +27,19 @@ class TestAnchor(LinkCheckTest):
     Test anchor checking of HTML pages.
     """
 
-    @pytest.mark.xfail(strict=True)
     def test_anchor(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
-        url = "file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
-        nurl = self.norm(url)
         anchor = "broken"
-        urlanchor = url + "#" + anchor
+        url = f"file://%(curdir)s/%(datadir)s/anchor.html#{anchor}" % self.get_attrs()
+        nurl = self.norm(url)
         resultlines = [
-            "url %s" % urlanchor,
+            "url %s" % url,
             "cache key %s" % nurl,
             "real url %s" % nurl,
-            "warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
+            "warning Anchor `%s' (decoded: `%s') not found. Available anchors: `myid:'." % (anchor, anchor),
             "valid",
         ]
-        self.direct(urlanchor, resultlines, confargs=confargs)
+        self.direct(url, resultlines, confargs=confargs)
 
 
 class TestHttpAnchor(HttpServerTest):
@@ -49,7 +47,18 @@ class TestHttpAnchor(HttpServerTest):
     Test checking of HTML pages containing links to anchors served over http.
     """
 
-    @pytest.mark.xfail(strict=True)
     def test_anchor_html(self):
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
+
+class TestEncodedAnchors(HttpServerTest):
+    """
+    Test checking of HTML pages containing links to anchors that might be urlencoded
+    """
+
+    def test_anchor_encoded(self):
+        # XXX do one of these with deeper recursion, too
+        # XXX do one of these with file://, too
+        confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
+        self.file_test("urlencoding_anchor.html", confargs=confargs)
+
