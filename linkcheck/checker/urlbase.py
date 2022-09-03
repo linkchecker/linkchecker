@@ -363,11 +363,8 @@ class UrlBase:
 
     def set_cache_url(self):
         """Set the URL to be used for caching."""
-        log.debug(LOG_CHECK, "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s", self.url, self.anchor, self.urlparts[4])
         if "AnchorCheck" in self.aggregate.config["enabledplugins"]:
-            # XXX figure out why these aren't needed
-            # self.urlparts[4] = urllib.parse.unquote(self.urlparts[4], encoding=self.encoding)
-            # self.cache_url = urlutil.urlunsplit(self.urlparts)
+            log.debug(LOG_CHECK, "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s", self.url, self.anchor, self.urlparts[4])
             self.cache_url = self.url
         else:
             # remove anchor from cached target url since we assume

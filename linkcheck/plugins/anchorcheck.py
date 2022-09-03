@@ -50,8 +50,8 @@ class AnchorCheck(_ContentPlugin):
         """If URL is valid, parseable and has an anchor, check it.
         A warning is logged and True is returned if the anchor is not found.
         """
-        # XXX hard-coded encoding
-        decoded_anchor = urllib.parse.unquote(url_data.anchor, encoding="utf-8")
+        # default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed to be ASCII anyway, and utf-8 probably covers whatever else is in there
+        decoded_anchor = urllib.parse.unquote(url_data.anchor)
         log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s", url_data.anchor, decoded_anchor, self.anchors)
         if any(x for x in self.anchors if x[0] == decoded_anchor):
             return
