@@ -171,8 +171,8 @@ class FileUrl(urlbase.UrlBase):
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
         super().build_url()
-        # ignore query and fragment url parts for filesystem urls
-        self.urlparts[3] = self.urlparts[4] = ''
+        # ignore query url part for filesystem urls
+        self.urlparts[3] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
             self.add_warning(
                 _("Added trailing slash to directory."), tag=WARN_FILE_MISSING_SLASH
@@ -190,6 +190,11 @@ class FileUrl(urlbase.UrlBase):
         self.size = fileutil.get_size(filename)
         self.modified = datetime.utcfromtimestamp(fileutil.get_mtime(filename))
 
+    def url_without_anchor(self):
+        urlparts = list(urllib.parse.urlsplit(self.url))
+        urlparts[4] = ''
+        return urlutil.urlunsplit(urlparts)
+
     def check_connection(self):
         """
         Try to open the local file. Under NT systems the case sensitivity
@@ -204,7 +209,7 @@ class FileUrl(urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.path_safe(self.url)
+            url = fileutil.path_safe(self.url_without_anchor())
             self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
@@ -270,7 +275,7 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.is_directory():
             return True
-        if firefox.has_sqlite and firefox.extension.search(self.url):
+        if firefox.has_sqlite and firefox.extension.search(self.url_without_anchor()):
             return True
         if self.content_type in self.ContentMimetypes:
             return True
@@ -283,7 +288,7 @@ class FileUrl(urlbase.UrlBase):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
-            self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
+            self.content_type = mimeutil.guess_mimetype(self.url_without_anchor(), read=self.get_content)
         else:
             self.content_type = ""
 
