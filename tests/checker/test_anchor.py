@@ -22,12 +22,9 @@ from . import LinkCheckTest
 from .httpserver import HttpServerTest
 
 
-class TestAnchor(LinkCheckTest):
-    """
-    Test anchor checking of HTML pages.
-    """
-
-    def test_anchor(self):
+class TestFileAnchor(LinkCheckTest):
+    """ Simple test for a file:// URL """
+    def test_anchor_file(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
         anchor = "broken"
         url = f"file://%(curdir)s/%(datadir)s/anchor.html#{anchor}" % self.get_attrs()
@@ -43,22 +40,29 @@ class TestAnchor(LinkCheckTest):
 
 
 class TestHttpAnchor(HttpServerTest):
-    """
-    Test checking of HTML pages containing links to anchors served over http.
-    """
-
-    def test_anchor_html(self):
+    """ Simple test for a http:// URL """
+    def test_anchor_http(self):
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
 
 class TestEncodedAnchors(HttpServerTest):
-    """
-    Test checking of HTML pages containing links to anchors that might be urlencoded
-    """
+    """ Test HTML pages containing urlencoded links to anchors """
 
-    def test_anchor_encoded(self):
-        # XXX do one of these with deeper recursion, too
-        # XXX do one of these with file://, too
+    def test_anchor_encoded_http(self):
+        """
+        http://
+        """
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("urlencoding_anchor.html", confargs=confargs)
+
+    def test_anchor_encoded_file(self):
+        """
+        file://
+        This should have identical behavior as http://
+        """
+        filename = "urlencoding_anchor.html"
+        confargs = {"enabledplugins": ["AnchorCheck"]}
+        url = f"file://%(curdir)s/%(datadir)s/{filename}" % self.get_attrs()
+        resultlines = self.get_resultlines(f"{filename}.file") # get results from the special result file that has `.file.` in its name
+        self.direct(url, resultlines, recursionlevel=1, confargs=confargs)
 

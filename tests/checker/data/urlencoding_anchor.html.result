@@ -1,4 +1,8 @@
-# all the % characters that are really in the URLs have to be escaped (as "%%")
+
+# NOTE: all the % characters that are really in the URLs have to be escaped (as "%%")
+
+# NOTE: this file and the equivalent file with `.file.` in its name should be semantically the same!
+
 url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html
 cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html
 real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html
@@ -14,14 +18,14 @@ url urlencoding_anchor.html#bad
 cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad
 real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad
 name Bad anchor
-warning Anchor `bad' (decoded: `bad') not found. Available anchors: `another_with_pipes_|_and_parentheses_(and—em-dashes)', `good', `with_pipes_|_and_parentheses_(and—em-dashes)'.
+warning Anchor `bad' (decoded: `bad') not found. Available anchors: `another_with_pipes_|_and_parentheses_(and—em-dashes)', `good', `partially_|_(encoded_em—dash)', `with_pipes_|_and_parentheses_(and—em-dashes)'.
 valid
 
-url urlencoding_anchor.html#bad_%%28and%%E2%%80%%94em-dashes%%29
-cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad_(and%%E2%%80%%94em-dashes)
-real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad_(and%%E2%%80%%94em-dashes)
-name Bad encoded anchor
-warning Anchor `bad_(and%%E2%%80%%94em-dashes)' (decoded: `bad_(and—em-dashes)') not found. Available anchors: `another_with_pipes_|_and_parentheses_(and—em-dashes)', `good', `with_pipes_|_and_parentheses_(and—em-dashes)'.
+url urlencoding_anchor.html#bad_|_%%28and%%E2%%80%%94em-dashes%%29
+cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad_%%7C_(and%%E2%%80%%94em-dashes)
+real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#bad_%%7C_(and%%E2%%80%%94em-dashes)
+name Bad encoded anchor, partially encoded
+warning Anchor `bad_%%7C_(and%%E2%%80%%94em-dashes)' (decoded: `bad_|_(and—em-dashes)') not found. Available anchors: `another_with_pipes_|_and_parentheses_(and—em-dashes)', `good', `partially_|_(encoded_em—dash)', `with_pipes_|_and_parentheses_(and—em-dashes)'.
 valid
 
 url urlencoding_anchor.html#good
@@ -30,8 +34,15 @@ real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#good
 name Good anchor
 valid
 
+url urlencoding_anchor.html#partially_%%7C_(encoded_em—dash)
+cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#partially_%%7C_(encoded_em%%E2%%80%%94dash)
+real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#partially_%%7C_(encoded_em%%E2%%80%%94dash)
+name Partially-encoded anchor, for testing
+valid
+
 url urlencoding_anchor.html#with_pipes_|_and_parentheses_(and—em-dashes)
 cache key http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#with_pipes_%%7C_and_parentheses_(and%%E2%%80%%94em-dashes)
 real url http://localhost:%(port)d/%(datadir)s/urlencoding_anchor.html#with_pipes_%%7C_and_parentheses_(and%%E2%%80%%94em-dashes)
 name Non-encoded anchor
 valid
+
