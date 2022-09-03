@@ -66,3 +66,17 @@ class TestEncodedAnchors(HttpServerTest):
         # get results from the special result file that has `.file.` in its name
         resultlines = self.get_resultlines(f"{filename}.file")
         self.direct(url, resultlines, recursionlevel=1, confargs=confargs)
+
+
+class TestAnchorsAcrossMultipleFiles(HttpServerTest):
+    """ Test anchors when there are multiple files """
+
+    def test_anchor1_file(self):
+        """
+        Test a network of files that reference each other, starting with anchor1.html
+        """
+        filename = "anchor1.html"
+        confargs = {"enabledplugins": ["AnchorCheck"]}
+        url = f"file://%(curdir)s/%(datadir)s/{filename}" % self.get_attrs()
+        resultlines = self.get_resultlines(f"{filename}")
+        self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
