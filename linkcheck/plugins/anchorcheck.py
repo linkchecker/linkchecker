@@ -19,7 +19,7 @@ Check HTML anchors
 import urllib.parse
 
 from . import _ContentPlugin
-from .. import log, LOG_PLUGIN
+from .. import log, LOG_PLUGIN, LOG_CACHE
 from ..htmlutil import linkparse
 
 
@@ -37,10 +37,18 @@ class AnchorCheck(_ContentPlugin):
     def check(self, url_data):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
-        # list of parsed anchors
-        self.anchors = []
-        linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
+
+        url_without_anchor = url_data.url_without_anchor()
+        anchors = url_data.aggregate.anchor_cache.get(url_without_anchor, 'anchors')
+        if anchors is not None:
+            self.anchors = anchors
+        else:
+            self.anchors = []
+            linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
+            url_data.aggregate.anchor_cache.put(url_without_anchor, 'anchors', self.anchors)
+
         self.check_anchor(url_data)
+
 
     def add_anchor(self, url, line, column, name, base):
         """Add anchor URL."""

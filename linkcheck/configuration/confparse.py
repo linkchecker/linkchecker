@@ -187,6 +187,8 @@ class LCConfigParser(RawConfigParser):
         except ValueError:
             self.read_string_option(section, "sslverify")
         self.read_int_option(section, "maxrunseconds", min=0)
+        self.read_int_option(section, "resultcachesize", min=0)
+        self.read_int_option(section, "anchorcachesize", min=0)
 
     def read_authentication_config(self):
         """Read configuration options in section "authentication"."""

@@ -20,7 +20,7 @@ import os
 import time
 
 from .. import log, LOG_CHECK, LinkCheckerError, LinkCheckerInterrupt, plugins
-from ..cache import urlqueue, robots_txt, results
+from ..cache import urlqueue, robots_txt, results, anchor
 from . import aggregator, console
 
 
@@ -135,6 +135,7 @@ def get_aggregate(config):
     _robots_txt = robots_txt.RobotsTxt(config["useragent"])
     plugin_manager = plugins.PluginManager(config)
     result_cache = results.ResultCache(config["resultcachesize"])
+    anchor_cache = anchor.AnchorCache(config["anchorcachesize"])
     return aggregator.Aggregate(
-        config, _urlqueue, _robots_txt, plugin_manager, result_cache
+        config, _urlqueue, _robots_txt, plugin_manager, result_cache, anchor_cache
     )

@@ -194,11 +194,6 @@ class FileUrl(urlbase.UrlBase):
         self.size = fileutil.get_size(filename)
         self.modified = datetime.utcfromtimestamp(fileutil.get_mtime(filename))
 
-    def url_without_anchor(self):
-        urlparts = list(urllib.parse.urlsplit(self.url))
-        urlparts[4] = ''
-        return urlutil.urlunsplit(urlparts)
-
     def check_connection(self):
         """
         Try to open the local file. Under NT systems the case sensitivity
