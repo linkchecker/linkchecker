@@ -1,8 +1,0 @@
-# for testing:
-miniboa
-parameterized
-pdfminer.six
-pyftpdlib
-pyopenssl
-pytest
-pytest-xdist
