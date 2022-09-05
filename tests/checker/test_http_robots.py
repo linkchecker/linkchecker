@@ -32,6 +32,7 @@ class TestHttpRobots(HttpServerTest):
             "url %s" % url,
             "cache key %s" % url,
             "real url %s" % url,
+            "warning The URL with content type 'text/plain' is not parseable.",
             "valid",
         ]
         self.direct(url, resultlines, recursionlevel=5)
