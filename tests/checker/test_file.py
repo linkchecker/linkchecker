@@ -17,6 +17,7 @@
 Test file parsing.
 """
 import os
+from pathlib import Path
 import sys
 import zipfile
 
@@ -28,6 +29,10 @@ from . import LinkCheckTest, get_file
 
 def unzip(filename, targetdir):
     """Unzip given zipfile into targetdir."""
+    # There are likely problems with zipfile and non-Unicode filenames
+    # https://github.com/python/cpython/issues/83042
+    # https://github.com/python/cpython/issues/72267
+    # https://github.com/python/cpython/issues/95463
     zf = zipfile.ZipFile(filename)
     for name in zf.namelist():
         if name.endswith("/"):
@@ -87,15 +92,24 @@ class TestFile(LinkCheckTest):
     def test_urllist(self):
         self.file_test("urllist.txt")
 
+    @pytest.mark.xfail(strict=True)
     def test_directory_listing(self):
         # unpack non-unicode filename which cannot be stored
         # in the SF subversion repository
-        if os.name != "posix" or sys.platform != "linux2":
+        if os.name != "posix" or sys.platform != "linux":
             pytest.skip("Not running on POSIX or Linux")
         dirname = get_file("dir")
         if not os.path.isdir(dirname):
             unzip(dirname + ".zip", os.path.dirname(dirname))
         self.file_test("dir")
+
+    def test_directory_listing_unicode(self):
+        if os.name != "posix" or sys.platform != "linux":
+            pytest.skip("Not running on POSIX or Linux")
+        dirname = Path(get_file("udir"))
+        dirname.mkdir(exist_ok=True)
+        Path(dirname, "í»­¯¿.dat").touch()
+        self.file_test("udir")
 
     def test_unicode_filename(self):
         # a unicode filename
