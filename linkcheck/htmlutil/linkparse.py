@@ -18,6 +18,8 @@ Find link tags in HTML text.
 """
 
 import re
+
+from .srcsetparse import parse_srcset
 from .. import strformat, log, LOG_CHECK, url as urlutil
 
 unquote = strformat.unquote
@@ -200,19 +202,9 @@ class LinkFinder:
         elif attr == 'archive':
             for url in value.split(','):
                 self.found_url(url, name, base, lineno, column)
-        elif attr == 'srcset' and not value.startswith('data:'):
-            for img_candidate in value.split(','):
-                try:
-                    url = img_candidate.split()[0]
-                except IndexError:
-                    log.debug(
-                        LOG_CHECK,
-                        _("trailing comma in line: "
-                          "%(line)s srcset attribute: %(value)s")
-                        % {"line": lineno, "value": value}
-                    )
-                else:
-                    self.found_url(url, name, base, lineno, column)
+        elif attr == 'srcset':
+            for url in parse_srcset(value):
+                self.found_url(url, name, base, lineno, column)
         else:
             self.found_url(value, name, base, lineno, column)
 
