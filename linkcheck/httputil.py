@@ -20,11 +20,15 @@ def x509_to_dict(x509):
     """Parse a x509 pyopenssl object to a dictionary with keys
     subject, subjectAltName and optional notAfter.
     """
-    from requests.packages.urllib3.contrib.pyopenssl import get_subj_alt_name
+    from cryptography.x509 import DNSName, SubjectAlternativeName
+
+    crypto_cert = x509.to_cryptography()
+    ext = crypto_cert.extensions.get_extension_for_class(SubjectAlternativeName)
 
     res = {
         'subject': ((('commonName', x509.get_subject().CN),),),
-        'subjectAltName': [('DNS', value) for value in get_subj_alt_name(x509)]
+        'subjectAltName': [
+            ('DNS', value) for value in ext.value.get_values_for_type(DNSName)]
     }
     notAfter = x509.get_notAfter()
     if notAfter is not None:
