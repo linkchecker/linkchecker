@@ -42,7 +42,7 @@ These two steps can be performed with:
 
 Create man pages:
 
-``linkchecker/doc $ make man``
+``linkchecker/doc $ hatch -e doc run man``
 
 After updating the source files all steps need to be repeated, if translations
 alone have been changed in the .po file only the last step is needed.

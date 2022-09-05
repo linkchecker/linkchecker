@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # Needed for setuptools_scm to extract LinkChecker version from tag
+        # Needed for hatch-vcs to extract LinkChecker version from tag
         # https://github.com/actions/checkout/issues/249
         with:
           fetch-depth: 0
@@ -25,7 +25,7 @@ jobs:
 
       - name: Install Python packages
         run: >
-            pip3 install polib setuptools_scm twine wheel
+            pip3 install -U hatchling hatch-vcs polib twine
 
       - name: Set SOURCE_DATE_EPOCH
         run: >
@@ -33,7 +33,7 @@ jobs:
 
       - name: Create distribution files
         run: >
-            python3 setup.py sdist bdist_wheel
+            python3 -m hatchling build
 
       - name: Check distribution files
         run: >

@@ -23,7 +23,6 @@ import re
 import urllib.parse
 import shutil
 import socket
-from datetime import date
 
 try:
     from importlib.metadata import distribution
@@ -37,10 +36,11 @@ from . import confparse
 linkchecker_distribution = distribution(COMMAND_NAME)
 Version = linkchecker_distribution.metadata["Version"]
 try:
-    ReleaseDate = date.fromisoformat(
-        linkchecker_distribution.read_text("RELEASE_DATE"))
-except (TypeError, ValueError):
+    from .. import _release
+except ImportError:
     ReleaseDate = "unknown"
+else:
+    ReleaseDate = _release.__release_date__
 AppName = linkchecker_distribution.metadata["Name"]
 App = AppName + " " + Version
 Author = linkchecker_distribution.metadata["Author"]
@@ -49,7 +49,7 @@ Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 " + Author
 HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2022 "
                  + HtmlAuthor)
 HtmlAppInfo = App + ", " + HtmlCopyright
-Url = linkchecker_distribution.metadata["Home-page"]
+Url = linkchecker_distribution.metadata["Project-URL"].split(", ")[1]
 SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
 UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = (

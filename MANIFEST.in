@@ -11,7 +11,6 @@ include pyoxidizer.bzl
 include .project
 include .pydevproject
 include .yamllint
-include _release_date
 include linkcheck/data/linkcheckerrc
 
 recursive-include cgi-bin               \
@@ -46,6 +45,8 @@ recursive-include doc                   \
     *.yml                               \
     Makefile                            \
     linkcheckerrc_*
+recursive-include linkcheck             \
+    *.mo
 recursive-include po                    \
     *.po                                \
     *.pot                               \
@@ -77,6 +78,8 @@ recursive-include tests                 \
     *.xml                               \
     *.zip                               \
     Bookmarks
+recursive-include tools                 \
+    *.py
 recursive-include windows               \
     *.bat                               \
     *.cer                               \
