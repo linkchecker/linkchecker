@@ -20,6 +20,8 @@ import os
 import sys
 import zipfile
 
+import pytest
+
 from tests import need_network, need_word, need_pdflib
 from . import LinkCheckTest, get_file
 
@@ -89,7 +91,7 @@ class TestFile(LinkCheckTest):
         # unpack non-unicode filename which cannot be stored
         # in the SF subversion repository
         if os.name != "posix" or sys.platform != "linux2":
-            return
+            pytest.skip("Not running on POSIX or Linux")
         dirname = get_file("dir")
         if not os.path.isdir(dirname):
             unzip(dirname + ".zip", os.path.dirname(dirname))
@@ -115,7 +117,7 @@ class TestFile(LinkCheckTest):
             # Fails on NT platforms and I am too lazy to fix
             # Cause: url get quoted %7C which gets lowercased to
             # %7c and this fails.
-            return
+            pytest.skip("Not running on NT")
         url = "file:/%(curdir)s/%(datadir)s/file.txt" % self.get_attrs()
         nurl = self.norm(url)
         resultlines = [
