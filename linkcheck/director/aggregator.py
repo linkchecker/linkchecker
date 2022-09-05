@@ -67,7 +67,6 @@ class Aggregate:
         self.cookies = None
         requests_per_second = config["maxrequestspersecond"]
         self.wait_time_min = 1.0 / requests_per_second
-        self.wait_time_max = max(self.wait_time_min + 0.5, 0.5)
         self.downloaded_bytes = 0
 
     def visit_loginurl(self):
@@ -152,8 +151,7 @@ class Aggregate:
                 wait = due_time - t
                 time.sleep(wait)
                 t = time.time()
-        wait_time = random.uniform(self.wait_time_min, self.wait_time_max)
-        self.times[host] = t + wait_time
+        self.times[host] = t + self.wait_time_min
 
     @synchronized(_threads_lock)
     def print_active_threads(self):
