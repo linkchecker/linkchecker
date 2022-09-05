@@ -103,3 +103,17 @@ code = "make -C doc code"
 html = "make -C doc html"
 locale = "make -C doc locale"
 man = "make -C doc man"
+
+[tool.hatch.envs.test]
+dependencies = [
+    "miniboa",
+    "parameterized",
+    "pdfminer.six",
+    "pyftpdlib",
+    "pyopenssl",
+    "pytest",
+    "pytest-xdist",
+]
+
+[tool.hatch.envs.test.scripts]
+tests = "pytest -vra tests"
