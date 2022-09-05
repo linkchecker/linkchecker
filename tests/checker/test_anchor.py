@@ -16,6 +16,9 @@
 """
 Test html anchor parsing and checking.
 """
+from unittest.mock import patch
+from linkcheck.htmlutil import linkparse
+
 from . import LinkCheckTest
 from .httpserver import HttpServerTest
 
@@ -73,10 +76,56 @@ class TestAnchorsAcrossMultipleFiles(HttpServerTest):
 
     def test_anchor1_file(self):
         """
-        Test a network of files that reference each other, starting with anchor1.html
+        Test a group of files that reference each other, starting with anchor1.html
         """
         filename = "anchor1.html"
         confargs = {"enabledplugins": ["AnchorCheck"]}
         url = f"file://%(curdir)s/%(datadir)s/{filename}" % self.get_attrs()
         resultlines = self.get_resultlines(f"{filename}")
         self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
+
+    def test_caching_works(self):
+        """
+        Test the group with and without the cache, to see that the cache is working,
+        and that we see the same results either way.
+        """
+        # setup the test data
+        filename = "anchor1.html"
+        confargs = {"enabledplugins": ["AnchorCheck"]}
+        url = f"file://%(curdir)s/%(datadir)s/{filename}" % self.get_attrs()
+        resultlines = self.get_resultlines(f"{filename}")
+
+        # make a mock for linkparse.find_links that calls the original function,
+        # so we can track call counts
+        original_find_links = linkparse.find_links
+        with patch(
+                "linkcheck.htmlutil.linkparse.find_links",
+                autospec=True,
+                side_effect=original_find_links) as proxy_find_links:
+
+            # test with no cache
+            confargs["anchorcachesize"] = 0
+            self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
+
+            # I don't really know why it's "25";
+            # it's just "way more" than the 3 URLs we are really processing
+            expected = 25
+            actual = proxy_find_links.call_count
+            if actual != expected:
+                self.fail(f"expected (an absurd) {expected} find_links calls"
+                          + f" with the cache disabled, but got {actual}")
+
+            # reset the mock
+            proxy_find_links.call_count = 0
+
+            # test with the cache enabled
+            confargs["anchorcachesize"] = 3  # 3 should be just enough
+            self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
+
+            # 3 for basic URL processing + 3 for the first time AnchorCheck sees it.
+            # (3 total would be ideal)
+            expected = 6
+            actual = proxy_find_links.call_count
+            if actual != expected:
+                self.fail(f"expected {expected} find_links calls"
+                          + f"with the cache enabled, but got {actual}")

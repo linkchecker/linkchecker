@@ -34,13 +34,17 @@ class AnchorCheck(_ContentPlugin):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
 
-        url_anchor_check = UrlAnchorCheck()
-        linkparse.find_links(
-                url_data.get_soup(),
-                url_anchor_check.add_anchor,
-                linkparse.AnchorTags)
+        url_without_anchor = url_data.url_without_anchor()
+        uac = url_data.aggregate.anchor_cache.get(url_without_anchor, 'UAC')
+        if uac is None:
+            uac = UrlAnchorCheck()
+            linkparse.find_links(
+                    url_data.get_soup(),
+                    uac.add_anchor,
+                    linkparse.AnchorTags)
+            url_data.aggregate.anchor_cache.put(url_without_anchor, 'UAC', uac)
 
-        url_anchor_check.check_anchor(url_data.get_anchor(), url_data)
+        uac.check_anchor(url_data.get_anchor(), url_data)
 
 
 class UrlAnchorCheck:
