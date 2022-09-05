@@ -121,7 +121,6 @@ jobs:
       matrix:
         toxenv:
           - flake8
-          - check-manifest
           - check-python-versions
           - yamllint
 

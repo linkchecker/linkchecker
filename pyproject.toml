@@ -47,6 +47,12 @@ artifacts = [
     "linkcheck/_release.py",
     "linkcheck/data/locale",
 ]
+exclude = [
+    ".github",
+    ".gitattributes",
+    ".gitignore",
+    "windows",
+]
 
 [tool.hatch.build.targets.sdist]
 strict-naming = false
