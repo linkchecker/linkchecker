@@ -139,7 +139,7 @@ doccheck:
 	py-check-docstrings --force $(MYPY_FILES_DIRS)
 
 filescheck: localbuild
-	for out in text html gml sql csv xml gxml dot sitemap; do \
+	for out in text html json gml sql csv xml gxml dot sitemap; do \
 	  ./$(LAPPNAME) -o$$out -F$$out --complete -r1 -C $(FILESCHECK_URL) || exit 1; \
 	done
 

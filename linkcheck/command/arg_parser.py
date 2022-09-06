@@ -154,6 +154,7 @@ text    Standard text output, logging URLs in keyword: argument fashion.
 html    Log URLs in keyword: argument fashion, formatted as HTML.
         Additionally has links to the referenced pages. Invalid URLs have
         HTML and CSS syntax check links appended.
+json    Log check results in JSON format.
 csv     Log check result in CSV format with one URL per line.
 gml     Log parent-child relations between linked URLs as a GML sitemap
         graph.

@@ -103,6 +103,10 @@
 #colorok=#3ba557
 #parts=all
 
+# JSON logger
+[json]
+#indent=4
+
 # failures logger
 [failures]
 #filename=$XDG_DATA_HOME/linkchecker/failures
