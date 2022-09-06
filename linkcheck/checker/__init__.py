@@ -188,6 +188,9 @@ def get_index_html(urls):
         name = html.escape(entry)
         try:
             url = html.escape(urllib.parse.quote(entry))
+        except UnicodeEncodeError:
+            log.warn(LOG_CHECK, "Unable to convert entry to Unicode")
+            continue
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name
