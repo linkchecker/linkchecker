@@ -4,7 +4,7 @@ LOCALES:=en de
 all: html man
 
 code: clean
-	PYTHONPATH=.. sphinx-autogen src/code/index.rst
+	python3 -m sphinx.ext.autosummary.generate src/code/index.rst
 
 html:
 	make -C src html

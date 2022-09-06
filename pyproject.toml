@@ -1,0 +1,119 @@
+[project]
+name = "LinkChecker"
+dynamic = ["version"]
+description = "check links in web documents or full websites"
+readme = "README.rst"
+keywords = ["link", "url", "site", "checking", "crawling", "verification", "validation"]
+authors = [{name = "LinkChecker Authors"}]
+maintainers = [{name = "LinkChecker Authors"}]
+classifiers = [
+    "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+requires-python = ">=3.7"
+
+dependencies = [
+    "importlib_metadata;python_version<'3.8'",
+    "requests >= 2.4",
+    "dnspython >= 2.0",
+    "beautifulsoup4 >= 4.8.1",
+]
+
+[build-system]
+requires = [
+    "hatchling>=1.8.0",
+    "hatch-vcs",
+]
+build-backend = "hatchling.build"
+
+[project.urls]
+Homepage = "https://linkchecker.github.io/linkchecker/"
+"Bug Tracker" = "https://github.com/linkchecker/linkchecker/issues"
+Repository = "https://github.com/linkchecker/linkchecker"
+Changelog = "https://github.com/linkchecker/linkchecker/blob/master/doc/changelog.txt"
+
+[project.scripts]
+linkchecker = "linkcheck.command.linkchecker:linkchecker"
+
+[tool.hatch.build]
+artifacts = [
+    "linkcheck/_release.py",
+    "linkcheck/data/locale",
+]
+exclude = [
+    ".github",
+    ".gitattributes",
+    ".gitignore",
+    "windows",
+]
+
+[tool.hatch.build.targets.sdist]
+strict-naming = false
+
+[tool.hatch.build.targets.sdist.hooks.custom]
+path = "tools/hatch_build.py"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["linkcheck"]
+strict-naming = false
+
+[tool.hatch.build.targets.wheel.shared-data]
+"doc/man/en/linkchecker.1" = "share/man/man1/linkchecker.1"
+"doc/man/en/linkcheckerrc.5" = "share/man/man5/linkcheckerrc.5"
+"doc/man/de/linkchecker.1" = "share/man/de/man1/linkchecker.1"
+"doc/man/de/linkcheckerrc.5" = "share/man/de/man5/linkcheckerrc.5"
+"cgi-bin/lconline/leer.html.en" = "share/linkchecker/examples/cgi-bin/lconline/leer.html.en"
+"cgi-bin/lconline/leer.html.de" = "share/linkchecker/examples/cgi-bin/lconline/leer.html.de"
+"cgi-bin/lconline/index.html" = "share/linkchecker/examples/cgi-bin/lconline/index.html"
+"cgi-bin/lconline/lc_cgi.html.en" = "share/linkchecker/examples/cgi-bin/lconline/lc_cgi.html.en"
+"cgi-bin/lconline/lc_cgi.html.de" = "share/linkchecker/examples/cgi-bin/lconline/lc_cgi.html.de"
+"cgi-bin/lconline/check.js" = "share/linkchecker/examples/cgi-bin/lconline/check.js"
+"cgi-bin/lc.wsgi" = "share/linkchecker/examples/cgi-bin/lc.wsgi"
+"config/linkchecker.apache2.conf" = "share/linkchecker/examples/config/linkchecker.apache2.conf"
+"config/linkchecker-completion" = "share/linkchecker/examples/config/linkchecker-completion"
+"doc/examples/check_failures.sh" = "share/linkchecker/examples/check_failures.sh"
+"doc/examples/check_for_x_errors.sh" = "share/linkchecker/examples/check_for_x_errors.sh"
+"doc/examples/check_urls.sh" = "share/linkchecker/examples/check_urls.sh"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "node-and-timestamp"
+version_scheme = "post-release"
+
+[tool.hatch.envs.doc]
+dependencies = [
+    "sphinx",
+    "sphinx_epytext",
+    "sphinx_intl",
+    "sphinx_rtd_theme",
+    "sphinx-sitemap",
+]
+
+[tool.hatch.envs.doc.scripts]
+code = "make -C doc code"
+html = "make -C doc html"
+locale = "make -C doc locale"
+man = "make -C doc man"
+
+[tool.hatch.envs.test]
+dependencies = [
+    "miniboa",
+    "parameterized",
+    "pdfminer.six",
+    "pyftpdlib",
+    "pyopenssl",
+    "pytest",
+    "pytest-xdist",
+]
+
+[tool.hatch.envs.test.scripts]
+tests = "pytest -vra tests"

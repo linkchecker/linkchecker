@@ -46,3 +46,5 @@ doc/html
 doc/src/_build
 doc/src/code/linkcheck
 /.eggs/
+linkcheck/_release.py
+

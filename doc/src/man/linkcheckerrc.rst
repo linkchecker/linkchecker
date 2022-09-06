@@ -136,7 +136,7 @@ authentication
 
 **entry=**\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)
     Provide individual username/password pairs for different links. In
-    addtion to a single login page specified with **loginurl** multiple
+    addition to a single login page specified with **loginurl** multiple
     FTP, HTTP (Basic Authentication) and telnet links are supported.
     Entries are a triple (URL regex, username, password) or a tuple (URL
     regex, username), where the entries are separated by whitespace.
@@ -570,6 +570,8 @@ file entry:
     The URL content size is zero.
 **url-content-too-large**
     The URL content size is too large.
+**url-content-type-unparseable**
+    The URL content type is not parseable.
 **url-effective-url**
     The effective URL is different from the original.
 **url-error-getting-content**

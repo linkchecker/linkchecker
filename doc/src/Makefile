@@ -1,8 +1,8 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
-SPHINXINTL    ?= sphinx-intl
+SPHINXBUILD   ?= python3 -m sphinx.cmd.build
+SPHINXINTL    ?= python3 -m sphinx_intl.commands
 SOURCEDIR     = .
 BUILDDIR      = _build
 LANGUAGE      = en

@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('tox.ini', 'setup.py') }}
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('tox.ini', 'pyproject.toml') }}
           restore-keys: |
             ${{ runner.os }}-pip-${{ matrix.python-version }}-
             ${{ runner.os }}-pip-
@@ -58,7 +58,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install -U pip
-          python -m pip install -U setuptools wheel
+          python -m pip install -U hatchling hatch-vcs polib
           python -m pip install -U tox coveralls
 
       - name: Wait for ClamAV to be ready
@@ -102,16 +102,15 @@ jobs:
 
       - name: Install Python packages
         run: |
-          pip install -r requirements.txt Sphinx sphinx-epytext sphinx-intl \
-            sphinx-rtd-theme sphinx-sitemap
+          pip install -U -r requirements.txt hatch hatch-vcs Sphinx \
+            sphinx-epytext sphinx-intl sphinx-rtd-theme sphinx-sitemap
 
       - name: Build
         run: |
-          python3 setup.py build egg_info
-          make -C doc code
-          make -C doc html
-          make -C doc locale
-          make -C doc man
+          hatch -e doc run code
+          hatch -e doc run html
+          hatch -e doc run locale
+          hatch -e doc run man
           make -C doc check
 
   lint:
@@ -122,8 +121,6 @@ jobs:
       matrix:
         toxenv:
           - flake8
-          - check-manifest
-          - check-python-versions
           - yamllint
 
     steps:
@@ -145,7 +142,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install -U pip
-          python -m pip install -U setuptools wheel
+          python -m pip install -U hatchling hatch-vcs polib
           python -m pip install -U tox
 
       - name: Run ${{ matrix.toxenv }}

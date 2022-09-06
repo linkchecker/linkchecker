@@ -29,7 +29,7 @@ for scheme in ('ldap', 'irc'):
 # http://tools.ietf.org/html/rfc2396#section-2.1
 # Note that the encoding is not really specified, but most browsers
 # encode in UTF-8 when no encoding is specified by the HTTP headers,
-# else they use the page encoding for followed link. See als
+# else they use the page encoding for followed link. See also
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 url_encoding = "utf-8"
 
@@ -117,7 +117,7 @@ def parse_qsl(qs, encoding, keep_blank_values=0, strict_parsing=0):
         errors raise a ValueError exception.
     @type strict_parsing: bool
     @returns: list of triples (key, value, separator) where key and value
-      are the splitted CGI parameter and separator the used separator
+      are the split CGI parameter and separator the used separator
       for this CGI parameter which is either a semicolon or an ampersand
     @rtype: list of triples
     """

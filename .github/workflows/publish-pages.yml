@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        # Needed for setuptools_scm to extract LinkChecker version from tag
+        # Needed for hatch-vcs to extract LinkChecker version from tag
         # https://github.com/actions/checkout/issues/249
         with:
           fetch-depth: 0
@@ -30,13 +30,13 @@ jobs:
       - name: Install Python packages
         run: >
             pip install dnspython beautifulsoup4 requests \
-                        sphinx sphinx_epytext sphinx_rtd_theme sphinx-sitemap
+                        hatch hatch-vcs sphinx sphinx_epytext sphinx_rtd_theme \
+                        sphinx-sitemap
 
       - name: Build
         run: |
-            python3 setup.py build egg_info
-            make -C doc code
-            make -C doc html
+            hatch -e doc run code
+            hatch -e doc run html
 
       - name: Publish
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305

@@ -3,13 +3,10 @@ Installation
 If you are upgrading from older versions of LinkChecker you should
 also read the upgrading documentation stored in upgrading.txt.
 
-When installing from source, for application translations to be installed
-polib_ needs to be installed before LinkChecker. After LinkChecker installation
-polib_ can be removed.
-
-Installing from the GitHub release assets requires setuptools-scm-git-archive_.
-
-pip-run_ may be useful for both of these cases.
+Installing a LinkChecker release uses pre-built distribution packages. Building
+the distribution packages requires hatchling_ and hatch-vcs_, and for application
+translations to be compiled polib_ needs to be installed. After the sdist/wheel
+has been built polib_ can be removed. pip-run_ may be useful for this.
 
 There are several steps to resolve problems with detecting the character
 encoding of checked HTML pages:
@@ -34,7 +31,9 @@ used.
 
 .. _polib: https://pypi.org/project/polib/
 
-.. _setuptools-scm-git-archive: https://pypi.org/project/setuptools-scm-git-archive/
+.. _hatchling: https://pypi.org/project/hatchling/
+
+.. _hatch-vcs: https://pypi.org/project/hatch-vcs/
 
 .. _venv: https://docs.python.org/3/library/venv.html#creating-virtual-environments
 
@@ -42,11 +41,17 @@ Setup with pip
 ------------------
 pip_ can be used to install LinkChecker on the local system.
 
-If you want application translations, first:
+To install the latest release from PyPI:
+``pip3 install linkchecker``
+
+Alternatively you can install the latest source from the LinkChecker GitHub repository.
+First, if you want application translations:
 ``pip3 install polib``
 
-Then this command will install LinkChecker from the latest source:
+Then:
 ``pip3 install git+https://github.com/linkchecker/linkchecker.git``
+
+N.B. git archive's cannot be used.
 
 .. _pip: https://pypi.org/project/pip/
 
@@ -73,64 +78,59 @@ Manual setup for Unix systems
 -----------------------------
 First, install the required software.
 
-1. Python >= 3.7 from https://www.python.org/
+1. Python hatchling package from https://pypi.org/project/hatchling/
 
-   Be sure to also have installed the included distutils module.
-   On most distributions, the distutils module is included in
-   an extra ``python-dev`` package.
+2. Python hatch-vcs package from https://pypi.org/project/hatch-vcs/
 
-2. Python Requests package from https://pypi.org/project/requests/
+3. Python Requests package from https://pypi.org/project/requests/
 
-3. Python Beautiful Soup package from https://pypi.org/project/beautifulsoup4/
+4. Python Beautiful Soup package from https://pypi.org/project/beautifulsoup4/
 
-4. *Optional, installation time only, for translations:*
+5. Python dnspython package from https://pypi.org/project/dnspython/
+
+6. *Optional, build time only, for translations:*
    polib Python module from https://pypi.org/project/polib/
 
-5. *Optional, for bash-completion:*
+7. *Optional, for bash-completion:*
    argcomplete Python module from https://pypi.org/project/argcomplete/
 
-6. *Optional, for displaying country codes:*
-   GeoIP from https://pypi.org/project/GeoIP/
+8. *Optional, for displaying country codes:*
+    GeoIP from https://pypi.org/project/GeoIP/
 
-7. *Optional, used for Virus checking:*
-   ClamAv from https://www.clamav.net/
+9. *Optional, used for Virus checking:*
+    ClamAv from https://www.clamav.net/
 
-8. *Optional, to run the WSGI web interface:*
-   Apache from https://httpd.apache.org/
-   mod_wsgi from https://pypi.org/project/mod-wsgi/
+10. *Optional, to run the WSGI web interface:*
+    Apache from https://httpd.apache.org/
+    mod_wsgi from https://pypi.org/project/mod-wsgi/
 
 Note for developers: if you want to regenerate the po/linkchecker.pot template
 from the source files, you will need xgettext with Python support. This is
 available in gettext >= 0.12.
 
-Now install the application.
+Clone the LinkChecker repository:
 
-1. Compile Python modules
-   
-   Run ``python setup.py sdist --manifest-only`` to create the MANIFEST
-   file.
-   Run ``python setup.py build`` to compile the Python files.
-   For help about the setup.py script options, run
-   ``python setup.py --help``.
+  ``git clone https://github.com/linkchecker/linkchecker.git``
 
-2.
-   a) Installation as root
-      
-      Run ``sudo python setup.py install`` to install LinkChecker.
-   
-   b) Installation as a normal user
-      
-      Run ``python setup.py install --home $HOME``. Note that you have
-      to adjust your PATH and PYTHONPATH environment variables, eg. by
-      adding the commands ``export PYTHONPATH=$HOME/lib/python`` and
-      ``export PATH=$PATH:$HOME/bin`` to your shell configuration
-      file.
-      
-      For more information look at the `Modifying Python's search path`_
-      documentation.
-      
-      .. _Modifying Python's search path:
-         https://docs.python.org/3/install/#inst-search-path
+  ``cd linkchecker``
+
+Build the distribution wheel:
+
+  ``hatchling build``
+
+Now install the application from the wheel:
+
+  ``pip install --no-index --user dist/LinkChecker-<version>-py3-none-any.whl``
+
+  Note that you may have to adjust your PATH and PYTHONPATH environment variables,
+  eg. by adding the commands ``export PYTHONPATH=$HOME/lib/python`` and
+  ``export PATH=$PATH:$HOME/bin`` to your shell configuration file.
+
+  For more information look at the `Modifying Python's search path`_
+  documentation.
+
+  .. _Modifying Python's search path:
+     https://docs.python.org/3/install/#inst-search-path
 
 
 After installation

@@ -238,7 +238,7 @@ class FileUrl(urlbase.UrlBase):
         with links to the files."""
         if self.is_directory():
             data = get_index_html(get_files(self.get_os_filename()))
-            data = data.encode("iso8859-1", "ignore")
+            data = data.encode()
         else:
             data = super().read_content()
         return data
@@ -276,12 +276,7 @@ class FileUrl(urlbase.UrlBase):
             return True
         if firefox.has_sqlite and firefox.extension.search(self.url_without_anchor()):
             return True
-        if self.content_type in self.ContentMimetypes:
-            return True
-        log.debug(
-            LOG_CHECK, "File with content type %r is not parseable.", self.content_type
-        )
-        return False
+        return self.is_content_type_parseable()
 
     def set_content_type(self):
         """Return URL content type, or an empty string if content

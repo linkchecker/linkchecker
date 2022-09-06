@@ -44,6 +44,7 @@ from .const import (
     WARN_URL_OBFUSCATED_IP,
     WARN_URL_CONTENT_SIZE_ZERO,
     WARN_URL_CONTENT_SIZE_TOO_LARGE,
+    WARN_URL_CONTENT_TYPE_UNPARSEABLE,
     WARN_URL_WHITESPACE,
     URL_MAX_LENGTH,
     WARN_URL_TOO_LONG,
@@ -92,6 +93,7 @@ class UrlBase:
         # should not send this content type. They send text/html instead.
         "application/x-httpd-php": "html",
         "text/css": "css",
+        "application/vnd.adobe.flash.movie": "swf",
         "application/x-shockwave-flash": "swf",
         "application/msword": "word",
         "text/plain+linkchecker": "text",
@@ -224,7 +226,7 @@ class UrlBase:
         # This the real url we use when checking so it also referred to
         # as 'real url'
         self.url = None
-        # a splitted version of url for convenience
+        # a split version of url for convenience
         self.urlparts = None
         # the scheme, host, port and anchor part of url
         self.scheme = self.host = self.port = self.anchor = None
@@ -305,6 +307,24 @@ class UrlBase:
                 if title:
                     self.title = title
         return self.title
+
+    def is_content_type_parseable(self):
+        """
+        Return True iff the content type of this url is parseable.
+        """
+        if self.content_type in self.ContentMimetypes:
+            return True
+        log.debug(
+            LOG_CHECK,
+            "URL with content type %r is not parseable",
+            self.content_type,
+        )
+        if self.recursion_level == 0:
+            self.add_warning(
+                _("The URL with content type %r is not parseable.") % self.content_type,
+                tag=WARN_URL_CONTENT_TYPE_UNPARSEABLE,
+            )
+        return False
 
     def is_parseable(self):
         """
@@ -691,7 +711,7 @@ class UrlBase:
         pass
 
     def can_get_content(self):
-        """Indicate wether url get_content() can be called."""
+        """Indicate whether url get_content() can be called."""
         return self.size <= self.aggregate.config["maxfilesizedownload"]
 
     def download_content(self):
@@ -976,6 +996,6 @@ class CompactUrlData:
     __slots__ = urlDataAttr
 
     def __init__(self, wired_url_data):
-        '''Set all attributes according to the dictionnary wired_url_data'''
+        '''Set all attributes according to the dictionary wired_url_data'''
         for attr in urlDataAttr:
             setattr(self, attr, wired_url_data[attr])

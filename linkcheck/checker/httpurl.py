@@ -375,14 +375,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
             if rtype is not None:
                 # XXX side effect
                 self.content_type = rtype
-        if self.content_type not in self.ContentMimetypes:
-            log.debug(
-                LOG_CHECK,
-                "URL with content type %r is not parseable",
-                self.content_type,
-            )
-            return False
-        return True
+        return self.is_content_type_parseable()
 
     def get_robots_txt_url(self):
         """

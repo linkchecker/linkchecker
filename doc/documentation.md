@@ -19,10 +19,10 @@ sphinx_sitemap
 Configuration
 -------------
 
-Before building either man pages or HTML, generate ``PKG-INFO``
-containing copyright, author and version with:
+Before building either man pages or HTML, the package metadata needs to be
+created to derive copyright, author and version values. Running Sphinx in a
+hatch environment manages this for us.
 
-``linkchecker $ ./setup.py build``
 
 Man Pages
 ---------
@@ -31,7 +31,7 @@ Source files are in doc/src/man.
 
 The pages can be built with:
 
-``linkchecker/doc $ make man``
+``linkchecker $ hatch -e doc run man``
 
 The files are saved in doc/man.
 
@@ -46,11 +46,11 @@ HTML
 ``doc/src/code/index.rst`` gives an overview of the LinkChecker code, optionally a navigable
 copy of the LinkChecker source can be created with:
 
-``linkchecker/doc $ make code``
+``linkchecker $ hatch -e doc run code``
 
 Build the HTML files with:
 
-``linkchecker/doc $ make html``
+``linkchecker $ hatch -e doc run html``
 
 The files are saved in doc/html.
 

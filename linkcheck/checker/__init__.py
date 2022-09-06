@@ -116,7 +116,7 @@ def get_url_from(
     else:
         scheme = None
         if not (url or name):
-            # use filename as base url, with slash as path seperator
+            # use filename as base url, with slash as path separator
             name = base_url.replace("\\", "/")
     allowed_schemes = aggregate.config["allowedschemes"]
     # ignore local PHP files with execution directives
@@ -188,6 +188,9 @@ def get_index_html(urls):
         name = html.escape(entry)
         try:
             url = html.escape(urllib.parse.quote(entry))
+        except UnicodeEncodeError:
+            log.warn(LOG_CHECK, "Unable to convert entry to Unicode")
+            continue
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name
