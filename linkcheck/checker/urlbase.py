@@ -727,6 +727,9 @@ class UrlBase:
         urlparts[4] = ''
         return urlutil.urlunsplit(urlparts)
 
+    def get_anchor(self):
+        return self.urlparts[4]
+
     def get_raw_content(self):
         if self.data is None:
             self.data = self.download_content()

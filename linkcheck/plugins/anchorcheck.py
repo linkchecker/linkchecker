@@ -25,41 +25,37 @@ from ..htmlutil import linkparse
 class AnchorCheck(_ContentPlugin):
     """Checks validity of HTML anchors."""
 
-    def __init__(self, config):
-        super().__init__(config)
-        self.anchors = []
-
     def applies_to(self, url_data, **kwargs):
         """Check for HTML anchor existence."""
-        return url_data.is_html() and url_data.anchor
+        return url_data.is_html() and url_data.get_anchor()
 
     def check(self, url_data):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
 
         url_without_anchor = url_data.url_without_anchor()
-        anchors = url_data.aggregate.anchor_cache.get(url_without_anchor, 'anchors')
-        if anchors is not None:
-            self.anchors = anchors
-        else:
-            linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags) # populates self.anchors
-            url_data.aggregate.anchor_cache.put(url_without_anchor, 'anchors', self.anchors)
+        url_anchor_check = url_data.aggregate.anchor_cache.get(url_without_anchor, 'UAC')
+        if url_anchor_check is None:
+            url_anchor_check = UrlAnchorCheck()
+            linkparse.find_links(url_data.get_soup(), url_anchor_check.add_anchor, linkparse.AnchorTags)
+            url_data.aggregate.anchor_cache.put(url_without_anchor, 'UAC', url_anchor_check)
 
-        self.check_anchor(url_data)
+        url_anchor_check.check_anchor(url_data.get_anchor(), url_data)
+
+class UrlAnchorCheck:
+    """ Class to thread-safely handle collecting anchors for a URL """
+
+    def __init__(self):
+        self.anchors = []
 
     def add_anchor(self, anchor, **_kwargs):
-        """Add anchor to self.anchors."""
         self.anchors.append(anchor)
 
-
-    def check_anchor(self, url_data):
-        """If URL is valid, parseable and has an anchor, check it.
-        A warning is logged and True is returned if the anchor is not found.
-        """
+    def check_anchor(self, anchor, warning_callback):
         # Default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed
         # to be ASCII anyway, and utf-8 probably covers whatever else is in there
-        decoded_anchor = urllib.parse.unquote(url_data.anchor)
-        log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s", url_data.anchor, decoded_anchor, self.anchors)
+        decoded_anchor = urllib.parse.unquote(anchor)
+        log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s", anchor, decoded_anchor, self.anchors)
         if decoded_anchor in self.anchors:
             return
         if len(self.anchors) > 0:
@@ -67,5 +63,5 @@ class AnchorCheck(_ContentPlugin):
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"
-        msg = f"Anchor `{url_data.anchor}' (decoded: `{decoded_anchor}') not found. Available anchors: {anchors}."
-        url_data.add_warning(msg)
+        msg = f"Anchor `{anchor}' (decoded: `{decoded_anchor}') not found. Available anchors: {anchors}."
+        warning_callback.add_warning(msg)
