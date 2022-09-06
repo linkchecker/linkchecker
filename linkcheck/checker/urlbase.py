@@ -734,6 +734,14 @@ class UrlBase:
             self.get_content()
         return self.soup
 
+    def url_without_anchor(self):
+        urlparts = list(urllib.parse.urlsplit(self.url))
+        urlparts[4] = ''
+        return urlutil.urlunsplit(urlparts)
+
+    def get_anchor(self):
+        return self.urlparts[4]
+
     def get_raw_content(self):
         if self.data is None:
             self.data = self.download_content()

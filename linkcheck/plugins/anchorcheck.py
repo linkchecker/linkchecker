@@ -26,28 +26,33 @@ from ..htmlutil import linkparse
 class AnchorCheck(_ContentPlugin):
     """Checks validity of HTML anchors."""
 
-    def __init__(self, config):
-        super().__init__(config)
-        self.anchors = []
-
     def applies_to(self, url_data, **kwargs):
         """Check for HTML anchor existence."""
-        return url_data.is_html() and url_data.anchor
+        return url_data.is_html() and url_data.get_anchor()
 
     def check(self, url_data):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
-        linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
-        self.check_anchor(url_data.anchor, url_data)
+
+        url_anchor_check = UrlAnchorCheck()
+        linkparse.find_links(
+                url_data.get_soup(),
+                url_anchor_check.add_anchor,
+                linkparse.AnchorTags)
+
+        url_anchor_check.check_anchor(url_data.get_anchor(), url_data)
+
+
+class UrlAnchorCheck:
+    """ Class to thread-safely handle collecting anchors for a URL """
+
+    def __init__(self):
+        self.anchors = []
 
     def add_anchor(self, anchor, **_kwargs):
-        """Add anchor URL."""
         self.anchors.append(anchor)
 
     def check_anchor(self, anchor, warning_callback):
-        """If URL is valid, parseable and has an anchor, check it.
-        A warning is logged and True is returned if the anchor is not found.
-        """
         # Default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed
         # to be ASCII anyway, and utf-8 probably covers whatever else is in there
         decoded_anchor = urllib.parse.unquote(anchor)
