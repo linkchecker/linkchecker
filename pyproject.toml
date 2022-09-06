@@ -50,7 +50,6 @@ artifacts = [
 exclude = [
     ".github",
     ".gitattributes",
-    ".gitignore",
 ]
 
 [tool.hatch.build.targets.sdist]
