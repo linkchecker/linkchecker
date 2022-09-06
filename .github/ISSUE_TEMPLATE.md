@@ -29,7 +29,7 @@ the issue can increase the chance of a solution significantly. -->
 
 ## Configuration file
 
-<!-- include full contents of your configuration file, ~/.linkchecker/linkcheckerrc -->
+<!-- include full contents of your configuration file, ~/.config/linkchecker/linkcheckerrc -->
 
 ## Logs
 
