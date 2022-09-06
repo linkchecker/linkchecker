@@ -559,6 +559,8 @@ file entry:
     An error occurred while storing a cookie.
 **http-empty-content**
     The URL had no content.
+**http-rate-limited**
+    Too many HTTP requests.
 **mail-no-mx-host**
     The mail MX host could not be found.
 **nntp-no-newsgroup**
@@ -577,8 +579,6 @@ file entry:
     Could not get the content of the URL.
 **url-obfuscated-ip**
     The IP is obfuscated.
-**url-rate-limited**
-    Too many HTTP requests.
 **url-whitespace**
     The URL contains leading or trailing whitespace.
 

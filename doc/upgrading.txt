@@ -8,6 +8,8 @@ Compiled application translations are now also included in the sdist package.
 No need to install polib before installing any distribution package. It is
 still required for building distribution packages that include translations.
 
+Warning url-rate-limited renamed to http-rate-limited.
+
 Migrating from 10.0 to 10.1
 ---------------------------
 If installing from source and application translations are needed the Python
