@@ -27,42 +27,40 @@ class AnchorCheck(_ContentPlugin):
     """Checks validity of HTML anchors."""
 
     def __init__(self, config):
-        """Initialize plugin."""
         super().__init__(config)
+        self.anchors = []
 
-    def applies_to(self, url_data):
+    def applies_to(self, url_data, **kwargs):
         """Check for HTML anchor existence."""
         return url_data.is_html() and url_data.anchor
 
     def check(self, url_data):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
-        # list of parsed anchors
-        self.anchors = []
         linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
-        self.check_anchor(url_data)
+        self.check_anchor(url_data.anchor, url_data)
 
-    def add_anchor(self, url, line, column, name, base):
+    def add_anchor(self, anchor, **_kwargs):
         """Add anchor URL."""
-        self.anchors.append((url, line, column, name, base))
+        self.anchors.append(anchor)
 
-    def check_anchor(self, url_data):
+    def check_anchor(self, anchor, warning_callback):
         """If URL is valid, parseable and has an anchor, check it.
         A warning is logged and True is returned if the anchor is not found.
         """
-        # default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed to be ASCII anyway, and utf-8 probably covers whatever else is in there
-        decoded_anchor = urllib.parse.unquote(url_data.anchor)
-        log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s", url_data.anchor, decoded_anchor, self.anchors)
-        if any(x for x in self.anchors if x[0] == decoded_anchor):
+        # Default encoding (i.e. utf-8), but I think it's OK, because URLs are supposed
+        # to be ASCII anyway, and utf-8 probably covers whatever else is in there
+        decoded_anchor = urllib.parse.unquote(anchor)
+        msg = f"checking anchor {anchor} (decoded: {decoded_anchor})" \
+            + f" in {self.anchors}"
+        log.debug(LOG_PLUGIN, msg)
+        if decoded_anchor in self.anchors:
             return
-        if self.anchors:
-            anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
+        if len(self.anchors) > 0:
+            anchornames = sorted(set(f"`{x}'" for x in self.anchors))
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"
-        args = {"name": url_data.anchor, "decoded": decoded_anchor, "anchors": anchors}
-        msg = "%s %s" % (
-            _("Anchor `%(name)s' (decoded: `%(decoded)s') not found.") % args,
-            _("Available anchors: %(anchors)s.") % args,
-        )
-        url_data.add_warning(msg)
+        msg = f"Anchor `{anchor}' (decoded: `{decoded_anchor}') not found." \
+            + f" Available anchors: {anchors}."
+        warning_callback.add_warning(msg)

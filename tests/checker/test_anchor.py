@@ -16,8 +16,6 @@
 """
 Test html anchor parsing and checking.
 """
-import pytest
-
 from . import LinkCheckTest
 from .httpserver import HttpServerTest
 
@@ -33,10 +31,11 @@ class TestAnchor(LinkCheckTest):
         url = f"file://%(curdir)s/%(datadir)s/anchor.html#{anchor}" % self.get_attrs()
         nurl = self.norm(url)
         resultlines = [
-            "url %s" % url,
-            "cache key %s" % nurl,
-            "real url %s" % nurl,
-            "warning Anchor `%s' (decoded: `%s') not found. Available anchors: `myid:'." % (anchor, anchor),
+            f"url {url}",
+            f"cache key {nurl}",
+            f"real url {nurl}",
+            f"warning Anchor `{anchor}' (decoded: `{anchor}') not found."
+            + " Available anchors: `myid:'.",
             "valid",
         ]
         self.direct(url, resultlines, confargs=confargs)
@@ -51,14 +50,12 @@ class TestHttpAnchor(HttpServerTest):
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
 
+
 class TestEncodedAnchors(HttpServerTest):
     """
     Test checking of HTML pages containing links to anchors that might be urlencoded
     """
 
     def test_anchor_encoded(self):
-        # XXX do one of these with deeper recursion, too
-        # XXX do one of these with file://, too
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("urlencoding_anchor.html", confargs=confargs)
-

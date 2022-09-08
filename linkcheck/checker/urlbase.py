@@ -384,7 +384,10 @@ class UrlBase:
     def set_cache_url(self):
         """Set the URL to be used for caching."""
         if "AnchorCheck" in self.aggregate.config["enabledplugins"]:
-            log.debug(LOG_CHECK, "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s", self.url, self.anchor, self.urlparts[4])
+            log.debug(
+                LOG_CHECK,
+                "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s",
+                self.url, self.anchor, self.urlparts[4])
             self.cache_url = self.url
         else:
             # remove anchor from cached target url since we assume
@@ -444,7 +447,7 @@ class UrlBase:
                 self.base_ref = urljoin(self.parent_url, self.base_ref)
             self.url = urljoin(self.base_ref, base_url)
         elif self.parent_url:
-            # strip the parent url query and anchor # XXX this doesn't actually strip the query
+            # strip the parent url query and anchor
             urlparts = list(urllib.parse.urlsplit(self.parent_url))
             urlparts[4] = ""
             parent_url = urlutil.urlunsplit(urlparts)

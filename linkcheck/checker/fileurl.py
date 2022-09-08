@@ -283,7 +283,9 @@ class FileUrl(urlbase.UrlBase):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
-            self.content_type = mimeutil.guess_mimetype(self.url_without_anchor(), read=self.get_content)
+            self.content_type = mimeutil.guess_mimetype(
+                    self.url_without_anchor(),
+                    read=self.get_content)
         else:
             self.content_type = ""
 
