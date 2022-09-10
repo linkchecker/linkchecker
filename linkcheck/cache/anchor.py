@@ -10,13 +10,14 @@ from ..lock import get_lock
 
 cache_lock = get_lock("anchor_cache_lock")
 
+
 class AnchorCache:
     """
     Thread-safe cache of multiple data types, all based on the URL with the
     anchor stripped.
     The cache is limited in size since we'd rather recheck the same URL
     multiple times instead of running out of memory.
-    format: {url without anchor -> { <type>: <object>, <other type>: <other object>, ... } }
+    format: {url w/o anchor -> { <type>: <object>, <other type>: <other object>, ... } }
     """
 
     def __init__(self, anchor_cache_size):
@@ -52,4 +53,3 @@ class AnchorCache:
         if len(self.cache) > self.max_size:
             del self.cache[self.cache_order[self.cache_delete_index]]
             self.cache_delete_index += 1
-

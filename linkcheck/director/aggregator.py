@@ -53,7 +53,13 @@ def new_request_session(config, cookies):
 class Aggregate:
     """Store thread-safe data collections for checker threads."""
 
-    def __init__(self, config, urlqueue, robots_txt, plugin_manager, result_cache, anchor_cache):
+    def __init__(self,
+                 config,
+                 urlqueue,
+                 robots_txt,
+                 plugin_manager,
+                 result_cache,
+                 anchor_cache):
         """Store given link checking objects."""
         self.config = config
         self.urlqueue = urlqueue
