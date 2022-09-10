@@ -162,11 +162,14 @@ class FileUrl(urlbase.UrlBase):
             # of the base URL are removed first.
             # Otherwise the join function thinks the query is part of
             # the file name.
-            from .urlbase import url_norm
+            # from .urlbase import url_norm
 
-            # norm base url - can raise UnicodeError from url.idna_encode()  # XXX was it desirable to raise a unicode error here?
+            # XXX was it desirable to raise a unicode error here?
+            # norm base url - can raise UnicodeError from url.idna_encode()
+
             # XXX Calling url_norm here quotes the anchor, which is undesirable.
-            # XXX All this code seems unnecessary now - I think urllib.parse just handles it,
+            # XXX All this code seems unnecessary now -
+            # XXX I think urllib.parse just handles it,
             # XXX and all the tests still pass if I comment it out.
             # XXX But to be safe, I'm making the smallest-possible change.
             # base_url, is_idn = url_norm(self.base_url, self.encoding)
