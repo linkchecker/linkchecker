@@ -45,4 +45,4 @@ class TestDecorators(unittest.TestCase):
             return 42
 
         self.assertEqual(f(), 42)
-        self.assertEqual(log.getvalue(), "f took 1.00 seconds\n()\n{}\n")
+        self.assertRegex(log.getvalue(), r"f took 1\.0. seconds")
