@@ -43,7 +43,7 @@ from .. import (
 from . import internpaturl
 
 # import warnings
-from .const import WARN_HTTP_EMPTY_CONTENT, WARN_URL_RATE_LIMITED
+from .const import WARN_HTTP_EMPTY_CONTENT, WARN_HTTP_RATE_LIMITED
 from requests.sessions import REDIRECT_STATI
 
 HTTP_SCHEMAS = ('http://', 'https://')
@@ -315,7 +315,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
                 self.add_warning(
                     "Rate limited (Retry-After: %s)"
                     % self.headers.get("Retry-After"),
-                    tag=WARN_URL_RATE_LIMITED,
+                    tag=WARN_HTTP_RATE_LIMITED,
                 )
 
             if self.url_connection.status_code >= 200:
