@@ -1,57 +1,58 @@
 Developing LinkChecker
 ======================
 
-The following steps describe how to compile LinkChecker from source
-on various platforms.
+The following steps describe how to work with the LinkChecker source which can
+be found on [GitHub](https://github.com/linkchecker/linkchecker/) where
+development is managed.
 
 This is a technical document, if you are looking for ways to
 participate in the community, you should rather look into
-[contributing](contributing).
+[contributing](../CONTRIBUTING.rst).
 
 Requirements
 ------------
-On Mac OS X systems, using MacPorts, Fink or homebrew for software
-installation is recommended.
 
-- Install Python >= 2.7.2 from http://www.python.org/
+These requirements are in addition to the dependencies covered in the
+[installation instructions](install.txt).
 
-- *On Windows only*, install the Windows SDK
-  http://msdn.microsoft.com/de-de/windows/bb980924
+Developers will likely want to install hatch.
 
-- *On Windows only*, download and install the Microsoft
-  Visual C++ 2008 runtime from
-  http://www.microsoft.com/downloads/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf&displaylang=en
+To run the copy of linkchecker in the local repository:
 
-- *Optional, used for Virus checking:*
-  ClamAv for Unix from http://www.clamav.net/lang/en/download/
-  or for Windows from http://www.sosdg.org/clamav-win32/
+    hatch env remove
+    hatch run linkchecker
 
-- *Optional, for displaying country codes:*
-  Pygeoip from http://code.google.com/p/pygeoip/
+If LinkChecker is already installed, `python -m linkcheck` will work, but the
+metadata of the installed version will be used to e.g. provide the version number.
 
+Workflows using GitHub Actions are used to check every PR, each commit and
+regularly the repository HEAD. Developers are able to perform these checks
+locally, using `flake8` for code style, and run the test suite with `tox` or
+`hatch -e test run tests` that are both configured to use pytest.
 
-Setup for Unix/Linux
---------------------
-Execute ``make localbuild`` to compile a local version and execute
-``./linkchecker``.
-Execute ``make test`` to run the unittest suite.
-Execute ``make dist`` to build a distributable source package.
+`hatchling build` creates distributions packages.
 
+Source layout
+-------------
 
-Setup for Mac OS X
-------------------
-Execute ``make localbuild`` to compile a local version and execute
-``./linkchecker``.
-Execute ``make test`` to run the unittest suite.
-Execute ``make app`` to build a distributable source package.
+Important files and directories for developers to be aware of:
 
-
-Setup for Windows
------------------
-Execute ``windows\build.bat`` to build a local version.
-Execute ``windows\test.bat`` to run the unittest suite.
-Execute ``windows\dist.bat`` to build a binary installer.
-
+    .flake8
+    .gitignore
+    .yamllint
+    Dockerfile
+    pyproject.toml
+    pytest.ini
+    robots.txt      - test file
+    tox.ini
+    .github/        - GitHub automation
+    cgi-bin/        - WSGI frontend
+    doc/            - documentation including source for web site and man pages
+    linkcheck/      - core code and CLI frontend
+    po/             - application translations
+    scripts/        - automated IANA schemes updater, analysis tools
+    tests/
+    tools/          - build scripts
 
 Release process
 ---------------

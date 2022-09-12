@@ -38,6 +38,8 @@ Changelog.linkchecker*
 /testresults.txt
 /linkchecker.prof
 .cache
+.coverage
+.pytest_cache
 .tox
 tests/checker/data/https_cert.pem
 tests/checker/data/https_key.pem
