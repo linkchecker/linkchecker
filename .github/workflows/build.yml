@@ -67,7 +67,7 @@ jobs:
 
       - name: Run tests
         run: |
-            python -m hatchling build --hooks-only
+            python -m hatchling build -t sdist --hooks-only
             python -m tox -e py
 
       - name: Report to coveralls
@@ -109,7 +109,7 @@ jobs:
 
       - name: Build
         run: |
-          python3 -m hatchling build --hooks-only
+          python3 -m hatchling build -t sdist --hooks-only
           make -C doc code
           make -C doc html
           make -C doc locale

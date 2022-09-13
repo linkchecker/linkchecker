@@ -38,7 +38,7 @@ jobs:
 
       - name: Build man pages
         run: |
-            python3 -m hatchling build --hooks-only
+            python3 -m hatchling build -t sdist --hooks-only
             make -C doc locale
             git commit -a -m "Update doc translation catalogs"
             make -C doc man

@@ -22,7 +22,7 @@ Configuration
 Before building either man pages or HTML, generate ``linkcheck/_release.py``
 containing copyright, author and version with:
 
-``hatchling build --hooks-only``
+``hatchling build -t sdist --hooks-only``
 
 
 Man Pages

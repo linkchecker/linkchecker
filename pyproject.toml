@@ -51,11 +51,11 @@ exclude = [
     ".gitattributes",
 ]
 
+[tool.hatch.build.hooks.custom]
+path = "tools/hatch_build.py"
+
 [tool.hatch.build.targets.sdist]
 strict-naming = false
-
-[tool.hatch.build.targets.sdist.hooks.custom]
-path = "tools/hatch_build.py"
 
 [tool.hatch.build.targets.wheel]
 only-include = ["linkcheck"]
