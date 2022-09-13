@@ -29,6 +29,7 @@ dist:
 
 check:
 	flake8
+	yamllint .github
 	make -C doc check
 	make -C po check
 
