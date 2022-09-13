@@ -302,6 +302,12 @@ class ArgParser(LCArgumentParser):
             help=_("Don't log warnings. Default is to log warnings."),
         )
         group.add_argument(
+            "--allrefs",
+            action="store_true",
+            dest="reportallreferences",
+            help=_("Report all references to a URL, not just the first one."),
+        )
+        group.add_argument(
             "-o",
             "--output",
             dest="output",

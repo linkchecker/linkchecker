@@ -258,6 +258,8 @@ class UrlBase:
         self.soup = None
         # cache url is set by build_url() calling set_cache_url()
         self.cache_url = None
+        # result cache url is set by build_url() calling set_cache_url()
+        self.result_cache_url = None
         # extern flags (is_extern, is_strict)
         self.extern = None
         # flag if the result should be cached
@@ -382,18 +384,28 @@ class UrlBase:
             self.info.append(s)
 
     def set_cache_url(self):
-        """Set the URL to be used for caching."""
+        """Set the URLs to be used for caching."""
+
         if "AnchorCheck" in self.aggregate.config["enabledplugins"]:
             log.debug(
                 LOG_CHECK,
                 "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s",
                 self.url, self.anchor, self.urlparts[4])
-            self.cache_url = self.url
+            self.result_cache_url = self.url
         else:
             # remove anchor from cached target url since we assume
             # URLs with different anchors to have the same content
-            self.cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
-        log.debug(LOG_CHECK, "cache_url '%s'", self.cache_url)
+            self.result_cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
+        log.debug(LOG_CHECK, f"result_cache_url '{self.result_cache_url}'")
+
+        cache_url = self.result_cache_url
+        if self.aggregate.config["reportallreferences"]:
+            if self.line:
+                cache_url = f"{cache_url}; line: {str(self.line)}"
+            if self.parent_url:
+                cache_url = f"parent: {self.parent_url}; target: {cache_url}"
+        self.cache_url = cache_url
+        log.debug(LOG_CHECK, f"cache_url '{self.cache_url}'")
 
     def check_syntax(self):
         """
@@ -840,6 +852,7 @@ class UrlBase:
                 "name=%r" % self.name,
                 "anchor=%r" % self.anchor,
                 "cache_url=%s" % self.cache_url,
+                "result_cache_url=%s" % self.result_cache_url,
             ]
         )
 
@@ -928,7 +941,9 @@ class UrlBase:
         - url_data.page: int
           Page number of this URL at parent document, or -1
         - url_data.cache_url: unicode
-          Cache url for this URL.
+          Cache url for deciding whether we should check this URL.
+        - url_data.result_cache_url: unicode
+          Result cache url for determining whether we already have results for this URL.
         - url_data.content_type: unicode
           MIME content type for URL content.
         - url_data.level: int
@@ -956,6 +971,7 @@ class UrlBase:
             column=self.column,
             page=self.page,
             cache_url=self.cache_url,
+            result_cache_url=self.result_cache_url,
             content_type=self.content_type,
             level=self.recursion_level,
             modified=self.modified,
@@ -988,6 +1004,7 @@ urlDataAttr = [
     'column',
     'page',
     'cache_url',
+    'result_cache_url',
     'content_type',
     'level',
 ]
