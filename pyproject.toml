@@ -73,6 +73,7 @@ strict-naming = false
 "cgi-bin/lconline/lc_cgi.html.de" = "share/linkchecker/examples/cgi-bin/lconline/lc_cgi.html.de"
 "cgi-bin/lconline/check.js" = "share/linkchecker/examples/cgi-bin/lconline/check.js"
 "cgi-bin/lc.wsgi" = "share/linkchecker/examples/cgi-bin/lc.wsgi"
+"config/create.sql" = "share/linkchecker/examples/config/create.sql"
 "config/linkchecker.apache2.conf" = "share/linkchecker/examples/config/linkchecker.apache2.conf"
 "config/linkchecker-completion" = "share/linkchecker/examples/config/linkchecker-completion"
 "doc/examples/check_failures.sh" = "share/linkchecker/examples/check_failures.sh"
