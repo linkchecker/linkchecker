@@ -35,6 +35,7 @@ jobs:
 
       - name: Build
         run: |
+            python3 -m hatchling build --hooks-only
             hatch -e doc run code
             hatch -e doc run html
 

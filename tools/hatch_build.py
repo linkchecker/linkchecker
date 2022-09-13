@@ -38,7 +38,7 @@ class CustomBuildHook(BuildHookInterface):
 
     def initialize(self, version, build_data):
         cp = None
-        committer_date = "unknown"
+        committer_date = committer_year = "unknown"
         try:
             cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cs"],
                                 capture_output=True, text=True)
@@ -47,9 +47,17 @@ class CustomBuildHook(BuildHookInterface):
         else:
             if cp and cp.stdout:
                 committer_date = cp.stdout.strip()
+                committer_year = committer_date[:4]
 
-        Path(*RELEASE_PY).write_text(
-            f"__release_date__ = \"{committer_date}\"\n")
+        Path(*RELEASE_PY).write_text(f"""\
+__app_name__ = "{self.metadata.core.raw_name}"
+__version__ = "{self.metadata.version}"
+__release_date__ = "{committer_date}"
+__copyright_year__ = "{committer_year}"
+__author__ = "{self.metadata.core.authors[0]['name']}"
+__url__ = "{self.metadata.core.urls["Homepage"]}"
+__support_url__ = "{self.metadata.core.urls["Bug Tracker"]}"
+""")
 
         if COMPILE_TRANSLATIONS:
             for po in Path("po").glob("*.po"):
