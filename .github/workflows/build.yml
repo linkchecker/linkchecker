@@ -104,15 +104,16 @@ jobs:
 
       - name: Install Python packages
         run: |
-          pip install -U -r requirements.txt hatch hatch-vcs Sphinx \
+          pip install -U -r requirements.txt hatchling hatch-vcs Sphinx \
             sphinx-epytext sphinx-intl sphinx-rtd-theme sphinx-sitemap
 
       - name: Build
         run: |
-          hatch -e doc run code
-          hatch -e doc run html
-          hatch -e doc run locale
-          hatch -e doc run man
+          python3 -m hatchling build --hooks-only
+          make -C doc code
+          make -C doc html
+          make -C doc locale
+          make -C doc man
           make -C doc check
 
   lint:

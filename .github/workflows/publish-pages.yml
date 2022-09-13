@@ -30,14 +30,14 @@ jobs:
       - name: Install Python packages
         run: >
             pip install dnspython beautifulsoup4 requests \
-                        hatch hatch-vcs sphinx sphinx_epytext sphinx_rtd_theme \
-                        sphinx-sitemap
+                        hatchling hatch-vcs sphinx sphinx_epytext \
+                        sphinx_rtd_theme sphinx-sitemap
 
       - name: Build
         run: |
             python3 -m hatchling build --hooks-only
-            hatch -e doc run code
-            hatch -e doc run html
+            make -C doc code
+            make -C doc html
 
       - name: Publish
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305

@@ -86,21 +86,6 @@ source = "vcs"
 local_scheme = "node-and-timestamp"
 version_scheme = "post-release"
 
-[tool.hatch.envs.doc]
-dependencies = [
-    "sphinx",
-    "sphinx_epytext",
-    "sphinx_intl",
-    "sphinx_rtd_theme",
-    "sphinx-sitemap",
-]
-
-[tool.hatch.envs.doc.scripts]
-code = "make -C doc code"
-html = "make -C doc html"
-locale = "make -C doc locale"
-man = "make -C doc man"
-
 [tool.hatch.envs.test]
 dependencies = [
     "miniboa",
