@@ -415,6 +415,7 @@ ignored_schemes_historical = r"""
 ignored_schemes_other = r"""
 |clsid      # Microsoft specific
 |find       # Mozilla specific
+|gemini     # Gemini protocol
 |isbn       # ISBN (int. book numbers)
 |javascript # JavaScript
 |slack      # Slack Technologies client
