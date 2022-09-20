@@ -4,7 +4,6 @@ Changes:
 - PyXDG is no longer used
 - setuptools and setup.py replaced with hatchling and pyproject.toml
 - The application version is derived from git tags using hatch-vcs
-- Documentation build is run using hatch
 - Binary translation catalogs are compiled using polib during distribution
   package building and are now included in sdist packages
 - Warning url-rate-limited renamed to http-rate-limited.

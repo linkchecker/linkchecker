@@ -11,21 +11,25 @@ clean:
 locale:
 	$(MAKE) -C po
 
-test:
-	hatch -e test run tests
+linkcheck/_release.py:
+	hatchling build -t sdist --hooks-only
+
+test: linkcheck/_release.py
+	tox -e py
 
 upload:
 	twine upload dist/LinkChecker*
 
-homepage:
-	hatch -e doc run code
-	hatch -e doc run html
+homepage: linkcheck/_release.py
+	make -C doc code
+	make -C doc html
 
 dist:
 	hatchling build
 
 check:
 	flake8
+	yamllint .github
 	make -C doc check
 	make -C po check
 

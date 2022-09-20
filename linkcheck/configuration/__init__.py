@@ -24,33 +24,28 @@ import urllib.parse
 import shutil
 import socket
 
-try:
-    from importlib.metadata import distribution
-except ImportError:
-    # Python 3.7
-    from importlib_metadata import distribution
-
-from .. import log, LOG_CHECK, COMMAND_NAME, PACKAGE_NAME, fileutil
+from .. import log, LOG_CHECK, PACKAGE_NAME, fileutil
 from . import confparse
 
-linkchecker_distribution = distribution(COMMAND_NAME)
-Version = linkchecker_distribution.metadata["Version"]
 try:
     from .. import _release
 except ImportError:
-    ReleaseDate = "unknown"
-else:
-    ReleaseDate = _release.__release_date__
-AppName = linkchecker_distribution.metadata["Name"]
+    raise SystemExit('Run "hatchling build --hooks-only" first')
+
+Version = _release.__version__
+ReleaseDate = _release.__release_date__
+CopyrightYear = _release.__copyright_year__
+AppName = _release.__app_name__
 App = AppName + " " + Version
-Author = linkchecker_distribution.metadata["Author"]
+Author = _release.__author__
 HtmlAuthor = Author.replace(' ', '&nbsp;')
-Copyright = "Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 " + Author
-HtmlCopyright = ("Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, 2010-2022 "
-                 + HtmlAuthor)
+Copyright = f"Copyright (C) 2000-2016 Bastian Kleineidam, 2010-{CopyrightYear} {Author}"
+HtmlCopyright = (
+    "Copyright &copy; 2000-2016 Bastian&nbsp;Kleineidam, "
+    f"2010-{CopyrightYear} {HtmlAuthor}")
 HtmlAppInfo = App + ", " + HtmlCopyright
-Url = linkchecker_distribution.metadata["Project-URL"].split(", ")[1]
-SupportUrl = "https://github.com/linkchecker/linkchecker/issues"
+Url = _release.__url__
+SupportUrl = _release.__support_url__
 UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = (
     AppName

@@ -12,18 +12,22 @@ participate in the community, you should rather look into
 Requirements
 ------------
 
+hatchling and hatch-vcs are used to create the application metadata and build
+distribution packages.
+
 These requirements are in addition to the dependencies covered in the
 [installation instructions](install.txt).
 
-Developers will likely want to install hatch.
+Developers may wish to install hatch or tox to manage running tests.
 
-To run the copy of linkchecker in the local repository:
+To run the copy of linkchecker in the local repository first create the
+metadata in linkcheck/_release.py:
 
-    hatch env remove
-    hatch run linkchecker
+    hatchling build -t sdist --hooks-only
 
-If LinkChecker is already installed, `python -m linkcheck` will work, but the
-metadata of the installed version will be used to e.g. provide the version number.
+Then linkchecker can be run with:
+
+    python -m linkcheck
 
 Workflows using GitHub Actions are used to check every PR, each commit and
 regularly the repository HEAD. Developers are able to perform these checks
@@ -62,8 +66,7 @@ Release process
    if so create a pull request using the GitHub workflow:
    "Create a branch with updated man pages and application translations"
 
-2. edit `changelog.txt` and `upgrading.txt`, and if applicable the
-   copyright dates in `linkcheck/configuration/__init__.py`
+2. edit `changelog.txt` and `upgrading.txt`
 
 3. confirm tests have passed
 

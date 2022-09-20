@@ -19,9 +19,10 @@ sphinx_sitemap
 Configuration
 -------------
 
-Before building either man pages or HTML, the package metadata needs to be
-created to derive copyright, author and version values. Running Sphinx in a
-hatch environment manages this for us.
+Before building either man pages or HTML, generate ``linkcheck/_release.py``
+containing copyright, author and version with:
+
+``hatchling build -t sdist --hooks-only``
 
 
 Man Pages
@@ -31,7 +32,7 @@ Source files are in doc/src/man.
 
 The pages can be built with:
 
-``linkchecker $ hatch -e doc run man``
+``linkchecker/doc $ make man``
 
 The files are saved in doc/man.
 
@@ -46,11 +47,11 @@ HTML
 ``doc/src/code/index.rst`` gives an overview of the LinkChecker code, optionally a navigable
 copy of the LinkChecker source can be created with:
 
-``linkchecker $ hatch -e doc run code``
+``linkchecker/doc $ make code``
 
 Build the HTML files with:
 
-``linkchecker $ hatch -e doc run html``
+``linkchecker/doc $ make html``
 
 The files are saved in doc/html.
 

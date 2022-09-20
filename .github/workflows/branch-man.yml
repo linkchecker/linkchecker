@@ -26,8 +26,8 @@ jobs:
       - name: Install Python packages
         run: >
             pip3 install dnspython beautifulsoup4 requests \
-                         hatch hatch-vcs sphinx sphinx_epytext sphinx_rtd_theme \
-                         sphinx-sitemap sphinx-intl
+                         hatchling hatch-vcs sphinx sphinx_epytext \
+                         sphinx_rtd_theme sphinx-sitemap sphinx-intl
 
       - name: Prepare git environment
         run: |
@@ -38,9 +38,10 @@ jobs:
 
       - name: Build man pages
         run: |
-            hatch -e doc run locale
+            python3 -m hatchling build -t sdist --hooks-only
+            make -C doc locale
             git commit -a -m "Update doc translation catalogs"
-            hatch -e doc run man
+            make -C doc man
             git commit -a -m "Update man pages"
 
       - name: Build application translations catalogs

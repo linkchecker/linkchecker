@@ -20,7 +20,6 @@ classifiers = [
 requires-python = ">=3.7"
 
 dependencies = [
-    "importlib_metadata;python_version<'3.8'",
     "requests >= 2.4",
     "dnspython >= 2.0",
     "beautifulsoup4 >= 4.8.1",
@@ -52,11 +51,11 @@ exclude = [
     ".gitattributes",
 ]
 
+[tool.hatch.build.hooks.custom]
+path = "tools/hatch_build.py"
+
 [tool.hatch.build.targets.sdist]
 strict-naming = false
-
-[tool.hatch.build.targets.sdist.hooks.custom]
-path = "tools/hatch_build.py"
 
 [tool.hatch.build.targets.wheel]
 only-include = ["linkcheck"]
@@ -74,6 +73,7 @@ strict-naming = false
 "cgi-bin/lconline/lc_cgi.html.de" = "share/linkchecker/examples/cgi-bin/lconline/lc_cgi.html.de"
 "cgi-bin/lconline/check.js" = "share/linkchecker/examples/cgi-bin/lconline/check.js"
 "cgi-bin/lc.wsgi" = "share/linkchecker/examples/cgi-bin/lc.wsgi"
+"config/create.sql" = "share/linkchecker/examples/config/create.sql"
 "config/linkchecker.apache2.conf" = "share/linkchecker/examples/config/linkchecker.apache2.conf"
 "config/linkchecker-completion" = "share/linkchecker/examples/config/linkchecker-completion"
 "doc/examples/check_failures.sh" = "share/linkchecker/examples/check_failures.sh"
@@ -86,21 +86,6 @@ source = "vcs"
 [tool.hatch.version.raw-options]
 local_scheme = "node-and-timestamp"
 version_scheme = "post-release"
-
-[tool.hatch.envs.doc]
-dependencies = [
-    "sphinx",
-    "sphinx_epytext",
-    "sphinx_intl",
-    "sphinx_rtd_theme",
-    "sphinx-sitemap",
-]
-
-[tool.hatch.envs.doc.scripts]
-code = "make -C doc code"
-html = "make -C doc html"
-locale = "make -C doc locale"
-man = "make -C doc man"
 
 [tool.hatch.envs.test]
 dependencies = [
