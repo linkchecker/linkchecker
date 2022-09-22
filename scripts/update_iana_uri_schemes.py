@@ -13,6 +13,7 @@ iana_uri_schemes_dict = {}
 iana_uri_schemes_other = {
     "clsid": "Microsoft specific",
     "find": "Mozilla specific",
+    "gemini": "Gemini protocol",
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
     "slack": "Slack Technologies client",

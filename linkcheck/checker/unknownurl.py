@@ -179,6 +179,7 @@ ignored_schemes_provisional = r"""
 |com\-eventbrite\-attendee # com-eventbrite-attendee
 |content    # content
 |content\-type # content-type
+|cstr       # cstr
 |cvs        # cvs
 |dab        # dab
 |dat        # dat
@@ -212,6 +213,7 @@ ignored_schemes_provisional = r"""
 |fuchsia\-pkg # fuchsia-pkg
 |gg         # gg
 |git        # git
+|gitoid     # gitoid
 |gizmoproject # gizmoproject
 |graph      # graph
 |gtalk      # gtalk
@@ -251,6 +253,7 @@ ignored_schemes_provisional = r"""
 |mongodb    # mongodb
 |moz        # moz
 |ms\-access # ms-access
+|ms\-appinstaller # ms-appinstaller
 |ms\-browser\-extension # ms-browser-extension
 |ms\-calculator # ms-calculator
 |ms\-drive\-to # ms-drive-to
@@ -268,6 +271,7 @@ ignored_schemes_provisional = r"""
 |ms\-meetnow # ms-meetnow
 |ms\-mixedrealitycapture # ms-mixedrealitycapture
 |ms\-mobileplans # ms-mobileplans
+|ms\-newsandinterests # ms-newsandinterests
 |ms\-officeapp # ms-officeapp
 |ms\-people # ms-people
 |ms\-powerpoint # ms-powerpoint
@@ -382,7 +386,9 @@ ignored_schemes_provisional = r"""
 |vscode     # vscode
 |vscode\-insiders # vscode-insiders
 |vsls       # vsls
+|w3         # w3
 |wcr        # wcr
+|web3       # web3
 |webcal     # webcal
 |wifi       # wifi
 |wtai       # wtai
@@ -409,6 +415,7 @@ ignored_schemes_historical = r"""
 ignored_schemes_other = r"""
 |clsid      # Microsoft specific
 |find       # Mozilla specific
+|gemini     # Gemini protocol
 |isbn       # ISBN (int. book numbers)
 |javascript # JavaScript
 |slack      # Slack Technologies client
