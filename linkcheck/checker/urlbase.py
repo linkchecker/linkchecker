@@ -258,6 +258,8 @@ class UrlBase:
         self.soup = None
         # cache url is set by build_url() calling set_cache_url()
         self.cache_url = None
+        # result cache url is set by build_url() calling set_cache_url()
+        self.result_cache_url = None
         # extern flags (is_extern, is_strict)
         self.extern = None
         # flag if the result should be cached
@@ -382,14 +384,28 @@ class UrlBase:
             self.info.append(s)
 
     def set_cache_url(self):
-        """Set the URL to be used for caching."""
+        """Set the URLs to be used for caching."""
+
         if "AnchorCheck" in self.aggregate.config["enabledplugins"]:
-            self.cache_url = self.url
+            log.debug(
+                LOG_CHECK,
+                "set_cache_url: self.url: %s; self.anchor: %s; self.urlparts[4]: %s",
+                self.url, self.anchor, self.urlparts[4])
+            self.result_cache_url = self.url
         else:
             # remove anchor from cached target url since we assume
             # URLs with different anchors to have the same content
-            self.cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
-        log.debug(LOG_CHECK, "cache_url '%s'", self.cache_url)
+            self.result_cache_url = urlutil.urlunsplit(self.urlparts[:4] + [''])
+        log.debug(LOG_CHECK, f"result_cache_url '{self.result_cache_url}'")
+
+        cache_url = self.result_cache_url
+        if self.aggregate.config["reportallreferences"]:
+            if self.line:
+                cache_url = f"{cache_url}; line: {str(self.line)}"
+            if self.parent_url:
+                cache_url = f"parent: {self.parent_url}; target: {cache_url}"
+        self.cache_url = cache_url
+        log.debug(LOG_CHECK, f"cache_url '{self.cache_url}'")
 
     def check_syntax(self):
         """
@@ -497,7 +513,7 @@ class UrlBase:
             urlparts[1] = "%s@%s" % (self.userinfo, host)
         else:
             urlparts[1] = host
-        # safe anchor for later checking
+        # save anchor for later checking
         self.anchor = split.fragment
         if self.anchor is not None:
             assert isinstance(self.anchor, str), repr(self.anchor)
@@ -727,8 +743,27 @@ class UrlBase:
 
     def get_soup(self):
         if self.soup is None:
-            self.get_content()
+            self.get_content()  # sets self.soup
         return self.soup
+
+    def make_soup(self, encoding):
+        if self.soup is None:
+            url_without_anchor = self.url_without_anchor()
+            soup = self.aggregate.anchor_cache.get(url_without_anchor, 'soup')
+            if soup is not None:
+                self.soup = soup
+            else:
+                self.soup = htmlsoup.make_soup(self.data, encoding)
+                self.aggregate.anchor_cache.put(url_without_anchor, 'soup', self.soup)
+        return self.soup
+
+    def url_without_anchor(self):
+        urlparts = list(urllib.parse.urlsplit(self.url))
+        urlparts[4] = ''
+        return urlutil.urlunsplit(urlparts)
+
+    def get_anchor(self):
+        return self.urlparts[4]
 
     def get_raw_content(self):
         if self.data is None:
@@ -738,7 +773,7 @@ class UrlBase:
     def get_content(self, encoding=None):
         if self.text is None:
             self.get_raw_content()
-            self.soup = htmlsoup.make_soup(self.data, encoding)
+            self.make_soup(encoding)  # sets self.soup
             # Sometimes soup.original_encoding is None!  Better mangled text
             # than an internal crash, eh?  ISO-8859-1 is a safe fallback in the
             # sense that any binary blob can be decoded, it'll never cause a
@@ -817,6 +852,7 @@ class UrlBase:
                 "name=%r" % self.name,
                 "anchor=%r" % self.anchor,
                 "cache_url=%s" % self.cache_url,
+                "result_cache_url=%s" % self.result_cache_url,
             ]
         )
 
@@ -905,7 +941,9 @@ class UrlBase:
         - url_data.page: int
           Page number of this URL at parent document, or -1
         - url_data.cache_url: unicode
-          Cache url for this URL.
+          Cache url for deciding whether we should check this URL.
+        - url_data.result_cache_url: unicode
+          Result cache url for determining whether we already have results for this URL.
         - url_data.content_type: unicode
           MIME content type for URL content.
         - url_data.level: int
@@ -933,6 +971,7 @@ class UrlBase:
             column=self.column,
             page=self.page,
             cache_url=self.cache_url,
+            result_cache_url=self.result_cache_url,
             content_type=self.content_type,
             level=self.recursion_level,
             modified=self.modified,
@@ -965,6 +1004,7 @@ urlDataAttr = [
     'column',
     'page',
     'cache_url',
+    'result_cache_url',
     'content_type',
     'level',
 ]

@@ -103,6 +103,11 @@ checking
     Set the result cache size.
     The default is 100 000 URLs.
     Command line option: none
+**anchorcachesize=**\ *NUMBER*
+    Set the anchor cache size.
+    The anchor cache improved performance when AnchorCheck is enabled.
+    The default is 2 000 URLs.
+    Command line option: none
 
 filtering
 ^^^^^^^^^
@@ -181,6 +186,9 @@ URL checking results
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
+**reportallreferences=**\ [**0**\ \|\ **1**]
+    Report all references to a URL, not just the first one.
+    Command line option: :option:`--allrefs`
 **verbose=**\ [**0**\ \|\ **1**]
     If set log all checked URLs once. Default is to log only errors and
     warnings.
@@ -453,10 +461,6 @@ AnchorCheck
 ^^^^^^^^^^^
 
 Checks validity of HTML anchors.
-
-.. note::
-
-    The AnchorCheck plugin is currently broken and is disabled.
 
 LocationInfo
 ^^^^^^^^^^^^

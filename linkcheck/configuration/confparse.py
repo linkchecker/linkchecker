@@ -139,6 +139,7 @@ class LCConfigParser(RawConfigParser):
             val = self.get(section, "debug")
             parts = [f.strip().lower() for f in val.split(',')]
             logconf.set_debug(parts)
+        self.read_boolean_option(section, "reportallreferences")
         self.read_boolean_option(section, "status")
         if self.has_option(section, "log"):
             val = self.get(section, "log").strip().lower()
@@ -188,6 +189,7 @@ class LCConfigParser(RawConfigParser):
             self.read_string_option(section, "sslverify")
         self.read_int_option(section, "maxrunseconds", min=0)
         self.read_int_option(section, "resultcachesize", min=0)
+        self.read_int_option(section, "anchorcachesize", min=0)
 
     def read_authentication_config(self):
         """Read configuration options in section "authentication"."""

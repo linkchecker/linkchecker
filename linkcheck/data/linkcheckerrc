@@ -14,6 +14,8 @@
 #verbose=1
 # turn on/off --warnings
 #warnings=0
+# turn on/off --allrefs
+#reportallreferences=1
 # turn on/off --quiet
 #quiet=1
 # additional file output
@@ -175,6 +177,11 @@
 #allowedschemes=http,https
 # Size of the result cache. Checking more urls might increase memory usage during runtime
 #resultcachesize=100000
+# Size of the anchor cache, which is a cache of the actual data read for a given URL.
+# Checking more urls might increase memory usage during runtime.
+# This is generally only useful if you enable AnchorCheck, to save re-loading any
+# URL that is linked-to with multiple anchors.
+#anchorcachesize=2000
 
 ##################### filtering options ##########################
 [filtering]

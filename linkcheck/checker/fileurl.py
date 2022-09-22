@@ -162,17 +162,24 @@ class FileUrl(urlbase.UrlBase):
             # of the base URL are removed first.
             # Otherwise the join function thinks the query is part of
             # the file name.
-            from .urlbase import url_norm
+            # from .urlbase import url_norm
 
+            # XXX was it desirable to raise a unicode error here?
             # norm base url - can raise UnicodeError from url.idna_encode()
-            base_url, is_idn = url_norm(self.base_url, self.encoding)
-            urlparts = list(urllib.parse.urlsplit(base_url))
+
+            # XXX Calling url_norm here quotes the anchor, which is undesirable.
+            # XXX All this code seems unnecessary now -
+            # XXX I think urllib.parse just handles it,
+            # XXX and all the tests still pass if I comment it out.
+            # XXX But to be safe, I'm making the smallest-possible change.
+            # base_url, is_idn = url_norm(self.base_url, self.encoding)
+            urlparts = list(urllib.parse.urlsplit(self.base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
         super().build_url()
-        # ignore query and fragment url parts for filesystem urls
-        self.urlparts[3] = self.urlparts[4] = ''
+        # ignore query url part for filesystem urls
+        self.urlparts[3] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
             self.add_warning(
                 _("Added trailing slash to directory."), tag=WARN_FILE_MISSING_SLASH
@@ -204,7 +211,7 @@ class FileUrl(urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.path_safe(self.url)
+            url = fileutil.path_safe(self.url_without_anchor())
             self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
@@ -270,7 +277,7 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.is_directory():
             return True
-        if firefox.has_sqlite and firefox.extension.search(self.url):
+        if firefox.has_sqlite and firefox.extension.search(self.url_without_anchor()):
             return True
         return self.is_content_type_parseable()
 
@@ -278,7 +285,9 @@ class FileUrl(urlbase.UrlBase):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
-            self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
+            self.content_type = mimeutil.guess_mimetype(
+                    self.url_without_anchor(),
+                    read=self.get_content)
         else:
             self.content_type = ""
 

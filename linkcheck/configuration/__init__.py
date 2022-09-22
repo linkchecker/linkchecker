@@ -157,6 +157,7 @@ class Configuration(dict):
         self["recursionlevel"] = -1
         self["useragent"] = UserAgent
         self["resultcachesize"] = 100000
+        self["anchorcachesize"] = 2000
         # authentication
         self["authentication"] = []
         self["loginurl"] = None
@@ -176,6 +177,7 @@ class Configuration(dict):
         self['quiet'] = False
         self["verbose"] = False
         self["warnings"] = True
+        self["reportallreferences"] = False
         self["fileoutput"] = []
         self['output'] = 'text'
         self["status"] = True
