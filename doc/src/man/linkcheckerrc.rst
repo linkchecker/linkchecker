@@ -381,7 +381,7 @@ sitemap
     A number between 0.0 and 1.0 determining the priority. The default
     priority for the first URL is 1.0, for all child URLs 0.5.
 **frequency=**\ [**always**\ \|\ **hourly**\ \|\ **daily**\ \|\ **weekly**\ \|\ **monthly**\ \|\ **yearly**\ \|\ **never**]
-    How frequently pages are changing.
+    How frequently pages are changing. Default is **daily**.
 
 LOGGER PARTS
 ------------
