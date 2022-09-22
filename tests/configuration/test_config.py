@@ -34,6 +34,8 @@ class TestConfig(unittest.TestCase):
     """Test configuration parsing."""
 
     def test_confparse(self):
+        # Tests must either cover every possiblity or
+        # use a value other than the default
         config = linkcheck.configuration.Configuration()
         files = [get_file("config0.ini")]
         config.read(files)
@@ -55,7 +57,7 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config["maxrunseconds"], 1)
         self.assertEqual(config["maxfilesizeparse"], 100)
         self.assertEqual(config["maxfilesizedownload"], 100)
-        self.assertEqual(config["resultcachesize"], 100000)
+        self.assertEqual(config["resultcachesize"], 9999)
         # filtering section
         patterns = [x["pattern"].pattern for x in config["externlinks"]]
         for prefix in ("ignore_", "nofollow_"):
