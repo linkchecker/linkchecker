@@ -81,6 +81,7 @@
 #filename=linkchecker-out.csv
 #separator=;
 #quotechar="
+#dialect=excel
 #parts=all
 
 # SQL logger

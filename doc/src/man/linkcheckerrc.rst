@@ -297,6 +297,10 @@ csv
     Set CSV separator. Default is a semicolon (**;**).
 **quotechar=**\ *CHAR*
     Set CSV quote character. Default is a double quote (**"**).
+**dialect=**\ *STRING*
+    Controls the output formatting.
+    See https://docs.python.org/3/library/csv.html#csv.Dialect.
+    Default is **excel**.
 
 sql
 ^^^
