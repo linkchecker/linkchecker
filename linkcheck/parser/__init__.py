@@ -23,6 +23,14 @@ from ..bookmarks import firefox
 
 def parse_url(url_data):
     """Parse a URL."""
+
+    url_no_anchor = url_data.url_without_anchor()
+    found = url_data.aggregate.anchor_cache.get(url_no_anchor, 'url')
+    if found is not None:
+        return
+
+    url_data.aggregate.anchor_cache.put(url_no_anchor, 'url', url_no_anchor)
+
     if url_data.is_directory():
         # both ftp and file links represent directories as HTML data
         key = "html"

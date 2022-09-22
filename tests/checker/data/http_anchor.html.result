@@ -7,7 +7,7 @@ url http_anchor.html#bad
 cache key http://localhost:%(port)d/%(datadir)s/http_anchor.html#bad
 real url http://localhost:%(port)d/%(datadir)s/http_anchor.html#bad
 name a_bad
-warning Anchor `bad' not found. Available anchors: `good'.
+warning Anchor `bad' (decoded: `bad') not found. Available anchors: `good'.
 valid
 
 url http_anchor.html#good

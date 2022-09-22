@@ -53,7 +53,13 @@ def new_request_session(config, cookies):
 class Aggregate:
     """Store thread-safe data collections for checker threads."""
 
-    def __init__(self, config, urlqueue, robots_txt, plugin_manager, result_cache):
+    def __init__(self,
+                 config,
+                 urlqueue,
+                 robots_txt,
+                 plugin_manager,
+                 result_cache,
+                 anchor_cache):
         """Store given link checking objects."""
         self.config = config
         self.urlqueue = urlqueue
@@ -63,6 +69,7 @@ class Aggregate:
         self.robots_txt = robots_txt
         self.plugin_manager = plugin_manager
         self.result_cache = result_cache
+        self.anchor_cache = anchor_cache
         self.times = {}
         self.cookies = None
         requests_per_second = config["maxrequestspersecond"]
@@ -237,7 +244,8 @@ class Aggregate:
         """Print ending output to log."""
         kwargs.update(
             dict(
-                downloaded_bytes=self.downloaded_bytes, num_urls=len(self.result_cache),
+                downloaded_bytes=self.downloaded_bytes,
+                num_urls=len(self.result_cache),
             )
         )
         self.logger.end_log_output(**kwargs)
