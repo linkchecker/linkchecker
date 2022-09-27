@@ -18,6 +18,12 @@
 #quiet=1
 # additional file output
 #fileoutput = text, html, gml, sql
+# errors to ignore (URL regular expression, message regular expression)
+#ignoreerrors=
+# ignore all errors for broken.example.com:
+#  ^https?://broken.example.com/
+# ignore SSL errors for dev.example.com:
+#  ^https://dev.example.com/ ^SSLError .*
 
 
 ##################### logger configuration ##########################

@@ -188,6 +188,24 @@ URL checking results
 **warnings=**\ [**0**\ \|\ **1**]
     If set log warnings. Default is to log warnings.
     Command line option: :option:`--no-warnings`
+**ignoreerrors=**\ *URL_REGEX* [*MESSAGE_REGEX*] (`MULTILINE`_)
+    Specify regular expressions to ignore errors for matching URLs, one
+    per line. A second regular expression can be specified per line to
+    only ignore matching error messages per corresponding URL. If the
+    second expression is omitted, all errors are ignored. In contrast
+    to filtering_, this happens *after* checking, which allows checking
+    URLs despite certain expected and tolerable errors. Default is to
+    not ignore any errors.
+
+    ::
+    [output]
+
+    ignoreerrors=
+
+      ^https://deprecated\.example\.com ^410 Gone
+
+      # ignore all errors (no second expression), also for syntax check:
+      ^mailto:.*@example\.com$
 
 Progress updates
 """"""""""""""""
