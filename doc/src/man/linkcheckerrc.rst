@@ -315,6 +315,10 @@ csv
     Set CSV separator. Default is a semicolon (**;**).
 **quotechar=**\ *CHAR*
     Set CSV quote character. Default is a double quote (**"**).
+**dialect=**\ *STRING*
+    Controls the output formatting.
+    See https://docs.python.org/3/library/csv.html#csv.Dialect.
+    Default is **excel**.
 
 sql
 ^^^
@@ -395,7 +399,7 @@ sitemap
     A number between 0.0 and 1.0 determining the priority. The default
     priority for the first URL is 1.0, for all child URLs 0.5.
 **frequency=**\ [**always**\ \|\ **hourly**\ \|\ **daily**\ \|\ **weekly**\ \|\ **monthly**\ \|\ **yearly**\ \|\ **never**]
-    How frequently pages are changing.
+    How frequently pages are changing. Default is **daily**.
 
 LOGGER PARTS
 ------------

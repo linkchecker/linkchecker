@@ -4,19 +4,19 @@
 
 ##################### output configuration ##########################
 [output]
-# enable debug messages; see 'linkchecker -h' for valid debug names
+# enable debug messages; see 'linkchecker -h' for valid debug names, example:
 #debug=all
 # print status output
 #status=1
 # change the logging type
-#log=xml
+#log=text
 # turn on/off --verbose
-#verbose=1
+#verbose=0
 # turn on/off --warnings
-#warnings=0
+#warnings=1
 # turn on/off --quiet
-#quiet=1
-# additional file output
+#quiet=0
+# additional file output, example:
 #fileoutput = text, html, gml, sql
 # errors to ignore (URL regular expression, message regular expression)
 #ignoreerrors=
@@ -54,7 +54,7 @@
 # type can be bold, light, blink, invert
 # color can be default, black, red, green, yellow, blue, purple, cyan, white,
 # Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-#colorparent=white
+#colorparent=default
 #colorurl=default
 #colorname=default
 #colorreal=cyan
@@ -71,7 +71,7 @@
 #filename=linkchecker-out.gml
 #parts=all
 # valid encodings are listed in http://docs.python.org/library/codecs.html#standard-encodings
-# default encoding is iso-8859-15
+# example:
 #encoding=utf_16
 
 # DOT logger
@@ -79,7 +79,7 @@
 #filename=linkchecker-out.dot
 #parts=all
 # default encoding is ascii since the original DOT format does not
-# support other charsets
+# support other charsets, example:
 #encoding=iso-8859-15
 
 # CSV logger
@@ -87,6 +87,7 @@
 #filename=linkchecker-out.csv
 #separator=;
 #quotechar="
+#dialect=excel
 #parts=all
 
 # SQL logger
@@ -115,16 +116,22 @@
 
 # custom xml logger
 [xml]
+#filename=linkchecker-out.xml
+# system encoding is used by default. Example:
 #encoding=iso-8859-1
 
 # GraphXML logger
 [gxml]
+#filename=linkchecker-out.gxml
+# system encoding is used by default. Example:
 #encoding=iso-8859-1
 
 # Sitemap logger
 [sitemap]
-#priority=0.7
-#frequency=weekly
+#filename=linkchecker-out.sitemap.xml
+#encoding=utf-8
+#priority=0.5
+#frequency=daily
 
 
 ##################### checking options ##########################
@@ -137,13 +144,13 @@
 # (with Ctrl-C or the abort button).
 #aborttimeout=300
 # The recursion level determines how many times links inside pages are followed.
-#recursionlevel=1
+#recursionlevel=-1
 # Basic NNTP server. Overrides NNTP_SERVER environment variable.
 #nntpserver=
-# parse a cookiefile for initial cookie data
+# parse a cookiefile for initial cookie data, example:
 #cookiefile=/path/to/cookies.txt
 # User-Agent header string to send to HTTP web servers
-# Note that robots.txt are always checked with the original User-Agent.
+# Note that robots.txt are always checked with the original User-Agent. Example:
 #useragent=Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
 # When checking finishes, write a memory dump to a temporary file.
 # The memory dump is written both when checking finishes normally
@@ -164,20 +171,20 @@
 # CA cert bundle to use. Set to zero to disable SSL certificate verification.
 #sslverify=1
 # Stop checking new URLs after the given number of seconds. Same as if the
-# user hits Ctrl-C after X seconds.
+# user hits Ctrl-C after X seconds. Example:
 #maxrunseconds=600
 # Don't download files larger than the given number of bytes
 #maxfilesizedownload=5242880
 # Don't parse files larger than the given number of bytes
 #maxfilesizeparse=1048576
 # Maximum number of URLs to check. New URLs will not be queued after the
-# given number of URLs is checked.
+# given number of URLs is checked. Example:
 #maxnumurls=153
 # Maximum number of requests per second to one host.
 #maxrequestspersecond=10
 # Respect the instructions in any robots.txt files
 #robotstxt=1
-# Allowed URL schemes as a comma-separated list.
+# Allowed URL schemes as a comma-separated list. Example:
 #allowedschemes=http,https
 # Size of the result cache. Checking more urls might increase memory usage during runtime
 #resultcachesize=100000
@@ -200,13 +207,13 @@
 # Ignore specified warnings (see linkchecker -h for the list of
 # recognized warnings). Add a comma-separated list of warnings here
 # that prevent a valid URL from being logged. Note that the warning
-# will be logged in invalid URLs.
+# will be logged for invalid URLs. Example:
 #ignorewarnings=url-unicode-domain
 # Regular expression to add more URLs recognized as internal links.
 # Default is that URLs given on the command line are internal.
 #internlinks=^http://www\.example\.net/
 # Check external links
-#checkextern=1
+#checkextern=0
 
 
 ##################### password authentication ##########################
@@ -236,7 +243,7 @@
 #loginpasswordfield=password
 # Optionally the name attributes of any additional input elements and the values
 # to populate them with. Note that these are submitted without checking
-# whether matching input elements exist in the HTML form.
+# whether matching input elements exist in the HTML form. Example:
 #loginextrafields=
 #  name1:value1
 #  name 2:value 2
@@ -253,7 +260,7 @@
 # Comma separated list of header prefixes to print.
 # The names are case insensitive.
 # The default list is empty, so it should be non-empty when activating
-# this plugin.
+# this plugin. Example:
 #prefixes=Server,X-
 
 # Add country info to URLs
@@ -265,15 +272,16 @@
 
 # Search for regular expression in page contents
 #[RegexCheck]
+# Example:
 #warningregex=Oracle Error
 
 # Search for viruses in page contents
 #[VirusCheck]
-#clamavconf=/etc/clamav/clam.conf
+#clamavconf=/etc/clamav/clamd.conf
 
-# Check that SSL certificates are at least the given number of days valid.
+# Check that SSL certificates have at least the given number of days validity.
 #[SslCertificateCheck]
-#sslcertwarndays=14
+#sslcertwarndays=30
 
 # Parse and check links in PDF files
 #[PdfParser]
@@ -288,4 +296,4 @@
 #        [id]: http://link.com "Optional title"
 #[MarkdownCheck]
 # Regexp of filename
-#filename_re=.*\.(blog|markdown|md(own)?|mkdn?)$
+#filename_re=.*\.(markdown|md(own)?|mkdn?)$
