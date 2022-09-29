@@ -175,7 +175,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
         self.headers = self.url_connection.headers
         log.debug(LOG_CHECK, "Response headers %s", self.headers)
         self.set_encoding(self.url_connection.encoding)
-        log.debug(LOG_CHECK, "Response encoding %s", self.encoding)
+        log.debug(LOG_CHECK, "Response encoding %s", self.content_encoding)
         self._add_ssl_info()
 
     def _add_response_info(self):
@@ -237,9 +237,9 @@ class HttpUrl(internpaturl.InternPatternUrl):
             # set by Requests.
             # We fall back to it in UrlBase.get_content() if Beautiful Soup
             # doesn't return an encoding.
-            self.encoding = None
+            self.content_encoding = None
         else:
-            self.encoding = encoding
+            self.content_encoding = encoding
 
     def is_redirect(self):
         """Check if current response is a redirect."""
@@ -292,7 +292,8 @@ class HttpUrl(internpaturl.InternPatternUrl):
         if response:
             log.debug(LOG_CHECK, "Redirected response headers %s", response.headers)
             self.set_encoding(response.encoding)
-            log.debug(LOG_CHECK, "Redirected response encoding %s", self.encoding)
+            log.debug(
+                LOG_CHECK, "Redirected response encoding %s", self.content_encoding)
 
     def check_response(self):
         """Check final result and log it."""
@@ -327,7 +328,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
                 self.set_result(_("OK"))
 
     def get_content(self):
-        return super().get_content(self.encoding)
+        return super().get_content(self.content_encoding)
 
     def read_content(self):
         """Return data and data size for this URL.
