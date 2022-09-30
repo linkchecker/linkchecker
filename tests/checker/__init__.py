@@ -181,8 +181,6 @@ def get_test_aggregate(confargs, logargs, logger=TestLogger):
     config["recursionlevel"] = 1
     config["logger"] = config.logger_new(logger.LoggerName, **logargs)
     add_fileoutput_config(config)
-    # uncomment for debugging
-    # config.init_logging(None, debug=["all"])
     config["verbose"] = True
     config["threads"] = 0
     config["status"] = False
