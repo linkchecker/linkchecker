@@ -57,6 +57,7 @@ def check_url(url_data, logger):
                 for alias in url_data.aliases:
                     # redirect aliases
                     cache.add_result(alias, result)
+                logger.log_url(result)
                 # parse content recursively
                 # XXX this could add new warnings which should be cached.
                 if do_parse:
@@ -74,7 +75,7 @@ def check_url(url_data, logger):
             result.column = url_data.column
             result.level = url_data.recursion_level
             result.name = url_data.name
-        logger.log_url(result)
+            logger.log_url(result)
 
 
 class Checker(task.LoggedCheckedTask):
