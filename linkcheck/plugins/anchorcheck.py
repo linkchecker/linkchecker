@@ -33,10 +33,18 @@ class AnchorCheck(_ContentPlugin):
     def check(self, url_data):
         """Check content for invalid anchors."""
         log.debug(LOG_PLUGIN, "checking content for invalid anchors")
+        url_anchor_check = UrlAnchorCheck()
+        linkparse.find_links(
+            url_data.get_soup(), url_anchor_check.add_anchor, linkparse.AnchorTags)
+        url_anchor_check.check_anchor(url_data)
+
+
+class UrlAnchorCheck:
+    """Class to thread-safely handle collecting anchors for a URL"""
+
+    def __init__(self):
         # list of parsed anchors
         self.anchors = []
-        linkparse.find_links(url_data.get_soup(), self.add_anchor, linkparse.AnchorTags)
-        self.check_anchor(url_data)
 
     def add_anchor(self, url, line, column, name, base):
         """Add anchor URL."""
