@@ -54,17 +54,20 @@ class UrlAnchorCheck:
         """If URL is valid, parseable and has an anchor, check it.
         A warning is logged and True is returned if the anchor is not found.
         """
-        log.debug(LOG_PLUGIN, "checking anchor %r in %s", url_data.anchor, self.anchors)
-        if any(x for x in self.anchors if urllib.parse.quote(x[0]) == url_data.anchor):
+        decoded_anchor = urllib.parse.unquote(
+            url_data.anchor, encoding=url_data.encoding)
+        log.debug(LOG_PLUGIN, "checking anchor %r (decoded: %r) in %s",
+                  url_data.anchor, decoded_anchor, self.anchors)
+        if any(x for x in self.anchors if x[0] == decoded_anchor):
             return
         if self.anchors:
             anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"
-        args = {"name": url_data.anchor, "anchors": anchors}
+        args = {"name": url_data.anchor, "decoded": decoded_anchor, "anchors": anchors}
         msg = "%s %s" % (
-            _("Anchor `%(name)s' not found.") % args,
+            _("Anchor `%(name)s' (decoded: `%(decoded)s') not found.") % args,
             _("Available anchors: %(anchors)s.") % args,
         )
         url_data.add_warning(msg)
