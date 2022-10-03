@@ -195,15 +195,13 @@ URL checking results
     second expression is omitted, all errors are ignored. In contrast
     to filtering_, this happens *after* checking, which allows checking
     URLs despite certain expected and tolerable errors. Default is to
-    not ignore any errors.
+    not ignore any errors. Example:
 
-    ::
+::
+
     [output]
-
     ignoreerrors=
-
       ^https://deprecated\.example\.com ^410 Gone
-
       # ignore all errors (no second expression), also for syntax check:
       ^mailto:.*@example\.com$
 
