@@ -474,10 +474,6 @@ AnchorCheck
 
 Checks validity of HTML anchors.
 
-.. note::
-
-    The AnchorCheck plugin is currently broken and is disabled.
-
 LocationInfo
 ^^^^^^^^^^^^
 
