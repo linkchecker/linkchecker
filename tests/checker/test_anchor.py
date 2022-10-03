@@ -20,22 +20,23 @@ from . import LinkCheckTest
 from .httpserver import HttpServerTest
 
 
-class TestAnchor(LinkCheckTest):
+class TestFileAnchor(LinkCheckTest):
     """
-    Test anchor checking of HTML pages.
+    Test anchor checking of HTML files.
     """
 
-    def test_anchor(self):
+    def test_anchor_file(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
         anchor = "broken"
         url = "file://%(curdir)s/%(datadir)s/anchor.html#%(anchor)s" % self.get_attrs(
                anchor=anchor)
         nurl = self.norm(url)
         resultlines = [
-            "url %s" % url,
-            "cache key %s" % nurl,
-            "real url %s" % nurl,
-            "warning Anchor `%s' not found. Available anchors: `myid:'." % anchor,
+            f"url {url}",
+            f"cache key {nurl}",
+            f"real url {nurl}",
+            f"warning Anchor `{anchor}' (decoded: `{anchor}') not found."
+            " Available anchors: `myid:'.",
             "valid",
         ]
         self.direct(url, resultlines, confargs=confargs)
@@ -46,9 +47,33 @@ class TestHttpAnchor(HttpServerTest):
     Test checking of HTML pages containing links to anchors served over http.
     """
 
-    def test_anchor_html(self):
+    def test_anchor_http(self):
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
+
+
+class TestEncodedAnchors(HttpServerTest):
+    """Test HTML pages containing urlencoded links to anchors"""
+
+    def test_anchor_encoded_http(self):
+        """
+        http://
+        """
+        confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
+        self.file_test("urlencoding_anchor.html", confargs=confargs)
+
+    def test_anchor_encoded_file(self):
+        """
+        file://
+        This should have identical behavior as http://
+        """
+        filename = "urlencoding_anchor.html"
+        confargs = {"enabledplugins": ["AnchorCheck"]}
+        url = "file://%(curdir)s/%(datadir)s/%(filename)s" % self.get_attrs(
+               filename=filename)
+        # get results from the special result file that has `.file.` in its name
+        resultlines = self.get_resultlines(f"{filename}.file")
+        self.direct(url, resultlines, recursionlevel=1, confargs=confargs)
 
 
 class TestAnchorsAcrossMultipleFiles(LinkCheckTest):
