@@ -458,7 +458,7 @@ class UrlBase:
                 self.base_ref = urljoin(self.parent_url, self.base_ref)
             self.url = urljoin(self.base_ref, base_url)
         elif self.parent_url:
-            # strip the parent url query and anchor
+            # strip the parent url anchor
             urlparts = list(urllib.parse.urlsplit(self.parent_url))
             urlparts[4] = ""
             parent_url = urlutil.urlunsplit(urlparts)
@@ -512,7 +512,7 @@ class UrlBase:
             urlparts[1] = "%s@%s" % (self.userinfo, host)
         else:
             urlparts[1] = host
-        # safe anchor for later checking
+        # save anchor for later checking
         self.anchor = split.fragment
         if self.anchor is not None:
             assert isinstance(self.anchor, str), repr(self.anchor)
