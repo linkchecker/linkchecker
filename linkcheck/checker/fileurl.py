@@ -122,6 +122,14 @@ class FileUrl(urlbase.UrlBase):
         )
         self.scheme = 'file'
 
+    def reset(self):
+        super().reset()
+        # the local file URI
+        self.url_without_anchor = None
+        # including the anchor in self.url allows the AnchorCheck plugin to be
+        # used when checking files. The anchor is stripped in UrlBase.set_cache_url()
+        # if AnchorCheck is not being used.
+
     def build_base_url(self):
         """The URL is normed according to the platform:
          - the base URL is made an absolute *file://* URL
@@ -162,23 +170,20 @@ class FileUrl(urlbase.UrlBase):
             # of the base URL are removed first.
             # Otherwise the join function thinks the query is part of
             # the file name.
-            from .urlbase import url_norm
-
-            # norm base url - can raise UnicodeError from url.idna_encode()
-            base_url, is_idn = url_norm(self.base_url, self.encoding)
-            urlparts = list(urllib.parse.urlsplit(base_url))
+            urlparts = list(urllib.parse.urlsplit(self.base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
         super().build_url()
-        # ignore query and fragment url parts for filesystem urls
-        self.urlparts[3] = self.urlparts[4] = ''
+        # ignore query url part for filesystem urls
+        self.urlparts[3] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
             self.add_warning(
                 _("Added trailing slash to directory."), tag=WARN_FILE_MISSING_SLASH
             )
             self.urlparts[2] += '/'
         self.url = urlutil.urlunsplit(self.urlparts)
+        self.url_without_anchor = urlutil.urlunsplit(self.urlparts[:4] + [''])
 
     def add_size_info(self):
         """Get size of file content and modification time from filename path."""
@@ -204,7 +209,7 @@ class FileUrl(urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.path_safe(self.url)
+            url = fileutil.path_safe(self.url_without_anchor)
             self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
@@ -270,7 +275,7 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.is_directory():
             return True
-        if firefox.has_sqlite and firefox.extension.search(self.url):
+        if firefox.has_sqlite and firefox.extension.search(self.url_without_anchor):
             return True
         return self.is_content_type_parseable()
 
@@ -278,7 +283,8 @@ class FileUrl(urlbase.UrlBase):
         """Return URL content type, or an empty string if content
         type could not be found."""
         if self.url:
-            self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
+            self.content_type = mimeutil.guess_mimetype(
+                self.url_without_anchor, read=self.get_content)
         else:
             self.content_type = ""
 

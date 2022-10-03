@@ -1,0 +1,76 @@
+url #twofour
+cache key file://%(curdir)s/%(datadir)s/anchor2.html#twofour
+real url file://%(curdir)s/%(datadir)s/anchor2.html#twofour
+name anchor2 four from 2
+valid
+
+url #threefour
+cache key file://%(curdir)s/%(datadir)s/anchor3.html#threefour
+real url file://%(curdir)s/%(datadir)s/anchor3.html#threefour
+name anchor3 four from 3
+valid
+
+url #oneone
+cache key file://%(curdir)s/%(datadir)s/anchor1.html#oneone
+real url file://%(curdir)s/%(datadir)s/anchor1.html#oneone
+name anchor1 one from 1
+valid
+
+url #twoone
+cache key file://%(curdir)s/%(datadir)s/anchor2.html#twoone
+real url file://%(curdir)s/%(datadir)s/anchor2.html#twoone
+name anchor2 one from 2
+valid
+
+url #threeone
+cache key file://%(curdir)s/%(datadir)s/anchor3.html#threeone
+real url file://%(curdir)s/%(datadir)s/anchor3.html#threeone
+name anchor3 one from 3
+valid
+
+url anchor1.html#onefour
+cache key file://%(curdir)s/%(datadir)s/anchor1.html#onefour
+real url file://%(curdir)s/%(datadir)s/anchor1.html#onefour
+name anchor1 four from 3
+valid
+
+url anchor1.html#onethree
+cache key file://%(curdir)s/%(datadir)s/anchor1.html#onethree
+real url file://%(curdir)s/%(datadir)s/anchor1.html#onethree
+name anchor1 three from 3
+valid
+
+url anchor1.html#onetwo
+cache key file://%(curdir)s/%(datadir)s/anchor1.html#onetwo
+real url file://%(curdir)s/%(datadir)s/anchor1.html#onetwo
+name anchor1 two from 3
+valid
+
+url anchor2.html#twothree
+cache key file://%(curdir)s/%(datadir)s/anchor2.html#twothree
+real url file://%(curdir)s/%(datadir)s/anchor2.html#twothree
+name anchor2 three from 1
+valid
+
+url anchor2.html#twotwo
+cache key file://%(curdir)s/%(datadir)s/anchor2.html#twotwo
+real url file://%(curdir)s/%(datadir)s/anchor2.html#twotwo
+name anchor2 two from 1
+valid
+
+url anchor3.html#threethree
+cache key file://%(curdir)s/%(datadir)s/anchor3.html#threethree
+real url file://%(curdir)s/%(datadir)s/anchor3.html#threethree
+name anchor3 three from 2
+valid
+
+url anchor3.html#threetwo
+cache key file://%(curdir)s/%(datadir)s/anchor3.html#threetwo
+real url file://%(curdir)s/%(datadir)s/anchor3.html#threetwo
+name anchor3 two from 2
+valid
+
+url file://%(curdir)s/%(datadir)s/anchor1.html
+cache key file://%(curdir)s/%(datadir)s/anchor1.html
+real url file://%(curdir)s/%(datadir)s/anchor1.html
+valid

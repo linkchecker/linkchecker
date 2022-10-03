@@ -1,0 +1,25 @@
+<!-- targets -->
+<a name="good">Good target</a>
+<a name="with_pipes_|_and_parentheses_(and—em-dashes)">Needs-encoded target #1</a>
+<a name="another_with_pipes_|_and_parentheses_(and—em-dashes)">Needs-encoded target #2</a>
+<a name="partially_|_(encoded_em—dash)">Target for partially-encoded testing</a>
+
+<!-- simple anchors -->
+<a href="urlencoding_anchor.html">No anchor, will not be tested</a>
+<a href="urlencoding_anchor.html#good">Good anchor</a>
+<a href="urlencoding_anchor.html#bad">Bad anchor</a>
+
+<!-- different encodings of the same complex anchor -->
+<a href="urlencoding_anchor.html#with_pipes_|_and_parentheses_(and—em-dashes)">Non-encoded anchor</a>
+<a href="urlencoding_anchor.html#with_pipes_|_and_parentheses_%28and%E2%80%94em-dashes%29">Partially-encoded version of the same anchor</a>
+<a href="urlencoding_anchor.html#with_pipes_%7C_and_parentheses_%28and%E2%80%94em-dashes%29">Fully-encoded version of the same anchor</a>
+
+<!-- just another complex anchor -->
+<a href="urlencoding_anchor.html#another_with_pipes_%7C_and_parentheses_%28and%E2%80%94em-dashes%29">Distinct encoded anchor</a>
+
+<!-- bad anchor, encoded two ways -->
+<a href="urlencoding_anchor.html#bad_|_%28and%E2%80%94em-dashes%29">Bad encoded anchor, partially encoded</a>
+<a href="urlencoding_anchor.html#bad_%7C_%28and%E2%80%94em-dashes%29">Bad encoded anchor, fully encoded</a>
+
+<!-- stand-alone test for partially-encoded anchor -->
+<a href="urlencoding_anchor.html#partially_%7C_(encoded_em—dash)">Partially-encoded anchor, for testing</a>
