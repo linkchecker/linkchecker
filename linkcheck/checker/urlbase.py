@@ -253,6 +253,8 @@ class UrlBase:
         self.url_connection = None
         # data of url content,  (data == None) means no data is available
         self.data = None
+        # url content data encoding
+        self.content_encoding = None
         # url content as a Unicode string
         self.text = None
         # url content as a Beautiful Soup object
@@ -759,9 +761,9 @@ class UrlBase:
             log.debug(
                 LOG_CHECK, "Beautiful Soup detected %s", self.soup.original_encoding
             )
-            self.encoding = self.soup.original_encoding or 'ISO-8859-1'
-            log.debug(LOG_CHECK, "Content encoding %s", self.encoding)
-            self.text = self.data.decode(self.encoding)
+            self.content_encoding = self.soup.original_encoding or 'ISO-8859-1'
+            log.debug(LOG_CHECK, "Content encoding %s", self.content_encoding)
+            self.text = self.data.decode(self.content_encoding)
         return self.text
 
     def read_content(self):
@@ -794,7 +796,7 @@ class UrlBase:
     def add_url(self, url, line=0, column=0, page=0, name="", base=None):
         """Add new URL to queue."""
         if base:
-            base_ref = urlutil.url_norm(base, encoding=self.encoding)[0]
+            base_ref = urlutil.url_norm(base, encoding=self.content_encoding)[0]
         else:
             base_ref = None
         url_data = get_url_from(
@@ -808,7 +810,7 @@ class UrlBase:
             page=page,
             name=name,
             parent_content_type=self.content_type,
-            url_encoding=self.encoding,
+            url_encoding=self.content_encoding,
         )
         self.aggregate.urlqueue.put(url_data)
 
