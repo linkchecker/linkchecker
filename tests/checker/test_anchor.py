@@ -49,3 +49,18 @@ class TestHttpAnchor(HttpServerTest):
     def test_anchor_html(self):
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
+
+
+class TestAnchorsAcrossMultipleFiles(LinkCheckTest):
+    """Test anchors when there are multiple files"""
+
+    def test_anchor1_file(self):
+        """
+        Test a network of files that reference each other, starting with anchor1.html
+        """
+        filename = "anchor1.html"
+        confargs = {"enabledplugins": ["AnchorCheck"]}
+        url = "file://%(curdir)s/%(datadir)s/%(filename)s" % self.get_attrs(
+               filename=filename)
+        resultlines = self.get_resultlines(filename)
+        self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
