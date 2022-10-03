@@ -170,11 +170,7 @@ class FileUrl(urlbase.UrlBase):
             # of the base URL are removed first.
             # Otherwise the join function thinks the query is part of
             # the file name.
-            from .urlbase import url_norm
-
-            # norm base url - can raise UnicodeError from url.idna_encode()
-            base_url, is_idn = url_norm(self.base_url, self.encoding)
-            urlparts = list(urllib.parse.urlsplit(base_url))
+            urlparts = list(urllib.parse.urlsplit(self.base_url))
             # ignore query part for filesystem urls
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
