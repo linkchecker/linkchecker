@@ -161,9 +161,10 @@ class HttpServerTest(LinkCheckTest):
         self.port = None
         self.handler = NoQueryHttpRequestHandler
 
-    def setUp(self):
+    def setUp(self, https=False):
         """Start a new HTTP server in a new thread."""
-        self.port = start_server(self.handler)
+        super().setUp()
+        self.port = start_server(self.handler, https)
         assert self.port is not None
 
     def tearDown(self):
@@ -182,8 +183,7 @@ class HttpsServerTest(HttpServerTest):
 
     def setUp(self):
         """Start a new HTTPS server in a new thread."""
-        self.port = start_server(self.handler, https=True)
-        assert self.port is not None
+        super().setUp(https=True)
 
     def tearDown(self):
         """Send QUIT request to http server."""
