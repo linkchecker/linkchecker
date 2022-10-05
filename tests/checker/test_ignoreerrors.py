@@ -43,6 +43,7 @@ class TestFile(LinkCheckTest):
         ]
         self.direct(url, resultlines, confargs=confargs)
 
+    @need_network
     def test_no_error(self):
         """ Test that unmatched errors are not ignored. """
         self._test("mailto:good@example.com", "", "", True)
