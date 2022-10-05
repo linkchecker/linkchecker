@@ -156,12 +156,10 @@ Application
 
 .. option:: -D STRING, --debug=STRING
 
-    Print debugging output for the given logger. Available loggers are
-    cmdline, checking, cache, dns, plugin and
-    all. Specifying all is an alias for specifying all available
-    loggers. The option can be given multiple times to debug with more
-    than one logger. For accurate results, threading will be disabled
-    during debug runs.
+    Print debugging output for the given logger.
+    Available loggers are cmdline, checking, cache, plugin and all.
+    all is an alias for all available loggers.
+    This option can be given multiple times to debug with more than one logger.
 
 Quiet
 """""
