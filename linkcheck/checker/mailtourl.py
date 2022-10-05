@@ -328,7 +328,7 @@ class MailtoUrl(urlbase.UrlBase):
                 tag=WARN_MAIL_NO_MX_HOST,
             )
             try:
-                answers = resolver.query(domain, 'A')
+                answers = resolver.resolve(domain, 'A', search=True)
             except DNSException:
                 answers = []
             if len(answers) == 0:
