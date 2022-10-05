@@ -90,7 +90,8 @@ checking
 **maxrequestspersecond=**\ *NUMBER*
     Limit the maximum number of HTTP requests per second to one host.
     The average number of requests per second is approximately one third of the
-    maximum. To use values greater than 10, the HTTP server must return a
+    maximum. Values less than 1 and at least 0.001 can be used.
+    To use values greater than 10, the HTTP server must return a
     "LinkChecker" response header.
     The default is 10.
     Command line option: none
