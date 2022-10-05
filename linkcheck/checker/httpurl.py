@@ -176,6 +176,8 @@ class HttpUrl(internpaturl.InternPatternUrl):
         log.debug(LOG_CHECK, "Response headers %s", self.headers)
         self.set_encoding(self.url_connection.encoding)
         log.debug(LOG_CHECK, "Response encoding %s", self.content_encoding)
+        if "LinkChecker" in self.headers:
+            self.aggregate.set_maxrated_for_host(self.urlparts[1])
         self._add_ssl_info()
 
     def _add_response_info(self):

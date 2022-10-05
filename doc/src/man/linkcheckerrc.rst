@@ -88,7 +88,10 @@ checking
     The default is to queue and check all URLs.
     Command line option: none
 **maxrequestspersecond=**\ *NUMBER*
-    Limit the maximum number of requests per second to one host.
+    Limit the maximum number of HTTP requests per second to one host.
+    The average number of requests per second is approximately one third of the
+    maximum. To use values greater than 10, the HTTP server must return a
+    "LinkChecker" response header.
     The default is 10.
     Command line option: none
 **robotstxt=**\ [**0**\ \|\ **1**]
