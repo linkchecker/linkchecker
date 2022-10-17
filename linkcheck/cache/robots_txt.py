@@ -77,7 +77,7 @@ class RobotsTxt:
                 log.warn(LOG_CACHE, _("Relative Sitemap %s in %s discarded"),
                          sitemap_url, roboturl)
                 continue
-            url_data.add_url(sitemap_url, line=line)
+            url_data.add_url(sitemap_url, line=line, parent=roboturl)
 
     @synchronized(robot_lock)
     def get_lock(self, roboturl):
