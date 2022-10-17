@@ -426,6 +426,15 @@ Unsupported links (**javascript:**, etc.)
     `linkcheck/checker/unknownurl.py <https://github.com/linkchecker/linkchecker/blob/master/linkcheck/checker/unknownurl.py>`__
     source file. The most prominent of them should be JavaScript links.
 
+SITEMAPS
+--------
+
+Sitemaps are parsed for links to check and can be detected either from a
+sitemap entry in a robots.txt, or when passed as a :option:`FILE-OR-URL`
+argument in which case detection requires the urlset/sitemapindex tag to be
+within the first 70 characters of the sitemap.
+Compressed sitemap files are not supported.
+
 PLUGINS
 -------
 
