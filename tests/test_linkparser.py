@@ -17,11 +17,12 @@
 Test linkparser routines.
 """
 
-import unittest
 from linkcheck.htmlutil import htmlsoup, linkparse
 
+from . import TestBase
 
-class TestLinkparser(unittest.TestCase):
+
+class TestLinkparser(TestBase):
     """
     Test link parsing.
     """

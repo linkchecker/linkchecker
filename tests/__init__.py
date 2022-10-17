@@ -18,10 +18,23 @@ import subprocess
 import os
 import sys
 import socket
+import unittest
 import pytest
 from contextlib import contextmanager
 from functools import lru_cache, wraps
-from linkcheck import LinkCheckerInterrupt
+from linkcheck import init_i18n, LinkCheckerInterrupt
+
+
+class TestBase(unittest.TestCase):
+    """
+    Base class for tests.
+    """
+
+    def setUp(self):
+        """Ensure the current locale setting is the default.
+        Otherwise, warnings will get translated and will break tests."""
+        super().setUp()
+        init_i18n(loc="C")
 
 
 def run(cmd, verbosity=0, **kwargs):

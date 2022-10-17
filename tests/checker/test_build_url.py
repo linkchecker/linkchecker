@@ -16,15 +16,14 @@
 """
 Test UrlBase.build_url()
 """
-import unittest
-
 import linkcheck.configuration
 import linkcheck.director
 
 from . import get_url_from
+from .. import TestBase
 
 
-class TestBuildUrl(unittest.TestCase):
+class TestBuildUrl(TestBase):
     """Test parsing of URLs by UrlBase.build_url()."""
 
     def test_build_url(self):

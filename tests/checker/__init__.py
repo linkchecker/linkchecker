@@ -19,12 +19,11 @@ Define standard test support classes functional for LinkChecker tests.
 import os
 import re
 import difflib
-import unittest
 import linkcheck.checker
 import linkcheck.configuration
 import linkcheck.director
 import linkcheck.logger
-from .. import get_file
+from .. import get_file, TestBase
 
 # helper alias
 get_url_from = linkcheck.checker.get_url_from
@@ -190,18 +189,12 @@ def get_test_aggregate(confargs, logargs, logger=TestLogger):
     return linkcheck.director.get_aggregate(config)
 
 
-class LinkCheckTest(unittest.TestCase):
+class LinkCheckTest(TestBase):
     """
     Functional test class with ability to test local files.
     """
 
     logger = TestLogger
-
-    def setUp(self):
-        """Ensure the current locale setting is the default.
-        Otherwise, warnings will get translated and will break tests."""
-        super().setUp()
-        linkcheck.init_i18n(loc="C")
 
     def norm(self, url, encoding="utf-8"):
         """Helper function to norm a url."""

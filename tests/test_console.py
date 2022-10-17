@@ -17,11 +17,12 @@
 Test console operations.
 """
 
-import unittest
 import linkcheck.director.console
 
+from . import TestBase
 
-class TestConsole(unittest.TestCase):
+
+class TestConsole(TestBase):
     """Test console operations."""
 
     def test_internal_error(self):

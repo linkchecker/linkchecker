@@ -16,15 +16,16 @@
 """
 Test cgi form routines.
 """
-import unittest
 import urllib.parse
 from io import BytesIO
 from wsgiref.util import setup_testing_defaults
 from linkcheck.lc_cgi import checkform, checklink, LCFormError, application
 from linkcheck.strformat import limit
 
+from . import TestBase
 
-class TestWsgi(unittest.TestCase):
+
+class TestWsgi(TestBase):
     """Test wsgi application."""
 
     def test_form_valid_url(self):
