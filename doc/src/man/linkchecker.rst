@@ -175,7 +175,7 @@ Checking options
 
 .. option:: --cookiefile=FILENAME
 
-    Read a file with initial cookie data. The cookie data format is
+    Use initial cookie data read from a file. The cookie data format is
     explained below.
 
 .. option:: --check-extern
