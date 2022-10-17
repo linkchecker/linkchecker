@@ -225,8 +225,9 @@ class HttpUrl(internpaturl.InternPatternUrl):
             self.auth = (_user, _password)
 
     def set_content_type(self):
-        """Return content MIME type or empty string."""
+        """Set MIME type from HTTP response headers."""
         self.content_type = httputil.get_content_type(self.headers)
+        log.debug(LOG_CHECK, "MIME type: %s", self.content_type)
 
     def set_encoding(self, encoding):
         """Set content encoding"""
@@ -376,6 +377,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
             if rtype is not None:
                 # XXX side effect
                 self.content_type = rtype
+                log.debug(LOG_CHECK, "Read MIME type: %s", self.content_type)
         return self.is_content_type_parseable()
 
     def get_robots_txt_url(self):

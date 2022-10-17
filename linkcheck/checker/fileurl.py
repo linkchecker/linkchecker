@@ -280,13 +280,14 @@ class FileUrl(urlbase.UrlBase):
         return self.is_content_type_parseable()
 
     def set_content_type(self):
-        """Return URL content type, or an empty string if content
+        """Set URL content type, or an empty string if content
         type could not be found."""
         if self.url:
             self.content_type = mimeutil.guess_mimetype(
                 self.url_without_anchor, read=self.get_content)
         else:
             self.content_type = ""
+        log.debug(LOG_CHECK, "MIME type: %s", self.content_type)
 
     def get_intern_pattern(self, url=None):
         """Get pattern for intern URL matching.
