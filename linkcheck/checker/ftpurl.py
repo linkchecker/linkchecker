@@ -166,6 +166,7 @@ class FtpUrl(internpaturl.InternPatternUrl):
         """Set URL content type, or an empty string if content
         type could not be found."""
         self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
+        log.debug(LOG_CHECK, "MIME type: %s", self.content_type)
 
     def read_content(self):
         """Return URL target content, or in case of directories a dummy HTML

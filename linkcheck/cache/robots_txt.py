@@ -16,10 +16,13 @@
 """
 Cache robots.txt contents.
 """
+import urllib.parse
+
 from .. import robotparser2
 from ..containers import LFUCache
 from ..decorators import synchronized
 from ..lock import get_lock
+from .. import log, LOG_CACHE
 
 
 # lock objects
@@ -70,7 +73,11 @@ class RobotsTxt:
         if not rp.sitemap_urls or not url_data.allows_simple_recursion():
             return
         for sitemap_url, line in rp.sitemap_urls:
-            url_data.add_url(sitemap_url, line=line)
+            if not urllib.parse.urlparse(sitemap_url).scheme:
+                log.warn(LOG_CACHE, _("Relative Sitemap %s in %s discarded"),
+                         sitemap_url, roboturl)
+                continue
+            url_data.add_url(sitemap_url, line=line, parent=roboturl)
 
     @synchronized(robot_lock)
     def get_lock(self, roboturl):

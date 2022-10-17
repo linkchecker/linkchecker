@@ -793,7 +793,7 @@ class UrlBase:
             return (split.username, split.password)
         return self.aggregate.config.get_user_password(self.url)
 
-    def add_url(self, url, line=0, column=0, page=0, name="", base=None):
+    def add_url(self, url, line=0, column=0, page=0, name="", base=None, parent=None):
         """Add new URL to queue."""
         if base:
             base_ref = urlutil.url_norm(base, encoding=self.content_encoding)[0]
@@ -803,7 +803,7 @@ class UrlBase:
             url,
             self.recursion_level + 1,
             self.aggregate,
-            parent_url=self.url,
+            parent_url=self.url if parent is None else parent,
             base_ref=base_ref,
             line=line,
             column=column,
