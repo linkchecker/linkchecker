@@ -230,7 +230,7 @@ class TextLogger(_Logger):
             self.write(
                 _n("in %d URL", "in %d URLs", self.stats.num_urls) % self.stats.num_urls
             )
-        self.write(" checked. ")
+        self.write(_(" checked.") + " ")
         warning_text = (
             _n("%d warning found", "%d warnings found", self.stats.warnings_printed)
             % self.stats.warnings_printed
