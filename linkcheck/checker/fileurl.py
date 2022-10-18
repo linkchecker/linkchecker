@@ -122,14 +122,6 @@ class FileUrl(urlbase.UrlBase):
         )
         self.scheme = 'file'
 
-    def reset(self):
-        super().reset()
-        # the local file URI
-        self.url_without_anchor = None
-        # including the anchor in self.url allows the AnchorCheck plugin to be
-        # used when checking files. The anchor is stripped in UrlBase.set_cache_url()
-        # if AnchorCheck is not being used.
-
     def build_base_url(self):
         """The URL is normed according to the platform:
          - the base URL is made an absolute *file://* URL
@@ -175,15 +167,14 @@ class FileUrl(urlbase.UrlBase):
             urlparts[3] = ''
             self.base_url = urlutil.urlunsplit(urlparts)
         super().build_url()
-        # ignore query url part for filesystem urls
-        self.urlparts[3] = ''
+        # ignore query and fragment url parts for filesystem urls
+        self.urlparts[3] = self.urlparts[4] = ''
         if self.is_directory() and not self.urlparts[2].endswith('/'):
             self.add_warning(
                 _("Added trailing slash to directory."), tag=WARN_FILE_MISSING_SLASH
             )
             self.urlparts[2] += '/'
         self.url = urlutil.urlunsplit(self.urlparts)
-        self.url_without_anchor = urlutil.urlunsplit(self.urlparts[:4] + [''])
 
     def add_size_info(self):
         """Get size of file content and modification time from filename path."""
@@ -209,7 +200,7 @@ class FileUrl(urlbase.UrlBase):
         if self.is_directory():
             self.set_result(_("directory"))
         else:
-            url = fileutil.path_safe(self.url_without_anchor)
+            url = fileutil.path_safe(self.url)
             self.url_connection = urllib.request.urlopen(url)
             self.check_case_sensitivity()
 
@@ -275,7 +266,7 @@ class FileUrl(urlbase.UrlBase):
         """
         if self.is_directory():
             return True
-        if firefox.has_sqlite and firefox.extension.search(self.url_without_anchor):
+        if firefox.has_sqlite and firefox.extension.search(self.url):
             return True
         return self.is_content_type_parseable()
 
@@ -283,8 +274,7 @@ class FileUrl(urlbase.UrlBase):
         """Set URL content type, or an empty string if content
         type could not be found."""
         if self.url:
-            self.content_type = mimeutil.guess_mimetype(
-                self.url_without_anchor, read=self.get_content)
+            self.content_type = mimeutil.guess_mimetype(self.url, read=self.get_content)
         else:
             self.content_type = ""
         log.debug(LOG_CHECK, "MIME type: %s", self.content_type)

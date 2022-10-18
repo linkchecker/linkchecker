@@ -27,19 +27,19 @@ class TestAnchor(LinkCheckTest):
 
     def test_anchor(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
-        anchor = "broken"
-        url = "file://%(curdir)s/%(datadir)s/anchor.html#%(anchor)s" % self.get_attrs(
-               anchor=anchor)
+        url = "file://%(curdir)s/%(datadir)s/anchor.html" % self.get_attrs()
         nurl = self.norm(url)
+        anchor = "broken"
+        urlanchor = url + "#" + anchor
         resultlines = [
-            f"url {url}",
-            f"cache key {nurl}",
-            f"real url {nurl}",
-            f"warning Anchor `{anchor}' (decoded: `{anchor}') not found."
-            " Available anchors: `myid:'.",
+            "url %s" % urlanchor,
+            "cache key %s" % nurl,
+            "real url %s" % nurl,
+            "warning Anchor `%s' (decoded: `%s') not found."
+            " Available anchors: `myid:'." % (anchor, anchor),
             "valid",
         ]
-        self.direct(url, resultlines, confargs=confargs)
+        self.direct(urlanchor, resultlines, confargs=confargs)
 
 
 class TestHttpAnchor(HttpServerTest):
