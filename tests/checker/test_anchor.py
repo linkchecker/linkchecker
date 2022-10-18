@@ -43,28 +43,17 @@ class TestAnchor(LinkCheckTest):
 
 
 class TestHttpAnchor(HttpServerTest):
-    """
-    Test checking of HTML pages containing links to anchors served over http.
-    """
-
     def test_anchor_http(self):
+        """
+        Test checking of HTML pages containing links to anchors served over http.
+        """
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("http_anchor.html", confargs=confargs)
 
-
-class TestEncodedAnchors(HttpServerTest):
-    """Test HTML pages containing urlencoded links to anchors"""
-
     def test_anchor_encoded_http(self):
-        """
-        http://
-        """
+        """Test HTML pages containing urlencoded links to anchors"""
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("urlencoding_anchor.html", confargs=confargs)
-
-
-class TestAnchorsAcrossMultipleFiles(HttpServerTest):
-    """Test anchors when there are multiple HTML pages"""
 
     def test_anchor1_html(self):
         """
