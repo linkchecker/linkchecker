@@ -476,7 +476,7 @@ options in their section.
 AnchorCheck
 ^^^^^^^^^^^
 
-Checks validity of HTML anchors.
+Checks validity of HTML anchors. Only pages accessed over http(s) are checked.
 
 LocationInfo
 ^^^^^^^^^^^^
