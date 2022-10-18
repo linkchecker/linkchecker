@@ -76,16 +76,12 @@ class TestEncodedAnchors(HttpServerTest):
         self.direct(url, resultlines, recursionlevel=1, confargs=confargs)
 
 
-class TestAnchorsAcrossMultipleFiles(LinkCheckTest):
-    """Test anchors when there are multiple files"""
+class TestAnchorsAcrossMultipleFiles(HttpServerTest):
+    """Test anchors when there are multiple HTML pages"""
 
-    def test_anchor1_file(self):
+    def test_anchor1_html(self):
         """
         Test a network of files that reference each other, starting with anchor1.html
         """
-        filename = "anchor1.html"
-        confargs = {"enabledplugins": ["AnchorCheck"]}
-        url = "file://%(curdir)s/%(datadir)s/%(filename)s" % self.get_attrs(
-               filename=filename)
-        resultlines = self.get_resultlines(filename)
-        self.direct(url, resultlines, recursionlevel=4, confargs=confargs)
+        confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=4)
+        self.file_test("anchor1.html", confargs=confargs)
