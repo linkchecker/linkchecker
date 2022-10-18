@@ -20,12 +20,12 @@ from . import LinkCheckTest
 from .httpserver import HttpServerTest
 
 
-class TestFileAnchor(LinkCheckTest):
+class TestAnchor(LinkCheckTest):
     """
-    Test anchor checking of HTML files.
+    Test anchor checking of HTML pages.
     """
 
-    def test_anchor_file(self):
+    def test_anchor(self):
         confargs = {"enabledplugins": ["AnchorCheck"]}
         anchor = "broken"
         url = "file://%(curdir)s/%(datadir)s/anchor.html#%(anchor)s" % self.get_attrs(
@@ -61,19 +61,6 @@ class TestEncodedAnchors(HttpServerTest):
         """
         confargs = dict(enabledplugins=["AnchorCheck"], recursionlevel=1)
         self.file_test("urlencoding_anchor.html", confargs=confargs)
-
-    def test_anchor_encoded_file(self):
-        """
-        file://
-        This should have identical behavior as http://
-        """
-        filename = "urlencoding_anchor.html"
-        confargs = {"enabledplugins": ["AnchorCheck"]}
-        url = "file://%(curdir)s/%(datadir)s/%(filename)s" % self.get_attrs(
-               filename=filename)
-        # get results from the special result file that has `.file.` in its name
-        resultlines = self.get_resultlines(f"{filename}.file")
-        self.direct(url, resultlines, recursionlevel=1, confargs=confargs)
 
 
 class TestAnchorsAcrossMultipleFiles(HttpServerTest):
