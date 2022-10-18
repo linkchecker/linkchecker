@@ -41,9 +41,12 @@ class CustomBuildHook(BuildHookInterface):
         committer_date = committer_year = "unknown"
         try:
             cp = subprocess.run(["git", "log", "-n 1", "HEAD", "--format=%cs"],
-                                capture_output=True, text=True)
-        except FileNotFoundError:
-            pass
+                                capture_output=True, check=True, text=True)
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            # support building wheel from sdist
+            if Path(*RELEASE_PY).is_file():
+                self.app.display_warning("_release.py already exists")
+                return
         else:
             if cp and cp.stdout:
                 committer_date = cp.stdout.strip()
