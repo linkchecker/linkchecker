@@ -36,8 +36,7 @@ class TestConfig(TestBase):
     """Test configuration parsing."""
 
     def test_confparse(self):
-        # Tests must either cover every possiblity or
-        # use a value other than the default
+        # Tests must not use the default value only
         config = linkcheck.configuration.Configuration()
         files = [get_file("config0.ini")]
         config.read(files)
