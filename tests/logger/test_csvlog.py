@@ -14,12 +14,13 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import unittest
 import os
 from linkcheck.logger.csvlog import CSVLogger
 
+from .. import TestBase
 
-class TestCsvLogger(unittest.TestCase):
+
+class TestCsvLogger(TestBase):
     def test_parts(self):
         args = dict(
             filename=os.path.join(os.path.dirname(__file__), "testlog.csv"),

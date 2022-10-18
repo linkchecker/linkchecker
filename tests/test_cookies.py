@@ -18,14 +18,15 @@ Test cookie routines.
 """
 
 import os
-import unittest
 
 import linkcheck.cookies
 import linkcheck.configuration
 import linkcheck.director
 
+from . import TestBase
 
-class TestCookies(unittest.TestCase):
+
+class TestCookies(TestBase):
     """Test cookie routines."""
 
     def test_cookie_parse_multiple_headers(self):

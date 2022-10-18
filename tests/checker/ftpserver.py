@@ -38,6 +38,7 @@ class FtpServerTest(LinkCheckTest):
 
     def setUp(self):
         """Start a new FTP server in a new thread."""
+        super().setUp()
         self.port = start_server(self.host, 0)
         self.assertFalse(self.port is None)
 

@@ -17,10 +17,11 @@
 Test config parsing.
 """
 
-import unittest
 import os
 from re import Pattern
 import linkcheck.configuration
+
+from .. import TestBase
 
 
 def get_file(filename=None):
@@ -31,7 +32,7 @@ def get_file(filename=None):
     return directory
 
 
-class TestConfig(unittest.TestCase):
+class TestConfig(TestBase):
     """Test configuration parsing."""
 
     def test_confparse(self):
