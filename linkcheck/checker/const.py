@@ -91,6 +91,7 @@ WARN_URL_TOO_LONG = "url-too-long"
 WARN_URL_WHITESPACE = "url-whitespace"
 WARN_FILE_MISSING_SLASH = "file-missing-slash"
 WARN_FILE_SYSTEM_PATH = "file-system-path"
+WARN_FILE_ANCHORCHECK_DIRECTORY = "file-anchorcheck-directory"
 WARN_FTP_MISSING_SLASH = "ftp-missing-slash"
 WARN_HTTP_EMPTY_CONTENT = "http-empty-content"
 WARN_HTTP_COOKIE_STORE_ERROR = "http-cookie-store-error"
@@ -113,6 +114,8 @@ Warnings = {
     WARN_FILE_SYSTEM_PATH: _(
         "The file: path is not the same as the system specific path."
     ),
+    WARN_FILE_ANCHORCHECK_DIRECTORY: _(
+        "A local directory with an anchor, not supported by AnchorCheck."),
     WARN_FTP_MISSING_SLASH: _("The ftp: URL is missing a trailing slash."),
     WARN_HTTP_EMPTY_CONTENT: _("The URL had no content."),
     WARN_HTTP_COOKIE_STORE_ERROR: _("An error occurred while storing a cookie."),

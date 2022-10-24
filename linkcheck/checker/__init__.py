@@ -131,6 +131,9 @@ def get_url_from(
     else:
         assume_local_file = recursion_level == 0
         klass = get_urlclass_from(scheme, assume_local_file=assume_local_file)
+        if "AnchorCheck" in aggregate.config["enabledplugins"] and \
+                klass == fileurl.FileUrl:
+            klass = fileurl.AnchorCheckFileUrl
     log.debug(LOG_CHECK, "%s handles url %s", klass.__name__, base_url)
     return klass(
         base_url,

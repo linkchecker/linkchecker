@@ -475,7 +475,9 @@ options in their section.
 AnchorCheck
 ^^^^^^^^^^^
 
-Checks validity of HTML anchors.
+Checks validity of HTML anchors. When checking local files, URLs with anchors
+that link to directories e.g. "example/#anchor" are not supported. There is no
+such limitation when using http(s).
 
 LocationInfo
 ^^^^^^^^^^^^
@@ -568,6 +570,8 @@ WARNINGS
 The following warnings are recognized in the 'ignorewarnings' config
 file entry:
 
+**file-anchorcheck-directory**
+    A local directory with an anchor, not supported by AnchorCheck.
 **file-missing-slash**
     The file: URL is missing a trailing slash.
 **file-system-path**
