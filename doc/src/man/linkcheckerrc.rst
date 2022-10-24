@@ -220,10 +220,9 @@ Application
 """""""""""
 
 **debug=**\ *STRING*\ [**,**\ *STRING*...]
-    Print debugging output for the given modules. Available debug
-    modules are **cmdline**, **checking**, **cache**, **dns**,
-    **thread**, **plugins** and **all**. Specifying **all** is an alias
-    for specifying all available loggers.
+    Print debugging output for the given logger. Available debug
+    loggers are **cmdline**, **checking**, **cache**, **plugin** and **all**.
+    **all** is an alias for all available loggers.
     Command line option: :option:`--debug`
 
 Quiet
