@@ -42,7 +42,7 @@ def check_url(url_data, logger):
         logger.log_url(url_data.to_wire())
     else:
         cache = url_data.aggregate.result_cache
-        key = url_data.cache_url
+        key = url_data.result_cache_url
         result = cache.get_result(key)
         if result is None:
             # check

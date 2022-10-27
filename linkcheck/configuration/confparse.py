@@ -158,6 +158,7 @@ class LCConfigParser(RawConfigParser):
             val = self.get(section, "debug")
             parts = [f.strip().lower() for f in val.split(',')]
             logconf.set_debug(parts)
+        self.read_boolean_option(section, "reportallreferences")
         self.read_boolean_option(section, "status")
         if self.has_option(section, "log"):
             val = self.get(section, "log").strip().lower()

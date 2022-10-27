@@ -177,6 +177,7 @@ class Configuration(dict):
         self['quiet'] = False
         self["verbose"] = False
         self["warnings"] = True
+        self["reportallreferences"] = False
         self["fileoutput"] = []
         self['output'] = 'text'
         self["status"] = True
