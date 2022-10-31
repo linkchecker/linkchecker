@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKER" "1" "December 21, 2021" "10.0.1.post124+ga12fcf04" "LinkChecker"
+.TH "LINKCHECKER" "1" "October 31, 2022" "10.1.0.post162+g614e84b5" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .SH SYNOPSIS
@@ -158,17 +158,12 @@ $ linkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps
 .TP
 .B \-f FILENAME, \-\-config=FILENAME
 Use FILENAME as configuration file. By default LinkChecker uses
-~/.linkchecker/linkcheckerrc.
+$XDG_CONFIG_HOME/linkchecker/linkcheckerrc.
 .UNINDENT
 .INDENT 0.0
 .TP
 .B \-h, \-\-help
 Help me! Print usage information for this program.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-\-stdin
-Read list of white\-space separated URLs to check from stdin.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -192,7 +187,7 @@ Print available check plugins and exit.
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
 Output to a file linkchecker\-out.TYPE,
-$HOME/.linkchecker/failures for the failures output type, or
+$XDG_DATA_HOME/linkchecker/failures for the failures output type, or
 FILENAME if specified. The ENCODING specifies the output
 encoding, the default is that of your locale. Valid encodings are
 listed at
@@ -235,12 +230,10 @@ Do not print URL check status messages.
 .INDENT 0.0
 .TP
 .B \-D STRING, \-\-debug=STRING
-Print debugging output for the given logger. Available loggers are
-cmdline, checking, cache, dns, plugin and
-all. Specifying all is an alias for specifying all available
-loggers. The option can be given multiple times to debug with more
-than one logger. For accurate results, threading will be disabled
-during debug runs.
+Print debugging output for the given logger.
+Available debug loggers are cmdline, checking, cache, plugin and all.
+all is an alias for all available loggers.
+This option can be given multiple times to debug with more than one logger.
 .UNINDENT
 .SS Quiet
 .INDENT 0.0
@@ -254,7 +247,7 @@ This is only useful with \fI\%\-F\fP, else no results will be output.
 .INDENT 0.0
 .TP
 .B \-\-cookiefile=FILENAME
-Read a file with initial cookie data. The cookie data format is
+Use initial cookie data read from a file. The cookie data format is
 explained below.
 .UNINDENT
 .INDENT 0.0
@@ -319,8 +312,21 @@ username. See also \fI\%\-p\fP\&.
 .TP
 .B \-\-user\-agent=STRING
 Specify the User\-Agent string to send to the HTTP server, for
-example "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is
+example \(dqMozilla/4.0\(dq. The default is \(dqLinkChecker/X.Y\(dq where X.Y is
 the current version of LinkChecker.
+.UNINDENT
+.SS Input options
+.INDENT 0.0
+.TP
+.B \-\-stdin
+Read from stdin a list of white\-space separated URLs to check.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B FILE\-OR\-URL
+The location to start checking with.
+A file can be a simple list of URLs, one per line, if the first line is
+\(dq# LinkChecker URL list\(dq.
 .UNINDENT
 .SH CONFIGURATION FILES
 .sp
@@ -369,7 +375,7 @@ script to create the initial SQL table is included as create.sql.
 .TP
 \fBfailures\fP
 Suitable for cron jobs. Logs the check result into a file
-\fB~/.linkchecker/failures\fP which only contains entries with
+\fB$XDG_DATA_HOME/linkchecker/failures\fP which only contains entries with
 invalid URLs and the number of times they have failed.
 .TP
 \fBnone\fP
@@ -407,8 +413,8 @@ and one to all URLs starting with \fBhttps://example.org/\fP:
 .ft C
 Host: example.com
 Path: /hello
-Set\-cookie: ID="smee"
-Set\-cookie: spam="egg"
+Set\-cookie: ID=\(dqsmee\(dq
+Set\-cookie: spam=\(dqegg\(dq
 .ft P
 .fi
 .UNINDENT
@@ -419,7 +425,7 @@ Set\-cookie: spam="egg"
 .nf
 .ft C
 Host: example.org
-Set\-cookie: baggage="elitist"; comment="hologram"
+Set\-cookie: baggage=\(dqelitist\(dq; comment=\(dqhologram\(dq
 .ft P
 .fi
 .UNINDENT
@@ -444,7 +450,7 @@ Setting a HTTP proxy on Unix for example looks like this:
 .sp
 .nf
 .ft C
-$ export http_proxy="http://proxy.example.com:8080"
+$ export http_proxy=\(dqhttp://proxy.example.com:8080\(dq
 .ft P
 .fi
 .UNINDENT
@@ -456,7 +462,7 @@ Proxy authentication is also supported:
 .sp
 .nf
 .ft C
-$ export http_proxy="http://user1:mypass@proxy.example.org:8081"
+$ export http_proxy=\(dqhttp://user1:mypass@proxy.example.org:8081\(dq
 .ft P
 .fi
 .UNINDENT
@@ -547,6 +553,13 @@ in the
 \fI\%linkcheck/checker/unknownurl.py\fP
 source file. The most prominent of them should be JavaScript links.
 .UNINDENT
+.SH SITEMAPS
+.sp
+Sitemaps are parsed for links to check and can be detected either from a
+sitemap entry in a robots.txt, or when passed as a \fI\%FILE\-OR\-URL\fP
+argument in which case detection requires the urlset/sitemapindex tag to be
+within the first 70 characters of the sitemap.
+Compressed sitemap files are not supported.
 .SH PLUGINS
 .sp
 There are two plugin types: connection and content plugins. Connection
@@ -580,7 +593,7 @@ It must not match the ignored URL list. This is controlled with the
 \fI\%\-\-ignore\-url\fP option.
 .IP 6. 3
 The Robots Exclusion Protocol must allow links in the URL to be
-followed recursively. This is checked by searching for a "nofollow"
+followed recursively. This is checked by searching for a \(dqnofollow\(dq
 directive in the HTML header data.
 .UNINDENT
 .sp
@@ -660,9 +673,9 @@ of queued URLs the amount of consumed memory can become quite large.
 This might slow down the program or even the whole system.
 .SH FILES
 .sp
-\fB~/.linkchecker/linkcheckerrc\fP \- default configuration file
+\fB$XDG_CONFIG_HOME/linkchecker/linkcheckerrc\fP \- default configuration file
 .sp
-\fB~/.linkchecker/failures\fP \- default failures logger output filename
+\fB$XDG_DATA_HOME/linkchecker/failures\fP \- default failures logger output filename
 .sp
 \fBlinkchecker\-out.\fP\fITYPE\fP \- default logger file output name
 .SH SEE ALSO
@@ -677,6 +690,6 @@ documentation
 .SH AUTHOR
 Bastian Kleineidam <bastian.kleineidam@web.de>
 .SH COPYRIGHT
-2000-2016 Bastian Kleineidam, 2010-2021 LinkChecker Authors
+2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
 .\" Generated by docutils manpage writer.
 .

@@ -27,15 +27,16 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKERRC" "5" "December 21, 2021" "10.0.1.post124+ga12fcf04" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "October 31, 2022" "10.1.0.post162+g614e84b5" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .SH DESCRIPTION
 .sp
 \fBlinkcheckerrc\fP is the configuration file for LinkChecker. The file is
 written in an INI\-style format.
-The default file location is \fB~/.linkchecker/linkcheckerrc\fP on Unix,
-\fB%HOMEPATH%\e.linkchecker\elinkcheckerrc\fP on Windows systems.
+The default file location is \fB$XDG_CONFIG_HOME/linkchecker/linkcheckerrc\fP
+or else \fB~/.config/linkchecker/linkcheckerrc\fP on Unix,
+\fB%HOMEPATH%\e.config\elinkchecker\elinkcheckerrc\fP on Windows systems.
 .SH SETTINGS
 .SS checking
 .INDENT 0.0
@@ -43,7 +44,7 @@ The default file location is \fB~/.linkchecker/linkcheckerrc\fP on Unix,
 \fBcookiefile=\fP\fIfilename\fP
 Read a file with initial cookie data. The cookie data format is
 explained in \fBlinkchecker(1)\fP\&.
-Command line option: \fB\-\-cookiefile\fP
+Command line option: \fI\%\-\-cookiefile\fP
 .TP
 \fBdebugmemory=\fP[\fB0\fP|\fB1\fP]
 Write memory allocation statistics to a file on exit, requires \fI\%meliae\fP\&.
@@ -60,24 +61,24 @@ Command line option: none
 .TP
 \fBnntpserver=\fP\fISTRING\fP
 Specify an NNTP server for \fBnews:\fP links. Default is the
-environment variable \fBNNTP_SERVER\fP\&. If no host is given, only the
+environment variable \fI\%NNTP_SERVER\fP\&. If no host is given, only the
 syntax of the link is checked.
-Command line option: \fB\-\-nntp\-server\fP
+Command line option: \fI\%\-\-nntp\-server\fP
 .TP
 \fBrecursionlevel=\fP\fINUMBER\fP
 Check recursively all links up to given depth. A negative depth will
 enable infinite recursion. Default depth is infinite.
-Command line option: \fB\-\-recursion\-level\fP
+Command line option: \fI\%\-\-recursion\-level\fP
 .TP
 \fBthreads=\fP\fINUMBER\fP
 Generate no more than the given number of threads. Default number of
 threads is 10. To disable threading specify a non\-positive number.
-Command line option: \fB\-\-threads\fP
+Command line option: \fI\%\-\-threads\fP
 .TP
 \fBtimeout=\fP\fINUMBER\fP
 Set the timeout for connection attempts in seconds. The default
 timeout is 60 seconds.
-Command line option: \fB\-\-timeout\fP
+Command line option: \fI\%\-\-timeout\fP
 .TP
 \fBaborttimeout=\fP\fINUMBER\fP
 Time to wait for checks to finish after the user aborts the first
@@ -87,9 +88,9 @@ Command line option: none
 .TP
 \fBuseragent=\fP\fISTRING\fP
 Specify the User\-Agent string to send to the HTTP server, for
-example "Mozilla/4.0". The default is "LinkChecker/X.Y" where X.Y is
+example \(dqMozilla/4.0\(dq. The default is \(dqLinkChecker/X.Y\(dq where X.Y is
 the current version of LinkChecker.
-Command line option: \fB\-\-user\-agent\fP
+Command line option: \fI\%\-\-user\-agent\fP
 .TP
 \fBsslverify=\fP[\fB0\fP|\fB1\fP|\fIfilename\fP]
 If set to zero disables SSL certificate checking. If set to one (the
@@ -124,7 +125,11 @@ The default is to queue and check all URLs.
 Command line option: none
 .TP
 \fBmaxrequestspersecond=\fP\fINUMBER\fP
-Limit the maximum number of requests per second to one host.
+Limit the maximum number of HTTP requests per second to one host.
+The average number of requests per second is approximately one third of the
+maximum. Values less than 1 and at least 0.001 can be used.
+To use values greater than 10, the HTTP server must return a
+\(dqLinkChecker\(dq response header.
 The default is 10.
 Command line option: none
 .TP
@@ -132,7 +137,7 @@ Command line option: none
 When using http, fetch robots.txt, and confirm whether each URL should
 be accessed before checking.
 The default is to use robots.txt files.
-Command line option: \fB\-\-no\-robots\fP
+Command line option: \fI\%\-\-no\-robots\fP
 .TP
 \fBallowedschemes=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
 Allowed URL schemes as comma\-separated list.
@@ -148,7 +153,7 @@ Command line option: none
 .TP
 \fBignore=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Only check syntax of URLs matching the given regular expressions.
-Command line option: \fB\-\-ignore\-url\fP
+Command line option: \fI\%\-\-ignore\-url\fP
 .TP
 \fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
 Ignore the comma\-separated list of warnings. See \fI\%WARNINGS\fP for
@@ -163,11 +168,11 @@ Command line option: none
 \fBnofollow=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Check but do not recurse into URLs matching the given regular
 expressions.
-Command line option: \fB\-\-no\-follow\-url\fP
+Command line option: \fI\%\-\-no\-follow\-url\fP
 .TP
 \fBcheckextern=\fP[\fB0\fP|\fB1\fP]
 Check external links. Default is to check internal links only.
-Command line option: \fB\-\-check\-extern\fP
+Command line option: \fI\%\-\-check\-extern\fP
 .UNINDENT
 .SS authentication
 .INDENT 0.0
@@ -182,9 +187,9 @@ The password is optional and if missing it has to be entered at the
 commandline.
 If the regular expression matches the checked URL, the given
 username/password pair is used for authentication. The command line
-options \fB\-u\fP and \fB\-p\fP match every link and therefore override
+options \fI\%\-u\fP and \fI\%\-p\fP match every link and therefore override
 the entries given here. The first match wins.
-Command line option: \fB\-u\fP, \fB\-p\fP
+Command line option: \fI\%\-u\fP, \fI\%\-p\fP
 .TP
 \fBloginurl=\fP\fIURL\fP
 The URL of a login page to be visited before link checking. The page
@@ -212,12 +217,12 @@ form.
 .TP
 \fBfileoutput=\fP\fITYPE\fP[\fB,\fP\fITYPE\fP\&...]
 Output to a file \fBlinkchecker\-out.\fP\fITYPE\fP, or
-\fB$HOME/.linkchecker/failures\fP for the \fBfailures\fP output type.
+\fB$XDG_DATA_HOME/linkchecker/failures\fP for the \fBfailures\fP output type.
 Valid file output types are \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
 \fBgml\fP, \fBdot\fP, \fBxml\fP, \fBnone\fP or \fBfailures\fP\&. Default is no
 file output. The various output types are documented below. Note
 that you can suppress all console output with \fBoutput=none\fP\&.
-Command line option: \fB\-\-file\-output\fP
+Command line option: \fI\%\-\-file\-output\fP
 .TP
 \fBlog=\fP\fITYPE\fP[\fB/\fP\fIENCODING\fP]
 Specify the console output type as \fBtext\fP, \fBhtml\fP, \fBsql\fP, \fBcsv\fP,
@@ -226,33 +231,55 @@ is \fBtext\fP\&. The various output types are documented below.
 The \fIENCODING\fP specifies the output encoding, the default is that of
 your locale. Valid encodings are listed at
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
-Command line option: \fB\-\-output\fP
+Command line option: \fI\%\-\-output\fP
 .TP
 \fBverbose=\fP[\fB0\fP|\fB1\fP]
 If set log all checked URLs once. Default is to log only errors and
 warnings.
-Command line option: \fB\-\-verbose\fP
+Command line option: \fI\%\-\-verbose\fP
 .TP
 \fBwarnings=\fP[\fB0\fP|\fB1\fP]
 If set log warnings. Default is to log warnings.
-Command line option: \fB\-\-no\-warnings\fP
+Command line option: \fI\%\-\-no\-warnings\fP
+.TP
+\fBignoreerrors=\fP\fIURL_REGEX\fP [\fIMESSAGE_REGEX\fP] (\fI\%MULTILINE\fP)
+Specify regular expressions to ignore errors for matching URLs, one
+per line. A second regular expression can be specified per line to
+only ignore matching error messages per corresponding URL. If the
+second expression is omitted, all errors are ignored. In contrast
+to \fI\%filtering\fP, this happens \fIafter\fP checking, which allows checking
+URLs despite certain expected and tolerable errors. Default is to
+not ignore any errors. Example:
+.UNINDENT
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+[output]
+ignoreerrors=
+  ^https://deprecated\e.example\e.com ^410 Gone
+  # ignore all errors (no second expression), also for syntax check:
+  ^mailto:.*@example\e.com$
+.ft P
+.fi
+.UNINDENT
 .UNINDENT
 .SS Progress updates
 .INDENT 0.0
 .TP
 \fBstatus=\fP[\fB0\fP|\fB1\fP]
 Control printing URL checker status messages. Default is 1.
-Command line option: \fB\-\-no\-status\fP
+Command line option: \fI\%\-\-no\-status\fP
 .UNINDENT
 .SS Application
 .INDENT 0.0
 .TP
 \fBdebug=\fP\fISTRING\fP[\fB,\fP\fISTRING\fP\&...]
-Print debugging output for the given modules. Available debug
-modules are \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBdns\fP,
-\fBthread\fP, \fBplugins\fP and \fBall\fP\&. Specifying \fBall\fP is an alias
-for specifying all available loggers.
-Command line option: \fB\-\-debug\fP
+Print debugging output for the given logger. Available debug
+loggers are \fBcmdline\fP, \fBchecking\fP, \fBcache\fP, \fBplugin\fP and \fBall\fP\&.
+\fBall\fP is an alias for all available loggers.
+Command line option: \fI\%\-\-debug\fP
 .UNINDENT
 .SS Quiet
 .INDENT 0.0
@@ -261,7 +288,7 @@ Command line option: \fB\-\-debug\fP
 If set, operate quiet. An alias for \fBlog=none\fP that also hides
 application information messages.
 This is only useful with \fBfileoutput\fP, else no results will be output.
-Command line option: \fB\-\-quiet\fP
+Command line option: \fI\%\-\-quiet\fP
 .UNINDENT
 .SH OUTPUT TYPES
 .SS text
@@ -270,7 +297,7 @@ Command line option: \fB\-\-quiet\fP
 \fBfilename=\fP\fISTRING\fP
 Specify output filename for text logging. Default filename is
 \fBlinkchecker\-out.txt\fP\&.
-Command line option: \fB\-\-file\-output\fP
+Command line option: \fI\%\-\-file\-output\fP
 .TP
 \fBparts=\fP\fISTRING\fP
 Comma\-separated list of parts that have to be logged. See \fI\%LOGGER PARTS\fP
@@ -364,7 +391,12 @@ See \fI\%[text]\fP section above.
 Set CSV separator. Default is a semicolon (\fB;\fP).
 .TP
 \fBquotechar=\fP\fICHAR\fP
-Set CSV quote character. Default is a double quote (\fB"\fP).
+Set CSV quote character. Default is a double quote (\fB\(dq\fP).
+.TP
+\fBdialect=\fP\fISTRING\fP
+Controls the output formatting.
+See \fI\%https://docs.python.org/3/library/csv.html#csv.Dialect\fP\&.
+Default is \fBexcel\fP\&.
 .UNINDENT
 .SS sql
 .INDENT 0.0
@@ -467,7 +499,7 @@ A number between 0.0 and 1.0 determining the priority. The default
 priority for the first URL is 1.0, for all child URLs 0.5.
 .TP
 \fBfrequency=\fP[\fBalways\fP|\fBhourly\fP|\fBdaily\fP|\fBweekly\fP|\fBmonthly\fP|\fByearly\fP|\fBnever\fP]
-How frequently pages are changing.
+How frequently pages are changing. Default is \fBdaily\fP\&.
 .UNINDENT
 .SH LOGGER PARTS
 .INDENT 0.0
@@ -491,7 +523,7 @@ valid or invalid, with messages
 base href=...
 .TP
 \fBname\fP
-<a href=...>name</a> and <img alt="name">
+<a href=...>name</a> and <img alt=\(dqname\(dq>
 .TP
 \fBparenturl\fP
 if any
@@ -512,10 +544,10 @@ check time
 the original url name, can be relative
 .TP
 \fBintro\fP
-the blurb at the beginning, "starting at ..."
+the blurb at the beginning, \(dqstarting at ...\(dq
 .TP
 \fBoutro\fP
-the blurb at the end, "found x errors ..."
+the blurb at the end, \(dqfound x errors ...\(dq
 .UNINDENT
 .SH MULTILINE
 .sp
@@ -561,14 +593,9 @@ configuration file the plugin is enabled. Some plugins read extra
 options in their section.
 .SS AnchorCheck
 .sp
-Checks validity of HTML anchors.
-.sp
-\fBNOTE:\fP
-.INDENT 0.0
-.INDENT 3.5
-The AnchorCheck plugin is currently broken and is disabled.
-.UNINDENT
-.UNINDENT
+Checks validity of HTML anchors. When checking local files, URLs with anchors
+that link to directories e.g. \(dqexample/#anchor\(dq are not supported. There is no
+such limitation when using http(s).
 .SS LocationInfo
 .sp
 Adds the country and if possible city name of the URL host as info.
@@ -582,11 +609,11 @@ get their content.
 .TP
 \fBwarningregex=\fP\fIREGEX\fP
 Use this to check for pages that contain some form of error message,
-for example "This page has moved" or "Oracle Application error".
+for example \(dqThis page has moved\(dq or \(dqOracle Application error\(dq.
 \fIREGEX\fP should be unquoted.
 .sp
 Note that multiple values can be combined in the regular expression,
-for example "(This page has moved|Oracle Application error)".
+for example \(dq(This page has moved|Oracle Application error)\(dq.
 .UNINDENT
 .SS SslCertificateCheck
 .sp
@@ -616,7 +643,7 @@ Print HTTP headers in URL info.
 .TP
 \fBprefixes=\fP\fIprefix1\fP[,*prefix2*]...
 List of comma separated header prefixes. For example to display all
-HTTP headers that start with "X\-".
+HTTP headers that start with \(dqX\-\(dq.
 .UNINDENT
 .SS CssSyntaxCheck
 .sp
@@ -633,7 +660,7 @@ Filename of \fBclamd.conf\fP config file.
 .UNINDENT
 .SS PdfParser
 .sp
-Parse PDF files for URLs to check. Needs the \fI\%pdfminer\fP Python package
+Parse PDF files for URLs to check. Needs the \fI\%pdfminer.six\fP Python package
 installed.
 .SS WordParser
 .sp
@@ -653,6 +680,9 @@ The following warnings are recognized in the \(aqignorewarnings\(aq config
 file entry:
 .INDENT 0.0
 .TP
+\fBfile\-anchorcheck\-directory\fP
+A local directory with an anchor, not supported by AnchorCheck.
+.TP
 \fBfile\-missing\-slash\fP
 The file: URL is missing a trailing slash.
 .TP
@@ -668,6 +698,9 @@ An error occurred while storing a cookie.
 \fBhttp\-empty\-content\fP
 The URL had no content.
 .TP
+\fBhttp\-rate\-limited\fP
+Too many HTTP requests.
+.TP
 \fBmail\-no\-mx\-host\fP
 The mail MX host could not be found.
 .TP
@@ -682,6 +715,9 @@ The URL content size is zero.
 .TP
 \fBurl\-content\-too\-large\fP
 The URL content size is too large.
+.TP
+\fBurl\-content\-type\-unparseable\fP
+The URL content type is not parseable.
 .TP
 \fBurl\-effective\-url\fP
 The effective URL is different from the original.
@@ -701,6 +737,6 @@ The URL contains leading or trailing whitespace.
 .SH AUTHOR
 Bastian Kleineidam <bastian.kleineidam@web.de>
 .SH COPYRIGHT
-2000-2016 Bastian Kleineidam, 2010-2021 LinkChecker Authors
+2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
 .\" Generated by docutils manpage writer.
 .
