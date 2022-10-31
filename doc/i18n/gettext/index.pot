@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2021 LinkChecker Authors
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.0.1.post124+ga12fcf04\n"
+"Project-Id-Version: LinkChecker 10.1.0.post162+g614e84b5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-21 19:40+0000\n"
+"POT-Creation-Date: 2022-10-31 19:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../src/index.rst:10
-msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.6 or later."
+msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.7 or later."
 msgstr ""
 
 #: ../../src/index.rst:15
@@ -124,6 +124,6 @@ msgstr ""
 msgid "Linkchecker has extensive unit tests to ensure code quality. `GitHub Actions <https://docs.github.com/en/actions/>`_ is used for continuous build and test integration."
 msgstr ""
 
-#: ../../src/index.rst:None
+#: ../../src/index.rst:-1
 msgid "Build Status"
 msgstr ""
