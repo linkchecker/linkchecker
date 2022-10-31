@@ -19,6 +19,7 @@ $(TEMPLATE): $(POSOURCES)
 	$(XGETTEXT) -w 80 --default-domain=$(PACKAGE) --language=Python \
 	  --copyright-holder="Bastian Kleineidam <$(MYMAIL)>" \
 	  --package-name=LinkChecker \
+	  --from-code=UTF-8 \
 	  --msgid-bugs-address=$(BUGSURL) -o $(TEMPLATE) \
 	  --keyword=_n:1,2 $(POSOURCES)
 
