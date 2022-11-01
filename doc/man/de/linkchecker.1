@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKER" "1" "Dezember 21, 2021" "10.0.1.post124+ga12fcf04" "LinkChecker"
+.TH "LINKCHECKER" "1" "Oktober 31, 2022" "10.1.0.post162+g614e84b5" "LinkChecker"
 .SH NAME
 linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .SH SYNTAX
@@ -152,17 +152,13 @@ $ linkchecker \-odot \-v www.example.com | dot \-Tps > sitemap.ps
 .INDENT 0.0
 .TP
 .B \-f FILENAME, \-\-config=FILENAME
-Benutze DATEINAME als Konfigurationsdatei. Standardmäßig benutzt LinkChecker ~/.linkchecker/linkcheckerrc.
+Use FILENAME as configuration file. By default LinkChecker uses
+$XDG_CONFIG_HOME/linkchecker/linkcheckerrc.
 .UNINDENT
 .INDENT 0.0
 .TP
 .B \-h, \-\-help
 Hilfe! Gebe Gebrauchsanweisung für dieses Programm aus.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-\-stdin
-Lese Liste von URLs zum Prüfen von der Standardeingabe, getrennt durch Leerzeichen.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -185,7 +181,7 @@ Print available check plugins and exit.
 .TP
 .B \-F TYPE[/ENCODING][/FILENAME], \-\-file\-output=TYPE[/ENCODING][/FILENAME]
 Output to a file linkchecker\-out.TYPE,
-$HOME/.linkchecker/failures for the failures output type, or
+$XDG_DATA_HOME/linkchecker/failures for the failures output type, or
 FILENAME if specified. The ENCODING specifies the output
 encoding, the default is that of your locale. Valid encodings are
 listed at
@@ -228,7 +224,10 @@ Do not print URL check status messages.
 .INDENT 0.0
 .TP
 .B \-D STRING, \-\-debug=STRING
-Gebe Testmeldungen aus für den angegebenen Logger. Verfügbare Logger sind cmdline, checking, cache, dns, plugin und all. Die Angabe all ist ein Synonym für alle verfügbaren Logger. Diese Option kann mehrmals angegeben werden, um mit mehr als einem Logger zu testen. Um akkurate Ergebnisse zu erzielen, werden Threads deaktiviert.
+Print debugging output for the given logger.
+Available debug loggers are cmdline, checking, cache, plugin and all.
+all is an alias for all available loggers.
+This option can be given multiple times to debug with more than one logger.
 .UNINDENT
 .SS Quiet
 .INDENT 0.0
@@ -242,7 +241,8 @@ This is only useful with \fI\%\-F\fP, else no results will be output.
 .INDENT 0.0
 .TP
 .B \-\-cookiefile=FILENAME
-Lese eine Datei mit Cookie\-Daten. Das Cookie Datenformat wird weiter unten erklärt.
+Use initial cookie data read from a file. The cookie data format is
+explained below.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -294,7 +294,20 @@ Verwende den angegebenen Benutzernamen für HTTP und FTP Autorisierung. Für FTP
 .INDENT 0.0
 .TP
 .B \-\-user\-agent=STRING
-Gibt den User\-Agent an, der zu HTTP\-Servern geschickt wird, z.B. "Mozilla/4.0". Der Standard ist "LinkChecker/X.Y", wobei X.Y die aktuelle Version von LinkChecker ist.
+Gibt den User\-Agent an, der zu HTTP\-Servern geschickt wird, z.B. \(dqMozilla/4.0\(dq. Der Standard ist \(dqLinkChecker/X.Y\(dq, wobei X.Y die aktuelle Version von LinkChecker ist.
+.UNINDENT
+.SS Input options
+.INDENT 0.0
+.TP
+.B \-\-stdin
+Read from stdin a list of white\-space separated URLs to check.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B FILE\-OR\-URL
+The location to start checking with.
+A file can be a simple list of URLs, one per line, if the first line is
+\(dq# LinkChecker URL list\(dq.
 .UNINDENT
 .SH KONFIGURATIONSDATEIEN
 .sp
@@ -305,10 +318,10 @@ Beachten Sie, dass standardmäßig nur Fehler und Warnungen protokolliert werden
 .INDENT 0.0
 .TP
 \fBtext\fP
-Standard Textausgabe in "Schlüssel: Wert"\-Form.
+Standard Textausgabe in \(dqSchlüssel: Wert\(dq\-Form.
 .TP
 \fBhtml\fP
-Gebe URLs in "Schlüssel: Wert"\-Form als HTML formatiert aus. Besitzt zudem Verknüpfungen auf die referenzierten Seiten. Ungültige URLs haben Verknüpfungen zur HTML und CSS Syntaxprüfung angehängt.
+Gebe URLs in \(dqSchlüssel: Wert\(dq\-Form als HTML formatiert aus. Besitzt zudem Verknüpfungen auf die referenzierten Seiten. Ungültige URLs haben Verknüpfungen zur HTML und CSS Syntaxprüfung angehängt.
 .TP
 \fBcsv\fP
 Gebe Prüfresultat in CSV\-Format aus mit einer URL pro Zeile.
@@ -332,7 +345,9 @@ Protokolliere Prüfergebnisse als XML Sitemap dessen Format unter \fI\%https://w
 Gebe Prüfresultat als SQL Skript mit INSERT Befehlen aus. Ein Beispielskript, um die initiale SQL Tabelle zu erstellen ist unter create.sql zu finden.
 .TP
 \fBfailures\fP
-Für Cronjobs geeignet. Gibt das Prüfergebnis in eine Datei \fB~/.linkchecker/failures\fP aus, welche nur Einträge mit fehlerhaften URLs und die Anzahl der Fehlversuche enthält.
+Suitable for cron jobs. Logs the check result into a file
+\fB$XDG_DATA_HOME/linkchecker/failures\fP which only contains entries with
+invalid URLs and the number of times they have failed.
 .TP
 \fBnone\fP
 Gibt nichts aus. Für Debugging oder Prüfen des Rückgabewerts geeignet.
@@ -363,8 +378,8 @@ Mehrere Einträge sind durch eine Leerzeile zu trennen. Das untige Beispiel send
 .ft C
 Host: example.com
 Path: /hello
-Set\-cookie: ID="smee"
-Set\-cookie: spam="egg"
+Set\-cookie: ID=\(dqsmee\(dq
+Set\-cookie: spam=\(dqegg\(dq
 .ft P
 .fi
 .UNINDENT
@@ -375,7 +390,7 @@ Set\-cookie: spam="egg"
 .nf
 .ft C
 Host: example.org
-Set\-cookie: baggage="elitist"; comment="hologram"
+Set\-cookie: baggage=\(dqelitist\(dq; comment=\(dqhologram\(dq
 .ft P
 .fi
 .UNINDENT
@@ -400,7 +415,7 @@ Einen HTTP\-Proxy unter Unix anzugeben sieht beispielsweise so aus:
 .sp
 .nf
 .ft C
-$ export http_proxy="http://proxy.example.com:8080"
+$ export http_proxy=\(dqhttp://proxy.example.com:8080\(dq
 .ft P
 .fi
 .UNINDENT
@@ -412,7 +427,7 @@ Proxy\-Authentifizierung wird ebenfalls unterstützt:
 .sp
 .nf
 .ft C
-$ export http_proxy="http://user1:mypass@proxy.example.org:8081"
+$ export http_proxy=\(dqhttp://user1:mypass@proxy.example.org:8081\(dq
 .ft P
 .fi
 .UNINDENT
@@ -486,6 +501,13 @@ Ein nicht unterstützter Link wird nur eine Warnung ausgeben. Weitere Prüfungen
 .sp
 Die komplette Liste von erkannten, aber nicht unterstützten Links ist in der Quelldatei \fI\%linkcheck/checker/unknownurl.py\fP\&. Die bekanntesten davon dürften JavaScript\-Links sein.
 .UNINDENT
+.SH SITEMAPS
+.sp
+Sitemaps are parsed for links to check and can be detected either from a
+sitemap entry in a robots.txt, or when passed as a \fI\%FILE\-OR\-URL\fP
+argument in which case detection requires the urlset/sitemapindex tag to be
+within the first 70 characters of the sitemap.
+Compressed sitemap files are not supported.
 .SH PLUGINS
 .sp
 There are two plugin types: connection and content plugins. Connection
@@ -511,7 +533,7 @@ Die maximale Rekursionstiefe darf nicht überschritten werden. Diese wird mit de
 .IP 5. 3
 Die URL darf nicht in der Liste von ignorierten URLs sein. Die ignorierten URLs werden mit der Option \fI\%\-\-ignore\-url\fP konfiguriert.
 .IP 6. 3
-Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in der URL rekursiv verfolgt werden können. Dies wird geprüft, indem in den HTML Kopfdaten nach der "nofollow"\-Direktive gesucht wird.
+Das Robots Exclusion Protocol muss es erlauben, dass Verknüpfungen in der URL rekursiv verfolgt werden können. Dies wird geprüft, indem in den HTML Kopfdaten nach der \(dqnofollow\(dq\-Direktive gesucht wird.
 .UNINDENT
 .sp
 Beachten Sie, dass die Verzeichnisrekursion alle Dateien in diesem Verzeichnis liest, nicht nur eine Untermenge wie bspw. \fBindex.htm\fP\&.
@@ -579,9 +601,9 @@ Sonst ist der Rückgabewert Null.
 LinkChecker benutzt Hauptspeicher für jede zu prüfende URL, die in der Warteschlange steht. Mit tausenden solcher URLs kann die Menge des benutzten Hauptspeichers sehr groß werden. Dies könnte das Programm oder sogar das gesamte System verlangsamen.
 .SH DATEIEN
 .sp
-\fB~/.linkchecker/linkcheckerrc\fP \- Standardkonfigurationsdatei
+\fB$XDG_CONFIG_HOME/linkchecker/linkcheckerrc\fP \- default configuration file
 .sp
-\fB~/.linkchecker/failures\fP \- Standard Dateiname der failures Logger Ausgabe
+\fB$XDG_DATA_HOME/linkchecker/failures\fP \- default failures logger output filename
 .sp
 \fBlinkchecker\-out.\fP\fITYP\fP \- Standard Dateiname der Logausgabe
 .SH SIEHE AUCH
@@ -594,6 +616,6 @@ LinkChecker benutzt Hauptspeicher für jede zu prüfende URL, die in der Wartesc
 .SH AUTHOR
 Bastian Kleineidam <bastian.kleineidam@web.de>
 .SH COPYRIGHT
-2000-2016 Bastian Kleineidam, 2010-2021 LinkChecker Authors
+2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
 .\" Generated by docutils manpage writer.
 .
