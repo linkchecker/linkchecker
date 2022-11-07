@@ -44,11 +44,6 @@ Published man pages are included in the LinkChecker repository.
 HTML
 ----
 
-``doc/src/code/index.rst`` gives an overview of the LinkChecker code, optionally a navigable
-copy of the LinkChecker source can be created with:
-
-``linkchecker/doc $ make code``
-
 Build the HTML files with:
 
 ``linkchecker/doc $ make html``

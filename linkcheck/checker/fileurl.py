@@ -308,6 +308,10 @@ class FileUrl(urlbase.UrlBase):
 
 
 class AnchorCheckFileUrl(FileUrl):
+    """
+    File URL link for AnchorCheck plugin.
+    """
+
     def reset(self):
         super().reset()
         # the local file URI

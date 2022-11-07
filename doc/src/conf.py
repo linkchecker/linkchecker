@@ -78,6 +78,8 @@ autodoc_member_order = 'groupwise'
 
 autosectionlabel_prefix_document = True
 
+autosummary_mock_imports = ['ctypes', 'linkcheck.__main__']
+
 extlinks = {'pypi': ('https://pypi.org/project/%s/', '%s')}
 
 graphviz_output_format = 'svg'

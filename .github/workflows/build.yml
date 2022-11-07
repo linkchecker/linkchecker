@@ -111,7 +111,6 @@ jobs:
       - name: Build
         run: |
           python3 -m hatchling build -t sdist --hooks-only
-          make -C doc code
           make -C doc html
           make -C doc locale
           make -C doc man

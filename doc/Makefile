@@ -3,10 +3,7 @@ LOCALES:=en de
 
 all: html man
 
-code: clean
-	python3 -m sphinx.ext.autosummary.generate src/code/index.rst
-
-html:
+html: clean
 	make -C src html
 
 locale:
