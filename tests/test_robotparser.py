@@ -40,7 +40,7 @@ class TestRobotParser(unittest.TestCase):
         else:
             ac = "access allowed"
         if a != b:
-            self.fail("%s != %s (%s)" % (a, b, ac))
+            self.fail(f"{a} != {b} ({ac})")
 
     @need_network
     def test_nonexisting_robots(self):

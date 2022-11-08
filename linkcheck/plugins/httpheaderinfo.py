@@ -39,7 +39,7 @@ class HttpHeaderInfo(_ConnectionPlugin):
                 headers.append(name.lower())
         if headers:
             items = [
-                "%s=%s" % (name.capitalize(), url_data.headers[name])
+                f"{name.capitalize()}={url_data.headers[name]}"
                 for name in headers
             ]
             info = "HTTP headers %s" % ", ".join(items)

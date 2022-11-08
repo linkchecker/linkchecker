@@ -53,7 +53,7 @@ class StatusLogger:
 
     def writeln(self, msg):
         """Write status message and line break to file descriptor."""
-        self.fd.write("%s%s" % (msg, os.linesep))
+        self.fd.write(f"{msg}{os.linesep}")
 
     def flush(self):
         """Flush file descriptor."""

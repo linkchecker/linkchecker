@@ -70,5 +70,5 @@ class TestGTranslator(unittest.TestCase):
                 continue
             self.assertFalse(
                 "·" in line,
-                "Broken GTranslator copy/paste in %r:\n%s" % (f, line),
+                f"Broken GTranslator copy/paste in {f!r}:\n{line}",
             )

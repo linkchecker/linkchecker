@@ -508,7 +508,7 @@ class UrlBase:
         else:
             host = "%s:%d" % (self.host, self.port)
         if self.userinfo:
-            urlparts[1] = "%s@%s" % (self.userinfo, host)
+            urlparts[1] = f"{self.userinfo}@{host}"
         else:
             urlparts[1] = host
         # save anchor for later checking

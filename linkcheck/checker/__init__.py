@@ -197,7 +197,7 @@ def get_index_html(urls):
         except KeyError:
             # Some unicode entries raise KeyError.
             url = name
-        lines.append('<a href="%s">%s</a>' % (url, name))
+        lines.append(f'<a href="{url}">{name}</a>')
     lines.extend(["</body>", "</html>"])
     return os.linesep.join(lines)
 

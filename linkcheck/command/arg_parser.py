@@ -180,7 +180,7 @@ file entry:
     )
     + "\n".join(
         [
-            " o %s - %s" % (tag, desc)
+            f" o {tag} - {desc}"
             for tag, desc in sorted(checker.const.Warnings.items())
         ]
     )

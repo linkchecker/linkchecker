@@ -370,7 +370,7 @@ class MailtoUrl(urlbase.UrlBase):
         The cache url is a comma separated list of emails.
         """
         emails = ",".join(sorted(self.addresses))
-        self.cache_url = "%s:%s" % (self.scheme, emails)
+        self.cache_url = f"{self.scheme}:{emails}"
 
     def can_get_content(self):
         """

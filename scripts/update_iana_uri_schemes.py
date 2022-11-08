@@ -87,7 +87,7 @@ def main(args):
 
 def get_regex(schemes):
     expr = [
-        "|%s # %s" % (re.escape(scheme).ljust(10), description)
+        f"|{re.escape(scheme).ljust(10)} # {description}"
         for scheme, description in sorted(schemes.items())
     ]
     return "\n".join(expr)

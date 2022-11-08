@@ -34,7 +34,7 @@ def get_package_modules(packagename, packagepath):
     for mod in pkgutil.iter_modules(packagepath):
         if not mod.ispkg:
             try:
-                name = "..%s.%s" % (packagename, mod.name)
+                name = f"..{packagename}.{mod.name}"
                 yield importlib.import_module(name, __name__)
             except ImportError as msg:
                 print(_("WARN: could not load module %s: %s") % (mod.name, msg))

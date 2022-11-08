@@ -232,7 +232,7 @@ def better_exchook(etype, value, tb, out=sys.stdout):
         if value is None or not valuestr:
             line = "%s" % etype
         else:
-            line = "%s: %s" % (etype, valuestr)
+            line = f"{etype}: {valuestr}"
         return line
     if (isinstance(etype, BaseException) or
         (hasattr(types, "InstanceType") and isinstance(etype, types.InstanceType)) or

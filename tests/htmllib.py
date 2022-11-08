@@ -37,9 +37,9 @@ def pretty_print_html(fd, soup):
             if val is None:
                 fd.write(" %s" % key)
             else:
-                fd.write(' %s="%s"' % (key, quote_attrval(val)))
+                fd.write(f' {key}="{quote_attrval(val)}"')
         if element_text:
-            fd.write(">%s</%s>" % (element_text, tag))
+            fd.write(f">{element_text}</{tag}>")
         else:
             fd.write("/>")
 

@@ -66,7 +66,7 @@ class UrlAnchorCheck:
         else:
             anchors = "-"
         args = {"name": url_data.anchor, "decoded": decoded_anchor, "anchors": anchors}
-        msg = "%s %s" % (
+        msg = "{} {}".format(
             _("Anchor `%(name)s' (decoded: `%(decoded)s') not found.") % args,
             _("Available anchors: %(anchors)s.") % args,
         )

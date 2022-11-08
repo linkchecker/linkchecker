@@ -73,10 +73,10 @@ def unquote(s, matching=False):
     return s
 
 
-_para_mac = r"(?:%(sep)s)(?:(?:%(sep)s)\s*)+" % {'sep': '\r'}
-_para_posix = r"(?:%(sep)s)(?:(?:%(sep)s)\s*)+" % {'sep': '\n'}
-_para_win = r"(?:%(sep)s)(?:(?:%(sep)s)\s*)+" % {'sep': '\r\n'}
-_para_ro = re.compile("%s|%s|%s" % (_para_mac, _para_posix, _para_win))
+_para_mac = r"(?:{sep})(?:(?:{sep})\s*)+".format(sep='\r')
+_para_posix = r"(?:{sep})(?:(?:{sep})\s*)+".format(sep='\n')
+_para_win = r"(?:{sep})(?:(?:{sep})\s*)+".format(sep='\r\n')
+_para_ro = re.compile(f"{_para_mac}|{_para_posix}|{_para_win}")
 
 
 def get_paragraphs(text):
@@ -104,7 +104,7 @@ def wrap(text, width, **kwargs):
 
 def indent(text, indent_string="  "):
     """Indent each line of text with the given indent string."""
-    return os.linesep.join("%s%s" % (indent_string, x) for x in text.splitlines())
+    return os.linesep.join(f"{indent_string}{x}" for x in text.splitlines())
 
 
 def paginate(text):
@@ -191,7 +191,7 @@ def strduration_long(duration, do_translate=True):
     time_str.reverse()
     if len(time_str) > 2:
         time_str.pop()
-    return "%s%s" % (prefix, ", ".join(time_str))
+    return "{}{}".format(prefix, ", ".join(time_str))
 
 
 def strtimezone():

@@ -61,10 +61,10 @@ _safe_path_pattern = (
     r"(%%[%(_hex_safe)s][%(_hex_full)s]))+)*/?)" % _basic
 )
 _safe_fragment_pattern = r"%s*" % _safe_char
-_safe_cgi = r"%s+(=(%s|/)+)?" % (_safe_char, _safe_char)
-_safe_query_pattern = r"(%s(&%s)*)?" % (_safe_cgi, _safe_cgi)
-_safe_param_pattern = r"(%s(;%s)*)?" % (_safe_cgi, _safe_cgi)
-safe_url_pattern = r"%s://%s%s(#%s)?" % (
+_safe_cgi = fr"{_safe_char}+(=({_safe_char}|/)+)?"
+_safe_query_pattern = fr"({_safe_cgi}(&{_safe_cgi})*)?"
+_safe_param_pattern = fr"({_safe_cgi}(;{_safe_cgi})*)?"
+safe_url_pattern = r"{}://{}{}(#{})?".format(
     _safe_scheme_pattern,
     _safe_host_pattern,
     _safe_path_pattern,
@@ -195,7 +195,7 @@ def url_fix_host(urlparts, encoding):
         if not urlparts[2] or urlparts[2] == '/':
             urlparts[2] = comps
         else:
-            urlparts[2] = "%s%s" % (
+            urlparts[2] = "{}{}".format(
                 comps,
                 urllib.parse.unquote(urlparts[2], encoding=encoding),
             )
@@ -255,12 +255,12 @@ def url_parse_query(query, encoding):
         k = urllib.parse.quote(k, safe='/-:,;')
         if v:
             v = urllib.parse.quote(v, safe='/-:,;')
-            f.append("%s=%s%s" % (k, v, sep))
+            f.append(f"{k}={v}{sep}")
         elif v is None:
-            f.append("%s%s" % (k, sep))
+            f.append(f"{k}{sep}")
         else:
             # some sites do not work when the equal sign is missing
-            f.append("%s=%s" % (k, sep))
+            f.append(f"{k}={sep}")
     return ''.join(f) + append
 
 
@@ -381,9 +381,9 @@ def url_quote(url, encoding):
         k = urllib.parse.quote(k, safe='/-:,;')
         if v:
             v = urllib.parse.quote(v, safe='/-:,;')
-            f.append("%s=%s%s" % (k, v, sep))
+            f.append(f"{k}={v}{sep}")
         else:
-            f.append("%s%s" % (k, sep))
+            f.append(f"{k}{sep}")
     urlparts[3] = ''.join(f)
     urlparts[4] = urllib.parse.quote(urlparts[4])  # anchor
     return urlunsplit(urlparts)
@@ -397,7 +397,7 @@ def document_quote(document):
         query = None
     doc = urllib.parse.quote(doc, safe='/=,')
     if query:
-        return "%s?%s" % (doc, query)
+        return f"{doc}?{query}"
     return doc
 
 

@@ -125,5 +125,5 @@ class TestFtpparse(unittest.TestCase):
         for line, expected in patterns:
             res = ftpparse(line)
             self.assertEqual(
-                expected, res, "got %r\nexpected %r\n%r" % (res, expected, line)
+                expected, res, f"got {res!r}\nexpected {expected!r}\n{line!r}"
             )

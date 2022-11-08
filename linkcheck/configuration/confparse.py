@@ -227,7 +227,7 @@ class LCConfigParser(RawConfigParser):
                     self.config.add_auth(
                         pattern=auth[0], user=auth[1], password=auth[2]
                     )
-                    password_fields.append("entry/%s/%s" % (auth[0], auth[1]))
+                    password_fields.append(f"entry/{auth[0]}/{auth[1]}")
                 elif len(auth) == 2:
                     self.config.add_auth(pattern=auth[0], user=auth[1])
                 else:
