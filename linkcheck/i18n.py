@@ -25,7 +25,7 @@ import sys
 import codecs
 
 # more supported languages are added in init()
-supported_languages = set(['en'])
+supported_languages = {'en'}
 default_language = default_encoding = None
 default_directory = None
 default_domain = None

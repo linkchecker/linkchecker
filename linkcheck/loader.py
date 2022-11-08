@@ -85,8 +85,7 @@ def get_plugins(modules, classes):
     @rtype: iterator of class objects
     """
     for module in modules:
-        for plugin in get_module_plugins(module, classes):
-            yield plugin
+        yield from get_module_plugins(module, classes)
 
 
 def get_module_plugins(module, classes):

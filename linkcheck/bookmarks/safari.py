@@ -48,8 +48,7 @@ def parse_plist(entry):
         yield (url, title)
     elif has_children(entry):
         for child in entry[KEY_CHILDREN]:
-            for item in parse_plist(child):
-                yield item
+            yield from parse_plist(child)
 
 
 def is_leaf(entry):

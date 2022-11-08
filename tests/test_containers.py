@@ -43,8 +43,8 @@ class TestLFUCache(unittest.TestCase):
         self.assertTrue(not self.d)
         self.d["a"] = 1
         self.d["b"] = 2
-        self.assertEqual(set([1, 2]), set(self.d.values()))
-        self.assertEqual(set([1, 2]), set(self.d.itervalues()))
+        self.assertEqual({1, 2}, set(self.d.values()))
+        self.assertEqual({1, 2}, set(self.d.itervalues()))
 
     def test_popitem(self):
         self.assertTrue(not self.d)

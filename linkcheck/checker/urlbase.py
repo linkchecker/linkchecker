@@ -23,7 +23,6 @@ from urllib.request import urlopen
 import time
 import errno
 import socket
-import select
 from io import BytesIO
 
 from . import absolute_url, get_url_from
@@ -538,7 +537,7 @@ class UrlBase:
             trace.trace_on()
         try:
             self.local_check()
-        except (socket.error, select.error):
+        except OSError:
             # on Unix, ctrl-c can raise
             # error: (4, 'Interrupted system call')
             etype, value = sys.exc_info()[:2]

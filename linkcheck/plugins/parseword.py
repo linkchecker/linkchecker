@@ -64,7 +64,7 @@ def has_word():
         key = winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, "Word.Application")
         winreg.CloseKey(key)
         return True
-    except (EnvironmentError, ImportError):
+    except (OSError, ImportError):
         pass
     return False
 

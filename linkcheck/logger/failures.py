@@ -85,7 +85,7 @@ class FailuresLogger(_Logger):
         """
         Read a previously stored failures from file fd.
         """
-        with open(self.filename, 'r', encoding=self.output_encoding,
+        with open(self.filename, encoding=self.output_encoding,
                   errors=self.codec_errors) as fd:
             for line in fd:
                 line = line.rstrip()

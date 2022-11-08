@@ -22,15 +22,13 @@ def parse_bookmark_data(data):
     Return iterator for bookmarks of the form (url, name).
     Bookmarks are not sorted.
     """
-    for url, name in parse_bookmark_json(json.loads(data)):
-        yield url, name
+    yield from parse_bookmark_json(json.loads(data))
 
 
 def parse_bookmark_json(data):
     """Parse complete JSON data for Chromium Bookmarks."""
     for entry in data["roots"].values():
-        for url, name in parse_bookmark_node(entry):
-            yield url, name
+        yield from parse_bookmark_node(entry)
 
 
 def parse_bookmark_node(node):
@@ -39,5 +37,4 @@ def parse_bookmark_node(node):
         yield node["url"], node["name"]
     elif node["type"] == "folder":
         for child in node["children"]:
-            for entry in parse_bookmark_node(child):
-                yield entry
+            yield from parse_bookmark_node(child)

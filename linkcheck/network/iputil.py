@@ -47,7 +47,7 @@ def resolve_host(host):
             #  canonical name, socket address)
             # add first ip of socket address
             ips.append(res[4][0])
-    except socket.error:
+    except OSError:
         log.info(LOG_CHECK, "Ignored invalid host %r", host)
     return ips
 

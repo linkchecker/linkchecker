@@ -60,8 +60,7 @@ def application(environ, start_response):
 
     status = '200 OK'
     start_response(status, get_response_headers())
-    for output in checklink(form=form, env=environ):
-        yield output
+    yield from checklink(form=form, env=environ)
 
 
 _supported_langs = ('de', 'C')
@@ -113,7 +112,7 @@ class ThreadsafeIO:
         """Write given unicode data to buffer."""
         assert isinstance(data, str)
         if self.closed:
-            raise IOError("Write on closed I/O object")
+            raise OSError("Write on closed I/O object")
         if data:
             self.buf.append(data)
 
