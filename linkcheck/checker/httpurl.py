@@ -348,7 +348,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
         """Parse URLs in HTTP headers Link:."""
         for linktype, linkinfo in self.url_connection.links.items():
             url = linkinfo["url"]
-            name = "Link: header %s" % linktype
+            name = f"Link: header {linktype}"
             self.add_url(url, name=name)
         if 'Refresh' in self.headers:
             from ..htmlutil.linkparse import refresh_re

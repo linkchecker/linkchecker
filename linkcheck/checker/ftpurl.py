@@ -118,7 +118,7 @@ class FtpUrl(internpaturl.InternPatternUrl):
             # file found
             return
         # it could be a directory if the trailing slash was forgotten
-        if "%s/" % self.filename in files:
+        if f"{self.filename}/" in files:
             if not self.url.endswith('/'):
                 self.add_warning(
                     _("Missing trailing directory slash in ftp url."),
@@ -178,7 +178,7 @@ class FtpUrl(internpaturl.InternPatternUrl):
             data = get_index_html(self.files)
         else:
             # download file in BINARY mode
-            ftpcmd = "RETR %s" % self.filename
+            ftpcmd = f"RETR {self.filename}"
             buf = StringIO()
 
             def stor_data(s):

@@ -247,7 +247,7 @@ class MailtoUrl(urlbase.UrlBase):
                 )
                 return
             for char in '@ \\",[]':
-                if char in local.replace("\\%s" % char, ""):
+                if char in local.replace(f"\\{char}", ""):
                     self.set_result(
                         _(
                             "Local part of mail address `%(addr)s' contains"

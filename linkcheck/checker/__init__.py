@@ -39,10 +39,10 @@ def guess_url(url):
         return url
     if url.lower().startswith("www."):
         # syntactic sugar
-        return "http://%s" % url
+        return f"http://{url}"
     elif url.lower().startswith("ftp."):
         # syntactic sugar
-        return "ftp://%s" % url
+        return f"ftp://{url}"
     return url
 
 

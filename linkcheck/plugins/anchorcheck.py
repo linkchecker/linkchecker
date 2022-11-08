@@ -61,7 +61,7 @@ class UrlAnchorCheck:
         if any(x for x in self.anchors if x[0] == decoded_anchor):
             return
         if self.anchors:
-            anchornames = sorted({"`%s'" % x[0] for x in self.anchors})
+            anchornames = sorted({f"`{x[0]}'" for x in self.anchors})
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"

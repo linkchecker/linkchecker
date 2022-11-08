@@ -43,24 +43,22 @@ default_ports = {
 # adapted from David Wheelers "Secure Programming for Linux and Unix HOWTO"
 # http://www.dwheeler.com/secure-programs/Secure-Programs-HOWTO/\
 # filter-html.html#VALIDATING-URIS
-_basic = {
-    "_path": r"\-\_\.\!\~\*\'\(\),",
-    "_hex_safe": r"2-9a-f",
-    "_hex_full": r"0-9a-f",
-    "_part": r"([a-z0-9][-a-z0-9]{0,61}|[a-z])",
-}
+_path = r"\-\_\.\!\~\*\'\(\),"
+_hex_safe = r"2-9a-f"
+_hex_full = r"0-9a-f"
+_part = r"([a-z0-9][-a-z0-9]{0,61}|[a-z])"
 _safe_char = (
-    r"([a-z0-9%(_path)s\+]|"
-    r"(%%[%(_hex_safe)s][%(_hex_full)s]))" % _basic
+    fr"([a-z0-9{_path}\+]|"
+    fr"(%[{_hex_safe}][{_hex_full}]))"
 )
 _safe_scheme_pattern = r"(https?|ftp)"
-_safe_domain_pattern = r"(%(_part)s(\.%(_part)s)*\.?)" % _basic
-_safe_host_pattern = _safe_domain_pattern + r"(:(80|8080|8000|443))?" % _basic
+_safe_domain_pattern = fr"({_part}(\.{_part})*\.?)"
+_safe_host_pattern = fr"{_safe_domain_pattern}(:(80|8080|8000|443))?"
 _safe_path_pattern = (
-    r"((/([a-z0-9%(_path)s]|"
-    r"(%%[%(_hex_safe)s][%(_hex_full)s]))+)*/?)" % _basic
+    fr"((/([a-z0-9{_path}]|"
+    fr"(%[{_hex_safe}][{_hex_full}]))+)*/?)"
 )
-_safe_fragment_pattern = r"%s*" % _safe_char
+_safe_fragment_pattern = fr"{_safe_char}*"
 _safe_cgi = fr"{_safe_char}+(=({_safe_char}|/)+)?"
 _safe_query_pattern = fr"({_safe_cgi}(&{_safe_cgi})*)?"
 _safe_param_pattern = fr"({_safe_cgi}(;{_safe_cgi})*)?"
@@ -71,8 +69,8 @@ safe_url_pattern = r"{}://{}{}(#{})?".format(
     _safe_fragment_pattern,
 )
 
-is_safe_url = re.compile("(?i)^%s$" % safe_url_pattern).match
-is_safe_domain = re.compile("(?i)^%s$" % _safe_domain_pattern).match
+is_safe_url = re.compile(f"(?i)^{safe_url_pattern}$").match
+is_safe_domain = re.compile(f"(?i)^{_safe_domain_pattern}$").match
 
 
 # snatched form urlparse.py
@@ -219,7 +217,7 @@ def url_fix_host(urlparts, encoding):
         if host.endswith("."):
             host = host[:-1]
         if port != dport:
-            host = "%s:%d" % (host, port)
+            host = f"{host}:{port}"
         netloc = host
     urlparts[1] = userpass + netloc
     return is_idn
@@ -405,7 +403,7 @@ _nopathquote_chars = "-;/=,~*+()@!"
 if os.name == 'nt':
     _nopathquote_chars += "|"
 _safe_url_chars = re.escape(_nopathquote_chars + "_:.&#%?[]!") + "a-zA-Z0-9"
-_safe_url_chars_ro = re.compile(r"^[%s]*$" % _safe_url_chars)
+_safe_url_chars_ro = re.compile(fr"^[{_safe_url_chars}]*$")
 
 
 def url_needs_quoting(url):

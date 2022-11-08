@@ -71,9 +71,9 @@ class DOTLogger(_GraphLogger):
         source = dotquote(self.nodes[node["parent_url"]]["label"])
         target = dotquote(node["label"])
         self.writeln(f'  "{source}" -> "{target}" [')
-        self.writeln('    label="%s",' % dotquote(node["edge"]))
+        self.writeln(f'    label="{dotquote(node["edge"])}",')
         if self.has_part("result"):
-            self.writeln("    valid=%d," % node["valid"])
+            self.writeln(f'    valid={node["valid"]},')
         self.writeln("  ];")
 
     def end_graph(self):
