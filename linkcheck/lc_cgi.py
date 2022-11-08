@@ -212,7 +212,7 @@ def checkform(form, env):
                 locale.setlocale(locale.LC_ALL, localestr)
                 init_i18n()
             except locale.Error as errmsg:
-                log(env, "could not set locale %r: %s" % (localestr, errmsg))
+                log(env, _("could not set locale %r: %s") % (localestr, errmsg))
         else:
             raise LCFormError(_("unsupported language %r") % lang)
     # check url syntax

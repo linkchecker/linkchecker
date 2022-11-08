@@ -37,7 +37,7 @@ def get_package_modules(packagename, packagepath):
                 name = "..%s.%s" % (packagename, mod.name)
                 yield importlib.import_module(name, __name__)
             except ImportError as msg:
-                print("WARN: could not load module %s: %s" % (mod.name, msg))
+                print(_("WARN: could not load module %s: %s") % (mod.name, msg))
 
 
 def get_folder_modules(folder, parentpackage):
@@ -54,7 +54,7 @@ def get_folder_modules(folder, parentpackage):
             spec.loader.exec_module(module)
             yield module
         except ImportError as msg:
-            print("WARN: could not load file %s: %s" % (fullname, msg))
+            print(_("WARN: could not load file %s: %s") % (fullname, msg))
 
 
 def get_importable_files(folder):
