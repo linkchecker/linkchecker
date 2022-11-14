@@ -132,7 +132,7 @@ class NoQueryHttpRequestHandler(StoppableHttpRequestHandler):
         list = ["example1.txt", "example2.html", "example3"]
         for name in list:
             displayname = linkname = name
-            list_item = '<li><a href="%s">%s</a>\n' % (
+            list_item = '<li><a href="{}">{}</a>\n'.format(
                 urllib.parse.quote(linkname),
                 html.escape(displayname),
             )
@@ -247,7 +247,7 @@ def get_cookie(maxage=2000):
         ("Version", "1"),
         ("Foo", "Bar"),
     )
-    return "; ".join('%s="%s"' % (key, value) for key, value in data)
+    return "; ".join(f'{key}="{value}"' for key, value in data)
 
 
 class CookieRedirectHttpRequestHandler(NoQueryHttpRequestHandler):

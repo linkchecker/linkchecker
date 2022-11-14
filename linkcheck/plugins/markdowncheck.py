@@ -85,7 +85,7 @@ class MarkdownCheck(_ContentPlugin):
             try:
                 self.filename_re = re.compile(pattern)
             except re.error as msg:
-                log.warn(LOG_PLUGIN, "Invalid regex pattern %r: %s" % (pattern, msg))
+                log.warn(LOG_PLUGIN, _("Invalid regex pattern %r: %s"), pattern, msg)
 
     @classmethod
     def read_config(cls, configparser):

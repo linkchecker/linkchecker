@@ -46,7 +46,7 @@ HtmlCopyright = (
 HtmlAppInfo = App + ", " + HtmlCopyright
 Url = _release.__url__
 SupportUrl = _release.__support_url__
-UserAgent = "Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
+UserAgent = f"Mozilla/5.0 (compatible; {AppName}/{Version}; +{Url})"
 Freeware = (
     AppName
     + """ comes with ABSOLUTELY NO WARRANTY!
@@ -87,7 +87,7 @@ def get_modules_info():
         if version_attr and hasattr(mod, version_attr):
             attr = getattr(mod, version_attr)
             version = attr() if callable(attr) else attr
-            module_infos.append("%s %s" % (name, version))
+            module_infos.append(f"{name} {version}")
         else:
             # ignore attribute errors in case library developers
             # change the version information attribute

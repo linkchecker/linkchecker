@@ -23,7 +23,6 @@ from urllib.request import urlopen
 import time
 import errno
 import socket
-import select
 from io import BytesIO
 
 from . import absolute_url, get_url_from
@@ -507,9 +506,9 @@ class UrlBase:
         if not self.port or self.port == urlutil.default_ports.get(self.scheme):
             host = self.host
         else:
-            host = "%s:%d" % (self.host, self.port)
+            host = f"{self.host}:{self.port}"
         if self.userinfo:
-            urlparts[1] = "%s@%s" % (self.userinfo, host)
+            urlparts[1] = f"{self.userinfo}@{host}"
         else:
             urlparts[1] = host
         # save anchor for later checking
@@ -538,7 +537,7 @@ class UrlBase:
             trace.trace_on()
         try:
             self.local_check()
-        except (socket.error, select.error):
+        except OSError:
             # on Unix, ctrl-c can raise
             # error: (4, 'Interrupted system call')
             etype, value = sys.exc_info()[:2]
@@ -624,7 +623,7 @@ class UrlBase:
         # format message "<exception name>: <error message>"
         errmsg = etype.__name__
         if evalue:
-            errmsg += ": %s" % evalue
+            errmsg += f": {evalue}"
         # limit length to 240
         return strformat.limit(errmsg, length=240)
 
@@ -882,7 +881,7 @@ class UrlBase:
         @return: URL info
         @rtype: unicode
         """
-        return "<%s>" % self.serialized(sep=", ")
+        return f'<{self.serialized(sep=", ")}>'
 
     def to_wire_dict(self):
         """Return a simplified transport object for logging and caching.

@@ -17,7 +17,6 @@
 Helper constants.
 """
 import socket
-import select
 import nntplib
 import ftplib
 import requests
@@ -37,8 +36,6 @@ ExcCacheList = [
     OSError,  # OSError is thrown on Windows when a file is not found
     LinkCheckerError,
     DNSException,
-    socket.error,
-    select.error,
     # nttp errors (including EOFError)
     nntplib.NNTPError,
     EOFError,

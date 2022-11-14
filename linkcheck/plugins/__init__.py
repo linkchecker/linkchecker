@@ -65,10 +65,8 @@ class _ParserPlugin(_PluginBase):
 def get_plugin_modules(folders):
     """Get plugin modules for given folders."""
     for folder in folders:
-        for module in loader.get_folder_modules(folder, 'linkcheck.dummy'):
-            yield module
-    for module in loader.get_package_modules('plugins', __path__):
-        yield module
+        yield from loader.get_folder_modules(folder, 'linkcheck.dummy')
+    yield from loader.get_package_modules('plugins', __path__)
 
 
 def get_plugin_classes(modules):

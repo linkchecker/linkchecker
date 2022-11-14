@@ -247,7 +247,7 @@ class MailtoUrl(urlbase.UrlBase):
                 )
                 return
             for char in '@ \\",[]':
-                if char in local.replace("\\%s" % char, ""):
+                if char in local.replace(f"\\{char}", ""):
                     self.set_result(
                         _(
                             "Local part of mail address `%(addr)s' contains"
@@ -370,7 +370,7 @@ class MailtoUrl(urlbase.UrlBase):
         The cache url is a comma separated list of emails.
         """
         emails = ",".join(sorted(self.addresses))
-        self.cache_url = "%s:%s" % (self.scheme, emails)
+        self.cache_url = f"{self.scheme}:{emails}"
 
     def can_get_content(self):
         """

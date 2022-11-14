@@ -19,7 +19,6 @@ Store and retrieve country names for IPs.
 from . import _ConnectionPlugin
 import os
 import sys
-import socket
 from ..lock import get_lock
 from ..decorators import synchronized
 from .. import log, LOG_PLUGIN
@@ -105,7 +104,7 @@ def get_location(host):
         return None
     try:
         record = get_geoip_record(host)
-    except (geoip_error, socket.error):
+    except (geoip_error, OSError):
         log.debug(LOG_PLUGIN, "Geoip error for %r", host, exception=True)
         # ignore lookup errors
         return None

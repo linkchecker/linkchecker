@@ -357,10 +357,10 @@ class AnchorCheckFileUrl(FileUrl):
             if self.anchor:
                 self.add_warning(
                     _(
-                        f" URL `{self.url}' is a directory with an anchor."
+                        "URL `%s' is a directory with an anchor."
                         " When checking local files AnchorCheck does not support"
                         " anchors for directories."
-                    ),
+                    ) % self.url,
                     tag=WARN_FILE_ANCHORCHECK_DIRECTORY,
                 )
 

@@ -113,4 +113,4 @@ class _XMLLogger(_Logger):
             for aname, avalue in attrs.items():
                 args = (xmlquote(aname), xmlquoteattr(avalue))
                 self.write(' %s="%s"' % args)
-        self.writeln(">%s</%s>" % (xmlquote(content), xmlquote(name)))
+        self.writeln(f">{xmlquote(content)}</{xmlquote(name)}>")

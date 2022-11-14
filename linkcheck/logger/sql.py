@@ -112,8 +112,8 @@ class SQLLogger(_Logger):
             % {
                 'table': self.dbname,
                 'base_url': sqlify(url_data.base_url),
-                'url_parent': sqlify((url_data.parent_url)),
-                'base_ref': sqlify((url_data.base_ref)),
+                'url_parent': sqlify(url_data.parent_url),
+                'base_ref': sqlify(url_data.base_ref),
                 'valid': intify(url_data.valid),
                 'result': sqlify(url_data.result),
                 'warning': sqlify(os.linesep.join(x[1] for x in url_data.warnings)),

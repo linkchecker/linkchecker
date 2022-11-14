@@ -165,7 +165,7 @@ class TestParser(unittest.TestCase):
         Check parse results.
         """
         res = out.getvalue()
-        msg = "Test error; in: %r, out: %r, expect: %r" % (_in, res, _out)
+        msg = f"Test error; in: {_in!r}, out: {res!r}, expect: {_out!r}"
         self.assertEqual(res, _out, msg=msg)
 
     def test_encoding_detection_utf_content(self):

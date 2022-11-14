@@ -226,7 +226,7 @@ class _Logger(abc.ABC):
                 os.makedirs(path)
             self.fd = self.create_fd()
             self.close_fd = True
-        except IOError:
+        except OSError:
             msg = sys.exc_info()[1]
             log.warn(
                 LOG_CHECK,
@@ -255,13 +255,13 @@ class _Logger(abc.ABC):
         if self.fd is not None:
             try:
                 self.flush()
-            except IOError:
+            except OSError:
                 # ignore flush errors
                 pass
             if self.close_fd:
                 try:
                     self.fd.close()
-                except IOError:
+                except OSError:
                     # ignore close errors
                     pass
             self.fd = None
@@ -308,7 +308,7 @@ class _Logger(abc.ABC):
         else:
             try:
                 self.fd.write(s, **args)
-            except IOError:
+            except OSError:
                 msg = sys.exc_info()[1]
                 log.warn(
                     LOG_CHECK,
@@ -325,7 +325,7 @@ class _Logger(abc.ABC):
         """
         Write string to output descriptor plus a newline.
         """
-        self.write("%s%s" % (s, os.linesep), **args)
+        self.write(f"{s}{os.linesep}", **args)
 
     def has_part(self, name):
         """
@@ -436,7 +436,7 @@ class _Logger(abc.ABC):
         if hasattr(self, "fd"):
             try:
                 self.fd.flush()
-            except (IOError, AttributeError):
+            except (OSError, AttributeError):
                 pass
 
     def log_internal_error(self):
@@ -453,7 +453,7 @@ class _Logger(abc.ABC):
         @rtype: unicode
         """
         if modified is not None:
-            return modified.strftime("%Y-%m-%d{0}%H:%M:%S.%fZ".format(sep))
+            return modified.strftime(f"%Y-%m-%d{sep}%H:%M:%S.%fZ")
         return ""
 
 

@@ -61,12 +61,12 @@ class UrlAnchorCheck:
         if any(x for x in self.anchors if x[0] == decoded_anchor):
             return
         if self.anchors:
-            anchornames = sorted(set("`%s'" % x[0] for x in self.anchors))
+            anchornames = sorted({f"`{x[0]}'" for x in self.anchors})
             anchors = ", ".join(anchornames)
         else:
             anchors = "-"
         args = {"name": url_data.anchor, "decoded": decoded_anchor, "anchors": anchors}
-        msg = "%s %s" % (
+        msg = "{} {}".format(
             _("Anchor `%(name)s' (decoded: `%(decoded)s') not found.") % args,
             _("Available anchors: %(anchors)s.") % args,
         )

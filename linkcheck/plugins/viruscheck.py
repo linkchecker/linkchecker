@@ -94,7 +94,7 @@ class ClamdScanner:
                 if i != -1:
                     port = int(data[i + 5:])
                     break
-        except socket.error:
+        except OSError:
             self.sock.close()
             raise
         if port is None:
@@ -103,7 +103,7 @@ class ClamdScanner:
         wsock = create_socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             wsock.connect(sockinfo[0][4])
-        except socket.error:
+        except OSError:
             wsock.close()
             raise
         return wsock
@@ -199,7 +199,7 @@ class ClamavConfig(dict):
         addr = self['LocalSocket']
         try:
             sock.connect(addr)
-        except socket.error:
+        except OSError:
             sock.close()
             raise
         return sock
@@ -211,7 +211,7 @@ class ClamavConfig(dict):
         sock = create_socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             sock.connect(sockinfo[0][4])
-        except socket.error:
+        except OSError:
             sock.close()
             raise
         return sock
@@ -225,7 +225,7 @@ def scan(data, clamconf):
     """
     try:
         scanner = ClamdScanner(clamconf)
-    except socket.error:
+    except OSError:
         errmsg = _("Could not connect to ClamAV daemon.")
         return ([], [errmsg])
     try:

@@ -42,7 +42,7 @@ class RegexCheck(_ContentPlugin):
             try:
                 self.warningregex = re.compile(pattern)
             except re.error as msg:
-                log.warn(LOG_PLUGIN, "Invalid regex pattern %r: %s" % (pattern, msg))
+                log.warn(LOG_PLUGIN, _("Invalid regex pattern %r: %s"), pattern, msg)
 
     def applies_to(self, url_data):
         """Check for warningregex, extern flag and parseability."""

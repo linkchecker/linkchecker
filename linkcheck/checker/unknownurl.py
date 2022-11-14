@@ -423,7 +423,7 @@ ignored_schemes_other = r"""
 |whatsapp   # WhatsApp
 """
 
-ignored_schemes = "^(%s%s%s%s)$" % (
+ignored_schemes = "^({}{}{}{})$".format(
     ignored_schemes_permanent,
     ignored_schemes_provisional,
     ignored_schemes_historical,

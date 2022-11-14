@@ -64,7 +64,7 @@ class TestConfig(TestBase):
         patterns = [x["pattern"].pattern for x in config["externlinks"]]
         for prefix in ("ignore_", "nofollow_"):
             for suffix in ("1", "2"):
-                key = "%simadoofus%s" % (prefix, suffix)
+                key = f"{prefix}imadoofus{suffix}"
                 self.assertTrue(key in patterns)
         for key in ("url-unicode-domain",):
             self.assertTrue(key in config["ignorewarnings"])

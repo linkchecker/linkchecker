@@ -60,8 +60,7 @@ def application(environ, start_response):
 
     status = '200 OK'
     start_response(status, get_response_headers())
-    for output in checklink(form=form, env=environ):
-        yield output
+    yield from checklink(form=form, env=environ)
 
 
 _supported_langs = ('de', 'C')
@@ -113,7 +112,7 @@ class ThreadsafeIO:
         """Write given unicode data to buffer."""
         assert isinstance(data, str)
         if self.closed:
-            raise IOError("Write on closed I/O object")
+            raise OSError("Write on closed I/O object")
         if data:
             self.buf.append(data)
 
@@ -213,7 +212,7 @@ def checkform(form, env):
                 locale.setlocale(locale.LC_ALL, localestr)
                 init_i18n()
             except locale.Error as errmsg:
-                log(env, "could not set locale %r: %s" % (localestr, errmsg))
+                log(env, _("could not set locale %r: %s") % (localestr, errmsg))
         else:
             raise LCFormError(_("unsupported language %r") % lang)
     # check url syntax

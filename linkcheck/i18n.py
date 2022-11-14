@@ -25,7 +25,7 @@ import sys
 import codecs
 
 # more supported languages are added in init()
-supported_languages = set(['en'])
+supported_languages = {'en'}
 default_language = default_encoding = None
 default_directory = None
 default_domain = None
@@ -68,7 +68,7 @@ def init(domain, directory, loc=None):
         # get supported languages
         for lang in os.listdir(directory):
             path = os.path.join(directory, lang, 'LC_MESSAGES')
-            mo_file = os.path.join(path, '%s.mo' % domain)
+            mo_file = os.path.join(path, f"{domain}.mo")
             if os.path.exists(mo_file):
                 supported_languages.add(lang)
     if loc is None:

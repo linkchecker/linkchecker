@@ -34,7 +34,7 @@ class Form:
 
     def __repr__(self):
         """Return string displaying URL and form data."""
-        return "<url=%s data=%s>" % (self.url, self.data)
+        return f"<url={self.url} data={self.data}>"
 
 
 def search_form(content, cgiuser, cgipassword):
