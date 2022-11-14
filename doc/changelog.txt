@@ -1,12 +1,31 @@
-10.x
+10.2.0 (released 21.11.2022)
+
+Features:
+- ignoreerrors setting to disregard errors for URLs after checking
+- AnchorCheck plugin has partial support for checking local files
 
 Changes:
+- Minimum Python version required is 3.7
 - PyXDG is no longer used
 - setuptools and setup.py replaced with hatchling and pyproject.toml
 - The application version is derived from git tags using hatch-vcs
-- Binary translation catalogs are compiled using polib during distribution
+- Binary translation catalogs are produced using polib during distribution
   package building and are now included in sdist packages
-- Warning url-rate-limited renamed to http-rate-limited.
+- gemini, tg (Telegram) and whatsapp added to the list of ignored schemes
+- Warning url-rate-limited renamed to http-rate-limited
+- maxrequestspersecond can be less than 1
+- maxrequestspersecond greater than 10 is used unchanged if the HTTP server
+  returns a LinkChecker response header
+- When a sitemap is discovered from a robots.txt file, the robots.txt is logged
+  as the sitemap parent URL
+
+Fixes:
+- Checking directories containing Unicode filenames
+- Parsing srcset attributes with multiple image candidates
+- resultcachesize setting was being ignored
+- sitemap output when using multiple threads
+- AnchorCheck plugin is re-enabled
+- Multiple man page and other documentation updates
 
 
 10.1.0 (released 22.12.2021)
@@ -58,7 +77,7 @@ Changes:
   a new warning: WARN_URL_RATE_LIMITED, instead of an error
 - checking: Use timeout when fetching login forms and robots.txt
 - checking: login forms with only one field are supported
-- checking: slack and whatsapp added to the list of ignored schemes
+- checking: slack added to the list of ignored schemes
 - tests: Test coverage has been increased
 - biplist is no longer used because plistlib now supports binary files
 - dnspython and miniboa are no longer included
