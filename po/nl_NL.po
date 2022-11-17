@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: https://github.com/linkchecker/linkchecker\n"
 "POT-Creation-Date: 2022-10-31 19:45+0000\n"
-"PO-Revision-Date: 2021-01-08 15:12+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2022-11-17 14:20+0100\n"
+"Last-Translator: Gideon van Melle <translations@gvmelle.com>\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.2\n"
 
 #: ../linkcheck/director/console.py:38
 #, python-format
@@ -133,7 +133,7 @@ msgstr ""
 "stoppen de actieve URL's."
 
 #: ../linkcheck/director/__init__.py:36
-#, fuzzy, python-format
+#, python-format
 msgid "Problem using login URL: %(msg)s."
 msgstr "Fout met login URL: %(msg)s."
 
@@ -211,9 +211,9 @@ msgid "Leading or trailing whitespace in URL `%(url)s'."
 msgstr "Whitespace leiden of achtervolgen in URL `%(url)s'."
 
 #: ../linkcheck/checker/urlbase.py:339
-#, fuzzy, python-format
+#, python-format
 msgid "The URL with content type %r is not parseable."
-msgstr "De grootte van de URL-inhoud is te groot."
+msgstr "De URL met inhoudstype %r is niet te parseren."
 
 #: ../linkcheck/checker/urlbase.py:420
 msgid "URL is empty"
@@ -309,9 +309,8 @@ msgid "The URL content size is zero."
 msgstr "De grootte van de URL-inhoud is nul."
 
 #: ../linkcheck/checker/const.py:110
-#, fuzzy
 msgid "The URL content type is not parseable."
-msgstr "De grootte van de URL-inhoud is te groot."
+msgstr "Het URL-inhoudstype kan niet worden geparseerd."
 
 #: ../linkcheck/checker/const.py:111
 msgid "The URL is longer than the recommended size."
@@ -331,7 +330,7 @@ msgstr "Het bestand: pad is niet hetzelfde als het systeemspecifieke pad."
 
 #: ../linkcheck/checker/const.py:118
 msgid "A local directory with an anchor, not supported by AnchorCheck."
-msgstr ""
+msgstr "Een lokale directory met een anker, niet ondersteund door AnchorCheck."
 
 #: ../linkcheck/checker/const.py:119
 msgid "The ftp: URL is missing a trailing slash."
@@ -347,7 +346,7 @@ msgstr "Er is een fout opgetreden tijdens het opslaan van een cookie."
 
 #: ../linkcheck/checker/const.py:122
 msgid "The URL request was rate limited."
-msgstr ""
+msgstr "Het URL-verzoek was beperkt."
 
 #: ../linkcheck/checker/const.py:123
 msgid "The mail MX host could not be found."
@@ -542,6 +541,8 @@ msgid ""
 " URL `{self.url}' is a directory with an anchor. When checking local files "
 "AnchorCheck does not support anchors for directories."
 msgstr ""
+" URL '{self.url}' is een directory met een anker. Bij het controleren van "
+"lokale bestanden ondersteunt AnchorCheck geen ankers voor mappen."
 
 #: ../linkcheck/checker/ftpurl.py:75
 msgid "Got no answer from FTP server"
@@ -584,20 +585,20 @@ msgid "SSL verification is disabled; enable the sslverify option"
 msgstr "SSL-verificatie is uitgeschakeld; de optie sslverify inschakelen"
 
 #: ../linkcheck/plugins/sslcertcheck.py:85
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid SSL certificate \"notAfter\" value %r"
-msgstr "Ongeldige SSL-certficate \"notAfter\" waarde %r"
+msgstr "Ongeldig SSL-certificaat \"notAfter\" waarde %r"
 
 #: ../linkcheck/plugins/sslcertcheck.py:94
-#, fuzzy, python-format
+#, python-format
 msgid "SSL certificate is expired on %(expire)s."
-msgstr "SSL-certficate is verlopen op %(expire)s."
+msgstr "SSL-certificaat is verlopen op %(expire)s."
 
 #: ../linkcheck/plugins/sslcertcheck.py:100
 #, python-format
 msgid "SSL certificate expires on %(expire)s and is only %(valid)s valid."
 msgstr ""
-"SSL-certificaat verloopt op %(expire)s en is alleen geldig voor %(valid).s."
+"SSL-certificaat verloopt op %(expire)s en is alleen geldig voor %(valid)s."
 
 #: ../linkcheck/plugins/sslcertcheck.py:104
 #, python-format
@@ -612,9 +613,9 @@ msgid "invalid value for %s: %d must not be less than %d"
 msgstr "ongeldige waarde voor %s: %d mag niet lager zijn dan %d"
 
 #: ../linkcheck/plugins/anchorcheck.py:70
-#, fuzzy, python-format
+#, python-format
 msgid "Anchor `%(name)s' (decoded: `%(decoded)s') not found."
-msgstr "Anker `%(name)s’ niet gevonden."
+msgstr "Anker '%(name)s' (gedecodeerd: '%(decoded)s') niet gevonden."
 
 #: ../linkcheck/plugins/anchorcheck.py:71
 #, python-format
@@ -622,9 +623,8 @@ msgid "Available anchors: %(anchors)s."
 msgstr "Beschikbare ankers: %(anchors)s."
 
 #: ../linkcheck/plugins/syntaxchecks.py:56
-#, fuzzy
 msgid "HTML syntax check plugin is broken. Fixes welcome."
-msgstr "HTML-syntaxiscontrole-plugin fout: %(msg)s "
+msgstr "HTML syntax check plugin is kapot. Fixes welkom."
 
 #: ../linkcheck/plugins/syntaxchecks.py:74
 msgid "valid HTML syntax"
@@ -650,9 +650,9 @@ msgid "%(w3type)s validation error at line %(line)s col %(column)s: %(msg)s"
 msgstr "%(w3type)s validatiefout bij regel %(line)s col %(column)s: %(msg)s"
 
 #: ../linkcheck/plugins/syntaxchecks.py:136
-#, fuzzy, python-format
+#, python-format
 msgid "%(w3type)s validation error at line %(line)s: %(msg)s"
-msgstr "%(w3type)s validatiefout bij regel %(line)s col %(column)s: %(msg)s"
+msgstr "%(w3type)s validatiefout bij regel %(line)s: %(msg)s"
 
 #: ../linkcheck/plugins/viruscheck.py:101
 msgid "clamd is not ready for stream scanning"
@@ -682,7 +682,7 @@ msgstr "URL bevindt zich in %(location)s."
 #: ../linkcheck/cache/robots_txt.py:77
 #, python-format
 msgid "Relative Sitemap %s in %s discarded"
-msgstr ""
+msgstr "Relatieve sitemap %s in %s verwijderd"
 
 #: ../linkcheck/command/arg_parser.py:28
 msgid ""
@@ -721,7 +721,6 @@ msgstr ""
 "bladert.\n"
 
 #: ../linkcheck/command/arg_parser.py:46
-#, fuzzy
 msgid ""
 "PROXY SUPPORT\n"
 "To use a proxy on Unix or Windows set $http_proxy or $https_proxy\n"
@@ -775,7 +774,6 @@ msgstr ""
 "\n"
 
 #: ../linkcheck/command/arg_parser.py:72
-#, fuzzy
 msgid ""
 "REGULAR EXPRESSIONS\n"
 "Only Python regular expressions are accepted by LinkChecker.\n"
@@ -787,7 +785,7 @@ msgid ""
 msgstr ""
 "REGULIERE EXPRESSIES\n"
 "Alleen gewone Python-expressies worden geaccepteerd door LinkChecker.\n"
-"Zie http://www.amk.ca/python/howto/regex/ voor een introductie in\n"
+"Zie https://docs.python.org/howto/regex.html voor een introductie in\n"
 "reguliere expressies.\n"
 "\n"
 "De enige toevoeging is dat een uitroepteken vooraan\n"
@@ -916,7 +914,6 @@ msgstr ""
 "  linkchecker -r0 ftp.example.org\n"
 
 #: ../linkcheck/command/arg_parser.py:148
-#, fuzzy
 msgid ""
 "OUTPUT TYPES\n"
 "Note that by default only errors and warnings are logged.\n"
@@ -949,30 +946,29 @@ msgstr ""
 "U moet de optie --verbose gebruiken om geldige URL's te zien,\n"
 "en bij het uitvoeren van een sitemapgrafiek.\n"
 "\n"
-"tekst Standaard tekstuitvoer, LOGboekregistratie URL's in trefwoord: "
-"argument mode.\n"
-"html URL's registreren in trefwoord: argumentmode, opgemaakt als HTML.\n"
-"        Daarnaast heeft links naar de pagina's waarnaar verwezen wordt. "
-"Ongeldige URL's hebben\n"
-"        Html- en CSS-syntaxis controleren koppelingen die zijn toegevoegd.\n"
-"csv Log check resultaat in CSV formaat met een URL per lijn.\n"
-"gml Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
-"een GML-sitemap\n"
-"        Grafiek.\n"
-"punt Log bovenliggende en onderliggende relaties tussen gekoppelde URL's als "
-"DOT-sitemap\n"
-"        Grafiek.\n"
-"gxml Log check resultaat als een GraphXML sitemap grafiek.\n"
-"xml Log check resultaat als machine-readable XML.\n"
-"sql Log check resultaat als SQL script met INSERT commando's. Een voorbeeld\n"
-"        script om de eerste SQL-tabel te maken, is opgenomen als maken.sql.\n"
-"Blacklist\n"
-"        Geschikt voor cron banen. Logt het controleresultaat in op een "
-"bestand\n"
-"        ~/.linkchecker/zwarte lijst die alleen vermeldingen bevat met "
-"ongeldig\n"
+"tekst    Standaard tekstuitvoer, Logt URL's in trefwoord: argumentmode.\n"
+"html    logt URL's in trefwoord: argumentmode, opgemaakt als HTML.\n"
+"        Geeft ook links naar gerefereerde pagina’s. Ongeldige URL's hebben\n"
+"        HTML- en CSS-syntax controle links toegevoegd.\n"
+"csv     Log check resultaat in CSV formaat met één URL per regel.\n"
+"gml     Log parent-child relaties tussen gekoppelde URL's als een GML-"
+"sitemap\n"
+"        grafiek.\n"
+"dot    Log parent-child relaties tussen gekoppelde URL's als DOT-sitemap\n"
+"        grafiek.\n"
+"gxml     Log check met als resultaat een GraphXML sitemap grafiek.\n"
+"xml    Log check met als resultaat een machine-readable XML.\n"
+"sql     Log check met als resultaat een SQL script met INSERT commando's. "
+"Een voorbeeld\n"
+"        script om de eerste SQL-tabel te maken, is opgenomen als create."
+"sql.\n"
+"fouten\n"
+"        Geschikt voor cron jobs. Geeft het controleresultaat in een "
+"logbestand\n"
+"        $XDG_DATA_HOME/linkchecker/failures die alleen vermeldingen bevat "
+"met ongeldig\n"
 "        URL's en het aantal keren dat ze zijn mislukt.\n"
-"none Logs niets. Geschikt voor het debuggen of controleren van de exit "
+"none     Logt niets. Geschikt voor het debuggen of controleren van de exit "
 "code.\n"
 
 #: ../linkcheck/command/arg_parser.py:176
@@ -990,16 +986,16 @@ msgid "General options"
 msgstr "Algemene opties"
 
 #: ../linkcheck/command/arg_parser.py:221
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Use FILENAME as configuration file. Per default LinkChecker uses\n"
 "$XDG_CONFIG_HOME/linkchecker/linkcheckerrc (under Windows\n"
 "%%HOMEPATH%%\\.config\\linkchecker\\linkcheckerrc)."
 msgstr ""
-"Gebruik BESTANDSNAAM als configuratiebestand. Per standaard gebruik van "
+"Gebruik FILENAME als configuratiebestand. Per standaard gebruikt "
 "LinkChecker\n"
-"~/.linkchecker/linkcheckerrc (onder Windows\n"
-"%% HOMEPATH%%\\.linkchecker\\linkcheckerrc)."
+"$XDG_CONFIG_HOME/linkchecker/linkcheckerrc (onder Windows\n"
+"%%HOMEPATH%%\\.config\\linkchecker\\linkcheckerrc)."
 
 #: ../linkcheck/command/arg_parser.py:232
 msgid ""
@@ -1050,7 +1046,7 @@ msgstr ""
 "foutopsporingsruns."
 
 #: ../linkcheck/command/arg_parser.py:276
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Output to a file linkchecker-out.TYPE, $XDG_DATA_HOME/linkchecker/failures "
 "for\n"
@@ -1066,22 +1062,23 @@ msgid ""
 "to more than one file. Default is no file output. Note that you can\n"
 "suppress all console output with the option '-o none'."
 msgstr ""
-"Uitvoer naar een bestandskoppelingcontrole. TYPE, $HOME/.linkchecker/zwarte "
-"lijst voor\n"
-"'blacklist'-uitvoer of BESTANDSNAAM indien opgegeven.\n"
-"De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
-"uw\n"
-"Locale.\n"
-"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
-"encodings.html.\n"
-"De bestandsnamen en ENCODing-onderdelen van het uitvoertype 'geen' worden "
+"Uitvoer naar een linkchecker-out bestand. TYPE, $XDG_DATA_HOME/linkchecker/"
+"failures voor\n"
+"'fouten' uitvoer of BESTANDSNAAM indien opgegeven.\n"
+"De CODERING specificeert de uitvoercodering, de standaard is die van uw\n"
+"locale.\n"
+"Geldige coderingen worden vermeld op https://docs.python.org/library/codecs."
+"html#standard-encodings.\n"
+"De BESTANDSNAAM- en CODERING onderdelen van het uitvoertype 'geen' worden "
 "genegeerd,\n"
-"anders als het bestand al bestaat, zal het worden overschreven.\n"
-"U deze optie meerdere tijd opgeven. Geldige bestandsuitvoertypen\n"
-"%(loggertypes)s. U deze optie meerdere keren opgeven om uit te geven\n"
-"meer dan één bestand. Standaard is geen bestandsuitvoer. Houd er rekening "
-"mee dat u\n"
-"alle console-uitvoer te onderdrukken met de optie '-o none'."
+"zoniet, als het bestand al bestaat, wordt het overschreven.\n"
+"U kunt deze optie meer dan eens opgeven. Geldige bestandstypen voor "
+"bestandsuitvoer\n"
+"zijn %(loggertypes)s. U kunt deze optie meerdere keren opgeven om uit te "
+"voeren\n"
+"naar meer dan één bestand. Standaard is: geen bestandsuitvoer. Houd er "
+"rekening mee dat u\n"
+"alle console-uitvoer kan onderdrukken met de optie '-o none'."
 
 #: ../linkcheck/command/arg_parser.py:296
 msgid "Do not print check status messages."
@@ -1093,7 +1090,7 @@ msgstr ""
 "Log geen waarschuwingen in. Standaard is het registreren van waarschuwingen."
 
 #: ../linkcheck/command/arg_parser.py:310
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Specify output as %(loggertypes)s. Default output type is text.\n"
 "The ENCODING specifies the output encoding, the default is that of your\n"
@@ -1104,9 +1101,9 @@ msgstr ""
 "Geef uitvoer op als %(loggertypes)s. Standaarduitvoertype is tekst.\n"
 "De ENCODING geeft de uitvoercodering aan, de standaardinstelling is die van "
 "uw\n"
-"Locale.\n"
-"Geldige coderingscodes worden vermeld op http://docs.python.org/lib/standard-"
-"encodings.html."
+"locale.\n"
+"Geldige coderingscodes worden vermeld op https://docs.python.org/library/"
+"codecs.html#standard-encodings."
 
 #: ../linkcheck/command/arg_parser.py:327
 msgid ""
@@ -1143,14 +1140,13 @@ msgid "Check external URLs."
 msgstr "Externe URL's controleren."
 
 #: ../linkcheck/command/arg_parser.py:372
-#, fuzzy
 msgid ""
 "Only check syntax of URLs matching the given regular expression.\n"
 "This option can be given multiple times."
 msgstr ""
 "Controleer alleen de syntaxis van URL's die overeenkomen met de gegeven "
 "reguliere expressie.\n"
-" Deze optie kan meerdere keren worden gegeven."
+"Deze optie kan meerdere keren worden gegeven."
 
 #: ../linkcheck/command/arg_parser.py:382
 msgid ""
@@ -1192,11 +1188,8 @@ msgstr ""
 "zal oneindige recursie mogelijk maken. Standaarddiepte is oneindig."
 
 #: ../linkcheck/command/arg_parser.py:426
-#, fuzzy
 msgid "Set the timeout for connection attempts in seconds."
-msgstr ""
-"Stel de time-out voor verbindingspogingen in seconden in. De standaard\n"
-"time-out is %d seconden."
+msgstr "Stel de time-out in voor verbindingspogingen in seconden."
 
 #: ../linkcheck/command/arg_parser.py:435
 msgid ""
@@ -1279,6 +1272,8 @@ msgstr "Uitvoeren met python -O schakelt foutopsporing uit."
 #, python-format
 msgid "blacklist is deprecated for option %(option)s, using failures instead"
 msgstr ""
+"zwarte lijst is afgeschaft voor optie %(option)s, inplaats hiervan worden "
+"fouten gebruikt"
 
 #: ../linkcheck/command/setup_config.py:88
 #: ../linkcheck/command/setup_config.py:134
@@ -1297,6 +1292,8 @@ msgstr "Onbekende codering %(encoding)r in %(output)r voor optie %(option)s"
 msgid ""
 "blacklist logger is deprecated for option %(option)s, using failures instead"
 msgstr ""
+"blacklist logger is afgeschaft voor optie %(option)s, inplaats hiervan "
+"worden fouten gebruikt"
 
 #: ../linkcheck/command/setup_config.py:162
 #, python-format
@@ -1356,6 +1353,7 @@ msgid ""
 "The blacklist section in linkcheckerrc is deprecated, please rename to "
 "failures"
 msgstr ""
+"De zwarte lijst sectie in linkcheckeerrc is afgeschaft. Hernoem naar fouten"
 
 #: ../linkcheck/configuration/confparse.py:235
 #, python-format
@@ -1375,6 +1373,9 @@ msgid ""
 "options %s) and the file is readable by others. Please make the file only "
 "readable by you."
 msgstr ""
+"Het configuratiebestand bevat %s wachtwoordinformatie (in sectie [%s] en "
+"opties %s) en het bestand is leesbaar voor anderen. Maak het bestand alleen "
+"leesbaar voor u."
 
 #: ../linkcheck/configuration/confparse.py:283
 #, python-format
@@ -1473,7 +1474,7 @@ msgstr[1] "%d dagen"
 #, python-format
 msgid "%d year"
 msgid_plural "%d years"
-msgstr[0] "% d jaar"
+msgstr[0] "%d jaar"
 msgstr[1] "%d jaren"
 
 #: ../linkcheck/strformat.py:244
@@ -1488,17 +1489,17 @@ msgstr ""
 #: ../linkcheck/logger/failures.py:47
 #, python-format
 msgid "%(blacklist)s file is deprecated please rename to failures"
-msgstr ""
+msgstr "%(blacklist)s bestand is afgeschaft, hernoem naar fouten"
 
 #: ../linkcheck/logger/failures.py:99
 #, python-format
 msgid "invalid line starting with '%(linestart)s' in %(failures)s"
-msgstr ""
+msgstr "ongeldige regel die begint met '%(linestart)s' in %(failures)s"
 
 #: ../linkcheck/logger/text.py:100 ../linkcheck/logger/__init__.py:385
-#, fuzzy, python-format
+#, python-format
 msgid "Read the documentation at %(url)s"
-msgstr "Download de nieuwste versie op %(url)s"
+msgstr "Lees de documentatie op %(url)s"
 
 #: ../linkcheck/logger/text.py:103 ../linkcheck/logger/__init__.py:388
 #, python-format
@@ -1562,9 +1563,8 @@ msgstr[0] "in %d URL"
 msgstr[1] "in %d URL's"
 
 #: ../linkcheck/logger/text.py:233
-#, fuzzy
 msgid " checked."
-msgstr "%d link gecontroleerd."
+msgstr " aangevinkt."
 
 #: ../linkcheck/logger/text.py:235 ../linkcheck/logger/html.py:357
 #, python-format
@@ -1643,9 +1643,9 @@ msgstr[0] "%d link gecontroleerd."
 msgstr[1] "%d links gecontroleerd."
 
 #: ../linkcheck/logger/html.py:401
-#, fuzzy, python-format
+#, python-format
 msgid "Read the documentation at %s"
-msgstr "Koop de nieuwste versie op %s"
+msgstr "Lees de documentatie op %s"
 
 #: ../linkcheck/logger/html.py:411
 #, python-format
@@ -1966,29 +1966,3 @@ msgstr "ongeldige keuze: %(value)r (kies uit %(choices)s)"
 #, python-format
 msgid "%(prog)s: error: %(message)s\n"
 msgstr "%(prog)s: fout: %(message)s\n"
-
-#~ msgid "The URL has been ignored."
-#~ msgstr "De URL is genegeerd."
-
-#, fuzzy
-#~ msgid "Anchor check plugin is broken. Fixes welcome."
-#~ msgstr "HTML-syntaxiscontrole-plugin fout: %(msg)s "
-
-#, fuzzy
-#~ msgid "options"
-#~ msgstr "Uitvoeropties"
-
-#~ msgid "Proxy value `%(proxy)s' must start with 'http:' or 'https:'."
-#~ msgstr "Proxywaarde `%(proxy)s' moet beginnen met 'http:' of 'https:'."
-
-#~ msgid "Ignoring proxy setting `%(proxy)s'."
-#~ msgstr "Proxy-instelling `%(proxy)s' negeren."
-
-#~ msgid "Using proxy `%(proxy)s'."
-#~ msgstr "Met behulp van proxy `%(proxy)s'."
-
-#~ msgid "no CGI password fieldname given for login URL."
-#~ msgstr "geen CGI wachtwoord veldnaam gegeven voor login URL."
-
-#~ msgid "no CGI user fieldname given for login URL."
-#~ msgstr "geen CGI-gebruikersveldnaam gegeven voor login URL."
