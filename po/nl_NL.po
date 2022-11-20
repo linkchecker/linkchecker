@@ -536,12 +536,12 @@ msgstr ""
 "moet het systeempad altijd gebruiken in URL's."
 
 #: ../linkcheck/checker/fileurl.py:360
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "URL `%s' is a directory with an anchor. When checking local files "
 "AnchorCheck does not support anchors for directories."
 msgstr ""
-" URL '{self.url}' is een directory met een anker. Bij het controleren van "
+"URL `%s' is een directory met een anker. Bij het controleren van "
 "lokale bestanden ondersteunt AnchorCheck geen ankers voor mappen."
 
 #: ../linkcheck/checker/ftpurl.py:75
