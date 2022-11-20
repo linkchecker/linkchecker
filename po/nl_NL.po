@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: https://github.com/linkchecker/linkchecker\n"
-"POT-Creation-Date: 2022-10-31 19:45+0000\n"
+"POT-Creation-Date: 2022-11-20 17:11+0000\n"
 "PO-Revision-Date: 2022-11-19 14:59+0100\n"
 "Last-Translator: Gideon van Melle <translations@gvmelle.com>\n"
 "Language-Team: \n"
@@ -190,87 +190,87 @@ msgstr "Geen nieuwsgroep opgegeven in NNTP URL."
 msgid "NNTP server too busy; tried more than %d times."
 msgstr "NNTP-server te druk; meer dan %d keer geprobeerd."
 
-#: ../linkcheck/checker/urlbase.py:78
+#: ../linkcheck/checker/urlbase.py:77
 #, python-format
 msgid "URL has unparsable domain name: %(name)s"
 msgstr "URL heeft unparsable domeinnaam: %(name)s"
 
-#: ../linkcheck/checker/urlbase.py:162
+#: ../linkcheck/checker/urlbase.py:161
 msgid "The URL is outside of the domain filter, checked only syntax."
 msgstr ""
 "De URL bevindt zich buiten het domeinfilter. Alleen de syntaxis "
 "gecontroleerd."
 
-#: ../linkcheck/checker/urlbase.py:165
+#: ../linkcheck/checker/urlbase.py:164
 msgid "filtered"
 msgstr "gefilterd"
 
-#: ../linkcheck/checker/urlbase.py:215
+#: ../linkcheck/checker/urlbase.py:214
 #, python-format
 msgid "Leading or trailing whitespace in URL `%(url)s'."
 msgstr "Whitespace leiden of achtervolgen in URL `%(url)s'."
 
-#: ../linkcheck/checker/urlbase.py:339
+#: ../linkcheck/checker/urlbase.py:338
 #, python-format
 msgid "The URL with content type %r is not parseable."
 msgstr "De URL met inhoudstype %r is niet te parseren."
 
-#: ../linkcheck/checker/urlbase.py:420
+#: ../linkcheck/checker/urlbase.py:419
 msgid "URL is empty"
 msgstr "URL is leeg"
 
-#: ../linkcheck/checker/urlbase.py:435
+#: ../linkcheck/checker/urlbase.py:434
 #, python-format
 msgid "Effective URL %(url)r."
 msgstr "Effectieve URL %(url)r."
 
-#: ../linkcheck/checker/urlbase.py:442
+#: ../linkcheck/checker/urlbase.py:441
 #, python-format
 msgid "URL length %(len)d is longer than %(max)d."
 msgstr "URL-lengte %(len)d is langer dan %(max)d."
 
-#: ../linkcheck/checker/urlbase.py:492 ../linkcheck/checker/urlbase.py:498
+#: ../linkcheck/checker/urlbase.py:491 ../linkcheck/checker/urlbase.py:497
 #, python-format
 msgid "URL host %(host)r has invalid port"
 msgstr "URL-host %(host)r heeft ongeldige poort"
 
-#: ../linkcheck/checker/urlbase.py:505
+#: ../linkcheck/checker/urlbase.py:504
 msgid "URL has empty hostname"
 msgstr "URL heeft lege hostnaam"
 
-#: ../linkcheck/checker/urlbase.py:530
+#: ../linkcheck/checker/urlbase.py:529
 #, python-format
 msgid "URL %(url)s has obfuscated IP address %(ip)s"
 msgstr "URL %(url)s heeft verborgen IP-adres %(ip)s"
 
-#: ../linkcheck/checker/urlbase.py:566
+#: ../linkcheck/checker/urlbase.py:565
 msgid "Hostname not found"
 msgstr "Hostname niet gevonden"
 
-#: ../linkcheck/checker/urlbase.py:569
+#: ../linkcheck/checker/urlbase.py:568
 #, python-format
 msgid "Bad hostname %(host)r: %(msg)s"
 msgstr "Bad hostnaam %(host)r: %(msg)s"
 
-#: ../linkcheck/checker/urlbase.py:589
+#: ../linkcheck/checker/urlbase.py:588
 #, python-format
 msgid "could not get content: %(msg)s"
 msgstr "kon geen content krijgen: %(msg)s"
 
-#: ../linkcheck/checker/urlbase.py:644
+#: ../linkcheck/checker/urlbase.py:643
 #, python-format
 msgid "Content size %(size)s is larger than %(maxbytes)s."
 msgstr "De content grootte %(size)s is groter dan %(maxbytes)s."
 
-#: ../linkcheck/checker/urlbase.py:738
+#: ../linkcheck/checker/urlbase.py:737
 msgid "Content size is zero."
 msgstr "De content grootte is nul."
 
-#: ../linkcheck/checker/urlbase.py:775 ../linkcheck/checker/httpurl.py:343
+#: ../linkcheck/checker/urlbase.py:774 ../linkcheck/checker/httpurl.py:343
 msgid "File size too large"
 msgstr "Bestand te groot"
 
-#: ../linkcheck/checker/urlbase.py:856
+#: ../linkcheck/checker/urlbase.py:855
 #, python-format
 msgid "URL has unparsable domain name: %(domain)s"
 msgstr "URL heeft unparsable domeinnaam: %(domain)s"
@@ -292,79 +292,79 @@ msgstr "genegeerd"
 msgid "URL is unrecognized or has invalid syntax"
 msgstr "URL is niet herkend of heeft ongeldige syntaxis"
 
-#: ../linkcheck/checker/const.py:106
+#: ../linkcheck/checker/const.py:103
 msgid "The effective URL is different from the original."
 msgstr "De effectieve URL is anders dan het origineel."
 
-#: ../linkcheck/checker/const.py:107
+#: ../linkcheck/checker/const.py:104
 msgid "Could not get the content of the URL."
 msgstr "Kan de content van de URL niet krijgen."
 
-#: ../linkcheck/checker/const.py:108
+#: ../linkcheck/checker/const.py:105
 msgid "The URL content size is too large."
 msgstr "De grootte van de URL-inhoud is te groot."
 
-#: ../linkcheck/checker/const.py:109
+#: ../linkcheck/checker/const.py:106
 msgid "The URL content size is zero."
 msgstr "De grootte van de URL-inhoud is nul."
 
-#: ../linkcheck/checker/const.py:110
+#: ../linkcheck/checker/const.py:107
 msgid "The URL content type is not parseable."
 msgstr "Het URL-inhoudstype kan niet worden geparseerd."
 
-#: ../linkcheck/checker/const.py:111
+#: ../linkcheck/checker/const.py:108
 msgid "The URL is longer than the recommended size."
 msgstr "De URL is langer dan de aanbevolen grootte."
 
-#: ../linkcheck/checker/const.py:112
+#: ../linkcheck/checker/const.py:109
 msgid "The URL contains leading or trailing whitespace."
 msgstr "De URL bevat toonaangevende of nakomende spaties."
 
-#: ../linkcheck/checker/const.py:113
+#: ../linkcheck/checker/const.py:110
 msgid "The file: URL is missing a trailing slash."
 msgstr "Het bestand: URL mist een schuine eindstreep."
 
-#: ../linkcheck/checker/const.py:115
+#: ../linkcheck/checker/const.py:112
 msgid "The file: path is not the same as the system specific path."
 msgstr "Het bestand: pad is niet hetzelfde als het systeemspecifieke pad."
 
-#: ../linkcheck/checker/const.py:118
+#: ../linkcheck/checker/const.py:115
 msgid "A local directory with an anchor, not supported by AnchorCheck."
 msgstr "Een lokale directory met een anker, niet ondersteund door AnchorCheck."
 
-#: ../linkcheck/checker/const.py:119
+#: ../linkcheck/checker/const.py:116
 msgid "The ftp: URL is missing a trailing slash."
 msgstr "De ftp: URL mist een afsluitende schuine streep."
 
-#: ../linkcheck/checker/const.py:120
+#: ../linkcheck/checker/const.py:117
 msgid "The URL had no content."
 msgstr "De URL had geen inhoud."
 
-#: ../linkcheck/checker/const.py:121
+#: ../linkcheck/checker/const.py:118
 msgid "An error occurred while storing a cookie."
 msgstr "Er is een fout opgetreden tijdens het opslaan van een cookie."
 
-#: ../linkcheck/checker/const.py:122
+#: ../linkcheck/checker/const.py:119
 msgid "The URL request was rate limited."
 msgstr "Het URL-verzoek was beperkt."
 
-#: ../linkcheck/checker/const.py:123
+#: ../linkcheck/checker/const.py:120
 msgid "The mail MX host could not be found."
 msgstr "De E-mail MX-host kon niet worden gevonden."
 
-#: ../linkcheck/checker/const.py:124
+#: ../linkcheck/checker/const.py:121
 msgid "No NNTP server was found."
 msgstr "Er is geen NNTP-server gevonden."
 
-#: ../linkcheck/checker/const.py:125
+#: ../linkcheck/checker/const.py:122
 msgid "The NNTP newsgroup could not be found."
 msgstr "De NNTP-nieuwsgroep kon niet worden gevonden."
 
-#: ../linkcheck/checker/const.py:126
+#: ../linkcheck/checker/const.py:123
 msgid "The IP is obfuscated."
 msgstr "De IP is verborgen."
 
-#: ../linkcheck/checker/const.py:127
+#: ../linkcheck/checker/const.py:124
 msgid "XML could not be parsed."
 msgstr "XML kon niet worden ontleed."
 
@@ -510,11 +510,11 @@ msgstr "OK"
 msgid "Could not get current working directory: %(msg)s"
 msgstr "Kan de huidige werkmap niet krijgen: %(msg)s"
 
-#: ../linkcheck/checker/fileurl.py:175 ../linkcheck/checker/fileurl.py:335
+#: ../linkcheck/checker/fileurl.py:175 ../linkcheck/checker/fileurl.py:339
 msgid "Added trailing slash to directory."
 msgstr "Schuine streep toegevoegd aan de map."
 
-#: ../linkcheck/checker/fileurl.py:197 ../linkcheck/checker/fileurl.py:348
+#: ../linkcheck/checker/fileurl.py:197 ../linkcheck/checker/fileurl.py:352
 msgid ""
 "local files are only checked without parent URL or when the parent URL is "
 "also a file"
@@ -522,7 +522,7 @@ msgstr ""
 "lokale bestanden worden alleen gecontroleerd zonder bovenliggende URL of "
 "wanneer de bovenliggende URL ook een bestand is"
 
-#: ../linkcheck/checker/fileurl.py:202 ../linkcheck/checker/fileurl.py:363
+#: ../linkcheck/checker/fileurl.py:202 ../linkcheck/checker/fileurl.py:367
 msgid "directory"
 msgstr "folder"
 
@@ -535,10 +535,10 @@ msgstr ""
 "Het URL-pad %(path)r is niet hetzelfde als het systeempad %(realpath)r. U "
 "moet het systeempad altijd gebruiken in URL's."
 
-#: ../linkcheck/checker/fileurl.py:356
-#, python-brace-format
+#: ../linkcheck/checker/fileurl.py:360
+#, fuzzy, python-format
 msgid ""
-" URL `{self.url}' is a directory with an anchor. When checking local files "
+"URL `%s' is a directory with an anchor. When checking local files "
 "AnchorCheck does not support anchors for directories."
 msgstr ""
 " URL '{self.url}' is een directory met een anker. Bij het controleren van "
@@ -570,6 +570,12 @@ msgstr "%(host)s opgelost voor IPS %(ips)s"
 #, python-format
 msgid "%(host)r could not be resolved"
 msgstr "%(host)r kan niet worden opgelost"
+
+#: ../linkcheck/plugins/regexcheck.py:45
+#: ../linkcheck/plugins/markdowncheck.py:88
+#, fuzzy, python-format
+msgid "Invalid regex pattern %r: %s"
+msgstr "ongeldige lege waarde voor %s: %s\n"
 
 #: ../linkcheck/plugins/regexcheck.py:61
 #, python-format
@@ -674,7 +680,7 @@ msgstr "één van TCPSocket of LocalSocket moet ingeschakeld zijn"
 msgid "Could not connect to ClamAV daemon."
 msgstr "Kon geen verbinding maken met ClamAV daemon."
 
-#: ../linkcheck/plugins/locationinfo.py:47
+#: ../linkcheck/plugins/locationinfo.py:46
 #, python-format
 msgid "URL is located in %(location)s."
 msgstr "URL bevindt zich in %(location)s."
@@ -1437,6 +1443,16 @@ msgstr ""
 "kon het oorspronkelijke configuratiebestand %(src)r niet kopiëren naar "
 "%(dst)r: %(errmsg)r"
 
+#: ../linkcheck/loader.py:40
+#, python-format
+msgid "WARN: could not load module %s: %s"
+msgstr ""
+
+#: ../linkcheck/loader.py:57
+#, fuzzy, python-format
+msgid "WARN: could not load file %s: %s"
+msgstr "Kan cookie-bestand %s  niet lezen"
+
 #: ../linkcheck/strformat.py:164
 #, python-format
 msgid "%(prefix)s%(duration).02f seconds"
@@ -1723,35 +1739,40 @@ msgstr ""
 msgid "created by %(app)s at %(time)s"
 msgstr "gemaakt door %(app)s op %(time)s"
 
-#: ../linkcheck/lc_cgi.py:218
+#: ../linkcheck/lc_cgi.py:215
+#, fuzzy, python-format
+msgid "could not set locale %r: %s"
+msgstr "kon geen content krijgen: %(msg)s"
+
+#: ../linkcheck/lc_cgi.py:217
 #, python-format
 msgid "unsupported language %r"
 msgstr "niet-ondersteunde taal %r"
 
-#: ../linkcheck/lc_cgi.py:223
+#: ../linkcheck/lc_cgi.py:222
 msgid "empty url was given"
 msgstr "lege url werd gegeven"
 
-#: ../linkcheck/lc_cgi.py:225
+#: ../linkcheck/lc_cgi.py:224
 #, python-format
 msgid "disallowed url %r was given"
 msgstr "niet-toegestane url %r werd gegeven"
 
-#: ../linkcheck/lc_cgi.py:227
+#: ../linkcheck/lc_cgi.py:226
 msgid "no url was given"
 msgstr "geen url werd gegeven"
 
-#: ../linkcheck/lc_cgi.py:232
+#: ../linkcheck/lc_cgi.py:231
 #, python-format
 msgid "invalid recursion level %r"
 msgstr "ongeldig recursieniveau %r"
 
-#: ../linkcheck/lc_cgi.py:238
+#: ../linkcheck/lc_cgi.py:237
 #, python-format
 msgid "invalid %s option %r"
 msgstr "ongeldige %s optie %r"
 
-#: ../linkcheck/lc_cgi.py:265
+#: ../linkcheck/lc_cgi.py:264
 #, python-format
 msgid ""
 "<!DOCTYPE HTML>\n"
@@ -1786,6 +1807,16 @@ msgstr ""
 "Fouten worden geregistreerd.</blockquote>\n"
 "</body>\n"
 "</html>"
+
+#: ../linkcheck/__init__.py:77
+#, python-format
+msgid "Link pattern %r strict=%s"
+msgstr ""
+
+#: ../linkcheck/__init__.py:87
+#, fuzzy, python-format
+msgid "invalid regular expression %r: %s"
+msgstr "ongeldig recursieniveau %r"
 
 #: ../linkcheck/__init__.py:111
 msgid "CRITICAL"

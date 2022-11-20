@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinkChecker\n"
 "Report-Msgid-Bugs-To: https://github.com/linkchecker/linkchecker\n"
-"POT-Creation-Date: 2022-10-31 19:45+0000\n"
+"POT-Creation-Date: 2022-11-20 17:11+0000\n"
 "PO-Revision-Date: 2011-02-16 15:27+0100\n"
 "Last-Translator: Bastian Kleineidam <calvin@users.sourceforge.net>\n"
 "Language-Team: français <kde-francophone@kde.org>\n"
@@ -192,87 +192,87 @@ msgstr "Aucun newsgroup spécifié dans l'URL NNTP."
 msgid "NNTP server too busy; tried more than %d times."
 msgstr "Le serveur NNTP est trop chargé ; plus de %d essais effectués."
 
-#: ../linkcheck/checker/urlbase.py:78
+#: ../linkcheck/checker/urlbase.py:77
 #, python-format
 msgid "URL has unparsable domain name: %(name)s"
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:162
+#: ../linkcheck/checker/urlbase.py:161
 #, fuzzy
 msgid "The URL is outside of the domain filter, checked only syntax."
 msgstr "En dehors du filtre de domaine, analyse de la syntaxe seulement."
 
-#: ../linkcheck/checker/urlbase.py:165
+#: ../linkcheck/checker/urlbase.py:164
 msgid "filtered"
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:215
+#: ../linkcheck/checker/urlbase.py:214
 #, python-format
 msgid "Leading or trailing whitespace in URL `%(url)s'."
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:339
+#: ../linkcheck/checker/urlbase.py:338
 #, python-format
 msgid "The URL with content type %r is not parseable."
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:420
+#: ../linkcheck/checker/urlbase.py:419
 msgid "URL is empty"
 msgstr "L'URL est vide."
 
-#: ../linkcheck/checker/urlbase.py:435
+#: ../linkcheck/checker/urlbase.py:434
 #, fuzzy, python-format
 msgid "Effective URL %(url)r."
 msgstr "URL effective %r."
 
-#: ../linkcheck/checker/urlbase.py:442
+#: ../linkcheck/checker/urlbase.py:441
 #, fuzzy, python-format
 msgid "URL length %(len)d is longer than %(max)d."
 msgstr "La taille du contenu (%s) est supérieure à %s."
 
-#: ../linkcheck/checker/urlbase.py:492 ../linkcheck/checker/urlbase.py:498
+#: ../linkcheck/checker/urlbase.py:491 ../linkcheck/checker/urlbase.py:497
 #, fuzzy, python-format
 msgid "URL host %(host)r has invalid port"
 msgstr "Le port %r de l'URL est invalide."
 
-#: ../linkcheck/checker/urlbase.py:505
+#: ../linkcheck/checker/urlbase.py:504
 #, fuzzy
 msgid "URL has empty hostname"
 msgstr "L'URL est vide."
 
-#: ../linkcheck/checker/urlbase.py:530
+#: ../linkcheck/checker/urlbase.py:529
 #, python-format
 msgid "URL %(url)s has obfuscated IP address %(ip)s"
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:566
+#: ../linkcheck/checker/urlbase.py:565
 msgid "Hostname not found"
 msgstr "Impossible de trouver le nom d'hôte"
 
-#: ../linkcheck/checker/urlbase.py:569
+#: ../linkcheck/checker/urlbase.py:568
 #, python-format
 msgid "Bad hostname %(host)r: %(msg)s"
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:589
+#: ../linkcheck/checker/urlbase.py:588
 #, fuzzy, python-format
 msgid "could not get content: %(msg)s"
 msgstr "Impossible d'analyser le contenu : %(msg)r"
 
-#: ../linkcheck/checker/urlbase.py:644
+#: ../linkcheck/checker/urlbase.py:643
 #, fuzzy, python-format
 msgid "Content size %(size)s is larger than %(maxbytes)s."
 msgstr "La taille du contenu (%s) est supérieure à %s."
 
-#: ../linkcheck/checker/urlbase.py:738
+#: ../linkcheck/checker/urlbase.py:737
 msgid "Content size is zero."
 msgstr "La taille du contenu est nulle."
 
-#: ../linkcheck/checker/urlbase.py:775 ../linkcheck/checker/httpurl.py:343
+#: ../linkcheck/checker/urlbase.py:774 ../linkcheck/checker/httpurl.py:343
 msgid "File size too large"
 msgstr ""
 
-#: ../linkcheck/checker/urlbase.py:856
+#: ../linkcheck/checker/urlbase.py:855
 #, python-format
 msgid "URL has unparsable domain name: %(domain)s"
 msgstr ""
@@ -295,83 +295,83 @@ msgstr "URL %s ignorée."
 msgid "URL is unrecognized or has invalid syntax"
 msgstr "L'URL n'est pas reconnue ou n'a pas une syntaxe valide."
 
-#: ../linkcheck/checker/const.py:106
+#: ../linkcheck/checker/const.py:103
 msgid "The effective URL is different from the original."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:107
+#: ../linkcheck/checker/const.py:104
 msgid "Could not get the content of the URL."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:108
+#: ../linkcheck/checker/const.py:105
 msgid "The URL content size is too large."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:109
+#: ../linkcheck/checker/const.py:106
 msgid "The URL content size is zero."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:110
+#: ../linkcheck/checker/const.py:107
 msgid "The URL content type is not parseable."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:111
+#: ../linkcheck/checker/const.py:108
 msgid "The URL is longer than the recommended size."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:112
+#: ../linkcheck/checker/const.py:109
 msgid "The URL contains leading or trailing whitespace."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:113
+#: ../linkcheck/checker/const.py:110
 msgid "The file: URL is missing a trailing slash."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:115
+#: ../linkcheck/checker/const.py:112
 #, fuzzy
 msgid "The file: path is not the same as the system specific path."
 msgstr ""
 "L'URL %r n'est pas la même que le chemin du système %r. Vous devez toujours "
 "utiliser le chemin du système dans les URL."
 
-#: ../linkcheck/checker/const.py:118
+#: ../linkcheck/checker/const.py:115
 msgid "A local directory with an anchor, not supported by AnchorCheck."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:119
+#: ../linkcheck/checker/const.py:116
 msgid "The ftp: URL is missing a trailing slash."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:120
+#: ../linkcheck/checker/const.py:117
 msgid "The URL had no content."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:121
+#: ../linkcheck/checker/const.py:118
 msgid "An error occurred while storing a cookie."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:122
+#: ../linkcheck/checker/const.py:119
 msgid "The URL request was rate limited."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:123
+#: ../linkcheck/checker/const.py:120
 msgid "The mail MX host could not be found."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:124
+#: ../linkcheck/checker/const.py:121
 #, fuzzy
 msgid "No NNTP server was found."
 msgstr "Aucun serveur NNTP spécifié, l'URL est ignorée."
 
-#: ../linkcheck/checker/const.py:125
+#: ../linkcheck/checker/const.py:122
 msgid "The NNTP newsgroup could not be found."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:126
+#: ../linkcheck/checker/const.py:123
 msgid "The IP is obfuscated."
 msgstr ""
 
-#: ../linkcheck/checker/const.py:127
+#: ../linkcheck/checker/const.py:124
 msgid "XML could not be parsed."
 msgstr ""
 
@@ -508,17 +508,17 @@ msgstr ""
 msgid "Could not get current working directory: %(msg)s"
 msgstr "Impossible d'analyser le contenu : %(msg)r"
 
-#: ../linkcheck/checker/fileurl.py:175 ../linkcheck/checker/fileurl.py:335
+#: ../linkcheck/checker/fileurl.py:175 ../linkcheck/checker/fileurl.py:339
 msgid "Added trailing slash to directory."
 msgstr "Rajout d'une barre oblique terminale au répertoire."
 
-#: ../linkcheck/checker/fileurl.py:197 ../linkcheck/checker/fileurl.py:348
+#: ../linkcheck/checker/fileurl.py:197 ../linkcheck/checker/fileurl.py:352
 msgid ""
 "local files are only checked without parent URL or when the parent URL is "
 "also a file"
 msgstr ""
 
-#: ../linkcheck/checker/fileurl.py:202 ../linkcheck/checker/fileurl.py:363
+#: ../linkcheck/checker/fileurl.py:202 ../linkcheck/checker/fileurl.py:367
 msgid "directory"
 msgstr "répertoire"
 
@@ -531,10 +531,10 @@ msgstr ""
 "L'URL %r n'est pas la même que le chemin du système %r. Vous devez toujours "
 "utiliser le chemin du système dans les URL."
 
-#: ../linkcheck/checker/fileurl.py:356
-#, python-brace-format
+#: ../linkcheck/checker/fileurl.py:360
+#, python-format
 msgid ""
-" URL `{self.url}' is a directory with an anchor. When checking local files "
+"URL `%s' is a directory with an anchor. When checking local files "
 "AnchorCheck does not support anchors for directories."
 msgstr ""
 
@@ -563,6 +563,12 @@ msgstr ""
 #: ../linkcheck/checker/dnsurl.py:48
 #, python-format
 msgid "%(host)r could not be resolved"
+msgstr ""
+
+#: ../linkcheck/plugins/regexcheck.py:45
+#: ../linkcheck/plugins/markdowncheck.py:88
+#, python-format
+msgid "Invalid regex pattern %r: %s"
 msgstr ""
 
 #: ../linkcheck/plugins/regexcheck.py:61
@@ -670,7 +676,7 @@ msgstr ""
 msgid "Could not connect to ClamAV daemon."
 msgstr "Impossible de se connecter, mais la syntaxe est correcte"
 
-#: ../linkcheck/plugins/locationinfo.py:47
+#: ../linkcheck/plugins/locationinfo.py:46
 #, python-format
 msgid "URL is located in %(location)s."
 msgstr ""
@@ -1350,6 +1356,16 @@ msgid ""
 "could not copy initial configuration file %(src)r to %(dst)r: %(errmsg)r"
 msgstr ""
 
+#: ../linkcheck/loader.py:40
+#, python-format
+msgid "WARN: could not load module %s: %s"
+msgstr ""
+
+#: ../linkcheck/loader.py:57
+#, fuzzy, python-format
+msgid "WARN: could not load file %s: %s"
+msgstr "Impossible d'enregistrer les cookies : %(msg)s."
+
 #: ../linkcheck/strformat.py:164
 #, python-format
 msgid "%(prefix)s%(duration).02f seconds"
@@ -1633,35 +1649,40 @@ msgstr "Joyeux anniversaire LinkChecker, j'ai %d ans aujourd'hui !"
 msgid "created by %(app)s at %(time)s"
 msgstr "créé par %(app)s à %(time)s"
 
-#: ../linkcheck/lc_cgi.py:218
+#: ../linkcheck/lc_cgi.py:215
+#, fuzzy, python-format
+msgid "could not set locale %r: %s"
+msgstr "Impossible d'analyser le contenu : %(msg)r"
+
+#: ../linkcheck/lc_cgi.py:217
 #, fuzzy, python-format
 msgid "unsupported language %r"
 msgstr "langage non accepté"
 
-#: ../linkcheck/lc_cgi.py:223
+#: ../linkcheck/lc_cgi.py:222
 msgid "empty url was given"
 msgstr "Une URL vide a été donnée."
 
-#: ../linkcheck/lc_cgi.py:225
+#: ../linkcheck/lc_cgi.py:224
 #, fuzzy, python-format
 msgid "disallowed url %r was given"
 msgstr "Une URL non autorisée a été donnée."
 
-#: ../linkcheck/lc_cgi.py:227
+#: ../linkcheck/lc_cgi.py:226
 msgid "no url was given"
 msgstr "Aucune URL donnée"
 
-#: ../linkcheck/lc_cgi.py:232
+#: ../linkcheck/lc_cgi.py:231
 #, fuzzy, python-format
 msgid "invalid recursion level %r"
 msgstr "Niveau de récursion invalide"
 
-#: ../linkcheck/lc_cgi.py:238
+#: ../linkcheck/lc_cgi.py:237
 #, fuzzy, python-format
 msgid "invalid %s option %r"
 msgstr "option de journal %r invalide"
 
-#: ../linkcheck/lc_cgi.py:265
+#: ../linkcheck/lc_cgi.py:264
 #, fuzzy, python-format
 msgid ""
 "<!DOCTYPE HTML>\n"
@@ -1696,6 +1717,16 @@ msgstr ""
 "</blockquote>\n"
 "</body>\n"
 "</html>"
+
+#: ../linkcheck/__init__.py:77
+#, python-format
+msgid "Link pattern %r strict=%s"
+msgstr ""
+
+#: ../linkcheck/__init__.py:87
+#, fuzzy, python-format
+msgid "invalid regular expression %r: %s"
+msgstr "Niveau de récursion invalide"
 
 #: ../linkcheck/__init__.py:111
 msgid "CRITICAL"
