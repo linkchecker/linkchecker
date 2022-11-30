@@ -72,8 +72,8 @@ Modules = (
     ("argcomplete", "Argcomplete", None),
     ("GeoIP", "GeoIP", 'lib_version'),  # on Unix systems
     ("pygeoip", "GeoIP", 'lib_version'),  # on Windows systems
-    ("sqlite3", "Pysqlite", 'version'),
-    ("sqlite3", "Sqlite", 'sqlite_version'),
+    ("sqlite3", "sqlite3", 'version'),
+    ("sqlite3", "SQLite", 'sqlite_version'),
     ("meliae", "Meliae", '__version__'),
 )
 
