@@ -28,11 +28,13 @@ warnings.filterwarnings(
 
 import bs4
 
-warnings.simplefilter(
+# bs4 4.9.1 introduced MarkupResemblesLocatorWarning
+hasattr(bs4, "MarkupResemblesLocatorWarning") and warnings.simplefilter(
     'ignore', bs4.MarkupResemblesLocatorWarning
 )
 
-warnings.simplefilter(
+# bs4 4.11.0 introduced builder.XMLParsedAsHTMLWarning
+hasattr(bs4.builder, "XMLParsedAsHTMLWarning") and warnings.simplefilter(
     'ignore', bs4.builder.XMLParsedAsHTMLWarning
 )
 
