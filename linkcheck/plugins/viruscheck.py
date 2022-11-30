@@ -40,7 +40,7 @@ class VirusCheck(_ContentPlugin):
         return self.clamav_conf and not url_data.extern[0]
 
     def check(self, url_data):
-        """Try to ask GeoIP database for country info."""
+        """Scan content for viruses."""
         data = url_data.get_raw_content()
         infected, errors = scan(data, self.clamav_conf)
         if infected or errors:
