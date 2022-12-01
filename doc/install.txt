@@ -74,6 +74,13 @@ the ``linkchecker`` package is available for installation. pip_ will be
 available, often as a package e.g. ``python3-pip``, to install the latest
 LinkChecker.
 
+You may wish to install your distribution's copies of LinkChecker's dependencies
+before using pip to install LinkChecker. e.g. for Debian/Ubuntu:
+
+``apt install python3-bs4 python3-dnspython python3-requests``
+
+If those packages are too old pip will install newer versions.
+
 Manual setup for Unix systems
 -----------------------------
 First, install the required software.

@@ -1,6 +1,6 @@
 # required:
 beautifulsoup4 >= 4.8.1
-requests >= 2.4
+requests >= 2.19
 dnspython >= 2.0
 # optional:
-argcomplete
+argcomplete >= 1.8.1

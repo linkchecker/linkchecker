@@ -20,11 +20,14 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.7"
           - "3.8"
           - "3.9"
           - "3.10"
           - "3.11"
+        toxenv: [py]
+        include:
+          - python-version: "3.7"
+            toxenv: minreqs
 
     steps:
       - name: Install OS dependencies
@@ -69,7 +72,7 @@ jobs:
       - name: Run tests
         run: |
             python -m hatchling build -t sdist --hooks-only
-            python -m tox -e py
+            python -m tox -e ${{ matrix.toxenv }}
 
       - name: Report to coveralls
         run: coveralls
