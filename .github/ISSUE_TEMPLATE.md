@@ -27,9 +27,12 @@ the issue can increase the chance of a solution significantly. -->
  * Python version: <!-- python --version -->
  * Install method: <!-- distribution package, PyPI, from source tarball, from git, etc -->
 
-## Configuration file
+## Configuration
 
-<!-- include full contents of your configuration file, ~/.config/linkchecker/linkcheckerrc -->
+<!-- Include the output of `linkchecker -Dcmdline -q -f <FILENAME>` inline, not as an attachment, -->
+<!-- you may want to substitute any sensitive strings, make sure any substitutions are consistent -->
+<!-- in the reported result and logs. -->
+<!-- (if you don't use -f/--config when reproducing the problem omit that option here). -->
 
 ## Logs
 
