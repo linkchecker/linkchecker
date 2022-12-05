@@ -96,16 +96,16 @@ First, install the required software.
 5. Python dnspython package from https://pypi.org/project/dnspython/
 
 6. *Optional, build time only, for translations:*
-   polib Python module from https://pypi.org/project/polib/
+   Python polib package from https://pypi.org/project/polib/
 
 7. *Optional, for bash-completion:*
-   argcomplete Python module from https://pypi.org/project/argcomplete/
+   Python argcomplete package from https://pypi.org/project/argcomplete/
 
 8. *Optional, for displaying country codes:*
-    GeoIP from https://pypi.org/project/GeoIP/
+   Python GeoIP package from https://pypi.org/project/GeoIP/
 
 9. *Optional, for reading PDF files:*
-    pdfminer.six from https://pypi.org/project/pdfminer.six/
+   Python pdfminer.six package from https://pypi.org/project/pdfminer.six/
 
 10. *Optional, used for Virus checking:*
     ClamAv from https://www.clamav.net/
