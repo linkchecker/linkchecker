@@ -1,5 +1,5 @@
 # Use the maximum Python version tested
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # linkchecker creates $XDG_CONFIG_HOME/linkchecker/ (700) containing linkcheckerrc et al
 ENV HOME /tmp
