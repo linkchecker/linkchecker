@@ -32,10 +32,18 @@ jobs:
     steps:
       - name: Install OS dependencies
         run: |
-          sudo apt update
-          sudo apt install -y clamav-daemon geoip-database libgeoip-dev gettext
+          sudo apt-get update
+          sudo apt-get install -y clamav-daemon geoip-database libgeoip-dev gettext
+
+      - name: ClamAV cache
+        id: cache-clamav
+        uses: actions/cache@v3
+        with:
+          path: /var/lib/clamav
+          key: clamav-v1
 
       - name: Download the ClamAV signature database
+        if: ${{ steps.cache-clamav.outputs.cache-hit != 'true' }}
         run: |
           sudo service clamav-freshclam stop
           sudo freshclam
@@ -92,7 +100,7 @@ jobs:
 
       - name: Install Ubuntu packages
         run: |
-          sudo apt install -y graphviz mandoc
+          sudo apt-get install -y graphviz mandoc
 
       - name: Set up Python
         uses: actions/setup-python@v4
