@@ -92,7 +92,7 @@ jobs:
     # there's some overlap with publish-pages.yml, but this one runs on pull
     # requests, doesn't publish, and runs more doc checks
     name: docs
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Git clone
@@ -116,8 +116,9 @@ jobs:
 
       - name: Install Python packages
         run: |
-          pip install -U -r requirements.txt hatchling hatch-vcs Sphinx \
-            sphinx-epytext sphinx-intl sphinx-rtd-theme sphinx-sitemap
+          pip install -U dnspython beautifulsoup4 requests \
+            hatchling hatch-vcs sphinx sphinx-epytext \
+            sphinx-intl sphinx-rtd-theme sphinx-sitemap
 
       - name: Build
         run: |
