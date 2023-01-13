@@ -34,7 +34,8 @@ class TestBase(unittest.TestCase):
         """Ensure the current locale setting is the default.
         Otherwise, warnings will get translated and will break tests."""
         super().setUp()
-        init_i18n(loc="C")
+        os.environ["LANG"] = "C"
+        init_i18n()
 
 
 def run(cmd, verbosity=0, **kwargs):
