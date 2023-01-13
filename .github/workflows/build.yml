@@ -35,12 +35,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y clamav-daemon geoip-database libgeoip-dev gettext
 
+      - name: Make ClamAV cache directory writeable for cache action
+        run: |
+          sudo chown -R runner:docker /var/lib/clamav
+
       - name: ClamAV cache
         id: cache-clamav
         uses: actions/cache@v3
         with:
           path: /var/lib/clamav
           key: clamav-v1
+
+      - name: Restore ClamAV directory ownership
+        run: |
+          sudo chown -R clamav:clamav /var/lib/clamav
+
+      - name: Restart ClamAV Daemon
+        if: ${{ steps.cache-clamav.outputs.cache-hit == 'true' }}
+        run: |
+          sudo service clamav-daemon restart
 
       - name: Download the ClamAV signature database
         if: ${{ steps.cache-clamav.outputs.cache-hit != 'true' }}
@@ -75,7 +88,7 @@ jobs:
 
       - name: Wait for ClamAV to be ready
         run: |
-          while ! test -S /var/run/clamav/clamd.ctl; do printf "."; sleep 1; done
+          while ! test -S /run/clamav/clamd.ctl; do printf "."; sleep 1; done
 
       - name: Run tests
         run: |
