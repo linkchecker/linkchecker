@@ -117,6 +117,8 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
 
       - name: Pip cache
         uses: actions/cache@v3
@@ -157,6 +159,8 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
 
       - name: Pip cache
         uses: actions/cache@v3
