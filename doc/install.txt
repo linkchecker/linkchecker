@@ -51,8 +51,6 @@ First, if you want application translations:
 Then:
 ``pip3 install git+https://github.com/linkchecker/linkchecker.git``
 
-N.B. git archive's cannot be used.
-
 .. _pip: https://pypi.org/project/pip/
 
 Setup for Windows
