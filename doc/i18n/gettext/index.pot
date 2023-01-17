@@ -25,7 +25,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../src/index.rst:10
-msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.7 or later."
+msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.8 or later."
 msgstr ""
 
 #: ../../src/index.rst:15

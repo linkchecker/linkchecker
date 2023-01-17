@@ -28,7 +28,7 @@ Features
 Installation
 -------------
 
-Python 3.7 or later is needed. Using pip to install LinkChecker:
+Python 3.8 or later is needed. Using pip to install LinkChecker:
 
 ``pip3 install linkchecker``
 
