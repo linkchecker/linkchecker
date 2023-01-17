@@ -31,7 +31,8 @@ jobs:
         run: >
             pip install dnspython beautifulsoup4 requests \
                         hatchling hatch-vcs sphinx sphinx_epytext \
-                        sphinx_rtd_theme sphinx-sitemap
+                        sphinx_rtd_theme sphinx-sitemap \
+                        sphinxcontrib-jquery
 
       - name: Build
         run: |
