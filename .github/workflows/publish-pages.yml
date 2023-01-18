@@ -30,11 +30,12 @@ jobs:
           python-version: "3.x"
 
       - name: Install Python packages
-        run: >
+        run: |
             pip install dnspython beautifulsoup4 requests \
-                        hatchling hatch-vcs sphinx sphinx_epytext \
-                        sphinx_rtd_theme sphinx-sitemap \
-                        sphinxcontrib-jquery
+                        hatchling hatch-vcs
+            # Allow sphinx-rtd-theme to choose the versions of sphinx & docutils
+            pip install sphinx-rtd-theme
+            pip install sphinx-epytext sphinx-sitemap
 
       - name: Build
         run: |
