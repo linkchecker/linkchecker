@@ -26,6 +26,8 @@ jobs:
       # Ensure sphinx-autogen is installed in PATH
       - name: Setup Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
 
       - name: Install Python packages
         run: >
