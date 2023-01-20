@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-import cgi
 from http import cookies
+import sys
+import urllib.parse
 
-form = cgi.FieldStorage()
 C = cookies.SimpleCookie()
-for field in form:
-    C[field] = form.getvalue(field)
+for field, value in urllib.parse.parse_qsl(sys.stdin.read()):
+    C[field] = value
 
 print(C)
