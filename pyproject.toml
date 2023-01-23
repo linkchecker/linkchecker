@@ -28,8 +28,9 @@ dependencies = [
 
 [build-system]
 requires = [
-    "hatchling>=1.8.0",
+    "hatchling >= 1.8.0",
     "hatch-vcs",
+    "setuptools-scm >= 7.0.5",
 ]
 build-backend = "hatchling.build"
 
