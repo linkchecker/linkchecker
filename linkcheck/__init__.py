@@ -93,7 +93,7 @@ def get_link_pat(arg, strict=False):
     }
 
 
-def init_i18n(loc=None):
+def init_i18n():
     """Initialize i18n with the configured locale dir. The environment
     variable LOCPATH can also specify a locale dir.
 
@@ -104,7 +104,7 @@ def init_i18n(loc=None):
     else:
         # Need Python 3.9 for importlib.resources.files
         locdir = os.path.join(__path__[0], 'data', 'locale')
-    i18n.init(COMMAND_NAME, locdir, loc=loc)
+    i18n.init(COMMAND_NAME, locdir)
     # install translated log level names
     import logging
 
