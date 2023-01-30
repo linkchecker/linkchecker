@@ -1,5 +1,7 @@
 # NB: this name is used in the status badge, where we want to see "build: passing"
 name: build
+permissions:
+  contents: read
 
 on:
   push:
