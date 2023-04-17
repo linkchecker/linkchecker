@@ -33,6 +33,7 @@ class TestFtp(FtpServerTest):
             "real url %s" % url,
             "valid",
         ]
+        self.direct(url, resultlines)
         # ftp use/password
         user = "anonymous"
         passwd = "Ftp"

@@ -18,7 +18,7 @@ Handle FTP links.
 """
 
 import ftplib
-from io import StringIO
+from io import BytesIO
 
 from .. import log, LOG_CHECK, LinkCheckerError, mimeutil
 from . import internpaturl, get_index_html
@@ -179,12 +179,12 @@ class FtpUrl(internpaturl.InternPatternUrl):
         else:
             # download file in BINARY mode
             ftpcmd = f"RETR {self.filename}"
-            buf = StringIO()
+            buf = BytesIO()
 
             def stor_data(s):
                 """Helper method storing given data"""
                 # limit the download size
-                if (buf.tell() + len(s)) > self.max_size:
+                if (buf.tell() + len(s)) > self.aggregate.config["maxfilesizedownload"]:
                     raise LinkCheckerError(_("FTP file size too large"))
                 buf.write(s)
 
