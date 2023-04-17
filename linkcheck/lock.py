@@ -45,14 +45,14 @@ class DebugLock:
 
     def acquire(self, blocking=1):
         """Acquire lock."""
-        threadname = threading.currentThread().name
+        threadname = threading.current_thread().name
         log.debug(LOG_THREAD, "Acquire %s for %s", self.name, threadname)
         self.lock.acquire(blocking)
         log.debug(LOG_THREAD, "...acquired %s for %s", self.name, threadname)
 
     def release(self):
         """Release lock."""
-        threadname = threading.currentThread().name
+        threadname = threading.current_thread().name
         log.debug(LOG_THREAD, "Release %s for %s", self.name, threadname)
         self.lock.release()
 
