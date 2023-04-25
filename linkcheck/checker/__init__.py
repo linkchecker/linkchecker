@@ -199,7 +199,7 @@ def get_index_html(urls):
             url = name
         lines.append(f'<a href="{url}">{name}</a>')
     lines.extend(["</body>", "</html>"])
-    return os.linesep.join(lines)
+    return os.linesep.join(lines).encode()
 
 
 # all the URL classes

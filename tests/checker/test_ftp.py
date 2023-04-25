@@ -33,6 +33,7 @@ class TestFtp(FtpServerTest):
             "real url %s" % url,
             "valid",
         ]
+        self.direct(url, resultlines)
         # ftp use/password
         user = "anonymous"
         passwd = "Ftp"
@@ -105,3 +106,33 @@ class TestFtp(FtpServerTest):
             "error",
         ]
         self.direct(url, resultlines)
+        # directory listing
+        url = "ftp://%s:%d/base/" % (self.host, self.port)
+        resultlines = [
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url test.txt",
+            "cache key %stest.txt" % url,
+            "real url %stest.txt" % url,
+            "name test.txt",
+            "warning Content size is zero.",
+            "valid",
+        ]
+        self.direct(url, resultlines, recursionlevel=1)
+        # file download
+        url = "ftp://%s:%d/file.html" % (self.host, self.port)
+        resultlines = [
+            "url %s" % url,
+            "cache key %s" % url,
+            "real url %s" % url,
+            "valid",
+            "url javascript:loadthis()",
+            "cache key javascript:loadthis()",
+            "real url javascript:loadthis()",
+            "name javascript url",
+            "info Javascript URL ignored.",
+            "valid",
+        ]
+        self.direct(url, resultlines, recursionlevel=1)

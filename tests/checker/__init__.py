@@ -277,11 +277,14 @@ class LinkCheckTest(TestBase):
         url_data = get_url_from(url, url_reclevel, aggregate, url_encoding=url_encoding)
         aggregate.urlqueue.put(url_data)
         linkcheck.director.check_urls(aggregate)
-        diff = aggregate.config["logger"].diff
+        logger = aggregate.config["logger"]
+        diff = logger.diff
         if diff:
             d = ["Differences found testing %s" % url]
             d.extend(x.rstrip() for x in diff[2:])
             self.fail(os.linesep.join(d))
+        if logger.stats.internal_errors:
+            self.fail("%d internal errors occurred!" % logger.stats.internal_errors)
 
 
 class MailTest(LinkCheckTest):
