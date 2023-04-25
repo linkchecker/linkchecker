@@ -75,7 +75,7 @@ def _trace_line(frame, event, arg):
     if filename.endswith((".pyc", ".pyo")):
         filename = filename[:-1]
     line = linecache.getline(filename, lineno)
-    currentThread = threading.currentThread()
+    currentThread = threading.current_thread()
     tid = currentThread.ident
     tname = currentThread.name
     args = (tid, tname, time.time(), line.rstrip(), name, lineno)
