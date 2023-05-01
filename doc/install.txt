@@ -37,12 +37,15 @@ used.
 
 .. _venv: https://docs.python.org/3/library/venv.html#creating-virtual-environments
 
-Setup with pip
+Setup with pip(x)
 ------------------
-pip_ can be used to install LinkChecker on the local system.
+pip_ or pipx_ can be used to install LinkChecker on the local system.
 
 To install the latest release from PyPI:
 ``pip3 install linkchecker``
+
+or:
+``pipx install linkchecker``
 
 There is no need to wait for releases, every update to LinkChecker gets a unique
 version number and is subjected to the test suite.
@@ -54,6 +57,8 @@ Then:
 ``pip3 install https://github.com/linkchecker/linkchecker/archive/master.tar.gz``
 
 .. _pip: https://pypi.org/project/pip/
+
+.. _pipx: https://pypi.org/project/pipx/
 
 Setup for Windows
 -----------------
@@ -70,9 +75,9 @@ https://pip.pypa.io/en/stable/installation/
 Setup for GNU/Linux
 -------------------
 On all major Linux distributions (Debian, Mandriva, Redhat, Suse, Ubuntu),
-the ``linkchecker`` package is available for installation. pip_ will be
-available, often as a package e.g. ``python3-pip``, to install the latest
-LinkChecker.
+the ``linkchecker`` package is available for installation.
+To install the latest LinkChecker pip_ will be available, often as a package
+e.g. ``python3-pip``, a pipx_ package may also be found e.g. ``pipx``.
 
 You may wish to install your distribution's copies of LinkChecker's dependencies
 before using pip to install LinkChecker. e.g. for Debian/Ubuntu:
@@ -80,6 +85,10 @@ before using pip to install LinkChecker. e.g. for Debian/Ubuntu:
 ``apt install python3-bs4 python3-dnspython python3-requests``
 
 If those packages are too old pip will install newer versions.
+
+To use the dependencies from your distribution if installing LinkChecker with pipx:
+
+`'pipx install --system-site-packages linkchecker``
 
 Manual setup for Unix systems
 -----------------------------
