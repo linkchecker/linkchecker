@@ -85,7 +85,7 @@ jobs:
         run: |
           python -m pip install -U pip
           python -m pip install -U hatchling hatch-vcs polib
-          python -m pip install -U tox coveralls
+          python -m pip install -U tox
 
       - name: Wait for ClamAV to be ready
         run: |
@@ -97,10 +97,7 @@ jobs:
             python -m tox -e ${{ matrix.toxenv }}
 
       - name: Report to coveralls
-        run: coveralls
-        env:
-          COVERALLS_SERVICE_NAME: github
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d
 
   docs:
     # there's some overlap with publish-pages.yml, but this one runs on pull

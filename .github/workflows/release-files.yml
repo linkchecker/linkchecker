@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v3
@@ -50,3 +51,6 @@ jobs:
             gh release upload ${{ github.ref_name }} dist/*
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Publish distribution files to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
