@@ -44,12 +44,14 @@ pip_ can be used to install LinkChecker on the local system.
 To install the latest release from PyPI:
 ``pip3 install linkchecker``
 
-Alternatively you can install the latest source from the LinkChecker GitHub repository.
+There is no need to wait for releases, every update to LinkChecker gets a unique
+version number and is subjected to the test suite.
+You can easily install the latest source from the LinkChecker GitHub repository.
 First, if you want application translations:
 ``pip3 install polib``
 
 Then:
-``pip3 install git+https://github.com/linkchecker/linkchecker.git``
+``pip3 install https://github.com/linkchecker/linkchecker/archive/master.tar.gz``
 
 .. _pip: https://pypi.org/project/pip/
 
