@@ -74,6 +74,4 @@ Release process
 
 5. create release (vX.Y.Z) on GitHub
 
-6. download Python distribution files from the GitHub release
-
-7. check distribution files (`twine check LinkChecker*`) and upload to PyPI (`twine upload LinkChecker*`)
+6. check release has been created on PyPI
