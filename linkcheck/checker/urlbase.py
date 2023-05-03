@@ -16,6 +16,8 @@
 """
 Base URL handler.
 """
+# pylint: disable=assignment-from-none, catching-non-exception, no-member
+
 import sys
 import os
 import urllib.parse

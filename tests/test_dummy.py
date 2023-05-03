@@ -16,6 +16,7 @@
 """
 Test dummy object.
 """
+# pylint: disable=no-member, not-callable
 
 import unittest
 

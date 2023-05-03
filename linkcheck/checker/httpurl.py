@@ -26,6 +26,7 @@ import requests
 import warnings
 
 warnings.simplefilter(
+    # pylint: disable=no-member
     'ignore', requests.packages.urllib3.exceptions.InsecureRequestWarning
 )
 

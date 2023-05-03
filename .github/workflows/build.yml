@@ -150,6 +150,7 @@ jobs:
         toxenv:
           - flake8
           - check-python-versions
+          - pylint
           - yamllint
 
     steps:
