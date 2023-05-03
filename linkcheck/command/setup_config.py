@@ -28,7 +28,6 @@ from .. import LOG_CMDLINE
 from .. import get_link_pat, log
 
 from ..cmdline import print_version, print_usage, print_plugins
-from ..director import console
 
 
 def has_encoding(encoding):
@@ -164,7 +163,7 @@ def setup_config(config, options):
             }
         else:
             msg = _("Enter LinkChecker HTTP/FTP password:")
-        _password = getpass.getpass(console.encode(msg))
+        _password = getpass.getpass(msg)
         constructauth = True
     if options.quiet:
         config["logger"] = config.logger_new("none")
