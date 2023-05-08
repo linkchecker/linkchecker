@@ -17,7 +17,7 @@
 Store metadata and options.
 """
 
-import importlib.resources
+import importlib
 import os
 import re
 import urllib.parse
@@ -82,10 +82,11 @@ def get_modules_info():
     """Return unicode string with detected module info."""
     module_infos = []
     for (mod, name, version_attr) in Modules:
-        if not fileutil.has_module(mod):
+        try:
+            module = importlib.import_module(mod)
+        except ModuleNotFoundError:
             continue
-        if version_attr and hasattr(mod, version_attr):
-            attr = getattr(mod, version_attr)
+        if version_attr and (attr := getattr(module, version_attr, None)):
             version = attr() if callable(attr) else attr
             module_infos.append(f"{name} {version}")
         else:
