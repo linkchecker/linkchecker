@@ -1,0 +1,5 @@
+[TYPECHECK]
+ignored-modules=meliae, win32com.client, yappi
+
+[VARIABLES]
+additional-builtins=_, _n

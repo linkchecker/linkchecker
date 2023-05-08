@@ -304,8 +304,7 @@ class Configuration(dict):
 
     def sanitize_ssl(self):
         """Use local installed certificate file if available.
-        Tries to get system, then certifi, then the own
-        installed certificate file."""
+        Tries to get system, then certifi certificate file."""
         if self["sslverify"] is True:
             try:
                 self["sslverify"] = get_system_cert_file()

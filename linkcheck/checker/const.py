@@ -41,7 +41,7 @@ ExcCacheList = [
     EOFError,
     # http errors
     requests.exceptions.RequestException,
-    requests.packages.urllib3.exceptions.HTTPError,
+    requests.packages.urllib3.exceptions.HTTPError,  # pylint: disable=no-member
     # ftp errors
     ftplib.Error,
     # idna.encode(), called from socket.create_connection()

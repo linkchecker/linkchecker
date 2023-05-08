@@ -397,9 +397,8 @@ class ArgParser(LCArgumentParser):
         group.add_argument(
             "-p",
             "--password",
-            action="store_false",
+            action="store_true",
             dest="password",
-            default=False,
             help=_(
                 "Read a password from console and use it for HTTP and FTP authorization.\n"
                 "For FTP the default password is 'anonymous@'. For HTTP there is\n"

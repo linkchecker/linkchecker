@@ -138,7 +138,7 @@ class WordParser(_ParserPlugin):
                     raise Error("could not open word file %r" % filename)
                 try:
                     for link in doc.Hyperlinks:
-                        line = get_line_number(link.Range)
+                        line = get_line_number(doc, link.Range)
                         name = link.TextToDisplay
                         url_data.add_url(link.Address, name=name, line=line)
                 finally:

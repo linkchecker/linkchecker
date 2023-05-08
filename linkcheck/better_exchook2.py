@@ -234,9 +234,7 @@ def better_exchook(etype, value, tb, out=sys.stdout):
         else:
             line = f"{etype}: {valuestr}"
         return line
-    if (isinstance(etype, BaseException) or
-        (hasattr(types, "InstanceType") and isinstance(etype, types.InstanceType)) or
-        etype is None or type(etype) is str):
+    if isinstance(etype, BaseException) or etype is None or type(etype) is str:
         output(_format_final_exc_line(etype, value), out=out)
     else:
         output(_format_final_exc_line(etype.__name__, value), out=out)
