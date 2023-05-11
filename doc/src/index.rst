@@ -83,6 +83,14 @@ and test integration.
    :alt: Build Status
    :target: https://github.com/linkchecker/linkchecker/actions/workflows/build.yml
 
+Icon
+----
+
+The project icon is categories/applications-development-web from
+`Oxygen icons <https://develop.kde.org/frameworks/oxygen-icons/>`_ copyright KDE
+and licensed under the `GNU LGPL version 3 <https://www.gnu.org/licenses/lgpl-3.0.html>`_
+or later.
+
 .. toctree::
    :hidden:
 
