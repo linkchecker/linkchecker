@@ -7,7 +7,7 @@ Check websites for broken links
 
 Introduction
 -------------
-LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_
+LinkChecker is a free, `GPL <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`_
 licensed website validator.
 LinkChecker checks links in web documents or full websites.
 It runs on Python 3 systems, requiring Python 3.8 or later.
