@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2023 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.1.0.post162+g614e84b5\n"
+"Project-Id-Version: LinkChecker 10.2.1.post54+g6c0f1f336\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 19:45+0000\n"
+"POT-Creation-Date: 2023-05-15 18:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,7 +150,7 @@ msgid "Output options"
 msgstr ""
 
 #: ../../src/man/linkchecker.rst:112
-#: ../../src/man/linkcheckerrc.rst:170
+#: ../../src/man/linkcheckerrc.rst:166
 msgid "URL checking results"
 msgstr ""
 
@@ -881,115 +881,115 @@ msgid "Only check syntax of URLs matching the given regular expressions. Command
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:119
-msgid "**ignorewarnings=**\\ *NAME*\\ [**,**\\ *NAME*...]"
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:118
-msgid "Ignore the comma-separated list of warnings. See `WARNINGS`_ for the list of supported warnings. Command line option: none"
-msgstr ""
-
-#: ../../src/man/linkcheckerrc.rst:123
 msgid "**internlinks=**\\ *REGEX*"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:122
+#: ../../src/man/linkcheckerrc.rst:118
 msgid "Regular expression to add more URLs recognized as internal links. Default is that URLs given on the command line are internal. Command line option: none"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:127
+#: ../../src/man/linkcheckerrc.rst:123
 msgid "**nofollow=**\\ *REGEX* (`MULTILINE`_)"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:126
+#: ../../src/man/linkcheckerrc.rst:122
 msgid "Check but do not recurse into URLs matching the given regular expressions. Command line option: :option:`--no-follow-url`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:131
+#: ../../src/man/linkcheckerrc.rst:127
 msgid "**checkextern=**\\ [**0**\\ \\|\\ **1**]"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:130
+#: ../../src/man/linkcheckerrc.rst:126
 msgid "Check external links. Default is to check internal links only. Command line option: :option:`--check-extern`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:134
+#: ../../src/man/linkcheckerrc.rst:130
 msgid "authentication"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:147
+#: ../../src/man/linkcheckerrc.rst:143
 msgid "**entry=**\\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:137
+#: ../../src/man/linkcheckerrc.rst:133
 msgid "Provide individual username/password pairs for different links. In addition to a single login page specified with **loginurl** multiple FTP, HTTP (Basic Authentication) and telnet links are supported. Entries are a triple (URL regex, username, password) or a tuple (URL regex, username), where the entries are separated by whitespace. The password is optional and if missing it has to be entered at the commandline. If the regular expression matches the checked URL, the given username/password pair is used for authentication. The command line options :option:`-u` and :option:`-p` match every link and therefore override the entries given here. The first match wins. Command line option: :option:`-u`, :option:`-p`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:154
+#: ../../src/man/linkcheckerrc.rst:150
 msgid "**loginurl=**\\ *URL*"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:150
+#: ../../src/man/linkcheckerrc.rst:146
 msgid "The URL of a login page to be visited before link checking. The page is expected to contain an HTML form to collect credentials and submit them to the address in its action attribute using an HTTP POST request. The name attributes of the input elements of the form and the values to be submitted need to be available (see **entry** for an explanation of username and password values)."
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:156
+#: ../../src/man/linkcheckerrc.rst:152
 msgid "**loginuserfield=**\\ *STRING*"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:157
+#: ../../src/man/linkcheckerrc.rst:153
 msgid "The name attribute of the username input element. Default: **login**."
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:158
+#: ../../src/man/linkcheckerrc.rst:154
 msgid "**loginpasswordfield=**\\ *STRING*"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:159
+#: ../../src/man/linkcheckerrc.rst:155
 msgid "The name attribute of the password input element. Default: **password**."
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:164
+#: ../../src/man/linkcheckerrc.rst:160
 msgid "**loginextrafields=**\\ *NAME*\\ **:**\\ *VALUE* (`MULTILINE`_)"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:161
+#: ../../src/man/linkcheckerrc.rst:157
 msgid "Optionally the name attributes of any additional input elements and the values to populate them with. Note that these are submitted without checking whether matching input elements exist in the HTML form."
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:167
+#: ../../src/man/linkcheckerrc.rst:163
 msgid "output"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:178
+#: ../../src/man/linkcheckerrc.rst:174
 msgid "**fileoutput=**\\ *TYPE*\\ [**,**\\ *TYPE*...]"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:173
+#: ../../src/man/linkcheckerrc.rst:169
 msgid "Output to a file **linkchecker-out.**\\ *TYPE*, or **$XDG_DATA_HOME/linkchecker/failures** for the **failures** output type. Valid file output types are **text**, **html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none** or **failures**. Default is no file output. The various output types are documented below. Note that you can suppress all console output with **output=none**. Command line option: :option:`--file-output`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:186
+#: ../../src/man/linkcheckerrc.rst:182
 msgid "**log=**\\ *TYPE*\\ [**/**\\ *ENCODING*]"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:181
+#: ../../src/man/linkcheckerrc.rst:177
 msgid "Specify the console output type as **text**, **html**, **sql**, **csv**, **gml**, **dot**, **xml**, **none** or **failures**. Default type is **text**. The various output types are documented below. The *ENCODING* specifies the output encoding, the default is that of your locale. Valid encodings are listed at https://docs.python.org/library/codecs.html#standard-encodings. Command line option: :option:`--output`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:190
+#: ../../src/man/linkcheckerrc.rst:186
 msgid "**verbose=**\\ [**0**\\ \\|\\ **1**]"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:189
+#: ../../src/man/linkcheckerrc.rst:185
 msgid "If set log all checked URLs once. Default is to log only errors and warnings. Command line option: :option:`--verbose`"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:193
+#: ../../src/man/linkcheckerrc.rst:189
 msgid "**warnings=**\\ [**0**\\ \\|\\ **1**]"
 msgstr ""
 
-#: ../../src/man/linkcheckerrc.rst:193
+#: ../../src/man/linkcheckerrc.rst:189
 msgid "If set log warnings. Default is to log warnings. Command line option: :option:`--no-warnings`"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:193
+msgid "**ignorewarnings=**\\ *NAME*\\ [**,**\\ *NAME*...]"
+msgstr ""
+
+#: ../../src/man/linkcheckerrc.rst:192
+msgid "Ignore the comma-separated list of warnings. See `WARNINGS`_ for the list of supported warnings. Command line option: none"
 msgstr ""
 
 #: ../../src/man/linkcheckerrc.rst:202

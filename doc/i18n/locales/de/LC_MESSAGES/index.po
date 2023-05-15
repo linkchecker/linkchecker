@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LinkChecker \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 19:45+0000\n"
+"POT-Creation-Date: 2023-05-15 18:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.12.1\n"
 
 #: ../../src/index.rst:6
 msgid "Check websites for broken links"
@@ -28,10 +28,10 @@ msgstr ""
 
 #: ../../src/index.rst:10
 msgid ""
-"LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ "
-"licensed website validator. LinkChecker checks links in web documents or "
-"full websites. It runs on Python 3 systems, requiring Python 3.8 or "
-"later."
+"LinkChecker is a free, `GPL <https://www.gnu.org/licenses/old-"
+"licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks "
+"links in web documents or full websites. It runs on Python 3 systems, "
+"requiring Python 3.8 or later."
 msgstr ""
 
 #: ../../src/index.rst:15
@@ -156,6 +156,18 @@ msgstr ""
 msgid "Build Status"
 msgstr ""
 
+#: ../../src/index.rst:87
+msgid "Icon"
+msgstr ""
+
+#: ../../src/index.rst:89
+msgid ""
+"The project icon is categories/applications-development-web from `Oxygen "
+"icons <https://develop.kde.org/frameworks/oxygen-icons/>`_ copyright KDE "
+"and licensed under the `GNU LGPL version 3 "
+"<https://www.gnu.org/licenses/lgpl-3.0.html>`_ or later."
+msgstr ""
+
 #~ msgid ""
 #~ "#.. image:: https://travis-"
 #~ "ci.com/linkchecker/linkchecker.png #   :alt: Build"
@@ -193,5 +205,14 @@ msgstr ""
 #~ " in web documents or full websites."
 #~ " It runs on Python 3 systems, "
 #~ "requiring Python 3.6 or later."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "LinkChecker is a free, `GPL "
+#~ "<http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed "
+#~ "website validator. LinkChecker checks links"
+#~ " in web documents or full websites."
+#~ " It runs on Python 3 systems, "
+#~ "requiring Python 3.8 or later."
 #~ msgstr ""
 
