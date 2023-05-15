@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2022 LinkChecker Authors
+# Copyright (C) 2000-2016 Bastian Kleineidam, 2010-2023 LinkChecker Authors
 # This file is distributed under the same license as the LinkChecker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.1.0.post162+g614e84b5\n"
+"Project-Id-Version: LinkChecker 10.2.1.post54+g6c0f1f336\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 19:45+0000\n"
+"POT-Creation-Date: 2023-05-15 18:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../src/index.rst:10
-msgid "LinkChecker is a free, `GPL <http://www.gnu.org/licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.8 or later."
+msgid "LinkChecker is a free, `GPL <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.8 or later."
 msgstr ""
 
 #: ../../src/index.rst:15
@@ -126,4 +126,12 @@ msgstr ""
 
 #: ../../src/index.rst:-1
 msgid "Build Status"
+msgstr ""
+
+#: ../../src/index.rst:87
+msgid "Icon"
+msgstr ""
+
+#: ../../src/index.rst:89
+msgid "The project icon is categories/applications-development-web from `Oxygen icons <https://develop.kde.org/frameworks/oxygen-icons/>`_ copyright KDE and licensed under the `GNU LGPL version 3 <https://www.gnu.org/licenses/lgpl-3.0.html>`_ or later."
 msgstr ""
