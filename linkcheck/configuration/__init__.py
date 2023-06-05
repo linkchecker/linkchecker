@@ -17,7 +17,7 @@
 Store metadata and options.
 """
 
-import importlib
+import importlib.resources
 import os
 import re
 import urllib.parse

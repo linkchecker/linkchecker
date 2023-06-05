@@ -8,7 +8,7 @@ Example usage::
     plugins = loader.get_plugins(modules, PluginClass)
 """
 import os
-import importlib
+import importlib.util
 import pkgutil
 
 from .fileutil import is_writable_by_others
