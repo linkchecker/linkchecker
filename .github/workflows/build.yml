@@ -30,6 +30,12 @@ jobs:
           - python-version: "3.8"
             toxenv: minreqs
 
+    services:
+      httpbin:
+        image: kennethreitz/httpbin
+        ports:
+          - 8080:80
+
     steps:
       - name: Install OS dependencies
         run: |
