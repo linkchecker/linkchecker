@@ -90,7 +90,6 @@ version_scheme = "post-release"
 
 [tool.hatch.envs.test]
 dependencies = [
-    "miniboa",
     "parameterized",
     "pdfminer.six",
     "pyftpdlib",

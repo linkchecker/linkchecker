@@ -48,7 +48,6 @@ class TestConfig(TestBase):
         self.assertEqual(config["timeout"], 42)
         self.assertEqual(config["aborttimeout"], 99)
         self.assertEqual(config["recursionlevel"], 1)
-        self.assertEqual(config["nntpserver"], "example.org")
         self.assertEqual(config["cookiefile"], "blablabla")
         self.assertEqual(config["useragent"], "Example/0.0")
         self.assertEqual(config["debugmemory"], 1)

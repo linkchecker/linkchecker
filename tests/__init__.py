@@ -181,33 +181,6 @@ need_pyftpdlib = _need_func(has_pyftpdlib, "pyftpdlib")
 
 
 @lru_cache(1)
-def has_newsserver(server):
-    import nntplib
-
-    try:
-        nntp = nntplib.NNTP(server, usenetrc=False)
-        nntp.quit()
-        return True
-    except nntplib.NNTPError:
-        return False
-
-
-def need_newsserver(server):
-    """Decorator skipping test if newsserver is not available."""
-
-    def check_func(func):
-        def newfunc(*args, **kwargs):
-            if not has_newsserver(server):
-                pytest.skip("Newsserver `%s' is not available" % server)
-            return func(*args, **kwargs)
-
-        newfunc.__name__ = func.__name__
-        return newfunc
-
-    return check_func
-
-
-@lru_cache(1)
 def has_x11():
     """Test if DISPLAY variable is set."""
     return os.getenv("DISPLAY") is not None

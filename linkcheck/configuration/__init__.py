@@ -150,7 +150,6 @@ class Configuration(dict):
         self["maxrunseconds"] = None
         self["maxrequestspersecond"] = 10
         self["maxhttpredirects"] = 10
-        self["nntpserver"] = os.environ.get("NNTP_SERVER", None)
         self["sslverify"] = True
         self["threads"] = 10
         self["timeout"] = 60

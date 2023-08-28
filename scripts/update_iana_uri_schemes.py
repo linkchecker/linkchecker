@@ -27,8 +27,6 @@ filter_uri_schemes_permanent = (
     "http",
     "https",
     "mailto",
-    "news",
-    "nntp",
 )
 
 template = '''

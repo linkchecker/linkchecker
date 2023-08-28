@@ -17,7 +17,6 @@
 Helper constants.
 """
 import socket
-import nntplib
 import ftplib
 import requests
 from .. import LinkCheckerError
@@ -36,8 +35,6 @@ ExcCacheList = [
     OSError,  # OSError is thrown on Windows when a file is not found
     LinkCheckerError,
     DNSException,
-    # nttp errors (including EOFError)
-    nntplib.NNTPError,
     EOFError,
     # http errors
     requests.exceptions.RequestException,
@@ -94,8 +91,6 @@ WARN_HTTP_EMPTY_CONTENT = "http-empty-content"
 WARN_HTTP_COOKIE_STORE_ERROR = "http-cookie-store-error"
 WARN_HTTP_RATE_LIMITED = "http-rate-limited"
 WARN_MAIL_NO_MX_HOST = "mail-no-mx-host"
-WARN_NNTP_NO_SERVER = "nntp-no-server"
-WARN_NNTP_NO_NEWSGROUP = "nntp-no-newsgroup"
 WARN_XML_PARSE_ERROR = "xml-parse-error"
 
 # registered warnings
@@ -118,8 +113,6 @@ Warnings = {
     WARN_HTTP_COOKIE_STORE_ERROR: _("An error occurred while storing a cookie."),
     WARN_HTTP_RATE_LIMITED: _("The URL request was rate limited."),
     WARN_MAIL_NO_MX_HOST: _("The mail MX host could not be found."),
-    WARN_NNTP_NO_SERVER: _("No NNTP server was found."),
-    WARN_NNTP_NO_NEWSGROUP: _("The NNTP newsgroup could not be found."),
     WARN_URL_OBFUSCATED_IP: _("The IP is obfuscated."),
     WARN_XML_PARSE_ERROR: _("XML could not be parsed."),
 }

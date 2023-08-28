@@ -33,11 +33,6 @@ checking
     slash to join directories instead of a backslash. And the given
     directory must end with a slash.
     Command line option: none
-**nntpserver=**\ *STRING*
-    Specify an NNTP server for **news:** links. Default is the
-    environment variable :envvar:`NNTP_SERVER`. If no host is given, only the
-    syntax of the link is checked.
-    Command line option: :option:`--nntp-server`
 **recursionlevel=**\ *NUMBER*
     Check recursively all links up to given depth. A negative depth will
     enable infinite recursion. Default depth is infinite.
@@ -132,7 +127,7 @@ authentication
 **entry=**\ *REGEX* *USER* [*PASS*] (`MULTILINE`_)
     Provide individual username/password pairs for different links. In
     addition to a single login page specified with **loginurl** multiple
-    FTP, HTTP (Basic Authentication) and telnet links are supported.
+    FTP and HTTP (Basic Authentication) links are supported.
     Entries are a triple (URL regex, username, password) or a tuple (URL
     regex, username), where the entries are separated by whitespace.
     The password is optional and if missing it has to be entered at the
@@ -586,10 +581,6 @@ file entry:
     Too many HTTP requests.
 **mail-no-mx-host**
     The mail MX host could not be found.
-**nntp-no-newsgroup**
-    The NNTP newsgroup could not be found.
-**nntp-no-server**
-    No NNTP server was found.
 **url-content-size-zero**
     The URL content size is zero.
 **url-content-too-large**

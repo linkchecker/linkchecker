@@ -43,21 +43,17 @@ according to the URL scheme.
    "6" [label="InternPatternUrl", shape="record", href="../code/linkcheck/linkcheck.checker.internpaturl.html", target="_blank"];
    "7" [label="ItmsServicesUrl", shape="record", href="../code/linkcheck/linkcheck.checker.itmsservicesurl.html", target="_blank"];
    "8" [label="MailtoUrl", shape="record", href="../code/linkcheck/linkcheck.checker.mailtourl.html", target="_blank"];
-   "9" [label="NntpUrl", shape="record", href="../code/linkcheck/linkcheck.checker.nntpurl.html", target="_blank"];
-   "10" [label="TelnetUrl", shape="record", href="../code/linkcheck/linkcheck.checker.telneturl.html", target="_blank"];
-   "11" [label="UnknownUrl", shape="record", href="../code/linkcheck/linkcheck.checker.unknownurl.html", target="_blank"];
-   "12" [label="UrlBase", shape="record", href="../code/linkcheck/linkcheck.checker.urlbase.html", target="_blank"];
-   "1" -> "12" [arrowhead="empty", arrowtail="none"];
-   "2" -> "12" [arrowhead="empty", arrowtail="none"];
+   "9" [label="UnknownUrl", shape="record", href="../code/linkcheck/linkcheck.checker.unknownurl.html", target="_blank"];
+   "10" [label="UrlBase", shape="record", href="../code/linkcheck/linkcheck.checker.urlbase.html", target="_blank"];
+   "1" -> "10" [arrowhead="empty", arrowtail="none"];
+   "2" -> "10" [arrowhead="empty", arrowtail="none"];
    "3" -> "6" [arrowhead="empty", arrowtail="none"];
    "4" -> "6" [arrowhead="empty", arrowtail="none"];
    "5" -> "11" [arrowhead="empty", arrowtail="none"];
-   "6" -> "12" [arrowhead="empty", arrowtail="none"];
-   "7" -> "12" [arrowhead="empty", arrowtail="none"];
-   "8" -> "12" [arrowhead="empty", arrowtail="none"];
-   "9" -> "12" [arrowhead="empty", arrowtail="none"];
-   "10" -> "12" [arrowhead="empty", arrowtail="none"];
-   "11" -> "12" [arrowhead="empty", arrowtail="none"];
+   "6" -> "10" [arrowhead="empty", arrowtail="none"];
+   "7" -> "10" [arrowhead="empty", arrowtail="none"];
+   "8" -> "10" [arrowhead="empty", arrowtail="none"];
+   "9" -> "10" [arrowhead="empty", arrowtail="none"];
    }
 
 

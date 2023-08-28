@@ -194,7 +194,6 @@ class LCConfigParser(RawConfigParser):
         self.read_int_option(section, "timeout", min=1)
         self.read_int_option(section, "aborttimeout", min=1)
         self.read_int_option(section, "recursionlevel", min=-1)
-        self.read_string_option(section, "nntpserver")
         self.read_string_option(section, "useragent")
         self.read_float_option(section, "maxrequestspersecond", min=0.001)
         self.read_int_option(section, "maxnumurls", min=0)
