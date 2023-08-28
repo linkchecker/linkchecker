@@ -21,7 +21,7 @@ import re
 import os
 import urllib.parse
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 
 from . import urlbase, get_index_html
 from .. import log, LOG_CHECK, fileutil, mimeutil, LinkCheckerError, url as urlutil
@@ -185,7 +185,8 @@ class FileUrl(urlbase.UrlBase):
             return
         filename = self.get_os_filename()
         self.size = fileutil.get_size(filename)
-        self.modified = datetime.utcfromtimestamp(fileutil.get_mtime(filename))
+        self.modified = datetime.fromtimestamp(
+            fileutil.get_mtime(filename), tz=timezone.utc)
 
     def check_connection(self):
         """
