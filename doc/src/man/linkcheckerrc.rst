@@ -114,6 +114,10 @@ filtering
 **ignore=**\ *REGEX* (`MULTILINE`_)
     Only check syntax of URLs matching the given regular expressions.
     Command line option: :option:`--ignore-url`
+**ignorewarnings=**\ *NAME*\ [**,**\ *NAME*...]
+    Ignore the comma-separated list of warnings. See `WARNINGS`_ for
+    the list of supported warnings.
+    Command line option: none
 **internlinks=**\ *REGEX*
     Regular expression to add more URLs recognized as internal links.
     Default is that URLs given on the command line are internal.
@@ -188,10 +192,6 @@ URL checking results
 **warnings=**\ [**0**\ \|\ **1**]
     If set log warnings. Default is to log warnings.
     Command line option: :option:`--no-warnings`
-**ignorewarnings=**\ *NAME*\ [**,**\ *NAME*...]
-    Ignore the comma-separated list of warnings. See `WARNINGS`_ for
-    the list of supported warnings.
-    Command line option: none
 **ignoreerrors=**\ *URL_REGEX* [*MESSAGE_REGEX*] (`MULTILINE`_)
     Specify regular expressions to ignore errors for matching URLs, one
     per line. A second regular expression can be specified per line to
