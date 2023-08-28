@@ -3,6 +3,7 @@
 Changes:
 - Minimum Python version required is 3.8
 - HTTP redirect causes a warning, http-redirected
+- Ignored warning messages are logged as information
 
 
 10.2.1 (released 05.12.2022)

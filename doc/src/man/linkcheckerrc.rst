@@ -116,7 +116,7 @@ filtering
     Command line option: :option:`--ignore-url`
 **ignorewarnings=**\ *NAME*\ [**,**\ *NAME*...]
     Ignore the comma-separated list of warnings. See `WARNINGS`_ for
-    the list of supported warnings.
+    the list of supported warnings. Messages are logged as information.
     Command line option: none
 **internlinks=**\ *REGEX*
     Regular expression to add more URLs recognized as internal links.

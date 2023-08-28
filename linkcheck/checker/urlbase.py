@@ -384,11 +384,11 @@ class UrlBase:
         Add a warning string.
         """
         item = (tag, s)
-        if (
-            item not in self.warnings
-            and tag not in self.aggregate.config["ignorewarnings"]
-        ):
-            self.warnings.append(item)
+        if item not in self.warnings:
+            if tag in self.aggregate.config["ignorewarnings"]:
+                self.add_info(s)
+            else:
+                self.warnings.append(item)
 
     def add_info(self, s):
         """
