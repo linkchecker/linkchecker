@@ -19,7 +19,7 @@ The default text logger.
 import time
 
 from . import _Logger
-from .. import ansicolor, strformat, configuration, i18n
+from .. import ansicolor, strformat, configuration
 
 
 class TextLogger(_Logger):
@@ -56,20 +56,19 @@ class TextLogger(_Logger):
         """Initialize error counter and optional file output."""
         args = self.get_args(kwargs)
         super().__init__(**args)
-        self.output_encoding = args.get("encoding", i18n.default_encoding)
         self.init_fileoutput(args)
-        self.colorparent = args.get('colorparent', 'default')
-        self.colorurl = args.get('colorurl', 'default')
-        self.colorname = args.get('colorname', 'default')
-        self.colorreal = args.get('colorreal', 'default')
-        self.colorbase = args.get('colorbase', 'default')
-        self.colorvalid = args.get('colorvalid', 'default')
-        self.colorinvalid = args.get('colorinvalid', 'default')
-        self.colorinfo = args.get('colorinfo', 'default')
-        self.colorwarning = args.get('colorwarning', 'default')
-        self.colordltime = args.get('colordltime', 'default')
-        self.colordlsize = args.get('colordlsize', 'default')
-        self.colorreset = args.get('colorreset', 'default')
+        self.colorparent = args["colorparent"]
+        self.colorurl = args["colorurl"]
+        self.colorname = args["colorname"]
+        self.colorreal = args["colorreal"]
+        self.colorbase = args["colorbase"]
+        self.colorvalid = args["colorvalid"]
+        self.colorinvalid = args["colorinvalid"]
+        self.colorinfo = args["colorinfo"]
+        self.colorwarning = args["colorwarning"]
+        self.colordltime = args["colordltime"]
+        self.colordlsize = args["colordlsize"]
+        self.colorreset = args["colorreset"]
 
     def init_fileoutput(self, args):
         """Colorize file output if possible."""
