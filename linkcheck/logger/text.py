@@ -19,7 +19,7 @@ The default text logger.
 import time
 
 from . import _Logger
-from .. import ansicolor, strformat, configuration
+from .. import ansicolor, log, strformat, configuration, LOG_CHECK
 
 
 class TextLogger(_Logger):
@@ -38,6 +38,7 @@ class TextLogger(_Logger):
 
     LoggerArgs = {
         "filename": "linkchecker-out.txt",
+        "wraplength": 65,
         'colorparent': "default",
         'colorurl': "default",
         'colorname': "default",
@@ -57,6 +58,11 @@ class TextLogger(_Logger):
         args = self.get_args(kwargs)
         super().__init__(**args)
         self.init_fileoutput(args)
+        try:
+            self.wraplength = int(args["wraplength"])
+        except ValueError:
+            self.wraplength = self.LoggerArgs["wraplength"]
+            log.warn(LOG_CHECK, _("Invalid value for wraplength. Using default."))
         self.colorparent = args["colorparent"]
         self.colorurl = args["colorurl"]
         self.colorname = args["colorname"]
@@ -191,7 +197,7 @@ class TextLogger(_Logger):
     def write_info(self, url_data):
         """Write url_data.info."""
         self.write(self.part("info") + self.spaces("info"))
-        self.writeln(self.wrap(url_data.info, 65), color=self.colorinfo)
+        self.writeln(self.wrap(url_data.info, self.wraplength), color=self.colorinfo)
 
     def write_modified(self, url_data):
         """Write url_data.modified."""
@@ -202,7 +208,7 @@ class TextLogger(_Logger):
         """Write url_data.warning."""
         self.write(self.part("warning") + self.spaces("warning"))
         warning_msgs = [f"[{tag}] {msg}" for tag, msg in url_data.warnings]
-        self.writeln(self.wrap(warning_msgs, 65), color=self.colorwarning)
+        self.writeln(self.wrap(warning_msgs, self.wraplength), color=self.colorwarning)
 
     def write_result(self, url_data):
         """Write url_data.result."""

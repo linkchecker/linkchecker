@@ -119,6 +119,7 @@ class TestConfig(TestBase):
         self.assertEqual(config["text"]["filename"], "imadoofus.txt")
         self.assertEqual(config["text"]["parts"], ["realurl"])
         self.assertEqual(config["text"]["encoding"], "utf-8")
+        self.assertEqual(config["text"]["wraplength"], "80")
         self.assertEqual(config["text"]["colorparent"], "blink;red")
         self.assertEqual(config["text"]["colorurl"], "blink;red")
         self.assertEqual(config["text"]["colorname"], "blink;red")
