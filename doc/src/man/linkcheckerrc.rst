@@ -584,6 +584,8 @@ file entry:
     The URL had no content.
 **http-rate-limited**
     Too many HTTP requests.
+**http-redirected**
+    Redirected to a different URL.
 **mail-no-mx-host**
     The mail MX host could not be found.
 **nntp-no-newsgroup**

@@ -93,6 +93,7 @@ WARN_FTP_MISSING_SLASH = "ftp-missing-slash"
 WARN_HTTP_EMPTY_CONTENT = "http-empty-content"
 WARN_HTTP_COOKIE_STORE_ERROR = "http-cookie-store-error"
 WARN_HTTP_RATE_LIMITED = "http-rate-limited"
+WARN_HTTP_REDIRECTED = "http-redirected"
 WARN_MAIL_NO_MX_HOST = "mail-no-mx-host"
 WARN_NNTP_NO_SERVER = "nntp-no-server"
 WARN_NNTP_NO_NEWSGROUP = "nntp-no-newsgroup"
@@ -117,6 +118,7 @@ Warnings = {
     WARN_HTTP_EMPTY_CONTENT: _("The URL had no content."),
     WARN_HTTP_COOKIE_STORE_ERROR: _("An error occurred while storing a cookie."),
     WARN_HTTP_RATE_LIMITED: _("The URL request was rate limited."),
+    WARN_HTTP_REDIRECTED: _("Redirected to a different URL."),
     WARN_MAIL_NO_MX_HOST: _("The mail MX host could not be found."),
     WARN_NNTP_NO_SERVER: _("No NNTP server was found."),
     WARN_NNTP_NO_NEWSGROUP: _("The NNTP newsgroup could not be found."),

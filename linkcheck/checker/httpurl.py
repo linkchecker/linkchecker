@@ -44,7 +44,7 @@ from .. import (
 from . import internpaturl
 
 # import warnings
-from .const import WARN_HTTP_EMPTY_CONTENT, WARN_HTTP_RATE_LIMITED
+from .const import WARN_HTTP_EMPTY_CONTENT, WARN_HTTP_RATE_LIMITED, WARN_HTTP_REDIRECTED
 from requests.sessions import REDIRECT_STATI
 
 HTTP_SCHEMAS = ('http://', 'https://')
@@ -279,7 +279,11 @@ class HttpUrl(internpaturl.InternPatternUrl):
             log.debug(LOG_CHECK, "Redirected to %r", newurl)
             self.aliases.append(newurl)
             # XXX on redirect errors this is not printed
-            self.add_info(_("Redirected to `%(url)s'.") % {'url': newurl})
+            self.add_warning(
+                _("Redirected to `%(url)s' status: %(code)d %(reason)s.")
+                % {'url': newurl, 'code': self.url_connection.status_code,
+                   'reason': self.url_connection.reason},
+                tag=WARN_HTTP_REDIRECTED)
             # Reset extern and recalculate
             self.extern = None
             self.set_extern(newurl)
