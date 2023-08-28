@@ -88,7 +88,7 @@ If those packages are too old pip will install newer versions.
 
 To use the dependencies from your distribution if installing LinkChecker with pipx:
 
-`'pipx install --system-site-packages linkchecker``
+``pipx install --system-site-packages linkchecker``
 
 Manual setup for Unix systems
 -----------------------------
