@@ -62,11 +62,11 @@ ignored_schemes_permanent = r"""
 |cap        # Calendar Access Protocol
 |cid        # content identifier
 |coap       # coap
-|coap\+tcp  # coap+tcp [1]
-|coap\+ws   # coap+ws [1]
+|coap\+tcp  # coap+tcp (see [reviewer notes])
+|coap\+ws   # coap+ws (see [reviewer notes])
 |coaps      # coaps
-|coaps\+tcp # coaps+tcp [1]
-|coaps\+ws  # coaps+ws [1]
+|coaps\+tcp # coaps+tcp (see [reviewer notes])
+|coaps\+ws  # coaps+ws (see [reviewer notes])
 |crid       # TV-Anytime Content Reference Identifier
 |data       # data
 |dav        # dav
@@ -97,11 +97,14 @@ ignored_schemes_permanent = r"""
 |mid        # message identifier
 |msrp       # Message Session Relay Protocol
 |msrps      # Message Session Relay Protocol Secure
+|mt         # Matter protocol on-boarding payloads that are encoded for use in QR Codes and/or NFC Tags
 |mtqp       # Message Tracking Query Protocol
 |mupdate    # Mailbox Update (MUPDATE) Protocol
+|news       # USENET news
 |nfs        # network file system protocol
 |ni         # ni
 |nih        # nih
+|nntp       # USENET news using NNTP access
 |opaquelocktoken # opaquelocktokent
 |pkcs11     # PKCS#11
 |pop        # Post Office Protocol v3
@@ -160,6 +163,7 @@ ignored_schemes_provisional = r"""
 |apt        # apt
 |ar         # ar
 |ark        # ark
+|at         # at (see [reviewer notes])
 |attachment # attachment
 |aw         # aw
 |barion     # barion
@@ -183,6 +187,7 @@ ignored_schemes_provisional = r"""
 |cvs        # cvs
 |dab        # dab
 |dat        # dat
+|dhttp      # dhttp (see [reviewer notes])
 |diaspora   # diaspora
 |did        # did
 |dis        # dis
@@ -192,12 +197,12 @@ ignored_schemes_provisional = r"""
 |doi        # doi
 |dpp        # dpp
 |drm        # drm
-|drop       # drop
 |dtmi       # dtmi
 |dvb        # dvb
 |dvx        # dvx
 |dweb       # dweb
 |ed2k       # ed2k
+|eid        # eid
 |elsi       # elsi
 |embedded   # embedded
 |ens        # ens
@@ -239,7 +244,9 @@ ignored_schemes_provisional = r"""
 |lastfm     # lastfm
 |lbry       # lbry
 |ldaps      # ldaps
+|lid        # lid
 |lorawan    # lorawan
+|lpa        # lpa
 |lvlt       # lvlt
 |magnet     # magnet
 |maps       # maps
@@ -266,6 +273,7 @@ ignored_schemes_provisional = r"""
 |ms\-help   # ms-help
 |ms\-infopath # ms-infopath
 |ms\-inputapp # ms-inputapp
+|ms\-launchremotedesktop # ms-launchremotedesktop
 |ms\-lockscreencomponent\-config # ms-lockscreencomponent-config
 |ms\-media\-stream\-id # ms-media-stream-id
 |ms\-meetnow # ms-meetnow
@@ -277,6 +285,8 @@ ignored_schemes_provisional = r"""
 |ms\-powerpoint # ms-powerpoint
 |ms\-project # ms-project
 |ms\-publisher # ms-publisher
+|ms\-remotedesktop # ms-remotedesktop
+|ms\-remotedesktop\-launch # ms-remotedesktop-launch
 |ms\-restoretabcompanion # ms-restoretabcompanion
 |ms\-screenclip # ms-screenclip
 |ms\-screensketch # ms-screensketch
@@ -317,7 +327,6 @@ ignored_schemes_provisional = r"""
 |ms\-word   # ms-word
 |msnim      # msnim
 |mss        # mss
-|mt         # Matter protocol
 |mumble     # mumble
 |mvn        # mvn
 |notes      # notes
@@ -326,6 +335,7 @@ ignored_schemes_provisional = r"""
 |oid        # oid
 |onenote    # onenote
 |onenote\-cmd # onenote-cmd
+|openid     # OpenID Connect
 |openpgp4fpr # openpgp4fpr
 |otpauth    # otpauth
 |palm       # palm
@@ -365,12 +375,14 @@ ignored_schemes_provisional = r"""
 |spotify    # spotify
 |ssb        # ssb
 |ssh        # ssh
+|starknet   # starknet
 |steam      # steam
 |submit     # submit
 |svn        # svn
 |swh        # swh
-|swid       # swid
-|swidpath   # swidpath
+|swid       # swid (see [reviewer notes])
+|swidpath   # swidpath (see [reviewer notes])
+|taler      # taler
 |teamspeak  # teamspeak
 |teliaeid   # teliaeid
 |things     # things
@@ -386,8 +398,9 @@ ignored_schemes_provisional = r"""
 |vscode     # vscode
 |vscode\-insiders # vscode-insiders
 |vsls       # vsls
-|w3         # w3
+|w3         # w3 (see [reviewer notes])
 |wcr        # wcr
+|web\+ap    # web+ap
 |web3       # web3
 |webcal     # webcal
 |wifi       # wifi
@@ -399,13 +412,18 @@ ignored_schemes_provisional = r"""
 """
 
 ignored_schemes_historical = r"""
+|bb         # bb
+|drop       # drop
 |fax        # fax
 |filesystem # filesystem
+|grd        # grd
 |mailserver # Access to data available from mail servers
 |modem      # modem
+|p1         # p1
 |pack       # pack
 |prospero   # Prospero Directory Service
 |snews      # NNTP over SSL/TLS
+|upt        # upt
 |videotex   # videotex
 |wais       # Wide Area Information Servers
 |wpid       # wpid
