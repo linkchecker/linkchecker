@@ -7,5 +7,5 @@ url redirect_newhost.html
 cache key http://localhost:%(port)d/%(datadir)s/redirect_newhost.html
 real url http://www.example.com/
 name redirect to new host
-info Redirected to `http://www.example.com/'.
+warning Redirected to `http://www.example.com/' status: 302 Found.
 valid

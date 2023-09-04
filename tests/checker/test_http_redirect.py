@@ -43,7 +43,7 @@ class TestHttpRedirect(HttpServerTest):
             "url %s" % url,
             "cache key %s" % nurl,
             "real url %s" % rurl,
-            "info Redirected to `%s'." % rurl,
+            "warning Redirected to `%s' status: 302 Found." % rurl,
             "error",
         ]
         self.direct(url, resultlines, recursionlevel=0)
@@ -56,7 +56,7 @@ class TestHttpRedirect(HttpServerTest):
             "url %s" % url,
             "cache key %s" % nurl,
             "real url %s" % rurl,
-            "info Redirected to `%s'." % rurl,
+            "warning Redirected to `%s' status: 302 Found." % rurl,
             "valid",
         ]
         self.direct(url, resultlines, recursionlevel=99)

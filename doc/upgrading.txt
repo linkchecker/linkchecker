@@ -5,6 +5,9 @@ Migrating from 10.2 to 10.x
 ---------------------------
 Python 3.8 or newer is required.
 
+An HTTP redirect now causes a warning. Set ignorewarnings=http-redirected in
+linkcheckerrc for the previous behaviour.
+
 Migrating from 10.1 to 10.2
 ---------------------------
 Python 3.7 or newer is required.
