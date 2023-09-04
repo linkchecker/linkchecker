@@ -36,7 +36,6 @@ url_encoding = "utf-8"
 default_ports = {
     'http': 80,
     'https': 443,
-    'nntps': 563,
     'ftp': 21,
 }
 

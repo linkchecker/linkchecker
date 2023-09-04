@@ -56,7 +56,7 @@ from .const import (
 from ..url import url_fix_wayback_query
 
 # schemes that are invalid with an empty hostname
-scheme_requires_host = ("ftp", "http", "telnet")
+scheme_requires_host = ("ftp", "http")
 
 
 def urljoin(parent, url):

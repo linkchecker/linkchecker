@@ -160,12 +160,8 @@ def get_urlclass_from(scheme, assume_local_file=False):
         klass = ftpurl.FtpUrl
     elif scheme == "file":
         klass = fileurl.FileUrl
-    elif scheme == "telnet":
-        klass = telneturl.TelnetUrl
     elif scheme == "mailto":
         klass = mailtourl.MailtoUrl
-    elif scheme in ("nntp", "news", "snews"):
-        klass = nntpurl.NntpUrl
     elif scheme == "dns":
         klass = dnsurl.DnsUrl
     elif scheme == "itms-services":
@@ -210,8 +206,6 @@ from . import (  # noqa: E402
     httpurl,
     dnsurl,
     mailtourl,
-    telneturl,
-    nntpurl,
     ignoreurl,
     itmsservicesurl,
 )

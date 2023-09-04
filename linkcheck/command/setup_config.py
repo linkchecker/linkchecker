@@ -151,8 +151,6 @@ def setup_config(config, options):
                 )
             new_logger = config.logger_new(ftype, **ns)
             config["fileoutput"].append(new_logger)
-    if options.nntpserver:
-        config["nntpserver"] = options.nntpserver
     if options.username:
         _username = options.username
         constructauth = True
