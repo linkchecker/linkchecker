@@ -50,6 +50,7 @@
 [text]
 #filename=linkchecker-out.txt
 #parts=all
+#wraplength=65
 # colors for the various parts, syntax is <color> or <type>;<color>
 # type can be bold, light, blink, invert
 # color can be default, black, red, green, yellow, blue, purple, cyan, white,

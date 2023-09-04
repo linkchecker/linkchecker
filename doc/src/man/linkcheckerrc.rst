@@ -252,6 +252,10 @@ text
     Valid encodings are listed in
     https://docs.python.org/library/codecs.html#standard-encodings.
     Default encoding is the system default locale encoding.
+**wraplength=**\ *NUMBER*
+    The number of characters at which to wrap each message line.
+    The default is 65.
+    Command line option: none
 *color\**
     Color settings for the various log parts, syntax is *color* or
     *type*\ **;**\ *color*. The *type* can be **bold**, **light**,
