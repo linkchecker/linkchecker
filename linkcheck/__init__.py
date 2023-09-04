@@ -42,7 +42,7 @@ from .logconf import (
 )
 
 COMMAND_NAME = "linkchecker"
-PACKAGE_NAME = __package__
+PACKAGE_NAME = __spec__.parent
 
 
 def module_path():
