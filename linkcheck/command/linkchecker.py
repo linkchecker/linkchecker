@@ -116,7 +116,7 @@ def linkchecker():
 
     # read and parse command line options and arguments
     options = argparser.parse_args()
-    # initialize logging
+    # configure application logging
     if options.debug:
         allowed_debugs = logconf.lognames.keys()
         for _name in options.debug:

@@ -74,7 +74,7 @@ https://pip.pypa.io/en/stable/installation/
 
 Setup for GNU/Linux
 -------------------
-On all major Linux distributions (Debian, Mandriva, Redhat, Suse, Ubuntu),
+On major Linux distributions (Debian, Gentoo, Fedora, Ubuntu),
 the ``linkchecker`` package is available for installation.
 To install the latest LinkChecker pip_ will be available, often as a package
 e.g. ``python3-pip``, a pipx_ package may also be found e.g. ``pipx``.
@@ -88,7 +88,7 @@ If those packages are too old pip will install newer versions.
 
 To use the dependencies from your distribution if installing LinkChecker with pipx:
 
-`'pipx install --system-site-packages linkchecker``
+``pipx install --system-site-packages linkchecker``
 
 Manual setup for Unix systems
 -----------------------------
