@@ -16,6 +16,8 @@
 """
 Test miscellaneous html tag parsing and URL types
 """
+import sys
+
 from tests import need_network
 from . import LinkCheckTest
 
@@ -41,7 +43,11 @@ class TestMisc(LinkCheckTest):
 
     @need_network
     def test_itms_services(self):
-        url = "itms-services:?action=download-manifest&url=http://www.example.com/"
+        if sys.version_info < (3, 12):
+            url = "itms-services:?action=download-manifest&url=http://www.example.com/"
+        else:
+            url = \
+                "itms-services://?action=download-manifest&url=http://www.example.com/"
         resultlines = [
             "url %s" % url,
             "cache key %s" % url,
