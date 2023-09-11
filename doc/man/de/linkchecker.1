@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKER" "1" "Mai 15, 2023" "10.2.1.post54+g6c0f1f336" "LinkChecker"
+.TH "LINKCHECKER" "1" "September 11, 2023" "10.2.1.post89+g3a276cfc8" "LinkChecker"
 .SH NAME
 linkchecker \- Kommandozeilenprogramm zum Prüfen von HTML Dokumenten und Webseiten auf ungültige Verknüpfungen
 .SH SYNTAX
@@ -42,13 +42,13 @@ rekursives Prüfen und Multithreading
 .IP \(bu 2
 Ausgabe als farbigen oder normalen Text, HTML, SQL, CSV, XML oder einen Sitemap\-Graphen in verschiedenen Formaten
 .IP \(bu 2
-Unterstützung von HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet und Verknüpfungen auf lokale Dateien
+support for HTTP/1.1, HTTPS, FTP, mailto: and local file links
 .IP \(bu 2
 Einschränkung der Linküberprüfung mit URL\-Filter
 .IP \(bu 2
 Proxy\-Unterstützung
 .IP \(bu 2
-Benutzer/Passwort Authorisierung für HTTP, FTP und Telnet
+username/password authorization for HTTP and FTP
 .IP \(bu 2
 Unterstützung des robots.txt Protokolls
 .IP \(bu 2
@@ -255,11 +255,6 @@ Check external URLs.
 URLs matching the given regular expression will only be syntax checked.
 This option can be given multiple times.
 See section \fI\%REGULAR EXPRESSIONS\fP for more info.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-N STRING, \-\-nntp\-server=STRING
-Gibt ein NNTP Rechner für news: Links. Standard ist die Umgebungsvariable \fI\%NNTP_SERVER\fP\&. Falls kein Rechner angegeben ist, wird lediglich auf korrekte Syntax des Links geprüft.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -490,12 +485,6 @@ Versuche, in das angegebene Verzeichnis zu wechseln
 Liste die Dateien im Verzeichnis auf mit dem NLST\-Befehl
 .UNINDENT
 .TP
-Telnet links (\fBtelnet:\fP)
-Versuche, zu dem angegeben Telnetrechner zu verginden und falls Benutzer/Passwort angegeben sind, wird versucht, sich anzumelden.
-.TP
-NNTP links (\fBnews:\fP, \fBsnews:\fP, \fBnntp\fP)
-Versuche, zu dem angegebenen NNTP\-Rechner eine Verbindung aufzubaucne. Falls eine Nachrichtengruppe oder ein bestimmter Artikel angegeben ist, wird versucht, diese Gruppe oder diesen Artikel vom Rechner anzufragen.
-.TP
 Nicht unterstützte Links (\fBjavascript:\fP, etc.)
 Ein nicht unterstützter Link wird nur eine Warnung ausgeben. Weitere Prüfungen werden nicht durchgeführt.
 .sp
@@ -546,14 +535,7 @@ Javascript Links werden nicht unterstützt.
 Wenn Ihr System keine Threads unterstützt, deaktiviert diese LinkChecker automatisch.
 .sp
 Sie können mehrere Benutzer/Passwort Paare in einer Konfigurationsdatei angeben.
-.sp
-Beim Prüfen von \fBnews:\fP Links muß der angegebene NNTP Rechner nicht unbedingt derselbe wie der des Benutzers sein.
 .SH UMGEBUNG
-.INDENT 0.0
-.TP
-.B NNTP_SERVER
-gibt Standard NNTP Server an
-.UNINDENT
 .INDENT 0.0
 .TP
 .B http_proxy

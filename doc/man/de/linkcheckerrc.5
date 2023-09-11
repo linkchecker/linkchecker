@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKERRC" "5" "Mai 15, 2023" "10.2.1.post54+g6c0f1f336" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "September 11, 2023" "10.2.1.post89+g3a276cfc8" "LinkChecker"
 .SH NAME
 linkcheckerrc \- Konfigurationsdatei für LinkChecker
 .SH BESCHREIBUNG
@@ -51,9 +51,6 @@ Command line option: none
 .TP
 \fBlocalwebroot=\fP\fISTRING\fP
 Beachten Sie dass das angegebene Verzeichnis in URL\-Syntax sein muss, d.h. es muss einen normalen statt einen umgekehrten Schrägstrich zum Aneinanderfügen von Verzeichnissen benutzen. Und das angegebene Verzeichnis muss mit einem Schrägstrich enden. Kommandozeilenoption: none
-.TP
-\fBnntpserver=\fP\fISTRING\fP
-Gibt ein NNTP Rechner für \fBnews:\fP Links. Standard ist die Umgebungsvariable \fI\%NNTP_SERVER\fP\&. Falls kein Rechner angegeben ist, wird lediglich auf korrekte Syntax des Links geprüft. Kommandozeilenoption: \fI\%\-\-nntp\-server\fP
 .TP
 \fBrecursionlevel=\fP\fINUMMER\fP
 Prüfe rekursiv alle URLs bis zu der angegebenen Tiefe. Eine negative Tiefe bewirkt unendliche Rekursion. Standard Tiefe ist unendlich. Kommandozeilenoption: \fI\%\-\-recursion\-level\fP
@@ -124,6 +121,11 @@ Command line option: none
 \fBignore=\fP\fIREGEX\fP (\fI\%MULTILINE\fP)
 Prüfe lediglich die Syntax von URLs, welche dem angegebenen regulären Ausdruck entsprechen. Kommandozeilenoption: \fI\%\-\-ignore\-url\fP
 .TP
+\fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
+Ignore the comma\-separated list of warnings. See \fI\%WARNINGS\fP for
+the list of supported warnings. Messages are logged as information.
+Command line option: none
+.TP
 \fBinternlinks=\fP\fIREGEX\fP
 Regulärer Ausdruck, um mehr URLs als interne Verknüpfungen hinzuzufügen. Standard ist dass URLs der Kommandozeile als intern gelten. Kommandozeilenoption: none
 .TP
@@ -140,7 +142,7 @@ Command line option: \fI\%\-\-check\-extern\fP
 \fBentry=\fP\fIREGEX\fP \fIBENUTZER\fP [\fIPASSWORT\fP] (\fI\%MULTILINE\fP)
 Provide individual username/password pairs for different links. In
 addition to a single login page specified with \fBloginurl\fP multiple
-FTP, HTTP (Basic Authentication) and telnet links are supported.
+FTP and HTTP (Basic Authentication) links are supported.
 Entries are a triple (URL regex, username, password) or a tuple (URL
 regex, username), where the entries are separated by whitespace.
 The password is optional and if missing it has to be entered at the
@@ -198,9 +200,6 @@ Falls gesetzt, gebe alle geprüften URLs einmal aus. Standard ist es, nur fehler
 .TP
 \fBwarnings=\fP[\fB0\fP|\fB1\fP]
 Falls gesetzt, gebe keine Warnungen aus. Standard ist die Ausgabe von Warnungen. Kommandozeilenoption: \fI\%\-\-verbose\fP
-.TP
-\fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
-Ignoriere die kommagetrennte Liste von Warnungen. Siehe \fI\%WARNINGS\fP für die Liste von erkannten Warnungen. Kommandozeilenoption: none
 .TP
 \fBignoreerrors=\fP\fIURL_REGEX\fP [\fIMESSAGE_REGEX\fP] (\fI\%MULTILINE\fP)
 Specify regular expressions to ignore errors for matching URLs, one
@@ -264,6 +263,11 @@ Kommagetrennte Liste von Teilen, die ausgegeben werden sollen. Siehe \fI\%LOGGER
 Valid encodings are listed in
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 Default encoding is the system default locale encoding.
+.TP
+\fBwraplength=\fP\fINUMBER\fP
+The number of characters at which to wrap each message line.
+The default is 65.
+Command line option: none
 .TP
 .B \fIcolor*\fP
 Farbwerte für die verschiedenen Ausgabeteile. Syntax ist \fIcolor\fP oder \fItype\fP\fB;\fP\fIcolor\fP\&. Der \fItype\fP kann \fBbold\fP, \fBlight\fP, \fBblink\fP> oder \fBinvert\fP sein.  Die \fIcolor\fP kann \fBdefault\fP, \fBblack\fP, \fBred\fP, \fBgreen\fP, \fByellow\fP, \fBblue\fP, \fBpurple\fP, \fBcyan\fP, \fBwhite\fP, \fBBlack\fP, \fBRed\fP, \fBGreen\fP, \fBYellow\fP, \fBBlue\fP, \fBPurple\fP, \fBCyan\fP oder \fBWhite\fP sein. Kommandozeilenoption: none
@@ -642,14 +646,11 @@ Die URL besitzt keinen Inhalt.
 \fBhttp\-rate\-limited\fP
 Too many HTTP requests.
 .TP
+\fBhttp\-redirected\fP
+Redirected to a different URL.
+.TP
 \fBmail\-no\-mx\-host\fP
 Der MX Mail\-Rechner konnte nicht gefunden werden.
-.TP
-\fBnntp\-no\-newsgroup\fP
-Die NNTP Nachrichtengruppe konnte nicht gefunden werden.
-.TP
-\fBnntp\-no\-server\fP
-Es wurde kein NNTP Server gefunden.
 .TP
 \fBurl\-content\-size\-zero\fP
 Der URL Inhaltsgrößenangabe ist Null.

@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKER" "1" "May 15, 2023" "10.2.1.post54+g6c0f1f336" "LinkChecker"
+.TH "LINKCHECKER" "1" "September 11, 2023" "10.2.1.post89+g3a276cfc8" "LinkChecker"
 .SH NAME
 linkchecker \- command line client to check HTML documents and websites for broken links
 .SH SYNOPSIS
@@ -43,14 +43,13 @@ recursive and multithreaded checking
 output in colored or normal text, HTML, SQL, CSV, XML or a sitemap
 graph in different formats
 .IP \(bu 2
-support for HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and
-local file links
+support for HTTP/1.1, HTTPS, FTP, mailto: and local file links
 .IP \(bu 2
 restriction of link checking with URL filters
 .IP \(bu 2
 proxy support
 .IP \(bu 2
-username/password authorization for HTTP, FTP and Telnet
+username/password authorization for HTTP and FTP
 .IP \(bu 2
 support for robots.txt exclusion protocol
 .IP \(bu 2
@@ -261,13 +260,6 @@ Check external URLs.
 URLs matching the given regular expression will only be syntax checked.
 This option can be given multiple times.
 See section \fI\%REGULAR EXPRESSIONS\fP for more info.
-.UNINDENT
-.INDENT 0.0
-.TP
-.B \-N STRING, \-\-nntp\-server=STRING
-Specify an NNTP server for news: links. Default is the
-environment variable \fI\%NNTP_SERVER\fP\&. If no host is given, only the
-syntax of the link is checked.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -536,14 +528,6 @@ try to change to the given directory
 list the file with the NLST command
 .UNINDENT
 .TP
-Telnet links (\fBtelnet:\fP)
-We try to connect and if user/password are given, login to the given
-telnet server.
-.TP
-NNTP links (\fBnews:\fP, \fBsnews:\fP, \fBnntp\fP)
-We try to connect to the given NNTP server. If a news group or
-article is specified, try to request it from the server.
-.TP
 Unsupported links (\fBjavascript:\fP, etc.)
 An unsupported link will only print a warning. No further checking
 will be made.
@@ -615,15 +599,7 @@ If your platform does not support threading, LinkChecker disables it
 automatically.
 .sp
 You can supply multiple user/password pairs in a configuration file.
-.sp
-When checking \fBnews:\fP links the given NNTP host doesn\(aqt need to be the
-same as the host of the user browsing your pages.
 .SH ENVIRONMENT
-.INDENT 0.0
-.TP
-.B NNTP_SERVER
-specifies default NNTP server
-.UNINDENT
 .INDENT 0.0
 .TP
 .B http_proxy
