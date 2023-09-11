@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.2.1.post54+g6c0f1f336\n"
+"Project-Id-Version: LinkChecker 10.2.1.post89+g3a276cfc8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 18:45+0000\n"
+"POT-Creation-Date: 2023-09-11 18:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,58 +69,58 @@ msgid "output in colored or normal text, HTML, SQL, CSV, XML or a sitemap graph 
 msgstr ""
 
 #: ../../src/index.rst:51
-msgid "HTTP/1.1, HTTPS, FTP, mailto:, news:, nntp:, Telnet and local file links support"
+msgid "HTTP/1.1, HTTPS, FTP, mailto: and local file links support"
 msgstr ""
 
-#: ../../src/index.rst:53
+#: ../../src/index.rst:52
 msgid "restriction of link checking with regular expression filters for URLs"
 msgstr ""
 
-#: ../../src/index.rst:54
+#: ../../src/index.rst:53
 msgid "proxy support"
 msgstr ""
 
-#: ../../src/index.rst:55
-msgid "username/password authorization for HTTP and FTP and Telnet"
+#: ../../src/index.rst:54
+msgid "username/password authorization for HTTP and FTP"
 msgstr ""
 
-#: ../../src/index.rst:56
+#: ../../src/index.rst:55
 msgid "honors robots.txt exclusion protocol"
 msgstr ""
 
-#: ../../src/index.rst:57
+#: ../../src/index.rst:56
 msgid "Cookie support"
 msgstr ""
 
-#: ../../src/index.rst:58
+#: ../../src/index.rst:57
 msgid "HTML5 support"
 msgstr ""
 
-#: ../../src/index.rst:59
+#: ../../src/index.rst:58
 msgid ":ref:`Plugin support <man/linkchecker:PLUGINS>` allowing custom page checks"
 msgstr ""
 
-#: ../../src/index.rst:60
+#: ../../src/index.rst:59
 msgid "Different interfaces: command line and web interface"
 msgstr ""
 
-#: ../../src/index.rst:63
+#: ../../src/index.rst:62
 msgid "Screenshots"
 msgstr ""
 
-#: ../../src/index.rst:73
+#: ../../src/index.rst:72
 msgid "Commandline interface"
 msgstr ""
 
-#: ../../src/index.rst:74
+#: ../../src/index.rst:73
 msgid "WSGI web interface"
 msgstr ""
 
-#: ../../src/index.rst:77
+#: ../../src/index.rst:76
 msgid "Test suite status"
 msgstr ""
 
-#: ../../src/index.rst:78
+#: ../../src/index.rst:77
 msgid "Linkchecker has extensive unit tests to ensure code quality. `GitHub Actions <https://docs.github.com/en/actions/>`_ is used for continuous build and test integration."
 msgstr ""
 
@@ -128,10 +128,10 @@ msgstr ""
 msgid "Build Status"
 msgstr ""
 
-#: ../../src/index.rst:87
+#: ../../src/index.rst:86
 msgid "Icon"
 msgstr ""
 
-#: ../../src/index.rst:89
+#: ../../src/index.rst:88
 msgid "The project icon is categories/applications-development-web from `Oxygen icons <https://develop.kde.org/frameworks/oxygen-icons/>`_ copyright KDE and licensed under the `GNU LGPL version 3 <https://www.gnu.org/licenses/lgpl-3.0.html>`_ or later."
 msgstr ""
