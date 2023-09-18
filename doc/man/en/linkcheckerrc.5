@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKERRC" "5" "May 15, 2023" "10.2.1.post54+g6c0f1f336" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "September 11, 2023" "10.2.1.post89+g3a276cfc8" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .SH DESCRIPTION
@@ -58,12 +58,6 @@ Note that the given directory must have URL syntax, so it must use a
 slash to join directories instead of a backslash. And the given
 directory must end with a slash.
 Command line option: none
-.TP
-\fBnntpserver=\fP\fISTRING\fP
-Specify an NNTP server for \fBnews:\fP links. Default is the
-environment variable \fI\%NNTP_SERVER\fP\&. If no host is given, only the
-syntax of the link is checked.
-Command line option: \fI\%\-\-nntp\-server\fP
 .TP
 \fBrecursionlevel=\fP\fINUMBER\fP
 Check recursively all links up to given depth. A negative depth will
@@ -155,6 +149,11 @@ Command line option: none
 Only check syntax of URLs matching the given regular expressions.
 Command line option: \fI\%\-\-ignore\-url\fP
 .TP
+\fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
+Ignore the comma\-separated list of warnings. See \fI\%WARNINGS\fP for
+the list of supported warnings. Messages are logged as information.
+Command line option: none
+.TP
 \fBinternlinks=\fP\fIREGEX\fP
 Regular expression to add more URLs recognized as internal links.
 Default is that URLs given on the command line are internal.
@@ -175,7 +174,7 @@ Command line option: \fI\%\-\-check\-extern\fP
 \fBentry=\fP\fIREGEX\fP \fIUSER\fP [\fIPASS\fP] (\fI\%MULTILINE\fP)
 Provide individual username/password pairs for different links. In
 addition to a single login page specified with \fBloginurl\fP multiple
-FTP, HTTP (Basic Authentication) and telnet links are supported.
+FTP and HTTP (Basic Authentication) links are supported.
 Entries are a triple (URL regex, username, password) or a tuple (URL
 regex, username), where the entries are separated by whitespace.
 The password is optional and if missing it has to be entered at the
@@ -236,11 +235,6 @@ Command line option: \fI\%\-\-verbose\fP
 \fBwarnings=\fP[\fB0\fP|\fB1\fP]
 If set log warnings. Default is to log warnings.
 Command line option: \fI\%\-\-no\-warnings\fP
-.TP
-\fBignorewarnings=\fP\fINAME\fP[\fB,\fP\fINAME\fP\&...]
-Ignore the comma\-separated list of warnings. See \fI\%WARNINGS\fP for
-the list of supported warnings.
-Command line option: none
 .TP
 \fBignoreerrors=\fP\fIURL_REGEX\fP [\fIMESSAGE_REGEX\fP] (\fI\%MULTILINE\fP)
 Specify regular expressions to ignore errors for matching URLs, one
@@ -308,6 +302,11 @@ Command line option: none
 Valid encodings are listed in
 \fI\%https://docs.python.org/library/codecs.html#standard\-encodings\fP\&.
 Default encoding is the system default locale encoding.
+.TP
+\fBwraplength=\fP\fINUMBER\fP
+The number of characters at which to wrap each message line.
+The default is 65.
+Command line option: none
 .TP
 .B \fIcolor*\fP
 Color settings for the various log parts, syntax is \fIcolor\fP or
@@ -701,14 +700,11 @@ The URL had no content.
 \fBhttp\-rate\-limited\fP
 Too many HTTP requests.
 .TP
+\fBhttp\-redirected\fP
+Redirected to a different URL.
+.TP
 \fBmail\-no\-mx\-host\fP
 The mail MX host could not be found.
-.TP
-\fBnntp\-no\-newsgroup\fP
-The NNTP newsgroup could not be found.
-.TP
-\fBnntp\-no\-server\fP
-No NNTP server was found.
 .TP
 \fBurl\-content\-size\-zero\fP
 The URL content size is zero.
