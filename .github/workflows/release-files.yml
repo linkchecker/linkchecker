@@ -38,13 +38,18 @@ jobs:
         run: >
             python3 -m hatchling build
 
+      - name: Generate Sigstore signatures
+        uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31
+        with:
+          inputs: dist/*
+
       - name: Check distribution files
         run: >
-            twine check dist/*
+            twine check dist/*.{tar.gz,whl}
 
       - name: Calculate checksums for distribution files
         run: >
-            sha256sum dist/*
+            sha256sum dist/*.{tar.gz,whl}
 
       - name: Add distribution files to release
         run: >
