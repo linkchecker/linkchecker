@@ -1,7 +1,7 @@
 Upgrading
 =========
 
-Migrating from 10.2 to 10.x
+Migrating from 10.2 to 10.3
 ---------------------------
 Python 3.8 or newer is required.
 

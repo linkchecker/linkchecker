@@ -1,9 +1,20 @@
-10.x
+10.3.0 (released 18.09.2023)
+
+Features:
+- TextLogger message wrapping is configurable using wraplength
 
 Changes:
 - Minimum Python version required is 3.8
 - HTTP redirect causes a warning, http-redirected
 - Ignored warning messages are logged as information
+- Installing from git archives is re-enabled
+- Support for checking NNTP and Telnet links is removed
+
+Fixes
+- -p/--password was being ignored
+- FTP checker was raising a TypeError
+- FTP checker was ignoring maxfilesizedownload
+- Documentation updates
 
 
 10.2.1 (released 05.12.2022)
