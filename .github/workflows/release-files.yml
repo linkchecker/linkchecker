@@ -51,7 +51,7 @@ jobs:
         run: >
             sha256sum dist/*.{tar.gz,whl}
 
-      - name: Add distribution files to release
+      - name: Add files to release
         run: >
             gh release upload ${{ github.ref_name }} dist/*
         env:
