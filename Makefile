@@ -21,7 +21,6 @@ upload:
 	twine upload dist/LinkChecker*
 
 homepage: linkcheck/_release.py
-	make -C doc code
 	make -C doc html
 
 dist:

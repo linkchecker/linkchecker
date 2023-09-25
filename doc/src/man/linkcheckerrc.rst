@@ -181,8 +181,8 @@ URL checking results
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
 **verbose=**\ [**0**\ \|\ **1**]
-    If set log all checked URLs once. Default is to log only errors and
-    warnings.
+    If set log all checked URLs once, overriding **warnings**.
+    Default is to log only errors and warnings.
     Command line option: :option:`--verbose`
 **warnings=**\ [**0**\ \|\ **1**]
     If set log warnings. Default is to log warnings.

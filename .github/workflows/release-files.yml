@@ -51,11 +51,15 @@ jobs:
         run: >
             sha256sum dist/*.{tar.gz,whl}
 
-      - name: Add distribution files to release
+      - name: Add files to release
         run: >
             gh release upload ${{ github.ref_name }} dist/*
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Remove Sigstore files
+        run: >
+            rm -f dist/*.{crt,sig,sigstore}
 
       - name: Publish distribution files to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

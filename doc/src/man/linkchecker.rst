@@ -141,7 +141,8 @@ URL checking results
 
 .. option:: -v, --verbose   
 
-    Log all checked URLs. Default is to log only errors and warnings.
+    Log all checked URLs, overriding :option:`--no-warnings`.
+    Default is to log only errors and warnings.
 
 Progress updates
 """"""""""""""""
