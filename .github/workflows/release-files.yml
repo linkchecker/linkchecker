@@ -57,5 +57,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Remove Sigstore files
+        run: >
+            rm -f dist/*.{crt,sig,sigstore}
+
       - name: Publish distribution files to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
