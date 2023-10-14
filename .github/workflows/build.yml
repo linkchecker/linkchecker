@@ -25,7 +25,7 @@ jobs:
           - "3.9"
           - "3.10"
           - "3.11"
-          - "3.12-dev"
+          - "3.12"
         toxenv: [py]
         include:
           - python-version: "3.8"
