@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Chris Mayo
+# Copyright (C) 2020-2023 Chris Mayo
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,9 +18,20 @@ Test director.aggregator.Aggregate.visit_loginurl().
 This includes the retrieval and search of a login form and posting credentials.
 """
 import re
+import urllib.parse
 
-from .httpserver import HttpServerTest, CGIHandler
+from .httpserver import HttpServerTest, StoppableHttpRequestHandler
 from . import get_test_aggregate
+
+
+class LoginPostHandler(StoppableHttpRequestHandler):
+    def do_POST(self):
+        length = int(self.headers.get("content-length"))
+        form_data = self.rfile.read(length).decode()
+        self.send_response(200)
+        for name, value in urllib.parse.parse_qsl(form_data):
+            self.send_header("Set-Cookie", f"{name}={value}")
+        self.end_headers()
 
 
 class TestLoginUrl(HttpServerTest):
@@ -28,7 +39,7 @@ class TestLoginUrl(HttpServerTest):
 
     def __init__(self, methodName="runTest"):
         super().__init__(methodName=methodName)
-        self.handler = CGIHandler
+        self.handler = LoginPostHandler
 
     def visit_loginurl(self, page, user=None, password=None, extrafields=False):
         confargs = {}
