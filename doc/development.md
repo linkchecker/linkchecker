@@ -66,12 +66,14 @@ Release process
    if so create a pull request using the GitHub workflow:
    "Create a branch with updated man pages and application translations"
 
-2. edit `changelog.txt` and `upgrading.txt`
+2. run `scripts/update_iana_uri_schemes.sh` and commit any changes
 
-3. confirm tests have passed
+3. edit `changelog.txt` and `upgrading.txt`
 
-4. submit a pull request
+4. confirm tests have passed
 
-5. create release (vX.Y.Z) on GitHub
+5. submit a pull request
 
-6. check release has been created on PyPI
+6. create release (vX.Y.Z) on GitHub
+
+7. check release has been created on PyPI
