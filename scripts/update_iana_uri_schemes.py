@@ -16,6 +16,7 @@ iana_uri_schemes_other = {
     "gemini": "Gemini protocol",
     "isbn": "ISBN (int. book numbers)",
     "javascript": "JavaScript",
+    "ms-windows-store": "Microsoft Store",
     "slack": "Slack Technologies client",
     "tg": "Telegram",
     "whatsapp": "WhatsApp",
