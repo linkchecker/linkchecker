@@ -89,8 +89,8 @@ def is_tty(fp):
 
 @lru_cache(128)
 def is_readable(filename):
-    """Check if file is a regular file and is readable."""
-    return os.path.isfile(filename) and os.access(filename, os.R_OK)
+    """Check if file is readable."""
+    return os.access(filename, os.R_OK)
 
 
 def is_accessable_by_others(filename):
@@ -103,3 +103,8 @@ def is_writable_by_others(filename):
     """Check if file or directory is world writable."""
     mode = os.stat(filename)[stat.ST_MODE]
     return mode & stat.S_IWOTH
+
+
+def is_valid_config_source(filename):
+    """Check if the file is a valid config file."""
+    return os.path.isfile(filename) or stat.S_ISFIFO(os.stat(filename).st_mode)
