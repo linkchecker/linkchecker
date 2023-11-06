@@ -222,7 +222,7 @@ class Configuration(dict):
         # filter invalid files
         filtered_cfiles = []
         for cfile in cfiles:
-            if not os.path.isfile(cfile):
+            if not fileutil.is_valid_config_source(cfile):
                 log.warn(LOG_CHECK, _("Configuration file %r does not exist."), cfile)
             elif not fileutil.is_readable(cfile):
                 log.warn(LOG_CHECK, _("Configuration file %r is not readable."), cfile)

@@ -135,7 +135,7 @@ def linkchecker():
         files = []
         if options.configfile:
             path = configuration.normpath(options.configfile)
-            if os.path.isfile(path):
+            if fileutil.is_valid_config_source(path):
                 files.append(path)
             else:
                 log.warn(
