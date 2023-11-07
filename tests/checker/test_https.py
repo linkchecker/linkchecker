@@ -16,8 +16,13 @@
 """
 Test https.
 """
+import datetime
 from unittest.mock import patch
 
+from cryptography import x509
+from cryptography.x509.oid import NameOID
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import rsa
 from OpenSSL import crypto
 
 from .httpserver import HttpsServerTest, CookieRedirectHttpRequestHandler
@@ -37,22 +42,42 @@ class TestHttps(HttpsServerTest):
 
     @classmethod
     def setUpClass(cls):
-        key = crypto.PKey()
-        key.generate_key(crypto.TYPE_RSA, 2048)
-        cert = crypto.X509()
-        cert.get_subject().CN = "localhost"
-        cert.add_extensions(
-            [crypto.X509Extension(b"subjectAltName", False, b"DNS:localhost")])
-        cert.set_serial_number(1000)
-        cert.gmtime_adj_notBefore(0)
-        cert.set_notAfter(b"21190102030405Z")
-        cert.set_issuer(cert.get_subject())
-        cert.set_pubkey(key)
-        cert.sign(key, "sha1")
+        key = rsa.generate_private_key(
+            public_exponent=65537,
+            key_size=2048,
+        )
+
         with open(get_file("https_key.pem"), "wb") as f:
-            f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, key))
+            f.write(key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.TraditionalOpenSSL,
+                encryption_algorithm=serialization.NoEncryption(),
+            ))
+
+        subject = issuer = x509.Name([
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "LinkChecker"),
+            x509.NameAttribute(NameOID.COMMON_NAME, "linkchecker.github.io"),
+        ])
+
+        cert = x509.CertificateBuilder().subject_name(
+            subject
+        ).issuer_name(
+            issuer
+        ).public_key(
+            key.public_key()
+        ).serial_number(
+            x509.random_serial_number()
+        ).not_valid_before(
+            datetime.datetime.now(datetime.timezone.utc)
+        ).not_valid_after(
+            datetime.datetime(2119, 1, 2, 3, 4, 5)
+        ).add_extension(
+            x509.SubjectAlternativeName([x509.DNSName("localhost")]),
+            critical=False,
+        ).sign(key, hashes.SHA256())
+
         with open(get_file("https_cert.pem"), "wb") as f:
-            f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
+            f.write(cert.public_bytes(serialization.Encoding.PEM))
 
     def test_https(self):
         url = self.get_url("")
