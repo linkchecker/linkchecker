@@ -39,7 +39,7 @@ jobs:
             python3 -m hatchling build
 
       - name: Generate Sigstore signatures
-        uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31
+        uses: sigstore/gh-action-sigstore-python@1a402ed919f6cb88b9bafb523fb65508c442514b
         with:
           inputs: dist/*
 
