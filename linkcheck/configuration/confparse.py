@@ -57,6 +57,9 @@ class LCConfigParser(RawConfigParser):
         assert isinstance(files, list), "Invalid file list %r" % files
         try:
             self.read_ok = super().read(files)
+            if not self.sections():
+                raise LinkCheckerError(
+                    _("configuration files %s contain no sections.") % files)
             if len(self.read_ok) < len(files):
                 failed_files = set(files) - set(self.read_ok)
                 log.warn(
