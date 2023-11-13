@@ -107,4 +107,5 @@ def is_writable_by_others(filename):
 
 def is_valid_config_source(filename):
     """Check if the file is a valid config file."""
-    return os.path.isfile(filename) or stat.S_ISFIFO(os.stat(filename).st_mode)
+    return os.path.exists(filename) and (
+        os.path.isfile(filename) or stat.S_ISFIFO(os.stat(filename).st_mode))
