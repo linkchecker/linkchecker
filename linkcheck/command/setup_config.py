@@ -187,8 +187,6 @@ def setup_config(config, options):
         if options.verbose:
             config["verbose"] = True
             config["warnings"] = True
-    if options.cookiefile is not None:
-        config["cookiefile"] = options.cookiefile
     if constructauth:
         config.add_auth(pattern=".+", user=_username, password=_password)
     # read missing passwords
@@ -204,8 +202,11 @@ def setup_config(config, options):
     if options.useragent is not None:
         config["useragent"] = options.useragent
     if options.cookiefile is not None:
-        if fileutil.is_readable(options.cookiefile):
-            config["cookiefile"] = options.cookiefile
+        if not fileutil.is_valid_config_source(options.cookiefile):
+            print_usage(
+                _("Cookie file %s does not exist.") % options.cookiefile)
+        elif not fileutil.is_readable(options.cookiefile):
+            print_usage(
+                _("Could not read cookie file %s") % options.cookiefile)
         else:
-            msg = _("Could not read cookie file %s") % options.cookiefile
-            log.error(LOG_CMDLINE, msg)
+            config["cookiefile"] = options.cookiefile
