@@ -187,8 +187,6 @@ def setup_config(config, options):
         if options.verbose:
             config["verbose"] = True
             config["warnings"] = True
-    if options.cookiefile is not None:
-        config["cookiefile"] = options.cookiefile
     if constructauth:
         config.add_auth(pattern=".+", user=_username, password=_password)
     # read missing passwords
