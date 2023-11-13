@@ -191,3 +191,13 @@ class TestConfig(TestBase):
         # blacklist logger section
         self.assertEqual(config["failures"]["filename"], "blacklist")
         self.assertEqual(config["failures"]["encoding"], "utf-8")
+
+    def test_confparse_empty(self):
+        config = linkcheck.configuration.Configuration()
+        files = [get_file("config.empty")]
+        self.assertRaises(linkcheck.LinkCheckerError, config.read, files)
+
+    def test_confparse_missing(self):
+        config = linkcheck.configuration.Configuration()
+        files = [get_file("no_such_config")]
+        self.assertRaises(linkcheck.LinkCheckerError, config.read, files)

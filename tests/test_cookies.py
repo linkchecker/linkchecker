@@ -18,6 +18,7 @@ Test cookie routines.
 """
 
 import os
+from pathlib import Path
 
 import linkcheck.cookies
 import linkcheck.configuration
@@ -80,3 +81,10 @@ class TestCookies(TestBase):
         aggregate.add_request_session()
         session = aggregate.get_request_session()
         self.assertEqual({c.name for c in session.cookies}, {"om", "multiple", "are"})
+
+    def test_empty_cookie_file(self):
+        self.assertRaises(
+            linkcheck.LinkCheckerError,
+            linkcheck.cookies.from_file,
+            Path(__file__).parent / "configuration/data/config.empty",
+        )
