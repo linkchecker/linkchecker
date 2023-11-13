@@ -203,10 +203,10 @@ def setup_config(config, options):
         config["useragent"] = options.useragent
     if options.cookiefile is not None:
         if not fileutil.is_valid_config_source(options.cookiefile):
-            log.error(
-                LOG_CMDLINE, _("Cookie file %s does not exist."), options.cookiefile)
+            print_usage(
+                _("Cookie file %s does not exist.") % options.cookiefile)
         elif not fileutil.is_readable(options.cookiefile):
-            msg = _("Could not read cookie file %s") % options.cookiefile
-            log.error(LOG_CMDLINE, msg)
+            print_usage(
+                _("Could not read cookie file %s") % options.cookiefile)
         else:
             config["cookiefile"] = options.cookiefile
