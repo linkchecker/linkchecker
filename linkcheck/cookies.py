@@ -21,6 +21,8 @@ from http.cookiejar import split_header_words
 import email
 import requests
 
+from . import LinkCheckerError
+
 
 def from_file(filename):
     """Parse cookie data from a text file in HTTP header format.
@@ -40,6 +42,8 @@ def from_file(filename):
                 lines.append(line)
         if lines:
             entries.extend(from_headers("\r\n".join(lines)))
+        if not entries:
+            raise LinkCheckerError(_("No entries found"))
         return entries
 
 
