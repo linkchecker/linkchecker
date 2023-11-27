@@ -385,8 +385,8 @@ def get_user_config():
     )
     if not os.path.exists(userconf):
         # initial config (with all options explained)
-        with importlib.resources.path(
-                f"{PACKAGE_NAME}.data", "linkcheckerrc") as initialconf:
+        with importlib.resources.as_file(importlib.resources.files(
+                f"{PACKAGE_NAME}.data").joinpath("linkcheckerrc")) as initialconf:
             # copy the initial configuration to the user configuration
             try:
                 make_userdir(userconf)
