@@ -22,6 +22,7 @@ Various string utility functions. Note that these functions are not
 necessarily optimised for large strings, so use with care.
 """
 
+import math
 import re
 import textwrap
 import os
@@ -187,7 +188,7 @@ def strduration_long(duration, do_translate=True):
         else:
             duration, unit = divmod(duration, divisor)
         if unit:
-            time_str.append(_n(single, plural, unit) % unit)
+            time_str.append(_n(single, plural, math.ceil(unit)) % unit)
     time_str.reverse()
     if len(time_str) > 2:
         time_str.pop()
