@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: LinkChecker 10.2.1.post89+g3a276cfc8\n"
+"Project-Id-Version: LinkChecker 10.3.0.post33+g268799ee0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 18:26+0000\n"
+"POT-Creation-Date: 2023-12-04 19:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Introduction"
 msgstr ""
 
 #: ../../src/index.rst:10
-msgid "LinkChecker is a free, `GPL <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.8 or later."
+msgid "LinkChecker is a free, `GPL <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>`_ licensed website validator. LinkChecker checks links in web documents or full websites. It runs on Python 3 systems, requiring Python 3.9 or later."
 msgstr ""
 
 #: ../../src/index.rst:15
