@@ -172,6 +172,7 @@ ignored_schemes_provisional = r"""
 |bitcoincash # bitcoincash
 |blob       # blob
 |bolo       # bolo
+|brid       # brid
 |browserext # browserext
 |cabal      # cabal
 |calculator # calculator
