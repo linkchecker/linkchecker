@@ -36,7 +36,7 @@ class SslCertificateCheck(_ConnectionPlugin):
     option."""
 
     def __init__(self, config):
-        """Initialize clamav configuration."""
+        """Initialize plugin."""
         super().__init__(config)
         self.warn_ssl_cert_secs_valid = (
             config[sslcertwarndays] * strformat.SECONDS_PER_DAY
