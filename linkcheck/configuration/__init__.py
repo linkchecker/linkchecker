@@ -166,6 +166,7 @@ class Configuration(dict):
         self["externlinks"] = []
         self["ignoreerrors"] = []
         self["ignorewarnings"] = []
+        self["ignorewarningsforurls"] = []
         self["internlinks"] = []
         self["checkextern"] = False
         # plugins

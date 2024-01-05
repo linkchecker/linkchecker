@@ -301,6 +301,14 @@ class LCConfigParser(RawConfigParser):
                 f.strip().lower()
                 for f in self.get(section, 'ignorewarnings').split(',')
             ]
+        if self.has_option(section, "ignorewarningsforurls"):
+            for line in read_multiline(self.get(section, "ignorewarningsforurls")):
+                parts = line.split(maxsplit=1)
+                if len(parts) == 1:
+                    parts.append('')
+                self.config["ignorewarningsforurls"].append(tuple(
+                    re_compile(part) for part in parts
+                ))
         if self.has_option(section, "ignore"):
             for line in read_multiline(self.get(section, "ignore")):
                 pat = get_link_pat(line, strict=1)
