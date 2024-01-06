@@ -23,12 +23,12 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestWarnings(LinkCheckTest):
+class TestIgnoreWarnings(LinkCheckTest):
     """
     Test whether ignoring of warnings per URL works.
     """
 
-    def test_ignorewarnings_for_specified_url_and_warning(self):
+    def test_given_warning_for_given_url_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
                 (re_compile("test.txt"), re_compile("url-content-size-zero"))
@@ -36,7 +36,7 @@ class TestWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings.html", confargs=confargs)
 
-    def test_ignorewarnings_for_incorrect_url(self):
+    def test_warning_for_unmatching_url_not_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
                 (re_compile("test_incorrect.txt"), re_compile("url-content-size-zero"))
@@ -44,7 +44,7 @@ class TestWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
-    def test_ignorewarnings_for_incorrect_warning(self):
+    def test_non_matching_warning_for_matching_url_not_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
                 (re_compile("test.txt"), re_compile("not-a-warning"))
@@ -52,7 +52,7 @@ class TestWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
-    def test_ignorewarnings_ignore_all(self):
+    def test_empty_warning_spec_matches_anything(self):
         confargs = {
             "ignorewarningsforurls": [
                 (re_compile("test.txt"), re_compile(""))
