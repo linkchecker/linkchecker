@@ -28,6 +28,7 @@ class TestIgnoreWarnings(LinkCheckTest):
     Test whether ignoring of warnings per URL works.
     """
 
+    @need_network
     def test_given_warning_for_given_url_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
@@ -36,6 +37,7 @@ class TestIgnoreWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings.html", confargs=confargs)
 
+    @need_network
     def test_warning_for_unmatching_url_not_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
@@ -44,6 +46,7 @@ class TestIgnoreWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
+    @need_network
     def test_non_matching_warning_for_matching_url_not_ignored(self):
         confargs = {
             "ignorewarningsforurls": [
@@ -52,6 +55,7 @@ class TestIgnoreWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
+    @need_network
     def test_empty_warning_spec_matches_anything(self):
         confargs = {
             "ignorewarningsforurls": [
