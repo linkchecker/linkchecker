@@ -28,28 +28,27 @@ class TestWarnings(LinkCheckTest):
     Test whether ignoring of warnings per URL works.
     """
 
-    def _test(self, url, url_regex, msg_regex, warning):
-        """ Shorthand for various tests of ignoring warnings. """
-        confargs = {
-            #"ignorewarningsforurls": [
-            #    (re_compile(url_regex), re_compile(msg_regex))
-            #]
-        }
-        resultlines = [
-            "url %s" % url,
-            "cache key %s" % url,
-            "real url %s" % url,
-            #"warning %s" % warning,
-            "valid",
-        ]
-        self.direct(url, resultlines, confargs=confargs)
-
-
-    def test_ignorewarnings(self):
+    def test_ignorewarnings_for_specified_url_and_warning(self):
         confargs = {
             "ignorewarningsforurls": [
                 (re_compile("test.txt"), re_compile("url-content-size-zero"))
             ]
         }
         self.file_test("base_ignorewarnings.html", confargs=confargs)
+
+    def test_ignorewarnings_for_incorrect_url(self):
+        confargs = {
+            "ignorewarningsforurls": [
+                (re_compile("test_incorrect.txt"), re_compile("url-content-size-zero"))
+            ]
+        }
+        self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
+
+    def test_ignorewarnings_for_incorrect_warning(self):
+        confargs = {
+            "ignorewarningsforurls": [
+                (re_compile("test.txt"), re_compile("not-a-warning"))
+            ]
+        }
+        self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
