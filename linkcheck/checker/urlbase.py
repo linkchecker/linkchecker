@@ -381,7 +381,16 @@ class UrlBase:
 
     def should_ignore_warning(self, tag):
         """Return true if a warning should be ignored"""
-        return tag in self.aggregate.config["ignorewarnings"]
+        if tag in self.aggregate.config["ignorewarnings"]:
+            return True
+        ignore_errors = self.aggregate.config["ignorewarningsforurls"]
+        for url_regex, msg_regex in ignore_errors:
+            if not url_regex.search(self.url):
+                continue
+            if not msg_regex.search(tag):
+                continue
+            return True
+        return False
 
     def add_warning(self, s, tag=None):
         """
