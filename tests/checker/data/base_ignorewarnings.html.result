@@ -1,0 +1,12 @@
+url file://%(curdir)s/%(datadir)s/base_ignorewarnings.html
+cache key file://%(curdir)s/%(datadir)s/base_ignorewarnings.html
+real url file://%(curdir)s/%(datadir)s/base_ignorewarnings.html
+name %(datadir)s/base_ignorewarnings.html
+valid
+
+url test.txt
+cache key file://%(curdir)s/%(datadir)s/base/test.txt
+real url file://%(curdir)s/%(datadir)s/base/test.txt
+baseurl file://%(curdir)s/%(datadir)s/base/
+info Content size is zero.
+valid
