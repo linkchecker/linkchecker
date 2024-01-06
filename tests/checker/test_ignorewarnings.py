@@ -52,3 +52,11 @@ class TestWarnings(LinkCheckTest):
         }
         self.file_test("base_ignorewarnings_with_warning.html", confargs=confargs)
 
+    def test_ignorewarnings_ignore_all(self):
+        confargs = {
+            "ignorewarningsforurls": [
+                (re_compile("test.txt"), re_compile(""))
+            ]
+        }
+        self.file_test("base_ignorewarnings.html", confargs=confargs)
+
