@@ -63,4 +63,3 @@ class TestIgnoreWarnings(LinkCheckTest):
             ]
         }
         self.file_test("base_ignorewarnings.html", confargs=confargs)
-
