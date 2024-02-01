@@ -983,8 +983,8 @@ msgstr "%d enlace chequeado."
 #, python-format
 msgid "%d warning found"
 msgid_plural "%d warnings found"
-msgstr[0] "%d error encontrado"
-msgstr[1] "%d errores encontrados"
+msgstr[0] "%d adventencia encontrada"
+msgstr[1] "%d adventencias encontradas"
 
 #: ../linkcheck/logger/text.py:250 ../linkcheck/logger/html.py:362
 #, python-format
