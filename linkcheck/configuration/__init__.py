@@ -148,6 +148,7 @@ class Configuration(dict):
         self["maxnumurls"] = None
         self["maxrunseconds"] = None
         self["maxrequestspersecond"] = 10
+        self["ignoreddosprotection"] = False
         self["maxhttpredirects"] = 10
         self["sslverify"] = True
         self["threads"] = 10

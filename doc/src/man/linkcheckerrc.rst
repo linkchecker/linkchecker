@@ -90,6 +90,10 @@ checking
     "LinkChecker" response header.
     The default is 10.
     Command line option: none
+**ignoreddosprotection=**\ [**0**\ \|\ **1**]
+    Ignore the internal DDOS protection which limits the maximum number of requests
+    to 6 per second.
+    Use with caution!
 **robotstxt=**\ [**0**\ \|\ **1**]
     When using http, fetch robots.txt, and confirm whether each URL should
     be accessed before checking.
