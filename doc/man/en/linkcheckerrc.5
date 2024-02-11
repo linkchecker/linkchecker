@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LINKCHECKERRC" "5" "February 03, 2024" "10.4.0.post11+g62f9694a0" "LinkChecker"
+.TH "LINKCHECKERRC" "5" "February 11, 2024" "10.4.0.post11+g62f9694a0" "LinkChecker"
 .SH NAME
 linkcheckerrc \- configuration file for LinkChecker
 .SH DESCRIPTION
@@ -154,12 +154,21 @@ Ignore the comma\-separated list of warnings. See \fI\%WARNINGS\fP for
 the list of supported warnings. Messages are logged as information.
 Command line option: none
 .TP
-\fBignorewarningsforurls=\fP\fIURL_REGEX\fP [\fIMESSAGE_REGEX\fP] (\fI\%MULTILINE\fP)
+\fBignorewarningsforurls=\fP\fIURL_REGEX\fP [\fINAME_REGEX\fP] (\fI\%MULTILINE\fP)
 Specify regular expressions to ignore warnings for matching URLs, one
-per line. A second regular expression can be specified per line to
-only ignore matching warning messages per corresponding URL. If the
-second expression is omitted, all warnings are ignored. Default is to
-not ignore any warnings. Example:
+per line.
+On each line, you can specify a second regular expression,
+ensuring that only the warnings with names matching the second
+expression will be ignored for that URL.
+If the second expression is omitted, all warnings are ignored for
+that URL.
+.sp
+Default is to not ignore any warnings.
+See \fI\%WARNINGS\fP for the list of supported warnings.
+Messages are logged as information.
+Command line option: none
+.sp
+Example:
 .UNINDENT
 .INDENT 0.0
 .INDENT 3.5
