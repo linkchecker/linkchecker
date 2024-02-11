@@ -387,14 +387,14 @@ class UrlBase:
         if tag in self.aggregate.config["ignorewarnings"]:
             return True
         ignore_warnings = self.aggregate.config["ignorewarningsforurls"]
-        for url_regex, msg_regex in ignore_warnings:
+        for url_regex, name_regex in ignore_warnings:
             log.debug(LOG_CHECK,
                       "ignorewarningsforurl: considering '%s, %s'",
-                      url_regex, msg_regex)
+                      url_regex, name_regex)
             if not url_regex.search(self.url):
                 continue
             log.debug(LOG_CHECK, "ignorewarningsforurl: URL matches '%s'", self.url)
-            if not msg_regex.search(tag):
+            if not name_regex.search(tag):
                 log.debug(LOG_CHECK,
                           "ignorewarningsforurl: tag doesn't match '%s'",
                           tag)
