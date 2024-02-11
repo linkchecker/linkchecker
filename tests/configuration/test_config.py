@@ -72,7 +72,7 @@ class TestConfig(TestBase):
             for part in parts:
                 self.assertTrue(isinstance(part, Pattern))
         self.assertTrue(config["ignorewarningsforurls"][0][1].search(
-            "[http-redirected] Redirected to"
+            "http-redirected"
         ))
         self.assertTrue(config["ignorewarningsforurls"][1][0].search(
             "https://example.com/another-url"
