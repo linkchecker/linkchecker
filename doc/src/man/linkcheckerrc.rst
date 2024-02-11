@@ -115,10 +115,12 @@ filtering
     Command line option: none
 **ignorewarningsforurls=**\ *URL_REGEX* [*NAME_REGEX*] (`MULTILINE`_)
     Specify regular expressions to ignore warnings for matching URLs, one
-    per line. A second regular expression can be specified on each line
-    so that only the warnings the name of which match that second expression
-    will be ignored for that URL. If the second expression is omitted, all
-    warnings are ignored for that URL.
+    per line.
+    On each line, you can specify a second regular expression,
+    ensuring that only the warnings with names matching the second
+    expression will be ignored for that URL.
+    If the second expression is omitted, all warnings are ignored for
+    that URL.
 
     Default is to not ignore any warnings.
     See `WARNINGS`_ for the list of supported warnings.
