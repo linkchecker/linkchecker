@@ -113,6 +113,28 @@ filtering
     Ignore the comma-separated list of warnings. See `WARNINGS`_ for
     the list of supported warnings. Messages are logged as information.
     Command line option: none
+**ignorewarningsforurls=**\ *URL_REGEX* [*NAME_REGEX*] (`MULTILINE`_)
+    Specify regular expressions to ignore warnings for matching URLs, one
+    per line.
+    On each line, you can specify a second regular expression,
+    ensuring that only the warnings with names matching the second
+    expression will be ignored for that URL.
+    If the second expression is omitted, all warnings are ignored for
+    that URL.
+
+    Default is to not ignore any warnings.
+    See `WARNINGS`_ for the list of supported warnings.
+    Messages are logged as information.
+    Command line option: none
+
+    Example:
+
+::
+
+    [filtering]
+    ignorewarningsforurls=
+      ^https://redirected\.example\.com ^http-redirected
+
 **internlinks=**\ *REGEX*
     Regular expression to add more URLs recognized as internal links.
     Default is that URLs given on the command line are internal.
@@ -566,8 +588,8 @@ Parse Markdown files for URLs to check.
 WARNINGS
 --------
 
-The following warnings are recognized in the 'ignorewarnings' config
-file entry:
+The following warnings are recognized in the 'ignorewarnings' and
+'ignorewarningsforurls' config file entries:
 
 **file-anchorcheck-directory**
     A local directory with an anchor, not supported by AnchorCheck.

@@ -379,13 +379,37 @@ class UrlBase:
         """Return True for local (ie. *file://*) URLs."""
         return self.is_file()
 
+    def should_ignore_warning(self, tag):
+        """Return true if a warning should be ignored"""
+        log.debug(LOG_CHECK,
+                  "ignorewarnings(%s): %s, %s", self.url, tag,
+                  repr(self.aggregate.config["ignorewarnings"]))
+        if tag in self.aggregate.config["ignorewarnings"]:
+            return True
+        ignore_warnings = self.aggregate.config["ignorewarningsforurls"]
+        for url_regex, name_regex in ignore_warnings:
+            log.debug(LOG_CHECK,
+                      "ignorewarningsforurl: considering '%s, %s'",
+                      url_regex, name_regex)
+            if not url_regex.search(self.url):
+                continue
+            log.debug(LOG_CHECK, "ignorewarningsforurl: URL matches '%s'", self.url)
+            if not name_regex.search(tag):
+                log.debug(LOG_CHECK,
+                          "ignorewarningsforurl: tag doesn't match '%s'",
+                          tag)
+                continue
+            log.debug(LOG_CHECK, "ignorewarningsforurl: tag matches '%s'", tag)
+            return True
+        return False
+
     def add_warning(self, s, tag=None):
         """
         Add a warning string.
         """
         item = (tag, s)
         if item not in self.warnings:
-            if tag in self.aggregate.config["ignorewarnings"]:
+            if self.should_ignore_warning(tag):
                 self.add_info(s)
             else:
                 self.warnings.append(item)

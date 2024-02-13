@@ -67,6 +67,16 @@ class TestConfig(TestBase):
                 self.assertTrue(key in patterns)
         for key in ("url-unicode-domain",):
             self.assertTrue(key in config["ignorewarnings"])
+        for parts in config["ignorewarningsforurls"]:
+            self.assertEqual(len(parts), 2)
+            for part in parts:
+                self.assertTrue(isinstance(part, Pattern))
+        self.assertTrue(config["ignorewarningsforurls"][0][1].search(
+            "http-redirected"
+        ))
+        self.assertTrue(config["ignorewarningsforurls"][1][0].search(
+            "https://example.com/another-url"
+        ))
         self.assertEqual(len(config["ignoreerrors"]), 2)
         for parts in config["ignoreerrors"]:
             self.assertEqual(len(parts), 2)
