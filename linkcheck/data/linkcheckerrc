@@ -23,7 +23,7 @@
 # ignore all errors for broken.example.com:
 #  ^https?://broken.example.com/
 # ignore SSL errors for dev.example.com:
-#  ^https://dev.example.com/ ^SSLError .*
+#  ^https://dev.example.com/ ^SSLError
 
 
 ##################### logger configuration ##########################
