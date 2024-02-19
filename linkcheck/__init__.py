@@ -119,3 +119,7 @@ def init_i18n():
 
 # initialize i18n, puts _() and _n() function into global namespace
 init_i18n()
+
+
+if __name__ == '__main__':
+    linkcheck.command.linkchecker.linkchecker()
