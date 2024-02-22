@@ -555,8 +555,8 @@ Print HTTP headers in URL info.
 CssSyntaxCheck
 ^^^^^^^^^^^^^^
 
-Check the syntax of HTML pages by submitting their URLs to the online W3C CSS
-validator. If a page URL is not accessible to the validator no check is
+Check the syntax of CSS stylesheets by submitting their URLs to the online W3C CSS
+validator. If a stylesheet URL is not accessible to the validator no check is
 performed and no warning given.
 See https://jigsaw.w3.org/css-validator/manual.html#expert.
 
