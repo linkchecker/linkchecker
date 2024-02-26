@@ -592,8 +592,8 @@ Parse Markdown files for URLs to check.
 WARNINGS
 --------
 
-The following warnings are recognized in the 'ignorewarnings' and
-'ignorewarningsforurls' config file entries:
+The following warnings are recognized by **ignorewarnings** and
+**ignorewarningsforurls**:
 
 **file-anchorcheck-directory**
     A local directory with an anchor, not supported by AnchorCheck.
