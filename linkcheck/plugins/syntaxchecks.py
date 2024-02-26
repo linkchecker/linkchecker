@@ -83,7 +83,7 @@ class HtmlSyntaxCheck(_ContentPlugin):
 
 
 class CssSyntaxCheck(_ContentPlugin):
-    """Check the syntax of HTML pages with the online W3C CSS validator.
+    """Check the syntax of CSS stylesheets with the online W3C CSS validator.
     See https://jigsaw.w3.org/css-validator/manual.html#expert.
     """
 

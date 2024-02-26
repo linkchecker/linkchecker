@@ -534,8 +534,10 @@ warnings.
 HtmlSyntaxCheck
 ^^^^^^^^^^^^^^^
 
-Check the syntax of HTML pages with the online W3C HTML validator. See
-https://validator.w3.org/docs/api.html.
+Check the syntax of HTML pages by submitting their URLs to the online W3C HTML
+validator. If a page URL is not accessible to the validator no check is
+performed and no warning given.
+See https://validator.w3.org/docs/api.html.
 
 .. note::
 
@@ -553,8 +555,10 @@ Print HTTP headers in URL info.
 CssSyntaxCheck
 ^^^^^^^^^^^^^^
 
-Check the syntax of HTML pages with the online W3C CSS validator. See
-https://jigsaw.w3.org/css-validator/manual.html#expert.
+Check the syntax of CSS stylesheets by submitting their URLs to the online W3C CSS
+validator. If a stylesheet URL is not accessible to the validator no check is
+performed and no warning given.
+See https://jigsaw.w3.org/css-validator/manual.html#expert.
 
 VirusCheck
 ^^^^^^^^^^
