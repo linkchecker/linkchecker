@@ -28,7 +28,11 @@ def x509_to_dict(x509):
         'subjectAltName': [
             ('DNS', value) for value in ext.value.get_values_for_type(DNSName)]
     }
-    notAfter = crypto_cert.not_valid_after
+    try:
+        # cryptography >= 42.0.0
+        notAfter = crypto_cert.not_valid_after_utc
+    except AttributeError:
+        notAfter = crypto_cert.not_valid_after
     if notAfter is not None:
         res['notAfter'] = notAfter.strftime('%b %d %H:%M:%S %Y GMT')
     return res
