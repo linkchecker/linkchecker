@@ -23,7 +23,7 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestFile(LinkCheckTest):
+class TestIgnoreErrors(LinkCheckTest):
     """
     Test whether ignoring of errors per URL works.
     """
@@ -71,7 +71,7 @@ class TestFile(LinkCheckTest):
     @need_network
     def test_internet(self):
         """ Test a few well-known Internet URLs. """
-        self._test("http://example.com/does-not-exist",
-                   r"^http://example.com/.+$", "^404", True)
+        self._test("https://linkchecker.github.io/does-not-exist",
+                   r"^https://linkchecker.github.io/.+$", "^404", True)
         self._test("http://does-not-exist.example.com",
                    r"example.com", "^ConnectionError", True)
