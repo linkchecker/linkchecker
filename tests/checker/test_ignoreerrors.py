@@ -23,7 +23,7 @@ from tests import need_network
 from . import LinkCheckTest
 
 
-class TestFile(LinkCheckTest):
+class TestIgnoreErrors(LinkCheckTest):
     """
     Test whether ignoring of errors per URL works.
     """
