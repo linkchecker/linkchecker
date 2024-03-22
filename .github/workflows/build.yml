@@ -48,7 +48,7 @@ jobs:
 
       - name: ClamAV cache
         id: cache-clamav
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /var/lib/clamav
           key: clamav-v1
@@ -71,15 +71,17 @@ jobs:
           sudo service clamav-daemon status
 
       - name: Git clone
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "${{ matrix.python-version }}"
 
       - name: Pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('tox.ini', 'pyproject.toml') }}
@@ -103,7 +105,7 @@ jobs:
             python -m tox -e ${{ matrix.toxenv }}
 
       - name: Report to coveralls
-        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d
+        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d  # v2.1.2
 
   docs:
     # there's some overlap with publish-pages.yml, but this one runs on pull
@@ -113,19 +115,21 @@ jobs:
 
     steps:
       - name: Git clone
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       - name: Install Ubuntu packages
         run: |
           sudo apt-get install -y graphviz mandoc
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-docs-${{ hashFiles('tox.ini') }}
@@ -161,15 +165,17 @@ jobs:
 
     steps:
       - name: Git clone
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ matrix.toxenv }}-${{ hashFiles('tox.ini') }}
