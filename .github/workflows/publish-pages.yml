@@ -15,10 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        # Needed for hatch-vcs to extract LinkChecker version from tag
-        # https://github.com/actions/checkout/issues/249
         with:
+          # Needed for hatch-vcs to extract LinkChecker version from tag
+          # https://github.com/actions/checkout/issues/249
           fetch-depth: 0
+          show-progress: false
 
       - name: Install Ubuntu packages
         run: sudo apt install graphviz
