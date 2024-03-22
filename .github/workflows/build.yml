@@ -103,7 +103,7 @@ jobs:
             python -m tox -e ${{ matrix.toxenv }}
 
       - name: Report to coveralls
-        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d
+        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d  # v2.1.2
 
   docs:
     # there's some overlap with publish-pages.yml, but this one runs on pull
