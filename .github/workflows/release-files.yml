@@ -12,7 +12,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         # Needed for hatch-vcs to extract LinkChecker version from tag
         # https://github.com/actions/checkout/issues/249
         with:
@@ -22,7 +22,7 @@ jobs:
         run: sudo apt install git
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
