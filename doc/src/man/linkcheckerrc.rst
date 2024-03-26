@@ -202,6 +202,9 @@ URL checking results
     your locale. Valid encodings are listed at
     https://docs.python.org/library/codecs.html#standard-encodings.
     Command line option: :option:`--output`
+**reportallreferences=**\ [**0**\ \|\ **1**]
+    Report all references to a URL, not just the first one.
+    Command line option: :option:`--allrefs`
 **verbose=**\ [**0**\ \|\ **1**]
     If set log all checked URLs once, overriding **warnings**.
     Default is to log only errors and warnings.

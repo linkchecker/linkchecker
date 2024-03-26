@@ -53,6 +53,8 @@ def setup_config(config, options):
         print_version()
     if not options.warnings:
         config["warnings"] = options.warnings
+    if options.reportallreferences:
+        config["reportallreferences"] = True
     if options.externstrict:
         pats = [get_link_pat(arg, strict=True) for arg in options.externstrict]
         config["externlinks"].extend(pats)
