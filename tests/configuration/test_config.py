@@ -55,6 +55,7 @@ class TestConfig(TestBase):
         self.assertEqual(config["sslverify"], "/path/to/cacerts.crt")
         self.assertEqual(config["maxnumurls"], 1000)
         self.assertEqual(config["maxrequestspersecond"], 0.1)
+        self.assertEqual(config["ignoreddosprotection"], 0)
         self.assertEqual(config["maxrunseconds"], 1)
         self.assertEqual(config["maxfilesizeparse"], 100)
         self.assertEqual(config["maxfilesizedownload"], 100)

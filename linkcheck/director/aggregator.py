@@ -77,6 +77,7 @@ class Aggregate:
         requests_per_second = config["maxrequestspersecond"]
         self.wait_time_min = 1.0 / requests_per_second
         self.wait_time_max = 6 * self.wait_time_min
+        self.ignoreddosprotection = config["ignoreddosprotection"]
         self.downloaded_bytes = 0
 
     def visit_loginurl(self):
@@ -161,7 +162,7 @@ class Aggregate:
                 wait = due_time - t
                 time.sleep(wait)
                 t = time.time()
-        if host in self.maxrated:
+        if host in self.maxrated or self.ignoreddosprotection:
             wait_time_min, wait_time_max = self.wait_time_min, self.wait_time_max
         else:
             wait_time_min = max(self.wait_time_min, self.wait_time_min_default)
