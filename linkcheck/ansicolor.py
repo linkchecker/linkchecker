@@ -159,6 +159,10 @@ if os.name == 'nt':
         Cyan: colorama.CYAN,
         White: colorama.GREY,
     }
+else:
+    WinColor = {
+        None: None,
+    }
 
 # pc speaker beep escape code
 Beep = "\007"

@@ -69,6 +69,7 @@ def get_geoip_dat():
 # try importing both the C-library GeoIP and the pure-python pygeoip
 geoip_dat = get_geoip_dat()
 geoip = None
+geoip_error = None
 if geoip_dat:
     try:
         import GeoIP
