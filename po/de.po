@@ -491,9 +491,9 @@ msgstr ""
 "URLs haben\n"
 "        Verknüpfungen zur HTML und CSS Syntaxprüfung angehängt.\n"
 "csv     Gebe Prüfresultat in CSV-Format aus mit einer URL pro Zeile.\n"
-"gml     Gebe Vater-Kind Beziehungen zwischen verknüpften URLs als GML "
+"gml     Gebe Eltern-Kind Beziehungen zwischen verknüpften URLs als GML "
 "Graphen aus.\n"
-"dot     Gebe Vater-Kind Beziehungen zwischen verknüpften URLs als DOT "
+"dot     Gebe Eltern-Kind Beziehungen zwischen verknüpften URLs als DOT "
 "Graphen aus.\n"
 "gxml    Gebe Prüfresultat als GraphXML-Datei aus.\n"
 "xml     Gebe Prüfresultat als maschinenlesbare XML-Datei aus.\n"
@@ -1151,7 +1151,7 @@ msgstr "Name"
 
 #: ../linkcheck/logger/__init__.py:36
 msgid "Parent URL"
-msgstr "Vater URL"
+msgstr "Eltern URL"
 
 #: ../linkcheck/logger/__init__.py:37
 msgid "Extern"
@@ -1573,7 +1573,7 @@ msgid ""
 "local files are only checked without parent URL or when the parent URL is "
 "also a file"
 msgstr ""
-"lokale Dateien werden nur ohne Vater-URL geprüft oder wenn die Vater-URL "
+"lokale Dateien werden nur ohne Eltern-URL geprüft oder wenn die Eltern-URL "
 "auch eine Datei ist"
 
 #: ../linkcheck/checker/fileurl.py:203 ../linkcheck/checker/fileurl.py:367
