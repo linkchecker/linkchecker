@@ -100,6 +100,11 @@ To use values greater than 10, the HTTP server must return a
 The default is 10.
 Command line option: none
 .TP
+\fignoreddosprotection=\fP[\fB0\fP|\fB1\fP]
+Ignoriere den internen DDOS Schutz, der die maximale Anzahl der Anfragen auf
+6 pro Sekunde begrenzt.
+Mit Vorsicht zu verwenden!
+.TP
 \fBrobotstxt=\fP[\fB0\fP|\fB1\fP]
 When using http, fetch robots.txt, and confirm whether each URL should
 be accessed before checking.
