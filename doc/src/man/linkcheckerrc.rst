@@ -107,7 +107,7 @@ filtering
 ^^^^^^^^^
 
 **ignore=**\ *REGEX* (`MULTILINE`_)
-    Only check syntax of URLs matching the given regular expressions.
+    Only check syntax of URLs not matching the given regular expressions.
     Command line option: :option:`--ignore-url`
 **ignorewarnings=**\ *NAME*\ [**,**\ *NAME*...]
     Ignore the comma-separated list of warnings. See `WARNINGS`_ for
