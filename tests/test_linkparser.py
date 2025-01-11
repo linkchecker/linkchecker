@@ -96,6 +96,17 @@ class TestLinkparser(TestBase):
         url = "data:image/vnd.microsoft.icon,000001000200"
         self._test_one_link(content, url)
 
+    def test_source_srcset_parsing(self):
+        content = '<source srcset="%s 1x">'
+        url = "imagesmall.jpg"
+        self._test_one_link(content % url, url)
+        content = '<source srcset="imagesmall.jpg 1x,">'
+        url = "imagesmall.jpg"
+        self._test_one_link(content, url)
+        content = '<source srcset="data:image/vnd.microsoft.icon,000001000200">'
+        url = "data:image/vnd.microsoft.icon,000001000200"
+        self._test_one_link(content, url)
+
     def test_itemtype_parsing(self):
         content = '<div itemtype="%s">'
         url = "http://example.org/Movie"

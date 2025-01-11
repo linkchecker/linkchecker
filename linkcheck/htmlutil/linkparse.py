@@ -53,7 +53,7 @@ LinkTags = {
     'object': ['classid', 'data', 'archive', 'usemap', 'codebase'],
     'q': ['cite'],
     'script': ['src'],
-    'source': ['src'],  # HTML5
+    'source': ['src', 'srcset'],  # HTML5
     'table': ['background'],
     'td': ['background'],
     'th': ['background'],
