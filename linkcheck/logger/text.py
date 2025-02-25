@@ -160,7 +160,7 @@ class TextLogger(_Logger):
     def write_parent(self, url_data):
         """Write url_data.parent_url."""
         self.write(self.part('parenturl') + self.spaces("parenturl"))
-        txt = url_data.parent_url
+        txt = strformat.strline(url_data.parent_url)
         if url_data.line is not None:
             txt += _(", line %d") % url_data.line
         if url_data.column is not None:
@@ -177,7 +177,8 @@ class TextLogger(_Logger):
     def write_real(self, url_data):
         """Write url_data.url."""
         self.write(self.part("realurl") + self.spaces("realurl"))
-        self.writeln(url_data.url, color=self.colorreal)
+        txt = strformat.strline(url_data.url)
+        self.writeln(txt, color=self.colorreal)
 
     def write_dltime(self, url_data):
         """Write url_data.dltime."""
