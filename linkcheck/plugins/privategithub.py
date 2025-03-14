@@ -52,7 +52,7 @@ class PrivateGithub(_ConnectionPlugin):
         return res
 
     @staticmethod
-    def _run_request(url_data, api_url, pat):
+    def _run_request_api(url_data, api_url, pat):
         '''Static method to make it easily mockable in test'''
         # for details see https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content
         return url_data.session.get(
@@ -63,6 +63,23 @@ class PrivateGithub(_ConnectionPlugin):
                 'Authorization': f'bearer {pat}',
             },
         ).status_code
+    
+    @staticmethod
+    def _run_request_release(url_data, api_url, pat, asset):
+        '''Static method to make it easily mockable in test'''
+        # for details see https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-a-release-by-tag-name
+        # respectively https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
+        res = url_data.session.get(
+            api_url,
+            headers={
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28',
+                'Authorization': f'bearer {pat}',
+            },
+        ).json()
+        if any(x.get('name', '') == asset for x in res.get('assets', [])):
+            return 200
+        return 404
 
     def check(self, url_data):
         '''Check content.'''
@@ -83,16 +100,33 @@ class PrivateGithub(_ConnectionPlugin):
                     ref = chunks.pop(0)
                 rest = '/'.join(chunks)
 
-            api_url = f'https://api.github.com/repos/{org}/{repo}/contents/{rest}'
-            if ref:
-                api_url += f'?ref={ref}'
+            if 'releases' in chunks:
+                # possible chunks left
+                # latest/download/asset.zip
+                # download/1.2.4/asset.zip
+                chunks.remove('releases')
+                if chunks[0] == 'latest':
+                    api_url = f'https://api.github.com/repos/{org}/{repo}/releases/latest'
+                else:
+                    chunks.pop(0)
+                    api_url = f'https://api.github.com/repos/{org}/{repo}/releases/tags/{chunks[0]}'
+                asset = chunks[-1]
+                log.debug(
+                    LOG_PLUGIN, f'Private github API release url {api_url}')
+                result = PrivateGithub._run_request_release(url_data, api_url, self.pat, asset)
+                log.debug(
+                    LOG_PLUGIN, f'Private github API release result {result}')
+            else:
+                api_url = f'https://api.github.com/repos/{org}/{repo}/contents/{rest}'
+                if ref:
+                    api_url += f'?ref={ref}'
 
-            log.debug(
-                LOG_PLUGIN, f'Private github API url {api_url}')
+                log.debug(
+                    LOG_PLUGIN, f'Private github API url {api_url}')
 
-            result = PrivateGithub._run_request(url_data, api_url, self.pat)
-            log.debug(
-                LOG_PLUGIN, f'Private github API result {result}')
+                result = PrivateGithub._run_request_api(url_data, api_url, self.pat)
+                log.debug(
+                    LOG_PLUGIN, f'Private github API result {result}')
 
             if self.ratelimitskip and result in [429]:
                 log.info(
@@ -104,6 +138,8 @@ class PrivateGithub(_ConnectionPlugin):
             url_data.set_result(' ', valid=True, overwrite=True)
         except Exception as e:
             log.info(LOG_PLUGIN, f'Private github page check threw: {e}')
+            url_data.set_result(
+                    'Private GitHub page is not valid', valid=False, overwrite=True)
 
     @classmethod
     def read_config(cls, configparser):
