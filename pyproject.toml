@@ -6,10 +6,11 @@ readme = "README.rst"
 keywords = ["link", "url", "site", "checking", "crawling", "verification", "validation"]
 authors = [{name = "LinkChecker Authors"}]
 maintainers = [{name = "LinkChecker Authors"}]
+license = "GPL-2.0-or-later"
+license-files = ["COPYING"]
 classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
