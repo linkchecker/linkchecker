@@ -13,7 +13,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # Needed for hatch-vcs to extract LinkChecker version from tag
           # https://github.com/actions/checkout/issues/249
