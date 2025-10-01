@@ -41,7 +41,7 @@ jobs:
             python3 -m hatchling build
 
       - name: Attest
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v3
         with:
           subject-path: 'dist/*.tar.gz, dist/*.whl'
 
