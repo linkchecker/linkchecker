@@ -367,7 +367,7 @@ class ArgParser(LCArgumentParser):
             metavar="REGEX",
             dest="externstrict",
             help=_(
-                "Only check syntax of URLs not matching the given regular expression.\n"
+                "Only check syntax of URLs matching the given regular expression.\n"
                 "This option can be given multiple times."
             ),
         )
