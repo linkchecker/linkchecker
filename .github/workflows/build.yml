@@ -77,7 +77,7 @@ jobs:
             python -m tox -e ${{ matrix.toxenv }}-geoip
 
       - name: Report to coveralls
-        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d  # v2.1.2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b  # v2.3.6
         with:
           parallel: true
           flag-name: run-${{ matrix.python-version }}
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close coveralls parallel build
-        uses: coverallsapp/github-action@f350da2c033043742f89e8c0b7b5145a1616da6d  # v2.1.2
+        uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b  # v2.3.6
         with:
           parallel-finished: true
 
