@@ -34,9 +34,9 @@ jobs:
 
     services:
       httpbin:
-        image: kennethreitz/httpbin
+        image: ghcr.io/psf/httpbin:0.10.2
         ports:
-          - 8080:80
+          - 8080:8080
 
     steps:
       - name: Install OS dependencies
