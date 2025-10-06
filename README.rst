@@ -28,15 +28,13 @@ Features
 Installation
 -------------
 
-Python 3.9 or later is needed. Using pip to install LinkChecker:
+Python 3.9 or later is needed. Using pipx to install LinkChecker:
 
-``pip3 install linkchecker``
+``pipx install linkchecker``
 
-pipx can also be used to install LinkChecker.
-
-The version in the pip repository may be old, to find out how to get the latest
-code, plus platform-specific information and other advice see `doc/install.txt`_
-in the source code archive.
+The version in the Python Package Index repository may be old, to find out how
+to get the latest code, plus platform-specific information and other advice see
+ `doc/install.txt`_ in the source code archive.
 
 .. _doc/install.txt: https://linkchecker.github.io/linkchecker/install.html
 

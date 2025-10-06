@@ -37,66 +37,85 @@ used.
 
 .. _venv: https://docs.python.org/3/library/venv.html#creating-virtual-environments
 
-Setup with pip(x)
+Setup with pipx
 ------------------
-pip_ or pipx_ can be used to install LinkChecker on the local system.
+pipx_ can be used to install LinkChecker on the local system.
 
 To install the latest release from PyPI:
-``pip3 install linkchecker``
-
-or:
 ``pipx install linkchecker``
 
 There is no need to wait for releases, every update to LinkChecker gets a unique
 version number and is subjected to the test suite.
-You can easily install the latest source from the LinkChecker GitHub repository.
-First, if you want application translations:
-``pip3 install polib``
+You can easily install the latest source from the LinkChecker GitHub repository:
+``pipx install https://github.com/linkchecker/linkchecker/archive/master.tar.gz``
 
-Then:
-``pip3 install https://github.com/linkchecker/linkchecker/archive/master.tar.gz``
-
-.. _pip: https://pypi.org/project/pip/
+Alternatively, to install the latest LinkChecker with application translations
+create a wheel as described below.
 
 .. _pipx: https://pypi.org/project/pipx/
 
 Setup for Windows
 -----------------
-Python from the Microsoft Store does include pip_, but installing
-within Windows Subsystem for Linux (WSL) is the preferred option:
+Installing within the Windows Subsystem for Linux (WSL) is the preferred option:
 https://docs.microsoft.com/en-us/windows/python/beginners
 
 Setup for macOS
 ------------------
-Python from Homebrew includes pip_. Otherwise ``python3 -m ensurepip --upgrade`` can be
-used to install pip_ (untested):
-https://pip.pypa.io/en/stable/installation/
+``brew install pipx`` can be used to install pipx_ (untested):
+https://pipx.pypa.io/stable/#on-macos
 
 Setup for GNU/Linux
 -------------------
 On major Linux distributions (Debian, Gentoo, Fedora, Ubuntu),
 the ``linkchecker`` package is available for installation.
-To install the latest LinkChecker pip_ will be available, often as a package
-e.g. ``python3-pip``, a pipx_ package may also be found e.g. ``pipx``.
+pipx_ is available to install the latest LinkChecker.
 
 You may wish to install your distribution's copies of LinkChecker's dependencies
-before using pip to install LinkChecker. e.g. for Debian/Ubuntu:
+before using pipx to install LinkChecker. e.g. for Debian/Ubuntu:
 
 ``apt install python3-bs4 python3-dnspython python3-requests``
 
-If those packages are too old pip will install newer versions.
+If those packages are too old pipx will install newer versions.
 
-To use the dependencies from your distribution if installing LinkChecker with pipx:
+To install LinkChecker with pipx using the dependencies from your distribution:
 
 ``pipx install --system-site-packages linkchecker``
 
-Manual setup for Unix systems
------------------------------
-First, install the required software.
+Building and Installing a Wheel
+-------------------------------
 
-1. Python hatchling package from https://pypi.org/project/hatchling/
+Clone the LinkChecker repository:
 
-2. Python hatch-vcs package from https://pypi.org/project/hatch-vcs/
+  ``git clone https://github.com/linkchecker/linkchecker.git``
+
+  ``cd linkchecker``
+
+Install hatchling:
+
+  ``pipx install --include-deps hatch-vcs``
+
+If pipx warns you to run ``pipx ensurepath``, do that and follow the subsequent
+hint to close and open your terminal.
+
+To enable application translations:
+
+  ``pipx inject hatch-vcs polib``
+
+Build the distribution wheel:
+
+  ``hatchling build``
+
+Now install the application from the wheel:
+
+  ``pipx install dist/linkchecker-<version>-py3-none-any.whl``
+
+
+Dependencies
+------------
+
+1. Build time only, Python hatchling package from https://pypi.org/project/hatchling/
+
+2. Build time only, Python hatch-vcs package from https://pypi.org/project/hatch-vcs/
 
 3. Python Requests package from https://pypi.org/project/requests/
 
@@ -126,35 +145,6 @@ First, install the required software.
 Note for developers: if you want to regenerate the po/linkchecker.pot template
 from the source files, you will need xgettext with Python support. This is
 available in gettext >= 0.12.
-
-Clone the LinkChecker repository:
-
-  ``git clone https://github.com/linkchecker/linkchecker.git``
-
-  ``cd linkchecker``
-
-Build the distribution wheel:
-
-  ``hatchling build``
-
-Now install the application from the wheel:
-
-  ``pip install --no-index --user dist/LinkChecker-<version>-py3-none-any.whl``
-
-  Note that you may have to adjust your PATH and PYTHONPATH environment variables,
-  eg. by adding the commands ``export PYTHONPATH=$HOME/lib/python`` and
-  ``export PATH=$PATH:$HOME/bin`` to your shell configuration file.
-
-  For more information look at the `Modifying Python's search path`_
-  documentation.
-
-  .. _Modifying Python's search path:
-     https://docs.python.org/3/install/#inst-search-path
-
-
-After installation
-------------------
-LinkChecker is now installed. Have fun!
 
 
 WSGI web interface
