@@ -30,7 +30,7 @@ dependencies = [
 
 [build-system]
 requires = [
-    "hatchling >= 1.8.0",
+    "hatchling >= 1.26.0",
     "hatch-vcs",
     "setuptools-scm >= 7.1.0",
 ]
