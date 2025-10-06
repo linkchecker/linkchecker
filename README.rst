@@ -28,7 +28,7 @@ Features
 Installation
 -------------
 
-Python 3.9 or later is needed. Using pipx to install LinkChecker:
+Python 3.10 or later is needed. Using pipx to install LinkChecker:
 
 ``pipx install linkchecker``
 

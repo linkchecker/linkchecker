@@ -20,11 +20,11 @@ Main package for link checking.
 # version checks
 import sys
 
-if sys.version_info < (3, 9, 0, 'final', 0):
+if sys.version_info < (3, 10, 0, 'final', 0):
     import platform
 
     raise SystemExit(
-        "This program requires Python 3.9 or later instead of %s."
+        "This program requires Python 3.10 or later instead of %s."
         % platform.python_version()
     )
 

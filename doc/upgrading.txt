@@ -1,6 +1,10 @@
 Upgrading
 =========
 
+Migrating from 10.6 to 10.x
+---------------------------
+Python 3.10 or newer is required.
+
 Migrating from 10.5 to 10.6
 ---------------------------
 The VirusCheck plugin is disabled.
