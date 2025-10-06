@@ -18,7 +18,7 @@ Test config parsing.
 """
 
 import os
-from re import Pattern
+from re import compile, Pattern
 import linkcheck.configuration
 
 from .. import TestBase
@@ -201,6 +201,15 @@ class TestConfig(TestBase):
         # blacklist logger section
         self.assertEqual(config["failures"]["filename"], "blacklist")
         self.assertEqual(config["failures"]["encoding"], "utf-8")
+
+    def test_confparse_percent(self):
+        config = linkcheck.configuration.Configuration()
+        files = [get_file("config4.ini")]
+        config.read(files)
+        config.sanitize()
+        self.assertEqual(
+            config["internlinks"][0]["pattern"],
+            compile("http://www.example.com/a%20b"))
 
     def test_confparse_empty(self):
         config = linkcheck.configuration.Configuration()

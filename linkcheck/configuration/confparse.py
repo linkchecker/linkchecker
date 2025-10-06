@@ -15,7 +15,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """Parse configuration files"""
 
-from configparser import RawConfigParser
+from configparser import ConfigParser
 from re import compile as re_compile
 import os
 
@@ -39,14 +39,14 @@ def read_multiline(value):
         yield line
 
 
-class LCConfigParser(RawConfigParser):
+class LCConfigParser(ConfigParser):
     """
     Parse a LinkChecker configuration file.
     """
 
     def __init__(self, config):
         """Initialize configuration."""
-        super().__init__()
+        super().__init__(interpolation=None)
         self.config = config
 
     def read(self, files):
