@@ -28,6 +28,7 @@ if sys.version_info < (3, 10, 0, 'final', 0):
         % platform.python_version()
     )
 
+import importlib.resources
 import os
 import re
 
@@ -102,8 +103,7 @@ def init_i18n():
     if 'LOCPATH' in os.environ:
         locdir = os.environ['LOCPATH']
     else:
-        # Need Python 3.9 for importlib.resources.files
-        locdir = os.path.join(__path__[0], 'data', 'locale')
+        locdir = importlib.resources.files(f'{PACKAGE_NAME}.data').joinpath('locale')
     i18n.init(COMMAND_NAME, locdir)
     # install translated log level names
     import logging
