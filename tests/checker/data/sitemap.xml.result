@@ -2,11 +2,11 @@ url http://localhost:%(port)d/%(datadir)s/sitemap.xml
 cache key http://localhost:%(port)d/%(datadir)s/sitemap.xml
 real url http://localhost:%(port)d/%(datadir)s/sitemap.xml
 valid
-url http://www.example.com/
-cache key http://www.example.com/
-real url http://www.example.com/
+url https://linkchecker.github.io/
+cache key https://linkchecker.github.io/
+real url https://linkchecker.github.io/
 valid
-url http://www.example.com/?ascii=nø
-cache key http://www.example.com/?ascii=n%%C3%%B8
-real url http://www.example.com/?ascii=n%%C3%%B8
+url https://linkchecker.github.io/?ascii=nø
+cache key https://linkchecker.github.io/?ascii=n%%C3%%B8
+real url https://linkchecker.github.io/?ascii=n%%C3%%B8
 valid
