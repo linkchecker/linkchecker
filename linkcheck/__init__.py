@@ -46,11 +46,6 @@ COMMAND_NAME = "linkchecker"
 PACKAGE_NAME = __spec__.parent
 
 
-def module_path():
-    """Return absolute directory of system executable."""
-    return os.path.dirname(os.path.abspath(sys.executable))
-
-
 class LinkCheckerError(Exception):
     """Exception to be raised on linkchecker-specific check errors."""
 
