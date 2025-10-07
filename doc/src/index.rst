@@ -19,10 +19,10 @@ Installation
 
 .. code-block:: console
 
-   $ pip3 install linkchecker
+   $ pipx install linkchecker
 
-The version in the pip repository may be old, to find out how to get the latest
-code, plus platform-specific information and other advice see the
+The version in the Python Package Index may be old, to find out how to get the
+latest code, plus platform-specific information and other advice see the
 :doc:`installation document <install>`.
 
 Basic usage

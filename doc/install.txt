@@ -18,8 +18,8 @@ its own encoding detector but will use in order of preference cchardet_,
 chardet_ or charset-normalizer_ (Beautiful Soup >= 4.11). You might find that
 one of the other three detectors works better for your pages.
 There may already be a system copy of e.g. chardet installed;
-installing LinkChecker in a Python venv_ gives control over which packages are
-used.
+installing LinkChecker in a Python venv_ (pipx does this for you) gives control
+over which packages are used.
 
 .. _chardet: https://pypi.org/project/chardet/
 
@@ -41,13 +41,18 @@ Setup with pipx
 ------------------
 pipx_ can be used to install LinkChecker on the local system.
 
-To install the latest release from PyPI:
-``pipx install linkchecker``
+To install the latest release from PyPI::
+
+  pipx install linkchecker
 
 There is no need to wait for releases, every update to LinkChecker gets a unique
 version number and is subjected to the test suite.
-You can easily install the latest source from the LinkChecker GitHub repository:
-``pipx install https://github.com/linkchecker/linkchecker/archive/master.tar.gz``
+You can easily install the latest source from the LinkChecker GitHub repository::
+
+  pipx install https://github.com/linkchecker/linkchecker/archive/master.tar.gz
+
+If pipx warns you to run ``pipx ensurepath``, do that and follow the subsequent
+hint to open a new terminal.
 
 Alternatively, to install the latest LinkChecker with application translations
 create a wheel as described below.
@@ -71,43 +76,39 @@ the ``linkchecker`` package is available for installation.
 pipx_ is available to install the latest LinkChecker.
 
 You may wish to install your distribution's copies of LinkChecker's dependencies
-before using pipx to install LinkChecker. e.g. for Debian/Ubuntu:
+before using pipx to install LinkChecker. e.g. for Debian/Ubuntu::
 
-``apt install python3-bs4 python3-dnspython python3-requests``
+  apt install python3-bs4 python3-dnspython python3-requests
 
 If those packages are too old pipx will install newer versions.
 
-To install LinkChecker with pipx using the dependencies from your distribution:
+To install LinkChecker with pipx using the dependencies from your distribution::
 
-``pipx install --system-site-packages linkchecker``
+  pipx install --system-site-packages linkchecker
 
 Building and Installing a Wheel
 -------------------------------
 
-Clone the LinkChecker repository:
+Clone the LinkChecker repository::
 
-  ``git clone https://github.com/linkchecker/linkchecker.git``
+  git clone https://github.com/linkchecker/linkchecker.git
+  cd linkchecker
 
-  ``cd linkchecker``
+Install hatchling, from your distribution e.g ``python3-hatch-vcs``, or using pipx::
 
-Install hatchling:
+  pipx install --include-deps hatch-vcs
 
-  ``pipx install --include-deps hatch-vcs``
+To enable application translations::
 
-If pipx warns you to run ``pipx ensurepath``, do that and follow the subsequent
-hint to close and open your terminal.
+  pipx inject hatch-vcs polib
 
-To enable application translations:
+Build the distribution wheel::
 
-  ``pipx inject hatch-vcs polib``
+  hatchling build
 
-Build the distribution wheel:
+Now install the application from the wheel::
 
-  ``hatchling build``
-
-Now install the application from the wheel:
-
-  ``pipx install dist/linkchecker-<version>-py3-none-any.whl``
+  pipx install dist/linkchecker-<version>-py3-none-any.whl
 
 
 Dependencies
@@ -158,7 +159,7 @@ to run the script.
    Allowing a WSGI script to execute such a program for possibly a
    large number of users might deplete those resources.
    Be sure to only allow access from trusted sites to this script.
-   
+
 2. Copy the script lc.wsgi in the WSGI directory.
 
 3. Adjust the "action=..." parameter in lconline/lc_cgi.html
