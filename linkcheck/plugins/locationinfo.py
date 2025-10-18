@@ -104,6 +104,7 @@ def get_location(host):
         # no geoip available
         return None
     try:
+        # pylint: disable-next=possibly-used-before-assignment
         record = get_geoip_record(host)
     except (geoip_error, OSError):
         log.debug(LOG_PLUGIN, "Geoip error for %r", host, exception=True)
