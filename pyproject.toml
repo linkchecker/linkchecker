@@ -98,3 +98,21 @@ dependencies = [
 
 [tool.hatch.envs.test.scripts]
 tests = "pytest -vra tests"
+
+
+[tool.mypy]
+exclude = [
+    'tests/checker/',
+]
+ignore_missing_imports = true
+disable_error_code = [
+    "import-untyped",
+    "name-defined",
+    "assignment",
+    "var-annotated",
+    "func-returns-value",
+    "misc",
+    "attr-defined",
+]
+
+
