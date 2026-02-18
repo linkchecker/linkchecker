@@ -17,6 +17,7 @@ Features:
 
 Fixes
 - Documentation updates
+- TestFile.test_markdown was broken by Python >= 3.12.5
 
 
 10.4.0 (released 11.12.2023)
