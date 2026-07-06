@@ -4,3 +4,7 @@ updates:
     directory: "/.github/workflows/"
     schedule:
       interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "actions/*"
