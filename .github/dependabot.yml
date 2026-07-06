@@ -5,6 +5,9 @@ updates:
     schedule:
       interval: "weekly"
     groups:
+      docker-actions:
+        patterns:
+          - "docker/*"
       github-actions:
         patterns:
           - "actions/*"
