@@ -96,5 +96,9 @@ class TestHttps(HttpsServerTest):
         with open(get_file("https_cert.pem"), "rb") as f:
             cert = crypto.load_certificate(crypto.FILETYPE_PEM, f.read())
         self.assertEqual(
+            httputil.x509_to_dict(cert)["subject"],
+            [(('commonName', "linkchecker.github.io"),)]
+        )
+        self.assertEqual(
             httputil.x509_to_dict(cert)["notAfter"], "Jan 02 03:04:05 2119 GMT"
         )
