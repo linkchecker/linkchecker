@@ -29,6 +29,7 @@ import os
 import time
 import locale
 import pydoc
+import hashlib
 
 # some handy time constants
 SECONDS_PER_MINUTE = 60
@@ -211,6 +212,17 @@ def stripurl(s):
     if not s:
         return s
     return s.splitlines()[0].strip()
+
+
+def shorten_data_url(url):
+    """Replace a data URL payload with a stable digest for logging."""
+    if not url or url[:5].lower() != "data:":
+        return url
+    metadata, separator, payload = url.partition(",")
+    if not separator:
+        return url
+    digest = hashlib.sha256(payload.encode("utf-8", "surrogatepass")).hexdigest()
+    return f"{metadata},sha256:{digest}"
 
 
 def limit(s, length=72):
