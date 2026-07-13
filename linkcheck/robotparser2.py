@@ -35,13 +35,14 @@ class RobotFileParser:
     """This class provides a set of methods to read, parse and answer
     questions about a single robots.txt file."""
 
-    def __init__(self, session, url='', auth=None, timeout=None):
+    def __init__(self, session, url='', auth=None, timeout=None, useragent=None):
         """Initialize internal entry lists and store given url and
         credentials."""
         self.set_url(url)
         self.session = session
         self.auth = auth
         self.timeout = timeout
+        self.useragent = useragent
         self._reset()
 
     def _reset(self):
@@ -81,7 +82,7 @@ class RobotFileParser:
         self._reset()
         kwargs = dict(
             headers={
-                'User-Agent': configuration.UserAgent,
+                'User-Agent': self.useragent or configuration.UserAgent,
                 'Accept-Encoding': ACCEPT_ENCODING,
             }
         )
