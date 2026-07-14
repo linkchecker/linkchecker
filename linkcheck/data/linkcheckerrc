@@ -181,6 +181,8 @@
 #maxnumurls=153
 # Maximum number of requests per second to one host.
 #maxrequestspersecond=10
+# Ignore the internal DDOS protection
+#ignoreddosprotection=0
 # Respect the instructions in any robots.txt files
 #robotstxt=1
 # Allowed URL schemes as a comma-separated list. Example:
