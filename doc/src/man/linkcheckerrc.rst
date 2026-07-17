@@ -596,6 +596,26 @@ Parse Markdown files for URLs to check.
 **filename_re=**\ *REGEX*
     Regular expression matching the names of Markdown files.
 
+PrivateGithub
+^^^^^^^^^^^^^
+
+Check private github links via GitHub API.
+
+.. note::
+
+    A personal access token (PAT) needs to be passed as
+    **GITHUB_TOKEN** via environment
+
+**prefixes=**\ *prefix1*\ [*prefix2*]...
+    list of URL prefixes to perform the API check on.
+    E.g. github.com/my-account/my-repo
+    or
+    github.com/my-account
+
+**ratelimitskip**\ *ANY*
+    Assume link is fine if API rate limits request.
+    Default: report an error
+
 WARNINGS
 --------
 
