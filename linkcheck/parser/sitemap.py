@@ -43,7 +43,7 @@ class XmlTagUrlParser:
         try:
             self.parser.Parse(data, isfinal)
         except ExpatError as expaterr:
-            self.url_data.add_warning(expaterr.message, tag=WARN_XML_PARSE_ERROR)
+            self.url_data.add_warning(str(expaterr), tag=WARN_XML_PARSE_ERROR)
 
     def start_element(self, name, attrs):
         """Set tag status for start element."""
