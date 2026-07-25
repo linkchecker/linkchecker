@@ -32,6 +32,7 @@ from .. import (
     log,
     LOG_CHECK,
     strformat,
+    LinkCheckerContentTooLargeError,
     LinkCheckerError,
     url as urlutil,
     trace,
@@ -608,6 +609,12 @@ class UrlBase:
                     self.aggregate.plugin_manager.run_content_plugins(self)
                 if self.allows_recursion():
                     return True
+            except LinkCheckerContentTooLargeError:
+                value = self.handle_exception()
+                self.add_warning(
+                    _("could not get content: %(msg)s") % {"msg": value},
+                    tag=WARN_URL_CONTENT_SIZE_TOO_LARGE,
+                )
             except tuple(ExcList):
                 value = self.handle_exception()
                 self.add_warning(
@@ -797,7 +804,7 @@ class UrlBase:
         data = self.read_content_chunk()
         while data:
             if buf.tell() + len(data) > self.aggregate.config["maxfilesizedownload"]:
-                raise LinkCheckerError(_("File size too large"))
+                raise LinkCheckerContentTooLargeError(_("File size too large"))
             buf.write(data)
             data = self.read_content_chunk()
         return buf.getvalue()
