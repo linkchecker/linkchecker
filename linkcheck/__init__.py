@@ -52,6 +52,13 @@ class LinkCheckerError(Exception):
     pass
 
 
+class LinkCheckerContentTooLargeError(LinkCheckerError):
+    """Exception to be raised when the URL content exceeds the configured
+    maximum download size."""
+
+    pass
+
+
 class LinkCheckerInterrupt(Exception):
     """Used for testing."""
 
