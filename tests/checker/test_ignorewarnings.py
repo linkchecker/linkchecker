@@ -18,6 +18,9 @@ Test ignoring of warnings.
 """
 
 from re import compile as re_compile
+from types import SimpleNamespace
+
+from linkcheck.checker.urlbase import UrlBase
 
 from . import LinkCheckTest
 
@@ -58,3 +61,24 @@ class TestIgnoreWarnings(LinkCheckTest):
             ]
         }
         self.file_test("base_ignorewarnings.html", confargs=confargs)
+
+
+class TestIgnoreWarningsBeforeUrlBuilt(LinkCheckTest):
+    """
+    Test that warnings added before the real URL is built do not crash.
+    """
+
+    def test_warning_before_url_is_built(self):
+        """A warning can be added while self.url is still None."""
+        url_data = UrlBase.__new__(UrlBase)
+        url_data.reset()
+        url_data.aggregate = SimpleNamespace(
+            config={
+                "ignorewarnings": [],
+                "ignorewarningsforurls": [
+                    (re_compile("^https://youtu.be"), re_compile("url-whitespace"))
+                ],
+            }
+        )
+        self.assertIsNone(url_data.url)
+        self.assertFalse(url_data.should_ignore_warning("url-whitespace"))

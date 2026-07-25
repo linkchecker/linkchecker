@@ -391,7 +391,7 @@ class UrlBase:
             log.debug(LOG_CHECK,
                       "ignorewarningsforurl: considering '%s, %s'",
                       url_regex, name_regex)
-            if not url_regex.search(self.url):
+            if not url_regex.search(self.url or ""):
                 continue
             log.debug(LOG_CHECK, "ignorewarningsforurl: URL matches '%s'", self.url)
             if not name_regex.search(tag):
