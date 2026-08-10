@@ -1,0 +1,43 @@
+url allrefs1.html#onebroken
+cache key file://%(curdir)s/%(datadir)s/allrefs1.html#onebroken
+real url file://%(curdir)s/%(datadir)s/allrefs1.html#onebroken
+name allrefs1 onebroken first
+warning Anchor `onebroken' (decoded: `onebroken') not found. Available anchors: `oneone'.
+valid
+
+url allrefs1.html#oneone
+cache key file://%(curdir)s/%(datadir)s/allrefs1.html#oneone
+real url file://%(curdir)s/%(datadir)s/allrefs1.html#oneone
+name allrefs1 oneone first
+valid
+
+url allrefs2.html
+cache key file://%(curdir)s/%(datadir)s/allrefs2.html
+real url file://%(curdir)s/%(datadir)s/allrefs2.html
+name allrefs2 first
+valid
+
+url allrefs2.html#twobroken
+cache key file://%(curdir)s/%(datadir)s/allrefs2.html#twobroken
+real url file://%(curdir)s/%(datadir)s/allrefs2.html#twobroken
+name allrefs2 twobroken first
+warning Anchor `twobroken' (decoded: `twobroken') not found. Available anchors: `twoone'.
+valid
+
+url allrefs2.html#twoone
+cache key file://%(curdir)s/%(datadir)s/allrefs2.html#twoone
+real url file://%(curdir)s/%(datadir)s/allrefs2.html#twoone
+name allrefs2 twoone first
+valid
+
+url allrefs3.html
+cache key file://%(curdir)s/%(datadir)s/allrefs3.html
+real url file://%(curdir)s/%(datadir)s/allrefs3.html
+name allrefs3 only
+valid
+
+url file://%(curdir)s/%(datadir)s/allrefs1.html
+cache key file://%(curdir)s/%(datadir)s/allrefs1.html
+real url file://%(curdir)s/%(datadir)s/allrefs1.html
+valid
+
