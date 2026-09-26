@@ -38,7 +38,7 @@ from .. import (
     LOG_CHECK,
     mimeutil,
     url as urlutil,
-    LinkCheckerError,
+    LinkCheckerContentTooLargeError,
     httputil,
 )
 from . import internpaturl
@@ -345,7 +345,7 @@ class HttpUrl(internpaturl.InternPatternUrl):
         buf = BytesIO()
         for data in self.url_connection.iter_content(chunk_size=self.ReadChunkBytes):
             if buf.tell() + len(data) > maxbytes:
-                raise LinkCheckerError(_("File size too large"))
+                raise LinkCheckerContentTooLargeError(_("File size too large"))
             buf.write(data)
         return buf.getvalue()
 
