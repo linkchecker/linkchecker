@@ -23,6 +23,7 @@ import datetime
 import time
 import codecs
 import abc
+import copy
 
 from .. import log, LOG_CHECK, strformat, dummy, configuration, i18n
 
@@ -47,6 +48,27 @@ Fields = dict(
 del _
 
 ContentTypes = dict(image=0, text=0, video=0, audio=0, application=0, mail=0, other=0)
+
+_URL_FIELDS = ("base_url", "parent_url", "base_ref", "url", "cache_url")
+
+
+def _shorten_data_urls(url_data):
+    """Return a logging copy with shortened data URL fields when needed."""
+    shortened = {}
+    formatted_values = {}
+    for field in _URL_FIELDS:
+        value = getattr(url_data, field)
+        if value not in formatted_values:
+            formatted_values[value] = strformat.shorten_data_url(value)
+        formatted = formatted_values[value]
+        if formatted != value:
+            shortened[field] = formatted
+    if not shortened:
+        return url_data
+    result = copy.copy(url_data)
+    for field, value in shortened.items():
+        setattr(result, field, value)
+    return result
 
 
 class LogStatistics:
@@ -374,7 +396,7 @@ class _Logger(abc.ABC):
         """
         self.stats.log_url(url_data, do_print)
         if do_print:
-            self.log_url(url_data)
+            self.log_url(_shorten_data_urls(url_data))
 
     def write_intro(self):
         """Write intro comments."""

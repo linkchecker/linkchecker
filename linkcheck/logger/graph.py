@@ -16,7 +16,7 @@
 """
 Base class for graph loggers.
 """
-from . import _Logger
+from . import _Logger, _shorten_data_urls
 from ..decorators import notimplemented
 import re
 
@@ -39,7 +39,7 @@ class _GraphLogger(_Logger):
         self.stats.log_url(url_data, do_print)
         # ignore the do_print flag and determine ourselves if we filter the url
         if url_data.valid:
-            self.log_url(url_data)
+            self.log_url(_shorten_data_urls(url_data))
 
     def get_node(self, url_data):
         """Return new node data or None if node already exists."""
