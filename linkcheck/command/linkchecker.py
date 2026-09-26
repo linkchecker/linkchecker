@@ -223,9 +223,11 @@ def linkchecker():
             log.warn(LOG_CMDLINE, memoryutil.MemoryDebugMsg)
 
     stats = config["logger"].stats
-    # on internal errors, exit with status 2
+    # on internal errors, exit with status 70
     if stats.internal_errors:
-        sys.exit(2)
-    # on errors or printed warnings, exit with status 1
-    if stats.errors or (stats.warnings_printed and config["warnings"]):
+        sys.exit(70)
+    # on errors or printed warnings, exit with non-zero exit code
+    if stats.errors:
         sys.exit(1)
+    elif (stats.warnings_printed and config["warnings"]):
+        sys.exit(3)
