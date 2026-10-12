@@ -59,7 +59,7 @@ class RobotsTxt:
                 rp = self.cache[roboturl]
                 return rp.can_fetch(self.useragent, url_data.url)
             self.misses += 1
-        kwargs = dict(auth=url_data.auth, session=url_data.session, timeout=timeout)
+        kwargs = dict(auth=url_data.auth, session=url_data.session, timeout=timeout, useragent=self.useragent)
         rp = robotparser2.RobotFileParser(**kwargs)
         rp.set_url(roboturl)
         rp.read()
